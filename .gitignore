@@ -4,6 +4,7 @@ icon.png
 icon.png.import
 project.godot
 .DS_STORE
+develop/
 
 # Godot-specific ignores
 .import/
