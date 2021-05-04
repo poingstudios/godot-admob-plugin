@@ -1,0 +1,303 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/admob/scripts/AdMobConfig.gd" type="Script" id=1]
+
+[node name="AdMob" type="Control"]
+pause_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 27.1316
+margin_top = 26.8706
+margin_right = 427.132
+margin_bottom = 308.871
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enabled" type="CheckBox" parent="VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 24.0
+pressed = true
+text = "Enabled"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Real" type="CheckBox" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 400.0
+margin_bottom = 52.0
+pressed = true
+text = "Real"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TestEuropeUserConsent" type="CheckBox" parent="VBoxContainer"]
+margin_top = 56.0
+margin_right = 400.0
+margin_bottom = 80.0
+text = "Test Europe User Consent"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BannerSize" type="OptionButton" parent="VBoxContainer"]
+margin_top = 84.0
+margin_right = 400.0
+margin_bottom = 104.0
+text = "LEADERBOARD"
+items = [ "BANNER", null, false, 0, null, "MEDIUM_RECTANGLE", null, false, 1, null, "FULL_BANNER", null, false, 2, null, "LEADERBOARD", null, false, 3, null, "SMART_BANNER", null, false, 4, null, "BANNER", null, false, 5, null, "MEDIUM_RECTANGLE", null, false, 6, null, "FULL_BANNER", null, false, 7, null, "LEADERBOARD", null, false, 8, null, "SMART_BANNER", null, false, 9, null ]
+selected = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BannerOnTop" type="CheckButton" parent="VBoxContainer"]
+margin_top = 108.0
+margin_right = 400.0
+margin_bottom = 148.0
+text = "Banner On Top"
+
+[node name="ChildDirectedTreatment" type="CheckBox" parent="VBoxContainer"]
+margin_top = 152.0
+margin_right = 400.0
+margin_bottom = 176.0
+pressed = true
+text = "ChildDirectedTreatment"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MaxAdContentRating" type="OptionButton" parent="VBoxContainer"]
+margin_top = 180.0
+margin_right = 400.0
+margin_bottom = 200.0
+text = "G"
+items = [ "G", null, false, 0, null, "PG", null, false, 1, null, "T", null, false, 2, null, "MA", null, false, 3, null, "G", null, false, 4, null, "PG", null, false, 5, null, "T", null, false, 6, null, "MA", null, false, 7, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_top = 204.0
+margin_right = 400.0
+margin_bottom = 218.0
+text = "UNIT IDS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UnitIds" type="TabContainer" parent="VBoxContainer"]
+margin_top = 222.0
+margin_right = 400.0
+margin_bottom = 352.0
+rect_min_size = Vector2( 400, 130 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Android" type="Tabs" parent="VBoxContainer/UnitIds"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/UnitIds/Android"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Banner" type="HBoxContainer" parent="VBoxContainer/UnitIds/Android/VBoxContainer"]
+margin_right = 374.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="Label" parent="VBoxContainer/UnitIds/Android/VBoxContainer/Banner"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 19.0
+text = "Banner"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/Android/VBoxContainer/Banner"]
+margin_left = 49.0
+margin_right = 352.0
+margin_bottom = 24.0
+text = "ca-app-pub-3940256099942544/6300978111"
+align = 1
+expand_to_text_length = true
+virtual_keyboard_enabled = false
+
+[node name="Interstitial" type="HBoxContainer" parent="VBoxContainer/UnitIds/Android/VBoxContainer"]
+margin_top = 28.0
+margin_right = 374.0
+margin_bottom = 52.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="Label" parent="VBoxContainer/UnitIds/Android/VBoxContainer/Interstitial"]
+margin_top = 5.0
+margin_right = 67.0
+margin_bottom = 19.0
+text = "Interstitial"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/Android/VBoxContainer/Interstitial"]
+margin_left = 71.0
+margin_right = 374.0
+margin_bottom = 24.0
+text = "ca-app-pub-3940256099942544/1033173712"
+align = 1
+expand_to_text_length = true
+virtual_keyboard_enabled = false
+
+[node name="Rewarded" type="HBoxContainer" parent="VBoxContainer/UnitIds/Android/VBoxContainer"]
+margin_top = 56.0
+margin_right = 374.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="Label" parent="VBoxContainer/UnitIds/Android/VBoxContainer/Rewarded"]
+margin_top = 5.0
+margin_right = 62.0
+margin_bottom = 19.0
+text = "Rewarded"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/Android/VBoxContainer/Rewarded"]
+margin_left = 66.0
+margin_right = 369.0
+margin_bottom = 24.0
+text = "ca-app-pub-3940256099942544/5224354917"
+align = 1
+expand_to_text_length = true
+virtual_keyboard_enabled = false
+
+[node name="iOS" type="Tabs" parent="VBoxContainer/UnitIds"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/UnitIds/iOS"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Banner" type="HBoxContainer" parent="VBoxContainer/UnitIds/iOS/VBoxContainer"]
+margin_right = 374.0
+margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="Label" parent="VBoxContainer/UnitIds/iOS/VBoxContainer/Banner"]
+margin_top = 5.0
+margin_right = 45.0
+margin_bottom = 19.0
+text = "Banner"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/iOS/VBoxContainer/Banner"]
+margin_left = 49.0
+margin_right = 352.0
+margin_bottom = 24.0
+text = "ca-app-pub-3940256099942544/2934735716"
+align = 1
+expand_to_text_length = true
+virtual_keyboard_enabled = false
+
+[node name="Interstitial" type="HBoxContainer" parent="VBoxContainer/UnitIds/iOS/VBoxContainer"]
+margin_top = 28.0
+margin_right = 374.0
+margin_bottom = 52.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="Label" parent="VBoxContainer/UnitIds/iOS/VBoxContainer/Interstitial"]
+margin_top = 5.0
+margin_right = 67.0
+margin_bottom = 19.0
+text = "Interstitial"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/iOS/VBoxContainer/Interstitial"]
+margin_left = 71.0
+margin_right = 374.0
+margin_bottom = 24.0
+text = "ca-app-pub-3940256099942544/4411468910"
+align = 1
+expand_to_text_length = true
+virtual_keyboard_enabled = false
+
+[node name="Rewarded" type="HBoxContainer" parent="VBoxContainer/UnitIds/iOS/VBoxContainer"]
+margin_top = 56.0
+margin_right = 374.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="Label" parent="VBoxContainer/UnitIds/iOS/VBoxContainer/Rewarded"]
+margin_top = 5.0
+margin_right = 62.0
+margin_bottom = 19.0
+text = "Rewarded"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/iOS/VBoxContainer/Rewarded"]
+margin_left = 66.0
+margin_right = 369.0
+margin_bottom = 24.0
+text = "ca-app-pub-3940256099942544/1712485313"
+align = 1
+expand_to_text_length = true
+virtual_keyboard_enabled = false
+
+[connection signal="pressed" from="VBoxContainer/Enabled" to="." method="_on_Enabled_pressed"]
+[connection signal="pressed" from="VBoxContainer/Real" to="." method="_on_Real_pressed"]
+[connection signal="pressed" from="VBoxContainer/TestEuropeUserConsent" to="." method="_on_TestEuropeUserConsent_pressed"]
+[connection signal="item_selected" from="VBoxContainer/BannerSize" to="." method="_on_BannerSize_item_selected"]
+[connection signal="pressed" from="VBoxContainer/BannerOnTop" to="." method="_on_BannerOnTop_pressed"]
+[connection signal="pressed" from="VBoxContainer/ChildDirectedTreatment" to="." method="_on_ChildDirectedTreatment_pressed"]
+[connection signal="item_selected" from="VBoxContainer/MaxAdContentRating" to="." method="_on_MaxAdContentRating_item_selected"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/Android/VBoxContainer/Banner/Value" to="." method="_on_AndroidBanner_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/Android/VBoxContainer/Interstitial/Value" to="." method="_on_AndroidInterstitial_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/Android/VBoxContainer/Rewarded/Value" to="." method="_on_AndroidRewarded_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/iOS/VBoxContainer/Banner/Value" to="." method="_on_iOSBanner_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/iOS/VBoxContainer/Interstitial/Value" to="." method="_on_iOSInterstitial_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/iOS/VBoxContainer/Rewarded/Value" to="." method="_on_iOSRewarded_text_changed"]

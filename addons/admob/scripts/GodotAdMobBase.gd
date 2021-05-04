@@ -1,5 +1,3 @@
-class_name MobileAdsBase
-
 extends Control
 enum INITIALIZATION_STATUS {NOT_READY, READY}
 signal banner_loaded()
@@ -51,6 +49,8 @@ var rewarded_loaded : bool = false
 var _admob_singleton : Object
 var _control_node_to_be_replaced : Control
 enum _position_options {BOTTOM, TOP}
+const BANNER_SIZE = ["BANNER", "MEDIUM_RECTANGLE", "FULL_BANNER", "LEADERBOARD", "SMART_BANNER"] 
+const MAX_AD_RATING = ["G", "PG", "T", "MA"]
 
 onready var _native_scale : Dictionary = {
 	"x" : OS.get_screen_size().x / get_viewport_rect().size.x,
@@ -87,6 +87,7 @@ func _on_AdMob_interstitial_loaded():
 	emit_signal("interstitial_loaded")
 
 func _on_AdMob_interstitial_failed_to_load(error_code : int):
+	print("interstitial_failed_to_load", error_code)
 	emit_signal("interstitial_failed_to_load", error_code)
 	
 func _on_AdMob_interstitial_clicked():

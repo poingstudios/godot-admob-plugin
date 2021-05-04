@@ -1,32 +1,49 @@
-extends MobileAdsBase
+extends "res://addons/admob/scripts/GodotAdMobBase.gd"
 
-export var admob_enabled := true
-export var is_real := false
-export var is_test_europe_user_consent := true
-export(String, "BANNER", "MEDIUM_RECTANGLE", "FULL_BANNER", "LEADERBOARD", "SMART_BANNER") var banner_size : String = "BANNER"
-export(_position_options) var banner_position = _position_options.BOTTOM
-export var is_for_child_directed_treatment := false
-export(String, "G", "PG", "T", "MA") var max_ad_content_rating = "G"
-export (Dictionary) var unit_ids : Dictionary = {
-	"banner": {
-		"iOS" : "ca-app-pub-3940256099942544/2934735716",
-		"Android" : "ca-app-pub-3940256099942544/6300978111",
-	},
-	"interstitial" : {
-		"iOS" : "ca-app-pub-3940256099942544/4411468910",
-		"Android" : "ca-app-pub-3940256099942544/1033173712",
-	},
-	"rewarded" : {
-		"iOS" : "ca-app-pub-3940256099942544/1712485313",
-		"Android" : "ca-app-pub-3940256099942544/5224354917",
-	},
-	"native" : {
-		"iOS" : "",
-		"Android" : "ca-app-pub-3940256099942544/2247696110",
-	}
-}
+var admob_enabled := true
+var is_real := false
+var is_test_europe_user_consent := true
+var banner_size : String = "BANNER"
+var banner_position = _position_options.BOTTOM
+var is_for_child_directed_treatment := false
+var max_ad_content_rating = "G"
+var unit_ids : Dictionary 
+
+func load_config() -> Dictionary:
+	var config_file := File.new()
+	config_file.open("res://addons/admob/config/settings.json", File.READ)
+	return parse_json(config_file.get_as_text())
+	
 
 func _ready():
+	var content_file = load_config()
+	
+	admob_enabled =  content_file["Enabled"]
+	is_real = content_file["Real"]
+	is_test_europe_user_consent = content_file["TestEuropeUserConsent"]
+	banner_size = BANNER_SIZE[content_file["BannerSize"]]	
+	banner_position = MAX_AD_RATING[int(content_file["BannerOnTop"])]
+	is_for_child_directed_treatment = content_file["ChildDirectedTreatment"]
+	max_ad_content_rating = content_file["MaxAdContentRating"]
+	unit_ids = {
+		"banner": {
+			"iOS" : content_file["iOSBanner"],
+			"Android" : content_file["AndroidBanner"],
+		},
+		"interstitial" : {
+			"iOS" : content_file["iOSInterstitial"],
+			"Android" : content_file["AndroidInterstitial"],
+		},
+		"rewarded" : {
+			"iOS" : content_file["iOSRewarded"],
+			"Android" : content_file["AndroidRewarded"],
+		},
+		"native" : {
+			"iOS" : "",
+			"Android" : "ca-app-pub-3940256099942544/2247696110",
+		}
+	}
+
 	if admob_enabled:
 		if (Engine.has_singleton("AdMob")):
 			_admob_singleton = Engine.get_singleton("AdMob")
@@ -44,6 +61,7 @@ func load_banner():
 
 func load_interstitial():
 	if _admob_singleton and is_initialized:
+		print("loading_interstitial")
 		_admob_singleton.load_interstitial(unit_ids.interstitial[OS.get_name()])
 
 func load_rewarded():
@@ -75,6 +93,7 @@ func destroy_native():
 
 func show_interstitial():
 	if _admob_singleton and is_initialized:
+		print("showing interstitial")
 		_admob_singleton.show_interstitial()
 
 func show_rewarded():
@@ -95,3 +114,15 @@ func _on_get_tree_resized():
 			load_interstitial()
 		if rewarded_loaded:
 			load_rewarded()
+
+
+func _on_Button_pressed():
+	admob_enabled = false
+	print(admob_enabled)
+
+
+func _on_OptionButton_item_selected(index):
+	print(index)
+
+
+
