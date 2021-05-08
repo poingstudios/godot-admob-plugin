@@ -18,32 +18,15 @@ func load_config() -> Dictionary:
 func _ready():
 	var content_file = load_config()
 	
-	admob_enabled =  content_file["Enabled"]
-	is_real = content_file["Real"]
-	is_test_europe_user_consent = content_file["TestEuropeUserConsent"]
-	banner_size = BANNER_SIZE[content_file["BannerSize"]]	
-	banner_position = MAX_AD_RATING[int(content_file["BannerOnTop"])]
-	is_for_child_directed_treatment = content_file["ChildDirectedTreatment"]
-	max_ad_content_rating = content_file["MaxAdContentRating"]
-	unit_ids = {
-		"banner": {
-			"iOS" : content_file["iOSBanner"],
-			"Android" : content_file["AndroidBanner"],
-		},
-		"interstitial" : {
-			"iOS" : content_file["iOSInterstitial"],
-			"Android" : content_file["AndroidInterstitial"],
-		},
-		"rewarded" : {
-			"iOS" : content_file["iOSRewarded"],
-			"Android" : content_file["AndroidRewarded"],
-		},
-		"native" : {
-			"iOS" : "",
-			"Android" : "ca-app-pub-3940256099942544/2247696110",
-		}
-	}
-
+	admob_enabled = content_file.is_enabled
+	is_real = content_file.is_real
+	is_test_europe_user_consent = content_file.is_test_europe_user_consent
+	banner_size = BANNER_SIZE[content_file.banner.size]
+	banner_position = content_file.banner.position
+	is_for_child_directed_treatment = content_file.is_for_child_directed_treatment
+	max_ad_content_rating = MAX_AD_RATING[content_file.max_ad_content_rating]
+	unit_ids = content_file.unit_ids
+	
 	if admob_enabled:
 		if (Engine.has_singleton("AdMob")):
 			_admob_singleton = Engine.get_singleton("AdMob")

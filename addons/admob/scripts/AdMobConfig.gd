@@ -1,117 +1,171 @@
 tool
-extends Control
+extends "res://addons/admob/scripts/GodotAdMobBase.gd"
 
-onready var config_file := File.new()
+const FILE_PATH = "res://addons/admob/config/settings.json"
+
+var config : Dictionary = {
+	"banner" : {
+		"size" : 0,
+		"position" : 0,
+	},
+	"max_ad_content_rating": 0,
+	"is_enabled" : true,
+	"is_real" : false,
+	"is_test_europe_user_consent" : true,
+	"is_for_child_directed_treatment" : true,
+	"unit_ids" : {
+		"banner": {
+			"iOS" : "ca-app-pub-3940256099942544/2934735716",
+			"Android" : "ca-app-pub-3940256099942544/6300978111",
+		},
+		"interstitial" : {
+			"iOS" : "ca-app-pub-3940256099942544/4411468910",
+			"Android" : "ca-app-pub-3940256099942544/1033173712",
+		},
+		"rewarded" : {
+			"iOS" : "ca-app-pub-3940256099942544/1712485313",
+			"Android" : "ca-app-pub-3940256099942544/5224354917",
+		},
+		"native" : {
+			"iOS" : "",
+			"Android" : "ca-app-pub-3940256099942544/2247696110",
+		}
+	}
+}
+
+onready var BannerSize := $VBoxContainer/BannerSize
+onready var MaxAdContentRating := $VBoxContainer/MaxAdContentRating
+onready var Enabled := $VBoxContainer/Enabled
+onready var Real := $VBoxContainer/Real
+onready var TestEuropeUserConsent := $VBoxContainer/TestEuropeUserConsent
+onready var BannerOnTop := $VBoxContainer/BannerOnTop
+onready var ChildDirectedTreatment := $VBoxContainer/ChildDirectedTreatment
+onready var Android = {
+	"Banner" : $VBoxContainer/UnitIds/Android/VBoxContainer/Banner/Value,
+	"Interstitial" : $VBoxContainer/UnitIds/Android/VBoxContainer/Interstitial/Value,
+	"Rewarded" : $VBoxContainer/UnitIds/Android/VBoxContainer/Rewarded/Value
+}
+onready var iOS = {
+	"Banner" : $VBoxContainer/UnitIds/iOS/VBoxContainer/Banner/Value,
+	"Interstitial" : $VBoxContainer/UnitIds/iOS/VBoxContainer/Interstitial/Value,
+	"Rewarded" : $VBoxContainer/UnitIds/iOS/VBoxContainer/Rewarded/Value
+}
 
 func _ready():
-	$VBoxContainer/BannerSize.add_item("BANNER")
-	$VBoxContainer/BannerSize.add_item("MEDIUM_RECTANGLE")
-	$VBoxContainer/BannerSize.add_item("FULL_BANNER")
-	$VBoxContainer/BannerSize.add_item("LEADERBOARD")
-	$VBoxContainer/BannerSize.add_item("SMART_BANNER")
-	$VBoxContainer/MaxAdContentRating.add_item("G")
-	$VBoxContainer/MaxAdContentRating.add_item("PG")
-	$VBoxContainer/MaxAdContentRating.add_item("T")
-	$VBoxContainer/MaxAdContentRating.add_item("MA")
+	BannerSize.clear()
+	MaxAdContentRating.clear()
+	for banner_size in BANNER_SIZE:
+		BannerSize.add_item(banner_size)
+	for content_rating in MAX_AD_RATING:
+		MaxAdContentRating.add_item(content_rating)
 
 	var content_file = load_config()
-	$VBoxContainer/Enabled.pressed = content_file["Enabled"]
-	$VBoxContainer/Real.pressed = content_file["Real"]
-	$VBoxContainer/TestEuropeUserConsent.pressed = content_file["TestEuropeUserConsent"]
-	$VBoxContainer/BannerSize.selected = content_file["BannerSize"]
+	
+	Enabled.pressed = content_file.is_enabled if content_file.is_enabled != null else config.is_enabled
+	Real.pressed = content_file.is_real
+	TestEuropeUserConsent.pressed = content_file.is_test_europe_user_consent
+	BannerSize.selected = content_file.banner.size
+	BannerOnTop.pressed = content_file.banner.position
+	ChildDirectedTreatment.pressed = content_file.is_for_child_directed_treatment
+	MaxAdContentRating.selected = content_file.max_ad_content_rating
 
-	$VBoxContainer/BannerOnTop.pressed = content_file["BannerOnTop"]
-	$VBoxContainer/ChildDirectedTreatment.pressed = content_file["ChildDirectedTreatment"]
-	$VBoxContainer/MaxAdContentRating.selected = content_file["MaxAdContentRating"]
-	$VBoxContainer/UnitIds/Android/VBoxContainer/Banner/Value.text = content_file["AndroidBanner"]
-	$VBoxContainer/UnitIds/Android/VBoxContainer/Interstitial/Value.text = content_file["AndroidInterstitial"]
-	$VBoxContainer/UnitIds/Android/VBoxContainer/Rewarded/Value.text = content_file["AndroidRewarded"]
-	$VBoxContainer/UnitIds/iOS/VBoxContainer/Banner/Value.text = content_file["iOSBanner"]
-	$VBoxContainer/UnitIds/iOS/VBoxContainer/Interstitial/Value.text = content_file["iOSInterstitial"]
-	$VBoxContainer/UnitIds/iOS/VBoxContainer/Rewarded/Value.text = content_file["iOSRewarded"]
+	Android.Banner.text = content_file.unit_ids.banner.Android
+	Android.Interstitial.text = content_file.unit_ids.interstitial.Android
+	Android.Rewarded.text = content_file.unit_ids.rewarded.Android
 
-func save_config(content : Dictionary):
-	config_file.open("res://addons/admob/config/settings.json", File.WRITE)
-	config_file.store_string(to_json(content))
-	config_file.close()
+	iOS.Banner.text = content_file.unit_ids.banner.iOS
+	iOS.Interstitial.text = content_file.unit_ids.interstitial.iOS
+	iOS.Rewarded.text = content_file.unit_ids.rewarded.iOS
+
+func save_config(content):
+	var file = File.new()
+	file.open(FILE_PATH, File.WRITE)
+	file.store_string(to_json(content))
+	file.close()
 
 func load_config() -> Dictionary:
-	config_file.open("res://addons/admob/config/settings.json", File.READ)
-	return parse_json(config_file.get_as_text())
-	
+	var config_file := File.new()
+	if config_file.file_exists(FILE_PATH):
+		config_file.open(FILE_PATH, File.READ)
+		return parse_json(config_file.get_as_text())
+	else:
+		save_config(config)
+		return config
+
 
 func _on_Enabled_pressed():
 	var content = load_config()
-	content["Enabled"] = $VBoxContainer/Enabled.pressed
+	content.is_enabled = Enabled.pressed
 	save_config(content)
 
 
 func _on_Real_pressed():
 	var content = load_config()
-	content["Real"] = $VBoxContainer/Real.pressed
+	content.is_real = Real.pressed
 	save_config(content)
 
 
 func _on_TestEuropeUserConsent_pressed():
 	var content = load_config()
-	content["TestEuropeUserConsent"] = $VBoxContainer/TestEuropeUserConsent.pressed
+	content.is_test_europe_user_consent = TestEuropeUserConsent.pressed
 	save_config(content)
 
 
 func _on_BannerSize_item_selected(index):
 	var content = load_config()
-	content["BannerSize"] = index
+	content.banner.size = index
 	save_config(content)
 
 func _on_BannerOnTop_pressed():
 	var content = load_config()
-	content["BannerOnTop"] = $VBoxContainer/BannerOnTop.pressed
+	content.banner.position = int(BannerOnTop.pressed)
 	save_config(content)
 
 
 func _on_ChildDirectedTreatment_pressed():
 	var content = load_config()
-	content["ChildDirectedTreatment"] = $VBoxContainer/ChildDirectedTreatment.pressed
+	content.is_for_child_directed_treatment = ChildDirectedTreatment.pressed
 	save_config(content)
 
 
 func _on_MaxAdContentRating_item_selected(index):
 	var content = load_config()
-	content["MaxAdContentRating"] = index
+	content.max_ad_content_rating = index
 	save_config(content)
 
 
 func _on_AndroidBanner_text_changed(new_text):
 	var content = load_config()
-	content["AndroidBanner"] = new_text
+	content.unit_ids.banner.Android = new_text
 	save_config(content)
 
 
 func _on_AndroidInterstitial_text_changed(new_text):
 	var content = load_config()
-	content["AndroidInterstitial"] = new_text
+	content.unit_ids.interstitial.Android = new_text
 	save_config(content)
 
 
 func _on_AndroidRewarded_text_changed(new_text):
 	var content = load_config()
-	content["AndroidRewarded"] = new_text
+	content.unit_ids.rewarded.Android = new_text
 	save_config(content)
 
 
 func _on_iOSBanner_text_changed(new_text):
 	var content = load_config()
-	content["iOSBanner"] = new_text
+	content.unit_ids.banner.iOS = new_text
 	save_config(content)
 
 
 func _on_iOSInterstitial_text_changed(new_text):
 	var content = load_config()
-	content["iOSInterstitial"] = new_text
+	content.unit_ids.interstitial.iOS = new_text
 	save_config(content)
 
 
 func _on_iOSRewarded_text_changed(new_text):
 	var content = load_config()
-	content["iOSRewarded"] = new_text
+	content.unit_ids.rewarded.iOS = new_text
+	print(content)
 	save_config(content)

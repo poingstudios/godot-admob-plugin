@@ -34,7 +34,6 @@ __meta__ = {
 margin_top = 28.0
 margin_right = 400.0
 margin_bottom = 52.0
-pressed = true
 text = "Real"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -53,9 +52,9 @@ __meta__ = {
 margin_top = 84.0
 margin_right = 400.0
 margin_bottom = 104.0
-text = "LEADERBOARD"
-items = [ "BANNER", null, false, 0, null, "MEDIUM_RECTANGLE", null, false, 1, null, "FULL_BANNER", null, false, 2, null, "LEADERBOARD", null, false, 3, null, "SMART_BANNER", null, false, 4, null, "BANNER", null, false, 5, null, "MEDIUM_RECTANGLE", null, false, 6, null, "FULL_BANNER", null, false, 7, null, "LEADERBOARD", null, false, 8, null, "SMART_BANNER", null, false, 9, null ]
-selected = 3
+text = "BANNER"
+items = [ "BANNER", null, false, 0, null, "MEDIUM_RECTANGLE", null, false, 1, null, "FULL_BANNER", null, false, 2, null, "LEADERBOARD", null, false, 3, null, "SMART_BANNER", null, false, 4, null, "BANNER", null, false, 5, null, "MEDIUM_RECTANGLE", null, false, 6, null, "FULL_BANNER", null, false, 7, null, "LEADERBOARD", null, false, 8, null, "SMART_BANNER", null, false, 9, null, "BANNER", null, false, 10, null, "MEDIUM_RECTANGLE", null, false, 11, null, "FULL_BANNER", null, false, 12, null, "LEADERBOARD", null, false, 13, null, "SMART_BANNER", null, false, 14, null, "BANNER", null, false, 15, null, "MEDIUM_RECTANGLE", null, false, 16, null, "FULL_BANNER", null, false, 17, null, "LEADERBOARD", null, false, 18, null, "SMART_BANNER", null, false, 19, null ]
+selected = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,6 +63,7 @@ __meta__ = {
 margin_top = 108.0
 margin_right = 400.0
 margin_bottom = 148.0
+pressed = true
 text = "Banner On Top"
 
 [node name="ChildDirectedTreatment" type="CheckBox" parent="VBoxContainer"]
@@ -80,9 +80,9 @@ __meta__ = {
 margin_top = 180.0
 margin_right = 400.0
 margin_bottom = 200.0
-text = "G"
-items = [ "G", null, false, 0, null, "PG", null, false, 1, null, "T", null, false, 2, null, "MA", null, false, 3, null, "G", null, false, 4, null, "PG", null, false, 5, null, "T", null, false, 6, null, "MA", null, false, 7, null ]
-selected = 0
+text = "MA"
+items = [ "G", null, false, 0, null, "PG", null, false, 1, null, "T", null, false, 2, null, "MA", null, false, 3, null, "G", null, false, 4, null, "PG", null, false, 5, null, "T", null, false, 6, null, "MA", null, false, 7, null, "G", null, false, 8, null, "PG", null, false, 9, null, "T", null, false, 10, null, "MA", null, false, 11, null, "G", null, false, 12, null, "PG", null, false, 13, null, "T", null, false, 14, null, "MA", null, false, 15, null ]
+selected = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
