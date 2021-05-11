@@ -81,7 +81,7 @@ func _on_AdMob_interstitial_opened():
 	emit_signal("interstitial_opened")
 
 func _on_AdMob_interstitial_closed():
-	interstitial_loaded = false	
+	interstitial_loaded = false
 	emit_signal("interstitial_closed")
 
 
@@ -96,7 +96,7 @@ func _on_AdMob_rewarded_ad_closed():
 	rewarded_loaded = false
 	emit_signal("rewarded_ad_closed")
 
-func _on_AdMob_rewarded_ad_failed_to_load():
+func _on_AdMob_rewarded_ad_failed_to_load(error_code : int):
 	emit_signal("rewarded_ad_failed_to_load")
 	
 func _on_AdMob_user_earned_rewarded(currency : String, amount : int):

@@ -2,7 +2,6 @@ extends "util/Signals.gd"
 
 func _ready():
 	load_config()
-	print(config)
 	if config.is_enabled:
 		if (Engine.has_singleton("AdMob")):
 			_admob_singleton = Engine.get_singleton("AdMob")
@@ -12,15 +11,14 @@ func _ready():
 
 func _initialize():
 	if _admob_singleton and !is_initialized:
-		_admob_singleton.initialize(config.is_for_child_directed_treatment, config.max_ad_content_rating, config.is_real, config.is_test_europe_user_consent, get_instance_id())
+		_admob_singleton.initialize(config.is_for_child_directed_treatment, MAX_AD_RATING[config.max_ad_content_rating], config.is_real, config.is_test_europe_user_consent, get_instance_id())
 
 func load_banner():
 	if _admob_singleton and is_initialized:
-		_admob_singleton.load_banner(config.unit_ids.banner[OS.get_name()], config.banner.position, config.banner.size)
+		_admob_singleton.load_banner(config.unit_ids.banner[OS.get_name()], config.banner.position, BANNER_SIZE[config.banner.size])
 
 func load_interstitial():
 	if _admob_singleton and is_initialized:
-		print("loading_interstitial")
 		_admob_singleton.load_interstitial(config.unit_ids.interstitial[OS.get_name()])
 
 func load_rewarded():
@@ -52,7 +50,6 @@ func destroy_native():
 
 func show_interstitial():
 	if _admob_singleton and is_initialized:
-		print("showing interstitial")
 		_admob_singleton.show_interstitial()
 
 func show_rewarded():
@@ -73,13 +70,3 @@ func _on_get_tree_resized():
 			load_interstitial()
 		if rewarded_loaded:
 			load_rewarded()
-
-
-func _on_Button_pressed():
-	config.is_enabled = false
-	print(config.is_enabled)
-
-
-func _on_OptionButton_item_selected(index):
-	print(index)
-

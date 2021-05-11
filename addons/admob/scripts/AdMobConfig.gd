@@ -1,22 +1,22 @@
 tool
 extends "util/Variables.gd"
 
-onready var BannerSize := $VBoxContainer/BannerSize
-onready var MaxAdContentRating := $VBoxContainer/MaxAdContentRating
+onready var BannerSize := $VBoxContainer/BannerSizeHBoxContainer/BannerSize
+onready var MaxAdContentRating := $VBoxContainer/MaxAdHBoxContainer/MaxAdContentRating
 onready var Enabled := $VBoxContainer/Enabled
 onready var Real := $VBoxContainer/Real
 onready var TestEuropeUserConsent := $VBoxContainer/TestEuropeUserConsent
 onready var BannerOnTop := $VBoxContainer/BannerOnTop
 onready var ChildDirectedTreatment := $VBoxContainer/ChildDirectedTreatment
 onready var Android = {
-	"Banner" : $VBoxContainer/UnitIds/Android/VBoxContainer/Banner/Value,
-	"Interstitial" : $VBoxContainer/UnitIds/Android/VBoxContainer/Interstitial/Value,
-	"Rewarded" : $VBoxContainer/UnitIds/Android/VBoxContainer/Rewarded/Value
+	"Banner" : $VBoxContainer/UnitIdsHBoxContainer/UnitIds/Android/VBoxContainer/Banner/Value,
+	"Interstitial" : $VBoxContainer/UnitIdsHBoxContainer/UnitIds/Android/VBoxContainer/Interstitial/Value,
+	"Rewarded" : $VBoxContainer/UnitIdsHBoxContainer/UnitIds/Android/VBoxContainer/Rewarded/Value
 }
 onready var iOS = {
-	"Banner" : $VBoxContainer/UnitIds/iOS/VBoxContainer/Banner/Value,
-	"Interstitial" : $VBoxContainer/UnitIds/iOS/VBoxContainer/Interstitial/Value,
-	"Rewarded" : $VBoxContainer/UnitIds/iOS/VBoxContainer/Rewarded/Value
+	"Banner" : $VBoxContainer/UnitIdsHBoxContainer/UnitIds/iOS/VBoxContainer/Banner/Value,
+	"Interstitial" : $VBoxContainer/UnitIdsHBoxContainer/UnitIds/iOS/VBoxContainer/Interstitial/Value,
+	"Rewarded" : $VBoxContainer/UnitIdsHBoxContainer/UnitIds/iOS/VBoxContainer/Rewarded/Value
 }
 
 func _ready():
@@ -35,7 +35,6 @@ func _ready():
 	BannerOnTop.pressed = config.banner.position
 	ChildDirectedTreatment.pressed = config.is_for_child_directed_treatment
 	MaxAdContentRating.selected = config.max_ad_content_rating
-
 	Android.Banner.text = config.unit_ids.banner.Android
 	Android.Interstitial.text = config.unit_ids.interstitial.Android
 	Android.Rewarded.text = config.unit_ids.rewarded.Android
@@ -105,5 +104,4 @@ func _on_iOSInterstitial_text_changed(new_text):
 
 func _on_iOSRewarded_text_changed(new_text):
 	config.unit_ids.rewarded.iOS = new_text
-	print(config)
 	save_config()

@@ -1,6 +1,6 @@
 extends Control
 
-const FILE_PATH = "res://addons/admob/config/settings.json"
+const FILE_PATH = "user://admob_settings.json"
 enum INITIALIZATION_STATUS {NOT_READY, READY}
 
 #public attributes
@@ -9,6 +9,7 @@ var banner_enabled : bool = false
 var native_enabled : bool = false
 var interstitial_loaded : bool = false
 var rewarded_loaded : bool = false
+
 
 #private attributes
 var _admob_singleton : Object
@@ -24,10 +25,10 @@ onready var _native_scale : Dictionary = {
 
 var config : Dictionary = {
 	"banner" : {
-		"size" : BANNER_SIZE[0],
+		"size" : 0,
 		"position" : _position_options.BOTTOM,
 	},
-	"max_ad_content_rating": MAX_AD_RATING[0],
+	"max_ad_content_rating": 0,
 	"is_enabled" : true,
 	"is_real" : false,
 	"is_test_europe_user_consent" : true,
