@@ -6,6 +6,8 @@ project.godot
 .DS_STORE
 develop/
 
+!addons/admob/icon.png
+
 # Godot-specific ignores
 .import/
 export.cfg
