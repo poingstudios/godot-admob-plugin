@@ -24,4 +24,4 @@ func get_plugin_name():
 	return "AdMob"
 
 func get_plugin_icon():
-	return load("res://addons/admob/icon.png")
+	return load("res://addons/admob/assets/icon-15.png")

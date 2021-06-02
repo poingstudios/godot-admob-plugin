@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/music.ogg-6849ed60109f01916f243ace862e95fb.oggstr"
+
+[deps]
+
+source_file="res://addons/admob/assets/music.ogg"
+dest_files=[ "res://.import/music.ogg-6849ed60109f01916f243ace862e95fb.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
