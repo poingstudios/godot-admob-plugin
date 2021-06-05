@@ -105,3 +105,8 @@ func _on_iOSInterstitial_text_changed(new_text):
 func _on_iOSRewarded_text_changed(new_text):
 	config.unit_ids.rewarded.iOS = new_text
 	save_config()
+
+
+func _on_InstallationTutorial_pressed():
+	OS.shell_open("https://github.com/Poing-Studios/Godot-AdMob-Android-iOS#installation") 
+

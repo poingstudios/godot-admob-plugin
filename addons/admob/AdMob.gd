@@ -7,7 +7,7 @@ func _enter_tree():
 	add_autoload_singleton("MobileAds", "res://addons/admob/scripts/MobileAds.gd")
 	AdMobConfigScene = load("res://addons/admob/scenes/AdMobConfig.tscn").instance()
 	get_editor_interface().get_editor_viewport().add_child(AdMobConfigScene)
-	
+	AdMobConfigScene.hide()
 
 func _exit_tree():
 	remove_autoload_singleton("MobileAds")

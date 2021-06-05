@@ -1,4 +1,4 @@
-extends Control
+extends Node
 
 const FILE_PATH = "user://admob_settings.json"
 enum INITIALIZATION_STATUS {NOT_READY, READY}
@@ -6,7 +6,6 @@ enum INITIALIZATION_STATUS {NOT_READY, READY}
 #public attributes
 var is_initialized : bool = false 
 var banner_enabled : bool = false
-var native_enabled : bool = false
 var interstitial_loaded : bool = false
 var rewarded_loaded : bool = false
 
@@ -18,10 +17,6 @@ enum _position_options {BOTTOM, TOP}
 const BANNER_SIZE = ["BANNER", "MEDIUM_RECTANGLE", "FULL_BANNER", "LEADERBOARD", "SMART_BANNER"] 
 const MAX_AD_RATING = ["G", "PG", "T", "MA"]
 
-onready var _native_scale : Dictionary = {
-	"x" : OS.get_screen_size().x / get_viewport_rect().size.x,
-	"y" : OS.get_screen_size().y / get_viewport_rect().size.y,
-}
 
 var config : Dictionary = {
 	"banner" : {
@@ -45,10 +40,6 @@ var config : Dictionary = {
 		"rewarded" : {
 			"iOS" : "ca-app-pub-3940256099942544/1712485313",
 			"Android" : "ca-app-pub-3940256099942544/5224354917",
-		},
-		"native" : {
-			"iOS" : "",
-			"Android" : "ca-app-pub-3940256099942544/2247696110",
 		}
 	}
 }

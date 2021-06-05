@@ -22,14 +22,6 @@ signal rewarded_ad_closed()
 signal rewarded_user_earned_rewarded(currency, amount)
 signal rewarded_ad_failed_to_show(error_code)
 
-signal native_loaded()
-signal native_destroyed()
-signal native_failed_to_load(error_code)
-signal native_opened()
-signal native_clicked()
-signal native_closed()
-signal native_recorded_impression()
-
 signal consent_form_dismissed()
 signal consent_status_changed(consent_status_message)
 signal consent_form_load_failure(error_code, error_message)
@@ -105,29 +97,6 @@ func _on_AdMob_user_earned_rewarded(currency : String, amount : int):
 func _on_AdMob_rewarded_ad_failed_to_show(error_code : int):
 	emit_signal("rewarded_ad_failed_to_show", error_code)
 
-
-func _on_AdMob_native_loaded():
-	native_enabled = true
-	emit_signal("native_loaded")
-
-func _on_AdMob_native_destroyed():
-	native_enabled = false
-	emit_signal("native_destroyed")
-
-func _on_AdMob_native_failed_to_load(error_code : int):
-	emit_signal("native_failed_to_load", error_code)
-
-func _on_AdMob_native_opened():
-	emit_signal("native_opened")
-	
-func _on_AdMob_native_clicked():
-	emit_signal("native_clicked")
-	
-func _on_AdMob_native_closed():
-	emit_signal("native_closed")
-		
-func _on_AdMob_native_recorded_impression():
-	emit_signal("native_recorded_impression")
 
 
 func _on_AdMob_consent_form_dismissed():
