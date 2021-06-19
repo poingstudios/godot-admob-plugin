@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/admob/develop/Example.gd" type="Script" id=1]
 [ext_resource path="res://addons/admob/assets/icon-500.png" type="Texture" id=2]
@@ -7,6 +7,11 @@
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.36377, 0.23226, 0.0795746, 1 )
+
+[sub_resource type="StyleBoxEmpty" id=2]
+
+[sub_resource type="Theme" id=3]
+TabContainer/styles/panel = SubResource( 2 )
 
 [node name="Example" type="Control"]
 anchor_right = 1.0
@@ -22,6 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 1, 0.541176, 0, 1 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
@@ -66,79 +72,95 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="CenterContainer" type="CenterContainer" parent="Background"]
+[node name="TabContainer" type="TabContainer" parent="Background"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -385.0
-margin_top = -114.0
-margin_right = 385.0
-margin_bottom = 114.0
+margin_left = -128.0
+margin_top = -81.0
+margin_right = 128.0
+margin_bottom = 81.0
+theme = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/CenterContainer"]
-margin_left = 262.0
-margin_top = 68.0
-margin_right = 507.0
-margin_bottom = 160.0
-alignment = 1
+[node name="AdFormats" type="Tabs" parent="Background/TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
 
-[node name="Banner" type="HBoxContainer" parent="Background/CenterContainer/VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/TabContainer/AdFormats"]
 margin_right = 245.0
-margin_bottom = 20.0
+margin_bottom = 116.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Banner" type="HBoxContainer" parent="Background/TabContainer/AdFormats/VBoxContainer"]
+margin_top = 24.0
+margin_right = 245.0
+margin_bottom = 44.0
 size_flags_horizontal = 0
 size_flags_vertical = 0
 alignment = 1
 
-[node name="EnableBanner" type="Button" parent="Background/CenterContainer/VBoxContainer/Banner"]
+[node name="EnableBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner"]
 margin_right = 118.0
 margin_bottom = 20.0
 disabled = true
 text = "ENABLE BANNER"
 
-[node name="DisableBanner" type="Button" parent="Background/CenterContainer/VBoxContainer/Banner"]
+[node name="DisableBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner"]
 margin_left = 122.0
 margin_right = 245.0
 margin_bottom = 20.0
 disabled = true
 text = "DISABLE BANNER"
 
-[node name="Interstitial" type="Button" parent="Background/CenterContainer/VBoxContainer"]
-margin_top = 24.0
-margin_right = 245.0
-margin_bottom = 44.0
-disabled = true
-text = "INTERSTITIAL"
-
-[node name="Rewarded" type="Button" parent="Background/CenterContainer/VBoxContainer"]
+[node name="Interstitial" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer"]
 margin_top = 48.0
 margin_right = 245.0
 margin_bottom = 68.0
 disabled = true
-text = "REWARDED"
+text = "INTERSTITIAL"
 
-[node name="UnifiedNative" type="HBoxContainer" parent="Background/CenterContainer/VBoxContainer"]
+[node name="Rewarded" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer"]
 margin_top = 72.0
 margin_right = 245.0
 margin_bottom = 92.0
+disabled = true
+text = "REWARDED"
+
+[node name="UMP" type="Tabs" parent="Background/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/TabContainer/UMP"]
+margin_right = 245.0
+margin_bottom = 116.0
 alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="EnableUnifiedNative" type="Button" parent="Background/CenterContainer/VBoxContainer/UnifiedNative"]
-margin_left = 1.0
-margin_right = 115.0
-margin_bottom = 20.0
+[node name="RequestUserConsent" type="Button" parent="Background/TabContainer/UMP/VBoxContainer"]
+margin_top = 72.0
+margin_right = 245.0
+margin_bottom = 92.0
 disabled = true
-text = "ENABLE UNFIED"
+text = "REQUEST USER CONSENT"
 
-[node name="DisableUnifiedNative" type="Button" parent="Background/CenterContainer/VBoxContainer/UnifiedNative"]
-margin_left = 119.0
-margin_right = 243.0
-margin_bottom = 20.0
+[node name="ResetConsentState" type="Button" parent="Background/TabContainer/UMP/VBoxContainer"]
+margin_top = 96.0
+margin_right = 245.0
+margin_bottom = 116.0
 disabled = true
-text = "DISABLE UNIFIED"
+text = "RESET CONSENT STATE"
 
 [node name="BannerSizes" type="ItemList" parent="Background"]
 anchor_left = 0.064
@@ -164,10 +186,10 @@ __meta__ = {
 stream = ExtResource( 4 )
 autoplay = true
 
-[connection signal="pressed" from="Background/CenterContainer/VBoxContainer/Banner/EnableBanner" to="." method="_on_EnableBanner_pressed"]
-[connection signal="pressed" from="Background/CenterContainer/VBoxContainer/Banner/DisableBanner" to="." method="_on_DisableBanner_pressed"]
-[connection signal="pressed" from="Background/CenterContainer/VBoxContainer/Interstitial" to="." method="_on_Interstitial_pressed"]
-[connection signal="pressed" from="Background/CenterContainer/VBoxContainer/Rewarded" to="." method="_on_Rewarded_pressed"]
-[connection signal="pressed" from="Background/CenterContainer/VBoxContainer/UnifiedNative/EnableUnifiedNative" to="." method="_on_EnableUnifiedNative_pressed"]
-[connection signal="pressed" from="Background/CenterContainer/VBoxContainer/UnifiedNative/DisableUnifiedNative" to="." method="_on_DisableUnifiedNative_pressed"]
+[connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Banner/EnableBanner" to="." method="_on_EnableBanner_pressed"]
+[connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Banner/DisableBanner" to="." method="_on_DisableBanner_pressed"]
+[connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Interstitial" to="." method="_on_Interstitial_pressed"]
+[connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Rewarded" to="." method="_on_Rewarded_pressed"]
+[connection signal="pressed" from="Background/TabContainer/UMP/VBoxContainer/RequestUserConsent" to="." method="_on_RequestUserConsent_pressed"]
+[connection signal="pressed" from="Background/TabContainer/UMP/VBoxContainer/ResetConsentState" to="." method="_on_ResetConsentState_pressed"]
 [connection signal="item_selected" from="Background/BannerSizes" to="." method="_on_BannerSizes_item_selected"]

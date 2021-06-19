@@ -37,6 +37,35 @@ func show_rewarded():
 	if _admob_singleton and is_initialized:
 		_admob_singleton.show_rewarded()
 
+func request_user_consent():
+	if _admob_singleton and is_initialized:
+		_admob_singleton.request_user_consent()
+
+func reset_consent_state(will_request_user_consent := false):
+	if _admob_singleton and is_initialized:
+		_admob_singleton.reset_consent_state()
+
+func get_banner_width() -> int:
+	if _admob_singleton and is_initialized:
+		return _admob_singleton.get_banner_width()
+	return 0
+
+func get_banner_width_in_pixels() -> int:
+	if _admob_singleton and is_initialized:
+		return _admob_singleton.get_banner_width_in_pixels()
+	return 0
+	
+func get_banner_height() -> int:
+	if _admob_singleton and is_initialized:
+		return _admob_singleton.get_banner_height()
+	return 0
+	
+func get_banner_height_in_pixels() -> int:
+	if _admob_singleton and is_initialized:
+		return _admob_singleton.get_banner_height_in_pixels()
+	return 0
+	
+	
 func _on_get_tree_resized():
 	if _admob_singleton and is_initialized:
 		if banner_enabled and config.banner.size == "SMART_BANNER":

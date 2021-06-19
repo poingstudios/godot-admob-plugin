@@ -2,21 +2,21 @@ tool
 extends "util/Variables.gd"
 
 onready var BannerSize := $VBoxContainer/BannerSizeHBoxContainer/BannerSize
-onready var MaxAdContentRating := $VBoxContainer/MaxAdHBoxContainer/MaxAdContentRating
+onready var MaxAdContentRating := $VBoxContainer/MaxAdContentRating/Value
 onready var Enabled := $VBoxContainer/Enabled
 onready var Real := $VBoxContainer/Real
 onready var TestEuropeUserConsent := $VBoxContainer/TestEuropeUserConsent
 onready var BannerOnTop := $VBoxContainer/BannerOnTop
 onready var ChildDirectedTreatment := $VBoxContainer/ChildDirectedTreatment
 onready var Android = {
-	"Banner" : $VBoxContainer/UnitIdsHBoxContainer/UnitIds/Android/VBoxContainer/Banner/Value,
-	"Interstitial" : $VBoxContainer/UnitIdsHBoxContainer/UnitIds/Android/VBoxContainer/Interstitial/Value,
-	"Rewarded" : $VBoxContainer/UnitIdsHBoxContainer/UnitIds/Android/VBoxContainer/Rewarded/Value
+	"Banner" : $VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Banner/Value,
+	"Interstitial" : $VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Banner/Value,
+	"Rewarded" : $VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Rewarded/Value
 }
 onready var iOS = {
-	"Banner" : $VBoxContainer/UnitIdsHBoxContainer/UnitIds/iOS/VBoxContainer/Banner/Value,
-	"Interstitial" : $VBoxContainer/UnitIdsHBoxContainer/UnitIds/iOS/VBoxContainer/Interstitial/Value,
-	"Rewarded" : $VBoxContainer/UnitIdsHBoxContainer/UnitIds/iOS/VBoxContainer/Rewarded/Value
+	"Banner" : $VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Banner/Value,
+	"Interstitial" : $VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Interstitial/Value,
+	"Rewarded" : $VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Rewarded/Value
 }
 
 func _ready():
