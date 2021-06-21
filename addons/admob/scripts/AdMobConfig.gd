@@ -10,7 +10,7 @@ onready var BannerOnTop := $VBoxContainer/BannerOnTop
 onready var ChildDirectedTreatment := $VBoxContainer/ChildDirectedTreatment
 onready var Android = {
 	"Banner" : $VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Banner/Value,
-	"Interstitial" : $VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Banner/Value,
+	"Interstitial" : $VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Interstitial/Value,
 	"Rewarded" : $VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Rewarded/Value
 }
 onready var iOS = {
