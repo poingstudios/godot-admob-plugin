@@ -73,11 +73,11 @@ __meta__ = {
 
 [node name="BannerSize" type="OptionButton" parent="VBoxContainer/BannerSizeHBoxContainer"]
 margin_left = 79.0
-margin_right = 161.0
+margin_right = 243.0
 margin_bottom = 20.0
-text = "BANNER"
-items = [ "BANNER", null, false, 0, null, "MEDIUM_RECTANGLE", null, false, 1, null, "FULL_BANNER", null, false, 2, null, "LEADERBOARD", null, false, 3, null, "SMART_BANNER", null, false, 4, null ]
-selected = 0
+text = "MEDIUM_RECTANGLE"
+items = [ "BANNER", null, false, 0, null, "MEDIUM_RECTANGLE", null, false, 1, null, "FULL_BANNER", null, false, 2, null, "LEADERBOARD", null, false, 3, null, "ADAPTIVE", null, false, 4, null, "SMART_BANNER", null, false, 5, null ]
+selected = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -189,7 +189,7 @@ __meta__ = {
 margin_left = 49.0
 margin_right = 352.0
 margin_bottom = 24.0
-text = "ca-app-pub-3940256099942544/1033173712"
+text = "ca-app-pub-3940256099942544/6300978111"
 align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false

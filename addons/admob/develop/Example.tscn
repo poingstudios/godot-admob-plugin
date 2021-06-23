@@ -173,15 +173,6 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="UnifiedNative" type="Panel" parent="Background"]
-anchor_left = 0.293962
-anchor_top = 0.782665
-anchor_right = 0.727962
-anchor_bottom = 0.875998
-__meta__ = {
-"_edit_use_anchors_": true
-}
-
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
 autoplay = true
