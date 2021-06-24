@@ -12,6 +12,8 @@ onready var BannerSizes : ItemList = $Background/BannerSizes
 onready var Advice : RichTextLabel = $Background/Advice
 onready var Music : AudioStreamPlayer = $Music
 
+onready var BannerPosition : CheckBox = $Background/TabContainer/Banner/VBoxContainer/Position
+
 func _add_text_Advice_Node(text_value : String):
 	Advice.bbcode_text += text_value + "\n"
 
@@ -55,6 +57,7 @@ func _on_MobileAds_initialization_complete(status, _adapter_name):
 		_add_text_Advice_Node("max_ad_content_rating: " + str(MobileAds.config.max_ad_content_rating))
 		_add_text_Advice_Node("instance_id: " + str(get_instance_id()))
 		EnableBanner.disabled = false
+		BannerPosition.disabled = false
 		RequestUserConsent.disabled = false
 		ResetConsentState.disabled = false
 	else:
@@ -133,3 +136,9 @@ func _on_ResetConsentState_pressed():
 
 func _on_RequestUserConsent_pressed():
 	MobileAds.request_user_consent()
+
+
+func _on_Position_pressed():
+	MobileAds.config.banner.position = BannerPosition.pressed
+	if MobileAds.banner_enabled:
+		MobileAds.load_banner()

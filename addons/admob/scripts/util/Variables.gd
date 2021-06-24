@@ -1,6 +1,6 @@
 extends Node
 
-const FILE_PATH = "user://admob_settings.json"
+const FILE_PATH = "res://addons/admob/config/settings.json"
 enum INITIALIZATION_STATUS {NOT_READY, READY}
 
 #public attributes

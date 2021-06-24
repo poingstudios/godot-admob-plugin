@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://addons/admob/develop/Example.gd" type="Script" id=1]
 [ext_resource path="res://addons/admob/assets/icon-500.png" type="Texture" id=2]
@@ -12,6 +12,9 @@ bg_color = Color( 0.36377, 0.23226, 0.0795746, 1 )
 
 [sub_resource type="Theme" id=3]
 TabContainer/styles/panel = SubResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
 
 [node name="Example" type="Control"]
 anchor_right = 1.0
@@ -134,6 +137,32 @@ margin_bottom = 92.0
 disabled = true
 text = "REWARDED"
 
+[node name="Banner" type="Tabs" parent="Background/TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 24.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/TabContainer/Banner"]
+margin_right = 245.0
+margin_bottom = 116.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Position" type="CheckBox" parent="Background/TabContainer/Banner/VBoxContainer"]
+margin_right = 130.0
+margin_bottom = 24.0
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 4 )
+pressed = true
+text = "Position on TOP"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="UMP" type="Tabs" parent="Background/TabContainer"]
 visible = false
 anchor_right = 1.0
@@ -161,6 +190,9 @@ margin_right = 245.0
 margin_bottom = 116.0
 disabled = true
 text = "RESET CONSENT STATE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="BannerSizes" type="ItemList" parent="Background"]
 anchor_left = 0.064
@@ -181,6 +213,7 @@ autoplay = true
 [connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Banner/DisableBanner" to="." method="_on_DisableBanner_pressed"]
 [connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Interstitial" to="." method="_on_Interstitial_pressed"]
 [connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Rewarded" to="." method="_on_Rewarded_pressed"]
+[connection signal="pressed" from="Background/TabContainer/Banner/VBoxContainer/Position" to="." method="_on_Position_pressed"]
 [connection signal="pressed" from="Background/TabContainer/UMP/VBoxContainer/RequestUserConsent" to="." method="_on_RequestUserConsent_pressed"]
 [connection signal="pressed" from="Background/TabContainer/UMP/VBoxContainer/ResetConsentState" to="." method="_on_ResetConsentState_pressed"]
 [connection signal="item_selected" from="Background/BannerSizes" to="." method="_on_BannerSizes_item_selected"]
