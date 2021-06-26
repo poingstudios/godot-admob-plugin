@@ -7,6 +7,12 @@ This repository is for Godot's Addons to integrate natively AdMob to your Game P
 
 Please read this tutorial: https://docs.godotengine.org/pt_BR/stable/tutorials/plugins/editor/installing_plugins.html
 
+Manual:
+1. Go to Tags of the project: https://github.com/Poing-Studios/Godot-AdMob-Editor-Plugin/tags
+2. Download and extract the `.zip` or `.tar.gz`
+3. Put the "addons/admob" folder which was extracted into your "res://addons" of your Game Project
+
+Godot Asset Library:
 1. Find the Plugin `AdMob` then download and install
 2. Enable the Plugin: https://docs.godotengine.org/pt_BR/stable/tutorials/plugins/editor/installing_plugins.html#enabling-a-plugin
 
