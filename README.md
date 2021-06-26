@@ -24,4 +24,6 @@ A example scene is here: `res://addons/admob/develop/Example.tscn`
 
 To your plugin work, you need to download the `AdMob Plugin` here: https://github.com/Poing-Studios/Godot-AdMob-Android-iOS#readme
 
+On `Export -> Resources -> Filters to export non-resources...`, you need to put this: `res://addons/admob/*.json`
+
 A video tutorial is in work progress.
