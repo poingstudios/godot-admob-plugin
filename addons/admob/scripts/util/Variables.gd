@@ -8,6 +8,7 @@ var is_initialized : bool = false
 var banner_enabled : bool = false
 var interstitial_loaded : bool = false
 var rewarded_loaded : bool = false
+var rewarded_interstitial_loaded : bool = false
 
 
 #private attributes
@@ -40,22 +41,39 @@ var config : Dictionary = {
 		"rewarded" : {
 			"iOS" : "ca-app-pub-3940256099942544/1712485313",
 			"Android" : "ca-app-pub-3940256099942544/5224354917",
+		},
+		"rewarded_interstitial" : {
+			"iOS" : "ca-app-pub-3940256099942544/6978759866",
+			"Android" : "ca-app-pub-3940256099942544/5354046379",
 		}
 	}
 }
 
 
 func save_config():
-	var file = File.new()
-	file.open(FILE_PATH, File.WRITE)
-	file.store_string(to_json(config))
-	file.close()
+	if !(OS.get_name() == "Android" or OS.get_name() == "iOS"):
+		var file = File.new()
+		file.open(FILE_PATH, File.WRITE)
+		file.store_string(to_json(config))
+		file.close()
 
 func load_config():
 	var config_file := File.new()
 	if config_file.file_exists(FILE_PATH):
 		config_file.open(FILE_PATH, File.READ)
-		config = parse_json(config_file.get_as_text())
+		var new_config : Dictionary = parse_json(config_file.get_as_text())
+		merge_dir(config, new_config)
 		config_file.close()
-	else:
-		save_config()
+	save_config()
+
+
+static func merge_dir(target, patch):
+	for key in patch:
+		if target.has(key):
+			var tv = target[key]
+			if typeof(tv) == TYPE_DICTIONARY:
+				merge_dir(tv, patch[key])
+			else:
+				target[key] = patch[key]
+		else:
+			target[key] = patch[key]

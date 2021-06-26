@@ -25,6 +25,10 @@ func load_rewarded():
 	if _admob_singleton and is_initialized:
 		_admob_singleton.load_rewarded(config.unit_ids.rewarded[OS.get_name()])
 
+func load_rewarded_interstitial():
+	if _admob_singleton and is_initialized:
+		_admob_singleton.load_rewarded_interstitial(config.unit_ids.rewarded_interstitial[OS.get_name()])
+
 func destroy_banner():
 	if _admob_singleton and is_initialized:
 		_admob_singleton.destroy_banner()
@@ -36,6 +40,10 @@ func show_interstitial():
 func show_rewarded():
 	if _admob_singleton and is_initialized:
 		_admob_singleton.show_rewarded()
+
+func show_rewarded_interstitial():
+	if _admob_singleton and is_initialized:
+		_admob_singleton.show_rewarded_interstitial()
 
 func request_user_consent():
 	if _admob_singleton and is_initialized:

@@ -4,15 +4,16 @@ onready var EnableBanner : Button = $Background/TabContainer/AdFormats/VBoxConta
 onready var DisableBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner/DisableBanner
 onready var Interstitial : Button = $Background/TabContainer/AdFormats/VBoxContainer/Interstitial
 onready var Rewarded : Button = $Background/TabContainer/AdFormats/VBoxContainer/Rewarded
+onready var RewardedInterstitial : Button = $Background/TabContainer/AdFormats/VBoxContainer/RewardedInterstitial
 
 onready var RequestUserConsent : Button = $Background/TabContainer/UMP/VBoxContainer/RequestUserConsent
 onready var ResetConsentState : Button = $Background/TabContainer/UMP/VBoxContainer/ResetConsentState
 
-onready var BannerSizes : ItemList = $Background/BannerSizes
 onready var Advice : RichTextLabel = $Background/Advice
 onready var Music : AudioStreamPlayer = $Music
 
 onready var BannerPosition : CheckBox = $Background/TabContainer/Banner/VBoxContainer/Position
+onready var BannerSizes : ItemList = $Background/TabContainer/Banner/VBoxContainer/BannerSizes
 
 func _add_text_Advice_Node(text_value : String):
 	Advice.bbcode_text += text_value + "\n"
@@ -21,9 +22,9 @@ func _ready():
 	OS.center_window()
 	Music.play()
 	MobileAds.request_user_consent()
+	for banner_size in MobileAds.BANNER_SIZE:
+		BannerSizes.add_item(banner_size)
 	if OS.get_name() == "Android" or OS.get_name() == "iOS":
-		for banner_size in MobileAds.BANNER_SIZE:
-			BannerSizes.add_item(banner_size)
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("consent_info_update_failure", self, "_on_MobileAds_consent_info_update_failure")
 		# warning-ignore:return_value_discarded
@@ -41,7 +42,11 @@ func _ready():
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("rewarded_ad_closed", self, "_on_MobileAds_rewarded_ad_closed")
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_user_earned_rewarded", self, "_on_MobileAds_rewarded_user_earned_rewarded")
+		MobileAds.connect("rewarded_interstitial_ad_loaded", self, "_on_MobileAds_rewarded_interstitial_ad_loaded")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_interstitial_ad_closed", self, "_on_MobileAds_rewarded_interstitial_ad_closed")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("user_earned_rewarded", self, "_on_MobileAds_user_earned_rewarded")
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("initialization_complete", self, "_on_MobileAds_initialization_complete")
 	else:
@@ -51,6 +56,7 @@ func _on_MobileAds_initialization_complete(status, _adapter_name):
 	if status == MobileAds.INITIALIZATION_STATUS.READY:
 		MobileAds.load_interstitial()
 		MobileAds.load_rewarded()
+		MobileAds.load_rewarded_interstitial()
 		_add_text_Advice_Node("AdMob initialized! With parameters:")
 		_add_text_Advice_Node("is_real: " + str(MobileAds.config.is_real))
 		_add_text_Advice_Node("is_for_child_directed_treatment: " + str(MobileAds.config.is_for_child_directed_treatment))
@@ -104,7 +110,11 @@ func _on_DisableBanner_pressed():
 func _on_Rewarded_pressed():
 	MobileAds.show_rewarded()
 	Rewarded.disabled = true
-	
+
+func _on_RewardedInterstitial_pressed():
+	MobileAds.show_rewarded_interstitial()
+	RewardedInterstitial.disabled = true
+
 func _on_MobileAds_rewarded_ad_loaded():
 	Rewarded.disabled = false
 	_add_text_Advice_Node("Rewarded ad loaded")
@@ -112,8 +122,16 @@ func _on_MobileAds_rewarded_ad_loaded():
 func _on_MobileAds_rewarded_ad_closed():
 	MobileAds.load_rewarded()
 	_add_text_Advice_Node("Rewarded ad closed")
+
+func _on_MobileAds_rewarded_interstitial_ad_loaded():
+	RewardedInterstitial.disabled = false
+	_add_text_Advice_Node("Rewarded Interstitial ad loaded")
 	
-func _on_MobileAds_rewarded_user_earned_rewarded(currency : String, amount : int):
+func _on_MobileAds_rewarded_interstitial_ad_closed():
+	MobileAds.load_rewarded_interstitial()
+	_add_text_Advice_Node("Rewarded Interstitial ad closed")
+	
+func _on_MobileAds_user_earned_rewarded(currency : String, amount : int):
 	Advice.bbcode_text += "EARNED " + currency + " with amount: " + str(amount) + "\n"
 
 func _on_MobileAds_consent_info_update_failure(_error_code : int, error_message : String):
@@ -125,7 +143,7 @@ func _on_MobileAds_consent_status_changed(status_message : String):
 
 func _on_BannerSizes_item_selected(index):
 	if MobileAds.is_initialized:
-		var item_text : String = $Background/BannerSizes.get_item_text(index)
+		var item_text : String = BannerSizes.get_item_text(index)
 		MobileAds.config.banner.size = index
 		_add_text_Advice_Node("Banner Size changed:" + item_text)
 		if MobileAds.banner_enabled:
@@ -142,3 +160,5 @@ func _on_Position_pressed():
 	MobileAds.config.banner.position = BannerPosition.pressed
 	if MobileAds.banner_enabled:
 		MobileAds.load_banner()
+
+

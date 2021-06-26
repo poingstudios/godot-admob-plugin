@@ -19,8 +19,15 @@ signal rewarded_ad_loaded()
 signal rewarded_ad_failed_to_load()
 signal rewarded_ad_opened()
 signal rewarded_ad_closed()
-signal rewarded_user_earned_rewarded(currency, amount)
 signal rewarded_ad_failed_to_show(error_code)
+
+signal user_earned_rewarded(currency, amount) #for Rewarded and Rewarded Interstitial
+
+signal rewarded_interstitial_ad_loaded()
+signal rewarded_interstitial_ad_failed_to_load()
+signal rewarded_interstitial_ad_opened()
+signal rewarded_interstitial_ad_closed()
+signal rewarded_interstitial_ad_failed_to_show(error_code)
 
 signal consent_form_dismissed()
 signal consent_status_changed(consent_status_message)
@@ -92,11 +99,28 @@ func _on_AdMob_rewarded_ad_failed_to_load(error_code : int):
 	emit_signal("rewarded_ad_failed_to_load")
 	
 func _on_AdMob_user_earned_rewarded(currency : String, amount : int):
-	emit_signal("rewarded_user_earned_rewarded", currency, amount)
+	emit_signal("user_earned_rewarded", currency, amount)
 
 func _on_AdMob_rewarded_ad_failed_to_show(error_code : int):
 	emit_signal("rewarded_ad_failed_to_show", error_code)
 
+
+func _on_AdMob_rewarded_interstitial_ad_loaded():
+	rewarded_interstitial_loaded = true
+	emit_signal("rewarded_interstitial_ad_loaded")
+
+func _on_AdMob_rewarded_interstitial_ad_opened():
+	emit_signal("rewarded_interstitial_ad_opened")
+
+func _on_AdMob_rewarded_interstitial_ad_closed():
+	rewarded_interstitial_loaded = false
+	emit_signal("rewarded_interstitial_ad_closed")
+
+func _on_AdMob_rewarded_interstitial_ad_failed_to_load(error_code : int):
+	emit_signal("rewarded_interstitial_ad_failed_to_load")
+	
+func _on_AdMob_rewarded_interstitial_ad_failed_to_show(error_code : int):
+	emit_signal("rewarded_interstitial_ad_failed_to_show", error_code)
 
 
 func _on_AdMob_consent_form_dismissed():
