@@ -9,16 +9,16 @@ onready var TestEuropeUserConsent := $VBoxContainer/TestEuropeUserConsent
 onready var BannerOnTop := $VBoxContainer/BannerOnTop
 onready var ChildDirectedTreatment := $VBoxContainer/ChildDirectedTreatment
 onready var Android = {
-	"Banner" : $VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Banner/Value,
-	"Interstitial" : $VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Interstitial/Value,
-	"Rewarded" : $VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Rewarded/Value,
-	"RewardedInterstitial" : $VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/RewardedInterstitial/Value
+	"Banner" : $VBoxContainer/UnitIds/TabContainer/Android/Banner,
+	"Interstitial" : $VBoxContainer/UnitIds/TabContainer/Android/Interstitial,
+	"Rewarded" : $VBoxContainer/UnitIds/TabContainer/Android/Rewarded,
+	"RewardedInterstitial" : $VBoxContainer/UnitIds/TabContainer/Android/RewardedInterstitial
 }
 onready var iOS = {
-	"Banner" : $VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Banner/Value,
-	"Interstitial" : $VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Interstitial/Value,
-	"Rewarded" : $VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Rewarded/Value,
-	"RewardedInterstitial" : $VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/RewardedInterstitial/Value
+	"Banner" : $VBoxContainer/UnitIds/TabContainer/iOS/Banner,
+	"Interstitial" : $VBoxContainer/UnitIds/TabContainer/iOS/Interstitial,
+	"Rewarded" : $VBoxContainer/UnitIds/TabContainer/iOS/Rewarded,
+	"RewardedInterstitial" : $VBoxContainer/UnitIds/TabContainer/iOS/RewardedInterstitial
 }
 
 func _ready():

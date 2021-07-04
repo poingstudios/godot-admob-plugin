@@ -4,24 +4,23 @@
 
 [node name="AdMobConfig" type="Control"]
 pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 1.0
+anchor_right = 1.144
+anchor_bottom = 1.00111
+margin_bottom = -6.10352e-05
 rect_clip_content = true
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -250.0
-margin_right = 282.0
-margin_bottom = 395.0
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 556.0
+margin_bottom = 419.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -129,15 +128,18 @@ __meta__ = {
 [node name="UnitIds" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 188.0
 margin_right = 532.0
-margin_bottom = 348.0
+margin_bottom = 377.0
+rect_min_size = Vector2( 532, 189 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Description" type="Label" parent="VBoxContainer/UnitIds"]
-margin_top = 73.0
+margin_top = 87.0
 margin_right = 58.0
-margin_bottom = 87.0
+margin_bottom = 101.0
 text = "UNIT IDS"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -146,132 +148,100 @@ __meta__ = {
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/UnitIds"]
 margin_left = 62.0
 margin_right = 532.0
-margin_bottom = 160.0
-rect_min_size = Vector2( 470, 160 )
+margin_bottom = 189.0
+size_flags_horizontal = 3
 tab_align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Android" type="Tabs" parent="VBoxContainer/UnitIds/TabContainer"]
+[node name="Android" type="GridContainer" parent="VBoxContainer/UnitIds/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/UnitIds/TabContainer/Android"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Banner" type="HBoxContainer" parent="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer"]
-margin_right = 436.0
-margin_bottom = 24.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Key" type="Label" parent="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Banner"]
+[node name="Key" type="Label" parent="VBoxContainer/UnitIds/TabContainer/Android"]
 margin_top = 5.0
-margin_right = 45.0
+margin_right = 129.0
 margin_bottom = 19.0
 text = "Banner"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Banner"]
-margin_left = 49.0
-margin_right = 352.0
+[node name="Banner" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+margin_left = 133.0
+margin_right = 436.0
 margin_bottom = 24.0
 text = "ca-app-pub-3940256099942544/6300978111"
 align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="Interstitial" type="HBoxContainer" parent="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer"]
-margin_top = 28.0
-margin_right = 436.0
-margin_bottom = 52.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Key" type="Label" parent="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Interstitial"]
-margin_top = 5.0
-margin_right = 67.0
-margin_bottom = 19.0
+[node name="Key2" type="Label" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+margin_top = 33.0
+margin_right = 129.0
+margin_bottom = 47.0
 text = "Interstitial"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Interstitial"]
-margin_left = 71.0
-margin_right = 374.0
-margin_bottom = 24.0
+[node name="Interstitial" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+margin_left = 133.0
+margin_top = 28.0
+margin_right = 436.0
+margin_bottom = 52.0
 text = "ca-app-pub-3940256099942544/1033173712"
 align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="Rewarded" type="HBoxContainer" parent="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer"]
-margin_top = 56.0
-margin_right = 436.0
-margin_bottom = 80.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Key" type="Label" parent="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Rewarded"]
-margin_top = 5.0
-margin_right = 62.0
-margin_bottom = 19.0
+[node name="Key3" type="Label" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+margin_top = 61.0
+margin_right = 129.0
+margin_bottom = 75.0
 text = "Rewarded"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Rewarded"]
-margin_left = 66.0
-margin_right = 369.0
-margin_bottom = 24.0
+[node name="Rewarded" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+margin_left = 133.0
+margin_top = 56.0
+margin_right = 436.0
+margin_bottom = 80.0
 text = "ca-app-pub-3940256099942544/5224354917"
 align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="RewardedInterstitial" type="HBoxContainer" parent="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer"]
-margin_top = 84.0
-margin_right = 436.0
-margin_bottom = 108.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Key" type="Label" parent="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/RewardedInterstitial"]
-margin_top = 5.0
+[node name="Key4" type="Label" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+margin_top = 89.0
 margin_right = 129.0
-margin_bottom = 19.0
+margin_bottom = 103.0
 text = "RewardedInterstitial"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/RewardedInterstitial"]
+[node name="RewardedInterstitial" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/Android"]
 margin_left = 133.0
+margin_top = 84.0
 margin_right = 436.0
-margin_bottom = 24.0
+margin_bottom = 108.0
 text = "ca-app-pub-3940256099942544/5354046379"
 align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="iOS" type="Tabs" parent="VBoxContainer/UnitIds/TabContainer"]
+[node name="iOS" type="GridContainer" parent="VBoxContainer/UnitIds/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -279,118 +249,87 @@ margin_left = 4.0
 margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
+columns = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
-margin_right = 40.0
-margin_bottom = 40.0
-
-[node name="Banner" type="HBoxContainer" parent="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer"]
-margin_right = 436.0
-margin_bottom = 24.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Key" type="Label" parent="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Banner"]
+[node name="Key" type="Label" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
 margin_top = 5.0
-margin_right = 45.0
+margin_right = 129.0
 margin_bottom = 19.0
 text = "Banner"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Banner"]
-margin_left = 49.0
-margin_right = 352.0
+[node name="Banner" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+margin_left = 133.0
+margin_right = 436.0
 margin_bottom = 24.0
 text = "ca-app-pub-3940256099942544/2934735716"
 align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="Interstitial" type="HBoxContainer" parent="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer"]
-margin_top = 28.0
-margin_right = 436.0
-margin_bottom = 52.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Key" type="Label" parent="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Interstitial"]
-margin_top = 5.0
-margin_right = 67.0
-margin_bottom = 19.0
+[node name="Key2" type="Label" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+margin_top = 33.0
+margin_right = 129.0
+margin_bottom = 47.0
 text = "Interstitial"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Interstitial"]
-margin_left = 71.0
-margin_right = 374.0
-margin_bottom = 24.0
+[node name="Interstitial" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+margin_left = 133.0
+margin_top = 28.0
+margin_right = 436.0
+margin_bottom = 52.0
 text = "ca-app-pub-3940256099942544/4411468910"
 align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="Rewarded" type="HBoxContainer" parent="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer"]
-margin_top = 56.0
-margin_right = 436.0
-margin_bottom = 80.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Key" type="Label" parent="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Rewarded"]
-margin_top = 5.0
-margin_right = 62.0
-margin_bottom = 19.0
+[node name="Key3" type="Label" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+margin_top = 61.0
+margin_right = 129.0
+margin_bottom = 75.0
 text = "Rewarded"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Rewarded"]
-margin_left = 66.0
-margin_right = 369.0
-margin_bottom = 24.0
+[node name="Rewarded" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+margin_left = 133.0
+margin_top = 56.0
+margin_right = 436.0
+margin_bottom = 80.0
 text = "ca-app-pub-3940256099942544/1712485313"
 align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="RewardedInterstitial" type="HBoxContainer" parent="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer"]
-margin_top = 84.0
-margin_right = 436.0
-margin_bottom = 108.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Key" type="Label" parent="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/RewardedInterstitial"]
-margin_top = 5.0
+[node name="Key4" type="Label" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+margin_top = 89.0
 margin_right = 129.0
-margin_bottom = 19.0
+margin_bottom = 103.0
 text = "RewardedInterstitial"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Value" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/RewardedInterstitial"]
+[node name="RewardedInterstitial" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
 margin_left = 133.0
+margin_top = 84.0
 margin_right = 436.0
-margin_bottom = 24.0
+margin_bottom = 108.0
 text = "ca-app-pub-3940256099942544/6978759866"
 align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
 [node name="InstallationTutorial" type="LinkButton" parent="VBoxContainer"]
-margin_top = 352.0
+margin_top = 381.0
 margin_right = 532.0
-margin_bottom = 366.0
+margin_bottom = 395.0
 text = "INSTALLATION TUTORIAL"
 
 [connection signal="pressed" from="VBoxContainer/Enabled" to="." method="_on_Enabled_pressed"]
@@ -400,12 +339,12 @@ text = "INSTALLATION TUTORIAL"
 [connection signal="pressed" from="VBoxContainer/BannerOnTop" to="." method="_on_BannerOnTop_pressed"]
 [connection signal="pressed" from="VBoxContainer/ChildDirectedTreatment" to="." method="_on_ChildDirectedTreatment_pressed"]
 [connection signal="item_selected" from="VBoxContainer/MaxAdContentRating/Value" to="." method="_on_MaxAdContentRating_item_selected"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Banner/Value" to="." method="_on_AndroidBanner_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Interstitial/Value" to="." method="_on_AndroidInterstitial_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/Rewarded/Value" to="." method="_on_AndroidRewarded_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/Android/VBoxContainer/RewardedInterstitial/Value" to="." method="_on_AndroidRewardedInterstitial_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Banner/Value" to="." method="_on_iOSBanner_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Interstitial/Value" to="." method="_on_iOSInterstitial_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/Rewarded/Value" to="." method="_on_iOSRewarded_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/iOS/VBoxContainer/RewardedInterstitial/Value" to="." method="_on_iOSRewardedInterstitial_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/Android/Banner" to="." method="_on_AndroidBanner_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/Android/Interstitial" to="." method="_on_AndroidInterstitial_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/Android/Rewarded" to="." method="_on_AndroidRewarded_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/Android/RewardedInterstitial" to="." method="_on_AndroidRewardedInterstitial_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/iOS/Banner" to="." method="_on_iOSBanner_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/iOS/Interstitial" to="." method="_on_iOSInterstitial_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/iOS/Rewarded" to="." method="_on_iOSRewarded_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/iOS/RewardedInterstitial" to="." method="_on_iOSRewardedInterstitial_text_changed"]
 [connection signal="pressed" from="VBoxContainer/InstallationTutorial" to="." method="_on_InstallationTutorial_pressed"]
