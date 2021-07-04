@@ -4,16 +4,16 @@
 
 [node name="AdMobConfig" type="Control"]
 pause_mode = 2
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 1.0
+anchor_right = 1.144
+anchor_bottom = 1.00111
+margin_bottom = -6.10352e-05
 rect_clip_content = true
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -128,7 +128,7 @@ __meta__ = {
 [node name="UnitIds" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 188.0
 margin_right = 532.0
-margin_bottom = 408.0
+margin_bottom = 377.0
 rect_min_size = Vector2( 532, 189 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -137,9 +137,9 @@ __meta__ = {
 }
 
 [node name="Description" type="Label" parent="VBoxContainer/UnitIds"]
-margin_top = 103.0
+margin_top = 87.0
 margin_right = 58.0
-margin_bottom = 117.0
+margin_bottom = 101.0
 text = "UNIT IDS"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -147,8 +147,8 @@ __meta__ = {
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/UnitIds"]
 margin_left = 62.0
-margin_right = 506.0
-margin_bottom = 144.0
+margin_right = 532.0
+margin_bottom = 189.0
 size_flags_horizontal = 3
 tab_align = 0
 __meta__ = {
@@ -156,7 +156,6 @@ __meta__ = {
 }
 
 [node name="Android" type="GridContainer" parent="VBoxContainer/UnitIds/TabContainer"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -243,6 +242,7 @@ expand_to_text_length = true
 virtual_keyboard_enabled = false
 
 [node name="iOS" type="GridContainer" parent="VBoxContainer/UnitIds/TabContainer"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -327,9 +327,9 @@ expand_to_text_length = true
 virtual_keyboard_enabled = false
 
 [node name="InstallationTutorial" type="LinkButton" parent="VBoxContainer"]
-margin_top = 412.0
+margin_top = 381.0
 margin_right = 532.0
-margin_bottom = 426.0
+margin_bottom = 395.0
 text = "INSTALLATION TUTORIAL"
 
 [connection signal="pressed" from="VBoxContainer/Enabled" to="." method="_on_Enabled_pressed"]
