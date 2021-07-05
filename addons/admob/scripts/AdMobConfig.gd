@@ -1,6 +1,7 @@
 tool
 extends "util/Variables.gd"
 
+onready var CurrentVersion := $VBoxContainer/CurrentVersion
 onready var BannerSize := $VBoxContainer/BannerSizeHBoxContainer/BannerSize
 onready var MaxAdContentRating := $VBoxContainer/MaxAdContentRating/Value
 onready var Enabled := $VBoxContainer/Enabled
@@ -22,6 +23,10 @@ onready var iOS = {
 }
 
 func _ready():
+	var plugin_config_file := ConfigFile.new()
+	plugin_config_file.load("res://addons/admob/plugin.cfg")
+	CurrentVersion.text = "Version: " + plugin_config_file.get_value("plugin", "version")
+
 	load_config()
 	BannerSize.clear()
 	MaxAdContentRating.clear()

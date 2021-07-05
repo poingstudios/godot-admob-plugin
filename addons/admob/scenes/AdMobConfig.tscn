@@ -25,9 +25,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Enabled" type="CheckBox" parent="VBoxContainer"]
+[node name="CurrentVersion" type="Label" parent="VBoxContainer"]
 margin_right = 532.0
-margin_bottom = 24.0
+margin_bottom = 14.0
+text = "Version: 0.3.2"
+
+[node name="Enabled" type="CheckBox" parent="VBoxContainer"]
+margin_top = 18.0
+margin_right = 532.0
+margin_bottom = 42.0
 pressed = true
 text = "Enabled"
 __meta__ = {
@@ -35,18 +41,18 @@ __meta__ = {
 }
 
 [node name="Real" type="CheckBox" parent="VBoxContainer"]
-margin_top = 28.0
+margin_top = 46.0
 margin_right = 532.0
-margin_bottom = 52.0
+margin_bottom = 70.0
 text = "Real"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TestEuropeUserConsent" type="CheckBox" parent="VBoxContainer"]
-margin_top = 56.0
+margin_top = 74.0
 margin_right = 532.0
-margin_bottom = 80.0
+margin_bottom = 98.0
 pressed = true
 text = "Test Europe User Consent"
 __meta__ = {
@@ -54,9 +60,9 @@ __meta__ = {
 }
 
 [node name="BannerSizeHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 84.0
+margin_top = 102.0
 margin_right = 532.0
-margin_bottom = 104.0
+margin_bottom = 122.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -82,15 +88,15 @@ __meta__ = {
 }
 
 [node name="BannerOnTop" type="CheckBox" parent="VBoxContainer"]
-margin_top = 108.0
+margin_top = 126.0
 margin_right = 532.0
-margin_bottom = 132.0
+margin_bottom = 150.0
 text = "Banner On Top"
 
 [node name="ChildDirectedTreatment" type="CheckBox" parent="VBoxContainer"]
-margin_top = 136.0
+margin_top = 154.0
 margin_right = 532.0
-margin_bottom = 160.0
+margin_bottom = 178.0
 pressed = true
 text = "Child Directed Treatment"
 __meta__ = {
@@ -98,9 +104,9 @@ __meta__ = {
 }
 
 [node name="MaxAdContentRating" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 164.0
+margin_top = 182.0
 margin_right = 532.0
-margin_bottom = 184.0
+margin_bottom = 202.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -126,10 +132,10 @@ __meta__ = {
 }
 
 [node name="UnitIds" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 188.0
+margin_top = 206.0
 margin_right = 532.0
-margin_bottom = 377.0
-rect_min_size = Vector2( 532, 189 )
+margin_bottom = 356.0
+rect_min_size = Vector2( 532, 150 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
 __meta__ = {
@@ -137,9 +143,9 @@ __meta__ = {
 }
 
 [node name="Description" type="Label" parent="VBoxContainer/UnitIds"]
-margin_top = 87.0
+margin_top = 68.0
 margin_right = 58.0
-margin_bottom = 101.0
+margin_bottom = 82.0
 text = "UNIT IDS"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -148,7 +154,7 @@ __meta__ = {
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/UnitIds"]
 margin_left = 62.0
 margin_right = 532.0
-margin_bottom = 189.0
+margin_bottom = 150.0
 size_flags_horizontal = 3
 tab_align = 0
 __meta__ = {
@@ -326,10 +332,19 @@ align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="InstallationTutorial" type="LinkButton" parent="VBoxContainer"]
-margin_top = 381.0
+[node name="SupportVersion" type="Label" parent="VBoxContainer"]
+margin_top = 360.0
 margin_right = 532.0
-margin_bottom = 395.0
+margin_bottom = 425.0
+text = "Supported Plugin Versions:
+
+iOS: 1.0.0
+Android: 1.0.0"
+
+[node name="InstallationTutorial" type="LinkButton" parent="VBoxContainer"]
+margin_top = 429.0
+margin_right = 532.0
+margin_bottom = 443.0
 text = "INSTALLATION TUTORIAL"
 
 [connection signal="pressed" from="VBoxContainer/Enabled" to="." method="_on_Enabled_pressed"]
