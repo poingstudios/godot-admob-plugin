@@ -7,6 +7,7 @@ onready var MaxAdContentRating := $VBoxContainer/MaxAdContentRating/Value
 onready var Enabled := $VBoxContainer/Enabled
 onready var Real := $VBoxContainer/Real
 onready var TestEuropeUserConsent := $VBoxContainer/TestEuropeUserConsent
+onready var BannerShowInstantly := $VBoxContainer/BannerShowInstantly
 onready var BannerOnTop := $VBoxContainer/BannerOnTop
 onready var ChildDirectedTreatment := $VBoxContainer/ChildDirectedTreatment
 onready var Android = {
@@ -38,6 +39,7 @@ func _ready():
 	Enabled.pressed = config.is_enabled
 	Real.pressed = config.is_real
 	TestEuropeUserConsent.pressed = config.is_test_europe_user_consent
+	BannerShowInstantly.pressed = config.banner.show_instantly
 	BannerSize.selected = config.banner.size
 	BannerOnTop.pressed = config.banner.position
 	ChildDirectedTreatment.pressed = config.is_for_child_directed_treatment
@@ -127,3 +129,8 @@ func _on_AndroidRewardedInterstitial_text_changed(new_text):
 func _on_InstallationTutorial_pressed():
 	OS.shell_open("https://github.com/Poing-Studios/Godot-AdMob-Android-iOS#installation") 
 
+
+
+func _on_BannerShowInstantly_pressed():
+	config.banner.show_instantly = BannerShowInstantly.pressed
+	save_config()

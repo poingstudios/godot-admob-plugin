@@ -2,6 +2,9 @@ extends Control
 
 onready var EnableBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner/EnableBanner
 onready var DisableBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner/DisableBanner
+onready var ShowBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner2/ShowBanner
+onready var HideBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner2/HideBanner
+
 onready var Interstitial : Button = $Background/TabContainer/AdFormats/VBoxContainer/Interstitial
 onready var Rewarded : Button = $Background/TabContainer/AdFormats/VBoxContainer/Rewarded
 onready var RewardedInterstitial : Button = $Background/TabContainer/AdFormats/VBoxContainer/RewardedInterstitial
@@ -79,11 +82,14 @@ func _on_MobileAds_interstitial_closed():
 
 func _on_Interstitial_pressed():
 	MobileAds.show_interstitial()
+	MobileAds.load_interstitial()
 	Interstitial.disabled = true
 
 func reset_banner_buttons():
 	DisableBanner.disabled = true
 	EnableBanner.disabled = false
+	ShowBanner.disabled = true
+	HideBanner.disabled = true
 
 func _on_MobileAds_banner_destroyed():
 	reset_banner_buttons()
@@ -92,6 +98,8 @@ func _on_MobileAds_banner_destroyed():
 func _on_MobileAds_banner_loaded():
 	DisableBanner.disabled = false
 	EnableBanner.disabled = true
+	ShowBanner.disabled = false
+	HideBanner.disabled = false
 	_add_text_Advice_Node("Banner loaded")
 	_add_text_Advice_Node("Banner width: " + str(MobileAds.get_banner_width()))
 	_add_text_Advice_Node("Banner height: " + str(MobileAds.get_banner_height()))
@@ -109,10 +117,12 @@ func _on_DisableBanner_pressed():
 
 func _on_Rewarded_pressed():
 	MobileAds.show_rewarded()
+	MobileAds.load_rewarded()
 	Rewarded.disabled = true
 
 func _on_RewardedInterstitial_pressed():
 	MobileAds.show_rewarded_interstitial()
+	MobileAds.load_rewarded_interstitial()
 	RewardedInterstitial.disabled = true
 
 func _on_MobileAds_rewarded_ad_loaded():
@@ -142,11 +152,11 @@ func _on_MobileAds_consent_status_changed(status_message : String):
 
 
 func _on_BannerSizes_item_selected(index):
-	if MobileAds.is_initialized:
+	if MobileAds.get_is_initialized():
 		var item_text : String = BannerSizes.get_item_text(index)
 		MobileAds.config.banner.size = index
 		_add_text_Advice_Node("Banner Size changed:" + item_text)
-		if MobileAds.banner_enabled:
+		if MobileAds.get_is_banner_loaded():
 			MobileAds.load_banner()
 
 func _on_ResetConsentState_pressed():
@@ -158,7 +168,32 @@ func _on_RequestUserConsent_pressed():
 
 func _on_Position_pressed():
 	MobileAds.config.banner.position = BannerPosition.pressed
-	if MobileAds.banner_enabled:
+	if MobileAds.get_is_banner_loaded():
 		MobileAds.load_banner()
 
 
+func _on_IsInitialized_pressed():
+	_add_text_Advice_Node("Is initialized: " + str(MobileAds.get_is_initialized()))
+
+
+func _on_IsBannerLoaded_pressed():
+	_add_text_Advice_Node("Is Banner loaded: " + str(MobileAds.get_is_banner_loaded()))
+
+
+func _on_IsInterstitialLoaded_pressed():
+	_add_text_Advice_Node("Is Interstitial loaded: " + str(MobileAds.get_is_interstitial_loaded()))
+
+
+func _on_IsRewardedLoaded_pressed():
+	_add_text_Advice_Node("Is Rewarded loaded: " + str(MobileAds.get_is_rewarded_loaded()))
+
+
+func _on_IsRewardedInterstitialLoaded_pressed():
+	_add_text_Advice_Node("Is RewardedInterstitial loaded: " + str(MobileAds.get_is_rewarded_interstitial_loaded()))
+
+
+func _on_ShowBanner_pressed():
+	MobileAds.show_banner()
+
+func _on_HideBanner_pressed():
+	MobileAds.hide_banner()

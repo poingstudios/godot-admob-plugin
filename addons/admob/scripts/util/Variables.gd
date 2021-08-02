@@ -3,13 +3,6 @@ extends Node
 const FILE_PATH = "res://addons/admob/config/settings.json"
 enum INITIALIZATION_STATUS {NOT_READY, READY}
 
-#public attributes
-var is_initialized : bool = false 
-var banner_enabled : bool = false
-var interstitial_loaded : bool = false
-var rewarded_loaded : bool = false
-var rewarded_interstitial_loaded : bool = false
-
 
 #private attributes
 var _admob_singleton : Object
@@ -23,6 +16,7 @@ var config : Dictionary = {
 	"banner" : {
 		"size" : 0,
 		"position" : _position_options.BOTTOM,
+		"show_instantly": true
 	},
 	"max_ad_content_rating": 0,
 	"is_enabled" : true,

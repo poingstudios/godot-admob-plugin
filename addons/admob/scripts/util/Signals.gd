@@ -40,11 +40,9 @@ signal initialization_complete(status, adapter_name)
 #SIGNALS
 func _on_AdMob_banner_loaded():
 	emit_signal("banner_loaded")
-	banner_enabled = true
 	
 func _on_AdMob_banner_destroyed():
 	emit_signal("banner_destroyed")
-	banner_enabled = false
 
 func _on_AdMob_banner_failed_to_load(error_code : int):
 	emit_signal("banner_failed_to_load", error_code)
@@ -63,11 +61,9 @@ func _on_AdMob_banner_recorded_impression():
 
 
 func _on_AdMob_interstitial_loaded():
-	interstitial_loaded = true
 	emit_signal("interstitial_loaded")
 
 func _on_AdMob_interstitial_failed_to_load(error_code : int):
-	print("interstitial_failed_to_load", error_code)
 	emit_signal("interstitial_failed_to_load", error_code)
 	
 func _on_AdMob_interstitial_clicked():
@@ -80,19 +76,16 @@ func _on_AdMob_interstitial_opened():
 	emit_signal("interstitial_opened")
 
 func _on_AdMob_interstitial_closed():
-	interstitial_loaded = false
 	emit_signal("interstitial_closed")
 
 
 func _on_AdMob_rewarded_ad_loaded():
-	rewarded_loaded = true
 	emit_signal("rewarded_ad_loaded")
 
 func _on_AdMob_rewarded_ad_opened():
 	emit_signal("rewarded_ad_opened")
 
 func _on_AdMob_rewarded_ad_closed():
-	rewarded_loaded = false
 	emit_signal("rewarded_ad_closed")
 
 func _on_AdMob_rewarded_ad_failed_to_load(error_code : int):
@@ -106,14 +99,12 @@ func _on_AdMob_rewarded_ad_failed_to_show(error_code : int):
 
 
 func _on_AdMob_rewarded_interstitial_ad_loaded():
-	rewarded_interstitial_loaded = true
 	emit_signal("rewarded_interstitial_ad_loaded")
 
 func _on_AdMob_rewarded_interstitial_ad_opened():
 	emit_signal("rewarded_interstitial_ad_opened")
 
 func _on_AdMob_rewarded_interstitial_ad_closed():
-	rewarded_interstitial_loaded = false
 	emit_signal("rewarded_interstitial_ad_closed")
 
 func _on_AdMob_rewarded_interstitial_ad_failed_to_load(error_code : int):
@@ -140,9 +131,4 @@ func _on_AdMob_consent_info_update_failure(error_code : int, error_message : Str
 
 
 func _on_AdMob_initialization_complete(status : int, adapter_name : String):
-	if status == INITIALIZATION_STATUS.READY and adapter_name == "GADMobileAds": 
-		is_initialized = true
-	else: 
-		is_initialized = false
-
 	emit_signal("initialization_complete", status, adapter_name)
