@@ -63,7 +63,6 @@ __meta__ = {
 margin_top = 102.0
 margin_right = 532.0
 margin_bottom = 126.0
-pressed = true
 text = "Show Banner Instantly"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -144,7 +143,7 @@ __meta__ = {
 [node name="UnitIds" type="HBoxContainer" parent="VBoxContainer"]
 margin_top = 234.0
 margin_right = 532.0
-margin_bottom = 384.0
+margin_bottom = 418.0
 rect_min_size = Vector2( 532, 150 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -153,9 +152,9 @@ __meta__ = {
 }
 
 [node name="Description" type="Label" parent="VBoxContainer/UnitIds"]
-margin_top = 68.0
+margin_top = 85.0
 margin_right = 58.0
-margin_bottom = 82.0
+margin_bottom = 99.0
 text = "UNIT IDS"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -164,7 +163,7 @@ __meta__ = {
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer/UnitIds"]
 margin_left = 62.0
 margin_right = 532.0
-margin_bottom = 150.0
+margin_bottom = 184.0
 size_flags_horizontal = 3
 tab_align = 0
 __meta__ = {
@@ -343,18 +342,18 @@ expand_to_text_length = true
 virtual_keyboard_enabled = false
 
 [node name="SupportVersion" type="Label" parent="VBoxContainer"]
-margin_top = 388.0
+margin_top = 422.0
 margin_right = 532.0
-margin_bottom = 453.0
+margin_bottom = 487.0
 text = "Supported Plugin Versions:
 
-iOS: 1.0.0
-Android: 1.0.0"
+iOS: 1.1.x
+Android: 1.1.x"
 
 [node name="InstallationTutorial" type="LinkButton" parent="VBoxContainer"]
-margin_top = 457.0
+margin_top = 491.0
 margin_right = 532.0
-margin_bottom = 471.0
+margin_bottom = 505.0
 text = "INSTALLATION TUTORIAL"
 
 [connection signal="pressed" from="VBoxContainer/Enabled" to="." method="_on_Enabled_pressed"]
