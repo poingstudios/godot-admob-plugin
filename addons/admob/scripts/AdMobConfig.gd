@@ -1,26 +1,26 @@
 tool
 extends "util/Variables.gd"
 
-onready var CurrentVersion := $VBoxContainer/CurrentVersion
-onready var BannerSize := $VBoxContainer/BannerSizeHBoxContainer/BannerSize
-onready var MaxAdContentRating := $VBoxContainer/MaxAdContentRating/Value
-onready var Enabled := $VBoxContainer/Enabled
-onready var Real := $VBoxContainer/Real
-onready var TestEuropeUserConsent := $VBoxContainer/TestEuropeUserConsent
-onready var BannerShowInstantly := $VBoxContainer/BannerShowInstantly
-onready var BannerOnTop := $VBoxContainer/BannerOnTop
-onready var ChildDirectedTreatment := $VBoxContainer/ChildDirectedTreatment
+onready var CurrentVersion := $PanelContainer/VBoxContainer/TopPanel/CurrentVersion
+onready var BannerSize := $PanelContainer/VBoxContainer/BannerSizeHBoxContainer/BannerSize
+onready var MaxAdContentRating := $PanelContainer/VBoxContainer/MaxAdContentRating/Value
+onready var Enabled := $PanelContainer/VBoxContainer/Enabled
+onready var Real := $PanelContainer/VBoxContainer/Real
+onready var TestEuropeUserConsent := $PanelContainer/VBoxContainer/TestEuropeUserConsent
+onready var BannerShowInstantly := $PanelContainer/VBoxContainer/BannerShowInstantly
+onready var BannerOnTop := $PanelContainer/VBoxContainer/BannerOnTop
+onready var ChildDirectedTreatment := $PanelContainer/VBoxContainer/ChildDirectedTreatment
 onready var Android = {
-	"Banner" : $VBoxContainer/UnitIds/TabContainer/Android/Banner,
-	"Interstitial" : $VBoxContainer/UnitIds/TabContainer/Android/Interstitial,
-	"Rewarded" : $VBoxContainer/UnitIds/TabContainer/Android/Rewarded,
-	"RewardedInterstitial" : $VBoxContainer/UnitIds/TabContainer/Android/RewardedInterstitial
+	"Banner" : $PanelContainer/VBoxContainer/UnitIds/TabContainer/Android/Banner,
+	"Interstitial" : $PanelContainer/VBoxContainer/UnitIds/TabContainer/Android/Interstitial,
+	"Rewarded" : $PanelContainer/VBoxContainer/UnitIds/TabContainer/Android/Rewarded,
+	"RewardedInterstitial" : $PanelContainer/VBoxContainer/UnitIds/TabContainer/Android/RewardedInterstitial
 }
 onready var iOS = {
-	"Banner" : $VBoxContainer/UnitIds/TabContainer/iOS/Banner,
-	"Interstitial" : $VBoxContainer/UnitIds/TabContainer/iOS/Interstitial,
-	"Rewarded" : $VBoxContainer/UnitIds/TabContainer/iOS/Rewarded,
-	"RewardedInterstitial" : $VBoxContainer/UnitIds/TabContainer/iOS/RewardedInterstitial
+	"Banner" : $PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS/Banner,
+	"Interstitial" : $PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS/Interstitial,
+	"Rewarded" : $PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS/Rewarded,
+	"RewardedInterstitial" : $PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS/RewardedInterstitial
 }
 
 func _ready():

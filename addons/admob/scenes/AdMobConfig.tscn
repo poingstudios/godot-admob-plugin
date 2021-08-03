@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/admob/scripts/AdMobConfig.gd" type="Script" id=1]
+[ext_resource path="res://addons/admob/assets/fonts/orange_juice_2_0.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+draw_center = false
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.25098, 0.52549, 0.956863, 1 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 36
+use_filter = true
+font_data = ExtResource( 2 )
 
 [node name="AdMobConfig" type="Control"]
 pause_mode = 2
@@ -16,67 +28,85 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 24.0
-margin_top = 24.0
-margin_right = 556.0
-margin_bottom = 419.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_right = 14.0
+margin_bottom = 14.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_right = 532.0
+margin_bottom = 497.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="CurrentVersion" type="Label" parent="VBoxContainer"]
+[node name="TopPanel" type="Panel" parent="PanelContainer/VBoxContainer"]
 margin_right = 532.0
-margin_bottom = 14.0
-text = "Version: 0.4.0"
+margin_bottom = 40.0
+rect_min_size = Vector2( 0, 40 )
+custom_styles/panel = SubResource( 2 )
 
-[node name="Enabled" type="CheckBox" parent="VBoxContainer"]
-margin_top = 18.0
+[node name="CurrentVersion" type="Label" parent="PanelContainer/VBoxContainer/TopPanel"]
+anchor_bottom = 1.0
+margin_right = 88.0
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0.984314, 0.741176, 0, 1 )
+text = "Version: ?"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enabled" type="CheckBox" parent="PanelContainer/VBoxContainer"]
+margin_top = 44.0
 margin_right = 532.0
-margin_bottom = 42.0
-pressed = true
+margin_bottom = 68.0
 text = "Enabled"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Real" type="CheckBox" parent="VBoxContainer"]
-margin_top = 46.0
+[node name="Real" type="CheckBox" parent="PanelContainer/VBoxContainer"]
+margin_top = 72.0
 margin_right = 532.0
-margin_bottom = 70.0
+margin_bottom = 96.0
 text = "Real"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TestEuropeUserConsent" type="CheckBox" parent="VBoxContainer"]
-margin_top = 74.0
+[node name="TestEuropeUserConsent" type="CheckBox" parent="PanelContainer/VBoxContainer"]
+margin_top = 100.0
 margin_right = 532.0
-margin_bottom = 98.0
+margin_bottom = 124.0
 pressed = true
 text = "Test Europe User Consent"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BannerShowInstantly" type="CheckBox" parent="VBoxContainer"]
-margin_top = 102.0
+[node name="BannerShowInstantly" type="CheckBox" parent="PanelContainer/VBoxContainer"]
+margin_top = 128.0
 margin_right = 532.0
-margin_bottom = 126.0
+margin_bottom = 152.0
+pressed = true
 text = "Show Banner Instantly"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BannerSizeHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 130.0
+[node name="BannerSizeHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 156.0
 margin_right = 532.0
-margin_bottom = 150.0
+margin_bottom = 176.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="VBoxContainer/BannerSizeHBoxContainer"]
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/BannerSizeHBoxContainer"]
 margin_top = 3.0
 margin_right = 75.0
 margin_bottom = 17.0
@@ -85,7 +115,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BannerSize" type="OptionButton" parent="VBoxContainer/BannerSizeHBoxContainer"]
+[node name="BannerSize" type="OptionButton" parent="PanelContainer/VBoxContainer/BannerSizeHBoxContainer"]
 margin_left = 79.0
 margin_right = 161.0
 margin_bottom = 20.0
@@ -96,31 +126,31 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BannerOnTop" type="CheckBox" parent="VBoxContainer"]
-margin_top = 154.0
+[node name="BannerOnTop" type="CheckBox" parent="PanelContainer/VBoxContainer"]
+margin_top = 180.0
 margin_right = 532.0
-margin_bottom = 178.0
+margin_bottom = 204.0
 text = "Banner On Top"
 
-[node name="ChildDirectedTreatment" type="CheckBox" parent="VBoxContainer"]
-margin_top = 182.0
+[node name="ChildDirectedTreatment" type="CheckBox" parent="PanelContainer/VBoxContainer"]
+margin_top = 208.0
 margin_right = 532.0
-margin_bottom = 206.0
+margin_bottom = 232.0
 pressed = true
 text = "Child Directed Treatment"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MaxAdContentRating" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 210.0
+[node name="MaxAdContentRating" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 236.0
 margin_right = 532.0
-margin_bottom = 230.0
+margin_bottom = 256.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Key" type="Label" parent="VBoxContainer/MaxAdContentRating"]
+[node name="Key" type="Label" parent="PanelContainer/VBoxContainer/MaxAdContentRating"]
 margin_top = 3.0
 margin_right = 132.0
 margin_bottom = 17.0
@@ -129,7 +159,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Value" type="OptionButton" parent="VBoxContainer/MaxAdContentRating"]
+[node name="Value" type="OptionButton" parent="PanelContainer/VBoxContainer/MaxAdContentRating"]
 margin_left = 136.0
 margin_right = 175.0
 margin_bottom = 20.0
@@ -140,10 +170,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UnitIds" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 234.0
+[node name="UnitIds" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
+margin_top = 260.0
 margin_right = 532.0
-margin_bottom = 418.0
+margin_bottom = 410.0
 rect_min_size = Vector2( 532, 150 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -151,26 +181,26 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Description" type="Label" parent="VBoxContainer/UnitIds"]
-margin_top = 85.0
+[node name="Description" type="Label" parent="PanelContainer/VBoxContainer/UnitIds"]
+margin_top = 68.0
 margin_right = 58.0
-margin_bottom = 99.0
+margin_bottom = 82.0
 text = "UNIT IDS"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TabContainer" type="TabContainer" parent="VBoxContainer/UnitIds"]
+[node name="TabContainer" type="TabContainer" parent="PanelContainer/VBoxContainer/UnitIds"]
 margin_left = 62.0
 margin_right = 532.0
-margin_bottom = 184.0
+margin_bottom = 150.0
 size_flags_horizontal = 3
 tab_align = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Android" type="GridContainer" parent="VBoxContainer/UnitIds/TabContainer"]
+[node name="Android" type="GridContainer" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
@@ -181,7 +211,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 columns = 2
 
-[node name="Key" type="Label" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+[node name="Key" type="Label" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/Android"]
 margin_top = 5.0
 margin_right = 129.0
 margin_bottom = 19.0
@@ -190,7 +220,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Banner" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+[node name="Banner" type="LineEdit" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/Android"]
 margin_left = 133.0
 margin_right = 436.0
 margin_bottom = 24.0
@@ -199,7 +229,7 @@ align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="Key2" type="Label" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+[node name="Key2" type="Label" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/Android"]
 margin_top = 33.0
 margin_right = 129.0
 margin_bottom = 47.0
@@ -208,7 +238,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Interstitial" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+[node name="Interstitial" type="LineEdit" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/Android"]
 margin_left = 133.0
 margin_top = 28.0
 margin_right = 436.0
@@ -218,7 +248,7 @@ align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="Key3" type="Label" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+[node name="Key3" type="Label" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/Android"]
 margin_top = 61.0
 margin_right = 129.0
 margin_bottom = 75.0
@@ -227,7 +257,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Rewarded" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+[node name="Rewarded" type="LineEdit" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/Android"]
 margin_left = 133.0
 margin_top = 56.0
 margin_right = 436.0
@@ -237,7 +267,7 @@ align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="Key4" type="Label" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+[node name="Key4" type="Label" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/Android"]
 margin_top = 89.0
 margin_right = 129.0
 margin_bottom = 103.0
@@ -246,7 +276,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RewardedInterstitial" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/Android"]
+[node name="RewardedInterstitial" type="LineEdit" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/Android"]
 margin_left = 133.0
 margin_top = 84.0
 margin_right = 436.0
@@ -256,7 +286,7 @@ align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="iOS" type="GridContainer" parent="VBoxContainer/UnitIds/TabContainer"]
+[node name="iOS" type="GridContainer" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -266,7 +296,7 @@ margin_right = -4.0
 margin_bottom = -4.0
 columns = 2
 
-[node name="Key" type="Label" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+[node name="Key" type="Label" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS"]
 margin_top = 5.0
 margin_right = 129.0
 margin_bottom = 19.0
@@ -275,7 +305,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Banner" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+[node name="Banner" type="LineEdit" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS"]
 margin_left = 133.0
 margin_right = 436.0
 margin_bottom = 24.0
@@ -284,7 +314,7 @@ align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="Key2" type="Label" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+[node name="Key2" type="Label" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS"]
 margin_top = 33.0
 margin_right = 129.0
 margin_bottom = 47.0
@@ -293,7 +323,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Interstitial" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+[node name="Interstitial" type="LineEdit" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS"]
 margin_left = 133.0
 margin_top = 28.0
 margin_right = 436.0
@@ -303,7 +333,7 @@ align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="Key3" type="Label" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+[node name="Key3" type="Label" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS"]
 margin_top = 61.0
 margin_right = 129.0
 margin_bottom = 75.0
@@ -312,7 +342,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Rewarded" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+[node name="Rewarded" type="LineEdit" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS"]
 margin_left = 133.0
 margin_top = 56.0
 margin_right = 436.0
@@ -322,7 +352,7 @@ align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="Key4" type="Label" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+[node name="Key4" type="Label" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS"]
 margin_top = 89.0
 margin_right = 129.0
 margin_bottom = 103.0
@@ -331,7 +361,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="RewardedInterstitial" type="LineEdit" parent="VBoxContainer/UnitIds/TabContainer/iOS"]
+[node name="RewardedInterstitial" type="LineEdit" parent="PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS"]
 margin_left = 133.0
 margin_top = 84.0
 margin_right = 436.0
@@ -341,35 +371,35 @@ align = 1
 expand_to_text_length = true
 virtual_keyboard_enabled = false
 
-[node name="SupportVersion" type="Label" parent="VBoxContainer"]
-margin_top = 422.0
+[node name="SupportVersion" type="Label" parent="PanelContainer/VBoxContainer"]
+margin_top = 414.0
 margin_right = 532.0
-margin_bottom = 487.0
+margin_bottom = 479.0
 text = "Supported Plugin Versions:
 
 iOS: 1.1.x
 Android: 1.1.x"
 
-[node name="InstallationTutorial" type="LinkButton" parent="VBoxContainer"]
-margin_top = 491.0
+[node name="InstallationTutorial" type="LinkButton" parent="PanelContainer/VBoxContainer"]
+margin_top = 483.0
 margin_right = 532.0
-margin_bottom = 505.0
+margin_bottom = 497.0
 text = "INSTALLATION TUTORIAL"
 
-[connection signal="pressed" from="VBoxContainer/Enabled" to="." method="_on_Enabled_pressed"]
-[connection signal="pressed" from="VBoxContainer/Real" to="." method="_on_Real_pressed"]
-[connection signal="pressed" from="VBoxContainer/TestEuropeUserConsent" to="." method="_on_TestEuropeUserConsent_pressed"]
-[connection signal="pressed" from="VBoxContainer/BannerShowInstantly" to="." method="_on_BannerShowInstantly_pressed"]
-[connection signal="item_selected" from="VBoxContainer/BannerSizeHBoxContainer/BannerSize" to="." method="_on_BannerSize_item_selected"]
-[connection signal="pressed" from="VBoxContainer/BannerOnTop" to="." method="_on_BannerOnTop_pressed"]
-[connection signal="pressed" from="VBoxContainer/ChildDirectedTreatment" to="." method="_on_ChildDirectedTreatment_pressed"]
-[connection signal="item_selected" from="VBoxContainer/MaxAdContentRating/Value" to="." method="_on_MaxAdContentRating_item_selected"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/Android/Banner" to="." method="_on_AndroidBanner_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/Android/Interstitial" to="." method="_on_AndroidInterstitial_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/Android/Rewarded" to="." method="_on_AndroidRewarded_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/Android/RewardedInterstitial" to="." method="_on_AndroidRewardedInterstitial_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/iOS/Banner" to="." method="_on_iOSBanner_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/iOS/Interstitial" to="." method="_on_iOSInterstitial_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/iOS/Rewarded" to="." method="_on_iOSRewarded_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/UnitIds/TabContainer/iOS/RewardedInterstitial" to="." method="_on_iOSRewardedInterstitial_text_changed"]
-[connection signal="pressed" from="VBoxContainer/InstallationTutorial" to="." method="_on_InstallationTutorial_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Enabled" to="." method="_on_Enabled_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/Real" to="." method="_on_Real_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/TestEuropeUserConsent" to="." method="_on_TestEuropeUserConsent_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/BannerShowInstantly" to="." method="_on_BannerShowInstantly_pressed"]
+[connection signal="item_selected" from="PanelContainer/VBoxContainer/BannerSizeHBoxContainer/BannerSize" to="." method="_on_BannerSize_item_selected"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/BannerOnTop" to="." method="_on_BannerOnTop_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/ChildDirectedTreatment" to="." method="_on_ChildDirectedTreatment_pressed"]
+[connection signal="item_selected" from="PanelContainer/VBoxContainer/MaxAdContentRating/Value" to="." method="_on_MaxAdContentRating_item_selected"]
+[connection signal="text_changed" from="PanelContainer/VBoxContainer/UnitIds/TabContainer/Android/Banner" to="." method="_on_AndroidBanner_text_changed"]
+[connection signal="text_changed" from="PanelContainer/VBoxContainer/UnitIds/TabContainer/Android/Interstitial" to="." method="_on_AndroidInterstitial_text_changed"]
+[connection signal="text_changed" from="PanelContainer/VBoxContainer/UnitIds/TabContainer/Android/Rewarded" to="." method="_on_AndroidRewarded_text_changed"]
+[connection signal="text_changed" from="PanelContainer/VBoxContainer/UnitIds/TabContainer/Android/RewardedInterstitial" to="." method="_on_AndroidRewardedInterstitial_text_changed"]
+[connection signal="text_changed" from="PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS/Banner" to="." method="_on_iOSBanner_text_changed"]
+[connection signal="text_changed" from="PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS/Interstitial" to="." method="_on_iOSInterstitial_text_changed"]
+[connection signal="text_changed" from="PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS/Rewarded" to="." method="_on_iOSRewarded_text_changed"]
+[connection signal="text_changed" from="PanelContainer/VBoxContainer/UnitIds/TabContainer/iOS/RewardedInterstitial" to="." method="_on_iOSRewardedInterstitial_text_changed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/InstallationTutorial" to="." method="_on_InstallationTutorial_pressed"]
