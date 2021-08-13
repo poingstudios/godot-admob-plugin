@@ -8,8 +8,8 @@ enum INITIALIZATION_STATUS {NOT_READY, READY}
 var _admob_singleton : Object
 var _control_node_to_be_replaced : Control
 enum _position_options {BOTTOM, TOP}
-const BANNER_SIZE = ["BANNER", "MEDIUM_RECTANGLE", "FULL_BANNER", "LEADERBOARD", "ADAPTIVE", "SMART_BANNER"] 
-const MAX_AD_RATING = ["G", "PG", "T", "MA"]
+const BANNER_SIZE : Array = ["BANNER", "MEDIUM_RECTANGLE", "FULL_BANNER", "LEADERBOARD", "ADAPTIVE", "SMART_BANNER"] 
+const MAX_AD_RATING : Array = ["G", "PG", "T", "MA"]
 
 
 var config : Dictionary = {

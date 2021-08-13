@@ -55,7 +55,7 @@ anchor_bottom = 1.0
 margin_right = 88.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.984314, 0.741176, 0, 1 )
-text = "Version: ?"
+text = "Version: 0.4.1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -64,6 +64,7 @@ __meta__ = {
 margin_top = 44.0
 margin_right = 532.0
 margin_bottom = 68.0
+pressed = true
 text = "Enabled"
 __meta__ = {
 "_edit_use_anchors_": false

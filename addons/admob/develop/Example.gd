@@ -24,10 +24,11 @@ func _add_text_Advice_Node(text_value : String):
 func _ready():
 	OS.center_window()
 	Music.play()
-	MobileAds.request_user_consent()
 	for banner_size in MobileAds.BANNER_SIZE:
 		BannerSizes.add_item(banner_size)
 	if OS.get_name() == "Android" or OS.get_name() == "iOS":
+		BannerPosition.pressed = MobileAds.config.banner.position
+		MobileAds.request_user_consent()
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("consent_info_update_failure", self, "_on_MobileAds_consent_info_update_failure")
 		# warning-ignore:return_value_discarded
@@ -60,7 +61,7 @@ func _on_MobileAds_initialization_complete(status, _adapter_name):
 		MobileAds.load_interstitial()
 		MobileAds.load_rewarded()
 		MobileAds.load_rewarded_interstitial()
-		_add_text_Advice_Node("AdMob initialized! With parameters:")
+		_add_text_Advice_Node("AdMob initialized on GDScript! With parameters:")
 		_add_text_Advice_Node("is_real: " + str(MobileAds.config.is_real))
 		_add_text_Advice_Node("is_for_child_directed_treatment: " + str(MobileAds.config.is_for_child_directed_treatment))
 		_add_text_Advice_Node("max_ad_content_rating: " + str(MobileAds.config.max_ad_content_rating))
