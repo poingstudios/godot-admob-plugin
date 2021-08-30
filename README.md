@@ -2,9 +2,9 @@
 This repository is for Godot's Addons to integrate natively AdMob to your Game Project without much configurations, with a beautiful UI and directly inside Godot Editor!
 
 <u>is pretty basic right now, but with time will be improved</u>
+Tutorial Video: https://youtu.be/MW4hUR0d9lc
 
 # Installation:
-
 Please read this tutorial: https://docs.godotengine.org/pt_BR/stable/tutorials/plugins/editor/installing_plugins.html
 
 Manual:
@@ -25,5 +25,3 @@ A example scene is here: `res://addons/admob/develop/Example.tscn`
 To your plugin work, you need to download the `AdMob Plugin` here: https://github.com/Poing-Studios/Godot-AdMob-Android-iOS#readme
 
 On `Export -> Resources -> Filters to export non-resources...`, you need to put this: `res://addons/admob/*.json`
-
-A video tutorial is in work progress.
