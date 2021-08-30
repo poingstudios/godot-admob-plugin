@@ -2,6 +2,7 @@
 This repository is for Godot's Addons to integrate natively AdMob to your Game Project without much configurations, with a beautiful UI and directly inside Godot Editor!
 
 <u>is pretty basic right now, but with time will be improved</u>
+
 Tutorial Video: https://youtu.be/MW4hUR0d9lc
 
 # Installation:
