@@ -30,29 +30,29 @@ func _ready():
 		BannerPosition.pressed = MobileAds.config.banner.position
 		MobileAds.request_user_consent()
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("consent_info_update_failure", self, "_on_MobileAds_consent_info_update_failure")
+		MobileAds.plugin.connect("consent_info_update_failure", self, "_on_MobileAds_consent_info_update_failure")
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("consent_status_changed", self, "_on_MobileAds_consent_status_changed")
+		MobileAds.plugin.connect("consent_status_changed", self, "_on_MobileAds_consent_status_changed")
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("banner_loaded", self, "_on_MobileAds_banner_loaded")
+		MobileAds.plugin.connect("banner_loaded", self, "_on_MobileAds_banner_loaded")
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("banner_destroyed", self, "_on_MobileAds_banner_destroyed")
+		MobileAds.plugin.connect("banner_destroyed", self, "_on_MobileAds_banner_destroyed")
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("interstitial_loaded", self, "_on_MobileAds_interstitial_loaded")
+		MobileAds.plugin.connect("interstitial_loaded", self, "_on_MobileAds_interstitial_loaded")
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("interstitial_closed", self, "_on_MobileAds_interstitial_closed")
+		MobileAds.plugin.connect("interstitial_closed", self, "_on_MobileAds_interstitial_closed")
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_ad_loaded", self, "_on_MobileAds_rewarded_ad_loaded")
+		MobileAds.plugin.connect("rewarded_ad_loaded", self, "_on_MobileAds_rewarded_ad_loaded")
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_ad_closed", self, "_on_MobileAds_rewarded_ad_closed")
+		MobileAds.plugin.connect("rewarded_ad_closed", self, "_on_MobileAds_rewarded_ad_closed")
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_interstitial_ad_loaded", self, "_on_MobileAds_rewarded_interstitial_ad_loaded")
+		MobileAds.plugin.connect("rewarded_interstitial_ad_loaded", self, "_on_MobileAds_rewarded_interstitial_ad_loaded")
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_interstitial_ad_closed", self, "_on_MobileAds_rewarded_interstitial_ad_closed")
+		MobileAds.plugin.connect("rewarded_interstitial_ad_closed", self, "_on_MobileAds_rewarded_interstitial_ad_closed")
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("user_earned_rewarded", self, "_on_MobileAds_user_earned_rewarded")
+		MobileAds.plugin.connect("user_earned_rewarded", self, "_on_MobileAds_user_earned_rewarded")
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("initialization_complete", self, "_on_MobileAds_initialization_complete")
+		MobileAds.plugin.connect("initialization_complete", self, "_on_MobileAds_initialization_complete")
 	else:
 		_add_text_Advice_Node("AdMob only works on Android or iOS devices!")
 
