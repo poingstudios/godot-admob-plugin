@@ -83,7 +83,6 @@ func _on_MobileAds_interstitial_closed():
 
 func _on_Interstitial_pressed():
 	MobileAds.show_interstitial()
-	MobileAds.load_interstitial()
 	Interstitial.disabled = true
 
 func reset_banner_buttons():
@@ -118,12 +117,10 @@ func _on_DisableBanner_pressed():
 
 func _on_Rewarded_pressed():
 	MobileAds.show_rewarded()
-	MobileAds.load_rewarded()
 	Rewarded.disabled = true
 
 func _on_RewardedInterstitial_pressed():
 	MobileAds.show_rewarded_interstitial()
-	MobileAds.load_rewarded_interstitial()
 	RewardedInterstitial.disabled = true
 
 func _on_MobileAds_rewarded_ad_loaded():
