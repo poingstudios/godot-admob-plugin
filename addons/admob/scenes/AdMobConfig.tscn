@@ -39,7 +39,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 margin_right = 532.0
-margin_bottom = 497.0
+margin_bottom = 469.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -55,7 +55,7 @@ anchor_bottom = 1.0
 margin_right = 88.0
 custom_fonts/font = SubResource( 3 )
 custom_colors/font_color = Color( 0.984314, 0.741176, 0, 1 )
-text = "Version: 0.4.1"
+text = "Version: 0.4.2"
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -70,19 +70,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Real" type="CheckBox" parent="PanelContainer/VBoxContainer"]
+[node name="TestEuropeUserConsent" type="CheckBox" parent="PanelContainer/VBoxContainer"]
 margin_top = 72.0
 margin_right = 532.0
 margin_bottom = 96.0
-text = "Real"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TestEuropeUserConsent" type="CheckBox" parent="PanelContainer/VBoxContainer"]
-margin_top = 100.0
-margin_right = 532.0
-margin_bottom = 124.0
 pressed = true
 text = "Test Europe User Consent"
 __meta__ = {
@@ -90,9 +81,9 @@ __meta__ = {
 }
 
 [node name="BannerShowInstantly" type="CheckBox" parent="PanelContainer/VBoxContainer"]
-margin_top = 128.0
+margin_top = 100.0
 margin_right = 532.0
-margin_bottom = 152.0
+margin_bottom = 124.0
 pressed = true
 text = "Show Banner Instantly"
 __meta__ = {
@@ -100,9 +91,9 @@ __meta__ = {
 }
 
 [node name="BannerSizeHBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
-margin_top = 156.0
+margin_top = 128.0
 margin_right = 532.0
-margin_bottom = 176.0
+margin_bottom = 148.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -128,15 +119,15 @@ __meta__ = {
 }
 
 [node name="BannerOnTop" type="CheckBox" parent="PanelContainer/VBoxContainer"]
-margin_top = 180.0
+margin_top = 152.0
 margin_right = 532.0
-margin_bottom = 204.0
+margin_bottom = 176.0
 text = "Banner On Top"
 
 [node name="ChildDirectedTreatment" type="CheckBox" parent="PanelContainer/VBoxContainer"]
-margin_top = 208.0
+margin_top = 180.0
 margin_right = 532.0
-margin_bottom = 232.0
+margin_bottom = 204.0
 pressed = true
 text = "Child Directed Treatment"
 __meta__ = {
@@ -144,9 +135,9 @@ __meta__ = {
 }
 
 [node name="MaxAdContentRating" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
-margin_top = 236.0
+margin_top = 208.0
 margin_right = 532.0
-margin_bottom = 256.0
+margin_bottom = 228.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -172,9 +163,9 @@ __meta__ = {
 }
 
 [node name="UnitIds" type="HBoxContainer" parent="PanelContainer/VBoxContainer"]
-margin_top = 260.0
+margin_top = 232.0
 margin_right = 532.0
-margin_bottom = 410.0
+margin_bottom = 382.0
 rect_min_size = Vector2( 532, 150 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -373,22 +364,21 @@ expand_to_text_length = true
 virtual_keyboard_enabled = false
 
 [node name="SupportVersion" type="Label" parent="PanelContainer/VBoxContainer"]
-margin_top = 414.0
+margin_top = 386.0
 margin_right = 532.0
-margin_bottom = 479.0
+margin_bottom = 451.0
 text = "Supported Plugin Versions:
 
 iOS: 1.1.x
 Android: 1.1.x"
 
 [node name="InstallationTutorial" type="LinkButton" parent="PanelContainer/VBoxContainer"]
-margin_top = 483.0
+margin_top = 455.0
 margin_right = 532.0
-margin_bottom = 497.0
+margin_bottom = 469.0
 text = "INSTALLATION TUTORIAL"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Enabled" to="." method="_on_Enabled_pressed"]
-[connection signal="pressed" from="PanelContainer/VBoxContainer/Real" to="." method="_on_Real_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/TestEuropeUserConsent" to="." method="_on_TestEuropeUserConsent_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/BannerShowInstantly" to="." method="_on_BannerShowInstantly_pressed"]
 [connection signal="item_selected" from="PanelContainer/VBoxContainer/BannerSizeHBoxContainer/BannerSize" to="." method="_on_BannerSize_item_selected"]

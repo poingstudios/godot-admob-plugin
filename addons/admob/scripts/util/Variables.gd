@@ -20,7 +20,6 @@ var config : Dictionary = {
 	},
 	"max_ad_content_rating": 0,
 	"is_enabled" : true,
-	"is_real" : false,
 	"is_test_europe_user_consent" : true,
 	"is_for_child_directed_treatment" : true,
 	"unit_ids" : {

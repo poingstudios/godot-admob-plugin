@@ -16,7 +16,7 @@ func get_is_initialized() -> bool:
 
 func initialize() -> void:
 	if _admob_singleton and not get_is_initialized():
-		_admob_singleton.initialize(config.is_for_child_directed_treatment, MAX_AD_RATING[config.max_ad_content_rating], config.is_real, config.is_test_europe_user_consent, get_instance_id())
+		_admob_singleton.initialize(config.is_for_child_directed_treatment, MAX_AD_RATING[config.max_ad_content_rating], OS.has_feature("release"), config.is_test_europe_user_consent, get_instance_id())
 
 func load_banner() -> void:
 	if _admob_singleton:

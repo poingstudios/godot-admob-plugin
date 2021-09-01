@@ -5,7 +5,6 @@ onready var CurrentVersion := $PanelContainer/VBoxContainer/TopPanel/CurrentVers
 onready var BannerSize := $PanelContainer/VBoxContainer/BannerSizeHBoxContainer/BannerSize
 onready var MaxAdContentRating := $PanelContainer/VBoxContainer/MaxAdContentRating/Value
 onready var Enabled := $PanelContainer/VBoxContainer/Enabled
-onready var Real := $PanelContainer/VBoxContainer/Real
 onready var TestEuropeUserConsent := $PanelContainer/VBoxContainer/TestEuropeUserConsent
 onready var BannerShowInstantly := $PanelContainer/VBoxContainer/BannerShowInstantly
 onready var BannerOnTop := $PanelContainer/VBoxContainer/BannerOnTop
@@ -37,7 +36,6 @@ func _ready():
 		MaxAdContentRating.add_item(content_rating)
 	
 	Enabled.pressed = config.is_enabled
-	Real.pressed = config.is_real
 	TestEuropeUserConsent.pressed = config.is_test_europe_user_consent
 	BannerShowInstantly.pressed = config.banner.show_instantly
 	BannerSize.selected = config.banner.size
@@ -56,11 +54,6 @@ func _ready():
 
 func _on_Enabled_pressed():
 	config.is_enabled = Enabled.pressed
-	save_config()
-
-
-func _on_Real_pressed():
-	config.is_real = Real.pressed
 	save_config()
 
 
