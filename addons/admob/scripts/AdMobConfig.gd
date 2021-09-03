@@ -27,7 +27,6 @@ func _ready():
 	plugin_config_file.load("res://addons/admob/plugin.cfg")
 	CurrentVersion.text = "Version: " + plugin_config_file.get_value("plugin", "version")
 
-	load_config()
 	BannerSize.clear()
 	MaxAdContentRating.clear()
 	for banner_size in BANNER_SIZE:

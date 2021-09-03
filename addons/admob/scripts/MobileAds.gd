@@ -3,7 +3,6 @@ extends "util/Variables.gd"
 var plugin : Object
 
 func _ready() -> void:
-	load_config()
 	if config.is_enabled:
 		if (Engine.has_singleton("AdMob")):
 			plugin = Engine.get_singleton("AdMob")
