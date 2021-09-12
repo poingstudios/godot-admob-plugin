@@ -2,17 +2,15 @@ extends Node
 
 var config : Dictionary = {
 	"banner": {
-		"position": 0,
+		"position": 1,
 		"show_instantly": true,
-		"size": 0
+		"size": "MEDIUM_RECTANGLE"
 	},
 	"is_enabled": true,
-	"is_for_child_directed_treatment": true,
-	"is_real": false,
-	"is_test_europe_user_consent": true,
-	"max_ad_content_rating": 0,
+	"is_for_child_directed_treatment": false,
+	"is_test_europe_user_consent": false,
+	"max_ad_content_rating": "PG",
 	"position": 0,
-	"size": 4,
 	"unit_ids": {
 		"banner": {
 			"Android": "ca-app-pub-3940256099942544/6300978111",

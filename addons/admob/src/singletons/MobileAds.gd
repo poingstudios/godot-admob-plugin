@@ -1,8 +1,11 @@
-extends "util/Variables.gd"
+extends Node 
 
 var plugin : Object
+const Settings := preload("res://addons/admob/src/utils/Settings.gd")
+var config : Dictionary
 
 func _ready() -> void:
+	config = Settings.new().config
 	if config.is_enabled:
 		if (Engine.has_singleton("AdMob")):
 			plugin = Engine.get_singleton("AdMob")
@@ -17,12 +20,11 @@ func get_is_initialized() -> bool:
 
 func initialize() -> void:
 	if plugin and not get_is_initialized():
-		plugin.initialize(config.is_for_child_directed_treatment, MAX_AD_RATING[config.max_ad_content_rating], OS.has_feature("release"), config.is_test_europe_user_consent)
-
+		plugin.initialize(config.is_for_child_directed_treatment, config.max_ad_content_rating, OS.has_feature("release"), config.is_test_europe_user_consent)
 
 func load_banner() -> void:
 	if plugin:
-		plugin.load_banner(config.unit_ids.banner[OS.get_name()], config.banner.position, BANNER_SIZE[config.banner.size], config.banner.show_instantly)
+		plugin.load_banner(config.unit_ids.banner[OS.get_name()], config.banner.position, config.banner.size, config.banner.show_instantly)
 
 func load_interstitial() -> void:
 	if plugin:

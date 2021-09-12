@@ -24,11 +24,11 @@ func _add_text_Advice_Node(text_value : String):
 func _ready():
 	OS.center_window()
 	Music.play()
-	for banner_size in MobileAds.BANNER_SIZE:
-		BannerSizes.add_item(banner_size)
+	#for banner_size in MobileAds.BANNER_SIZE:
+	#	BannerSizes.add_item(banner_size)
 	if OS.get_name() == "Android" or OS.get_name() == "iOS":
-		BannerPosition.pressed = MobileAds.config.banner.position
-		MobileAds.request_user_consent()
+		#BannerPosition.pressed = MobileAds.config.banner.position
+		#MobileAds.request_user_consent()
 		# warning-ignore:return_value_discarded
 		MobileAds.plugin.connect("consent_info_update_failure", self, "_on_MobileAds_consent_info_update_failure")
 		# warning-ignore:return_value_discarded
