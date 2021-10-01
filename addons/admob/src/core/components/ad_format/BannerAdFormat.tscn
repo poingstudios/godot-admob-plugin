@@ -1,0 +1,58 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://addons/admob/src/core/components/ad_format/AdFormat.tscn" type="PackedScene" id=1]
+[ext_resource path="res://addons/admob/src/core/components/ad_format/BannerAdFormat.gd" type="Script" id=2]
+
+[node name="BannerAdFormat" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="BannerSizeHBoxContainer" type="HBoxContainer" parent="." index="0"]
+margin_right = 600.0
+margin_bottom = 20.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="BannerSizeHBoxContainer" index="0"]
+margin_top = 3.0
+margin_right = 75.0
+margin_bottom = 17.0
+text = "Banner Size"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BannerSize" type="OptionButton" parent="BannerSizeHBoxContainer" index="1"]
+margin_left = 79.0
+margin_right = 243.0
+margin_bottom = 20.0
+text = "MEDIUM_RECTANGLE"
+items = [ "BANNER", null, false, 0, null, "MEDIUM_RECTANGLE", null, false, 1, null, "FULL_BANNER", null, false, 2, null, "LEADERBOARD", null, false, 3, null, "ADAPTIVE", null, false, 4, null, "SMART_BANNER", null, false, 5, null ]
+selected = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BannerShowInstantly" type="CheckBox" parent="." index="1"]
+margin_top = 24.0
+margin_right = 600.0
+margin_bottom = 48.0
+pressed = true
+text = "Show Banner Instantly"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BannerOnTop" type="CheckBox" parent="." index="2"]
+margin_top = 52.0
+margin_right = 600.0
+margin_bottom = 76.0
+text = "Banner On Top"
+
+[node name="UnitIds" parent="." index="3"]
+margin_top = 80.0
+margin_bottom = 140.0
+
+[connection signal="item_selected" from="BannerSizeHBoxContainer/BannerSize" to="." method="_on_BannerSize_item_selected"]
+[connection signal="pressed" from="BannerShowInstantly" to="." method="_on_BannerShowInstantly_pressed"]
+[connection signal="pressed" from="BannerOnTop" to="." method="_on_BannerOnTop_pressed"]

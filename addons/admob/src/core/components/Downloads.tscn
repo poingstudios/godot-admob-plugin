@@ -1,0 +1,215 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://addons/admob/src/core/components/Downloads.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 1, 0.109804, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+
+[node name="Downloads" type="VBoxContainer"]
+anchor_right = 1.0
+margin_bottom = 31.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Advice" type="Label" parent="."]
+margin_right = 600.0
+margin_bottom = 82.0
+text = "This screen is just to download the AdMob plugin referring to the current version of your Godot, IT WILL NOT INSTALL.
+
+To install you need to follow the Android or iOS installation guide clicking on the icons on top screen."
+autowrap = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+margin_top = 86.0
+margin_right = 600.0
+margin_bottom = 100.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="AdviceAcceptDialog" type="AcceptDialog" parent="."]
+margin_top = 70.0
+margin_right = 888.0
+margin_bottom = 128.0
+popup_exclusive = true
+window_title = "Alerta!"
+dialog_text = "Download of %s completed!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="."]
+margin_top = 104.0
+margin_right = 600.0
+margin_bottom = 232.0
+
+[node name="Android" type="VBoxContainer" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="ChangeDirectoryHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
+margin_right = 592.0
+margin_bottom = 20.0
+
+[node name="DownloadDirectoryLabel" type="Label" parent="TabContainer/Android/ChangeDirectoryHBoxContainer"]
+margin_top = 3.0
+margin_right = 440.0
+margin_bottom = 17.0
+text = "Current Download Directory: res://addons/admob/downloads/android"
+
+[node name="AndroidChangeDirectoryButton" type="Button" parent="TabContainer/Android/ChangeDirectoryHBoxContainer"]
+margin_left = 444.0
+margin_right = 585.0
+margin_bottom = 20.0
+text = "CHANGE DIRECTORY"
+
+[node name="AndroidChangeDirectoryFileDialog" type="FileDialog" parent="TabContainer/Android/ChangeDirectoryHBoxContainer"]
+margin_left = 380.0
+margin_right = 780.0
+margin_bottom = 250.0
+rect_min_size = Vector2( 400, 250 )
+window_title = "Open a Directory"
+mode = 2
+current_dir = "res://addons/admob/downloads/android"
+current_path = "res://addons/admob/downloads/android/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VersionHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
+margin_top = 24.0
+margin_right = 592.0
+margin_bottom = 44.0
+
+[node name="Label" type="Label" parent="TabContainer/Android/VersionHBoxContainer"]
+margin_top = 3.0
+margin_right = 52.0
+margin_bottom = 17.0
+text = "Version:"
+
+[node name="AndroidVersion" type="OptionButton" parent="TabContainer/Android/VersionHBoxContainer"]
+margin_left = 56.0
+margin_right = 143.0
+margin_bottom = 20.0
+text = "CURRENT"
+items = [ "CURRENT", null, false, 0, null, "3.3.3", null, false, 1, null, "3.3.2", null, false, 2, null, "3.3.1", null, false, 3, null, "3.3", null, false, 4, null, "3.2.3", null, false, 5, null, "3.2.2", null, false, 6, null, "CURRENT", null, false, 7, null, "3.3.3", null, false, 8, null, "3.3.2", null, false, 9, null, "3.3.1", null, false, 10, null, "3.3", null, false, 11, null, "3.2.3", null, false, 12, null, "3.2.2", null, false, 13, null, "CURRENT", null, false, 14, null, "3.3.3", null, false, 15, null, "3.3.2", null, false, 16, null, "3.3.1", null, false, 17, null, "3.3", null, false, 18, null, "3.2.3", null, false, 19, null, "3.2.2", null, false, 20, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TargetHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
+margin_top = 48.0
+margin_right = 592.0
+margin_bottom = 68.0
+
+[node name="Label" type="Label" parent="TabContainer/Android/TargetHBoxContainer"]
+margin_top = 3.0
+margin_right = 43.0
+margin_bottom = 17.0
+text = "Target:"
+
+[node name="MenuButton" type="OptionButton" parent="TabContainer/Android/TargetHBoxContainer"]
+margin_left = 47.0
+margin_right = 76.0
+margin_bottom = 20.0
+items = [ "STANDARD", null, false, 1, null, "MONO", null, false, 2, null ]
+selected = 0
+
+[node name="DownloadAndroidTemplate" type="Button" parent="TabContainer/Android"]
+margin_top = 72.0
+margin_right = 592.0
+margin_bottom = 92.0
+text = "Download Android Template"
+
+[node name="iOS" type="VBoxContainer" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+
+[node name="ChangeDirectoryHBoxContainer" type="HBoxContainer" parent="TabContainer/iOS"]
+margin_right = 880.0
+margin_bottom = 250.0
+
+[node name="DownloadDirectoryLabel" type="Label" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
+margin_top = 118.0
+margin_right = 231.0
+margin_bottom = 132.0
+text = "Current Download Directory: res://addons/admob/downloads/ios"
+
+[node name="iOSChangeDirectoryButton" type="Button" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
+margin_left = 235.0
+margin_right = 376.0
+margin_bottom = 250.0
+text = "CHANGE DIRECTORY"
+
+[node name="iOSChangeDirectoryFileDialog" type="FileDialog" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
+visible = true
+margin_left = 380.0
+margin_right = 780.0
+margin_bottom = 250.0
+rect_min_size = Vector2( 400, 250 )
+window_title = "Open a Directory"
+mode = 2
+current_dir = "res://addons/admob/downloads/ios"
+current_path = "res://addons/admob/downloads/ios/"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VersionHBoxContainer" type="HBoxContainer" parent="TabContainer/iOS"]
+margin_top = 254.0
+margin_right = 880.0
+margin_bottom = 274.0
+
+[node name="Label" type="Label" parent="TabContainer/iOS/VersionHBoxContainer"]
+margin_top = 3.0
+margin_right = 52.0
+margin_bottom = 17.0
+text = "Version:"
+
+[node name="iOSVersion" type="OptionButton" parent="TabContainer/iOS/VersionHBoxContainer"]
+margin_left = 56.0
+margin_right = 85.0
+margin_bottom = 20.0
+text = "CURRENT"
+items = [ "CURRENT", null, false, 0, null, "3.3.3", null, false, 1, null, "3.3.2", null, false, 2, null, "3.3.1", null, false, 3, null, "3.3", null, false, 4, null, "CURRENT", null, false, 5, null, "3.3.3", null, false, 6, null, "3.3.2", null, false, 7, null, "3.3.1", null, false, 8, null, "3.3", null, false, 9, null, "CURRENT", null, false, 10, null, "3.3.3", null, false, 11, null, "3.3.2", null, false, 12, null, "3.3.1", null, false, 13, null, "3.3", null, false, 14, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="DownloadiOSTemplate" type="Button" parent="TabContainer/iOS"]
+margin_top = 278.0
+margin_right = 880.0
+margin_bottom = 298.0
+text = "Download iOS Template"
+
+[node name="DownloadGoogleMobileAdsSdkiOS" type="Button" parent="TabContainer/iOS"]
+margin_top = 302.0
+margin_right = 880.0
+margin_bottom = 322.0
+text = "Download GoogleMobileAdsSdkiOS"
+
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[connection signal="pressed" from="TabContainer/Android/ChangeDirectoryHBoxContainer/AndroidChangeDirectoryButton" to="." method="_on_AndroidChangeDirectoryButton_pressed"]
+[connection signal="dir_selected" from="TabContainer/Android/ChangeDirectoryHBoxContainer/AndroidChangeDirectoryFileDialog" to="." method="_on_AndroidChangeDirectoryFileDialog_dir_selected"]
+[connection signal="pressed" from="TabContainer/Android/DownloadAndroidTemplate" to="." method="_on_DownloadAndroidTemplate_pressed"]
+[connection signal="pressed" from="TabContainer/iOS/ChangeDirectoryHBoxContainer/iOSChangeDirectoryButton" to="." method="_on_iOSChangeDirectoryButton_pressed"]
+[connection signal="dir_selected" from="TabContainer/iOS/ChangeDirectoryHBoxContainer/iOSChangeDirectoryFileDialog" to="." method="_on_iOSChangeDirectoryFileDialog_dir_selected"]
+[connection signal="pressed" from="TabContainer/iOS/DownloadiOSTemplate" to="." method="_on_DownloadiOSTemplate_pressed"]
+[connection signal="pressed" from="TabContainer/iOS/DownloadGoogleMobileAdsSdkiOS" to="." method="_on_DownloadGoogleMobileAdsSdkiOS_pressed"]

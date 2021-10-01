@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/admob/src/core/components/General.gd" type="Script" id=1]
+
+[node name="General" type="VBoxContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Enabled" type="CheckBox" parent="."]
+margin_right = 592.0
+margin_bottom = 24.0
+pressed = true
+text = "Enabled"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TestEuropeUserConsent" type="CheckBox" parent="."]
+margin_top = 28.0
+margin_right = 592.0
+margin_bottom = 52.0
+text = "Test Europe User Consent"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChildDirectedTreatment" type="CheckBox" parent="."]
+margin_top = 56.0
+margin_right = 592.0
+margin_bottom = 80.0
+text = "Child Directed Treatment"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MaxAdContentRating" type="HBoxContainer" parent="."]
+margin_top = 84.0
+margin_right = 592.0
+margin_bottom = 104.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Key" type="Label" parent="MaxAdContentRating"]
+margin_top = 3.0
+margin_right = 132.0
+margin_bottom = 17.0
+text = "MaxAdContentRating"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Value" type="OptionButton" parent="MaxAdContentRating"]
+margin_left = 136.0
+margin_right = 183.0
+margin_bottom = 20.0
+text = "PG"
+items = [ "G", null, false, 0, null, "PG", null, false, 1, null, "T", null, false, 2, null, "MA", null, false, 3, null ]
+selected = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Enabled" to="." method="_on_Enabled_pressed"]
+[connection signal="pressed" from="TestEuropeUserConsent" to="." method="_on_TestEuropeUserConsent_pressed"]
+[connection signal="pressed" from="ChildDirectedTreatment" to="." method="_on_ChildDirectedTreatment_pressed"]
+[connection signal="item_selected" from="MaxAdContentRating/Value" to="." method="_on_MaxAdContentRating_item_selected"]

@@ -17,6 +17,3 @@ export_presets.cfg
 data_*/
 AdMobAddon.csproj
 AdMobAddon.sln
-
-android/
-ios/

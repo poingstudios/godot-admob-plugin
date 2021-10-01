@@ -1,0 +1,97 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/admob/src/core/components/ad_format/unit_ids/ad_unit_operational_system/ad_unit/AdUnit.gd" type="Script" id=1]
+
+[node name="AdUnit" type="GridContainer"]
+margin_right = 220.0
+margin_bottom = 24.0
+columns = 3
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="LineEdit" parent="."]
+margin_right = 108.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "<insert-name>"
+align = 1
+expand_to_text_length = true
+virtual_keyboard_enabled = false
+
+[node name="Id" type="LineEdit" parent="."]
+margin_left = 112.0
+margin_right = 196.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "<insert-id>"
+align = 1
+expand_to_text_length = true
+virtual_keyboard_enabled = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridContainer" type="GridContainer" parent="."]
+margin_left = 200.0
+margin_right = 255.0
+margin_bottom = 24.0
+columns = 2
+
+[node name="ConfirmButton" type="Button" parent="GridContainer"]
+margin_right = 31.0
+margin_bottom = 20.0
+text = "OK"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EditButton" type="Button" parent="GridContainer"]
+visible = false
+margin_left = 35.0
+margin_right = 76.0
+margin_bottom = 20.0
+text = "EDIT"
+
+[node name="RemoveButton" type="Button" parent="GridContainer"]
+margin_left = 35.0
+margin_right = 55.0
+margin_bottom = 20.0
+text = "X"
+
+[node name="Alerts" type="Node" parent="."]
+
+[node name="UniqueNameAcceptDialog" type="AcceptDialog" parent="Alerts"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -95.0
+margin_top = -29.0
+margin_right = 95.0
+margin_bottom = 29.0
+dialog_text = "The Name must be unique!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NameIdEmptyAcceptDialog" type="AcceptDialog" parent="Alerts"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -95.0
+margin_top = -29.0
+margin_right = 95.0
+margin_bottom = 29.0
+dialog_text = "The Name and Id must not be empty!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="text_entered" from="Name" to="." method="_on_AdUnit_text_entered"]
+[connection signal="text_entered" from="Id" to="." method="_on_AdUnit_text_entered"]
+[connection signal="pressed" from="GridContainer/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]
+[connection signal="pressed" from="GridContainer/EditButton" to="." method="_on_EditButton_pressed"]
+[connection signal="pressed" from="GridContainer/RemoveButton" to="." method="_on_RemoveButton_pressed"]

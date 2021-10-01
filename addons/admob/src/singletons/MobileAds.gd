@@ -1,12 +1,10 @@
 extends Node 
 
+var AdMobSettings = preload("res://addons/admob/src/utils/AdMobSettings.gd").new()
 var plugin : Object
-const Settings := preload("res://addons/admob/src/utils/Settings.gd")
-var config : Dictionary
 
-func _ready() -> void:
-	config = Settings.new().config
-	if config.is_enabled:
+func _ready() -> void:	
+	if AdMobSettings.config.general.is_enabled:
 		if (Engine.has_singleton("AdMob")):
 			plugin = Engine.get_singleton("AdMob")
 			initialize()
@@ -20,23 +18,23 @@ func get_is_initialized() -> bool:
 
 func initialize() -> void:
 	if plugin and not get_is_initialized():
-		plugin.initialize(config.is_for_child_directed_treatment, config.max_ad_content_rating, OS.has_feature("release"), config.is_test_europe_user_consent)
+		plugin.initialize(AdMobSettings.config.general.is_for_child_directed_treatment, AdMobSettings.config.general.max_ad_content_rating, OS.has_feature("release"), AdMobSettings.config.general.is_test_europe_user_consent)
 
 func load_banner() -> void:
 	if plugin:
-		plugin.load_banner(config.unit_ids.banner[OS.get_name()], config.banner.position, config.banner.size, config.banner.show_instantly)
+		plugin.load_banner(AdMobSettings.config.banner.unit_ids[OS.get_name()][0], AdMobSettings.config.banner.position, AdMobSettings.config.banner.size, AdMobSettings.config.banner.show_instantly)
 
 func load_interstitial() -> void:
 	if plugin:
-		plugin.load_interstitial(config.unit_ids.interstitial[OS.get_name()])
+		plugin.load_interstitial(AdMobSettings.config.interstitial.unit_ids[OS.get_name()][0])
 
 func load_rewarded() -> void:
 	if plugin:
-		plugin.load_rewarded(config.unit_ids.rewarded[OS.get_name()])
+		plugin.load_rewarded(AdMobSettings.config.rewarded.unit_ids[OS.get_name()][0])
 
 func load_rewarded_interstitial() -> void:
 	if plugin:
-		plugin.load_rewarded_interstitial(config.unit_ids.rewarded_interstitial[OS.get_name()])
+		plugin.load_rewarded_interstitial(AdMobSettings.config.rewarded_interstitial.unit_ids[OS.get_name()][0])
 
 func destroy_banner() -> void:
 	if plugin:
@@ -112,7 +110,7 @@ func get_is_rewarded_interstitial_loaded() -> bool:
 	
 func _on_get_tree_resized() -> void:
 	if plugin:
-		if get_is_banner_loaded() and config.banner.size == "SMART_BANNER":
+		if get_is_banner_loaded() and AdMobSettings.config.banner.size == "SMART_BANNER":
 			load_banner()
 		if get_is_interstitial_loaded(): #verify if interstitial and rewarded is loaded because the only reason to load again now is to resize
 			load_interstitial()
