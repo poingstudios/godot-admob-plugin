@@ -1,7 +1,7 @@
 tool
 extends Control
 var AdMobSettings = preload("res://addons/admob/src/utils/AdMobSettings.gd").new()
-var support_version_text = "[rainbow sat=10]iOS[/rainbow][color=black]:v%s[/color] [rainbow sat=10]Android[/rainbow][color=black]:v%s[/color]"
+var support_version_text = "[rainbow sat=10]iOS[/rainbow][color=black]:%s[/color] [rainbow sat=10]Android[/rainbow][color=black]:%s[/color]"
 
 onready var SupportVersion := $BottomPanel/SupportVersion
 onready var CurrentVersion := $BottomPanel/CurrentVersion

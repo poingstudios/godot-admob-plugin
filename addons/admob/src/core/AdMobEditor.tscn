@@ -214,8 +214,8 @@ margin_right = -158.0
 custom_styles/normal = SubResource( 3 )
 custom_fonts/normal_font = SubResource( 4 )
 bbcode_enabled = true
-bbcode_text = "[rainbow sat=10]iOS[/rainbow][color=black]:2.0.0[/color] [rainbow sat=10]Android[/rainbow][color=black]:2.0.0[/color]"
-text = "iOS:2.0.0 Android:2.0.0"
+bbcode_text = "[rainbow sat=10]iOS[/rainbow][color=black]:v2.0.0[/color] [rainbow sat=10]Android[/rainbow][color=black]:v2.0.0[/color]"
+text = "iOS:v2.0.0 Android:v2.0.0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
