@@ -150,8 +150,8 @@ __meta__ = {
 }
 
 [node name="TabContainer" type="TabContainer" parent="MiddleScrollContainer"]
-margin_right = 901.4
-margin_bottom = 665.699
+margin_right = 751.0
+margin_bottom = 575.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0

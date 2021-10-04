@@ -7,12 +7,12 @@ onready var godot_version : String = String(Engine.get_version_info().major) + "
 var actual_downloading_file : String = ""
 
 var android_dictionary : Dictionary = {
-		"version" : ["CURRENT", "3.3.3", "3.3.2", "3.3.1", "3.3", "3.2.3",  "3.2.2"],
+		"version" : ["CURRENT", "3.3.4", "3.3.3", "3.3.2", "3.3.1", "3.3", "3.2.3",  "3.2.2"],
 		"download_directory" : "res://addons/admob/downloads/android"
 	} setget set_android_dictionary
 
 var ios_dictionary : Dictionary = {
-		"version" : ["CURRENT", "3.3.3", "3.3.2", "3.3.1", "3.3"],
+		"version" : ["CURRENT", "3.3.4", "3.3.3", "3.3.2", "3.3.1", "3.3"],
 		"download_directory" : "res://addons/admob/downloads/ios"
 	} setget set_ios_dictionary
 
@@ -52,6 +52,7 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		$ProgressBar.value = 0
 	else:
 		$AdviceAcceptDialog.dialog_text = download_complete_message % actual_downloading_file
+
 	set_process(false)
 	$AdviceAcceptDialog.popup_centered()
 
@@ -62,33 +63,40 @@ func _on_DownloadGoogleMobileAdsSdkiOS_pressed():
 	$HTTPRequest.download_file = ios_dictionary.download_directory + "/" + file_name
 	$HTTPRequest.request("https://github.com/Poing-Studios/godot-admob-ios/releases/download/" + plugin_version + "/" + file_name)
 	actual_downloading_file = file_name
+	
 	set_process(true)
 
 func _on_DownloadiOSTemplate_pressed():
 	var ios_version = $TabContainer/iOS/VersionHBoxContainer/iOSVersion.text
 	if ios_version == "CURRENT":
 		ios_version = godot_version
-		
+	
 	var file_name = "ios-template-v" + ios_version + ".zip"
 	var plugin_version = AdMobEditor.AdMobSettings.version_support.ios
 	$HTTPRequest.download_file = ios_dictionary.download_directory + "/" + file_name
 	$HTTPRequest.request("https://github.com/Poing-Studios/godot-admob-ios/releases/download/" + plugin_version + "/" + file_name)
 	actual_downloading_file = file_name
+	
 	set_process(true)
 
-
 func _on_DownloadAndroidTemplate_pressed():
-	var android_version = $TabContainer/Android/VersionHBoxContainer/AndroidVersion.text
-	if android_version == "CURRENT":
+	var android_version = $TabContainer/Android/VersionHBoxContainer/AndroidVersion.text.to_lower()
+	if android_version == "current":
 		android_version = godot_version
 	
 	var android_target = $TabContainer/Android/TargetHBoxContainer/MenuButton.text.to_lower()
+	
+	if android_target == "current":
+		android_target = "mono" if Engine.has_singleton("GodotSharp") else "standard"
+	
+	
 	var file_name = "android-"+ android_target + "-template-v" + android_version + ".zip"
 	var plugin_version = AdMobEditor.AdMobSettings.version_support.android
 	$HTTPRequest.download_file = android_dictionary.download_directory + "/" + file_name
 	$HTTPRequest.request("https://github.com/Poing-Studios/godot-admob-android/releases/download/" + plugin_version + "/" + file_name)
 	actual_downloading_file = file_name
-	#set_process(true)
+	
+	set_process(true)
 
 
 func _on_AndroidChangeDirectoryFileDialog_dir_selected(dir):

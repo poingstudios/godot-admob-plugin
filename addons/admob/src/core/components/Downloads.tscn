@@ -16,7 +16,7 @@ __meta__ = {
 }
 
 [node name="Advice" type="Label" parent="."]
-margin_right = 600.0
+margin_right = 593.0
 margin_bottom = 82.0
 text = "This screen is just to download the AdMob plugin referring to the current version of your Godot, IT WILL NOT INSTALL.
 
@@ -25,7 +25,7 @@ autowrap = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 margin_top = 86.0
-margin_right = 600.0
+margin_right = 593.0
 margin_bottom = 100.0
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
@@ -46,7 +46,7 @@ __meta__ = {
 
 [node name="TabContainer" type="TabContainer" parent="."]
 margin_top = 104.0
-margin_right = 600.0
+margin_right = 593.0
 margin_bottom = 232.0
 
 [node name="Android" type="VBoxContainer" parent="TabContainer"]
@@ -58,7 +58,7 @@ margin_right = -4.0
 margin_bottom = -4.0
 
 [node name="ChangeDirectoryHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
-margin_right = 592.0
+margin_right = 585.0
 margin_bottom = 20.0
 
 [node name="DownloadDirectoryLabel" type="Label" parent="TabContainer/Android/ChangeDirectoryHBoxContainer"]
@@ -88,7 +88,7 @@ __meta__ = {
 
 [node name="VersionHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
 margin_top = 24.0
-margin_right = 592.0
+margin_right = 585.0
 margin_bottom = 44.0
 
 [node name="Label" type="Label" parent="TabContainer/Android/VersionHBoxContainer"]
@@ -102,7 +102,7 @@ margin_left = 56.0
 margin_right = 143.0
 margin_bottom = 20.0
 text = "CURRENT"
-items = [ "CURRENT", null, false, 0, null, "3.3.3", null, false, 1, null, "3.3.2", null, false, 2, null, "3.3.1", null, false, 3, null, "3.3", null, false, 4, null, "3.2.3", null, false, 5, null, "3.2.2", null, false, 6, null, "CURRENT", null, false, 7, null, "3.3.3", null, false, 8, null, "3.3.2", null, false, 9, null, "3.3.1", null, false, 10, null, "3.3", null, false, 11, null, "3.2.3", null, false, 12, null, "3.2.2", null, false, 13, null, "CURRENT", null, false, 14, null, "3.3.3", null, false, 15, null, "3.3.2", null, false, 16, null, "3.3.1", null, false, 17, null, "3.3", null, false, 18, null, "3.2.3", null, false, 19, null, "3.2.2", null, false, 20, null ]
+items = [ "CURRENT", null, false, 0, null, "3.3.3", null, false, 1, null, "3.3.2", null, false, 2, null, "3.3.1", null, false, 3, null, "3.3", null, false, 4, null, "3.2.3", null, false, 5, null, "3.2.2", null, false, 6, null ]
 selected = 0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -110,7 +110,7 @@ __meta__ = {
 
 [node name="TargetHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
 margin_top = 48.0
-margin_right = 592.0
+margin_right = 585.0
 margin_bottom = 68.0
 
 [node name="Label" type="Label" parent="TabContainer/Android/TargetHBoxContainer"]
@@ -121,14 +121,15 @@ text = "Target:"
 
 [node name="MenuButton" type="OptionButton" parent="TabContainer/Android/TargetHBoxContainer"]
 margin_left = 47.0
-margin_right = 76.0
+margin_right = 134.0
 margin_bottom = 20.0
-items = [ "STANDARD", null, false, 1, null, "MONO", null, false, 2, null ]
+text = "CURRENT"
+items = [ "CURRENT", null, false, 0, null, "STANDARD", null, false, 1, null, "MONO", null, false, 2, null ]
 selected = 0
 
 [node name="DownloadAndroidTemplate" type="Button" parent="TabContainer/Android"]
 margin_top = 72.0
-margin_right = 592.0
+margin_right = 585.0
 margin_bottom = 92.0
 text = "Download Android Template"
 
@@ -187,7 +188,7 @@ margin_left = 56.0
 margin_right = 85.0
 margin_bottom = 20.0
 text = "CURRENT"
-items = [ "CURRENT", null, false, 0, null, "3.3.3", null, false, 1, null, "3.3.2", null, false, 2, null, "3.3.1", null, false, 3, null, "3.3", null, false, 4, null, "CURRENT", null, false, 5, null, "3.3.3", null, false, 6, null, "3.3.2", null, false, 7, null, "3.3.1", null, false, 8, null, "3.3", null, false, 9, null, "CURRENT", null, false, 10, null, "3.3.3", null, false, 11, null, "3.3.2", null, false, 12, null, "3.3.1", null, false, 13, null, "3.3", null, false, 14, null ]
+items = [ "CURRENT", null, false, 0, null, "3.3.3", null, false, 1, null, "3.3.2", null, false, 2, null, "3.3.1", null, false, 3, null, "3.3", null, false, 4, null ]
 selected = 0
 __meta__ = {
 "_edit_use_anchors_": false

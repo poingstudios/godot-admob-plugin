@@ -1,6 +1,7 @@
 var AdMobLoad = preload("res://addons/admob/src/utils/AdMobLoad.gd")
 var AdMobSave = preload("res://addons/admob/src/utils/AdMobSave.gd")
 
+enum INITIALIZATION_STATUS {NOT_READY, READY}
 const PATH_ADMOB_PROJECT_SETTINGS = "admob/config"
 
 const BANNER_SIZE : Array = ["BANNER", "MEDIUM_RECTANGLE", "FULL_BANNER", "LEADERBOARD", "ADAPTIVE", "SMART_BANNER"] 
