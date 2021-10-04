@@ -1,14 +1,17 @@
-extends "util/Variables.gd"
+extends Node 
 
+var AdMobSettings = preload("res://addons/admob/src/utils/AdMobSettings.gd").new()
+onready var config = AdMobSettings.config
 var plugin : Object
 
 func _ready() -> void:
-	if config.is_enabled:
+	if config.general.is_enabled:
 		if (Engine.has_singleton("AdMob")):
 			plugin = Engine.get_singleton("AdMob")
 			initialize()
 			# warning-ignore:return_value_discarded
 			get_tree().connect("screen_resized", self, "_on_get_tree_resized")
+
 
 func get_is_initialized() -> bool:
 	if plugin:
@@ -17,24 +20,24 @@ func get_is_initialized() -> bool:
 
 func initialize() -> void:
 	if plugin and not get_is_initialized():
-		plugin.initialize(config.is_for_child_directed_treatment, MAX_AD_RATING[config.max_ad_content_rating], OS.has_feature("release"), config.is_test_europe_user_consent)
+		plugin.initialize(config.general.is_for_child_directed_treatment, config.general.max_ad_content_rating, OS.has_feature("release"), config.general.is_test_europe_user_consent)
 
-
-func load_banner() -> void:
+func load_banner(ad_unit_name : String = "demo") -> void:
 	if plugin:
-		plugin.load_banner(config.unit_ids.banner[OS.get_name()], config.banner.position, BANNER_SIZE[config.banner.size], config.banner.show_instantly)
+		print(config.banner.size)
+		plugin.load_banner(config.banner.unit_ids[OS.get_name()][ad_unit_name], config.banner.position, config.banner.size, config.banner.show_instantly)
 
-func load_interstitial() -> void:
+func load_interstitial(ad_unit_name : String = "demo") -> void:
 	if plugin:
-		plugin.load_interstitial(config.unit_ids.interstitial[OS.get_name()])
+		plugin.load_interstitial(config.interstitial.unit_ids[OS.get_name()][ad_unit_name])
 
-func load_rewarded() -> void:
+func load_rewarded(ad_unit_name : String = "demo") -> void:
 	if plugin:
-		plugin.load_rewarded(config.unit_ids.rewarded[OS.get_name()])
+		plugin.load_rewarded(config.rewarded.unit_ids[OS.get_name()][ad_unit_name])
 
-func load_rewarded_interstitial() -> void:
+func load_rewarded_interstitial(ad_unit_name : String = "demo") -> void:
 	if plugin:
-		plugin.load_rewarded_interstitial(config.unit_ids.rewarded_interstitial[OS.get_name()])
+		plugin.load_rewarded_interstitial(config.rewarded_interstitial.unit_ids[OS.get_name()][ad_unit_name])
 
 func destroy_banner() -> void:
 	if plugin:

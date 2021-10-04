@@ -1,0 +1,23 @@
+[gd_scene format=2]
+
+[node name="AdUnitOperationalSystem" type="VBoxContainer"]
+margin_right = 382.0
+margin_bottom = 159.0
+rect_clip_content = true
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AdUnitVBoxContainer" type="VBoxContainer" parent="."]
+margin_right = 382.0
+margin_bottom = 135.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AddAdUnitButton" type="Button" parent="."]
+margin_top = 139.0
+margin_right = 382.0
+margin_bottom = 159.0
+text = "ADD"

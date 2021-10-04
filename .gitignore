@@ -14,9 +14,11 @@ export_presets.cfg
 
 # Mono-specific ignores
 .mono/
+mono_crash*.json
 data_*/
 AdMobAddon.csproj
 AdMobAddon.sln
+
 
 android/
 ios/
