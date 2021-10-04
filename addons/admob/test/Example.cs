@@ -60,25 +60,25 @@ public class Example : Control
 		OS.CenterWindow();
 		Music.Play();
 
-		foreach(String banner_size in (IEnumerable) MobileAds.Get("BANNER_SIZE"))
+		foreach(String banner_size in (IEnumerable) ((Godot.Object)MobileAds.Get("AdMobSettings")).Get("BANNER_SIZE"))
 		{
 			BannerSizes.AddItem(banner_size);
 		}
 		if (OS.GetName() == "Android" || OS.GetName() == "iOS"){
 			BannerPosition.Pressed = Convert.ToBoolean(((IDictionary) config["banner"])["position"]);
 			MobileAds.Call("request_user_consent");
-			MobileAds.Connect("consent_info_update_failure", this, nameof(_on_MobileAds_consent_info_update_failure));
-			MobileAds.Connect("consent_status_changed", this, nameof(_on_MobileAds_consent_status_changed));
-			MobileAds.Connect("banner_loaded", this, nameof(_on_MobileAds_banner_loaded));
-			MobileAds.Connect("banner_destroyed", this, nameof(_on_MobileAds_banner_destroyed));
-			MobileAds.Connect("interstitial_loaded", this, nameof(_on_MobileAds_interstitial_loaded));
-			MobileAds.Connect("interstitial_closed", this, nameof(_on_MobileAds_interstitial_closed));
-			MobileAds.Connect("rewarded_ad_loaded", this, nameof(_on_MobileAds_rewarded_ad_loaded));
-			MobileAds.Connect("rewarded_ad_closed", this, nameof(_on_MobileAds_rewarded_ad_closed));
-			MobileAds.Connect("rewarded_interstitial_ad_loaded", this, nameof(_on_MobileAds_rewarded_interstitial_ad_loaded));
-			MobileAds.Connect("rewarded_interstitial_ad_closed", this, nameof(_on_MobileAds_rewarded_interstitial_ad_closed));
-			MobileAds.Connect("user_earned_rewarded", this, nameof(_on_MobileAds_user_earned_rewarded));
-			MobileAds.Connect("initialization_complete", this, nameof(_on_MobileAds_initialization_complete));
+			((Godot.Object)MobileAds.Get("plugin")).Connect("consent_info_update_failure", this, nameof(_on_MobileAds_consent_info_update_failure));
+			((Godot.Object)MobileAds.Get("plugin")).Connect("consent_status_changed", this, nameof(_on_MobileAds_consent_status_changed));
+			((Godot.Object)MobileAds.Get("plugin")).Connect("banner_loaded", this, nameof(_on_MobileAds_banner_loaded));
+			((Godot.Object)MobileAds.Get("plugin")).Connect("banner_destroyed", this, nameof(_on_MobileAds_banner_destroyed));
+			((Godot.Object)MobileAds.Get("plugin")).Connect("interstitial_loaded", this, nameof(_on_MobileAds_interstitial_loaded));
+			((Godot.Object)MobileAds.Get("plugin")).Connect("interstitial_closed", this, nameof(_on_MobileAds_interstitial_closed));
+			((Godot.Object)MobileAds.Get("plugin")).Connect("rewarded_ad_loaded", this, nameof(_on_MobileAds_rewarded_ad_loaded));
+			((Godot.Object)MobileAds.Get("plugin")).Connect("rewarded_ad_closed", this, nameof(_on_MobileAds_rewarded_ad_closed));
+			((Godot.Object)MobileAds.Get("plugin")).Connect("rewarded_interstitial_ad_loaded", this, nameof(_on_MobileAds_rewarded_interstitial_ad_loaded));
+			((Godot.Object)MobileAds.Get("plugin")).Connect("rewarded_interstitial_ad_closed", this, nameof(_on_MobileAds_rewarded_interstitial_ad_closed));
+			((Godot.Object)MobileAds.Get("plugin")).Connect("user_earned_rewarded", this, nameof(_on_MobileAds_user_earned_rewarded));
+			((Godot.Object)MobileAds.Get("plugin")).Connect("initialization_complete", this, nameof(_on_MobileAds_initialization_complete));
 		}
 		else
 		{
@@ -88,15 +88,16 @@ public class Example : Control
 
 	private void _on_MobileAds_initialization_complete(int status, String _adapter_name)
 	{
-		if (status == (int)((IDictionary) MobileAds.Get("INITIALIZATION_STATUS"))["READY"])
+		if (status == (int)((IDictionary) ((Godot.Object)MobileAds.Get("AdMobSettings")).Get("INITIALIZATION_STATUS"))["READY"])
 		{
 			MobileAds.Call("load_interstitial");
 			MobileAds.Call("load_rewarded");
 			MobileAds.Call("load_rewarded_interstitial");
+			
 			_add_text_Advice_Node("AdMob initialized on C#! With parameters:");
-			_add_text_Advice_Node("is_real: " + config["is_real"].ToString());
-			_add_text_Advice_Node("is_for_child_directed_treatment: " + config["is_for_child_directed_treatment"].ToString());
-			_add_text_Advice_Node("max_ad_content_rating: " + config["max_ad_content_rating"].ToString());
+			_add_text_Advice_Node("is_for_child_directed_treatment: " + ((IDictionary) config["general"])["is_for_child_directed_treatment"].ToString());
+			_add_text_Advice_Node("is_test_europe_user_consent: " + ((IDictionary) config["general"])["is_test_europe_user_consent"].ToString());
+			_add_text_Advice_Node("max_ad_content_rating: " + ((IDictionary) config["general"])["max_ad_content_rating"].ToString());
 			_add_text_Advice_Node("instance_id: " + GetInstanceId().ToString());
 			EnableBanner.Disabled = false;
 			BannerPosition.Disabled = false;
