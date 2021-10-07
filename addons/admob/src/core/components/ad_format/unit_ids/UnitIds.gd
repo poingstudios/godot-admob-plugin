@@ -6,12 +6,10 @@ var AdUnit = preload("res://addons/admob/src/core/components/ad_format/unit_ids/
 onready var AdMobEditor : Control = find_parent("AdMobEditor")
 onready var ad_format_name = AdMobEditor.AdMobSettings.pascal2snake(get_parent().name)
 
-onready var config_dictionary : Dictionary = AdMobEditor.AdMobSettings.config[ad_format_name].unit_ids
-
 func _ready():
 	for operational_system in $OperationalSystemTabContainer.get_children():
-		for unit_name in (config_dictionary[operational_system.name] as Dictionary):
-			var unit_id = config_dictionary[operational_system.name][unit_name]
+		for unit_name in (AdMobEditor.AdMobSettings.config[ad_format_name].unit_ids[operational_system.name] as Dictionary):
+			var unit_id = AdMobEditor.AdMobSettings.config[ad_format_name].unit_ids[operational_system.name][unit_name]
 			instance_ad_unit(operational_system.name, false, unit_name, unit_id)
 		get_node("OperationalSystemTabContainer/"+operational_system.name+"/AddAdUnitButton").connect("pressed", self, "_on_AddAdUnitButton_pressed", [operational_system.name])
 
@@ -25,16 +23,15 @@ func _on_AdUnitRemoved(name_value : String, system):
 	remove_ad_unit(system, name_value)
 	
 func _on_AddAdUnitButton_pressed(system):
-	print("_on_AddAdUnitButton_pressed", system)
 	instance_ad_unit(system, true)
 
 
 func add_ad_unit(operational_system : String, name_value: String, id_value : String):
-	print(config_dictionary)
-	config_dictionary[operational_system][name_value] = id_value
+	AdMobEditor.AdMobSettings.config[ad_format_name].unit_ids[operational_system][name_value] = id_value
 
 func remove_ad_unit(operational_system : String, name_value: String):
-	config_dictionary[operational_system].erase(name_value)	
+	AdMobEditor.AdMobSettings.config[ad_format_name].unit_ids[operational_system].erase(name_value)
+	AdMobEditor.AdMobSettings.save_config()
 
 func instance_ad_unit(system : String, is_editing : bool, unit_name : String = "", unit_id : String = ""):
 	var tab_container = get_node("OperationalSystemTabContainer/"+system+"/AdUnitVBoxContainer")
