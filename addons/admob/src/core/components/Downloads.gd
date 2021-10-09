@@ -112,3 +112,12 @@ func _on_iOSChangeDirectoryFileDialog_dir_selected(dir):
 func _on_iOSChangeDirectoryButton_pressed():
 	$TabContainer/iOS/ChangeDirectoryHBoxContainer/iOSChangeDirectoryFileDialog.popup_centered()
 
+
+func _on_AndroidOpenDirectoryButton_pressed():
+	var path_directory = ProjectSettings.globalize_path(android_dictionary.download_directory)
+	OS.shell_open(str("file://", path_directory))
+
+
+func _on_iOSOpenDirectoryButton_pressed():
+	var path_directory = ProjectSettings.globalize_path(ios_dictionary.download_directory)
+	OS.shell_open(str("file://", path_directory))
