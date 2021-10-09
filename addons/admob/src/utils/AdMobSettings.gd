@@ -68,8 +68,9 @@ var config : Dictionary = {
 func _init():
 	var config_project_settings : Dictionary = AdMobLoad.load_config(PATH_ADMOB_PROJECT_SETTINGS)
 	merge_dir(config, config_project_settings)
-	save_config()
-	
+	if Engine.editor_hint:
+		save_config()
+
 func save_config():
 	AdMobSave.save_config(PATH_ADMOB_PROJECT_SETTINGS, self.config)
 
