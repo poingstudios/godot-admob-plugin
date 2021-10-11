@@ -18,10 +18,10 @@ onready var Music : AudioStreamPlayer = $Music
 onready var BannerPosition : CheckBox = $Background/TabContainer/Banner/VBoxContainer/Position
 onready var BannerSizes : ItemList = $Background/TabContainer/Banner/VBoxContainer/BannerSizes
 
-func _add_text_Advice_Node(text_value : String):
+func _add_text_Advice_Node(text_value : String) -> void:
 	Advice.bbcode_text += text_value + "\n"
 
-func _ready():
+func _ready() -> void:
 	OS.center_window()
 	Music.play()
 	for banner_size in MobileAds.AdMobSettings.BANNER_SIZE:
@@ -29,35 +29,34 @@ func _ready():
 	if OS.get_name() == "Android" or OS.get_name() == "iOS":
 		BannerPosition.pressed = MobileAds.AdMobSettings.config.banner.position
 		MobileAds.request_user_consent()
-		if MobileAds.plugin != null:
-			# warning-ignore:return_value_discarded
-			MobileAds.plugin.connect("consent_info_update_failure", self, "_on_MobileAds_consent_info_update_failure")
-			# warning-ignore:return_value_discarded
-			MobileAds.plugin.connect("consent_status_changed", self, "_on_MobileAds_consent_status_changed")
-			# warning-ignore:return_value_discarded
-			MobileAds.plugin.connect("banner_loaded", self, "_on_MobileAds_banner_loaded")
-			# warning-ignore:return_value_discarded
-			MobileAds.plugin.connect("banner_destroyed", self, "_on_MobileAds_banner_destroyed")
-			# warning-ignore:return_value_discarded
-			MobileAds.plugin.connect("interstitial_loaded", self, "_on_MobileAds_interstitial_loaded")
-			# warning-ignore:return_value_discarded
-			MobileAds.plugin.connect("interstitial_closed", self, "_on_MobileAds_interstitial_closed")
-			# warning-ignore:return_value_discarded
-			MobileAds.plugin.connect("rewarded_ad_loaded", self, "_on_MobileAds_rewarded_ad_loaded")
-			# warning-ignore:return_value_discarded
-			MobileAds.plugin.connect("rewarded_ad_closed", self, "_on_MobileAds_rewarded_ad_closed")
-			# warning-ignore:return_value_discarded
-			MobileAds.plugin.connect("rewarded_interstitial_ad_loaded", self, "_on_MobileAds_rewarded_interstitial_ad_loaded")
-			# warning-ignore:return_value_discarded
-			MobileAds.plugin.connect("rewarded_interstitial_ad_closed", self, "_on_MobileAds_rewarded_interstitial_ad_closed")
-			# warning-ignore:return_value_discarded
-			MobileAds.plugin.connect("user_earned_rewarded", self, "_on_MobileAds_user_earned_rewarded")
-			# warning-ignore:return_value_discarded
-			MobileAds.plugin.connect("initialization_complete", self, "_on_MobileAds_initialization_complete")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("consent_info_update_failure", self, "_on_MobileAds_consent_info_update_failure")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("consent_status_changed", self, "_on_MobileAds_consent_status_changed")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("banner_loaded", self, "_on_MobileAds_banner_loaded")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("banner_destroyed", self, "_on_MobileAds_banner_destroyed")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("interstitial_loaded", self, "_on_MobileAds_interstitial_loaded")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("interstitial_closed", self, "_on_MobileAds_interstitial_closed")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_ad_loaded", self, "_on_MobileAds_rewarded_ad_loaded")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_ad_closed", self, "_on_MobileAds_rewarded_ad_closed")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_interstitial_ad_loaded", self, "_on_MobileAds_rewarded_interstitial_ad_loaded")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_interstitial_ad_closed", self, "_on_MobileAds_rewarded_interstitial_ad_closed")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("user_earned_rewarded", self, "_on_MobileAds_user_earned_rewarded")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("initialization_complete", self, "_on_MobileAds_initialization_complete")
 	else:
 		_add_text_Advice_Node("AdMob only works on Android or iOS devices!")
 
-func _on_MobileAds_initialization_complete(status, _adapter_name):
+func _on_MobileAds_initialization_complete(status : int, adapter_name : String) -> void:
 	if status == MobileAds.AdMobSettings.INITIALIZATION_STATUS.READY:
 		MobileAds.load_interstitial()
 		MobileAds.load_rewarded()
@@ -74,29 +73,30 @@ func _on_MobileAds_initialization_complete(status, _adapter_name):
 	else:
 		_add_text_Advice_Node("AdMob not initialized, check your configuration")
 	_add_text_Advice_Node("---------------------------------------------------")
-func _on_MobileAds_interstitial_loaded():
+
+func _on_MobileAds_interstitial_loaded() -> void:
 	Interstitial.disabled = false
 	_add_text_Advice_Node("Interstitial loaded")
 
-func _on_MobileAds_interstitial_closed():
+func _on_MobileAds_interstitial_closed() -> void:
 	MobileAds.load_interstitial()
 	_add_text_Advice_Node("Interstitial closed")
 
-func _on_Interstitial_pressed():
+func _on_Interstitial_pressed() -> void:
 	MobileAds.show_interstitial()
 	Interstitial.disabled = true
 
-func reset_banner_buttons():
+func reset_banner_buttons() -> void:
 	DisableBanner.disabled = true
 	EnableBanner.disabled = false
 	ShowBanner.disabled = true
 	HideBanner.disabled = true
 
-func _on_MobileAds_banner_destroyed():
+func _on_MobileAds_banner_destroyed() -> void:
 	reset_banner_buttons()
 	_add_text_Advice_Node("Banner destroyed")
 
-func _on_MobileAds_banner_loaded():
+func _on_MobileAds_banner_loaded() -> void:
 	DisableBanner.disabled = false
 	EnableBanner.disabled = true
 	ShowBanner.disabled = false
@@ -107,50 +107,50 @@ func _on_MobileAds_banner_loaded():
 	_add_text_Advice_Node("Banner width in pixels: " + str(MobileAds.get_banner_width_in_pixels()))
 	_add_text_Advice_Node("Banner height in pixels: " + str(MobileAds.get_banner_height_in_pixels()))
 
-func _on_EnableBanner_pressed():
+func _on_EnableBanner_pressed() -> void:
 	EnableBanner.disabled = true
 	MobileAds.load_banner()
 
-func _on_DisableBanner_pressed():
+func _on_DisableBanner_pressed() -> void:
 	DisableBanner.disabled = true
 	EnableBanner.disabled = false
 	MobileAds.destroy_banner()
 
-func _on_Rewarded_pressed():
+func _on_Rewarded_pressed() -> void:
 	MobileAds.show_rewarded()
 	Rewarded.disabled = true
 
-func _on_RewardedInterstitial_pressed():
+func _on_RewardedInterstitial_pressed() -> void:
 	MobileAds.show_rewarded_interstitial()
 	RewardedInterstitial.disabled = true
 
-func _on_MobileAds_rewarded_ad_loaded():
+func _on_MobileAds_rewarded_ad_loaded() -> void:
 	Rewarded.disabled = false
 	_add_text_Advice_Node("Rewarded ad loaded")
 	
-func _on_MobileAds_rewarded_ad_closed():
+func _on_MobileAds_rewarded_ad_closed() -> void:
 	MobileAds.load_rewarded()
 	_add_text_Advice_Node("Rewarded ad closed")
 
-func _on_MobileAds_rewarded_interstitial_ad_loaded():
+func _on_MobileAds_rewarded_interstitial_ad_loaded() -> void:
 	RewardedInterstitial.disabled = false
 	_add_text_Advice_Node("Rewarded Interstitial ad loaded")
 
-func _on_MobileAds_rewarded_interstitial_ad_closed():
+func _on_MobileAds_rewarded_interstitial_ad_closed() -> void:
 	MobileAds.load_rewarded_interstitial()
 	_add_text_Advice_Node("Rewarded Interstitial ad closed")
 	
-func _on_MobileAds_user_earned_rewarded(currency : String, amount : int):
+func _on_MobileAds_user_earned_rewarded(currency : String, amount : int) -> void:
 	Advice.bbcode_text += "EARNED " + currency + " with amount: " + str(amount) + "\n"
 
-func _on_MobileAds_consent_info_update_failure(_error_code : int, error_message : String):
+func _on_MobileAds_consent_info_update_failure(_error_code : int, error_message : String) -> void:
 	_add_text_Advice_Node(error_message)
 
-func _on_MobileAds_consent_status_changed(status_message : String):
+func _on_MobileAds_consent_status_changed(status_message : String) -> void:
 	_add_text_Advice_Node(status_message)
 
 
-func _on_BannerSizes_item_selected(index):
+func _on_BannerSizes_item_selected(index : int) -> void:
 	if MobileAds.get_is_initialized():
 		var item_text : String = BannerSizes.get_item_text(index)
 		MobileAds.config.banner.size = item_text
@@ -158,41 +158,41 @@ func _on_BannerSizes_item_selected(index):
 		if MobileAds.get_is_banner_loaded():
 			MobileAds.load_banner()
 
-func _on_ResetConsentState_pressed():
+func _on_ResetConsentState_pressed() -> void:
 	MobileAds.reset_consent_state(true)
 
-func _on_RequestUserConsent_pressed():
+func _on_RequestUserConsent_pressed() -> void:
 	MobileAds.request_user_consent()
 
 
-func _on_Position_pressed():
+func _on_Position_pressed() -> void:
 	MobileAds.config.banner.position = BannerPosition.pressed
 	if MobileAds.get_is_banner_loaded():
 		MobileAds.load_banner()
 
 
-func _on_IsInitialized_pressed():
+func _on_IsInitialized_pressed() -> void:
 	_add_text_Advice_Node("Is initialized: " + str(MobileAds.get_is_initialized()))
 
 
-func _on_IsBannerLoaded_pressed():
+func _on_IsBannerLoaded_pressed() -> void:
 	_add_text_Advice_Node("Is Banner loaded: " + str(MobileAds.get_is_banner_loaded()))
 
 
-func _on_IsInterstitialLoaded_pressed():
+func _on_IsInterstitialLoaded_pressed() -> void:
 	_add_text_Advice_Node("Is Interstitial loaded: " + str(MobileAds.get_is_interstitial_loaded()))
 
 
-func _on_IsRewardedLoaded_pressed():
+func _on_IsRewardedLoaded_pressed() -> void:
 	_add_text_Advice_Node("Is Rewarded loaded: " + str(MobileAds.get_is_rewarded_loaded()))
 
 
-func _on_IsRewardedInterstitialLoaded_pressed():
+func _on_IsRewardedInterstitialLoaded_pressed() -> void:
 	_add_text_Advice_Node("Is RewardedInterstitial loaded: " + str(MobileAds.get_is_rewarded_interstitial_loaded()))
 
 
-func _on_ShowBanner_pressed():
+func _on_ShowBanner_pressed() -> void:
 	MobileAds.show_banner()
 
-func _on_HideBanner_pressed():
+func _on_HideBanner_pressed() -> void:
 	MobileAds.hide_banner()
