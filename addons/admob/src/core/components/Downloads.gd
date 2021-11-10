@@ -7,12 +7,12 @@ onready var godot_version : String = String(Engine.get_version_info().major) + "
 var actual_downloading_file : String = ""
 
 var android_dictionary : Dictionary = {
-		"version" : ["CURRENT", "3.3.4", "3.3.3", "3.3.2", "3.3.1", "3.3", "3.2.3",  "3.2.2"],
+		"version" : ["CURRENT", "3.4", "3.3.4", "3.3.3", "3.3.2", "3.3.1", "3.3", "3.2.3",  "3.2.2"],
 		"download_directory" : "res://addons/admob/downloads/android"
 	} setget set_android_dictionary
 
 var ios_dictionary : Dictionary = {
-		"version" : ["CURRENT", "3.3.4", "3.3.3", "3.3.2", "3.3.1", "3.3"],
+		"version" : ["CURRENT", "3.4", "3.3.4", "3.3.3", "3.3.2", "3.3.1", "3.3"],
 		"download_directory" : "res://addons/admob/downloads/ios"
 	} setget set_ios_dictionary
 
@@ -28,6 +28,9 @@ func set_ios_dictionary(value):
 	$TabContainer/iOS/ChangeDirectoryHBoxContainer/DownloadDirectoryLabel.text =  current_dir_download_label % ios_dictionary.download_directory
 
 func _ready():
+	if godot_version[godot_version.length()-1] == "0":
+		godot_version = godot_version.substr(0, godot_version.length()-2)
+
 	set_process(false)
 	$TabContainer/Android/VersionHBoxContainer/AndroidVersion.clear()
 	$TabContainer/iOS/VersionHBoxContainer/iOSVersion.clear()
@@ -70,7 +73,7 @@ func _on_DownloadiOSTemplate_pressed():
 	var ios_version = $TabContainer/iOS/VersionHBoxContainer/iOSVersion.text
 	if ios_version == "CURRENT":
 		ios_version = godot_version
-	
+
 	var file_name = "ios-template-v" + ios_version + ".zip"
 	var plugin_version = AdMobEditor.AdMobSettings.version_support.ios
 	$HTTPRequest.download_file = ios_dictionary.download_directory + "/" + file_name
