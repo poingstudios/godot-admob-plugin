@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://addons/admob/test/Example.cs" type="Script" id=1]
+[ext_resource path="res://addons/admob/test/Example.gd" type="Script" id=1]
 [ext_resource path="res://addons/admob/assets/icon-500.png" type="Texture" id=2]
 [ext_resource path="res://addons/admob/assets/poing.jpeg" type="Texture" id=3]
 [ext_resource path="res://addons/admob/assets/music.ogg" type="AudioStream" id=4]
