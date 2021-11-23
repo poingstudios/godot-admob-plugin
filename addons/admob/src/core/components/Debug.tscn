@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://addons/admob/src/core/components/Debug.gd" type="Script" id=1]
+
+[node name="Debug" type="VBoxContainer"]
+margin_right = 40.0
+margin_bottom = 40.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TestEuropeUserConsent" type="CheckBox" parent="."]
+margin_right = 193.0
+margin_bottom = 24.0
+text = "Test Europe User Consent"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="TestEuropeUserConsent" to="." method="_on_TestEuropeUserConsent_pressed"]

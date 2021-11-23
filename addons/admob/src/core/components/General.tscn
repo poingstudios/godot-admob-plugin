@@ -15,7 +15,7 @@ __meta__ = {
 }
 
 [node name="Enabled" type="CheckBox" parent="."]
-margin_right = 592.0
+margin_right = 492.0
 margin_bottom = 24.0
 pressed = true
 text = "Enabled"
@@ -23,28 +23,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TestEuropeUserConsent" type="CheckBox" parent="."]
-margin_top = 28.0
-margin_right = 592.0
-margin_bottom = 52.0
-text = "Test Europe User Consent"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ChildDirectedTreatment" type="CheckBox" parent="."]
-margin_top = 56.0
-margin_right = 592.0
-margin_bottom = 80.0
+margin_top = 28.0
+margin_right = 492.0
+margin_bottom = 52.0
 text = "Child Directed Treatment"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MaxAdContentRating" type="HBoxContainer" parent="."]
-margin_top = 84.0
-margin_right = 592.0
-margin_bottom = 104.0
+margin_top = 56.0
+margin_right = 492.0
+margin_bottom = 76.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -70,6 +61,5 @@ __meta__ = {
 }
 
 [connection signal="pressed" from="Enabled" to="." method="_on_Enabled_pressed"]
-[connection signal="pressed" from="TestEuropeUserConsent" to="." method="_on_TestEuropeUserConsent_pressed"]
 [connection signal="pressed" from="ChildDirectedTreatment" to="." method="_on_ChildDirectedTreatment_pressed"]
 [connection signal="item_selected" from="MaxAdContentRating/Value" to="." method="_on_MaxAdContentRating_item_selected"]

@@ -12,6 +12,10 @@ onready var AddAdUnitButtonParent := get_parent().get_parent().get_node("AddAdUn
 var old_name_value := ""
 var is_editing := true setget set_is_editing
 
+func _ready():
+	if get_index() == 0:
+		$GridContainer/RemoveButton.disabled = true
+
 func change_state(editing : bool) -> void:
 	if editing:
 		editing_state()
@@ -23,10 +27,9 @@ func editing_state() -> void:
 	$GridContainer/EditButton.visible = false
 	Name.editable = true
 	Id.editable = true
-	
 	for ad_unit in ChildrenParent:
 		if ad_unit.get_index() != get_index():
-			ad_unit.get_node("GridContainer/RemoveButton").disabled = true
+			if ad_unit.get_index() != 0: ad_unit.get_node("GridContainer/RemoveButton").disabled = true
 			ad_unit.get_node("GridContainer/EditButton").disabled = true
 	AddAdUnitButtonParent.disabled = true
 
@@ -36,8 +39,8 @@ func not_editing_state():
 	Name.editable = false
 	Id.editable = false
 	for ad_unit in ChildrenParent:
+		if ad_unit.get_index() != 0: ad_unit.get_node("GridContainer/RemoveButton").disabled = false
 		ad_unit.get_node("GridContainer/EditButton").disabled = false
-		ad_unit.get_node("GridContainer/RemoveButton").disabled = false
 	AddAdUnitButtonParent.disabled = false
 
 

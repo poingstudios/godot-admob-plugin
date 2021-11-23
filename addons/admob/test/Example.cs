@@ -67,22 +67,22 @@ public class Example : Control
 		if (OS.GetName() == "Android" || OS.GetName() == "iOS"){
 			BannerPosition.Pressed = Convert.ToBoolean(((IDictionary) config["banner"])["position"]);
 			MobileAds.Call("request_user_consent");
-			((Godot.Object)MobileAds.Get("plugin")).Connect("consent_info_update_failure", this, nameof(_on_MobileAds_consent_info_update_failure));
-			((Godot.Object)MobileAds.Get("plugin")).Connect("consent_status_changed", this, nameof(_on_MobileAds_consent_status_changed));
-			((Godot.Object)MobileAds.Get("plugin")).Connect("banner_loaded", this, nameof(_on_MobileAds_banner_loaded));
-			((Godot.Object)MobileAds.Get("plugin")).Connect("banner_destroyed", this, nameof(_on_MobileAds_banner_destroyed));
-			((Godot.Object)MobileAds.Get("plugin")).Connect("interstitial_loaded", this, nameof(_on_MobileAds_interstitial_loaded));
-			((Godot.Object)MobileAds.Get("plugin")).Connect("interstitial_closed", this, nameof(_on_MobileAds_interstitial_closed));
-			((Godot.Object)MobileAds.Get("plugin")).Connect("rewarded_ad_loaded", this, nameof(_on_MobileAds_rewarded_ad_loaded));
-			((Godot.Object)MobileAds.Get("plugin")).Connect("rewarded_ad_closed", this, nameof(_on_MobileAds_rewarded_ad_closed));
-			((Godot.Object)MobileAds.Get("plugin")).Connect("rewarded_interstitial_ad_loaded", this, nameof(_on_MobileAds_rewarded_interstitial_ad_loaded));
-			((Godot.Object)MobileAds.Get("plugin")).Connect("rewarded_interstitial_ad_closed", this, nameof(_on_MobileAds_rewarded_interstitial_ad_closed));
-			((Godot.Object)MobileAds.Get("plugin")).Connect("user_earned_rewarded", this, nameof(_on_MobileAds_user_earned_rewarded));
-			((Godot.Object)MobileAds.Get("plugin")).Connect("initialization_complete", this, nameof(_on_MobileAds_initialization_complete));
+			MobileAds.Connect("consent_info_update_failure", this, nameof(_on_MobileAds_consent_info_update_failure));
+			MobileAds.Connect("consent_status_changed", this, nameof(_on_MobileAds_consent_status_changed));
+			MobileAds.Connect("banner_loaded", this, nameof(_on_MobileAds_banner_loaded));
+			MobileAds.Connect("banner_destroyed", this, nameof(_on_MobileAds_banner_destroyed));
+			MobileAds.Connect("interstitial_loaded", this, nameof(_on_MobileAds_interstitial_loaded));
+			MobileAds.Connect("interstitial_closed", this, nameof(_on_MobileAds_interstitial_closed));
+			MobileAds.Connect("rewarded_ad_loaded", this, nameof(_on_MobileAds_rewarded_ad_loaded));
+			MobileAds.Connect("rewarded_ad_closed", this, nameof(_on_MobileAds_rewarded_ad_closed));
+			MobileAds.Connect("rewarded_interstitial_ad_loaded", this, nameof(_on_MobileAds_rewarded_interstitial_ad_loaded));
+			MobileAds.Connect("rewarded_interstitial_ad_closed", this, nameof(_on_MobileAds_rewarded_interstitial_ad_closed));
+			MobileAds.Connect("user_earned_rewarded", this, nameof(_on_MobileAds_user_earned_rewarded));
+			MobileAds.Connect("initialization_complete", this, nameof(_on_MobileAds_initialization_complete));
 		}
 		else
 		{
-		_add_text_Advice_Node("AdMob only works on Android or iOS devices!");
+			_add_text_Advice_Node("AdMob only works on Android or iOS devices!");
 		}
 	}
 
@@ -112,8 +112,8 @@ public class Example : Control
 	}
 	private void _on_MobileAds_interstitial_loaded()
 	{
-		Interstitial.Disabled = false;
 		_add_text_Advice_Node("Interstitial loaded");
+		Interstitial.Disabled = false;
 	}
 
 	private void _on_MobileAds_interstitial_closed()
@@ -125,7 +125,6 @@ public class Example : Control
 	private void _on_Interstitial_pressed()
 	{
 		MobileAds.Call("show_interstitial");
-		MobileAds.Call("load_interstitial");
 		Interstitial.Disabled = true;
 	}
 
@@ -172,21 +171,19 @@ public class Example : Control
 	private void _on_Rewarded_pressed()
 	{
 		MobileAds.Call("show_rewarded");
-		MobileAds.Call("load_rewarded");
 		Rewarded.Disabled = true;
 	}
 
 	private void _on_RewardedInterstitial_pressed()
 	{
 		MobileAds.Call("show_rewarded_interstitial");
-		MobileAds.Call("load_rewarded_interstitial");
 		RewardedInterstitial.Disabled = true;
 	}
 
 	private void _on_MobileAds_rewarded_ad_loaded()
 	{
-		Rewarded.Disabled = false;
 		_add_text_Advice_Node("Rewarded ad loaded");
+		Rewarded.Disabled = false;
 	}
 	
 	private void _on_MobileAds_rewarded_ad_closed()
@@ -197,8 +194,8 @@ public class Example : Control
 
 	private void _on_MobileAds_rewarded_interstitial_ad_loaded()
 	{
-		RewardedInterstitial.Disabled = false;
 		_add_text_Advice_Node("Rewarded Interstitial ad loaded");
+		RewardedInterstitial.Disabled = false;
 	}
 	
 	private void _on_MobileAds_rewarded_interstitial_ad_closed()
@@ -214,7 +211,9 @@ public class Example : Control
 
 	private void _on_MobileAds_consent_info_update_failure(int _error_code, String error_message)
 	{
-		_add_text_Advice_Node(error_message);
+		_add_text_Advice_Node("Request Consent from European Users failure: " + error_message);
+		_add_text_Advice_Node("---------------------------------------------------");
+
 	}
 
 	private void _on_MobileAds_consent_status_changed(String status_message)

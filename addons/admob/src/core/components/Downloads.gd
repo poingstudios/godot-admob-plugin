@@ -5,6 +5,7 @@ onready var AdMobEditor : Control = find_parent("AdMobEditor")
 
 onready var godot_version : String = String(Engine.get_version_info().major) + "." + String(Engine.get_version_info().minor) + "." + String(Engine.get_version_info().patch)
 var actual_downloading_file : String = ""
+var downloaded_plugin_version : String = ""
 
 var android_dictionary : Dictionary = {
 		"version" : ["CURRENT", "3.4", "3.3.4", "3.3.3", "3.3.2", "3.3.1", "3.3", "3.2.3",  "3.2.2"],
@@ -17,7 +18,7 @@ var ios_dictionary : Dictionary = {
 	} setget set_ios_dictionary
 
 var current_dir_download_label = "Current Download Directory: %s"
-var download_complete_message = "Download of %s completed!"
+var download_complete_message = "Download of %s completed! \n%s"
 
 func set_android_dictionary(value):
 	android_dictionary = value
@@ -54,7 +55,7 @@ func _on_HTTPRequest_request_completed(result, response_code, headers, body):
 		$AdviceAcceptDialog.dialog_text = "!!!DOWNLOAD FAILED!!!"
 		$ProgressBar.value = 0
 	else:
-		$AdviceAcceptDialog.dialog_text = download_complete_message % actual_downloading_file
+		$AdviceAcceptDialog.dialog_text = download_complete_message % [actual_downloading_file, downloaded_plugin_version]
 
 	set_process(false)
 	$AdviceAcceptDialog.popup_centered()
@@ -66,7 +67,8 @@ func _on_DownloadGoogleMobileAdsSdkiOS_pressed():
 	$HTTPRequest.download_file = ios_dictionary.download_directory + "/" + file_name
 	$HTTPRequest.request("https://github.com/Poing-Studios/godot-admob-ios/releases/download/" + plugin_version + "/" + file_name)
 	actual_downloading_file = file_name
-	
+	downloaded_plugin_version = "iOS Plugin Version: " + plugin_version
+
 	set_process(true)
 
 func _on_DownloadiOSTemplate_pressed():
@@ -79,6 +81,7 @@ func _on_DownloadiOSTemplate_pressed():
 	$HTTPRequest.download_file = ios_dictionary.download_directory + "/" + file_name
 	$HTTPRequest.request("https://github.com/Poing-Studios/godot-admob-ios/releases/download/" + plugin_version + "/" + file_name)
 	actual_downloading_file = file_name
+	downloaded_plugin_version = "iOS Plugin Version: " + plugin_version
 	
 	set_process(true)
 
@@ -98,6 +101,8 @@ func _on_DownloadAndroidTemplate_pressed():
 	$HTTPRequest.download_file = android_dictionary.download_directory + "/" + file_name
 	$HTTPRequest.request("https://github.com/Poing-Studios/godot-admob-android/releases/download/" + plugin_version + "/" + file_name)
 	actual_downloading_file = file_name
+	
+	downloaded_plugin_version = "Android Plugin Version: " + plugin_version
 	
 	set_process(true)
 

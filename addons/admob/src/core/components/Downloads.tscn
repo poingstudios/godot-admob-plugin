@@ -27,9 +27,9 @@ autowrap = true
 margin_top = 69.0
 margin_right = 720.0
 margin_bottom = 83.0
-custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
@@ -39,7 +39,7 @@ margin_right = 888.0
 margin_bottom = 128.0
 popup_exclusive = true
 window_title = "Alerta!"
-dialog_text = "Download of %s completed!"
+dialog_text = "Download of %s completed! \\n%s"
 __meta__ = {
 "_edit_use_anchors_": false
 }

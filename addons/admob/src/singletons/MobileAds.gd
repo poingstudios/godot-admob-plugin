@@ -5,19 +5,19 @@ func _ready() -> void:
 	get_tree().connect("screen_resized", self, "_on_get_tree_resized")
 
 
-func load_banner(ad_unit_name : String = "demo") -> void:
+func load_banner(ad_unit_name : String = "standard") -> void:
 	if _plugin:
 		_plugin.load_banner(config.banner.unit_ids[OS.get_name()][ad_unit_name], config.banner.position, config.banner.size, config.banner.show_instantly)
 
-func load_interstitial(ad_unit_name : String = "demo") -> void:
+func load_interstitial(ad_unit_name : String = "standard") -> void:
 	if _plugin:
 		_plugin.load_interstitial(config.interstitial.unit_ids[OS.get_name()][ad_unit_name])
 
-func load_rewarded(ad_unit_name : String = "demo") -> void:
+func load_rewarded(ad_unit_name : String = "standard") -> void:
 	if _plugin:
 		_plugin.load_rewarded(config.rewarded.unit_ids[OS.get_name()][ad_unit_name])
 
-func load_rewarded_interstitial(ad_unit_name : String = "demo") -> void:
+func load_rewarded_interstitial(ad_unit_name : String = "standard") -> void:
 	if _plugin:
 		_plugin.load_rewarded_interstitial(config.rewarded_interstitial.unit_ids[OS.get_name()][ad_unit_name])
 

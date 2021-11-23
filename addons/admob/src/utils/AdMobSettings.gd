@@ -17,8 +17,10 @@ var config : Dictionary = {
 	"general" : {
 		"is_enabled": true,
 		"is_for_child_directed_treatment": false,
-		"is_test_europe_user_consent": false,
 		"max_ad_content_rating": "PG"
+	},
+	"debug" : {
+		"is_test_europe_user_consent": false
 	},
 	"banner": {
 		"position": POSITION.TOP,
@@ -26,40 +28,40 @@ var config : Dictionary = {
 		"size": "MEDIUM_RECTANGLE",
 		"unit_ids" : {
 			"Android": {
-				"demo" : "ca-app-pub-3940256099942544/6300978111",
+				"standard" : "ca-app-pub-3940256099942544/6300978111",
 			},
 			"iOS":  {
-				"demo" : "ca-app-pub-3940256099942544/2934735716"
+				"standard" : "ca-app-pub-3940256099942544/2934735716"
 			}
 		}
 	},
 	"interstitial": {
 		"unit_ids" : {
 			"Android": {
-				"demo" : "ca-app-pub-3940256099942544/1033173712"
+				"standard" : "ca-app-pub-3940256099942544/1033173712"
 			},
 			"iOS": {
-				"demo" : "ca-app-pub-3940256099942544/4411468910"
+				"standard" : "ca-app-pub-3940256099942544/4411468910"
 			}
 		}
 	},
 	"rewarded": {
 		"unit_ids" : {
 			"Android": {
-				"demo" : "ca-app-pub-3940256099942544/5224354917"
+				"standard" : "ca-app-pub-3940256099942544/5224354917"
 			},
 			"iOS": {
-				"demo" : "ca-app-pub-3940256099942544/1712485313"
+				"standard" : "ca-app-pub-3940256099942544/1712485313"
 			}
 		}
 	},
 	"rewarded_interstitial": {
 		"unit_ids" : {
 			"Android": {
-				"demo" : "ca-app-pub-3940256099942544/5354046379"
+				"standard" : "ca-app-pub-3940256099942544/5354046379"
 			},
 			"iOS": {
-				"demo" : "ca-app-pub-3940256099942544/6978759866"
+				"standard" : "ca-app-pub-3940256099942544/6978759866"
 			}
 		}
 	}
