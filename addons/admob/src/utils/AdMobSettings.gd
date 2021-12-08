@@ -9,7 +9,7 @@ const MAX_AD_RATING : Array = ["G", "PG", "T", "MA"]
 enum POSITION {TOP, BOTTOM}
 
 var version_support : Dictionary = {
-	"ios" : "v2.0.3",
+	"ios" : "v2.0.4",
 	"android" : "v2.0.0"
 }
 
