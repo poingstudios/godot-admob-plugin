@@ -53,7 +53,7 @@ func get_is_initialized() -> bool:
 	return false
 
 func initialize() -> void:
-	if _plugin and not get_is_initialized():
+	if _plugin:
 		_plugin.initialize(config.general.is_for_child_directed_treatment, config.general.max_ad_content_rating, OS.has_feature("release"), config.debug.is_test_europe_user_consent)
 
 

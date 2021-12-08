@@ -28,7 +28,6 @@ func _ready() -> void:
 		BannerSizes.add_item(banner_size)
 	if OS.get_name() == "Android" or OS.get_name() == "iOS":
 		BannerPosition.pressed = MobileAds.AdMobSettings.config.banner.position
-		MobileAds.request_user_consent()
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("consent_info_update_failure", self, "_on_MobileAds_consent_info_update_failure")
 		# warning-ignore:return_value_discarded
