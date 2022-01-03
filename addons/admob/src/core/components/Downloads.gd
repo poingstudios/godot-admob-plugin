@@ -8,12 +8,12 @@ var actual_downloading_file : String = ""
 var downloaded_plugin_version : String = ""
 
 var android_dictionary : Dictionary = {
-		"version" : ["CURRENT", "3.4", "3.3.4", "3.3.3", "3.3.2", "3.3.1", "3.3", "3.2.3",  "3.2.2"],
+		"version" : ["CURRENT", "3.4.2", "3.4.1", "3.4", "3.3.4", "3.3.3", "3.3.2", "3.3.1", "3.3", "3.2.3",  "3.2.2"],
 		"download_directory" : "res://addons/admob/downloads/android"
 	} setget set_android_dictionary
 
 var ios_dictionary : Dictionary = {
-		"version" : ["CURRENT", "3.4", "3.3.4", "3.3.3", "3.3.2", "3.3.1", "3.3"],
+		"version" : ["CURRENT", "3.4.2", "3.4.1", "3.4", "3.3.4", "3.3.3", "3.3.2", "3.3.1", "3.3"],
 		"download_directory" : "res://addons/admob/downloads/ios"
 	} setget set_ios_dictionary
 
