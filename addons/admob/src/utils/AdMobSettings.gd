@@ -20,6 +20,8 @@ var config : Dictionary = {
 		"max_ad_content_rating": "PG"
 	},
 	"debug" : {
+		"is_debug_on_release": false,
+		"is_real": false,
 		"is_test_europe_user_consent": false
 	},
 	"banner": {
