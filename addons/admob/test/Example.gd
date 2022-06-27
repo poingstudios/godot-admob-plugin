@@ -16,18 +16,21 @@ onready var Advice : RichTextLabel = $Background/Advice
 onready var Music : AudioStreamPlayer = $Music
 
 onready var BannerPosition : CheckBox = $Background/TabContainer/Banner/VBoxContainer/Position
+onready var RespectSafeArea : CheckBox = $Background/TabContainer/Banner/VBoxContainer/RespectSafeArea
 onready var BannerSizes : ItemList = $Background/TabContainer/Banner/VBoxContainer/BannerSizes
 
 func _add_text_Advice_Node(text_value : String) -> void:
 	Advice.bbcode_text += text_value + "\n"
 
 func _ready() -> void:
+	BannerPosition.pressed = MobileAds.AdMobSettings.config.banner.position
+	RespectSafeArea.pressed = MobileAds.AdMobSettings.config.banner.respect_safe_area
+
 	OS.center_window()
 	Music.play()
 	for banner_size in MobileAds.AdMobSettings.BANNER_SIZE:
 		BannerSizes.add_item(banner_size)
 	if OS.get_name() == "Android" or OS.get_name() == "iOS":
-		BannerPosition.pressed = MobileAds.AdMobSettings.config.banner.position
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("consent_form_dismissed", self, "_on_MobileAds_consent_form_dismissed")
 		# warning-ignore:return_value_discarded
@@ -183,6 +186,10 @@ func _on_Position_pressed() -> void:
 	if MobileAds.get_is_banner_loaded():
 		MobileAds.load_banner()
 
+func _on_RespectSafeArea_pressed():
+	MobileAds.config.banner.respect_safe_area = RespectSafeArea.pressed
+	if MobileAds.get_is_banner_loaded():
+		MobileAds.load_banner()
 
 func _on_IsInitialized_pressed() -> void:
 	_add_text_Advice_Node("Is initialized: " + str(MobileAds.get_is_initialized()))
@@ -209,3 +216,5 @@ func _on_ShowBanner_pressed() -> void:
 
 func _on_HideBanner_pressed() -> void:
 	MobileAds.hide_banner()
+
+

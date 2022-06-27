@@ -184,15 +184,15 @@ __meta__ = {
 }
 
 [node name="Control" type="Control" parent="Background/TabContainer/Banner/VBoxContainer"]
-margin_top = 68.0
+margin_top = 58.0
 margin_right = 355.0
-margin_bottom = 78.0
+margin_bottom = 68.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="Position" type="CheckBox" parent="Background/TabContainer/Banner/VBoxContainer"]
-margin_top = 82.0
+margin_top = 72.0
 margin_right = 355.0
-margin_bottom = 98.0
+margin_bottom = 88.0
 custom_styles/hover = SubResource( 4 )
 custom_styles/pressed = SubResource( 4 )
 custom_styles/normal = SubResource( 4 )
@@ -202,10 +202,19 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BannerSizes" type="ItemList" parent="Background/TabContainer/Banner/VBoxContainer"]
-margin_top = 102.0
+[node name="RespectSafeArea" type="CheckBox" parent="Background/TabContainer/Banner/VBoxContainer"]
+margin_top = 92.0
 margin_right = 355.0
-margin_bottom = 111.0
+margin_bottom = 108.0
+custom_styles/hover = SubResource( 4 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 4 )
+text = "Respect Safe Area (RECOMMENDED TRUE)"
+
+[node name="BannerSizes" type="ItemList" parent="Background/TabContainer/Banner/VBoxContainer"]
+margin_top = 112.0
+margin_right = 355.0
+margin_bottom = 121.0
 auto_height = true
 same_column_width = true
 __meta__ = {
@@ -308,6 +317,7 @@ autoplay = true
 [connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Rewarded" to="." method="_on_Rewarded_pressed"]
 [connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/RewardedInterstitial" to="." method="_on_RewardedInterstitial_pressed"]
 [connection signal="pressed" from="Background/TabContainer/Banner/VBoxContainer/Position" to="." method="_on_Position_pressed"]
+[connection signal="pressed" from="Background/TabContainer/Banner/VBoxContainer/RespectSafeArea" to="." method="_on_RespectSafeArea_pressed"]
 [connection signal="item_selected" from="Background/TabContainer/Banner/VBoxContainer/BannerSizes" to="." method="_on_BannerSizes_item_selected"]
 [connection signal="pressed" from="Background/TabContainer/UMP/VBoxContainer/RequestUserConsent" to="." method="_on_RequestUserConsent_pressed"]
 [connection signal="pressed" from="Background/TabContainer/UMP/VBoxContainer/ResetConsentState" to="." method="_on_ResetConsentState_pressed"]
