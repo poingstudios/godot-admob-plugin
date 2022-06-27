@@ -26,6 +26,7 @@ var config : Dictionary = {
 	},
 	"banner": {
 		"position": POSITION.TOP,
+		"respect_safe_area" : true,
 		"show_instantly": true,
 		"size": "MEDIUM_RECTANGLE",
 		"unit_ids" : {

@@ -7,7 +7,7 @@ func _ready() -> void:
 
 func load_banner(ad_unit_name : String = "standard") -> void:
 	if _plugin:
-		_plugin.load_banner(config.banner.unit_ids[OS.get_name()][ad_unit_name], config.banner.position, config.banner.size, config.banner.show_instantly)
+		_plugin.load_banner(config.banner.unit_ids[OS.get_name()][ad_unit_name], config.banner.position, config.banner.size, config.banner.show_instantly, config.banner.respect_safe_area)
 
 func load_interstitial(ad_unit_name : String = "standard") -> void:
 	if _plugin:

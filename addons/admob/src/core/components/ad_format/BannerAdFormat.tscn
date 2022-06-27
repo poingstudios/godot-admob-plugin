@@ -1,13 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://addons/admob/src/core/components/ad_format/AdFormat.tscn" type="PackedScene" id=1]
 [ext_resource path="res://addons/admob/src/core/components/ad_format/BannerAdFormat.gd" type="Script" id=2]
+[ext_resource path="res://addons/admob/src/core/components/ad_format/RespectSafeArea.gd" type="Script" id=3]
 
 [node name="BannerAdFormat" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="BannerSizeHBoxContainer" type="HBoxContainer" parent="." index="0"]
-margin_right = 600.0
+margin_right = 500.0
 margin_bottom = 20.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -33,26 +34,53 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BannerShowInstantly" type="CheckBox" parent="." index="1"]
+[node name="RespectSafeArea" type="CheckBox" parent="." index="1"]
 margin_top = 24.0
-margin_right = 600.0
+margin_right = 500.0
 margin_bottom = 48.0
+pressed = true
+text = "Respect Safe Area (RECOMMEND TRUE)"
+script = ExtResource( 3 )
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="RespectSafeArea" index="0"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -114.0
+margin_right = 250.0
+margin_bottom = 114.0
+window_title = "!!!WARNING!!!"
+dialog_text = "IT'S NOT RECOMMENDED LEAVE THIS AS FALSE
+
+According to Google AdMob documentation for iOS: Banner ads must be placed in the \"Safe Area\" to avoid being obscured by rounded corners, sensor housing, and the Home indicator. 
+
+Read here: https://developers.google.com/admob/ios/x-ad-rendering"
+dialog_autowrap = true
+
+[node name="BannerShowInstantly" type="CheckBox" parent="." index="2"]
+margin_top = 52.0
+margin_right = 500.0
+margin_bottom = 76.0
 pressed = true
 text = "Show Banner Instantly"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BannerOnTop" type="CheckBox" parent="." index="2"]
-margin_top = 52.0
-margin_right = 600.0
-margin_bottom = 76.0
+[node name="BannerOnTop" type="CheckBox" parent="." index="3"]
+margin_top = 80.0
+margin_right = 500.0
+margin_bottom = 104.0
 text = "Banner On Top"
 
-[node name="UnitIds" parent="." index="3"]
-margin_top = 80.0
-margin_bottom = 140.0
+[node name="UnitIds" parent="." index="4"]
+margin_top = 108.0
+margin_bottom = 168.0
 
 [connection signal="item_selected" from="BannerSizeHBoxContainer/BannerSize" to="." method="_on_BannerSize_item_selected"]
+[connection signal="pressed" from="RespectSafeArea" to="RespectSafeArea" method="_on_RespectSafeArea_pressed"]
+[connection signal="confirmed" from="RespectSafeArea/ConfirmationDialog" to="RespectSafeArea" method="_on_ConfirmationDialog_confirmed"]
 [connection signal="pressed" from="BannerShowInstantly" to="." method="_on_BannerShowInstantly_pressed"]
 [connection signal="pressed" from="BannerOnTop" to="." method="_on_BannerOnTop_pressed"]
