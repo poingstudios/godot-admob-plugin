@@ -13,7 +13,6 @@ onready var RequestUserConsent : Button = $Background/TabContainer/UMP/VBoxConta
 onready var ResetConsentState : Button = $Background/TabContainer/UMP/VBoxContainer/ResetConsentState
 
 onready var Advice : RichTextLabel = $Background/Advice
-onready var Music : AudioStreamPlayer = $Music
 
 onready var BannerPosition : CheckBox = $Background/TabContainer/Banner/VBoxContainer/Position
 onready var RespectSafeArea : CheckBox = $Background/TabContainer/Banner/VBoxContainer/RespectSafeArea
@@ -27,7 +26,6 @@ func _ready() -> void:
 	RespectSafeArea.pressed = MobileAds.AdMobSettings.config.banner.respect_safe_area
 
 	OS.center_window()
-	Music.play()
 	for banner_size in MobileAds.AdMobSettings.BANNER_SIZE:
 		BannerSizes.add_item(banner_size)
 	if OS.get_name() == "Android" or OS.get_name() == "iOS":
