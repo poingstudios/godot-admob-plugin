@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://addons/admob/src/core/components/Downloads.gd" type="Script" id=1]
+[ext_resource path="res://addons/admob/src/core/components/VerifyNetworkGithub.gd" type="Script" id=2]
+[ext_resource path="res://addons/admob/src/core/VersionSupportedHTTPRequest.tscn" type="PackedScene" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 1, 0.109804, 1 )
@@ -11,9 +13,6 @@ bg_color = Color( 0, 1, 0.109804, 1 )
 anchor_right = 1.0
 margin_bottom = 31.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Advice" type="Label" parent="."]
 margin_right = 720.0
@@ -27,16 +26,14 @@ autowrap = true
 margin_top = 69.0
 margin_right = 720.0
 margin_bottom = 83.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
-custom_colors/font_color = Color( 0, 0, 0, 1 )
-
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
 
 [node name="AdviceAcceptDialog" type="AcceptDialog" parent="."]
-margin_top = 70.0
-margin_right = 888.0
-margin_bottom = 128.0
+margin_top = 104.0
+margin_right = 500.0
+margin_bottom = 162.0
 popup_exclusive = true
 window_title = "Alerta!"
 dialog_text = "Download of %s completed! \\n%s"
@@ -48,6 +45,8 @@ __meta__ = {
 margin_top = 87.0
 margin_right = 720.0
 margin_bottom = 215.0
+
+[node name="HTTPRequest" type="HTTPRequest" parent="TabContainer"]
 
 [node name="Android" type="VBoxContainer" parent="TabContainer"]
 anchor_right = 1.0
@@ -108,7 +107,7 @@ margin_left = 56.0
 margin_right = 143.0
 margin_bottom = 20.0
 text = "CURRENT"
-items = [ "CURRENT", null, false, 0, null, "3.3.4", null, false, 1, null, "3.3.3", null, false, 2, null, "3.3.2", null, false, 3, null, "3.3.1", null, false, 4, null, "3.3", null, false, 5, null, "3.2.3", null, false, 6, null, "3.2.2", null, false, 7, null ]
+items = [ "CURRENT", null, false, 0, null, "v3.2.2", null, false, 1, null, "v3.2.3", null, false, 2, null, "v3.3.1", null, false, 3, null, "v3.3.2", null, false, 4, null, "v3.3.3", null, false, 5, null, "v3.3.4", null, false, 6, null, "v3.3", null, false, 7, null, "v3.4.1", null, false, 8, null, "v3.4.2", null, false, 9, null, "v3.4.3", null, false, 10, null, "v3.4.4", null, false, 11, null, "v3.4", null, false, 12, null ]
 selected = 0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -144,35 +143,36 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+margin_top = 24.0
+margin_right = 599.0
+margin_bottom = 354.0
 
 [node name="ChangeDirectoryHBoxContainer" type="HBoxContainer" parent="TabContainer/iOS"]
-margin_right = 880.0
+margin_right = 1690.0
 margin_bottom = 250.0
 
 [node name="DownloadDirectoryLabel" type="Label" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
 margin_top = 118.0
-margin_right = 231.0
+margin_right = 411.0
 margin_bottom = 132.0
 text = "Current Download Directory: res://addons/admob/downloads/ios"
 
 [node name="iOSChangeDirectoryButton" type="Button" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
-margin_left = 235.0
-margin_right = 376.0
+margin_left = 415.0
+margin_right = 556.0
 margin_bottom = 250.0
 text = "CHANGE DIRECTORY"
 
 [node name="iOSOpenDirectoryButton" type="Button" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
-margin_right = 12.0
-margin_bottom = 20.0
+margin_left = 560.0
+margin_right = 683.0
+margin_bottom = 250.0
 text = "OPEN DIRECTORY"
 
 [node name="iOSChangeDirectoryFileDialog" type="FileDialog" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
 visible = true
-margin_left = 380.0
-margin_right = 780.0
+margin_left = 687.0
+margin_right = 1087.0
 margin_bottom = 250.0
 rect_min_size = Vector2( 400, 250 )
 window_title = "Open a Directory"
@@ -185,7 +185,7 @@ __meta__ = {
 
 [node name="VersionHBoxContainer" type="HBoxContainer" parent="TabContainer/iOS"]
 margin_top = 254.0
-margin_right = 880.0
+margin_right = 1690.0
 margin_bottom = 274.0
 
 [node name="Label" type="Label" parent="TabContainer/iOS/VersionHBoxContainer"]
@@ -196,10 +196,10 @@ text = "Version:"
 
 [node name="iOSVersion" type="OptionButton" parent="TabContainer/iOS/VersionHBoxContainer"]
 margin_left = 56.0
-margin_right = 85.0
+margin_right = 143.0
 margin_bottom = 20.0
 text = "CURRENT"
-items = [ "CURRENT", null, false, 0, null, "3.3.4", null, false, 1, null, "3.3.3", null, false, 2, null, "3.3.2", null, false, 3, null, "3.3.1", null, false, 4, null, "3.3", null, false, 5, null ]
+items = [ "CURRENT", null, false, 0, null, "v3.3.1", null, false, 1, null, "v3.3.2", null, false, 2, null, "v3.3.3", null, false, 3, null, "v3.3.4", null, false, 4, null, "v3.3", null, false, 5, null, "v3.4.1", null, false, 6, null, "v3.4.2", null, false, 7, null, "v3.4.3", null, false, 8, null, "v3.4.4", null, false, 9, null, "v3.4", null, false, 10, null ]
 selected = 0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -207,17 +207,47 @@ __meta__ = {
 
 [node name="DownloadiOSTemplate" type="Button" parent="TabContainer/iOS"]
 margin_top = 278.0
-margin_right = 880.0
+margin_right = 1690.0
 margin_bottom = 298.0
 text = "Download iOS Template"
 
 [node name="DownloadGoogleMobileAdsSdkiOS" type="Button" parent="TabContainer/iOS"]
 margin_top = 302.0
-margin_right = 880.0
+margin_right = 1690.0
 margin_bottom = 322.0
 text = "Download GoogleMobileAdsSdkiOS"
 
-[connection signal="request_completed" from="HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
+[node name="DontHaveConnectionPanelContainer" type="PanelContainer" parent="."]
+visible = false
+margin_top = 219.0
+margin_right = 720.0
+margin_bottom = 263.0
+
+[node name="Label" type="RichTextLabel" parent="DontHaveConnectionPanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 713.0
+margin_bottom = 37.0
+bbcode_enabled = true
+bbcode_text = "[b]You don't have connection to the Server: %s, please verify your connection in order to Download[/b]"
+text = "You don't have connection to the Server: https://github.com/, please verify your connection in order to Download"
+fit_content_height = true
+scroll_active = false
+
+[node name="VerifyNetworkGithub" type="HTTPRequest" parent="."]
+script = ExtResource( 2 )
+
+[node name="VerifyAgainTimer" type="Timer" parent="VerifyNetworkGithub"]
+wait_time = 60.0
+autostart = true
+
+[node name="VersionSupportedHTTPRequest" parent="." instance=ExtResource( 3 )]
+
+[node name="VersionsAndroidSupportedHTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="VersionsiOSSupportedHTTPRequest" type="HTTPRequest" parent="."]
+
+[connection signal="request_completed" from="TabContainer/HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
 [connection signal="pressed" from="TabContainer/Android/ChangeDirectoryHBoxContainer/AndroidChangeDirectoryButton" to="." method="_on_AndroidChangeDirectoryButton_pressed"]
 [connection signal="pressed" from="TabContainer/Android/ChangeDirectoryHBoxContainer/AndroidOpenDirectoryButton" to="." method="_on_AndroidOpenDirectoryButton_pressed"]
 [connection signal="dir_selected" from="TabContainer/Android/ChangeDirectoryHBoxContainer/AndroidChangeDirectoryFileDialog" to="." method="_on_AndroidChangeDirectoryFileDialog_dir_selected"]
@@ -227,3 +257,9 @@ text = "Download GoogleMobileAdsSdkiOS"
 [connection signal="dir_selected" from="TabContainer/iOS/ChangeDirectoryHBoxContainer/iOSChangeDirectoryFileDialog" to="." method="_on_iOSChangeDirectoryFileDialog_dir_selected"]
 [connection signal="pressed" from="TabContainer/iOS/DownloadiOSTemplate" to="." method="_on_DownloadiOSTemplate_pressed"]
 [connection signal="pressed" from="TabContainer/iOS/DownloadGoogleMobileAdsSdkiOS" to="." method="_on_DownloadGoogleMobileAdsSdkiOS_pressed"]
+[connection signal="network_status_changed" from="VerifyNetworkGithub" to="." method="_on_VerifyNetworkGithub_network_status_changed"]
+[connection signal="request_completed" from="VerifyNetworkGithub" to="VerifyNetworkGithub" method="_on_VerifyNetworkGithub_request_completed"]
+[connection signal="timeout" from="VerifyNetworkGithub/VerifyAgainTimer" to="VerifyNetworkGithub" method="_on_VerifyAgainTimer_timeout"]
+[connection signal="supported_version_changed" from="VersionSupportedHTTPRequest" to="." method="_on_VersionSupportedHTTPRequest_supported_version_changed"]
+[connection signal="request_completed" from="VersionsAndroidSupportedHTTPRequest" to="." method="_on_VersionsAndroidSupportedHTTPRequest_request_completed"]
+[connection signal="request_completed" from="VersionsiOSSupportedHTTPRequest" to="." method="_on_VersionsiOSSupportedHTTPRequest_request_completed"]

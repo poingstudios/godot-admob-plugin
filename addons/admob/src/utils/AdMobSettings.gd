@@ -8,10 +8,6 @@ const BANNER_SIZE : Array = ["BANNER", "MEDIUM_RECTANGLE", "FULL_BANNER", "LEADE
 const MAX_AD_RATING : Array = ["G", "PG", "T", "MA"]
 enum POSITION {TOP, BOTTOM}
 
-var version_support : Dictionary = {
-	"ios" : "v2.0.4",
-	"android" : "v2.0.0"
-}
 
 var config : Dictionary = {
 	"general" : {
