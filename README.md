@@ -3,7 +3,7 @@ This repository is for Godot's Addons to integrate natively AdMob to your Game P
 
 <u>is pretty basic right now, but with time will be improved</u>
 
-Tutorial Video: https://youtu.be/MW4hUR0d9lc
+Tutorial Video: https://youtu.be/ZnlH3INcAGs
 
 # Installation:
 Please read this tutorial: https://docs.godotengine.org/pt_BR/stable/tutorials/plugins/editor/installing_plugins.html
