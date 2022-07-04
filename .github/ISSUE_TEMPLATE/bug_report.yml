@@ -1,0 +1,46 @@
+name: Bug report
+description: Report a bug with the AdMob editor plugin
+labels: bug
+body:
+- type: input
+  attributes:
+    label: Godot version
+    placeholder: '3.5'
+  validations:
+    required: true
+- type: input
+  attributes:
+    label: Plugin version
+    placeholder: '1.2.3'
+  validations:
+    required: true
+- type: input
+  attributes:
+    label: System information
+    placeholder: 'Catalina 10.15.7'
+  validations:
+    required: true
+- type: input
+  attributes:
+    label: Phone information, if applicable
+    placeholder: 'iPhone 6 running iOS 8.1'
+- type: textarea
+  attributes:
+    label: Issue description
+    description: |
+      What happened that was unexpected? If there was an error, include logs here.
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Steps to reproduce
+    placeholder: |
+      1. Go to '...'
+      2. Click on '...'
+  validations:
+    required: true
+- type: textarea
+  attributes:
+    label: Additional context
+    description: |
+      Including screenshots or a minimal reproduction project can greatly speed up your issue's resolution.
