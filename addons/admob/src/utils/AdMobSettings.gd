@@ -6,7 +6,7 @@ const PATH_ADMOB_PROJECT_SETTINGS = "admob/config"
 
 const BANNER_SIZE : Array = ["BANNER", "MEDIUM_RECTANGLE", "FULL_BANNER", "LEADERBOARD", "ADAPTIVE", "SMART_BANNER"] 
 const MAX_AD_RATING : Array = ["G", "PG", "T", "MA"]
-enum POSITION {TOP, BOTTOM}
+enum POSITION {BOTTOM, TOP}
 
 
 var config : Dictionary = {
@@ -24,7 +24,7 @@ var config : Dictionary = {
 		"position": POSITION.TOP,
 		"respect_safe_area" : true,
 		"show_instantly": true,
-		"size": "MEDIUM_RECTANGLE",
+		"size": BANNER_SIZE[0],
 		"unit_ids" : {
 			"Android": {
 				"standard" : "ca-app-pub-3940256099942544/6300978111",
