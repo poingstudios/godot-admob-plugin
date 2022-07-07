@@ -103,14 +103,14 @@ __meta__ = {
 }
 
 [node name="Banner" type="HBoxContainer" parent="Background/TabContainer/AdFormats/VBoxContainer"]
-margin_top = 31.0
-margin_right = 355.0
-margin_bottom = 51.0
+margin_top = 46.0
+margin_right = 426.0
+margin_bottom = 66.0
 size_flags_vertical = 0
 alignment = 1
 
 [node name="EnableBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner"]
-margin_right = 175.0
+margin_right = 211.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
@@ -120,22 +120,22 @@ __meta__ = {
 }
 
 [node name="DisableBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner"]
-margin_left = 179.0
-margin_right = 355.0
+margin_left = 215.0
+margin_right = 426.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "DISABLE BANNER"
 
 [node name="Banner2" type="HBoxContainer" parent="Background/TabContainer/AdFormats/VBoxContainer"]
-margin_top = 55.0
-margin_right = 355.0
-margin_bottom = 75.0
+margin_top = 70.0
+margin_right = 426.0
+margin_bottom = 90.0
 size_flags_vertical = 0
 alignment = 1
 
 [node name="ShowBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner2"]
-margin_right = 175.0
+margin_right = 211.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
@@ -145,31 +145,31 @@ __meta__ = {
 }
 
 [node name="HideBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner2"]
-margin_left = 179.0
-margin_right = 355.0
+margin_left = 215.0
+margin_right = 426.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 disabled = true
 text = "HIDE BANNER"
 
 [node name="Interstitial" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer"]
-margin_top = 79.0
-margin_right = 355.0
-margin_bottom = 99.0
+margin_top = 94.0
+margin_right = 426.0
+margin_bottom = 114.0
 disabled = true
 text = "INTERSTITIAL"
 
 [node name="Rewarded" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer"]
-margin_top = 103.0
-margin_right = 355.0
-margin_bottom = 123.0
+margin_top = 118.0
+margin_right = 426.0
+margin_bottom = 138.0
 disabled = true
 text = "REWARDED"
 
 [node name="RewardedInterstitial" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer"]
-margin_top = 127.0
-margin_right = 355.0
-margin_bottom = 147.0
+margin_top = 142.0
+margin_right = 426.0
+margin_bottom = 162.0
 disabled = true
 text = "REWARDED INTERSTITIAL"
 
