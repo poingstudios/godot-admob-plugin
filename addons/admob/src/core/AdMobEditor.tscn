@@ -45,21 +45,12 @@ bg_color = Color( 0.172549, 0.568627, 0.992157, 1 )
 
 [node name="AdMobEditor" type="Control"]
 pause_mode = 2
-anchor_left = -0.002
-anchor_right = 1.502
-anchor_bottom = 0.731444
-margin_left = 1.0
-margin_right = -6.10352e-05
-margin_bottom = -8.30005
+anchor_right = 1.0
+anchor_bottom = 1.0
 rect_clip_content = true
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true,
-"_edit_use_anchors_": true
-}
 
 [node name="TopPanel" type="Panel" parent="."]
 anchor_right = 1.0
@@ -154,8 +145,8 @@ __meta__ = {
 }
 
 [node name="TabContainer" type="TabContainer" parent="MiddleScrollContainer"]
-margin_right = 751.0
-margin_bottom = 575.0
+margin_right = 600.0
+margin_bottom = 949.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 tab_align = 0
