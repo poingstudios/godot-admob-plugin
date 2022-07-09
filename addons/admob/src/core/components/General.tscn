@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://addons/admob/src/core/components/General.gd" type="Script" id=1]
+[ext_resource path="res://addons/admob/src/core/components/Enabled.gd" type="Script" id=2]
 
 [node name="General" type="VBoxContainer"]
 anchor_right = 1.0
@@ -10,22 +11,33 @@ margin_top = 32.0
 margin_right = -4.0
 margin_bottom = -4.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Enabled" type="CheckBox" parent="."]
-margin_right = 492.0
+margin_right = 592.0
 margin_bottom = 24.0
 pressed = true
 text = "Enabled"
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="Enabled"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -334.0
+margin_top = -46.0
+margin_right = 334.0
+margin_bottom = 46.0
+dialog_text = "If \"Enabled\" is false then ads will no longer work, are you sure?
+
+Note: You can disable ads if the user purchases by IAP, that's why this attribute can be useful."
+
 [node name="ChildDirectedTreatment" type="CheckBox" parent="."]
 margin_top = 28.0
-margin_right = 492.0
+margin_right = 592.0
 margin_bottom = 52.0
 text = "Child Directed Treatment"
 __meta__ = {
@@ -34,7 +46,7 @@ __meta__ = {
 
 [node name="MaxAdContentRating" type="HBoxContainer" parent="."]
 margin_top = 56.0
-margin_right = 492.0
+margin_right = 592.0
 margin_bottom = 76.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -60,6 +72,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="pressed" from="Enabled" to="." method="_on_Enabled_pressed"]
+[connection signal="pressed" from="Enabled" to="Enabled" method="_on_Enabled_pressed"]
+[connection signal="confirmed" from="Enabled/ConfirmationDialog" to="Enabled" method="_on_ConfirmationDialog_confirmed"]
 [connection signal="pressed" from="ChildDirectedTreatment" to="." method="_on_ChildDirectedTreatment_pressed"]
 [connection signal="item_selected" from="MaxAdContentRating/Value" to="." method="_on_MaxAdContentRating_item_selected"]
