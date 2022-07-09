@@ -17,7 +17,7 @@ var config : Dictionary = {
 	},
 	"debug" : {
 		"is_debug_on_release": false,
-		"is_real": false,
+		"is_real": true,
 		"is_test_europe_user_consent": false
 	},
 	"banner": {
