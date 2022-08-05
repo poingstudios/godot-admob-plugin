@@ -20,19 +20,25 @@ signal interstitial_failed_to_load(error_code)
 signal interstitial_loaded()
 signal interstitial_failed_to_show(error_code)
 signal interstitial_opened()
+signal interstitial_clicked()
 signal interstitial_closed()
+signal interstitial_recorded_impression()
 
 signal rewarded_ad_failed_to_load(error_code)
 signal rewarded_ad_loaded()
 signal rewarded_ad_failed_to_show(error_code)
 signal rewarded_ad_opened()
+signal rewarded_ad_clicked()
 signal rewarded_ad_closed()
+signal rewarded_ad_recorded_impression()
 
 signal rewarded_interstitial_ad_failed_to_load(error_code)
 signal rewarded_interstitial_ad_loaded()
 signal rewarded_interstitial_ad_failed_to_show(error_code)
 signal rewarded_interstitial_ad_opened()
+signal rewarded_interstitial_ad_clicked()
 signal rewarded_interstitial_ad_closed()
+signal rewarded_interstitial_ad_recorded_impression()
 
 signal user_earned_rewarded(currency, amount)
 
@@ -95,19 +101,25 @@ func _connect_signals() -> void:
 	_plugin.connect("interstitial_loaded", self, "_on_AdMob_interstitial_loaded")
 	_plugin.connect("interstitial_failed_to_show", self, "_on_AdMob_interstitial_failed_to_show")
 	_plugin.connect("interstitial_opened", self, "_on_AdMob_interstitial_opened")
+	_plugin.connect("interstitial_clicked", self, "_on_AdMob_interstitial_clicked")
 	_plugin.connect("interstitial_closed", self, "_on_AdMob_interstitial_closed")
+	_plugin.connect("interstitial_recorded_impression", self, "_on_AdMob_interstitial_recorded_impression")
 
 	_plugin.connect("rewarded_ad_failed_to_load", self, "_on_AdMob_rewarded_ad_failed_to_load")
 	_plugin.connect("rewarded_ad_loaded", self, "_on_AdMob_rewarded_ad_loaded")
 	_plugin.connect("rewarded_ad_failed_to_show", self, "_on_AdMob_rewarded_ad_failed_to_show")
 	_plugin.connect("rewarded_ad_opened", self, "_on_AdMob_rewarded_ad_opened")
+	_plugin.connect("rewarded_ad_clicked", self, "_on_AdMob_rewarded_ad_clicked")
 	_plugin.connect("rewarded_ad_closed", self, "_on_AdMob_rewarded_ad_closed")
+	_plugin.connect("rewarded_ad_recorded_impression", self, "_on_AdMob_rewarded_ad_recorded_impression")
 
 	_plugin.connect("rewarded_interstitial_ad_failed_to_load", self, "_on_AdMob_rewarded_interstitial_ad_failed_to_load")
 	_plugin.connect("rewarded_interstitial_ad_loaded", self, "_on_AdMob_rewarded_interstitial_ad_loaded")
 	_plugin.connect("rewarded_interstitial_ad_failed_to_show", self, "_on_AdMob_rewarded_interstitial_ad_failed_to_show")
 	_plugin.connect("rewarded_interstitial_ad_opened", self, "_on_AdMob_rewarded_interstitial_ad_opened")
+	_plugin.connect("rewarded_interstitial_ad_clicked", self, "_on_AdMob_rewarded_interstitial_ad_clicked")
 	_plugin.connect("rewarded_interstitial_ad_closed", self, "_on_AdMob_rewarded_interstitial_ad_closed")
+	_plugin.connect("rewarded_interstitial_ad_recorded_impression", self, "_on_AdMob_rewarded_interstitial_ad_recorded_impression")
 
 	_plugin.connect("user_earned_rewarded", self, "_on_AdMob_user_earned_rewarded")
 
@@ -149,8 +161,12 @@ func _on_AdMob_interstitial_failed_to_show(error_code : int) -> void:
 	emit_signal("interstitial_failed_to_show", error_code)
 func _on_AdMob_interstitial_opened() -> void:
 	emit_signal("interstitial_opened")
+func _on_AdMob_interstitial_clicked() -> void:
+	emit_signal("interstitial_clicked")
 func _on_AdMob_interstitial_closed() -> void:
 	emit_signal("interstitial_closed")
+func _on_AdMob_interstitial_recorded_impression() -> void:
+	emit_signal("interstitial_recorded_impression")
 
 func _on_AdMob_rewarded_ad_failed_to_load(error_code : int) -> void:
 	emit_signal("rewarded_ad_failed_to_load", error_code)
@@ -160,8 +176,12 @@ func _on_AdMob_rewarded_ad_failed_to_show(error_code : int) -> void:
 	emit_signal("rewarded_ad_failed_to_show", error_code)
 func _on_AdMob_rewarded_ad_opened() -> void:
 	emit_signal("rewarded_ad_opened")
+func _on_AdMob_rewarded_ad_clicked() -> void:
+	emit_signal("rewarded_ad_clicked")
 func _on_AdMob_rewarded_ad_closed() -> void:
 	emit_signal("rewarded_ad_closed")
+func _on_AdMob_rewarded_ad_recorded_impression() -> void:
+	emit_signal("rewarded_ad_recorded_impression")
 
 func _on_AdMob_rewarded_interstitial_ad_failed_to_load(error_code : int) -> void:
 	emit_signal("rewarded_interstitial_ad_failed_to_load", error_code)
@@ -171,8 +191,12 @@ func _on_AdMob_rewarded_interstitial_ad_failed_to_show(error_code : int) -> void
 	emit_signal("rewarded_interstitial_ad_failed_to_show", error_code)
 func _on_AdMob_rewarded_interstitial_ad_opened() -> void:
 	emit_signal("rewarded_interstitial_ad_opened")
+func _on_AdMob_rewarded_interstitial_ad_clicked() -> void:
+	emit_signal("rewarded_interstitial_ad_clicked")
 func _on_AdMob_rewarded_interstitial_ad_closed() -> void:
 	emit_signal("rewarded_interstitial_ad_closed")
+func _on_AdMob_rewarded_interstitial_ad_recorded_impression() -> void:
+	emit_signal("rewarded_interstitial_ad_recorded_impression")
 
 func _on_AdMob_user_earned_rewarded(currency : String, amount : int) -> void:
 	emit_signal("user_earned_rewarded", currency, amount)
