@@ -44,23 +44,104 @@ func _ready() -> void:
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("banner_destroyed", self, "_on_MobileAds_banner_destroyed")
 		# warning-ignore:return_value_discarded
+		MobileAds.connect("banner_clicked", self, "_on_MobileAds_banner_clicked")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("banner_closed", self, "_on_MobileAds_banner_closed")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("banner_failed_to_load", self, "_on_MobileAds_banner_failed_to_load")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("banner_recorded_impression", self, "_on_MobileAds_banner_recorded_impression")
+		# warning-ignore:return_value_discarded
 		MobileAds.connect("interstitial_loaded", self, "_on_MobileAds_interstitial_loaded")
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("interstitial_closed", self, "_on_MobileAds_interstitial_closed")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("interstitial_clicked", self, "_on_MobileAds_interstitial_clicked")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("interstitial_failed_to_load", self, "_on_MobileAds_interstitial_failed_to_load")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("interstitial_failed_to_show", self, "_on_MobileAds_interstitial_failed_to_show")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("interstitial_opened", self, "_on_MobileAds_interstitial_opened")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("interstitial_recorded_impression", self, "_on_MobileAds_interstitial_recorded_impression")
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("rewarded_ad_loaded", self, "_on_MobileAds_rewarded_ad_loaded")
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("rewarded_ad_closed", self, "_on_MobileAds_rewarded_ad_closed")
 		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_ad_clicked", self, "_on_MobileAds_rewarded_ad_clicked")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_ad_failed_to_load", self, "_on_MobileAds_rewarded_ad_failed_to_load")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_ad_failed_to_show", self, "_on_MobileAds_rewarded_ad_failed_to_show")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_ad_opened", self, "_on_MobileAds_rewarded_ad_opened")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_ad_recorded_impression", self, "_on_MobileAds_rewarded_ad_recorded_impression")
+		# warning-ignore:return_value_discarded
 		MobileAds.connect("rewarded_interstitial_ad_loaded", self, "_on_MobileAds_rewarded_interstitial_ad_loaded")
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("rewarded_interstitial_ad_closed", self, "_on_MobileAds_rewarded_interstitial_ad_closed")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_interstitial_ad_clicked", self, "_on_MobileAds_rewarded_interstitial_ad_clicked")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_interstitial_ad_failed_to_load", self, "_on_MobileAds_rewarded_interstitial_ad_failed_to_load")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_interstitial_ad_failed_to_show", self, "_on_MobileAds_rewarded_interstitial_ad_failed_to_show")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_interstitial_ad_opened", self, "_on_MobileAds_rewarded_interstitial_ad_opened")
+		# warning-ignore:return_value_discarded
+		MobileAds.connect("rewarded_interstitial_ad_recorded_impression", self, "_on_MobileAds_rewarded_interstitial_ad_recorded_impression")
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("user_earned_rewarded", self, "_on_MobileAds_user_earned_rewarded")
 		# warning-ignore:return_value_discarded
 		MobileAds.connect("initialization_complete", self, "_on_MobileAds_initialization_complete")
 	else:
 		_add_text_Advice_Node("AdMob only works on Android or iOS devices!")
+
+func _on_MobileAds_rewarded_interstitial_ad_clicked():
+	_add_text_Advice_Node("Rewarded Interstitial clicked")
+func _on_MobileAds_rewarded_interstitial_ad_failed_to_load(error_code):
+	_add_text_Advice_Node("Rewarded Interstitial failed to load, error_code = " + str(error_code))
+func _on_MobileAds_rewarded_interstitial_ad_failed_to_show(error_code):
+	_add_text_Advice_Node("Rewarded Interstitial failed to show, error_code = " + str(error_code))
+func _on_MobileAds_rewarded_interstitial_ad_opened():
+	_add_text_Advice_Node("Rewarded Interstitial opened")
+func _on_MobileAds_rewarded_interstitial_ad_recorded_impression():
+	_add_text_Advice_Node("Rewarded Interstitial recorded impression")
+
+func _on_MobileAds_rewarded_ad_clicked():
+	_add_text_Advice_Node("Rewarded clicked")
+func _on_MobileAds_rewarded_ad_failed_to_load(error_code):
+	_add_text_Advice_Node("Rewarded failed to load, error_code = " + str(error_code))
+func _on_MobileAds_rewarded_ad_failed_to_show(error_code):
+	_add_text_Advice_Node("Rewarded failed to show, error_code = " + str(error_code))
+func _on_MobileAds_rewarded_ad_opened():
+	_add_text_Advice_Node("Rewarded opened")
+func _on_MobileAds_rewarded_ad_recorded_impression():
+	_add_text_Advice_Node("Rewarded recorded impression")
+
+
+func _on_MobileAds_interstitial_clicked():
+	_add_text_Advice_Node("Interstitial clicked")
+func _on_MobileAds_interstitial_failed_to_load(error_code):
+	_add_text_Advice_Node("Interstitial failed to load, error_code = " + str(error_code))
+func _on_MobileAds_interstitial_failed_to_show(error_code):
+	_add_text_Advice_Node("Interstitial failed to show, error_code = " + str(error_code))
+func _on_MobileAds_interstitial_opened():
+	_add_text_Advice_Node("Interstitial opened")
+func _on_MobileAds_interstitial_recorded_impression():
+	_add_text_Advice_Node("Interstitial recorded impression")
+
+func _on_MobileAds_banner_clicked():
+	_add_text_Advice_Node("Banner clicked")
+func _on_MobileAds_banner_closed():
+	_add_text_Advice_Node("Banner closed")
+func _on_MobileAds_banner_failed_to_load(error_code):
+	_add_text_Advice_Node("Banner failed to load, error_code = " + str(error_code))
+func _on_MobileAds_banner_recorded_impression():
+	_add_text_Advice_Node("Banner recorded impression")
 
 func _on_MobileAds_initialization_complete(status : int, adapter_name : String) -> void:
 	if status == MobileAds.AdMobSettings.INITIALIZATION_STATUS.READY:
