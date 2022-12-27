@@ -3,7 +3,8 @@ extends VBoxContainer
 
 @onready var AdMobEditor : Control = find_parent("AdMobEditor")
 
-@onready var godot_version : String = "v" + String(Engine.get_version_info().major) + "." + String(Engine.get_version_info().minor) + "." + String(Engine.get_version_info().patch)
+@onready var godot_version : String = "v" + str(Engine.get_version_info().major) + "." + str(Engine.get_version_info().minor) + "." + str(Engine.get_version_info().patch)
+var string_dont_have_connection := "[b]You don't have connection to the Server: %s, please verify your connection in order to Download[/b]"
 var actual_downloading_file : String = ""
 var downloaded_plugin_version : String = ""
 var version_support : Dictionary
@@ -11,26 +12,24 @@ var version_support : Dictionary
 var android_dictionary : Dictionary = {
 		"version" : ["CURRENT"],
 		"download_directory" : "res://addons/admob/downloads/android"
-	} setget set_android_dictionary
+	} : 
+		set(value):
+			android_dictionary = value
+			$TabContainer/Android/ChangeDirectoryHBoxContainer/DownloadDirectoryLabel.text =  current_dir_download_label % android_dictionary.download_directory
 
 var ios_dictionary : Dictionary = {
 		"version" : ["CURRENT"],
 		"download_directory" : "res://addons/admob/downloads/ios"
-	} setget set_ios_dictionary
+	} : 
+		set(value):
+			ios_dictionary = value 
+			$TabContainer/iOS/ChangeDirectoryHBoxContainer/DownloadDirectoryLabel.text =  current_dir_download_label % ios_dictionary.download_directory
 
 var current_dir_download_label = "Current Download Directory: %s"
 var download_complete_message = "Download of %s completed! \n%s"
 
-func set_android_dictionary(value):
-	android_dictionary = value
-	$TabContainer/Android/ChangeDirectoryHBoxContainer/DownloadDirectoryLabel.text =  current_dir_download_label % android_dictionary.download_directory
-	
-func set_ios_dictionary(value):
-	ios_dictionary = value 
-	$TabContainer/iOS/ChangeDirectoryHBoxContainer/DownloadDirectoryLabel.text =  current_dir_download_label % ios_dictionary.download_directory
-
 func _ready():
-	$DontHaveConnectionPanelContainer/Label.text %= $VerifyNetworkGithub.server_to_test
+	$DontHaveConnectionPanelContainer/Label.text = string_dont_have_connection % $VerifyNetworkGithub.server_to_test
 
 	if godot_version[godot_version.length()-1] == "0":
 		godot_version = godot_version.substr(0, godot_version.length()-2)
@@ -165,7 +164,7 @@ func get_versions_platform_supported(body):
 	
 	var versions_supported : Array
 
-	for asset in json.result["assets"]:
+	for asset in json["assets"]:
 		var godot_version = asset["name"]
 		
 		var regex_result = regex.search(godot_version)

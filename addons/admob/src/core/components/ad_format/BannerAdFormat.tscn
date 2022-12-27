@@ -5,9 +5,6 @@
 [ext_resource type="Script" path="res://addons/admob/src/core/components/ad_format/RespectSafeArea.gd" id="3"]
 
 [node name="BannerAdFormat" instance=ExtResource("1")]
-anchors_preset = 15
-grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("2")
 
 [node name="BannerSizeHBoxContainer" type="HBoxContainer" parent="." index="0"]
@@ -53,7 +50,6 @@ text = "Banner On Top"
 
 [node name="UnitIds" parent="." index="4"]
 offset_top = 135.0
-offset_right = 1152.0
 offset_bottom = 201.0
 
 [connection signal="item_selected" from="BannerSizeHBoxContainer/BannerSize" to="." method="_on_BannerSize_item_selected"]

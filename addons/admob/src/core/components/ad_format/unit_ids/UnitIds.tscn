@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cke7ulw7ib5rr"]
 
 [ext_resource type="Script" path="res://addons/admob/src/core/components/ad_format/unit_ids/UnitIds.gd" id="1"]
-[ext_resource type="PackedScene" path="res://addons/admob/src/core/components/ad_format/unit_ids/ad_unit_operational_system/AdUnitOperationalSystem.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://brktmay07rysy" path="res://addons/admob/src/core/components/ad_format/unit_ids/ad_unit_operational_system/AdUnitOperationalSystem.tscn" id="2"]
 
 [node name="UnitIds" type="HBoxContainer"]
 offset_right = 600.0
@@ -27,6 +27,8 @@ anchor_bottom = 1.0
 offset_top = 31.0
 offset_right = 0.0
 offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="iOS" parent="OperationalSystemTabContainer" instance=ExtResource("2")]
 visible = false
@@ -37,3 +39,5 @@ offset_left = 4.0
 offset_top = 32.0
 offset_right = -4.0
 offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
