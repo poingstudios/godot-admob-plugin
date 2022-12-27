@@ -17,7 +17,6 @@
 [ext_resource type="PackedScene" uid="uid://dsjf8l2m3uc60" path="res://addons/admob/src/core/VersionSupportedHTTPRequest.tscn" id="16"]
 
 [node name="AdMobEditor" type="Control"]
-process_mode = 2
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -30,14 +29,12 @@ size_flags_vertical = 3
 script = ExtResource("4")
 
 [node name="TopPanel" type="Panel" parent="."]
-layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 40.0
 grow_horizontal = 2
 
 [node name="Description" type="Label" parent="TopPanel"]
-layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_right = -401.4
@@ -46,7 +43,7 @@ grow_horizontal = 2
 text = "AdMob Editor"
 
 [node name="Icons" type="Control" parent="TopPanel"]
-layout_mode = 1
+layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -56,7 +53,6 @@ offset_bottom = 40.0
 grow_horizontal = 0
 
 [node name="AndroidButton" type="TextureButton" parent="TopPanel/Icons"]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -68,7 +64,6 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource("1")
 
 [node name="iOSButton" type="TextureButton" parent="TopPanel/Icons"]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -80,7 +75,6 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource("5")
 
 [node name="AdMobButton" type="TextureButton" parent="TopPanel/Icons"]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -92,7 +86,6 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource("6")
 
 [node name="PoingButton" type="TextureButton" parent="TopPanel/Icons"]
-layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -103,7 +96,6 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource("2")
 
 [node name="MiddleScrollContainer" type="ScrollContainer" parent="."]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -114,39 +106,36 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="TabContainer" type="TabContainer" parent="MiddleScrollContainer"]
-layout_mode = 2
+offset_right = 1152.0
+offset_bottom = 573.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="General" parent="MiddleScrollContainer/TabContainer" instance=ExtResource("8")]
-layout_mode = 2
+offset_left = 0.0
+offset_top = 31.0
+offset_right = 0.0
+offset_bottom = 0.0
 
 [node name="Debug" parent="MiddleScrollContainer/TabContainer" instance=ExtResource("13")]
 visible = false
-layout_mode = 2
 
 [node name="Banner" parent="MiddleScrollContainer/TabContainer" instance=ExtResource("7")]
 visible = false
-layout_mode = 2
 
 [node name="Interstitial" parent="MiddleScrollContainer/TabContainer" instance=ExtResource("9")]
 visible = false
-layout_mode = 2
 
 [node name="Rewarded" parent="MiddleScrollContainer/TabContainer" instance=ExtResource("10")]
 visible = false
-layout_mode = 2
 
 [node name="RewardedInterstitial" parent="MiddleScrollContainer/TabContainer" instance=ExtResource("11")]
 visible = false
-layout_mode = 2
 
 [node name="Downloads" parent="MiddleScrollContainer/TabContainer" instance=ExtResource("12")]
 visible = false
-layout_mode = 2
 
 [node name="BottomPanel" type="Panel" parent="."]
-layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -156,7 +145,6 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="SupportVersion" type="RichTextLabel" parent="BottomPanel"]
-layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
@@ -172,7 +160,6 @@ script = ExtResource("14")
 [node name="VersionSupportedHTTPRequest" parent="BottomPanel/SupportVersion" instance=ExtResource("16")]
 
 [node name="CurrentVersion" type="Label" parent="BottomPanel"]
-layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

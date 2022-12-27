@@ -12,73 +12,52 @@ grow_horizontal = 2
 script = ExtResource("1")
 
 [node name="Advice" type="Label" parent="."]
-offset_right = 1152.0
-offset_bottom = 78.0
+layout_mode = 2
 text = "This screen is just to download the AdMob plugin referring to the current version of your Godot, IT WILL NOT INSTALL.
 
 To install you need to follow the Android or iOS installation guide clicking checked the icons checked top screen."
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_top = 82.0
-offset_right = 1152.0
-offset_bottom = 109.0
+layout_mode = 2
 
 [node name="AdviceAcceptDialog" type="AcceptDialog" parent="."]
 dialog_text = "Download of %s completed! \\n%s"
 
 [node name="TabContainer" type="TabContainer" parent="."]
-offset_top = 113.0
-offset_right = 1152.0
-offset_bottom = 275.0
+layout_mode = 2
 
 [node name="HTTPRequest" type="HTTPRequest" parent="TabContainer"]
 
 [node name="Android" type="VBoxContainer" parent="TabContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 31.0
+layout_mode = 2
 
 [node name="ChangeDirectoryHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
-offset_right = 1152.0
-offset_bottom = 31.0
+layout_mode = 2
 
 [node name="DownloadDirectoryLabel" type="Label" parent="TabContainer/Android/ChangeDirectoryHBoxContainer"]
-offset_top = 2.0
-offset_right = 543.0
-offset_bottom = 28.0
+layout_mode = 2
 text = "Current Download Directory: res://addons/admob/downloads/android"
 
 [node name="AndroidChangeDirectoryButton" type="Button" parent="TabContainer/Android/ChangeDirectoryHBoxContainer"]
-offset_left = 547.0
-offset_right = 713.0
-offset_bottom = 31.0
+layout_mode = 2
 text = "CHANGE DIRECTORY"
 
 [node name="AndroidOpenDirectoryButton" type="Button" parent="TabContainer/Android/ChangeDirectoryHBoxContainer"]
-offset_left = 717.0
-offset_right = 861.0
-offset_bottom = 31.0
+layout_mode = 2
 text = "OPEN DIRECTORY"
 
 [node name="AndroidChangeDirectoryFileDialog" type="FileDialog" parent="TabContainer/Android/ChangeDirectoryHBoxContainer"]
 mode = 2
 
 [node name="VersionHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
-offset_top = 35.0
-offset_right = 1152.0
-offset_bottom = 66.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="TabContainer/Android/VersionHBoxContainer"]
-offset_top = 2.0
-offset_right = 63.0
-offset_bottom = 28.0
+layout_mode = 2
 text = "Version:"
 
 [node name="AndroidVersion" type="OptionButton" parent="TabContainer/Android/VersionHBoxContainer"]
-offset_left = 67.0
-offset_right = 184.0
-offset_bottom = 31.0
+layout_mode = 2
 item_count = 3
 selected = 0
 popup/item_0/text = "CURRENT"
@@ -89,51 +68,51 @@ popup/item_2/text = "v3.5"
 popup/item_2/id = 2
 
 [node name="TargetHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
-offset_top = 70.0
-offset_right = 1152.0
-offset_bottom = 96.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="TabContainer/Android/TargetHBoxContainer"]
-offset_right = 55.0
-offset_bottom = 26.0
+layout_mode = 2
 text = "Target:"
 
 [node name="MenuButton" type="OptionButton" parent="TabContainer/Android/TargetHBoxContainer"]
-offset_left = 59.0
-offset_right = 73.0
-offset_bottom = 26.0
+layout_mode = 2
 
 [node name="DownloadAndroidTemplate" type="Button" parent="TabContainer/Android"]
-offset_top = 100.0
-offset_right = 1152.0
-offset_bottom = 131.0
+layout_mode = 2
 text = "Download Android Template"
 
 [node name="iOS" type="VBoxContainer" parent="TabContainer"]
 visible = false
+layout_mode = 2
 
 [node name="ChangeDirectoryHBoxContainer" type="HBoxContainer" parent="TabContainer/iOS"]
+layout_mode = 2
 
 [node name="DownloadDirectoryLabel" type="Label" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
+layout_mode = 2
 text = "Current Download Directory: res://addons/admob/downloads/ios"
 
 [node name="iOSChangeDirectoryButton" type="Button" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
+layout_mode = 2
 text = "CHANGE DIRECTORY"
 
 [node name="iOSOpenDirectoryButton" type="Button" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
+layout_mode = 2
 text = "OPEN DIRECTORY"
 
 [node name="iOSChangeDirectoryFileDialog" type="FileDialog" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
 size = Vector2i(392, 162)
 mode = 2
-visible = true
 
 [node name="VersionHBoxContainer" type="HBoxContainer" parent="TabContainer/iOS"]
+layout_mode = 2
 
 [node name="Label" type="Label" parent="TabContainer/iOS/VersionHBoxContainer"]
+layout_mode = 2
 text = "Version:"
 
 [node name="iOSVersion" type="OptionButton" parent="TabContainer/iOS/VersionHBoxContainer"]
+layout_mode = 2
 item_count = 14
 selected = 0
 popup/item_0/text = "CURRENT"
@@ -166,15 +145,19 @@ popup/item_13/text = "v3.5"
 popup/item_13/id = 13
 
 [node name="DownloadiOSTemplate" type="Button" parent="TabContainer/iOS"]
+layout_mode = 2
 text = "Download iOS Template"
 
 [node name="DownloadGoogleMobileAdsSdkiOS" type="Button" parent="TabContainer/iOS"]
+layout_mode = 2
 text = "Download GoogleMobileAdsSdkiOS"
 
 [node name="DontHaveConnectionPanelContainer" type="PanelContainer" parent="."]
 visible = false
+layout_mode = 2
 
 [node name="Label" type="RichTextLabel" parent="DontHaveConnectionPanelContainer"]
+layout_mode = 2
 bbcode_enabled = true
 text = "[b]You don't have connection to the Server: https://github.com/, please verify your connection in order to Download[/b]"
 fit_content_height = true

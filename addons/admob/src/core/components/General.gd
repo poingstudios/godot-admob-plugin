@@ -9,7 +9,7 @@ func _ready():
 
 
 func _on_ChildDirectedTreatment_pressed():
-	AdMobEditor.AdMobSettings.config.general.is_for_child_directed_treatment = $ChildDirectedTreatment.pressed
+	AdMobEditor.AdMobSettings.config.general.is_for_child_directed_treatment = $ChildDirectedTreatment.button_pressed
 
 func _on_MaxAdContentRating_item_selected(index):
 	AdMobEditor.AdMobSettings.config.general.max_ad_content_rating = AdMobEditor.AdMobSettings.MAX_AD_RATING[index]

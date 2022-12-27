@@ -2,6 +2,7 @@ extends "res://addons/admob/src/singletons/AdMobSingleton.gd"
 
 func _ready() -> void:
 	# warning-ignore:return_value_discarded
+	super._ready()
 	get_viewport().size_changed.connect(Callable(self, "_on_get_tree_resized"))
 
 func load_banner(ad_unit_name : String = "standard") -> void:
