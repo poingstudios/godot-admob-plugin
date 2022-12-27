@@ -1,331 +1,298 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://bey4t78itvv66"]
 
-[ext_resource path="res://addons/admob/test/Example.gd" type="Script" id=1]
-[ext_resource path="res://addons/admob/assets/icon-500.png" type="Texture" id=2]
-[ext_resource path="res://addons/admob/assets/poing.jpeg" type="Texture" id=3]
-[ext_resource path="res://addons/admob/assets/music.ogg" type="AudioStream" id=4]
-[ext_resource path="res://addons/admob/test/MusicCheckButton.gd" type="Script" id=5]
+[ext_resource type="Script" path="res://addons/admob/test/Example.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://1bxvf4dmrg85" path="res://addons/admob/assets/poing.jpeg" id="2_qpj7y"]
+[ext_resource type="Texture2D" uid="uid://bxdta6aj7fg1s" path="res://addons/admob/assets/icon-500.png" id="3_unb2c"]
+[ext_resource type="AudioStream" uid="uid://f3f176vu6pfo" path="res://addons/admob/assets/music.ogg" id="4"]
+[ext_resource type="Script" path="res://addons/admob/test/MusicCheckButton.gd" id="5"]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.36377, 0.23226, 0.0795746, 1 )
+[sub_resource type="StyleBoxEmpty" id="2"]
 
-[sub_resource type="StyleBoxEmpty" id=2]
-
-[sub_resource type="Theme" id=3]
-TabContainer/styles/panel = SubResource( 2 )
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0, 0, 0, 1 )
-
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0, 0, 0, 1 )
+[sub_resource type="Theme" id="3"]
+TabContainer/styles/panel = SubResource("2")
 
 [node name="Example" type="Control"]
+layout_mode = 3
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
 
 [node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color( 1, 0.541176, 0, 1 )
-__meta__ = {
-"_edit_lock_": true,
-"_edit_use_anchors_": false
-}
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0.541176, 0, 1)
 
 [node name="Poing" type="TextureRect" parent="Background"]
+anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -100.0
-margin_top = -100.0
-texture = ExtResource( 3 )
-expand = true
-stretch_mode = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_left = -100.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_qpj7y")
+ignore_texture_size = true
 
 [node name="AdMob" type="TextureRect" parent="Background"]
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -256.0
-margin_top = -256.0
-margin_right = 256.0
-margin_bottom = 256.0
-texture = ExtResource( 2 )
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_unb2c")
 stretch_mode = 6
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Advice" type="RichTextLabel" parent="Background"]
+anchors_preset = -1
 anchor_top = 0.0933333
 anchor_right = 1.0
 anchor_bottom = 0.402222
-custom_styles/normal = SubResource( 1 )
 bbcode_enabled = true
-bbcode_text = "[wave]"
+text = "[wave]"
 scroll_following = true
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
 [node name="TabContainer" type="TabContainer" parent="Background"]
-anchor_left = 0.145
-anchor_top = 0.546667
-anchor_right = 0.855
-anchor_bottom = 0.773333
-theme = SubResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": true
-}
+anchors_preset = -1
+anchor_left = 0.144965
+anchor_top = 0.546296
+anchor_right = 0.858507
+anchor_bottom = 0.884259
+theme = SubResource("3")
+metadata/_edit_use_anchors_ = true
 
-[node name="AdFormats" type="Tabs" parent="Background/TabContainer"]
+[node name="AdFormats" type="TabBar" parent="Background/TabContainer"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background/TabContainer/AdFormats"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Banner" type="HBoxContainer" parent="Background/TabContainer/AdFormats/VBoxContainer"]
-margin_top = 46.0
-margin_right = 426.0
-margin_bottom = 66.0
+offset_top = 8.0
+offset_right = 822.0
+offset_bottom = 39.0
 size_flags_vertical = 0
 alignment = 1
 
 [node name="EnableBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner"]
-margin_right = 211.0
-margin_bottom = 20.0
+offset_right = 409.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 disabled = true
 text = "ENABLE BANNER"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="DisableBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner"]
-margin_left = 215.0
-margin_right = 426.0
-margin_bottom = 20.0
+offset_left = 413.0
+offset_right = 822.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 disabled = true
 text = "DISABLE BANNER"
 
 [node name="Banner2" type="HBoxContainer" parent="Background/TabContainer/AdFormats/VBoxContainer"]
-margin_top = 70.0
-margin_right = 426.0
-margin_bottom = 90.0
+offset_top = 43.0
+offset_right = 822.0
+offset_bottom = 74.0
 size_flags_vertical = 0
 alignment = 1
 
 [node name="ShowBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner2"]
-margin_right = 211.0
-margin_bottom = 20.0
+offset_right = 409.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 disabled = true
 text = "SHOW BANNER"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="HideBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner2"]
-margin_left = 215.0
-margin_right = 426.0
-margin_bottom = 20.0
+offset_left = 413.0
+offset_right = 822.0
+offset_bottom = 31.0
 size_flags_horizontal = 3
 disabled = true
 text = "HIDE BANNER"
 
 [node name="Interstitial" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer"]
-margin_top = 94.0
-margin_right = 426.0
-margin_bottom = 114.0
+offset_top = 78.0
+offset_right = 822.0
+offset_bottom = 109.0
 disabled = true
 text = "INTERSTITIAL"
 
 [node name="Rewarded" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer"]
-margin_top = 118.0
-margin_right = 426.0
-margin_bottom = 138.0
+offset_top = 113.0
+offset_right = 822.0
+offset_bottom = 144.0
 disabled = true
 text = "REWARDED"
 
 [node name="RewardedInterstitial" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer"]
-margin_top = 142.0
-margin_right = 426.0
-margin_bottom = 162.0
+offset_top = 148.0
+offset_right = 822.0
+offset_bottom = 179.0
 disabled = true
 text = "REWARDED INTERSTITIAL"
 
-[node name="Banner" type="Tabs" parent="Background/TabContainer"]
+[node name="Banner" type="TabBar" parent="Background/TabContainer"]
 visible = false
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background/TabContainer/Banner"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Control" type="Control" parent="Background/TabContainer/Banner/VBoxContainer"]
-margin_top = 58.0
-margin_right = 355.0
-margin_bottom = 68.0
-rect_min_size = Vector2( 0, 10 )
+layout_mode = 3
+anchors_preset = 0
+offset_top = 58.0
+offset_right = 355.0
+offset_bottom = 68.0
 
 [node name="Position" type="CheckBox" parent="Background/TabContainer/Banner/VBoxContainer"]
-margin_top = 72.0
-margin_right = 355.0
-margin_bottom = 88.0
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
-pressed = true
-text = "Position on TOP"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_top = 72.0
+offset_right = 355.0
+offset_bottom = 88.0
+text = "Position checked TOP"
 
 [node name="RespectSafeArea" type="CheckBox" parent="Background/TabContainer/Banner/VBoxContainer"]
-margin_top = 92.0
-margin_right = 355.0
-margin_bottom = 108.0
-custom_styles/hover = SubResource( 4 )
-custom_styles/pressed = SubResource( 4 )
-custom_styles/normal = SubResource( 4 )
-text = "Respect Safe Area (RECOMMENDED TRUE)"
+offset_top = 92.0
+offset_right = 355.0
+offset_bottom = 108.0
+text = "Respect Safe Area3D (RECOMMENDED TRUE)"
 
 [node name="BannerSizes" type="ItemList" parent="Background/TabContainer/Banner/VBoxContainer"]
-margin_top = 112.0
-margin_right = 355.0
-margin_bottom = 121.0
+offset_top = 112.0
+offset_right = 355.0
+offset_bottom = 121.0
 auto_height = true
 same_column_width = true
-__meta__ = {
-"_edit_use_anchors_": true
-}
 
-[node name="UMP" type="Tabs" parent="Background/TabContainer"]
+[node name="UMP" type="TabBar" parent="Background/TabContainer"]
 visible = false
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background/TabContainer/UMP"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="RequestUserConsent" type="Button" parent="Background/TabContainer/UMP/VBoxContainer"]
-margin_top = 67.0
-margin_right = 355.0
-margin_bottom = 87.0
+offset_top = 67.0
+offset_right = 355.0
+offset_bottom = 87.0
 disabled = true
 text = "REQUEST USER CONSENT"
 
 [node name="ResetConsentState" type="Button" parent="Background/TabContainer/UMP/VBoxContainer"]
-margin_top = 91.0
-margin_right = 355.0
-margin_bottom = 111.0
+offset_top = 91.0
+offset_right = 355.0
+offset_bottom = 111.0
 disabled = true
 text = "RESET CONSENT STATE"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="General" type="Tabs" parent="Background/TabContainer"]
+[node name="General" type="TabBar" parent="Background/TabContainer"]
 visible = false
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 24.0
+offset_top = 31.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Background/TabContainer/General"]
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="IsInitialized" type="Button" parent="Background/TabContainer/General/VBoxContainer"]
-margin_top = 31.0
-margin_right = 355.0
-margin_bottom = 51.0
+offset_top = 31.0
+offset_right = 355.0
+offset_bottom = 51.0
 text = "is_initialized()"
 
 [node name="IsBannerLoaded" type="Button" parent="Background/TabContainer/General/VBoxContainer"]
-margin_top = 55.0
-margin_right = 355.0
-margin_bottom = 75.0
+offset_top = 55.0
+offset_right = 355.0
+offset_bottom = 75.0
 text = "is_banner_loaded()"
 
 [node name="IsInterstitialLoaded" type="Button" parent="Background/TabContainer/General/VBoxContainer"]
-margin_top = 79.0
-margin_right = 355.0
-margin_bottom = 99.0
+offset_top = 79.0
+offset_right = 355.0
+offset_bottom = 99.0
 text = "is_interstitial_loaded()"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="IsRewardedLoaded" type="Button" parent="Background/TabContainer/General/VBoxContainer"]
-margin_top = 103.0
-margin_right = 355.0
-margin_bottom = 123.0
+offset_top = 103.0
+offset_right = 355.0
+offset_bottom = 123.0
 text = "is_rewarded_loaded()"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="IsRewardedInterstitialLoaded" type="Button" parent="Background/TabContainer/General/VBoxContainer"]
-margin_top = 127.0
-margin_right = 355.0
-margin_bottom = 147.0
+offset_top = 127.0
+offset_right = 355.0
+offset_bottom = 147.0
 text = "is_rewarded_interstitial_loaded()"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="MusicCheckButton" type="CheckButton" parent="Background"]
+anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-margin_left = -110.0
-margin_top = -84.0
-margin_bottom = -44.0
-custom_styles/hover = SubResource( 5 )
-custom_styles/pressed = SubResource( 5 )
-custom_styles/normal = SubResource( 5 )
-pressed = true
+offset_left = -110.0
+offset_top = -84.0
+offset_bottom = -44.0
+grow_horizontal = 0
+grow_vertical = 2
+button_pressed = true
 text = "MUSIC"
-script = ExtResource( 5 )
+script = ExtResource("5")
 
 [node name="Music" type="AudioStreamPlayer" parent="Background/MusicCheckButton"]
-stream = ExtResource( 4 )
+stream = ExtResource("4")
 
 [connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Banner/EnableBanner" to="." method="_on_EnableBanner_pressed"]
 [connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Banner/DisableBanner" to="." method="_on_DisableBanner_pressed"]

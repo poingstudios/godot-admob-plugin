@@ -1,4 +1,4 @@
-tool
+@tool
 extends HTTPRequest
 
 signal supported_version_changed(value_dictionary)
@@ -10,7 +10,9 @@ func _ready():
 
 
 func _on_VersionSupportedHTTPRequest_request_completed(result, response_code, headers, body):
-	var json = JSON.parse(body.get_string_from_utf8())
+	var test_json_conv = JSON.new()
+	test_json_conv.parse(body.get_string_from_utf8())
+	var json = test_json_conv.get_data()
 	
 	var version_support : Dictionary = json.result[AdMobGlobals.get_plugin_version()]
 	emit_signal("supported_version_changed", version_support)

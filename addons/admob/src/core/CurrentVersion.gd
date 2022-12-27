@@ -1,4 +1,4 @@
-tool
+@tool
 extends Label
 
 var AdMobGlobals = preload("res://addons/admob/src/utils/AdMobGlobals.gd")

@@ -3,27 +3,27 @@
 [ext_resource path="res://addons/admob/src/core/components/Debug.gd" type="Script" id=1]
 
 [node name="Debug" type="VBoxContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
+offset_right = 40.0
+offset_bottom = 40.0
 script = ExtResource( 1 )
 
 [node name="TabContainer" type="TabContainer" parent="."]
-margin_right = 151.0
-margin_bottom = 582.0
-tab_align = 0
+offset_right = 151.0
+offset_bottom = 582.0
+tab_alignment = 0
 
 [node name="General" type="VBoxContainer" parent="TabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 
 [node name="TestEuropeUserConsent" type="CheckBox" parent="TabContainer/General"]
-margin_right = 193.0
-margin_bottom = 24.0
+offset_right = 193.0
+offset_bottom = 24.0
 text = "Test Europe User Consent"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -32,35 +32,35 @@ __meta__ = {
 [node name="Release" type="VBoxContainer" parent="TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 4.0
-margin_top = 32.0
-margin_right = -4.0
-margin_bottom = -4.0
+offset_left = 4.0
+offset_top = 32.0
+offset_right = -4.0
+offset_bottom = -4.0
 
 [node name="DebugOnRelease" type="CheckBox" parent="TabContainer/Release"]
-margin_right = 143.0
-margin_bottom = 24.0
-text = "Debug on Release"
+offset_right = 143.0
+offset_bottom = 24.0
+text = "Debug checked Release"
 
 [node name="IsReal" type="CheckBox" parent="TabContainer/Release"]
-margin_top = 28.0
-margin_right = 143.0
-margin_bottom = 52.0
+offset_top = 28.0
+offset_right = 143.0
+offset_bottom = 52.0
 disabled = true
 pressed = true
 text = "Is Real"
 
 [node name="Advice" type="Label" parent="TabContainer/Release"]
-margin_top = 56.0
-margin_right = 143.0
-margin_bottom = 546.0
-text = "Advice: `Is Real` will ALWAYS be true unless `Debug on Release` is true.
+offset_top = 56.0
+offset_right = 143.0
+offset_bottom = 546.0
+text = "Advice: `Is Real` will ALWAYS be true unless `Debug checked Release` is true.
 
-So if `Debug on Release` is true it will consider the value of `Is Real` on this page when the game is exported as \"Release\".
+So if `Debug checked Release` is true it will consider the value of `Is Real` checked this page when the game is exported as \"Release\".
 
-In other words, you don't need to change anything on this page as it may cause bugs in your app once it's in the store.
+In other words, you don't need to change anything checked this page as it may cause bugs in your app once it's in the store.
 
-Note: The `Test Europe User Consent` button even if it is true, when the application goes to production, that value will be false IF `Debug on Release` is false."
+Note: The `Test Europe User Consent` button even if it is true, when the application goes to production, that value will be false IF `Debug checked Release` is false."
 autowrap = true
 
 [connection signal="pressed" from="TabContainer/General/TestEuropeUserConsent" to="." method="_on_TestEuropeUserConsent_pressed"]

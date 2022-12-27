@@ -1,4 +1,4 @@
-tool
+@tool
 extends Control
 var AdMobSettings = preload("res://addons/admob/src/utils/AdMobSettings.gd").new()
 

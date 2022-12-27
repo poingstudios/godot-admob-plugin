@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections;
 
-public class Example : Control
+public partial class Example : Control
 {
 	private Node MobileAds;
 	IDictionary config;
@@ -51,7 +51,7 @@ public class Example : Control
 	
 	private void _add_text_Advice_Node(String text_value)
 	{
-		Advice.BbcodeText += text_value + "\n";
+		Advice.Text += text_value + "\n";
 	}
 	
 	public override void _Ready()
@@ -67,18 +67,18 @@ public class Example : Control
 		if (OS.GetName() == "Android" || OS.GetName() == "iOS"){
 			BannerPosition.Pressed = Convert.ToBoolean(((IDictionary) config["banner"])["position"]);
 			MobileAds.Call("request_user_consent");
-			MobileAds.Connect("consent_info_update_failure", this, nameof(_on_MobileAds_consent_info_update_failure));
-			MobileAds.Connect("consent_status_changed", this, nameof(_on_MobileAds_consent_status_changed));
-			MobileAds.Connect("banner_loaded", this, nameof(_on_MobileAds_banner_loaded));
-			MobileAds.Connect("banner_destroyed", this, nameof(_on_MobileAds_banner_destroyed));
-			MobileAds.Connect("interstitial_loaded", this, nameof(_on_MobileAds_interstitial_loaded));
-			MobileAds.Connect("interstitial_closed", this, nameof(_on_MobileAds_interstitial_closed));
-			MobileAds.Connect("rewarded_ad_loaded", this, nameof(_on_MobileAds_rewarded_ad_loaded));
-			MobileAds.Connect("rewarded_ad_closed", this, nameof(_on_MobileAds_rewarded_ad_closed));
-			MobileAds.Connect("rewarded_interstitial_ad_loaded", this, nameof(_on_MobileAds_rewarded_interstitial_ad_loaded));
-			MobileAds.Connect("rewarded_interstitial_ad_closed", this, nameof(_on_MobileAds_rewarded_interstitial_ad_closed));
-			MobileAds.Connect("user_earned_rewarded", this, nameof(_on_MobileAds_user_earned_rewarded));
-			MobileAds.Connect("initialization_complete", this, nameof(_on_MobileAds_initialization_complete));
+			MobileAds.Connect("consent_info_update_failure",new Callable(this,nameof(_on_MobileAds_consent_info_update_failure)));
+			MobileAds.Connect("consent_status_changed",new Callable(this,nameof(_on_MobileAds_consent_status_changed)));
+			MobileAds.Connect("banner_loaded",new Callable(this,nameof(_on_MobileAds_banner_loaded)));
+			MobileAds.Connect("banner_destroyed",new Callable(this,nameof(_on_MobileAds_banner_destroyed)));
+			MobileAds.Connect("interstitial_loaded",new Callable(this,nameof(_on_MobileAds_interstitial_loaded)));
+			MobileAds.Connect("interstitial_closed",new Callable(this,nameof(_on_MobileAds_interstitial_closed)));
+			MobileAds.Connect("rewarded_ad_loaded",new Callable(this,nameof(_on_MobileAds_rewarded_ad_loaded)));
+			MobileAds.Connect("rewarded_ad_closed",new Callable(this,nameof(_on_MobileAds_rewarded_ad_closed)));
+			MobileAds.Connect("rewarded_interstitial_ad_loaded",new Callable(this,nameof(_on_MobileAds_rewarded_interstitial_ad_loaded)));
+			MobileAds.Connect("rewarded_interstitial_ad_closed",new Callable(this,nameof(_on_MobileAds_rewarded_interstitial_ad_closed)));
+			MobileAds.Connect("user_earned_rewarded",new Callable(this,nameof(_on_MobileAds_user_earned_rewarded)));
+			MobileAds.Connect("initialization_complete",new Callable(this,nameof(_on_MobileAds_initialization_complete)));
 		}
 		else
 		{
@@ -206,7 +206,7 @@ public class Example : Control
 	
 	private void _on_MobileAds_user_earned_rewarded(String currency, int amount)
 	{
-		Advice.BbcodeText += "EARNED " + currency + " with amount: " + amount.ToString() + "\n";
+		Advice.Text += "EARNED " + currency + " with amount: " + amount.ToString() + "\n";
 	}
 
 	private void _on_MobileAds_consent_info_update_failure(int _error_code, String error_message)

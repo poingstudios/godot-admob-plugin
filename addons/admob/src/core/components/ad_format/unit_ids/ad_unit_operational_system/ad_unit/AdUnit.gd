@@ -1,16 +1,16 @@
-tool
+@tool
 extends GridContainer
 
 signal AdUnitChanged(name_value, id_value, old_name_value)
 signal AdUnitRemoved(name_value)
 
-onready var Name := $Name
-onready var Id := $Id
-onready var ChildrenParent := get_parent().get_children()
-onready var AddAdUnitButtonParent := get_parent().get_parent().get_node("AddAdUnitButton")
+@onready var Name := $Name
+@onready var Id := $Id
+@onready var ChildrenParent := get_parent().get_children()
+@onready var AddAdUnitButtonParent := get_parent().get_parent().get_node("AddAdUnitButton")
 
 var old_name_value := ""
-var is_editing := true setget set_is_editing
+var is_editing := true : set = set_is_editing
 
 func _ready():
 	if get_index() == 0:

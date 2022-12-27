@@ -64,20 +64,20 @@ var config : Dictionary = {
 			}
 		}
 	}
-} setget set_config
-
+} : 
+	set(value):
+		config = value
+		save_config()
+		
 func _init():
 	var config_project_settings : Dictionary = AdMobLoad.load_config(PATH_ADMOB_PROJECT_SETTINGS)
 	merge_dir(config, config_project_settings)
-	if Engine.editor_hint:
+	if Engine.is_editor_hint():
 		save_config()
 
 func save_config():
 	AdMobSave.save_config(PATH_ADMOB_PROJECT_SETTINGS, self.config)
 
-func set_config(value : Dictionary):
-	config = value
-	save_config()
 
 func merge_dir(target : Dictionary, patch : Dictionary):
 	for key in patch:
@@ -93,11 +93,11 @@ func merge_dir(target : Dictionary, patch : Dictionary):
 
 static func pascal2snake(string : String) -> String:
 	string = string.replacen("adformat", "")
-	var result = PoolStringArray()
+	var result = PackedStringArray()
 	for ch in string:
 		if ch == ch.to_lower():
 			result.append(ch)
 		else:
 			result.append('_'+ch.to_lower())
 	result[0] = result[0][1]
-	return result.join('')
+	return ''.join(result)

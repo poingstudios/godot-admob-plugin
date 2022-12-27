@@ -1,104 +1,103 @@
 extends Control
 
-onready var EnableBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner/EnableBanner
-onready var DisableBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner/DisableBanner
-onready var ShowBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner2/ShowBanner
-onready var HideBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner2/HideBanner
+@onready var EnableBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner/EnableBanner
+@onready var DisableBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner/DisableBanner
+@onready var ShowBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner2/ShowBanner
+@onready var HideBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner2/HideBanner
 
-onready var Interstitial : Button = $Background/TabContainer/AdFormats/VBoxContainer/Interstitial
-onready var Rewarded : Button = $Background/TabContainer/AdFormats/VBoxContainer/Rewarded
-onready var RewardedInterstitial : Button = $Background/TabContainer/AdFormats/VBoxContainer/RewardedInterstitial
+@onready var Interstitial : Button = $Background/TabContainer/AdFormats/VBoxContainer/Interstitial
+@onready var Rewarded : Button = $Background/TabContainer/AdFormats/VBoxContainer/Rewarded
+@onready var RewardedInterstitial : Button = $Background/TabContainer/AdFormats/VBoxContainer/RewardedInterstitial
 
-onready var RequestUserConsent : Button = $Background/TabContainer/UMP/VBoxContainer/RequestUserConsent
-onready var ResetConsentState : Button = $Background/TabContainer/UMP/VBoxContainer/ResetConsentState
+@onready var RequestUserConsent : Button = $Background/TabContainer/UMP/VBoxContainer/RequestUserConsent
+@onready var ResetConsentState : Button = $Background/TabContainer/UMP/VBoxContainer/ResetConsentState
 
-onready var Advice : RichTextLabel = $Background/Advice
+@onready var Advice : RichTextLabel = $Background/Advice
 
-onready var BannerPosition : CheckBox = $Background/TabContainer/Banner/VBoxContainer/Position
-onready var RespectSafeArea : CheckBox = $Background/TabContainer/Banner/VBoxContainer/RespectSafeArea
-onready var BannerSizes : ItemList = $Background/TabContainer/Banner/VBoxContainer/BannerSizes
+@onready var BannerPosition : CheckBox = $Background/TabContainer/Banner/VBoxContainer/Position
+@onready var RespectSafeArea : CheckBox = $Background/TabContainer/Banner/VBoxContainer/RespectSafeArea
+@onready var BannerSizes : ItemList = $Background/TabContainer/Banner/VBoxContainer/BannerSizes
 
 func _add_text_Advice_Node(text_value : String) -> void:
-	Advice.bbcode_text += text_value + "\n"
+	Advice.text += text_value + "\n"
 
 func _ready() -> void:
-	BannerPosition.pressed = MobileAds.AdMobSettings.config.banner.position
-	RespectSafeArea.pressed = MobileAds.AdMobSettings.config.banner.respect_safe_area
+	BannerPosition.button_pressed = MobileAds.AdMobSettings.config.banner.position
+	RespectSafeArea.button_pressed = MobileAds.AdMobSettings.config.banner.respect_safe_area
 
-	OS.center_window()
 	for banner_size in MobileAds.AdMobSettings.BANNER_SIZE:
 		BannerSizes.add_item(banner_size)
 	if OS.get_name() == "Android" or OS.get_name() == "iOS":
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("consent_form_dismissed", self, "_on_MobileAds_consent_form_dismissed")
+		MobileAds.connect("consent_form_dismissed",Callable(self,"_on_MobileAds_consent_form_dismissed"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("consent_form_load_failure", self, "_on_MobileAds_consent_form_load_failure")
+		MobileAds.connect("consent_form_load_failure",Callable(self,"_on_MobileAds_consent_form_load_failure"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("consent_info_update_failure", self, "_on_MobileAds_consent_info_update_failure")
+		MobileAds.connect("consent_info_update_failure",Callable(self,"_on_MobileAds_consent_info_update_failure"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("consent_info_update_success", self, "_on_MobileAds_consent_info_update_success")
+		MobileAds.connect("consent_info_update_success",Callable(self,"_on_MobileAds_consent_info_update_success"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("consent_status_changed", self, "_on_MobileAds_consent_status_changed")
+		MobileAds.connect("consent_status_changed",Callable(self,"_on_MobileAds_consent_status_changed"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("banner_loaded", self, "_on_MobileAds_banner_loaded")
+		MobileAds.connect("banner_loaded",Callable(self,"_on_MobileAds_banner_loaded"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("banner_destroyed", self, "_on_MobileAds_banner_destroyed")
+		MobileAds.connect("banner_destroyed",Callable(self,"_on_MobileAds_banner_destroyed"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("banner_clicked", self, "_on_MobileAds_banner_clicked")
+		MobileAds.connect("banner_clicked",Callable(self,"_on_MobileAds_banner_clicked"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("banner_closed", self, "_on_MobileAds_banner_closed")
+		MobileAds.connect("banner_closed",Callable(self,"_on_MobileAds_banner_closed"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("banner_failed_to_load", self, "_on_MobileAds_banner_failed_to_load")
+		MobileAds.connect("banner_failed_to_load",Callable(self,"_on_MobileAds_banner_failed_to_load"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("banner_recorded_impression", self, "_on_MobileAds_banner_recorded_impression")
+		MobileAds.connect("banner_recorded_impression",Callable(self,"_on_MobileAds_banner_recorded_impression"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("interstitial_loaded", self, "_on_MobileAds_interstitial_loaded")
+		MobileAds.connect("interstitial_loaded",Callable(self,"_on_MobileAds_interstitial_loaded"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("interstitial_closed", self, "_on_MobileAds_interstitial_closed")
+		MobileAds.connect("interstitial_closed",Callable(self,"_on_MobileAds_interstitial_closed"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("interstitial_clicked", self, "_on_MobileAds_interstitial_clicked")
+		MobileAds.connect("interstitial_clicked",Callable(self,"_on_MobileAds_interstitial_clicked"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("interstitial_failed_to_load", self, "_on_MobileAds_interstitial_failed_to_load")
+		MobileAds.connect("interstitial_failed_to_load",Callable(self,"_on_MobileAds_interstitial_failed_to_load"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("interstitial_failed_to_show", self, "_on_MobileAds_interstitial_failed_to_show")
+		MobileAds.connect("interstitial_failed_to_show",Callable(self,"_on_MobileAds_interstitial_failed_to_show"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("interstitial_opened", self, "_on_MobileAds_interstitial_opened")
+		MobileAds.connect("interstitial_opened",Callable(self,"_on_MobileAds_interstitial_opened"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("interstitial_recorded_impression", self, "_on_MobileAds_interstitial_recorded_impression")
+		MobileAds.connect("interstitial_recorded_impression",Callable(self,"_on_MobileAds_interstitial_recorded_impression"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_ad_loaded", self, "_on_MobileAds_rewarded_ad_loaded")
+		MobileAds.connect("rewarded_ad_loaded",Callable(self,"_on_MobileAds_rewarded_ad_loaded"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_ad_closed", self, "_on_MobileAds_rewarded_ad_closed")
+		MobileAds.connect("rewarded_ad_closed",Callable(self,"_on_MobileAds_rewarded_ad_closed"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_ad_clicked", self, "_on_MobileAds_rewarded_ad_clicked")
+		MobileAds.connect("rewarded_ad_clicked",Callable(self,"_on_MobileAds_rewarded_ad_clicked"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_ad_failed_to_load", self, "_on_MobileAds_rewarded_ad_failed_to_load")
+		MobileAds.connect("rewarded_ad_failed_to_load",Callable(self,"_on_MobileAds_rewarded_ad_failed_to_load"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_ad_failed_to_show", self, "_on_MobileAds_rewarded_ad_failed_to_show")
+		MobileAds.connect("rewarded_ad_failed_to_show",Callable(self,"_on_MobileAds_rewarded_ad_failed_to_show"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_ad_opened", self, "_on_MobileAds_rewarded_ad_opened")
+		MobileAds.connect("rewarded_ad_opened",Callable(self,"_on_MobileAds_rewarded_ad_opened"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_ad_recorded_impression", self, "_on_MobileAds_rewarded_ad_recorded_impression")
+		MobileAds.connect("rewarded_ad_recorded_impression",Callable(self,"_on_MobileAds_rewarded_ad_recorded_impression"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_interstitial_ad_loaded", self, "_on_MobileAds_rewarded_interstitial_ad_loaded")
+		MobileAds.connect("rewarded_interstitial_ad_loaded",Callable(self,"_on_MobileAds_rewarded_interstitial_ad_loaded"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_interstitial_ad_closed", self, "_on_MobileAds_rewarded_interstitial_ad_closed")
+		MobileAds.connect("rewarded_interstitial_ad_closed",Callable(self,"_on_MobileAds_rewarded_interstitial_ad_closed"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_interstitial_ad_clicked", self, "_on_MobileAds_rewarded_interstitial_ad_clicked")
+		MobileAds.connect("rewarded_interstitial_ad_clicked",Callable(self,"_on_MobileAds_rewarded_interstitial_ad_clicked"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_interstitial_ad_failed_to_load", self, "_on_MobileAds_rewarded_interstitial_ad_failed_to_load")
+		MobileAds.connect("rewarded_interstitial_ad_failed_to_load",Callable(self,"_on_MobileAds_rewarded_interstitial_ad_failed_to_load"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_interstitial_ad_failed_to_show", self, "_on_MobileAds_rewarded_interstitial_ad_failed_to_show")
+		MobileAds.connect("rewarded_interstitial_ad_failed_to_show",Callable(self,"_on_MobileAds_rewarded_interstitial_ad_failed_to_show"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_interstitial_ad_opened", self, "_on_MobileAds_rewarded_interstitial_ad_opened")
+		MobileAds.connect("rewarded_interstitial_ad_opened",Callable(self,"_on_MobileAds_rewarded_interstitial_ad_opened"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("rewarded_interstitial_ad_recorded_impression", self, "_on_MobileAds_rewarded_interstitial_ad_recorded_impression")
+		MobileAds.connect("rewarded_interstitial_ad_recorded_impression",Callable(self,"_on_MobileAds_rewarded_interstitial_ad_recorded_impression"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("user_earned_rewarded", self, "_on_MobileAds_user_earned_rewarded")
+		MobileAds.connect("user_earned_rewarded",Callable(self,"_on_MobileAds_user_earned_rewarded"))
 		# warning-ignore:return_value_discarded
-		MobileAds.connect("initialization_complete", self, "_on_MobileAds_initialization_complete")
+		MobileAds.connect("initialization_complete",Callable(self,"_on_MobileAds_initialization_complete"))
 	else:
-		_add_text_Advice_Node("AdMob only works on Android or iOS devices!")
+		_add_text_Advice_Node("AdMob only works checked Android or iOS devices!")
 
 func _on_MobileAds_rewarded_interstitial_ad_clicked():
 	_add_text_Advice_Node("Rewarded Interstitial clicked")
@@ -148,8 +147,8 @@ func _on_MobileAds_initialization_complete(status : int, adapter_name : String) 
 		MobileAds.load_interstitial()
 		MobileAds.load_rewarded()
 		MobileAds.load_rewarded_interstitial()
-		_add_text_Advice_Node("AdMob initialized on GDScript! With parameters:")
-		_add_text_Advice_Node(JSON.print(MobileAds.config, "\t"))
+		_add_text_Advice_Node("AdMob initialized checked GDScript! With parameters:")
+		_add_text_Advice_Node(JSON.stringify(MobileAds.config, "\t"))
 		_add_text_Advice_Node("instance_id: " + str(get_instance_id()))
 		EnableBanner.disabled = false
 		BannerPosition.disabled = false
@@ -226,7 +225,7 @@ func _on_MobileAds_rewarded_interstitial_ad_closed() -> void:
 	_add_text_Advice_Node("Rewarded Interstitial ad closed")
 	
 func _on_MobileAds_user_earned_rewarded(currency : String, amount : int) -> void:
-	Advice.bbcode_text += "EARNED " + currency + " with amount: " + str(amount) + "\n"
+	Advice.text += "EARNED " + currency + " with amount: " + str(amount) + "\n"
 
 func _on_MobileAds_consent_form_dismissed() -> void:
 	_add_text_Advice_Node("Request Consent from European Users Form dismissed")

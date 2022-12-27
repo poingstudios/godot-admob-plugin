@@ -43,7 +43,7 @@ signal rewarded_interstitial_ad_recorded_impression()
 signal user_earned_rewarded(currency, amount)
 
 var AdMobSettings = preload("res://addons/admob/src/utils/AdMobSettings.gd").new()
-onready var config = AdMobSettings.config
+@onready var config = AdMobSettings.config
 var _plugin : Object
 
 func _ready() -> void:
@@ -81,47 +81,47 @@ func initialize() -> void:
 
 
 func _connect_signals() -> void:
-	_plugin.connect("initialization_complete", self, "_on_AdMob_initialization_complete")
+	_plugin.connect("initialization_complete",Callable(self,"_on_AdMob_initialization_complete"))
 
-	_plugin.connect("consent_form_dismissed", self, "_on_AdMob_consent_form_dismissed")
-	_plugin.connect("consent_status_changed", self, "_on_AdMob_consent_status_changed")
-	_plugin.connect("consent_form_load_failure", self, "_on_AdMob_consent_form_load_failure")
-	_plugin.connect("consent_info_update_success", self, "_on_AdMob_consent_info_update_success")
-	_plugin.connect("consent_info_update_failure", self, "_on_AdMob_consent_info_update_failure")
+	_plugin.connect("consent_form_dismissed",Callable(self,"_on_AdMob_consent_form_dismissed"))
+	_plugin.connect("consent_status_changed",Callable(self,"_on_AdMob_consent_status_changed"))
+	_plugin.connect("consent_form_load_failure",Callable(self,"_on_AdMob_consent_form_load_failure"))
+	_plugin.connect("consent_info_update_success",Callable(self,"_on_AdMob_consent_info_update_success"))
+	_plugin.connect("consent_info_update_failure",Callable(self,"_on_AdMob_consent_info_update_failure"))
 
-	_plugin.connect("banner_loaded", self, "_on_AdMob_banner_loaded")
-	_plugin.connect("banner_failed_to_load", self, "_on_AdMob_banner_failed_to_load")
-	_plugin.connect("banner_opened", self, "_on_AdMob_banner_opened")
-	_plugin.connect("banner_clicked", self, "_on_AdMob_banner_clicked")
-	_plugin.connect("banner_closed", self, "_on_AdMob_banner_closed")
-	_plugin.connect("banner_recorded_impression", self, "_on_AdMob_banner_recorded_impression")
-	_plugin.connect("banner_destroyed", self, "_on_AdMob_banner_destroyed")
+	_plugin.connect("banner_loaded",Callable(self,"_on_AdMob_banner_loaded"))
+	_plugin.connect("banner_failed_to_load",Callable(self,"_on_AdMob_banner_failed_to_load"))
+	_plugin.connect("banner_opened",Callable(self,"_on_AdMob_banner_opened"))
+	_plugin.connect("banner_clicked",Callable(self,"_on_AdMob_banner_clicked"))
+	_plugin.connect("banner_closed",Callable(self,"_on_AdMob_banner_closed"))
+	_plugin.connect("banner_recorded_impression",Callable(self,"_on_AdMob_banner_recorded_impression"))
+	_plugin.connect("banner_destroyed",Callable(self,"_on_AdMob_banner_destroyed"))
 
-	_plugin.connect("interstitial_failed_to_load", self, "_on_AdMob_interstitial_failed_to_load")
-	_plugin.connect("interstitial_loaded", self, "_on_AdMob_interstitial_loaded")
-	_plugin.connect("interstitial_failed_to_show", self, "_on_AdMob_interstitial_failed_to_show")
-	_plugin.connect("interstitial_opened", self, "_on_AdMob_interstitial_opened")
-	_plugin.connect("interstitial_clicked", self, "_on_AdMob_interstitial_clicked")
-	_plugin.connect("interstitial_closed", self, "_on_AdMob_interstitial_closed")
-	_plugin.connect("interstitial_recorded_impression", self, "_on_AdMob_interstitial_recorded_impression")
+	_plugin.connect("interstitial_failed_to_load",Callable(self,"_on_AdMob_interstitial_failed_to_load"))
+	_plugin.connect("interstitial_loaded",Callable(self,"_on_AdMob_interstitial_loaded"))
+	_plugin.connect("interstitial_failed_to_show",Callable(self,"_on_AdMob_interstitial_failed_to_show"))
+	_plugin.connect("interstitial_opened",Callable(self,"_on_AdMob_interstitial_opened"))
+	_plugin.connect("interstitial_clicked",Callable(self,"_on_AdMob_interstitial_clicked"))
+	_plugin.connect("interstitial_closed",Callable(self,"_on_AdMob_interstitial_closed"))
+	_plugin.connect("interstitial_recorded_impression",Callable(self,"_on_AdMob_interstitial_recorded_impression"))
 
-	_plugin.connect("rewarded_ad_failed_to_load", self, "_on_AdMob_rewarded_ad_failed_to_load")
-	_plugin.connect("rewarded_ad_loaded", self, "_on_AdMob_rewarded_ad_loaded")
-	_plugin.connect("rewarded_ad_failed_to_show", self, "_on_AdMob_rewarded_ad_failed_to_show")
-	_plugin.connect("rewarded_ad_opened", self, "_on_AdMob_rewarded_ad_opened")
-	_plugin.connect("rewarded_ad_clicked", self, "_on_AdMob_rewarded_ad_clicked")
-	_plugin.connect("rewarded_ad_closed", self, "_on_AdMob_rewarded_ad_closed")
-	_plugin.connect("rewarded_ad_recorded_impression", self, "_on_AdMob_rewarded_ad_recorded_impression")
+	_plugin.connect("rewarded_ad_failed_to_load",Callable(self,"_on_AdMob_rewarded_ad_failed_to_load"))
+	_plugin.connect("rewarded_ad_loaded",Callable(self,"_on_AdMob_rewarded_ad_loaded"))
+	_plugin.connect("rewarded_ad_failed_to_show",Callable(self,"_on_AdMob_rewarded_ad_failed_to_show"))
+	_plugin.connect("rewarded_ad_opened",Callable(self,"_on_AdMob_rewarded_ad_opened"))
+	_plugin.connect("rewarded_ad_clicked",Callable(self,"_on_AdMob_rewarded_ad_clicked"))
+	_plugin.connect("rewarded_ad_closed",Callable(self,"_on_AdMob_rewarded_ad_closed"))
+	_plugin.connect("rewarded_ad_recorded_impression",Callable(self,"_on_AdMob_rewarded_ad_recorded_impression"))
 
-	_plugin.connect("rewarded_interstitial_ad_failed_to_load", self, "_on_AdMob_rewarded_interstitial_ad_failed_to_load")
-	_plugin.connect("rewarded_interstitial_ad_loaded", self, "_on_AdMob_rewarded_interstitial_ad_loaded")
-	_plugin.connect("rewarded_interstitial_ad_failed_to_show", self, "_on_AdMob_rewarded_interstitial_ad_failed_to_show")
-	_plugin.connect("rewarded_interstitial_ad_opened", self, "_on_AdMob_rewarded_interstitial_ad_opened")
-	_plugin.connect("rewarded_interstitial_ad_clicked", self, "_on_AdMob_rewarded_interstitial_ad_clicked")
-	_plugin.connect("rewarded_interstitial_ad_closed", self, "_on_AdMob_rewarded_interstitial_ad_closed")
-	_plugin.connect("rewarded_interstitial_ad_recorded_impression", self, "_on_AdMob_rewarded_interstitial_ad_recorded_impression")
+	_plugin.connect("rewarded_interstitial_ad_failed_to_load",Callable(self,"_on_AdMob_rewarded_interstitial_ad_failed_to_load"))
+	_plugin.connect("rewarded_interstitial_ad_loaded",Callable(self,"_on_AdMob_rewarded_interstitial_ad_loaded"))
+	_plugin.connect("rewarded_interstitial_ad_failed_to_show",Callable(self,"_on_AdMob_rewarded_interstitial_ad_failed_to_show"))
+	_plugin.connect("rewarded_interstitial_ad_opened",Callable(self,"_on_AdMob_rewarded_interstitial_ad_opened"))
+	_plugin.connect("rewarded_interstitial_ad_clicked",Callable(self,"_on_AdMob_rewarded_interstitial_ad_clicked"))
+	_plugin.connect("rewarded_interstitial_ad_closed",Callable(self,"_on_AdMob_rewarded_interstitial_ad_closed"))
+	_plugin.connect("rewarded_interstitial_ad_recorded_impression",Callable(self,"_on_AdMob_rewarded_interstitial_ad_recorded_impression"))
 
-	_plugin.connect("user_earned_rewarded", self, "_on_AdMob_user_earned_rewarded")
+	_plugin.connect("user_earned_rewarded",Callable(self,"_on_AdMob_user_earned_rewarded"))
 
 
 func _on_AdMob_initialization_complete(status : int, adapter_name : String) -> void:
