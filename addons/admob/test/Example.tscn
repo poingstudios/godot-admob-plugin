@@ -79,149 +79,116 @@ anchor_bottom = 0.884259
 theme = SubResource("3")
 metadata/_edit_use_anchors_ = true
 
-[node name="AdFormats" type="TabBar" parent="Background/TabContainer"]
+[node name="AdFormats" type="VBoxContainer" parent="Background/TabContainer"]
 layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/TabContainer/AdFormats"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 alignment = 1
 
-[node name="Banner" type="HBoxContainer" parent="Background/TabContainer/AdFormats/VBoxContainer"]
+[node name="Banner" type="HBoxContainer" parent="Background/TabContainer/AdFormats"]
 layout_mode = 2
 size_flags_vertical = 0
 alignment = 1
 
-[node name="EnableBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner"]
+[node name="EnableBanner" type="Button" parent="Background/TabContainer/AdFormats/Banner"]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "ENABLE BANNER"
 
-[node name="DisableBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner"]
+[node name="DisableBanner" type="Button" parent="Background/TabContainer/AdFormats/Banner"]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "DISABLE BANNER"
 
-[node name="Banner2" type="HBoxContainer" parent="Background/TabContainer/AdFormats/VBoxContainer"]
+[node name="Banner2" type="HBoxContainer" parent="Background/TabContainer/AdFormats"]
 layout_mode = 2
 size_flags_vertical = 0
 alignment = 1
 
-[node name="ShowBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner2"]
+[node name="ShowBanner" type="Button" parent="Background/TabContainer/AdFormats/Banner2"]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "SHOW BANNER"
 
-[node name="HideBanner" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer/Banner2"]
+[node name="HideBanner" type="Button" parent="Background/TabContainer/AdFormats/Banner2"]
 layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "HIDE BANNER"
 
-[node name="Interstitial" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer"]
+[node name="Interstitial" type="Button" parent="Background/TabContainer/AdFormats"]
 layout_mode = 2
 disabled = true
 text = "INTERSTITIAL"
 
-[node name="Rewarded" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer"]
+[node name="Rewarded" type="Button" parent="Background/TabContainer/AdFormats"]
 layout_mode = 2
 disabled = true
 text = "REWARDED"
 
-[node name="RewardedInterstitial" type="Button" parent="Background/TabContainer/AdFormats/VBoxContainer"]
+[node name="RewardedInterstitial" type="Button" parent="Background/TabContainer/AdFormats"]
 layout_mode = 2
 disabled = true
 text = "REWARDED INTERSTITIAL"
 
-[node name="Banner" type="TabBar" parent="Background/TabContainer"]
+[node name="Banner" type="VBoxContainer" parent="Background/TabContainer"]
 visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/TabContainer/Banner"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-alignment = 1
-
-[node name="Control" type="Control" parent="Background/TabContainer/Banner/VBoxContainer"]
+[node name="Control" type="Control" parent="Background/TabContainer/Banner"]
 layout_mode = 2
 
-[node name="Position" type="CheckBox" parent="Background/TabContainer/Banner/VBoxContainer"]
+[node name="Position" type="CheckBox" parent="Background/TabContainer/Banner"]
 layout_mode = 2
 text = "Position checked TOP"
 
-[node name="RespectSafeArea" type="CheckBox" parent="Background/TabContainer/Banner/VBoxContainer"]
+[node name="RespectSafeArea" type="CheckBox" parent="Background/TabContainer/Banner"]
 layout_mode = 2
 text = "Respect Safe Area3D (RECOMMENDED TRUE)"
 
-[node name="BannerSizes" type="ItemList" parent="Background/TabContainer/Banner/VBoxContainer"]
+[node name="BannerSizes" type="ItemList" parent="Background/TabContainer/Banner"]
 layout_mode = 2
 auto_height = true
 same_column_width = true
 
-[node name="UMP" type="TabBar" parent="Background/TabContainer"]
+[node name="UMP" type="VBoxContainer" parent="Background/TabContainer"]
 visible = false
 layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/TabContainer/UMP"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 alignment = 1
 
-[node name="RequestUserConsent" type="Button" parent="Background/TabContainer/UMP/VBoxContainer"]
+[node name="RequestUserConsent" type="Button" parent="Background/TabContainer/UMP"]
 layout_mode = 2
 disabled = true
 text = "REQUEST USER CONSENT"
 
-[node name="ResetConsentState" type="Button" parent="Background/TabContainer/UMP/VBoxContainer"]
+[node name="ResetConsentState" type="Button" parent="Background/TabContainer/UMP"]
 layout_mode = 2
 disabled = true
 text = "RESET CONSENT STATE"
 
-[node name="General" type="TabBar" parent="Background/TabContainer"]
+[node name="General" type="VBoxContainer" parent="Background/TabContainer"]
 visible = false
 layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/TabContainer/General"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 alignment = 1
 
-[node name="IsInitialized" type="Button" parent="Background/TabContainer/General/VBoxContainer"]
+[node name="IsInitialized" type="Button" parent="Background/TabContainer/General"]
 layout_mode = 2
 text = "is_initialized()"
 
-[node name="IsBannerLoaded" type="Button" parent="Background/TabContainer/General/VBoxContainer"]
+[node name="IsBannerLoaded" type="Button" parent="Background/TabContainer/General"]
 layout_mode = 2
 text = "is_banner_loaded()"
 
-[node name="IsInterstitialLoaded" type="Button" parent="Background/TabContainer/General/VBoxContainer"]
+[node name="IsInterstitialLoaded" type="Button" parent="Background/TabContainer/General"]
 layout_mode = 2
 text = "is_interstitial_loaded()"
 
-[node name="IsRewardedLoaded" type="Button" parent="Background/TabContainer/General/VBoxContainer"]
+[node name="IsRewardedLoaded" type="Button" parent="Background/TabContainer/General"]
 layout_mode = 2
 text = "is_rewarded_loaded()"
 
-[node name="IsRewardedInterstitialLoaded" type="Button" parent="Background/TabContainer/General/VBoxContainer"]
+[node name="IsRewardedInterstitialLoaded" type="Button" parent="Background/TabContainer/General"]
 layout_mode = 2
 text = "is_rewarded_interstitial_loaded()"
 
@@ -244,21 +211,21 @@ script = ExtResource("5")
 [node name="Music" type="AudioStreamPlayer" parent="Background/MusicCheckButton"]
 stream = ExtResource("4")
 
-[connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Banner/EnableBanner" to="." method="_on_EnableBanner_pressed"]
-[connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Banner/DisableBanner" to="." method="_on_DisableBanner_pressed"]
-[connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Banner2/ShowBanner" to="." method="_on_ShowBanner_pressed"]
-[connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Banner2/HideBanner" to="." method="_on_HideBanner_pressed"]
-[connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Interstitial" to="." method="_on_Interstitial_pressed"]
-[connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/Rewarded" to="." method="_on_Rewarded_pressed"]
-[connection signal="pressed" from="Background/TabContainer/AdFormats/VBoxContainer/RewardedInterstitial" to="." method="_on_RewardedInterstitial_pressed"]
-[connection signal="pressed" from="Background/TabContainer/Banner/VBoxContainer/Position" to="." method="_on_Position_pressed"]
-[connection signal="pressed" from="Background/TabContainer/Banner/VBoxContainer/RespectSafeArea" to="." method="_on_RespectSafeArea_pressed"]
-[connection signal="item_selected" from="Background/TabContainer/Banner/VBoxContainer/BannerSizes" to="." method="_on_BannerSizes_item_selected"]
-[connection signal="pressed" from="Background/TabContainer/UMP/VBoxContainer/RequestUserConsent" to="." method="_on_RequestUserConsent_pressed"]
-[connection signal="pressed" from="Background/TabContainer/UMP/VBoxContainer/ResetConsentState" to="." method="_on_ResetConsentState_pressed"]
-[connection signal="pressed" from="Background/TabContainer/General/VBoxContainer/IsInitialized" to="." method="_on_IsInitialized_pressed"]
-[connection signal="pressed" from="Background/TabContainer/General/VBoxContainer/IsBannerLoaded" to="." method="_on_IsBannerLoaded_pressed"]
-[connection signal="pressed" from="Background/TabContainer/General/VBoxContainer/IsInterstitialLoaded" to="." method="_on_IsInterstitialLoaded_pressed"]
-[connection signal="pressed" from="Background/TabContainer/General/VBoxContainer/IsRewardedLoaded" to="." method="_on_IsRewardedLoaded_pressed"]
-[connection signal="pressed" from="Background/TabContainer/General/VBoxContainer/IsRewardedInterstitialLoaded" to="." method="_on_IsRewardedInterstitialLoaded_pressed"]
+[connection signal="pressed" from="Background/TabContainer/AdFormats/Banner/EnableBanner" to="." method="_on_EnableBanner_pressed"]
+[connection signal="pressed" from="Background/TabContainer/AdFormats/Banner/DisableBanner" to="." method="_on_DisableBanner_pressed"]
+[connection signal="pressed" from="Background/TabContainer/AdFormats/Banner2/ShowBanner" to="." method="_on_ShowBanner_pressed"]
+[connection signal="pressed" from="Background/TabContainer/AdFormats/Banner2/HideBanner" to="." method="_on_HideBanner_pressed"]
+[connection signal="pressed" from="Background/TabContainer/AdFormats/Interstitial" to="." method="_on_Interstitial_pressed"]
+[connection signal="pressed" from="Background/TabContainer/AdFormats/Rewarded" to="." method="_on_Rewarded_pressed"]
+[connection signal="pressed" from="Background/TabContainer/AdFormats/RewardedInterstitial" to="." method="_on_RewardedInterstitial_pressed"]
+[connection signal="pressed" from="Background/TabContainer/Banner/Position" to="." method="_on_Position_pressed"]
+[connection signal="pressed" from="Background/TabContainer/Banner/RespectSafeArea" to="." method="_on_RespectSafeArea_pressed"]
+[connection signal="item_selected" from="Background/TabContainer/Banner/BannerSizes" to="." method="_on_BannerSizes_item_selected"]
+[connection signal="pressed" from="Background/TabContainer/UMP/RequestUserConsent" to="." method="_on_RequestUserConsent_pressed"]
+[connection signal="pressed" from="Background/TabContainer/UMP/ResetConsentState" to="." method="_on_ResetConsentState_pressed"]
+[connection signal="pressed" from="Background/TabContainer/General/IsInitialized" to="." method="_on_IsInitialized_pressed"]
+[connection signal="pressed" from="Background/TabContainer/General/IsBannerLoaded" to="." method="_on_IsBannerLoaded_pressed"]
+[connection signal="pressed" from="Background/TabContainer/General/IsInterstitialLoaded" to="." method="_on_IsInterstitialLoaded_pressed"]
+[connection signal="pressed" from="Background/TabContainer/General/IsRewardedLoaded" to="." method="_on_IsRewardedLoaded_pressed"]
+[connection signal="pressed" from="Background/TabContainer/General/IsRewardedInterstitialLoaded" to="." method="_on_IsRewardedInterstitialLoaded_pressed"]
 [connection signal="pressed" from="Background/MusicCheckButton" to="Background/MusicCheckButton" method="_on_MusicCheckButton_pressed"]

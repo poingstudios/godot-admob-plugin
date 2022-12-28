@@ -1,22 +1,22 @@
 extends Control
 
-@onready var EnableBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner/EnableBanner
-@onready var DisableBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner/DisableBanner
-@onready var ShowBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner2/ShowBanner
-@onready var HideBanner : Button = $Background/TabContainer/AdFormats/VBoxContainer/Banner2/HideBanner
+@onready var EnableBanner : Button = $Background/TabContainer/AdFormats/Banner/EnableBanner
+@onready var DisableBanner : Button = $Background/TabContainer/AdFormats/Banner/DisableBanner
+@onready var ShowBanner : Button = $Background/TabContainer/AdFormats/Banner2/ShowBanner
+@onready var HideBanner : Button = $Background/TabContainer/AdFormats/Banner2/HideBanner
 
-@onready var Interstitial : Button = $Background/TabContainer/AdFormats/VBoxContainer/Interstitial
-@onready var Rewarded : Button = $Background/TabContainer/AdFormats/VBoxContainer/Rewarded
-@onready var RewardedInterstitial : Button = $Background/TabContainer/AdFormats/VBoxContainer/RewardedInterstitial
+@onready var Interstitial : Button = $Background/TabContainer/AdFormats/Interstitial
+@onready var Rewarded : Button = $Background/TabContainer/AdFormats/Rewarded
+@onready var RewardedInterstitial : Button = $Background/TabContainer/AdFormats/RewardedInterstitial
 
-@onready var RequestUserConsent : Button = $Background/TabContainer/UMP/VBoxContainer/RequestUserConsent
-@onready var ResetConsentState : Button = $Background/TabContainer/UMP/VBoxContainer/ResetConsentState
+@onready var RequestUserConsent : Button = $Background/TabContainer/UMP/RequestUserConsent
+@onready var ResetConsentState : Button = $Background/TabContainer/UMP/ResetConsentState
 
 @onready var Advice : RichTextLabel = $Background/Advice
 
-@onready var BannerPosition : CheckBox = $Background/TabContainer/Banner/VBoxContainer/Position
-@onready var RespectSafeArea : CheckBox = $Background/TabContainer/Banner/VBoxContainer/RespectSafeArea
-@onready var BannerSizes : ItemList = $Background/TabContainer/Banner/VBoxContainer/BannerSizes
+@onready var BannerPosition : CheckBox = $Background/TabContainer/Banner/Position
+@onready var RespectSafeArea : CheckBox = $Background/TabContainer/Banner/RespectSafeArea
+@onready var BannerSizes : ItemList = $Background/TabContainer/Banner/BannerSizes
 
 func _add_text_Advice_Node(text_value : String) -> void:
 	Advice.text += text_value + "\n"
