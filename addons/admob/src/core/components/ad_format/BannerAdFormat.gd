@@ -3,6 +3,9 @@ extends VBoxContainer
 @onready var AdMobEditor : Control = find_parent("AdMobEditor")
 
 func _ready():
+	for item in AdMobEditor.AdMobSettings.BANNER_SIZE:
+		$BannerSizeHBoxContainer/BannerSize.add_item(item)
+	
 	$RespectSafeArea.connect("value_changed",Callable(self,"_on_RespectSafeArea_value_changed"))
 	
 	$BannerSizeHBoxContainer/BannerSize.selected = AdMobEditor.AdMobSettings.BANNER_SIZE.find(AdMobEditor.AdMobSettings.config.banner.size)

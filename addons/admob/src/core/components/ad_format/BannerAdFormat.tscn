@@ -8,23 +8,17 @@
 script = ExtResource("2")
 
 [node name="BannerSizeHBoxContainer" type="HBoxContainer" parent="." index="0"]
-offset_right = 1152.0
-offset_bottom = 26.0
+layout_mode = 2
 
 [node name="Label" type="Label" parent="BannerSizeHBoxContainer" index="0"]
-offset_right = 91.0
-offset_bottom = 26.0
+layout_mode = 2
 text = "Banner Size"
 
 [node name="BannerSize" type="OptionButton" parent="BannerSizeHBoxContainer" index="1"]
-offset_left = 95.0
-offset_right = 109.0
-offset_bottom = 26.0
+layout_mode = 2
 
 [node name="RespectSafeArea" type="CheckBox" parent="." index="1"]
-offset_top = 30.0
-offset_right = 1152.0
-offset_bottom = 61.0
+layout_mode = 2
 text = "Respect Safe Area3D (RECOMMEND TRUE)"
 script = ExtResource("3")
 
@@ -37,20 +31,15 @@ Read here: https://developers.google.com/admob/ios/x-ad-rendering"
 dialog_autowrap = true
 
 [node name="BannerShowInstantly" type="CheckBox" parent="." index="2"]
-offset_top = 65.0
-offset_right = 1152.0
-offset_bottom = 96.0
+layout_mode = 2
 text = "Show Banner Instantly"
 
 [node name="BannerOnTop" type="CheckBox" parent="." index="3"]
-offset_top = 100.0
-offset_right = 1152.0
-offset_bottom = 131.0
+layout_mode = 2
 text = "Banner On Top"
 
 [node name="UnitIds" parent="." index="4"]
-offset_top = 135.0
-offset_bottom = 201.0
+layout_mode = 2
 
 [connection signal="item_selected" from="BannerSizeHBoxContainer/BannerSize" to="." method="_on_BannerSize_item_selected"]
 [connection signal="pressed" from="RespectSafeArea" to="RespectSafeArea" method="_on_RespectSafeArea_pressed"]
