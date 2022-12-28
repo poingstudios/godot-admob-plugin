@@ -21,6 +21,7 @@ grow_vertical = 2
 script = ExtResource("1")
 
 [node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -29,6 +30,7 @@ grow_vertical = 2
 color = Color(1, 0.541176, 0, 1)
 
 [node name="Poing" type="TextureRect" parent="Background"]
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -42,6 +44,7 @@ texture = ExtResource("2_qpj7y")
 ignore_texture_size = true
 
 [node name="AdMob" type="TextureRect" parent="Background"]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -57,6 +60,7 @@ texture = ExtResource("3_unb2c")
 stretch_mode = 6
 
 [node name="Advice" type="RichTextLabel" parent="Background"]
+layout_mode = 1
 anchors_preset = -1
 anchor_top = 0.0933333
 anchor_right = 1.0
@@ -66,6 +70,7 @@ text = "[wave]"
 scroll_following = true
 
 [node name="TabContainer" type="TabContainer" parent="Background"]
+layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.144965
 anchor_top = 0.546296
@@ -75,126 +80,120 @@ theme = SubResource("3")
 metadata/_edit_use_anchors_ = true
 
 [node name="AdFormats" type="VBoxContainer" parent="Background/TabContainer"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 31.0
+layout_mode = 2
 alignment = 1
 
 [node name="Banner" type="HBoxContainer" parent="Background/TabContainer/AdFormats"]
-offset_top = 162.0
-offset_right = 513.0
-offset_bottom = 193.0
+layout_mode = 2
 size_flags_vertical = 0
 alignment = 1
 
 [node name="EnableBanner" type="Button" parent="Background/TabContainer/AdFormats/Banner"]
-offset_right = 254.0
-offset_bottom = 31.0
+layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "ENABLE BANNER"
 
 [node name="DisableBanner" type="Button" parent="Background/TabContainer/AdFormats/Banner"]
-offset_left = 258.0
-offset_right = 513.0
-offset_bottom = 31.0
+layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "DISABLE BANNER"
 
 [node name="Banner2" type="HBoxContainer" parent="Background/TabContainer/AdFormats"]
-offset_top = 197.0
-offset_right = 513.0
-offset_bottom = 228.0
+layout_mode = 2
 size_flags_vertical = 0
 alignment = 1
 
 [node name="ShowBanner" type="Button" parent="Background/TabContainer/AdFormats/Banner2"]
-offset_right = 254.0
-offset_bottom = 31.0
+layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "SHOW BANNER"
 
 [node name="HideBanner" type="Button" parent="Background/TabContainer/AdFormats/Banner2"]
-offset_left = 258.0
-offset_right = 513.0
-offset_bottom = 31.0
+layout_mode = 2
 size_flags_horizontal = 3
 disabled = true
 text = "HIDE BANNER"
 
 [node name="Interstitial" type="Button" parent="Background/TabContainer/AdFormats"]
-offset_top = 232.0
-offset_right = 513.0
-offset_bottom = 263.0
+layout_mode = 2
 disabled = true
 text = "INTERSTITIAL"
 
 [node name="Rewarded" type="Button" parent="Background/TabContainer/AdFormats"]
-offset_top = 267.0
-offset_right = 513.0
-offset_bottom = 298.0
+layout_mode = 2
 disabled = true
 text = "REWARDED"
 
 [node name="RewardedInterstitial" type="Button" parent="Background/TabContainer/AdFormats"]
-offset_top = 302.0
-offset_right = 513.0
-offset_bottom = 333.0
+layout_mode = 2
 disabled = true
 text = "REWARDED INTERSTITIAL"
 
 [node name="Banner" type="VBoxContainer" parent="Background/TabContainer"]
 visible = false
+layout_mode = 2
 
 [node name="Control" type="Control" parent="Background/TabContainer/Banner"]
-layout_mode = 3
-anchors_preset = 0
+layout_mode = 2
 
 [node name="Position" type="CheckBox" parent="Background/TabContainer/Banner"]
+layout_mode = 2
 text = "Position checked TOP"
 
 [node name="RespectSafeArea" type="CheckBox" parent="Background/TabContainer/Banner"]
+layout_mode = 2
 text = "Respect Safe Area3D (RECOMMENDED TRUE)"
 
 [node name="BannerSizes" type="ItemList" parent="Background/TabContainer/Banner"]
+layout_mode = 2
 auto_height = true
 same_column_width = true
 
 [node name="UMP" type="VBoxContainer" parent="Background/TabContainer"]
 visible = false
+layout_mode = 2
 alignment = 1
 
 [node name="RequestUserConsent" type="Button" parent="Background/TabContainer/UMP"]
+layout_mode = 2
 disabled = true
 text = "REQUEST USER CONSENT"
 
 [node name="ResetConsentState" type="Button" parent="Background/TabContainer/UMP"]
+layout_mode = 2
 disabled = true
 text = "RESET CONSENT STATE"
 
 [node name="General" type="VBoxContainer" parent="Background/TabContainer"]
 visible = false
+layout_mode = 2
 alignment = 1
 
 [node name="IsInitialized" type="Button" parent="Background/TabContainer/General"]
+layout_mode = 2
 text = "is_initialized()"
 
 [node name="IsBannerLoaded" type="Button" parent="Background/TabContainer/General"]
+layout_mode = 2
 text = "is_banner_loaded()"
 
 [node name="IsInterstitialLoaded" type="Button" parent="Background/TabContainer/General"]
+layout_mode = 2
 text = "is_interstitial_loaded()"
 
 [node name="IsRewardedLoaded" type="Button" parent="Background/TabContainer/General"]
+layout_mode = 2
 text = "is_rewarded_loaded()"
 
 [node name="IsRewardedInterstitialLoaded" type="Button" parent="Background/TabContainer/General"]
+layout_mode = 2
 text = "is_rewarded_interstitial_loaded()"
 
 [node name="MusicCheckButton" type="CheckButton" parent="Background"]
+layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
