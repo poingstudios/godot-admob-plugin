@@ -1,9 +1,7 @@
 name: Build Pull Request Godot Editor
 
 on:
-  pull_request:
-    types: [opened]
-
+  [pull_request]
 
 jobs:
   generate-build:
