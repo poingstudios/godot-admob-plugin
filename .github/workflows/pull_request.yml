@@ -1,0 +1,49 @@
+name: Build Pull Request Godot Editor
+
+on:
+  [pull_request]
+
+jobs:
+  generate-build:
+    name: Generate Build of Pull Request
+    runs-on: "ubuntu-latest"
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+
+    - name: Define Godot version based on branch name
+      run: |
+        GODOT_VERSION="${{ github.base_ref }}"
+
+        if [ "${{ github.base_ref }}" = "master" ]; then
+          GODOT_VERSION=4.0
+        elif [ "${{ github.base_ref }}" = "3.5" ]; then
+          GODOT_VERSION=3.5
+        fi
+
+        echo "GODOT_VERSION=${GODOT_VERSION}" >> $GITHUB_ENV
+
+    - uses: paulhatch/semantic-version@v5.0.0
+      id: version
+      with:
+        tag_prefix: "v"
+        major_pattern: "BREAKING CHANGE:"
+        minor_pattern: "feat:"
+        version_format: "v${major}.${minor}.${patch}-alpha.${increment}"
+
+    - name: Compress .zip
+      run: |
+        git archive --format=zip --output compress.zip HEAD
+
+    - name: Uncompress .zip to Artifact
+      run: |
+        unzip compress.zip -d zip_extract_folder/
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3.1.1
+      with:
+        name: godot-${{env.GODOT_VERSION}}-admob-editor-${{ steps.version.outputs.version }}
+        path: zip_extract_folder/
