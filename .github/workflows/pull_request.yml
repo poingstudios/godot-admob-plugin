@@ -14,10 +14,17 @@ jobs:
         fetch-depth: 0
 
 
-    - name: Get branch name
+    - name: Define Godot version based on branch name
       run: |
-        echo ${{ github.head_ref }}
-        echo ${{ github.base_ref }}
+        GODOT_VERSION=""
+
+        if [ ${{ github.base_ref }} = "master" ]; then
+          GODOT_VERSION=4.0
+        elif [ ${{ github.base_ref }} = "3.5" ]; then
+          GODOT_VERSION=3.5
+        fi
+
+        echo "GODOT_VERSION=${GODOT_VERSION}" >> $GITHUB_ENV
 
     - uses: paulhatch/semantic-version@v5.0.0
       id: version
@@ -38,5 +45,5 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.1
       with:
-        name: godot-admob-editor-${{ steps.version.outputs.version }}
+        name: godot-${{env.CURRENT_GODOT_VERSION}}-admob-editor-${{ steps.version.outputs.version }}
         path: zip_extract_folder/
