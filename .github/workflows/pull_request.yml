@@ -11,17 +11,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     
-    - name: Echo test
-      run: echo "test"
-    
     - name: Compress .zip
       run: |
-        ls
         git archive --format=zip --output compress.zip HEAD
 
+    - name: Uncompress .zip to Artifact
+      run: |
+        unzip compress.zip -d zip_extract_folder
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.1
       with:
-        path: compress.zip
-        
-
+        name: godot-admob-editor-v0.0.0.0
+        path: zip_extract_folder/
