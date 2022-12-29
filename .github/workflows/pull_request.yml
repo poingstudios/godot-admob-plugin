@@ -10,7 +10,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    
+
+    - uses: paulhatch/semantic-version@v5.0.0
+      id: version
+      with:
+        tag_prefix: "v"
+        major_pattern: "BREAKING CHANGE:"
+        minor_pattern: "feat:"
+        version_format: "${major}.${minor}.${patch}-alpha.${increment}"
+
     - name: Compress .zip
       run: |
         git archive --format=zip --output compress.zip HEAD
@@ -18,8 +26,9 @@ jobs:
     - name: Uncompress .zip to Artifact
       run: |
         unzip compress.zip -d zip_extract_folder
+
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.1
       with:
-        name: godot-admob-editor-v0.0.0.0
+        name: godot-admob-editor-${{ steps.version.outputs.version }}
         path: zip_extract_folder/
