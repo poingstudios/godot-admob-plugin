@@ -1,4 +1,4 @@
-name: Build Android
+name: Build Pull Request Godot Editor
 
 on:
   pull_request:
@@ -11,6 +11,6 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-      name: Echo test
+    - name: Echo test
       run: echo "test"
 
