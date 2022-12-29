@@ -10,6 +10,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
 
     - uses: paulhatch/semantic-version@v5.0.0
       id: version
@@ -17,7 +19,7 @@ jobs:
         tag_prefix: "v"
         major_pattern: "BREAKING CHANGE:"
         minor_pattern: "feat:"
-        version_format: "v${major}.${minor}.${patch}"
+        version_format: "v${major}.${minor}.${patch}-alpha.${increment}"
 
     - name: Compress .zip
       run: |
