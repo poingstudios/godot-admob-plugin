@@ -11,5 +11,6 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
+      name: Echo test
       run: echo "test"
 
