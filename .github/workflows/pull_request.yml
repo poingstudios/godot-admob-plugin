@@ -1,0 +1,16 @@
+name: Build Android
+
+on:
+  pull_request:
+    types: [opened]
+
+
+jobs:
+  generate-build:
+    name: Generate Build of Pull Request
+    runs-on: "ubuntu-latest"
+
+    steps:
+    - uses: actions/checkout@v3
+      run: echo "test"
+
