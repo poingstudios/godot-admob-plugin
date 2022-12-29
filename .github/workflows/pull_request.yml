@@ -15,7 +15,9 @@ jobs:
 
 
     - name: Get branch name
-      run: echo ${{ github.head_ref }}
+      run: |
+        echo ${{ github.head_ref }}
+        echo ${{ github.base_ref }}
 
     - uses: paulhatch/semantic-version@v5.0.0
       id: version
