@@ -29,7 +29,7 @@ jobs:
     - uses: paulhatch/semantic-version@v5.0.0
       id: version
       with:
-        tag_prefix: "v"
+        tag_prefix: "v4"
         major_pattern: "BREAKING CHANGE:"
         minor_pattern: "feat:"
         version_format: "testv${major}.${minor}.${patch}-alpha.${increment}"
