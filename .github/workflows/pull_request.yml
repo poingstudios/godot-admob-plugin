@@ -32,7 +32,7 @@ jobs:
       with:
         tag_prefix: "v"
         use_branches: "true"
-        branch: "3.5"
+        branch: "master"
         major_pattern: "BREAKING CHANGE:"
         minor_pattern: "feat:"
         version_format: "v${major}.${minor}.${patch}-alpha.${increment}"
