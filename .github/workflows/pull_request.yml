@@ -33,6 +33,7 @@ jobs:
         major_pattern: "BREAKING CHANGE:"
         minor_pattern: "feat:"
         version_format: "v${major}.${minor}.${patch}-alpha.${increment}"
+        use_branches: true
 
     - name: Compress .zip
       run: |
