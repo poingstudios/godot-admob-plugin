@@ -33,8 +33,7 @@ jobs:
         major_pattern: "BREAKING CHANGE:"
         minor_pattern: "feat:"
         version_format: "v${major}.${minor}.${patch}-alpha.${increment}"
-        branch: "3.5"
-        namespace: "godot"
+        namespace: "v"
 
     - name: Compress .zip
       run: |
@@ -47,5 +46,5 @@ jobs:
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.1
       with:
-        name: godot-${{env.GODOT_VERSION}}-admob-editor-${{ steps.version.outputs.version }}
+        name: godot${{env.GODOT_VERSION}}-admob-editor-${{ steps.version.outputs.version }}
         path: zip_extract_folder/
