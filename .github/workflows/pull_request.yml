@@ -34,7 +34,7 @@ jobs:
         minor_pattern: "feat:"
         version_format: "v${major}.${minor}.${patch}-alpha.${increment}"
         change_path: "."
-        namespace: "v"
+        namespace: "vvvv"
 
     - name: Compress .zip
       run: |
