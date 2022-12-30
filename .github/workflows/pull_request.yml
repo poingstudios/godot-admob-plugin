@@ -19,17 +19,18 @@ jobs:
         GODOT_VERSION="${{ github.base_ref }}"
 
         if [ "${{ github.base_ref }}" = "master" ]; then
-          GODOT_VERSION=4.0
-        elif [ "${{ github.base_ref }}" = "3.5" ]; then
-          GODOT_VERSION=3.5
+          GODOT_VERSION=4
+        elif [ "${{ github.base_ref }}" = "godot3" ]; then
+          GODOT_VERSION=3
         fi
 
         echo "GODOT_VERSION=${GODOT_VERSION}" >> $GITHUB_ENV
+        echo "TAG_PREFIX=godot${GODOT_VERSION}-v" >> $GITHUB_ENV
 
     - uses: paulhatch/semantic-version@v5.0.0
       id: version
       with:
-        tag_prefix: "v"
+        tag_prefix: "${{env.TAG_PREFIX}}"
         major_pattern: "BREAKING CHANGE:"
         minor_pattern: "feat:"
         version_format: "v${major}.${minor}.${patch}-alpha.${increment}"
