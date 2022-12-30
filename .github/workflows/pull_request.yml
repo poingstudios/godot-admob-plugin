@@ -25,7 +25,7 @@ jobs:
         fi
 
         echo "GODOT_VERSION=${GODOT_VERSION}" >> $GITHUB_ENV
-        echo "TAG_PREFIX=godot${GODOT_VERSION}/v" >> $GITHUB_ENV
+        echo "TAG_PREFIX=godot3/v" >> $GITHUB_ENV
 
     - uses: paulhatch/semantic-version@v5.0.0
       id: version
