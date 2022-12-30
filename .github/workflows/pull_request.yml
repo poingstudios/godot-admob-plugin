@@ -36,6 +36,12 @@ jobs:
         minor_pattern: "feat:"
         version_format: "v${major}.${minor}.${patch}-alpha.${increment}"
 
+    - name: Change version
+      run: |
+        REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE='(?<=version=")[^"]+'
+
+        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{ steps.version.outputs.version }}/g" plugin.cfg
+
     - name: Compress .zip
       run: |
         git archive --format=zip --output compress.zip HEAD
