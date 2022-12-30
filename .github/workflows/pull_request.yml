@@ -19,9 +19,9 @@ jobs:
         GODOT_VERSION="${{ github.base_ref }}"
 
         if [ "${{ github.base_ref }}" = "master" ]; then
-          GODOT_VERSION=4
-        elif [ "${{ github.base_ref }}" = "3.5" ]; then
           GODOT_VERSION=3
+        elif [ "${{ github.base_ref }}" = "godot3" ]; then
+          GODOT_VERSION=4
         fi
 
         echo "GODOT_VERSION=${GODOT_VERSION}" >> $GITHUB_ENV
