@@ -32,7 +32,7 @@ jobs:
         tag_prefix: "v"
         major_pattern: "BREAKING CHANGE:"
         minor_pattern: "feat:"
-        version_format: "v${major}.${minor}.${patch}-alpha.${increment}"
+        version_format: "testv${major}.${minor}.${patch}-alpha.${increment}"
 
     - name: Compress .zip
       run: |
