@@ -33,8 +33,7 @@ jobs:
         major_pattern: "BREAKING CHANGE:"
         minor_pattern: "feat:"
         version_format: "v${major}.${minor}.${patch}-alpha.${increment}"
-        branch: master
-        use_branches: true
+        namespace: godot
 
     - name: Compress .zip
       run: |
