@@ -27,7 +27,8 @@ jobs:
         echo "GODOT_VERSION=${GODOT_VERSION}" >> $GITHUB_ENV
         echo "TAG_PREFIX=godot${GODOT_VERSION}-v" >> $GITHUB_ENV
 
-    - uses: paulhatch/semantic-version@v5.0.0
+    - name: Get plugin version
+      uses: paulhatch/semantic-version@v5.0.0
       id: version
       with:
         tag_prefix: "${{env.TAG_PREFIX}}"
