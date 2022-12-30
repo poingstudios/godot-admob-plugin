@@ -25,14 +25,15 @@ jobs:
         fi
 
         echo "GODOT_VERSION=${GODOT_VERSION}" >> $GITHUB_ENV
+        echo "TAG_PREFIX=godot${{env.GODOT_VERSION}}-v"
 
     - uses: paulhatch/semantic-version@v5.0.0
       id: version
       with:
-        tag_prefix: "v"
+        tag_prefix: "${{env.TAG_PREFIX}}"
         major_pattern: "BREAKING CHANGE:"
         minor_pattern: "feat:"
-        version_format: "${{env.GODOT_VERSION}}${{env.GODOT_VERSION}}v${major}.${minor}.${patch}-alpha.${increment}"
+        version_format: "v${major}.${minor}.${patch}-alpha.${increment}"
 
     - name: Compress .zip
       run: |
