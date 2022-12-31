@@ -12,6 +12,7 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
+        token: ${{ secrets.ADMOB_GODOT_EDITOR_WORKFLOW }}
 
     - name: Verify current inputs godot_version
       run: |
