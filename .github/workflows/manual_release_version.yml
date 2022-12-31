@@ -1,0 +1,17 @@
+name: Manual Release Version
+
+on: workflow_dispatch
+
+jobs:
+  release-version:
+    name: Manual Release Version
+    runs-on: "ubuntu-latest"
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Verify current inputs godot_version
+      run: |
+        echo ${{ github.base_ref }}
+        echo ${{ github.ref_name }}
+        echo ${{ github.event.base_ref }}
