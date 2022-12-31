@@ -1,3 +1,6 @@
+# Godot 4+ specific ignores
+.godot/
+
 # Ignore test files
 .DS_STORE
 
