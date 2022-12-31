@@ -62,3 +62,4 @@ jobs:
         generateReleaseNotes: true
         commit: ${{ steps.auto-commit-action.outputs.commit_hash }}
         tag: ${{env.TAG_PREFIX}}${{ steps.version.outputs.version }}
+        
