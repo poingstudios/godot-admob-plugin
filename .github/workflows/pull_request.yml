@@ -42,6 +42,7 @@ jobs:
 
         perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{ steps.version.outputs.version }}/g" addons/admob/plugin.cfg
 
+        cat addons/admob/plugin.cfg
     - name: Compress .zip
       run: |
         git archive --format=zip --output compress.zip HEAD
