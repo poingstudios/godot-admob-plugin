@@ -1,6 +1,7 @@
 name: Manual Release Version
 
-on: workflow_dispatch
+on: [workflow_dispatch]
+
 
 jobs:
   release-version:
@@ -8,10 +9,55 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-    - uses: actions/checkout@v2
-    
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
     - name: Verify current inputs godot_version
       run: |
-        echo ${{ github.base_ref }}
-        echo ${{ github.ref_name }}
-        echo ${{ github.event.base_ref }}
+        #BRANCH_NAME=${{ github.ref_name }}
+
+    - name: Define Godot version based on branch name
+      run: |
+        GODOT_VERSION=""
+
+        if [ "${{ github.ref_name }}" = "master" ]; then
+          GODOT_VERSION=4
+        elif [ "${{ github.ref_name }}" = "godot3" ]; then
+          GODOT_VERSION=3
+        else
+          echo "ERROR! Check if branch name matches with the pattern: godot?" && exit 1
+        fi
+
+        echo "GODOT_VERSION=${GODOT_VERSION}" >> $GITHUB_ENV
+        echo "TAG_PREFIX=godot${GODOT_VERSION}-" >> $GITHUB_ENV
+
+    - name: Get plugin version
+      uses: paulhatch/semantic-version@v5.0.0
+      id: version
+      with:
+        tag_prefix: "${{env.TAG_PREFIX}}v"
+        major_pattern: "BREAKING CHANGE:"
+        minor_pattern: "feat:"
+        version_format: "v${major}.${minor}.${patch}"
+    
+    - name: Change version
+      run: |
+        REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE='(?<=version=")[^"]+'
+
+        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{ steps.version.outputs.version }}/g" addons/admob/plugin.cfg
+
+        cat addons/admob/plugin.cfg
+
+    - name: Git Auto Commit
+      uses: stefanzweifel/git-auto-commit-action@v4.15.0
+      id: auto-commit-action
+      with:
+        commit_message: Auto changed versiond with CI/CD
+    
+    - name: Create Release
+      uses: ncipollo/release-action@v1.12.0
+      with:
+        generateReleaseNotes: true
+        commit: ${{ steps.auto-commit-action.outputs.commit_hash }}
+        tag: ${{env.TAG_PREFIX}}${{ steps.version.outputs.version }}
