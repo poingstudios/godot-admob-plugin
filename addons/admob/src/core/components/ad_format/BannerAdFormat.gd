@@ -22,5 +22,5 @@ func _on_BannerShowInstantly_pressed():
 func _on_BannerOnTop_pressed():
 	AdMobEditor.AdMobSettings.config.banner.position = int($BannerOnTop.pressed)
 
-func _on_RespectSafeArea_value_changed(value : bool):
+func _on_respect_safe_area_value_changed(value):
 	AdMobEditor.AdMobSettings.config.banner.respect_safe_area = value

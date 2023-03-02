@@ -41,7 +41,7 @@ offset_top = -100.0
 grow_horizontal = 0
 grow_vertical = 0
 texture = ExtResource("2_qpj7y")
-ignore_texture_size = true
+expand_mode = 1
 
 [node name="AdMob" type="TextureRect" parent="Background"]
 layout_mode = 1
