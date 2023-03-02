@@ -189,7 +189,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_rabx0")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxFlat_d4upu")
-text = "Version: 1.3.2"
+text = "Version: v1.0.0"
 script = ExtResource("15")
 
 [connection signal="pressed" from="TopPanel/Icons/AndroidButton" to="." method="_on_AndroidButton_pressed"]

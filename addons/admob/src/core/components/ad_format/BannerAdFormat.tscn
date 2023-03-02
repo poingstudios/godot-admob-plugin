@@ -43,6 +43,7 @@ layout_mode = 2
 
 [connection signal="item_selected" from="BannerSizeHBoxContainer/BannerSize" to="." method="_on_BannerSize_item_selected"]
 [connection signal="pressed" from="RespectSafeArea" to="RespectSafeArea" method="_on_RespectSafeArea_pressed"]
+[connection signal="value_changed" from="RespectSafeArea" to="." method="_on_respect_safe_area_value_changed"]
 [connection signal="confirmed" from="RespectSafeArea/ConfirmationDialog" to="RespectSafeArea" method="_on_ConfirmationDialog_confirmed"]
 [connection signal="pressed" from="BannerShowInstantly" to="." method="_on_BannerShowInstantly_pressed"]
 [connection signal="pressed" from="BannerOnTop" to="." method="_on_BannerOnTop_pressed"]

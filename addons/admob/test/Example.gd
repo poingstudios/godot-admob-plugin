@@ -260,12 +260,12 @@ func _on_RequestUserConsent_pressed() -> void:
 
 
 func _on_Position_pressed() -> void:
-	MobileAds.config.banner.position = BannerPosition.pressed
+	MobileAds.config.banner.position = BannerPosition.button_pressed
 	if MobileAds.get_is_banner_loaded():
 		MobileAds.load_banner()
 
 func _on_RespectSafeArea_pressed():
-	MobileAds.config.banner.respect_safe_area = RespectSafeArea.pressed
+	MobileAds.config.banner.respect_safe_area = RespectSafeArea.button_pressed
 	if MobileAds.get_is_banner_loaded():
 		MobileAds.load_banner()
 
