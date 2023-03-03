@@ -19,13 +19,13 @@ layout_mode = 2
 
 [node name="RespectSafeArea" type="CheckBox" parent="." index="1"]
 layout_mode = 2
-text = "Respect Safe Area3D (RECOMMEND TRUE)"
+text = "Respect Safe Area (RECOMMEND TRUE)"
 script = ExtResource("3")
 
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="RespectSafeArea" index="0"]
 dialog_text = "IT'S NOT RECOMMENDED LEAVE THIS AS FALSE
 
-According to Google AdMob documentation for iOS: Banner ads must be placed in the \"Safe Area3D\" to avoid being obscured by rounded corners, sensor housing, and the Home indicator. 
+According to Google AdMob documentation for iOS: Banner ads must be placed in the \"Safe Area\" to avoid being obscured by rounded corners, sensor housing, and the Home indicator. 
 
 Read here: https://developers.google.com/admob/ios/x-ad-rendering"
 dialog_autowrap = true
