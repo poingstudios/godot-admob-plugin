@@ -49,34 +49,6 @@ text = "OPEN DIRECTORY"
 [node name="AndroidChangeDirectoryFileDialog" type="FileDialog" parent="TabContainer/Android/ChangeDirectoryHBoxContainer"]
 mode = 2
 
-[node name="VersionHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="TabContainer/Android/VersionHBoxContainer"]
-layout_mode = 2
-text = "Version:"
-
-[node name="AndroidVersion" type="OptionButton" parent="TabContainer/Android/VersionHBoxContainer"]
-layout_mode = 2
-item_count = 3
-selected = 0
-popup/item_0/text = "CURRENT"
-popup/item_0/id = 0
-popup/item_1/text = "v3.5.1"
-popup/item_1/id = 1
-popup/item_2/text = "v3.5"
-popup/item_2/id = 2
-
-[node name="TargetHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="TabContainer/Android/TargetHBoxContainer"]
-layout_mode = 2
-text = "Target:"
-
-[node name="MenuButton" type="OptionButton" parent="TabContainer/Android/TargetHBoxContainer"]
-layout_mode = 2
-
 [node name="DownloadAndroidTemplate" type="Button" parent="TabContainer/Android"]
 layout_mode = 2
 text = "Download Android Template"
@@ -104,46 +76,6 @@ text = "OPEN DIRECTORY"
 size = Vector2i(392, 162)
 mode = 2
 
-[node name="VersionHBoxContainer" type="HBoxContainer" parent="TabContainer/iOS"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="TabContainer/iOS/VersionHBoxContainer"]
-layout_mode = 2
-text = "Version:"
-
-[node name="iOSVersion" type="OptionButton" parent="TabContainer/iOS/VersionHBoxContainer"]
-layout_mode = 2
-item_count = 14
-selected = 0
-popup/item_0/text = "CURRENT"
-popup/item_0/id = 0
-popup/item_1/text = "v3.3.1"
-popup/item_1/id = 1
-popup/item_2/text = "v3.3.2"
-popup/item_2/id = 2
-popup/item_3/text = "v3.3.3"
-popup/item_3/id = 3
-popup/item_4/text = "v3.3.4"
-popup/item_4/id = 4
-popup/item_5/text = "v3.3"
-popup/item_5/id = 5
-popup/item_6/text = "v3.4.1"
-popup/item_6/id = 6
-popup/item_7/text = "v3.4.2"
-popup/item_7/id = 7
-popup/item_8/text = "v3.4.3"
-popup/item_8/id = 8
-popup/item_9/text = "v3.4.4"
-popup/item_9/id = 9
-popup/item_10/text = "v3.4.5"
-popup/item_10/id = 10
-popup/item_11/text = "v3.4"
-popup/item_11/id = 11
-popup/item_12/text = "v3.5.1"
-popup/item_12/id = 12
-popup/item_13/text = "v3.5"
-popup/item_13/id = 13
-
 [node name="DownloadiOSTemplate" type="Button" parent="TabContainer/iOS"]
 layout_mode = 2
 text = "Download iOS Template"
@@ -160,7 +92,6 @@ layout_mode = 2
 layout_mode = 2
 bbcode_enabled = true
 text = "[b]You don't have connection to the Server: https://github.com/, please verify your connection in order to Download[/b]"
-fit_content_height = true
 scroll_active = false
 
 [node name="VerifyNetworkGithub" type="HTTPRequest" parent="."]
@@ -172,10 +103,6 @@ autostart = true
 
 [node name="VersionSupportedHTTPRequest" parent="." instance=ExtResource("3")]
 
-[node name="VersionsAndroidSupportedHTTPRequest" type="HTTPRequest" parent="."]
-
-[node name="VersionsiOSSupportedHTTPRequest" type="HTTPRequest" parent="."]
-
 [connection signal="request_completed" from="TabContainer/HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
 [connection signal="pressed" from="TabContainer/Android/ChangeDirectoryHBoxContainer/AndroidChangeDirectoryButton" to="." method="_on_AndroidChangeDirectoryButton_pressed"]
 [connection signal="pressed" from="TabContainer/Android/ChangeDirectoryHBoxContainer/AndroidOpenDirectoryButton" to="." method="_on_AndroidOpenDirectoryButton_pressed"]
@@ -186,9 +113,7 @@ autostart = true
 [connection signal="dir_selected" from="TabContainer/iOS/ChangeDirectoryHBoxContainer/iOSChangeDirectoryFileDialog" to="." method="_on_iOSChangeDirectoryFileDialog_dir_selected"]
 [connection signal="pressed" from="TabContainer/iOS/DownloadiOSTemplate" to="." method="_on_DownloadiOSTemplate_pressed"]
 [connection signal="pressed" from="TabContainer/iOS/DownloadGoogleMobileAdsSdkiOS" to="." method="_on_DownloadGoogleMobileAdsSdkiOS_pressed"]
-[connection signal="network_status_changed" from="VerifyNetworkGithub" to="." method="_on_VerifyNetworkGithub_network_status_changed"]
+[connection signal="network_status_changed" from="VerifyNetworkGithub" to="." method="_on_verify_network_github_network_status_changed"]
 [connection signal="request_completed" from="VerifyNetworkGithub" to="VerifyNetworkGithub" method="_on_VerifyNetworkGithub_request_completed"]
 [connection signal="timeout" from="VerifyNetworkGithub/VerifyAgainTimer" to="VerifyNetworkGithub" method="_on_VerifyAgainTimer_timeout"]
 [connection signal="supported_version_changed" from="VersionSupportedHTTPRequest" to="." method="_on_VersionSupportedHTTPRequest_supported_version_changed"]
-[connection signal="request_completed" from="VersionsAndroidSupportedHTTPRequest" to="." method="_on_VersionsAndroidSupportedHTTPRequest_request_completed"]
-[connection signal="request_completed" from="VersionsiOSSupportedHTTPRequest" to="." method="_on_VersionsiOSSupportedHTTPRequest_request_completed"]

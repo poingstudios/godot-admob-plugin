@@ -46,16 +46,18 @@ jobs:
       run: |
         REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE='(?<=version=")[^"]+'
 
-        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{ steps.version.outputs.version }}/g" addons/admob/plugin.cfg
+        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{env.TAG_PREFIX}}${{ steps.version.outputs.version }}/g" addons/admob/plugin.cfg
 
         cat addons/admob/plugin.cfg
 
     - name: Git Auto Commit
-      uses: stefanzweifel/git-auto-commit-action@v4.16.0
-      id: auto-commit-action
-      with:
-        commit_message: Auto changed version with CI/CD
-    
+      run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add .
+          git commit -m "Auto changed version with CI/CD"
+          git push
+
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
