@@ -145,7 +145,7 @@ text = "Position checked TOP"
 
 [node name="RespectSafeArea" type="CheckBox" parent="Background/TabContainer/Banner"]
 layout_mode = 2
-text = "Respect Safe Area3D (RECOMMENDED TRUE)"
+text = "Respect Safe Area (RECOMMENDED TRUE)"
 
 [node name="BannerSizes" type="ItemList" parent="Background/TabContainer/Banner"]
 layout_mode = 2
