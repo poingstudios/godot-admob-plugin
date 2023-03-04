@@ -44,9 +44,11 @@ jobs:
     
     - name: Change version
       run: |
+        echo "PLUGIN_VERSION=${{env.TAG_PREFIX}}${{ steps.version.outputs.version }}" >> $GITHUB_ENV
+
         REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE='(?<=version=")[^"]+'
 
-        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{env.TAG_PREFIX}}${{ steps.version.outputs.version }}/g" addons/admob/plugin.cfg
+        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{env.PLUGIN_VERSION}}/g" addons/admob/plugin.cfg
 
         cat addons/admob/plugin.cfg
 
@@ -58,9 +60,28 @@ jobs:
           git commit -m "Auto changed version with CI/CD"
           git push
 
+          echo "LAST_COMMIT_HASH=$(git log -1 --pretty=format:%H)" >> $GITHUB_ENV
+
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
         generateReleaseNotes: true
-        commit: ${{ steps.auto-commit-action.outputs.commit_hash }}
-        tag: ${{env.TAG_PREFIX}}${{ steps.version.outputs.version }}
+        commit: ${{env.LAST_COMMIT_HASH}}
+        tag: ${{env.PLUGIN_VERSION}}
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install requests
+      run: pip install requests
+      
+    - name: Upload new version to Godot Asset Library
+      env:
+        USERNAME: ${{ secrets.ASSET_LIBRARY_USERNAME }}
+        PASSWORD: ${{ secrets.ASSET_LIBRARY_PASSWORD }}
+        VERSION: ${{env.PLUGIN_VERSION}}
+        COMMIT_HASH: ${{env.LAST_COMMIT_HASH}}
+      run: |
+        python3 static/workflow_files/push.py
