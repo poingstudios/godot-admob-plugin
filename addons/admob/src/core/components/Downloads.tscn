@@ -44,7 +44,7 @@ __meta__ = {
 [node name="TabContainer" type="TabContainer" parent="."]
 margin_top = 87.0
 margin_right = 720.0
-margin_bottom = 215.0
+margin_bottom = 167.0
 
 [node name="HTTPRequest" type="HTTPRequest" parent="TabContainer"]
 
@@ -85,57 +85,14 @@ margin_bottom = 250.0
 rect_min_size = Vector2( 400, 250 )
 window_title = "Open a Directory"
 mode = 2
-current_dir = "res://addons/admob/downloads/android"
-current_path = "res://addons/admob/downloads/android/"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="VersionHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
+[node name="DownloadAndroidTemplate" type="Button" parent="TabContainer/Android"]
 margin_top = 24.0
 margin_right = 712.0
 margin_bottom = 44.0
-
-[node name="Label" type="Label" parent="TabContainer/Android/VersionHBoxContainer"]
-margin_top = 3.0
-margin_right = 52.0
-margin_bottom = 17.0
-text = "Version:"
-
-[node name="AndroidVersion" type="OptionButton" parent="TabContainer/Android/VersionHBoxContainer"]
-margin_left = 56.0
-margin_right = 143.0
-margin_bottom = 20.0
-text = "CURRENT"
-items = [ "CURRENT", null, false, 0, null, "v3.2.2", null, false, 1, null, "v3.2.3", null, false, 2, null, "v3.3.1", null, false, 3, null, "v3.3.2", null, false, 4, null, "v3.3.3", null, false, 5, null, "v3.3.4", null, false, 6, null, "v3.3", null, false, 7, null, "v3.4.1", null, false, 8, null, "v3.4.2", null, false, 9, null, "v3.4.3", null, false, 10, null, "v3.4.4", null, false, 11, null, "v3.4", null, false, 12, null ]
-selected = 0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TargetHBoxContainer" type="HBoxContainer" parent="TabContainer/Android"]
-margin_top = 48.0
-margin_right = 712.0
-margin_bottom = 68.0
-
-[node name="Label" type="Label" parent="TabContainer/Android/TargetHBoxContainer"]
-margin_top = 3.0
-margin_right = 43.0
-margin_bottom = 17.0
-text = "Target:"
-
-[node name="MenuButton" type="OptionButton" parent="TabContainer/Android/TargetHBoxContainer"]
-margin_left = 47.0
-margin_right = 134.0
-margin_bottom = 20.0
-text = "CURRENT"
-items = [ "CURRENT", null, false, 0, null, "STANDARD", null, false, 1, null, "MONO", null, false, 2, null ]
-selected = 0
-
-[node name="DownloadAndroidTemplate" type="Button" parent="TabContainer/Android"]
-margin_top = 72.0
-margin_right = 712.0
-margin_bottom = 92.0
 text = "Download Android Template"
 
 [node name="iOS" type="VBoxContainer" parent="TabContainer"]
@@ -143,78 +100,53 @@ visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 4.0
-margin_top = 24.0
-margin_right = 599.0
-margin_bottom = 354.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0
 
 [node name="ChangeDirectoryHBoxContainer" type="HBoxContainer" parent="TabContainer/iOS"]
-margin_right = 1690.0
-margin_bottom = 250.0
+margin_right = 683.0
+margin_bottom = 20.0
 
 [node name="DownloadDirectoryLabel" type="Label" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
-margin_top = 118.0
+margin_top = 3.0
 margin_right = 411.0
-margin_bottom = 132.0
+margin_bottom = 17.0
 text = "Current Download Directory: res://addons/admob/downloads/ios"
 
 [node name="iOSChangeDirectoryButton" type="Button" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
 margin_left = 415.0
 margin_right = 556.0
-margin_bottom = 250.0
+margin_bottom = 20.0
 text = "CHANGE DIRECTORY"
 
 [node name="iOSOpenDirectoryButton" type="Button" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
 margin_left = 560.0
 margin_right = 683.0
-margin_bottom = 250.0
+margin_bottom = 20.0
 text = "OPEN DIRECTORY"
 
 [node name="iOSChangeDirectoryFileDialog" type="FileDialog" parent="TabContainer/iOS/ChangeDirectoryHBoxContainer"]
-visible = true
 margin_left = 687.0
 margin_right = 1087.0
 margin_bottom = 250.0
 rect_min_size = Vector2( 400, 250 )
 window_title = "Open a Directory"
 mode = 2
-current_dir = "res://addons/admob/downloads/ios"
-current_path = "res://addons/admob/downloads/ios/"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VersionHBoxContainer" type="HBoxContainer" parent="TabContainer/iOS"]
-margin_top = 254.0
-margin_right = 1690.0
-margin_bottom = 274.0
-
-[node name="Label" type="Label" parent="TabContainer/iOS/VersionHBoxContainer"]
-margin_top = 3.0
-margin_right = 52.0
-margin_bottom = 17.0
-text = "Version:"
-
-[node name="iOSVersion" type="OptionButton" parent="TabContainer/iOS/VersionHBoxContainer"]
-margin_left = 56.0
-margin_right = 143.0
-margin_bottom = 20.0
-text = "CURRENT"
-items = [ "CURRENT", null, false, 0, null, "v3.3.1", null, false, 1, null, "v3.3.2", null, false, 2, null, "v3.3.3", null, false, 3, null, "v3.3.4", null, false, 4, null, "v3.3", null, false, 5, null, "v3.4.1", null, false, 6, null, "v3.4.2", null, false, 7, null, "v3.4.3", null, false, 8, null, "v3.4.4", null, false, 9, null, "v3.4", null, false, 10, null ]
-selected = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="DownloadiOSTemplate" type="Button" parent="TabContainer/iOS"]
-margin_top = 278.0
-margin_right = 1690.0
-margin_bottom = 298.0
+margin_top = 24.0
+margin_right = 683.0
+margin_bottom = 44.0
 text = "Download iOS Template"
 
 [node name="DownloadGoogleMobileAdsSdkiOS" type="Button" parent="TabContainer/iOS"]
-margin_top = 302.0
-margin_right = 1690.0
-margin_bottom = 322.0
+margin_top = 48.0
+margin_right = 683.0
+margin_bottom = 68.0
 text = "Download GoogleMobileAdsSdkiOS"
 
 [node name="DontHaveConnectionPanelContainer" type="PanelContainer" parent="."]
@@ -243,10 +175,6 @@ autostart = true
 
 [node name="VersionSupportedHTTPRequest" parent="." instance=ExtResource( 3 )]
 
-[node name="VersionsAndroidSupportedHTTPRequest" type="HTTPRequest" parent="."]
-
-[node name="VersionsiOSSupportedHTTPRequest" type="HTTPRequest" parent="."]
-
 [connection signal="request_completed" from="TabContainer/HTTPRequest" to="." method="_on_HTTPRequest_request_completed"]
 [connection signal="pressed" from="TabContainer/Android/ChangeDirectoryHBoxContainer/AndroidChangeDirectoryButton" to="." method="_on_AndroidChangeDirectoryButton_pressed"]
 [connection signal="pressed" from="TabContainer/Android/ChangeDirectoryHBoxContainer/AndroidOpenDirectoryButton" to="." method="_on_AndroidOpenDirectoryButton_pressed"]
@@ -261,5 +189,3 @@ autostart = true
 [connection signal="request_completed" from="VerifyNetworkGithub" to="VerifyNetworkGithub" method="_on_VerifyNetworkGithub_request_completed"]
 [connection signal="timeout" from="VerifyNetworkGithub/VerifyAgainTimer" to="VerifyNetworkGithub" method="_on_VerifyAgainTimer_timeout"]
 [connection signal="supported_version_changed" from="VersionSupportedHTTPRequest" to="." method="_on_VersionSupportedHTTPRequest_supported_version_changed"]
-[connection signal="request_completed" from="VersionsAndroidSupportedHTTPRequest" to="." method="_on_VersionsAndroidSupportedHTTPRequest_request_completed"]
-[connection signal="request_completed" from="VersionsiOSSupportedHTTPRequest" to="." method="_on_VersionsiOSSupportedHTTPRequest_request_completed"]
