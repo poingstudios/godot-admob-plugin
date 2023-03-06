@@ -40,11 +40,13 @@ jobs:
         major_pattern: "BREAKING CHANGE:"
         minor_pattern: "feat:"
         version_format: "v${major}.${minor}.${patch}"
-    
-    - name: Change version
+
+    - name: Set PLUGIN_VERSION on GITHUB_ENV    
       run: |
         echo "PLUGIN_VERSION=${{env.TAG_PREFIX}}${{ steps.version.outputs.version }}" >> $GITHUB_ENV
 
+    - name: Change version
+      run: |
         REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE='(?<=version=")[^"]+'
 
         perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{env.PLUGIN_VERSION}}/g" addons/admob/plugin.cfg
