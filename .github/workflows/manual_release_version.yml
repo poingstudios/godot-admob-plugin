@@ -12,7 +12,6 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-        token: ${{ secrets.ADMOB_GODOT_EDITOR_WORKFLOW }}
 
     - name: Verify current inputs godot_version
       run: |
@@ -44,21 +43,44 @@ jobs:
     
     - name: Change version
       run: |
+        echo "PLUGIN_VERSION=${{env.TAG_PREFIX}}${{ steps.version.outputs.version }}" >> $GITHUB_ENV
+
         REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE='(?<=version=")[^"]+'
 
-        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{ steps.version.outputs.version }}/g" addons/admob/plugin.cfg
+        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{env.PLUGIN_VERSION}}/g" addons/admob/plugin.cfg
 
         cat addons/admob/plugin.cfg
 
     - name: Git Auto Commit
-      uses: stefanzweifel/git-auto-commit-action@v4.16.0
-      id: auto-commit-action
-      with:
-        commit_message: Auto changed version with CI/CD
-    
+      run: |
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add .
+          git commit -m "Auto changed version with CI/CD"
+          git push
+
+          echo "LAST_COMMIT_HASH=$(git log -1 --pretty=format:%H)" >> $GITHUB_ENV
+
     - name: Create Release
       uses: ncipollo/release-action@v1.12.0
       with:
         generateReleaseNotes: true
-        commit: ${{ steps.auto-commit-action.outputs.commit_hash }}
-        tag: ${{env.TAG_PREFIX}}${{ steps.version.outputs.version }}
+        commit: ${{env.LAST_COMMIT_HASH}}
+        tag: ${{env.PLUGIN_VERSION}}
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+
+    - name: Install requests
+      run: pip install requests
+      
+    - name: Upload new version to Godot Asset Library
+      env:
+        USERNAME: ${{ secrets.ASSET_LIBRARY_USERNAME }}
+        PASSWORD: ${{ secrets.ASSET_LIBRARY_PASSWORD }}
+        VERSION: ${{env.PLUGIN_VERSION}}
+        COMMIT_HASH: ${{env.LAST_COMMIT_HASH}}
+      run: |
+        python3 static/workflow_files/push.py
