@@ -13,17 +13,16 @@ jobs:
     steps:
     - uses: actions/checkout@v3.3.0
 
-    steps:
     - name: Verify if has the correct version in order to publish
       run: |
-      VERSION=$(grep version addons/admob/plugin.cfg | cut -d'=' -f2 | sed 's/"//g')
+        VERSION=$(grep version addons/admob/plugin.cfg | cut -d'=' -f2 | sed 's/"//g')
       
-      if [[ "$VERSION" != godot[0-9]*-v[0-9].[0-9].[0-9] ]]; then
-        echo "The version is not in the correct format: godotX-vX.X.X" >&2
-        exit 1
-      fi
+        if [[ "$VERSION" != godot[0-9]*-v[0-9].[0-9].[0-9] ]]; then
+          echo "The version is not in the correct format: godotX-vX.X.X" >&2
+          exit 1
+        fi
 
-      echo "PLUGIN_VERSION=$VERSION" >> $GITHUB_ENV
+        echo "PLUGIN_VERSION=$VERSION" >> $GITHUB_ENV
 
     - name: Set LAST_COMMIT_HASH variable
       run: |
