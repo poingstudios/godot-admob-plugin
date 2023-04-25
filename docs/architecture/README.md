@@ -10,5 +10,18 @@ Welcome to the architecture section of our **AdMob plugin** open source project.
 The plugin architecture is designed to make it easy to integrate AdMob into your app, while still providing flexibility and control. The main classes and components of the plugin include:
 
 ```mermaid
-
+sequenceDiagram
+    actor Android/iOS
+    actor AdMobPlugin(Godot)
+    actor GoogleAdsInventory(Cloud)
+    
+    
+    Android/iOS->>AdMobPlugin(Godot) : Asks to Plugin an Ad
+    activate AdMobPlugin(Godot)
+    AdMobPlugin(Godot)->>GoogleAdsInventory(Cloud) : Asks Google an Ad
+    activate GoogleAdsInventory(Cloud)
+    GoogleAdsInventory(Cloud)->>AdMobPlugin(Godot) : Return an Ad to AdMobPlugin
+    deactivate GoogleAdsInventory(Cloud)
+    AdMobPlugin(Godot)->> Android/iOS : Shows the Ad received
+    deactivate AdMobPlugin(Godot)
 ```
