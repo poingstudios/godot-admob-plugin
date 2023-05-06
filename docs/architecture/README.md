@@ -7,13 +7,13 @@ Welcome to the architecture section of our **AdMob plugin** open source project.
 - The [dependencies](dependencies.md) file contains a list of external libraries and frameworks used by the plugin.
 
 ## High Level Overview 
-The plugin architecture is designed to make it easy to integrate AdMob into your app, while still providing flexibility and control. The main classes and components of the plugin include:
+The plugin architecture is designed to make it easy to integrate AdMob into your app, while still providing flexibility and control.
 
 ```mermaid
 sequenceDiagram
-    actor Android/iOS
-    actor AdMobPlugin(Godot)
-    actor GoogleAdsInventory(Cloud)
+    participant Android/iOS
+    participant AdMobPlugin(Godot)
+    participant GoogleAdsInventory(Cloud)
     
     
     Android/iOS->>AdMobPlugin(Godot) : Asks to Plugin an Ad
