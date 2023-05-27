@@ -1,13 +1,15 @@
 extends Node
 
 var _plugin : JNISingleton
-const PLATFORM_PLUGIN_NAME := "AdMob"
+const PLATFORM_PLUGIN_NAME := "PoingGodotAdMob"
 var request_configuration : Dictionary
 
 
 func _ready() -> void:
 	if (Engine.has_singleton(PLATFORM_PLUGIN_NAME)):
 		_plugin = Engine.get_singleton(PLATFORM_PLUGIN_NAME)
+	else:
+		print_debug("Doesn't has plugin:", PLATFORM_PLUGIN_NAME)
 
 func initialize(on_initialization_complete_listener : OnInitializationCompleteListener) -> void:
 	if _plugin:
