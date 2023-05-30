@@ -1,6 +1,6 @@
 extends Node
 
-var _plugin : JNISingleton
+var _plugin : Object
 const PLATFORM_PLUGIN_NAME := "PoingGodotAdMob"
 var request_configuration : Dictionary
 
@@ -21,8 +21,10 @@ func initialize(on_initialization_complete_listener : OnInitializationCompleteLi
 		)
 
 
-func set_request_configuration(request_configuration : RequestConfiguration) -> void:
-	pass
+func set_request_configuration(request_configuration : RequestConfiguration):
+	if _plugin:
+		#test_device_ids needs to be passed separarely because Dictionary can't serialize Arrays 
+		_plugin.set_request_configuration(request_configuration.convert_to_dictionary(), request_configuration.test_device_ids)
 
 func get_initialization_status() -> InitializationStatus:
 	if _plugin:
