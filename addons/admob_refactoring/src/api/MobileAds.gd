@@ -1,17 +1,14 @@
-extends Node
+class_name MobileAds
+extends MobileSingletonPlugin
 
-var _plugin : Object
-const PLATFORM_PLUGIN_NAME := "PoingGodotAdMob"
-var request_configuration : Dictionary
+static var _plugin : Object
+const PLUGIN_NAME := "PoingGodotAdMob"
 
 
-func _ready() -> void:
-	if (Engine.has_singleton(PLATFORM_PLUGIN_NAME)):
-		_plugin = Engine.get_singleton(PLATFORM_PLUGIN_NAME)
-	else:
-		print_debug("Doesn't has plugin:", PLATFORM_PLUGIN_NAME)
+static func _static_init() -> void:
+	_plugin = _get_plugin(PLUGIN_NAME)
 
-func initialize(on_initialization_complete_listener : OnInitializationCompleteListener) -> void:
+static func initialize(on_initialization_complete_listener : OnInitializationCompleteListener) -> void:
 	if _plugin:
 		_plugin.initialize()
 		
@@ -21,12 +18,12 @@ func initialize(on_initialization_complete_listener : OnInitializationCompleteLi
 		)
 
 
-func set_request_configuration(request_configuration : RequestConfiguration):
+static func set_request_configuration(request_configuration : RequestConfiguration):
 	if _plugin:
 		#test_device_ids needs to be passed separarely because Dictionary can't serialize Arrays 
 		_plugin.set_request_configuration(request_configuration.convert_to_dictionary(), request_configuration.test_device_ids)
 
-func get_initialization_status() -> InitializationStatus:
+static func get_initialization_status() -> InitializationStatus:
 	if _plugin:
 		var initialization_status_dictionary : Dictionary = _plugin.get_initialization_status()
 		return InitializationStatus.create(initialization_status_dictionary)

@@ -1,17 +1,18 @@
 class_name AdView
+extends MobileSingletonPlugin
 
 var _plugin : Object
 var _uid : int
 
 var ad_position : int
 
-const PLATFORM_PLUGIN_NAME := "PoingGodotAdMobAdView"
+const PLUGIN_NAME := "PoingGodotAdMobAdView"
 
 func _init(ad_unit_id : String, ad_position : int, ad_size : AdSize) -> void:
 	self.ad_position = ad_position
 
-	if (Engine.has_singleton(PLATFORM_PLUGIN_NAME)):
-		_plugin = Engine.get_singleton(PLATFORM_PLUGIN_NAME)
+	_plugin = _get_plugin(PLUGIN_NAME)
+	if _plugin:
 		var ad_view_dictionary := {
 			"ad_unit_id" : ad_unit_id,
 			"ad_position" : ad_position,
@@ -20,7 +21,7 @@ func _init(ad_unit_id : String, ad_position : int, ad_size : AdSize) -> void:
 				"height" : ad_size.height
 			}
 		}
-		print(ad_view_dictionary)
+
 		_uid = _plugin.create(ad_view_dictionary)
 		_plugin.connect("on_ad_clicked", func(uid : int): 
 			if uid == _uid:
