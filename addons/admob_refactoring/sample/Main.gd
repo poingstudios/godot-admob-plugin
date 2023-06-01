@@ -1,8 +1,6 @@
 extends Control
 
-
 var adView1: AdView
-var adView2: AdView
 
 func _ready() -> void:
 	var request_configuration := RequestConfiguration.new()
@@ -10,7 +8,7 @@ func _ready() -> void:
 
 	MobileAds.initialize(OnInitializationCompleteListener.new(_on_initialization_complete))
 	adView1 = AdView.new("ca-app-pub-3940256099942544/6300978111", AdPosition.BOTTOM, AdSize.BANNER)
-	adView2 = AdView.new("ca-app-pub-3940256099942544/6300978111", AdPosition.TOP, AdSize.BANNER)
+	_on_load_banner_pressed()
 	
 func _on_initialization_complete(initialization_status : InitializationStatus) -> void:
 	print_all_values(initialization_status)
@@ -26,14 +24,15 @@ func print_all_values(initialization_status : InitializationStatus) -> void:
 
 func _on_load_banner_pressed():
 	var adRequest1 := AdRequest.new()
+	var adColonyMediationExtras := AdColonyMediationExtras.new()
+	adColonyMediationExtras.show_post_popup = true
+	adRequest1.mediation_extras.append_array([adColonyMediationExtras])
+	adRequest1.keywords.append_array(["tip", "bonus"])
+	print(adRequest1.convert_to_dictionary())
 	adView1.load_ad(adRequest1)
-	adView2.load_ad(adRequest1)
-
-
 
 func _on_destroy_banner_pressed():
 	adView1.destroy()
-	adView2.destroy()
 
 func _on_show_banner_pressed():
 	adView1.show()

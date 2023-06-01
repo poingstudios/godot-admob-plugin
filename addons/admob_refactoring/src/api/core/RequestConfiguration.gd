@@ -1,5 +1,7 @@
 class_name RequestConfiguration
 
+const DEVICE_ID_EMULATOR := "B3EEABB8EE11C2BE770B684D95219ECB"
+
 enum TagForChildDirectedTreatment{
 	UNSPECIFIED = -1,
 	FALSE = 0,
