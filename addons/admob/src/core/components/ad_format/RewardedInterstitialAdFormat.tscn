@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhmyjpfme4yhs"]
-
-[ext_resource type="PackedScene" uid="uid://2e67u6fu1ieh" path="res://addons/admob/src/core/components/ad_format/AdFormat.tscn" id="1"]
-
-[node name="RewardedInterstitialAdFormat" instance=ExtResource("1")]

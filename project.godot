@@ -70,7 +70,7 @@ config={
 [application]
 
 config/name="AdMobAddon"
-run/main_scene="res://addons/admob_refactoring/sample/Main.tscn"
+run/main_scene="res://addons/admob/sample/Main.tscn"
 config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://addons/admob/assets/icon-76.png"
 
@@ -89,7 +89,7 @@ project/assembly_name="AdMobAddon"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/admob_refactoring/plugin.cfg")
+enabled=PackedStringArray("res://addons/admob/plugin.cfg")
 
 [physics]
 

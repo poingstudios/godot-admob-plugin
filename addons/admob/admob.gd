@@ -4,7 +4,7 @@ extends EditorPlugin
 var MainScreen : Control
 
 func _enter_tree():
-	MainScreen = load("res://addons/admob_refactoring/src/editor/scenes/MainScreen.tscn").instantiate()
+	MainScreen = load("res://addons/admob/src/editor/scenes/MainScreen.tscn").instantiate()
 	get_editor_interface().get_editor_main_screen().add_child(MainScreen)
 	MainScreen.hide()
 
