@@ -20,6 +20,32 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name OnInitializationCompleteListener
+class_name AdapterResponseInfo
 
-var on_initialization_complete : Callable = func(initialization_status : InitializationStatus): pass
+var adapter_class_name : String
+var ad_source_id : String
+var ad_source_name : String
+var ad_source_instance_id : String
+var ad_source_instance_name : String
+var ad_unit_mapping : Dictionary
+var ad_error : AdError
+var latency_millis : int
+
+
+func _init(adapter_class_name : String,
+			ad_source_id : String,
+			ad_source_name : String,
+			ad_source_instance_id : String,
+			ad_source_instance_name : String,
+			ad_unit_mapping : Dictionary,
+			ad_error : AdError,
+			latency_millis : int):
+	
+	self.adapter_class_name = adapter_class_name
+	self.ad_source_id = ad_source_id
+	self.ad_source_name = ad_source_name
+	self.ad_source_instance_id = ad_source_instance_id
+	self.ad_source_instance_name = ad_source_instance_name
+	self.ad_unit_mapping = ad_unit_mapping
+	self.ad_error = ad_error
+	self.latency_millis = latency_millis

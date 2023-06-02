@@ -20,6 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name OnInitializationCompleteListener
+class_name LoadAdError
+extends AdError
 
-var on_initialization_complete : Callable = func(initialization_status : InitializationStatus): pass
+var response_info : ResponseInfo
+
+func _init(response_info : ResponseInfo, code : int, domain : String, message : String, cause : AdError):
+	super._init(code, domain, message, cause)
+	self.response_info = response_info

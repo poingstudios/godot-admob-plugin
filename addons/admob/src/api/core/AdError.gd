@@ -20,6 +20,15 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name OnInitializationCompleteListener
+class_name AdError
 
-var on_initialization_complete : Callable = func(initialization_status : InitializationStatus): pass
+var code : int
+var domain : String
+var message : String
+var cause : AdError
+
+func _init(code : int, domain : String, message : String, cause : AdError):
+	self.code = code
+	self.domain = domain
+	self.message = message
+	self.cause = cause

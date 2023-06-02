@@ -20,6 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name OnInitializationCompleteListener
+class_name AdListener
 
-var on_initialization_complete : Callable = func(initialization_status : InitializationStatus): pass
+var on_ad_clicked : Callable = func(): pass
+var on_ad_closed : Callable = func(): pass
+var on_ad_failed_to_load : Callable = func(load_ad_error : LoadAdError): pass
+var on_ad_impression : Callable = func(): pass
+var on_ad_loaded : Callable = func(): pass
+var on_ad_opened : Callable = func(): pass

@@ -26,19 +26,18 @@ extends MobileSingletonPlugin
 static var _plugin : Object
 const PLUGIN_NAME := "PoingGodotAdMob"
 
-
 static func _static_init() -> void:
 	_plugin = _get_plugin(PLUGIN_NAME)
 
-static func initialize(on_initialization_complete_listener : OnInitializationCompleteListener) -> void:
+static func initialize(on_initialization_complete_listener : OnInitializationCompleteListener = null) -> void:
 	if _plugin:
 		_plugin.initialize()
 		
-		_plugin.connect("initialization_complete", func(admob_initialization_status : Dictionary):
-			var initialization_status := InitializationStatus.create(admob_initialization_status)
-			on_initialization_complete_listener.on_initialization_complete.call(initialization_status)
-		)
-
+		if on_initialization_complete_listener:
+			_plugin.connect("initialization_complete", func(admob_initialization_status : Dictionary):
+				var initialization_status := InitializationStatus.create(admob_initialization_status)
+				on_initialization_complete_listener.on_initialization_complete.call(initialization_status)
+			)
 
 static func set_request_configuration(request_configuration : RequestConfiguration):
 	if _plugin:

@@ -20,6 +20,22 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name OnInitializationCompleteListener
+class_name ResponseInfo
 
-var on_initialization_complete : Callable = func(initialization_status : InitializationStatus): pass
+var loaded_adapter_response_info : AdapterResponseInfo
+var adapter_responses : Array[AdapterResponseInfo]
+var response_extras : Dictionary
+var mediation_adapter_class_name : String
+var response_id : String
+
+func _init(loaded_adapter_response_info : AdapterResponseInfo, 
+			adapter_responses : Array[AdapterResponseInfo], 
+			response_extras : Dictionary, 
+			mediation_adapter_class_name : String, 
+			response_id : String):
+	self.loaded_adapter_response_info = loaded_adapter_response_info
+	self.adapter_responses = adapter_responses
+	self.response_extras = response_extras
+	self.mediation_adapter_class_name = mediation_adapter_class_name
+	self.response_id = response_id
+	
