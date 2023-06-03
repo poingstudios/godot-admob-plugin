@@ -33,10 +33,38 @@ func _ready() -> void:
 	var on_initialization_complete_listener := OnInitializationCompleteListener.new()
 	on_initialization_complete_listener.on_initialization_complete = _on_initialization_complete
 	MobileAds.initialize(on_initialization_complete_listener)
-	adView1 = AdView.new("ca-app-pub-3940256099942544/6300978111X", AdPosition.BOTTOM, AdSize.BANNER)
-
+	
+	var ad_listener := AdListener.new()
+	ad_listener.on_ad_failed_to_load = _on_ad_failed_to_load
+	ad_listener.on_ad_clicked = _on_ad_clicked
+	ad_listener.on_ad_closed = _on_ad_closed
+	ad_listener.on_ad_impression = _on_ad_impression
+	ad_listener.on_ad_loaded = _on_ad_loaded
+	ad_listener.on_ad_opened = _on_ad_opened
+	
+	adView1 = AdView.new("ca-app-pub-3940256099942544/6300978111", AdPosition.BOTTOM, AdSize.BANNER)
+	adView1.ad_listener = ad_listener
+	
 	_on_load_banner_pressed()
 	
+func _on_ad_failed_to_load(load_ad_error : LoadAdError) -> void:
+	print("_on_ad_failed_to_load: " + load_ad_error.message)
+	
+func _on_ad_clicked() -> void:
+	print("_on_ad_clicked")
+	
+func _on_ad_closed() -> void:
+	print("_on_ad_closed")
+	
+func _on_ad_impression() -> void:
+	print("_on_ad_impression")
+	
+func _on_ad_loaded() -> void:
+	print("_on_ad_loaded")
+	
+func _on_ad_opened() -> void:
+	print("_on_ad_opened")
+
 func _on_initialization_complete(initialization_status : InitializationStatus) -> void:
 	print_all_values(initialization_status)
 
@@ -64,7 +92,6 @@ func _on_load_banner_pressed():
 		vungleRewardedMediationExtras])
 		
 	adRequest1.keywords.append_array(["tip", "bonus"])
-	print(adRequest1.convert_to_dictionary())
 	adView1.load_ad(adRequest1)
 
 func _on_destroy_banner_pressed():

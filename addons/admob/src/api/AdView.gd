@@ -23,6 +23,8 @@
 class_name AdView
 extends MobileSingletonPlugin
 
+
+var ad_listener := AdListener.new()
 var _plugin : Object
 var _uid : int
 
@@ -47,29 +49,27 @@ func _init(ad_unit_id : String, ad_position : int, ad_size : AdSize) -> void:
 		_uid = _plugin.create(ad_view_dictionary)
 		_plugin.connect("on_ad_clicked", func(uid : int): 
 			if uid == _uid:
-				print("AdClicked", uid)
+				ad_listener.on_ad_clicked.call()
 			)
 		_plugin.connect("on_ad_closed", func(uid : int): 
 			if uid == _uid:
-				print("AdClosed", uid)
+				ad_listener.on_ad_closed.call()
 			)
 		_plugin.connect("on_ad_failed_to_load", func(uid : int, load_ad_error_dictionary : Dictionary): 
 			if uid == _uid:
-				var loadAdError := LoadAdError.create(load_ad_error_dictionary)
-				
-				print("AdFailedToLoad", uid)
+				ad_listener.on_ad_failed_to_load.call(LoadAdError.create(load_ad_error_dictionary))
 			)
 		_plugin.connect("on_ad_impression", func(uid : int): 
 			if uid == _uid:
-				print("AdImpression", uid)
+				ad_listener.on_ad_impression.call()
 			)
 		_plugin.connect("on_ad_loaded", func(uid : int): 
 			if uid == _uid:
-				print("AdLoaded", uid)
+				ad_listener.on_ad_loaded.call()
 			)
 		_plugin.connect("on_ad_opened", func(uid : int): 
 			if uid == _uid:
-				print("AdOpened", uid)
+				ad_listener.on_ad_opened.call()
 			)
 
 func load_ad(ad_request : AdRequest) -> void:
