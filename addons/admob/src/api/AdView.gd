@@ -53,8 +53,10 @@ func _init(ad_unit_id : String, ad_position : int, ad_size : AdSize) -> void:
 			if uid == _uid:
 				print("AdClosed", uid)
 			)
-		_plugin.connect("on_ad_failed_to_load", func(uid : int): 
+		_plugin.connect("on_ad_failed_to_load", func(uid : int, load_ad_error_dictionary : Dictionary): 
 			if uid == _uid:
+				var loadAdError := LoadAdError.create(load_ad_error_dictionary)
+				
 				print("AdFailedToLoad", uid)
 			)
 		_plugin.connect("on_ad_impression", func(uid : int): 

@@ -28,15 +28,12 @@ func _ready() -> void:
 	var request_configuration := RequestConfiguration.new()
 	request_configuration.max_ad_content_rating = RequestConfiguration.MAX_AD_CONTENT_RATING_G
 
-
-	var loadAdError := LoadAdError.new(ResponseInfo.new(null, [], {}, "", ""), 123, "asda", "ada", null)
-
 	Vungle.update_consent_status(Vungle.Consent.OPTED_IN, "1.0.0")
 	Vungle.update_ccpa_status(Vungle.Consent.OPTED_IN)
 	var on_initialization_complete_listener := OnInitializationCompleteListener.new()
 	on_initialization_complete_listener.on_initialization_complete = _on_initialization_complete
 	MobileAds.initialize(on_initialization_complete_listener)
-	adView1 = AdView.new("ca-app-pub-3940256099942544/6300978111", AdPosition.BOTTOM, AdSize.BANNER)
+	adView1 = AdView.new("ca-app-pub-3940256099942544/6300978111X", AdPosition.BOTTOM, AdSize.BANNER)
 
 	_on_load_banner_pressed()
 	

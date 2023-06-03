@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://0esyp38ds6yg"]
 
-[ext_resource type="Script" path="res://addons/admob/sample/Main.gd" id="1_kq18a"]
+[ext_resource type="Script" path="res://addons/admob/sample/Main.gd" id="1_4n3oj"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -9,7 +9,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_kq18a")
+script = ExtResource("1_4n3oj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
