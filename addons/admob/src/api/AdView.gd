@@ -32,7 +32,8 @@ var ad_position : int
 
 const PLUGIN_NAME := "PoingGodotAdMobAdView"
 
-func _init(ad_unit_id : String, ad_position : int, ad_size : AdSize) -> void:
+
+func _init(ad_unit_id : String, ad_size : AdSize, ad_position : AdPosition.Values) -> void:
 	self.ad_position = ad_position
 
 	_plugin = _get_plugin(PLUGIN_NAME)

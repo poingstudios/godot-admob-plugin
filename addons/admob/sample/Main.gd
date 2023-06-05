@@ -42,10 +42,10 @@ func _ready() -> void:
 	ad_listener.on_ad_loaded = _on_ad_loaded
 	ad_listener.on_ad_opened = _on_ad_opened
 	
-	adView1 = AdView.new("ca-app-pub-3940256099942544/6300978111", AdPosition.BOTTOM, AdSize.BANNER)
-	adView1.ad_listener = ad_listener
+	var adSize := AdSize.get_landscape_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
 	
-	_on_load_banner_pressed()
+	adView1 = AdView.new("ca-app-pub-3940256099942544/6300978111", adSize, AdPosition.Values.TOP)
+	adView1.ad_listener = ad_listener
 	
 func _on_ad_failed_to_load(load_ad_error : LoadAdError) -> void:
 	print("_on_ad_failed_to_load: " + load_ad_error.message)

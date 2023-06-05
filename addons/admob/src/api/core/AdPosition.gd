@@ -22,7 +22,7 @@
 
 class_name AdPosition
 
-enum {
+enum Values {
 	TOP,
 	BOTTOM,
 	LEFT,
