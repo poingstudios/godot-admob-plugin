@@ -46,6 +46,12 @@ func _ready() -> void:
 	
 	adView1 = AdView.new("ca-app-pub-3940256099942544/6300978111", adSize, AdPosition.Values.TOP)
 	adView1.ad_listener = ad_listener
+	var request := ConsentRequestParameters.new()
+	request.tag_for_under_age_of_consent = false
+	request.consent_debug_settings = ConsentDebugSettings.new()
+	ConsentInformation.update(request)
+	
+	_on_load_banner_pressed()
 	
 func _on_ad_failed_to_load(load_ad_error : LoadAdError) -> void:
 	print("_on_ad_failed_to_load: " + load_ad_error.message)
@@ -92,6 +98,9 @@ func _on_load_banner_pressed():
 		vungleRewardedMediationExtras])
 		
 	adRequest1.keywords.append_array(["tip", "bonus"])
+	adRequest1.extras["rdp"] = 1
+	adRequest1.extras["IABUSPrivacy_String"] = "IAB_STRING"
+
 	adView1.load_ad(adRequest1)
 
 func _on_destroy_banner_pressed():

@@ -23,11 +23,7 @@
 class_name MobileAds
 extends MobileSingletonPlugin
 
-static var _plugin : Object
-const PLUGIN_NAME := "PoingGodotAdMob"
-
-static func _static_init() -> void:
-	_plugin = _get_plugin(PLUGIN_NAME)
+static var _plugin := _get_plugin("PoingGodotAdMob")
 
 static func initialize(on_initialization_complete_listener : OnInitializationCompleteListener = null) -> void:
 	if _plugin:

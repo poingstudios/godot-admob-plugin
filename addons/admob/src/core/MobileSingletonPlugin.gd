@@ -28,6 +28,6 @@ static func _get_plugin(plugin_name : String) -> Object:
 
 	push_warning("Doesn't has plugin:", plugin_name)
 	if OS.get_name() == "Android" or OS.get_name() == "iOS":
-		printerr(plugin_name + "not found, make sure you marked all 'PoingAdMob' plugins on export tab")
+		printerr(plugin_name + " not found, make sure you marked all 'PoingAdMob' plugins on export tab")
 
 	return null

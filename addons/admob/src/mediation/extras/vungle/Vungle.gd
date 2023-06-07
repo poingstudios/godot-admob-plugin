@@ -23,16 +23,13 @@
 class_name Vungle
 extends MobileSingletonPlugin
 
-static var _plugin : Object
-const PLUGIN_NAME := "PoingGodotAdMobVungle"
+static var _plugin := _get_plugin("PoingGodotAdMobVungle")
 
 enum Consent {
 	OPTED_IN,
 	OPTED_OUT
 }
 
-static func _static_init() -> void:
-	_plugin = _get_plugin(PLUGIN_NAME)
 
 static func update_consent_status(consent : Consent, consent_message_version : String) -> void:
 	if _plugin:

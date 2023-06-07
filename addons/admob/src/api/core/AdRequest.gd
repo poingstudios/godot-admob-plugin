@@ -24,10 +24,12 @@ class_name AdRequest
 
 var keywords : Array[String]
 var mediation_extras : Array[MediationExtras]
+var extras : Dictionary
 
 func convert_to_dictionary() -> Dictionary:
 	return {
-		"mediation_extras" : _transform_mediation_extras_to_dictionary()
+		"mediation_extras" : _transform_mediation_extras_to_dictionary(),
+		"extras" : extras
 	}
 
 func _transform_mediation_extras_to_dictionary() -> Dictionary:

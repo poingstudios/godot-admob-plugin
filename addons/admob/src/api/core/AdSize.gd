@@ -23,11 +23,9 @@
 class_name AdSize
 extends MobileSingletonPlugin
 
+static var _plugin := _get_plugin("PoingGodotAdMobAdSize")
 
 const FULL_WIDTH := -1
-const PLUGIN_NAME := "PoingGodotAdMobAdSize"
-
-static var _plugin : Object
 
 static var BANNER := new(320, 50)
 static var FULL_BANNER := new(468, 60)
@@ -38,10 +36,6 @@ static var WIDE_SKYSCRAPER := new(160, 600)
 
 var width : int
 var height : int
-
-static func _static_init() -> void:
-	_plugin = _get_plugin(PLUGIN_NAME)
-
 
 func _init(width : int, height : int):
 	self.width = width

@@ -23,20 +23,17 @@
 class_name AdView
 extends MobileSingletonPlugin
 
+static var _plugin := _get_plugin("PoingGodotAdMobAdView")
 
 var ad_listener := AdListener.new()
-var _plugin : Object
 var _uid : int
 
 var ad_position : int
-
-const PLUGIN_NAME := "PoingGodotAdMobAdView"
 
 
 func _init(ad_unit_id : String, ad_size : AdSize, ad_position : AdPosition.Values) -> void:
 	self.ad_position = ad_position
 
-	_plugin = _get_plugin(PLUGIN_NAME)
 	if _plugin:
 		var ad_view_dictionary := {
 			"ad_unit_id" : ad_unit_id,
