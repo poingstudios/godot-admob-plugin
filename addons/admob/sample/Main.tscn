@@ -18,7 +18,6 @@ offset_bottom = 302.0
 scale = Vector2(2, 2)
 
 [node name="General" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/General"]
@@ -60,6 +59,7 @@ layout_mode = 2
 text = "GetWidth"
 
 [node name="UMP" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/UMP"]

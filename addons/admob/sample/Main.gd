@@ -24,6 +24,7 @@ extends Control
 
 var adView1: AdView
 var consent_information := UserMessagingPlatform.consent_information
+var fullScreenContentCallback := FullScreenContentCallback.new()
 
 func _ready() -> void:
 	var request_configuration := RequestConfiguration.new()
@@ -54,7 +55,42 @@ func _ready() -> void:
 	
 	consent_information.update(request, _on_consent_info_updated_success, _on_consent_info_updated_failure)
 	_on_get_consent_status_pressed()
+	
+	var interstitialAdLoadCallback := InterstitialAdLoadCallback.new()
+	interstitialAdLoadCallback.on_ad_loaded = on_interstitial_ad_loaded
+	interstitialAdLoadCallback.on_ad_failed_to_load = on_interstitial_ad_failed_to_load
+	
+	InterstitialAdLoader.new().load("ca-app-pub-3940256099942544/1033173712", create_ad_request(), interstitialAdLoadCallback)
 
+#	var interstitialAdLoadCallback1 := InterstitialAdLoadCallback.new()
+#	interstitialAdLoadCallback1.on_ad_loaded = on_interstitial_ad_loaded1
+#	interstitialAdLoadCallback1.on_ad_failed_to_load = on_interstitial_ad_failed_to_load1
+#	InterstitialAdLoader.new().load("ca-app-pub-3940256099942544/1033173712", create_ad_request(), interstitialAdLoadCallback1)
+#
+#func on_interstitial_ad_failed_to_load1(adError : LoadAdError) -> void:
+#	print(adError.message)
+#
+#func on_interstitial_ad_loaded1(interstitial_ad : InterstitialAd) -> void:
+#	print("interstitial ad loaded" + str(interstitial_ad._uid))
+#	interstitial_ad.show()
+	
+func on_interstitial_ad_failed_to_load(adError : LoadAdError) -> void:
+	print(adError.message)
+	
+func on_interstitial_ad_loaded(interstitial_ad : InterstitialAd) -> void:
+	print("interstitial ad loaded" + str(interstitial_ad._uid))
+	fullScreenContentCallback.on_ad_clicked = func() -> void:
+		print("on_ad_clicked")
+	fullScreenContentCallback.on_ad_dismissed_full_screen_content = func() -> void:
+		print("on_ad_dismissed_full_screen_content")
+	fullScreenContentCallback.on_ad_failed_to_show_full_screen_content = func(ad_error : AdError) -> void:
+		print("on_ad_failed_to_show_full_screen_content")
+	fullScreenContentCallback.on_ad_impression = func() -> void:
+		print("on_ad_impression")
+	fullScreenContentCallback.on_ad_showed_full_screen_content = func() -> void:
+		print("on_ad_showed_full_screen_content")
+	interstitial_ad.full_screen_content_callback = fullScreenContentCallback
+	interstitial_ad.show()
 
 func _on_consent_info_updated_success():
 	if consent_information.get_is_consent_form_available():
@@ -109,6 +145,9 @@ func print_all_values(initialization_status : InitializationStatus) -> void:
 		prints(key, adapterStatus.latency, adapterStatus.initialization_status, adapterStatus.description)
 
 func _on_load_banner_pressed():
+	adView1.load_ad(create_ad_request())
+
+func create_ad_request() -> AdRequest:
 	var adRequest1 := AdRequest.new()
 	var adColonyMediationExtras := AdColonyMediationExtras.new()
 	var vungleInterstitialMediationExtras := VungleInterstitialMediationExtras.new()
@@ -125,8 +164,8 @@ func _on_load_banner_pressed():
 	adRequest1.keywords.append_array(["tip", "bonus"])
 	adRequest1.extras["rdp"] = 1
 	adRequest1.extras["IABUSPrivacy_String"] = "IAB_STRING"
-
-	adView1.load_ad(adRequest1)
+	
+	return adRequest1
 
 func _on_destroy_banner_pressed():
 	adView1.destroy()
