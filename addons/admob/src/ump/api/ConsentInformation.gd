@@ -3,16 +3,37 @@ extends MobileSingletonPlugin
 
 static var _plugin := _get_plugin("PoingGodotAdMobConsentInformation")
 
-static func update(consent_request : ConsentRequestParameters, 
-			consent_info_updated_success_callable := func() : pass,
-			consent_info_updated_failure_callable := func(form_error : FormError) : pass,
+enum ConsentStatus {
+	UNKNOWN,
+	NOT_REQUIRED,
+	REQUIRED,
+	OBTAINED
+}
+
+func get_consent_status() -> ConsentStatus:
+	if _plugin:
+		return _plugin.get_consent_status()
+	return ConsentStatus.UNKNOWN
+
+func get_is_consent_form_available() -> bool:
+	if _plugin:
+		return _plugin.get_is_consent_form_available()
+	return false
+
+func update(consent_request : ConsentRequestParameters, 
+			on_consent_info_updated_success := func() : pass,
+			on_consent_info_updated_failure := func(form_error : FormError) : pass,
 			) -> void:
 	if _plugin:
 		_plugin.update(consent_request.convert_to_dictionary())
-
+		
 		_plugin.connect("on_consent_info_updated_success", func(): 
-			consent_info_updated_success_callable.call()
+			on_consent_info_updated_success.call()
 		)
 		_plugin.connect("on_consent_info_updated_failure", func(form_error_dictionary : Dictionary): 
-			consent_info_updated_failure_callable.call(FormError.create(form_error_dictionary))
+			on_consent_info_updated_failure.call(FormError.create(form_error_dictionary))
 		)
+
+func reset():
+	if _plugin:
+		_plugin.reset()

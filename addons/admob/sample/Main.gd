@@ -23,6 +23,7 @@
 extends Control
 
 var adView1: AdView
+var consent_information := UserMessagingPlatform.consent_information
 
 func _ready() -> void:
 	var request_configuration := RequestConfiguration.new()
@@ -47,12 +48,33 @@ func _ready() -> void:
 	adView1 = AdView.new("ca-app-pub-3940256099942544/6300978111", adSize, AdPosition.Values.TOP)
 	adView1.ad_listener = ad_listener
 	var request := ConsentRequestParameters.new()
-	request.tag_for_under_age_of_consent = false
-	request.consent_debug_settings = ConsentDebugSettings.new()
-	ConsentInformation.update(request)
+	var consent_debug_settings := ConsentDebugSettings.new()
+	consent_debug_settings.debug_geography = DebugGeography.Values.EEA
+	request.consent_debug_settings = consent_debug_settings
+
+	consent_information.update(request, _on_consent_info_updated_success, _on_consent_info_updated_failure)
+
+
+
+func _on_consent_info_updated_success():
+	print("_on_consent_info_updated_success")
+	print(consent_information.get_consent_status())
+	if consent_information.get_is_consent_form_available():
+		UserMessagingPlatform.load_consent_form(_on_consent_form_load_success, _on_consent_form_load_failure)
+
+func _on_consent_form_load_success(consent_form : ConsentForm):
+	print("_on_consent_form_load_success")
+	consent_form.show(_on_consent_form_dismissed)
+
+func _on_consent_form_dismissed(form_error : FormError):
+	print("_on_consent_form_dismissed" + str(form_error))
 	
-	_on_load_banner_pressed()
-	
+func _on_consent_form_load_failure(form_error : FormError):
+	print("_on_consent_form_load_failure, form_error: error_code=" + str(form_error.error_code) + " message=" + form_error.message)
+
+func _on_consent_info_updated_failure(form_error : FormError):
+	print("_on_consent_info_updated_failure, form_error: error_code=" + str(form_error.error_code) + " message=" + form_error.message)
+
 func _on_ad_failed_to_load(load_ad_error : LoadAdError) -> void:
 	print("_on_ad_failed_to_load: " + load_ad_error.message)
 	
@@ -115,3 +137,10 @@ func _on_hide_banner_pressed():
 func _on_get_width_pressed():
 	if adView1:
 		print(adView1.get_width(), adView1.get_height(), adView1.get_width_in_pixels(), adView1.get_height_in_pixels())
+
+func _on_reset_consent_information_pressed():
+	consent_information.reset()
+
+
+func _on_get_consent_status_pressed():
+	print(consent_information.get_consent_status())

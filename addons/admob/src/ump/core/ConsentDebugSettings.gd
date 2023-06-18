@@ -11,10 +11,8 @@ func convert_to_dictionary() -> Dictionary:
 
 
 func _transform_test_device_hashed_ids_to_dictionary() -> Dictionary:
-	var test_device_hashed_ids_dictionary : Dictionary
+	var dictionary : Dictionary
 	for i in test_device_hashed_ids.size():
-		var id = test_device_hashed_ids[i] as String
-		test_device_hashed_ids_dictionary[i] = {
-			"_" : id
-		}
-	return test_device_hashed_ids_dictionary
+		var value = test_device_hashed_ids[i] as String
+		dictionary[i] = value
+	return dictionary

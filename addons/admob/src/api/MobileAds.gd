@@ -30,7 +30,7 @@ static func initialize(on_initialization_complete_listener : OnInitializationCom
 		_plugin.initialize()
 		
 		if on_initialization_complete_listener:
-			_plugin.connect("initialization_complete", func(admob_initialization_status : Dictionary):
+			_plugin.connect("on_initialization_complete", func(admob_initialization_status : Dictionary):
 				var initialization_status := InitializationStatus.create(admob_initialization_status)
 				on_initialization_complete_listener.on_initialization_complete.call(initialization_status)
 			)
