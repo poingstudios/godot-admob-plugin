@@ -49,25 +49,28 @@ func _ready() -> void:
 	adView1.ad_listener = ad_listener
 	var request := ConsentRequestParameters.new()
 	var consent_debug_settings := ConsentDebugSettings.new()
-	consent_debug_settings.debug_geography = DebugGeography.Values.EEA
+	consent_debug_settings.debug_geography = DebugGeography.Values.NOT_EEA
 	request.consent_debug_settings = consent_debug_settings
-
+	
 	consent_information.update(request, _on_consent_info_updated_success, _on_consent_info_updated_failure)
-
+	_on_get_consent_status_pressed()
 
 
 func _on_consent_info_updated_success():
-	print("_on_consent_info_updated_success")
-	print(consent_information.get_consent_status())
 	if consent_information.get_is_consent_form_available():
-		UserMessagingPlatform.load_consent_form(_on_consent_form_load_success, _on_consent_form_load_failure)
+		load_form()
+
+func load_form():
+	UserMessagingPlatform.load_consent_form(_on_consent_form_load_success, _on_consent_form_load_failure)
+	
 
 func _on_consent_form_load_success(consent_form : ConsentForm):
-	print("_on_consent_form_load_success")
-	consent_form.show(_on_consent_form_dismissed)
+	if consent_information.get_consent_status() == consent_information.ConsentStatus.REQUIRED:
+		consent_form.show(_on_consent_form_dismissed)
 
 func _on_consent_form_dismissed(form_error : FormError):
-	print("_on_consent_form_dismissed" + str(form_error))
+	if consent_information.get_consent_status() == consent_information.ConsentStatus.OBTAINED:
+		_on_load_banner_pressed()
 	
 func _on_consent_form_load_failure(form_error : FormError):
 	print("_on_consent_form_load_failure, form_error: error_code=" + str(form_error.error_code) + " message=" + form_error.message)
@@ -141,6 +144,5 @@ func _on_get_width_pressed():
 func _on_reset_consent_information_pressed():
 	consent_information.reset()
 
-
 func _on_get_consent_status_pressed():
-	print(consent_information.get_consent_status())
+	print("ConsentStatus: " + ConsentInformation.ConsentStatus.keys()[consent_information.get_consent_status()])
