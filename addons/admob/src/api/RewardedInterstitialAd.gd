@@ -20,10 +20,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name RewardedAd
+class_name RewardedInterstitialAd
 extends MobileSingletonPlugin
 
-static var _plugin = _get_plugin("PoingGodotAdMobRewardedAd")
+static var _plugin = _get_plugin("PoingGodotAdMobRewardedInterstitialAd")
 var full_screen_content_callback := FullScreenContentCallback.new()
 
 var _uid : int
@@ -35,7 +35,7 @@ func _init(uid : int):
 func show(on_user_earned_reward_listener := OnUserEarnedRewardListener.new()) -> void:
 	if _plugin:
 		_plugin.show(_uid)
-		_plugin.connect("on_rewarded_ad_user_earned_reward", func(uid : int, rewarded_item_dictionary : Dictionary):
+		_plugin.connect("on_rewarded_interstitial_ad_user_earned_reward", func(uid : int, rewarded_item_dictionary : Dictionary):
 			if uid == _uid:
 				on_user_earned_reward_listener.on_user_earned_reward.call(RewardedItem.create(rewarded_item_dictionary))
 			)
@@ -46,23 +46,23 @@ func set_server_side_verification_options(server_side_verification_options : Ser
 
 func register_callbacks() -> void:
 	if _plugin:
-		_plugin.connect("on_rewarded_ad_clicked", func(uid : int):
+		_plugin.connect("on_rewarded_interstitial_ad_clicked", func(uid : int):
 			if uid == _uid:
 				full_screen_content_callback.on_ad_clicked.call()
 			)
-		_plugin.connect("on_rewarded_ad_dismissed_full_screen_content", func(uid : int):
+		_plugin.connect("on_rewarded_interstitial_ad_dismissed_full_screen_content", func(uid : int):
 			if uid == _uid:
 				full_screen_content_callback.on_ad_dismissed_full_screen_content.call()
 			)
-		_plugin.connect("on_rewarded_ad_failed_to_show_full_screen_content", func(uid : int, ad_error_dictionary : Dictionary):
+		_plugin.connect("on_rewarded_interstitial_ad_failed_to_show_full_screen_content", func(uid : int, ad_error_dictionary : Dictionary):
 			if uid == _uid:
 				full_screen_content_callback.on_ad_failed_to_show_full_screen_content.call(AdError.create(ad_error_dictionary))
 			)
-		_plugin.connect("on_rewarded_ad_impression", func(uid : int):
+		_plugin.connect("on_rewarded_interstitial_ad_impression", func(uid : int):
 			if uid == _uid:
 				full_screen_content_callback.on_ad_impression.call()
 			)
-		_plugin.connect("on_rewarded_ad_showed_full_screen_content", func(uid : int):
+		_plugin.connect("on_rewarded_interstitial_ad_showed_full_screen_content", func(uid : int):
 			if uid == _uid:
 				full_screen_content_callback.on_ad_showed_full_screen_content.call()
 			)

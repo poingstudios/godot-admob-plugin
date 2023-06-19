@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name RewardedAdLoadCallback
+class_name RewardedInterstitialAdLoadCallback
 
 var on_ad_failed_to_load : Callable = func(adError : LoadAdError) -> void: pass
-var on_ad_loaded : Callable = func(interstitialAd : RewardedAd) -> void: pass
+var on_ad_loaded : Callable = func(interstitialAd : RewardedInterstitialAd) -> void: pass

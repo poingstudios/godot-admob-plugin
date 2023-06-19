@@ -20,7 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name RewardedAdLoadCallback
+class_name ServerSideVerificationOptions
 
-var on_ad_failed_to_load : Callable = func(adError : LoadAdError) -> void: pass
-var on_ad_loaded : Callable = func(interstitialAd : RewardedAd) -> void: pass
+var custom_data : String
+var user_id : String
+
+func convert_to_dictionary() -> Dictionary:
+	return {
+		"custom_data" : custom_data,
+		"user_id" : user_id
+	}

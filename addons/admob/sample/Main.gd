@@ -56,12 +56,18 @@ func _ready() -> void:
 	consent_information.update(request, _on_consent_info_updated_success, _on_consent_info_updated_failure)
 	_on_get_consent_status_pressed()
 
-	var rewardedAdLoadCallback := RewardedAdLoadCallback.new()
-	rewardedAdLoadCallback.on_ad_loaded = on_rewarded_ad_loaded
-	rewardedAdLoadCallback.on_ad_failed_to_load = on_rewarded_ad_failed_to_load
+	var rewardedInterstitialAdLoadCallback := RewardedInterstitialAdLoadCallback.new()
+	rewardedInterstitialAdLoadCallback.on_ad_loaded = on_rewarded_interstitial_ad_loaded
+	rewardedInterstitialAdLoadCallback.on_ad_failed_to_load = on_rewarded_interstitial_ad_failed_to_load
 
-	RewardedAdLoader.new().load("ca-app-pub-3940256099942544/5224354917", create_ad_request(), rewardedAdLoadCallback)
+	RewardedInterstitialAdLoader.new().load("ca-app-pub-3940256099942544/5354046379", create_ad_request(), rewardedInterstitialAdLoadCallback)
 
+#	var rewardedAdLoadCallback := RewardedAdLoadCallback.new()
+#	rewardedAdLoadCallback.on_ad_loaded = on_rewarded_ad_loaded
+#	rewardedAdLoadCallback.on_ad_failed_to_load = on_rewarded_ad_failed_to_load
+#
+#	RewardedAdLoader.new().load("ca-app-pub-3940256099942544/5224354917", create_ad_request(), rewardedAdLoadCallback)
+#
 
 #	var interstitialAdLoadCallback := InterstitialAdLoadCallback.new()
 #	interstitialAdLoadCallback.on_ad_loaded = on_interstitial_ad_loaded
@@ -70,11 +76,15 @@ func _ready() -> void:
 #	InterstitialAdLoader.new().load("ca-app-pub-3940256099942544/1033173712", create_ad_request(), interstitialAdLoadCallback)
 
 
-func on_rewarded_ad_failed_to_load(adError : LoadAdError) -> void:
+func on_rewarded_interstitial_ad_failed_to_load(adError : LoadAdError) -> void:
 	print(adError.message)
-	
-func on_rewarded_ad_loaded(rewarded_ad : RewardedAd) -> void:
-	print("rewarded ad loaded" + str(rewarded_ad._uid))
+
+func on_rewarded_interstitial_ad_loaded(rewarded_interstitial_ad : RewardedInterstitialAd) -> void:
+	var server_side_verification_options := ServerSideVerificationOptions.new()
+	server_side_verification_options.custom_data = "CUSTOM DATA TEST"
+	rewarded_interstitial_ad.set_server_side_verification_options(server_side_verification_options)
+
+	print("rewarded interstitial ad loaded" + str(rewarded_interstitial_ad._uid))
 	fullScreenContentCallback.on_ad_clicked = func() -> void:
 		print("on_ad_clicked")
 	fullScreenContentCallback.on_ad_dismissed_full_screen_content = func() -> void:
@@ -85,11 +95,36 @@ func on_rewarded_ad_loaded(rewarded_ad : RewardedAd) -> void:
 		print("on_ad_impression")
 	fullScreenContentCallback.on_ad_showed_full_screen_content = func() -> void:
 		print("on_ad_showed_full_screen_content")
-	rewarded_ad.full_screen_content_callback = fullScreenContentCallback
+	rewarded_interstitial_ad.full_screen_content_callback = fullScreenContentCallback
 	var onUserEarnedRewardListener := OnUserEarnedRewardListener.new()
 	onUserEarnedRewardListener.on_user_earned_reward = func(rewarded_item : RewardedItem):
 		print("Type: " + str(rewarded_item.type), "Amount: " + str(rewarded_item.amount))
-	rewarded_ad.show(onUserEarnedRewardListener)
+	rewarded_interstitial_ad.show(onUserEarnedRewardListener)
+
+#func on_rewarded_ad_failed_to_load(adError : LoadAdError) -> void:
+#	print(adError.message)
+#
+#func on_rewarded_ad_loaded(rewarded_ad : RewardedAd) -> void:
+#	var server_side_verification_options := ServerSideVerificationOptions.new()
+#	server_side_verification_options.custom_data = "CUSTOM DATA TEST"
+#	rewarded_ad.set_server_side_verification_options(server_side_verification_options)
+#
+#	print("rewarded ad loaded" + str(rewarded_ad._uid))
+#	fullScreenContentCallback.on_ad_clicked = func() -> void:
+#		print("on_ad_clicked")
+#	fullScreenContentCallback.on_ad_dismissed_full_screen_content = func() -> void:
+#		print("on_ad_dismissed_full_screen_content")
+#	fullScreenContentCallback.on_ad_failed_to_show_full_screen_content = func(ad_error : AdError) -> void:
+#		print("on_ad_failed_to_show_full_screen_content")
+#	fullScreenContentCallback.on_ad_impression = func() -> void:
+#		print("on_ad_impression")
+#	fullScreenContentCallback.on_ad_showed_full_screen_content = func() -> void:
+#		print("on_ad_showed_full_screen_content")
+#	rewarded_ad.full_screen_content_callback = fullScreenContentCallback
+#	var onUserEarnedRewardListener := OnUserEarnedRewardListener.new()
+#	onUserEarnedRewardListener.on_user_earned_reward = func(rewarded_item : RewardedItem):
+#		print("Type: " + str(rewarded_item.type), "Amount: " + str(rewarded_item.amount))
+#	rewarded_ad.show(onUserEarnedRewardListener)
 
 
 #	var interstitialAdLoadCallback1 := InterstitialAdLoadCallback.new()
