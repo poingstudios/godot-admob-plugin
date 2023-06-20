@@ -35,7 +35,7 @@ func _exit_tree():
 	MainScreen.queue_free()
 	
 func _has_main_screen():
-	return true
+	return false
 
 func _make_visible(visible):
 	MainScreen.visible = visible

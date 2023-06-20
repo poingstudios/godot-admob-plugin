@@ -1,6 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://0esyp38ds6yg"]
+[gd_scene load_steps=14 format=3 uid="uid://0esyp38ds6yg"]
 
 [ext_resource type="Script" path="res://addons/admob/sample/Main.gd" id="1_xm28w"]
+[ext_resource type="Texture2D" uid="uid://diqkx3m2rca2w" path="res://addons/admob/assets/Digital-Patreon-Wordmark_FieryCoral.png" id="2_2k8g3"]
+[ext_resource type="Texture2D" uid="uid://to8hnfn5fmrl" path="res://addons/admob/assets/icon-76.png" id="2_b280g"]
+[ext_resource type="FontFile" uid="uid://ctd0my3oi3sl7" path="res://addons/admob/assets/fonts/arial.ttf" id="3_acnhc"]
+[ext_resource type="Texture2D" uid="uid://c1p3ju4a5gwe3" path="res://addons/admob/assets/Ko-fi_Logo_RGB_ColorBg.png" id="4_gq8il"]
+[ext_resource type="PackedScene" uid="uid://c6u6s82p5d6qs" path="res://addons/admob/sample/Banner.tscn" id="6_xt5vc"]
+[ext_resource type="PackedScene" uid="uid://dkl0ov3vkn76o" path="res://addons/admob/sample/Interstitial.tscn" id="7_5rtn7"]
+[ext_resource type="PackedScene" uid="uid://iy12nk8vefwy" path="res://addons/admob/sample/Rewarded.tscn" id="8_atpxc"]
+[ext_resource type="PackedScene" uid="uid://cpxd2i7v6t6b6" path="res://addons/admob/sample/RewardedInterstitial.tscn" id="9_iwe72"]
+[ext_resource type="PackedScene" uid="uid://bnptawvmfxhhu" path="res://addons/admob/sample/Ump.tscn" id="10_7toto"]
+
+[sub_resource type="Theme" id="Theme_1p2mi"]
+default_font = ExtResource("3_acnhc")
+default_font_size = 20
+
+[sub_resource type="GDScript" id="GDScript_1vvio"]
+script/source = "extends TextureButton
+
+func _on_pressed():
+	OS.shell_open(\"https://www.patreon.com/poingstudios\") 
+"
+
+[sub_resource type="GDScript" id="GDScript_hcar3"]
+script/source = "extends TextureButton
+
+
+func _on_pressed():
+	OS.shell_open(\"https://ko-fi.com/poingstudios\") 
+"
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -9,86 +37,114 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_1p2mi")
 script = ExtResource("1_xm28w")
 
-[node name="TabContainer" type="TabContainer" parent="."]
-layout_mode = 0
-offset_right = 359.0
-offset_bottom = 302.0
-scale = Vector2(2, 2)
-
-[node name="General" type="TabBar" parent="TabContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/General"]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.996094, 0.425781, 0, 1)
+
+[node name="Content" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 14
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -90.0
-offset_top = -103.0
-offset_right = 90.0
-offset_bottom = 103.0
+offset_top = -129.5
+offset_bottom = 129.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GetInitializationStatus" type="Button" parent="TabContainer/General/VBoxContainer"]
+[node name="DonateButtons" type="PanelContainer" parent="Background/Content"]
 layout_mode = 2
-text = "GetInitializationStatus"
 
-[node name="LoadBanner" type="Button" parent="TabContainer/General/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/Content/DonateButtons"]
 layout_mode = 2
-text = "LoadBanner"
+size_flags_horizontal = 4
 
-[node name="DestroyBanner" type="Button" parent="TabContainer/General/VBoxContainer"]
+[node name="Label" type="Label" parent="Background/Content/DonateButtons/HBoxContainer"]
 layout_mode = 2
-text = "DestroyBanner"
+text = "SUPPORT:"
 
-[node name="ShowBanner" type="Button" parent="TabContainer/General/VBoxContainer"]
+[node name="Patreon" type="TextureButton" parent="Background/Content/DonateButtons/HBoxContainer"]
+custom_minimum_size = Vector2(250, 60)
 layout_mode = 2
-text = "ShowBanner"
+texture_normal = ExtResource("2_2k8g3")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_1vvio")
 
-[node name="HideBanner" type="Button" parent="TabContainer/General/VBoxContainer"]
+[node name="Ko-fi" type="TextureButton" parent="Background/Content/DonateButtons/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
 layout_mode = 2
-text = "HideBanner"
+texture_normal = ExtResource("4_gq8il")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_hcar3")
 
-[node name="GetWidth" type="Button" parent="TabContainer/General/VBoxContainer"]
+[node name="Main" type="VBoxContainer" parent="Background/Content"]
 layout_mode = 2
-text = "GetWidth"
 
-[node name="UMP" type="TabBar" parent="TabContainer"]
+[node name="Title" type="PanelContainer" parent="Background/Content/Main"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/Content/Main/Title"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Background/Content/Main/Title/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_b280g")
+
+[node name="Description" type="Label" parent="Background/Content/Main/Title/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_acnhc")
+theme_override_font_sizes/font_size = 25
+text = "AdMob Plugin - Poing Studios"
+
+[node name="Body" type="TabContainer" parent="Background/Content/Main"]
+layout_mode = 2
+
+[node name="Banner" parent="Background/Content/Main/Body" instance=ExtResource("6_xt5vc")]
+layout_mode = 2
+
+[node name="Interstitial" parent="Background/Content/Main/Body" instance=ExtResource("7_5rtn7")]
 visible = false
 layout_mode = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/UMP"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -104.0
-offset_top = -68.0
-offset_right = 104.0
-offset_bottom = 68.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="GetConsentStatus" type="Button" parent="TabContainer/UMP/VBoxContainer"]
+[node name="Rewarded" parent="Background/Content/Main/Body" instance=ExtResource("8_atpxc")]
+visible = false
 layout_mode = 2
-text = "GetConsentStatus"
 
-[node name="ResetConsentInformation" type="Button" parent="TabContainer/UMP/VBoxContainer"]
+[node name="RewardedInterstitial" parent="Background/Content/Main/Body" instance=ExtResource("9_iwe72")]
+visible = false
 layout_mode = 2
-text = "ResetConsentInformation"
 
-[connection signal="pressed" from="TabContainer/General/VBoxContainer/GetInitializationStatus" to="." method="_on_get_initialization_status_pressed"]
-[connection signal="pressed" from="TabContainer/General/VBoxContainer/LoadBanner" to="." method="_on_load_banner_pressed"]
-[connection signal="pressed" from="TabContainer/General/VBoxContainer/DestroyBanner" to="." method="_on_destroy_banner_pressed"]
-[connection signal="pressed" from="TabContainer/General/VBoxContainer/ShowBanner" to="." method="_on_show_banner_pressed"]
-[connection signal="pressed" from="TabContainer/General/VBoxContainer/HideBanner" to="." method="_on_hide_banner_pressed"]
-[connection signal="pressed" from="TabContainer/General/VBoxContainer/GetWidth" to="." method="_on_get_width_pressed"]
-[connection signal="pressed" from="TabContainer/UMP/VBoxContainer/GetConsentStatus" to="." method="_on_get_consent_status_pressed"]
-[connection signal="pressed" from="TabContainer/UMP/VBoxContainer/ResetConsentInformation" to="." method="_on_reset_consent_information_pressed"]
+[node name="UMP" parent="Background/Content/Main/Body" instance=ExtResource("10_7toto")]
+visible = false
+layout_mode = 2
+
+[node name="MobileAds" type="VBoxContainer" parent="Background/Content/Main/Body"]
+visible = false
+layout_mode = 2
+
+[node name="GetInitializationStatus" type="Button" parent="Background/Content/Main/Body/MobileAds"]
+layout_mode = 2
+text = "GetInitializationStatus"
+
+[node name="Output" type="RichTextLabel" parent="Background/Content"]
+visible = false
+layout_mode = 2
+text = "TEST"
+fit_content = true
+scroll_following = true
+visible_characters = 1
+visible_ratio = 0.480769
+
+[connection signal="pressed" from="Background/Content/DonateButtons/HBoxContainer/Patreon" to="Background/Content/DonateButtons/HBoxContainer/Patreon" method="_on_pressed"]
+[connection signal="pressed" from="Background/Content/DonateButtons/HBoxContainer/Ko-fi" to="Background/Content/DonateButtons/HBoxContainer/Ko-fi" method="_on_pressed"]
+[connection signal="pressed" from="Background/Content/Main/Body/MobileAds/GetInitializationStatus" to="." method="_on_get_initialization_status_pressed"]

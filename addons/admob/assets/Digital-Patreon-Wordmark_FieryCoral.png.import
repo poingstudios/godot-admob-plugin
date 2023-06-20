@@ -2,23 +2,23 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://xbtcgun2ycwr"
-path="res://.godot/imported/format-rewarded interstitial.svg-2096f0d975875eb123ad8e8ec1e3db24.ctex"
+uid="uid://diqkx3m2rca2w"
+path="res://.godot/imported/Digital-Patreon-Wordmark_FieryCoral.png-e4a7ebae571df18dbcfa9599fd901947.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/admob/assets/format-rewarded interstitial.svg"
-dest_files=["res://.godot/imported/format-rewarded interstitial.svg-2096f0d975875eb123ad8e8ec1e3db24.ctex"]
+source_file="res://addons/admob/assets/Digital-Patreon-Wordmark_FieryCoral.png"
+dest_files=["res://.godot/imported/Digital-Patreon-Wordmark_FieryCoral.png-e4a7ebae571df18dbcfa9599fd901947.ctex"]
 
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
@@ -32,6 +32,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

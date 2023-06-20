@@ -56,6 +56,7 @@ func register_callbacks() -> void:
 				full_screen_content_callback.on_ad_impression.call()
 			)
 		_plugin.connect("on_interstitial_ad_showed_full_screen_content", func(uid : int):
+			print("on_interstitial_ad_showed_full_screen_content")
 			if uid == _uid:
 				full_screen_content_callback.on_ad_showed_full_screen_content.call()
 			)

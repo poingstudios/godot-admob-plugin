@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6u6s82p5d6qs"]
+
+[ext_resource type="Script" path="res://addons/admob/sample/Banner.gd" id="1_5pjv8"]
+
+[node name="Banner" type="VBoxContainer"]
+script = ExtResource("1_5pjv8")
+
+[node name="LoadBanner" type="Button" parent="."]
+layout_mode = 2
+text = "LoadBanner"
+
+[node name="DestroyBanner" type="Button" parent="."]
+layout_mode = 2
+disabled = true
+text = "DestroyBanner"
+
+[node name="ShowBanner" type="Button" parent="."]
+layout_mode = 2
+disabled = true
+text = "ShowBanner"
+
+[node name="HideBanner" type="Button" parent="."]
+layout_mode = 2
+disabled = true
+text = "HideBanner"
+
+[node name="GetWidth" type="Button" parent="."]
+layout_mode = 2
+disabled = true
+text = "GetWidth"
+
+[connection signal="pressed" from="LoadBanner" to="." method="_on_load_banner_pressed"]
+[connection signal="pressed" from="DestroyBanner" to="." method="_on_destroy_banner_pressed"]
+[connection signal="pressed" from="ShowBanner" to="." method="_on_show_banner_pressed"]
+[connection signal="pressed" from="HideBanner" to="." method="_on_hide_banner_pressed"]
+[connection signal="pressed" from="GetWidth" to="." method="_on_get_width_pressed"]

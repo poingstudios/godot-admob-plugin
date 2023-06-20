@@ -81,6 +81,7 @@ window/size/viewport_height=1560
 window/size/window_width_override=360
 window/size/window_height_override=780
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
 window/handheld/orientation=6
 
 [dotnet]
