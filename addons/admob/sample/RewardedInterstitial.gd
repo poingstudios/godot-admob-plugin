@@ -26,8 +26,9 @@ var rewarded_interstitial_ad : RewardedInterstitialAd
 var rewarded_interstitial_ad_load_callback := RewardedInterstitialAdLoadCallback.new()
 var full_screen_content_callback := FullScreenContentCallback.new()
 
-@onready var ShowButton := $Show
 @onready var LoadButton := $Load
+@onready var ShowButton := $Show
+@onready var DestroyButton := $Destroy
 
 func _ready():
 	rewarded_interstitial_ad_load_callback.on_ad_failed_to_load = on_rewarded_interstitial_ad_failed_to_load
@@ -37,9 +38,7 @@ func _ready():
 		print("on_ad_clicked")
 	full_screen_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
 		print("on_ad_dismissed_full_screen_content")
-		rewarded_interstitial_ad = null #need to load again
-		ShowButton.disabled = true
-		LoadButton.disabled = false
+		destroy()
 		
 	full_screen_content_callback.on_ad_failed_to_show_full_screen_content = func(ad_error : AdError) -> void:
 		print("on_ad_failed_to_show_full_screen_content")
@@ -63,9 +62,22 @@ func on_rewarded_interstitial_ad_loaded(rewarded_interstitial_ad : RewardedInter
 	rewarded_interstitial_ad.set_server_side_verification_options(server_side_verification_options)
 
 	self.rewarded_interstitial_ad = rewarded_interstitial_ad
+	DestroyButton.disabled = false
 	ShowButton.disabled = false
 	LoadButton.disabled = true
 
 func _on_show_pressed():
 	if rewarded_interstitial_ad:
 		rewarded_interstitial_ad.show()
+
+func _on_destroy_pressed():
+	destroy()
+
+func destroy():
+	if rewarded_interstitial_ad:
+		rewarded_interstitial_ad.destroy()
+		rewarded_interstitial_ad = null #need to load again
+		
+		DestroyButton.disabled = true
+		ShowButton.disabled = true
+		LoadButton.disabled = false

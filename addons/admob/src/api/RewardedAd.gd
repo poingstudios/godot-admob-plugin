@@ -40,6 +40,10 @@ func show(on_user_earned_reward_listener := OnUserEarnedRewardListener.new()) ->
 				on_user_earned_reward_listener.on_user_earned_reward.call(RewardedItem.create(rewarded_item_dictionary))
 			)
 
+func destroy() -> void:
+	if _plugin:
+		_plugin.destroy(_uid)
+
 func set_server_side_verification_options(server_side_verification_options : ServerSideVerificationOptions):
 	if _plugin:
 		_plugin.set_server_side_verification_options(_uid, server_side_verification_options.convert_to_dictionary())

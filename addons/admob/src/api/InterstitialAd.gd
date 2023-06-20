@@ -36,6 +36,9 @@ func show() -> void:
 	if _plugin:
 		_plugin.show(_uid)
 
+func destroy() -> void:
+	if _plugin:
+		_plugin.destroy(_uid)
 
 func register_callbacks() -> void:
 	if _plugin:
