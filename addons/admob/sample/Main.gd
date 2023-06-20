@@ -33,7 +33,8 @@ func _on_initialization_complete(initialization_status : InitializationStatus) -
 
 func _on_get_initialization_status_pressed() -> void:
 	var initialization_status := MobileAds.get_initialization_status()
-	print_all_values(initialization_status)
+	if initialization_status:
+		print_all_values(initialization_status)
 
 func print_all_values(initialization_status : InitializationStatus) -> void:
 	for key in initialization_status.adapter_status_map:
