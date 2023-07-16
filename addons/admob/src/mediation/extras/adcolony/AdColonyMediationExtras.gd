@@ -36,3 +36,6 @@ var show_post_popup : bool :
 
 func _get_android_mediation_extra_class_name() -> String:
 	return "com.poingstudios.godot.admob.mediation.adcolony.AdColonyExtrasBuilder"
+
+func _get_ios_mediation_extra_class_name() -> String:
+	return "AdColonyExtrasBuilder"
