@@ -17,10 +17,10 @@ func _on_BannerSize_item_selected(index):
 	AdMobEditor.AdMobSettings.config.banner.size = AdMobEditor.AdMobSettings.BANNER_SIZE[index]
 
 func _on_BannerShowInstantly_pressed():
-	AdMobEditor.AdMobSettings.config.banner.show_instantly = $BannerShowInstantly.pressed#
+	AdMobEditor.AdMobSettings.config.banner.show_instantly = $BannerShowInstantly.button_pressed
 
 func _on_BannerOnTop_pressed():
-	AdMobEditor.AdMobSettings.config.banner.position = int($BannerOnTop.pressed)
+	AdMobEditor.AdMobSettings.config.banner.position = int($BannerOnTop.button_pressed)
 
 func _on_respect_safe_area_value_changed(value):
 	AdMobEditor.AdMobSettings.config.banner.respect_safe_area = value
