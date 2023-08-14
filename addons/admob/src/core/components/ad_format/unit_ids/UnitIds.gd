@@ -28,6 +28,7 @@ func _on_AddAdUnitButton_pressed(system):
 
 func add_ad_unit(operational_system : String, name_value: String, id_value : String):
 	AdMobEditor.AdMobSettings.config[ad_format_name].unit_ids[operational_system][name_value] = id_value
+	AdMobEditor.AdMobSettings.save_config()
 
 func remove_ad_unit(operational_system : String, name_value: String):
 	AdMobEditor.AdMobSettings.config[ad_format_name].unit_ids[operational_system].erase(name_value)
