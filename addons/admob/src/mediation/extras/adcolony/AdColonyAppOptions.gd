@@ -54,8 +54,16 @@ func set_user_id(user_id : String) -> void:
 	if _plugin:
 		_plugin.set_user_id(user_id)
 
-
 func get_user_id() -> String:
 	if _plugin:
 		return _plugin.get_user_id()
 	return ""
+
+func set_test_mode(enabled : bool) -> void:
+	if _plugin:
+		_plugin.set_test_mode(enabled)
+
+func get_test_mode() -> bool:
+	if _plugin:
+		return _plugin.get_test_mode()
+	return false

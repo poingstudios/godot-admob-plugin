@@ -46,7 +46,6 @@ func load(
 				interstitial_ad_load_callback.on_ad_loaded.call(InterstitialAd.new(uid))
 		)
 		_plugin.connect("on_interstitial_ad_failed_to_load", func(uid : int, load_ad_error_dictionary : Dictionary): 
-			print("on_interstitial_ad_failed_to_load")
 			if uid == _uid:
 				interstitial_ad_load_callback.on_ad_failed_to_load.call(LoadAdError.create(load_ad_error_dictionary))
 		)

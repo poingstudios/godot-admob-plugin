@@ -92,6 +92,10 @@ project/assembly_name="AdMobAddon"
 
 enabled=PackedStringArray("res://addons/admob/plugin.cfg")
 
+[filesystem]
+
+import/blender/enabled=false
+
 [physics]
 
 common/enable_pause_aware_picking=true

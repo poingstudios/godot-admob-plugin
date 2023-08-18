@@ -1,6 +1,6 @@
 # MIT License
 
-# Copyright (c) 2023 Poing Studios
+# Copyright (c) 2023-present Poing Studios
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,7 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name RewardedAdLoadCallback
+class_name FBAdSettings
+extends MobileSingletonPlugin
 
-var on_ad_failed_to_load : Callable = func(adError : LoadAdError) -> void: pass
-var on_ad_loaded : Callable = func(rewardedAd : RewardedAd) -> void: pass
+static var _plugin := _get_plugin("PoingGodotAdMobMetaFBAdSettings")
+
+static func set_advertiser_tracking_enabled(tracking_required : bool) -> void:
+	if _plugin:
+		_plugin.set_advertiser_tracking_enabled(tracking_required)

@@ -38,3 +38,6 @@ var user_id : String :
 var sound_enabled : bool : 
 	set(value):
 		extras[SOUND_ENABLED_KEY] = value
+
+func _get_ios_mediation_extra_class_name() -> String:
+	return "VunglePoingExtrasBuilder"

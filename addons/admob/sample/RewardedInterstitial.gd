@@ -22,6 +22,7 @@
 
 extends VBoxContainer
 
+var on_user_earned_reward_listener := OnUserEarnedRewardListener.new()
 var rewarded_interstitial_ad : RewardedInterstitialAd
 var rewarded_interstitial_ad_load_callback := RewardedInterstitialAdLoadCallback.new()
 var full_screen_content_callback := FullScreenContentCallback.new()
@@ -31,6 +32,8 @@ var full_screen_content_callback := FullScreenContentCallback.new()
 @onready var DestroyButton := $Destroy
 
 func _ready():
+	on_user_earned_reward_listener.on_user_earned_reward = on_user_earned_reward
+	
 	rewarded_interstitial_ad_load_callback.on_ad_failed_to_load = on_rewarded_interstitial_ad_failed_to_load
 	rewarded_interstitial_ad_load_callback.on_ad_loaded = on_rewarded_interstitial_ad_loaded
 
@@ -68,7 +71,10 @@ func on_rewarded_interstitial_ad_loaded(rewarded_interstitial_ad : RewardedInter
 
 func _on_show_pressed():
 	if rewarded_interstitial_ad:
-		rewarded_interstitial_ad.show()
+		rewarded_interstitial_ad.show(on_user_earned_reward_listener)
+		
+func on_user_earned_reward(rewarded_item : RewardedItem):
+	print("on_user_earned_reward, rewarded_item interstitial:", rewarded_item.amount, rewarded_item.type)
 
 func _on_destroy_pressed():
 	destroy()
