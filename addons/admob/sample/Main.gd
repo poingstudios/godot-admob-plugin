@@ -50,6 +50,7 @@ func _on_initialization_complete(initialization_status : InitializationStatus) -
 	print(ad_colony_app_options.get_test_mode())
 	
 	if OS.get_name() == "iOS":
+		#FBAdSettings is available only for iOS, Google didn't put this method on Android SDK
 		FBAdSettings.set_advertiser_tracking_enabled(true)
 		
 	Vungle.update_ccpa_status(Vungle.Consent.OPTED_IN)
@@ -66,3 +67,4 @@ func print_all_values(initialization_status : InitializationStatus) -> void:
 	for key in initialization_status.adapter_status_map:
 		var adapterStatus : AdapterStatus = initialization_status.adapter_status_map[key]
 		prints("Key:", key, "Latency:", adapterStatus.latency, "Initialization Status:", adapterStatus.initialization_status, "Description:", adapterStatus.description)
+
