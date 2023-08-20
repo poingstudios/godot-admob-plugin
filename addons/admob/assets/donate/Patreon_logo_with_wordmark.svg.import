@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diqkx3m2rca2w"
-path="res://.godot/imported/Digital-Patreon-Wordmark_FieryCoral.png-e4a7ebae571df18dbcfa9599fd901947.ctex"
+uid="uid://b04npsmf70fhr"
+path="res://.godot/imported/Patreon_logo_with_wordmark.svg-0da993a0f9d9563ad4a63b289ebc446a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/admob/assets/Digital-Patreon-Wordmark_FieryCoral.png"
-dest_files=["res://.godot/imported/Digital-Patreon-Wordmark_FieryCoral.png-e4a7ebae571df18dbcfa9599fd901947.ctex"]
+source_file="res://addons/admob/assets/donate/Patreon_logo_with_wordmark.svg"
+dest_files=["res://.godot/imported/Patreon_logo_with_wordmark.svg-0da993a0f9d9563ad4a63b289ebc446a.ctex"]
 
 [params]
 
@@ -32,3 +32,6 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
+svg/scale=1.0
+editor/scale_with_editor_scale=false
+editor/convert_colors_with_editor_theme=false
