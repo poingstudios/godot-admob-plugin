@@ -1,0 +1,90 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6u6s82p5d6qs"]
+
+[ext_resource type="Script" path="res://addons/admob/sample/Banner.gd" id="1_5pjv8"]
+
+[node name="Banner" type="VBoxContainer"]
+script = ExtResource("1_5pjv8")
+
+[node name="LoadBanner" type="Button" parent="."]
+layout_mode = 2
+text = "LoadBanner"
+
+[node name="DestroyBanner" type="Button" parent="."]
+layout_mode = 2
+disabled = true
+text = "DestroyBanner"
+
+[node name="ShowBanner" type="Button" parent="."]
+layout_mode = 2
+disabled = true
+text = "ShowBanner"
+
+[node name="HideBanner" type="Button" parent="."]
+layout_mode = 2
+disabled = true
+text = "HideBanner"
+
+[node name="GetWidth" type="Button" parent="."]
+layout_mode = 2
+disabled = true
+text = "GetWidth"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "AD POSITIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AdPositionList" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TOP" type="Button" parent="AdPositionList"]
+layout_mode = 2
+text = "TOP"
+
+[node name="BOTTOM" type="Button" parent="AdPositionList"]
+layout_mode = 2
+text = "BOTTOM"
+
+[node name="LEFT" type="Button" parent="AdPositionList"]
+layout_mode = 2
+text = "LEFT"
+
+[node name="RIGHT" type="Button" parent="AdPositionList"]
+layout_mode = 2
+text = "RIGHT"
+
+[node name="TOP_LEFT" type="Button" parent="AdPositionList"]
+layout_mode = 2
+text = "TOP LEFT"
+
+[node name="TOP_RIGHT" type="Button" parent="AdPositionList"]
+layout_mode = 2
+text = "TOP RIGHT"
+
+[node name="BOTTOM_LEFT" type="Button" parent="AdPositionList"]
+layout_mode = 2
+text = "BOTTOM LEFT"
+
+[node name="BOTTOM_RIGHT" type="Button" parent="AdPositionList"]
+layout_mode = 2
+text = "BOTTOM RIGHT"
+
+[node name="CENTER" type="Button" parent="AdPositionList"]
+layout_mode = 2
+text = "CENTER"
+
+[connection signal="pressed" from="LoadBanner" to="." method="_on_load_banner_pressed"]
+[connection signal="pressed" from="DestroyBanner" to="." method="_on_destroy_banner_pressed"]
+[connection signal="pressed" from="ShowBanner" to="." method="_on_show_banner_pressed"]
+[connection signal="pressed" from="HideBanner" to="." method="_on_hide_banner_pressed"]
+[connection signal="pressed" from="GetWidth" to="." method="_on_get_width_pressed"]
+[connection signal="pressed" from="AdPositionList/TOP" to="." method="_on_top_pressed"]
+[connection signal="pressed" from="AdPositionList/BOTTOM" to="." method="_on_bottom_pressed"]
+[connection signal="pressed" from="AdPositionList/LEFT" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="AdPositionList/RIGHT" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="AdPositionList/TOP_LEFT" to="." method="_on_top_left_pressed"]
+[connection signal="pressed" from="AdPositionList/TOP_RIGHT" to="." method="_on_top_right_pressed"]
+[connection signal="pressed" from="AdPositionList/BOTTOM_LEFT" to="." method="_on_bottom_left_pressed"]
+[connection signal="pressed" from="AdPositionList/BOTTOM_RIGHT" to="." method="_on_bottom_right_pressed"]
+[connection signal="pressed" from="AdPositionList/CENTER" to="." method="_on_center_pressed"]

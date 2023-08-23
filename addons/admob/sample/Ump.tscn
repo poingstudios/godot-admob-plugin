@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnptawvmfxhhu"]
+
+[ext_resource type="Script" path="res://addons/admob/sample/Ump.gd" id="1_pyoth"]
+
+[node name="UMP" type="VBoxContainer"]
+script = ExtResource("1_pyoth")
+
+[node name="GetConsentStatus" type="Button" parent="."]
+layout_mode = 2
+text = "GetConsentStatus"
+
+[node name="ResetConsentInformation" type="Button" parent="."]
+layout_mode = 2
+text = "ResetConsentInformation"
+
+[connection signal="pressed" from="GetConsentStatus" to="." method="_on_get_consent_status_pressed"]
+[connection signal="pressed" from="ResetConsentInformation" to="." method="_on_reset_consent_information_pressed"]

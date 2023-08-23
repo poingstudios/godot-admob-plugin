@@ -70,13 +70,9 @@ config={
 [application]
 
 config/name="AdMobAddon"
-run/main_scene="res://addons/admob/test/Example.tscn"
-config/features=PackedStringArray("4.0", "GL Compatibility")
+run/main_scene="res://addons/admob/sample/Main.tscn"
+config/features=PackedStringArray("4.1", "GL Compatibility")
 config/icon="res://addons/admob/assets/icon-76.png"
-
-[autoload]
-
-MobileAds="*res://addons/admob/src/singletons/MobileAds.gd"
 
 [display]
 
@@ -84,12 +80,21 @@ window/size/viewport_width=720
 window/size/viewport_height=1560
 window/size/window_width_override=360
 window/size/window_height_override=780
-window/handheld/orientation=5
 window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=6
+
+[dotnet]
+
+project/assembly_name="AdMobAddon"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/admob/plugin.cfg")
+
+[filesystem]
+
+import/blender/enabled=false
 
 [physics]
 

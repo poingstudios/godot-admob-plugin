@@ -1,0 +1,176 @@
+[gd_scene load_steps=17 format=3 uid="uid://0esyp38ds6yg"]
+
+[ext_resource type="Script" path="res://addons/admob/sample/Main.gd" id="1_xm28w"]
+[ext_resource type="Texture2D" uid="uid://to8hnfn5fmrl" path="res://addons/admob/assets/icon-76.png" id="2_b280g"]
+[ext_resource type="FontFile" uid="uid://ctd0my3oi3sl7" path="res://addons/admob/assets/fonts/arial.ttf" id="3_acnhc"]
+[ext_resource type="Texture2D" uid="uid://b04npsmf70fhr" path="res://addons/admob/assets/donate/Patreon_logo_with_wordmark.svg" id="3_t3dmm"]
+[ext_resource type="Texture2D" uid="uid://c1p3ju4a5gwe3" path="res://addons/admob/assets/donate/Ko-fi_Logo_RGB_ColorBg.png" id="4_5kmgw"]
+[ext_resource type="Texture2D" uid="uid://jksg4sbkq0p7" path="res://addons/admob/assets/donate/PayPal.svg" id="5_o2ew0"]
+[ext_resource type="PackedScene" uid="uid://c6u6s82p5d6qs" path="res://addons/admob/sample/Banner.tscn" id="6_xt5vc"]
+[ext_resource type="PackedScene" uid="uid://dkl0ov3vkn76o" path="res://addons/admob/sample/Interstitial.tscn" id="7_5rtn7"]
+[ext_resource type="PackedScene" uid="uid://iy12nk8vefwy" path="res://addons/admob/sample/Rewarded.tscn" id="8_atpxc"]
+[ext_resource type="PackedScene" uid="uid://cpxd2i7v6t6b6" path="res://addons/admob/sample/RewardedInterstitial.tscn" id="9_iwe72"]
+[ext_resource type="PackedScene" uid="uid://bnptawvmfxhhu" path="res://addons/admob/sample/Ump.tscn" id="10_7toto"]
+
+[sub_resource type="Theme" id="Theme_1p2mi"]
+default_font = ExtResource("3_acnhc")
+default_font_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tj05g"]
+bg_color = Color(0.805616, 0.781486, 0.781947, 1)
+
+[sub_resource type="GDScript" id="GDScript_1vvio"]
+script/source = "extends TextureButton
+
+func _on_pressed():
+	OS.shell_open(\"https://www.patreon.com/poingstudios\") 
+"
+
+[sub_resource type="GDScript" id="GDScript_hcar3"]
+script/source = "extends TextureButton
+
+
+func _on_pressed():
+	OS.shell_open(\"https://ko-fi.com/poingstudios\") 
+"
+
+[sub_resource type="GDScript" id="GDScript_8xyos"]
+script/source = "extends TextureButton
+
+
+func _on_pressed():
+	OS.shell_open(\"https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8\") 
+"
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_1p2mi")
+script = ExtResource("1_xm28w")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.996094, 0.425781, 0, 1)
+
+[node name="Content" type="VBoxContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -129.5
+offset_bottom = 129.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DonateButtons" type="PanelContainer" parent="Background/Content"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tj05g")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/Content/DonateButtons"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Patreon" type="TextureButton" parent="Background/Content/DonateButtons/HBoxContainer"]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+texture_normal = ExtResource("3_t3dmm")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_1vvio")
+
+[node name="Ko-fi" type="TextureButton" parent="Background/Content/DonateButtons/HBoxContainer"]
+custom_minimum_size = Vector2(150, 50)
+layout_mode = 2
+texture_normal = ExtResource("4_5kmgw")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_hcar3")
+
+[node name="DonateButtons2" type="PanelContainer" parent="Background/Content"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tj05g")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/Content/DonateButtons2"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PayPal" type="TextureButton" parent="Background/Content/DonateButtons2/HBoxContainer"]
+custom_minimum_size = Vector2(250, 60)
+layout_mode = 2
+texture_normal = ExtResource("5_o2ew0")
+ignore_texture_size = true
+stretch_mode = 0
+script = SubResource("GDScript_8xyos")
+
+[node name="Main" type="VBoxContainer" parent="Background/Content"]
+layout_mode = 2
+
+[node name="Title" type="PanelContainer" parent="Background/Content/Main"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/Content/Main/Title"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="Background/Content/Main/Title/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_b280g")
+
+[node name="Description" type="Label" parent="Background/Content/Main/Title/HBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_acnhc")
+theme_override_font_sizes/font_size = 25
+text = "AdMob Plugin - Poing Studios"
+
+[node name="Body" type="TabContainer" parent="Background/Content/Main"]
+layout_mode = 2
+
+[node name="Banner" parent="Background/Content/Main/Body" instance=ExtResource("6_xt5vc")]
+layout_mode = 2
+
+[node name="Interstitial" parent="Background/Content/Main/Body" instance=ExtResource("7_5rtn7")]
+visible = false
+layout_mode = 2
+
+[node name="Rewarded" parent="Background/Content/Main/Body" instance=ExtResource("8_atpxc")]
+visible = false
+layout_mode = 2
+
+[node name="RewardedInterstitial" parent="Background/Content/Main/Body" instance=ExtResource("9_iwe72")]
+visible = false
+layout_mode = 2
+
+[node name="UMP" parent="Background/Content/Main/Body" instance=ExtResource("10_7toto")]
+visible = false
+layout_mode = 2
+
+[node name="MobileAds" type="VBoxContainer" parent="Background/Content/Main/Body"]
+visible = false
+layout_mode = 2
+
+[node name="GetInitializationStatus" type="Button" parent="Background/Content/Main/Body/MobileAds"]
+layout_mode = 2
+text = "GetInitializationStatus"
+
+[node name="Output" type="RichTextLabel" parent="Background/Content"]
+visible = false
+layout_mode = 2
+text = "TEST"
+fit_content = true
+scroll_following = true
+visible_characters = 1
+visible_ratio = 0.480769
+
+[connection signal="pressed" from="Background/Content/DonateButtons/HBoxContainer/Patreon" to="Background/Content/DonateButtons/HBoxContainer/Patreon" method="_on_pressed"]
+[connection signal="pressed" from="Background/Content/DonateButtons/HBoxContainer/Ko-fi" to="Background/Content/DonateButtons/HBoxContainer/Ko-fi" method="_on_pressed"]
+[connection signal="pressed" from="Background/Content/DonateButtons2/HBoxContainer/PayPal" to="Background/Content/DonateButtons2/HBoxContainer/PayPal" method="_on_pressed"]
+[connection signal="pressed" from="Background/Content/Main/Body/MobileAds/GetInitializationStatus" to="." method="_on_get_initialization_status_pressed"]

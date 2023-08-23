@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dsjf8l2m3uc60"]
-
-[ext_resource type="Script" path="res://addons/admob/src/core/VersionSupportedHTTPRequest.gd" id="1"]
-
-[node name="VersionSupportedHTTPRequest" type="HTTPRequest"]
-script = ExtResource("1")
-
-[connection signal="request_completed" from="." to="." method="_on_VersionSupportedHTTPRequest_request_completed"]
