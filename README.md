@@ -1,7 +1,9 @@
-[![Version](https://img.shields.io/github/v/tag/Poing-Studios/godot-admob-plugin?label=Version)](https://github.com/Poing-Studios/godot-admob-plugin/releases)
-[![Download Asset Library](https://img.shields.io/badge/Download-Asset%20Library-darkgreen)](https://godotengine.org/asset-library/asset/1108)
+[![Version](https://img.shields.io/github/v/tag/Poing-Studios/godot-admob-plugin?label=Version&style=for-the-badge)](https://github.com/Poing-Studios/godot-admob-plugin/releases)
+[![Download Asset Library](https://img.shields.io/badge/Download-Asset%20Library-darkgreen?style=for-the-badge)](https://godotengine.org/asset-library/asset/1108)
+[![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/Poing-Studios/godot-admob-android)
+[![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)](https://github.com/Poing-Studios/godot-admob-ios)
+![License](https://img.shields.io/github/license/Poing-Studios/godot-admob-plugin?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/Poing-Studios/godot-admob-plugin?style=social)
-![License](https://img.shields.io/github/license/Poing-Studios/godot-admob-plugin)
 
 # 🦾Godot AdMob Plugin
 
