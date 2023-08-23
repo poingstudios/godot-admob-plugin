@@ -3,14 +3,20 @@
 ![Stars](https://img.shields.io/github/stars/Poing-Studios/godot-admob-plugin?style=social)
 ![License](https://img.shields.io/github/license/Poing-Studios/godot-admob-plugin)
 
-# Godot AdMob Editor Plugin
+# 🦾Godot AdMob Plugin
 
 This addon provides an easy and beautiful way to configure AdMob directly through the editor. Supports [godot-admob-android](https://github.com/Poing-Studios/godot-admob-android) and [godot-admob-ios](https://github.com/Poing-Studios/godot-admob-ios).
 
+<div align="center">
+
+![Plugin Usage](static/admob.webp)
+
+</div>
+
 - Video Tutorial - Soon
 
-# Installation
-## Godot Asset Library (recommended)
+# 📦Installation
+## 📥Godot Asset Library (recommended)
 
 1. Find the AdMob plugin by `poing.studios` \
    <img height=100 src="static/asset_library.png">
@@ -30,10 +36,10 @@ This addon provides an easy and beautiful way to configure AdMob directly throug
 
 </details>
 
-# How to use
+# 🙋‍♂️How to use
 After installation, all the methods will be available for use in any `.gd` script.
 
-# Examples
+# 📋Examples
 
 <details>
 <summary>Initialize AdMob</summary>
@@ -46,7 +52,7 @@ func _ready() -> void:
 
 </details>
 
-## Banner Ads
+## 🎏Banner Ads
 
 <details>
 <summary>Load (will automatically shows)</summary>
@@ -66,7 +72,7 @@ func _on_load_banner_pressed() -> void:
 
 </details>
 
-## Interstitial Ads
+## 📺Interstitial Ads
 <details>
 <summary>Load</summary>
 
@@ -108,7 +114,7 @@ func _on_show_pressed():
 
 </details>
 
-## Rewarded Ads
+## 🎁Rewarded Ads
 
 <details>
 <summary>Load</summary>
@@ -152,7 +158,7 @@ func _on_show_pressed():
 
 </details>
 
-## Rewarded Interstitial Ads
+## 🎁📺Rewarded Interstitial Ads
 <details>
 <summary>Load</summary>
 
@@ -196,7 +202,36 @@ func _on_show_pressed():
 
 </details>
 
-# Documentation
+
+## 📎Useful links:
+- 🍏 iOS: https://github.com/Poing-Studios/godot-admob-ios
+- 🤖 Android: https://github.com/Poing-Studios/godot-admob-android
+- ⏳ Plugin for Godot below v4.1: https://github.com/Poing-Studios/godot-admob-plugin/tree/v2
+
+## 📄Documentation
 For a complete documentation of this Plugin including how to mediation: [check here](docs).
 
 Alternatively, you can check the docs of AdMob itself of [Android](https://developers.google.com/admob/android/quick-start) and [iOS](https://developers.google.com/admob/ios/quick-start).
+
+## 🙏 Support
+If you find our work valuable and would like to support us, consider contributing via these platforms:
+
+[![Patreon](https://img.shields.io/badge/Support%20us%20on-Patreon-orange?style=for-the-badge&logo=patreon)](https://patreon.com/poingstudios)
+
+[![Ko-fi](https://img.shields.io/badge/Buy%20us%20a-coffee-yellow?style=for-the-badge&logo=ko-fi)](https://ko-fi.com/poingstudios)
+
+[![Paypal](https://img.shields.io/badge/Donate-via%20Paypal-blue?style=for-the-badge&logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8)
+
+Your support helps us continue to improve and maintain this plugin. Thank you for being a part of our community!
+
+
+## 🆘Getting help
+[![DISCUSSIONS](https://img.shields.io/badge/Discussions-green?style=for-the-badge)](https://github.com/Poing-Studios/godot-admob-plugin/discussions)
+[![DISCORD](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge)](https://discord.com/invite/YEPvYjSSMk)
+
+
+
+## ⭐ Star History
+If you appreciate our work, don't forget to give us a star on GitHub! ⭐
+
+![Star History Chart](https://api.star-history.com/svg?repos=Poing-studios/godot-admob-plugin&type=Date)
