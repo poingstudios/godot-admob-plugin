@@ -138,7 +138,7 @@ func start_download(platform: String, download_path: String, file_prefix: String
 func _on_android_popupmenu_id_pressed(id: int):
 	match id:
 		Items.LatestVersion:
-			start_download("android", android_download_path, "android-template-")
+			start_download("android", android_download_path, "poing-godot-admob-android-")
 		Items.Folder:
 			var path_directory = ProjectSettings.globalize_path(android_download_path)
 			OS.shell_open(str("file://", path_directory))
@@ -148,7 +148,7 @@ func _on_android_popupmenu_id_pressed(id: int):
 func _on_ios_popupmenu_id_pressed(id: int):
 	match id:
 		Items.LatestVersion:
-			start_download("ios", ios_download_path, "ios-template-")
+			start_download("ios", ios_download_path, "poing-godot-admob-ios-")
 		Items.Folder:
 			var path_directory = ProjectSettings.globalize_path(ios_download_path)
 			OS.shell_open(str("file://", path_directory))
