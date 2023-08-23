@@ -10,8 +10,8 @@ This addon provides an easy and beautiful way to configure AdMob directly throug
 - Video Tutorial - Soon
 
 # Installation
+## Godot Asset Library (recommended)
 
-Godot Asset Library (recommended):
 1. Find the AdMob plugin by `poing.studios` \
    <img height=100 src="static/asset_library.png">
 2. Click Download and Install
@@ -19,26 +19,38 @@ Godot Asset Library (recommended):
 4. Download [godot-admob-android](https://github.com/Poing-Studios/godot-admob-android) and/or [godot-admob-ios](https://github.com/Poing-Studios/godot-admob-ios) in `Project→Tools→AdMob Download Manager→Android/iOS→LatestVersion`.
 5. To know how to deploy, check the README.md of [godot-admob-android](https://github.com/Poing-Studios/godot-admob-android/#usage) and/or [godot-admob-ios](https://github.com/Poing-Studios/godot-admob-ios/#usage).
 
-Manual install for custom versions:
+<details>
+<summary>Manual install for custom versions.</summary>
+
 1. Pick a [specific version](https://github.com/Poing-Studios/godot-admob-editor/tags) from tags
 2. Download and extract as a `.zip` or `.tar.gz`
 3. Copy the extracted `addons/admob` folder into `res://addons` on your project
 4. Download [godot-admob-android](https://github.com/Poing-Studios/godot-admob-android) and/or [godot-admob-ios](https://github.com/Poing-Studios/godot-admob-ios) in `Project→Tools→AdMob Download Manager→Android/iOS→LatestVersion`.
 5. To know how to deploy, check the README.md of [godot-admob-android](https://github.com/Poing-Studios/godot-admob-android/#usage) and/or [godot-admob-ios](https://github.com/Poing-Studios/godot-admob-ios/#usage).
 
+</details>
+
 # How to use
 After installation, all the methods will be available for use in any `.gd` script.
 
 # Examples
 
-## Initialize AdMob
+<details>
+<summary>Initialize AdMob</summary>
+
 ```gdscript
 func _ready() -> void:
 	#just need to call once
 	MobileAds.initialize()
 ```
+
+</details>
+
 ## Banner Ads
-### Load (will automatically shows)
+
+<details>
+<summary>Load (will automatically shows)</summary>
+
 ```gdscript
 # button signal on scene
 func _on_load_banner_pressed() -> void:
@@ -51,8 +63,13 @@ func _on_load_banner_pressed() -> void:
 	var ad_view := AdView.new(unit_id, AdSize.BANNER, AdPosition.Values.TOP)
 	ad_view.load_ad(AdRequest.new())
 ```
+
+</details>
+
 ## Interstitial Ads
-### Load
+<details>
+<summary>Load</summary>
+
 ```gdscript
 var interstitial_ad : InterstitialAd
 var interstitial_ad_load_callback := InterstitialAdLoadCallback.new()
@@ -76,7 +93,12 @@ func on_interstitial_ad_failed_to_load(adError : LoadAdError) -> void:
 func on_interstitial_ad_loaded(interstitial_ad : InterstitialAd) -> void:
 	self.interstitial_ad = interstitial_ad
 ```
-### Show
+
+</details>
+
+<details>
+<summary>Show</summary>
+
 ```gdscript
 # button signal on scene
 func _on_show_pressed():
@@ -84,8 +106,13 @@ func _on_show_pressed():
 		interstitial_ad.show()
 ```
 
+</details>
+
 ## Rewarded Ads
-### Load
+
+<details>
+<summary>Load</summary>
+
 ```gdscript
 var rewarded_ad : RewardedAd
 var rewarded_ad_load_callback := RewardedAdLoadCallback.new()
@@ -110,7 +137,12 @@ func on_rewarded_ad_failed_to_load(adError : LoadAdError) -> void:
 func on_rewarded_ad_loaded(rewarded_ad : RewardedAd) -> void:
 	self.rewarded_ad = rewarded_ad
 ```
-### Show
+
+</details>
+
+<details>
+<summary>Show</summary>
+
 ```gdscript
 # button signal on scene
 func _on_show_pressed():
@@ -118,8 +150,12 @@ func _on_show_pressed():
 		rewarded_ad.show()
 ```
 
+</details>
+
 ## Rewarded Interstitial Ads
-### Load
+<details>
+<summary>Load</summary>
+
 ```gdscript
 var rewarded_interstitial_ad : RewardedInterstitialAd
 var rewarded_interstitial_ad_load_callback := RewardedInterstitialAdLoadCallback.new()
@@ -144,13 +180,21 @@ func on_rewarded_interstitial_ad_failed_to_load(adError : LoadAdError) -> void:
 func on_rewarded_interstitial_ad_loaded(rewarded_interstitial_ad : RewardedInterstitialAd) -> void:
 	self.rewarded_interstitial_ad = rewarded_interstitial_ad
 ```
-### Show
+
+</details>
+
+
+<details>
+<summary>Show</summary>
+
 ```gdscript
 # button signal on scene
 func _on_show_pressed():
 	if rewarded_interstitial_ad:
 		rewarded_interstitial_ad.show(on_user_earned_reward_listener)
 ```
+
+</details>
 
 # Documentation
 For a complete documentation of this Plugin including how to mediation: [check here](docs).
