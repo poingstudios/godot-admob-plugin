@@ -11,7 +11,7 @@ This addon provides an easy and beautiful way to configure AdMob directly throug
 
 <div align="center">
 
-![Plugin Usage](static/admob.webp)
+![Plugin Usage](static/usage.webp)
 
 </div>
 
