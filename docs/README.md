@@ -120,7 +120,7 @@ The Google Mobile Ads SDK is now successfully imported, and you are prepared to 
   <p>Banner ads are rectangular advertisements, consisting of either images or text, that are integrated into an app's layout. These ads remain on the screen while users engage with the app and can automatically refresh after a designated time interval. If you're new to mobile advertising, banner ads provide an excellent starting point for your ad implementation journey.</p>
 </div>
 
-[Implement banner ads](ad_formats/banner.md){ .md-button .md-button--primary }
+[Implement banner ads](ad_formats/banner){ .md-button .md-button--primary }
 
 ### Interstitial
 <div class="image-text-container">
