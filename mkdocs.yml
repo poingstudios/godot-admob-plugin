@@ -1,7 +1,10 @@
 site_name: Godot AdMob Plugin - Poing Studios
-site_url: https://godotadmob.poingstudios.com/
 theme:
   features:
+    - content.tabs.link
+    - navigation.instant
+    - navigation.indexes 
+    - navigation.instant.prefetch
     - navigation.sections
     - navigation.top
     - search.suggest
@@ -10,8 +13,8 @@ theme:
     - content.code.annotation
     - content.code.copy
   name: material
-  favicon: icon.ico
-  logo: icon.ico
+  favicon: assets/icon.ico
+  logo: assets/icon.ico
   language: en
   palette:
     - scheme: default
@@ -27,6 +30,11 @@ theme:
       primary: teal
       accent: lime
 markdown_extensions:
+  - toc:
+      title: On this page
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
   - pymdownx.highlight:
       anchor_linenums: true
   - pymdownx.inlinehilite

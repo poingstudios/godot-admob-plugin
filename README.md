@@ -211,7 +211,7 @@ func _on_show_pressed():
 - ⏳ Plugin for Godot below v4.1: https://github.com/Poing-Studios/godot-admob-plugin/tree/v2
 
 ## 📄Documentation
-For a complete documentation of this Plugin including how to mediation: [check here](docs).
+For a complete documentation of this Plugin including how to mediation: [check here](https://poing-studios.github.io/godot-admob-plugin/).
 
 Alternatively, you can check the docs of AdMob itself of [Android](https://developers.google.com/admob/android/quick-start) and [iOS](https://developers.google.com/admob/ios/quick-start).
 
