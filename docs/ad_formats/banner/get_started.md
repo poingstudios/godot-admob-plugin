@@ -3,6 +3,11 @@ Banner ads are rectangular advertisements, consisting of either images or text, 
 
 This guide demonstrates how to seamlessly integrate banner ads from AdMob into a Godot app. Alongside code snippets and detailed instructions, it also provides guidance on appropriately sizing banners and directs you to additional resources for further assistance.
 
+This document is based on:
+
+- [Google Mobile Ads SDK Android Documentation](https://developers.google.com/admob/android/banner)
+- [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/banner)
+
 ## Prerequisites
 - Complete the [Get started guide](../../README.md)
 
@@ -48,7 +53,7 @@ func _create_ad_view() -> void:
 	if OS.get_name() == "Android":
 		unit_id = "ca-app-pub-3940256099942544/6300978111"
 	elif OS.get_name() == "iOS":
-		unit_id = "ca-app-pub-3940256099942544/6300978111"
+		unit_id = "ca-app-pub-3940256099942544/2934735716"
 
 	_ad_view = AdView.new(unit_id, AdSize.BANNER, AdPosition.Values.TOP)
 ```
@@ -122,15 +127,15 @@ That's all there is to it! Your app is now fully prepared to showcase banner ads
 Below is a table presenting the standard banner ad sizes:
 
 
-| Size in dp (WxH)                 | Description          | Availability       | AdSize constant  |
-|----------------------------------|----------------------|--------------------|------------------|
-| 320x50                           | Standard Banner      | Phones and Tablets | BANNER           |
-| 320x100                          | Large Banner         | Phones and Tablets | LARGE_BANNER     |
-| 300x250                          | IAB Medium Rectangle | Phones and Tablets | MEDIUM_RECTANGLE |
-| 468x60                           | IAB Full-Size Banner | Tablets            | FULL_BANNER      |
-| 728x90                           | IAB Leaderboard      | Tablets            | LEADERBOARD      |
-| Provided width x Adaptive height | [Adaptive banner]()  | Phones and Tablets | N/A              |
-| Screen width x 32/50/90          | [Smart banner]()     | Phones and Tablets | N/A              |
+| Size in dp (WxH)                 | Description                                   | Availability       | AdSize constant  |
+|----------------------------------|-----------------------------------------------|--------------------|------------------|
+| 320x50                           | Standard Banner                               | Phones and Tablets | BANNER           |
+| 320x100                          | Large Banner                                  | Phones and Tablets | LARGE_BANNER     |
+| 300x250                          | IAB Medium Rectangle                          | Phones and Tablets | MEDIUM_RECTANGLE |
+| 468x60                           | IAB Full-Size Banner                          | Tablets            | FULL_BANNER      |
+| 728x90                           | IAB Leaderboard                               | Tablets            | LEADERBOARD      |
+| Provided width x Adaptive height | [Adaptive banner](sizes/anchored_adaptive.md) | Phones and Tablets | N/A              |
+| Screen width x 32/50/90          | [Smart banner](sizes/smart_banner.md)         | Phones and Tablets | N/A              |
 
 ## Further References
 
