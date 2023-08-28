@@ -39,7 +39,7 @@ The code sample below demonstrates how to utilize the AdView. In this example, y
 ### Create a AdView (banner)
 The initial step in utilizing a banner ad is to create an instance of an AdView within a GDScript attached to a Node.
 
-```gdscript linenums="1" hl_lines="16"
+```gdscript linenums="1" hl_lines="20"
 extends Node2D
 
 var _ad_view : AdView
@@ -49,6 +49,10 @@ func _ready():
 	MobileAds.initialize()
 
 func _create_ad_view() -> void:
+	#free memory
+	if _ad_view:
+		destroy_ad_view()
+
 	var unit_id : String
 	if OS.get_name() == "Android":
 		unit_id = "ca-app-pub-3940256099942544/6300978111"
@@ -113,9 +117,10 @@ func register_ad_listener() -> void:
 ### Destroy the AdView (banner)
 Upon completion of using the AdView, remember to call Destroy() to release allocated resources and free up memory.
 
-```gdscript linenums="1" hl_lines="3"
+```gdscript linenums="1" hl_lines="4"
 func destroy_ad_view() -> void:
 	if _ad_view:
+		#always call this method on all AdFormats to free memory on Android/iOS
 		_ad_view.destroy()
 		_ad_view = null
 ```
