@@ -127,7 +127,7 @@ The Google Mobile Ads SDK is now successfully imported, and you are prepared to 
   <p>Interstitial ads are expansive, full-screen advertisements that overlay an app's interface and persist until they are closed by the user. They are most effective when strategically placed during natural pauses in the app's execution, such as between levels of a game or immediately after the completion of a task.</p>
 </div>
 
-[Implement interstitial ads](https://github.com/Poing-Studios/godot-admob-plugin/releases/latest){ .md-button .md-button--primary }
+[Implement interstitial ads](ad_formats/interstitial.md){ .md-button .md-button--primary }
 
 ### Rewarded
 <div class="image-text-container">
@@ -135,7 +135,7 @@ The Google Mobile Ads SDK is now successfully imported, and you are prepared to 
   <p>Rewarded video ads are immersive, full-screen video advertisements that provide users with the choice to watch them entirely. In return for their time and attention, users receive in-app rewards or benefits.</p>
 </div>
 
-[Implement rewarded ads](https://github.com/Poing-Studios/godot-admob-plugin/releases/latest){ .md-button .md-button--primary }
+[Implement rewarded ads](ad_formats/rewarded.md){ .md-button .md-button--primary }
 
 ### Rewarded Interstitial
 <div class="image-text-container">
@@ -143,7 +143,7 @@ The Google Mobile Ads SDK is now successfully imported, and you are prepared to 
   <p>A Rewarded Interstitial is a specific form of incentivized ad format that allows you to provide rewards in exchange for ads that appear automatically during natural app transitions. Unlike regular rewarded ads, users are not obligated to actively opt in to view a Rewarded Interstitial; they are seamlessly integrated into the app experience.</p>
 </div>
 
-[Implement rewarded interstitial ads](https://github.com/Poing-Studios/godot-admob-plugin/releases/latest){ .md-button .md-button--primary }
+[Implement rewarded interstitial ads](ad_formats/rewarded_interstitial.md){ .md-button .md-button--primary }
 
 <style>
   .image-text-container {

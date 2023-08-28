@@ -40,12 +40,13 @@ The code sample below demonstrates how to utilize the Rewarded. In this example,
 ### Load an ad
 To load an rewarded ad, utilize the `RewardedAdLoader` class. Pass in an `RewardedAdLoadCallback` to receive the loaded ad or any potential errors. It's worth noting that, similar to other format load callbacks, the `RewardedAdLoadCallback` leverages `LoadAdError` to provide comprehensive error details.
 
-```gdscript linenums="1" hl_lines="29"
+```gdscript linenums="1" hl_lines="30"
 extends Node2D
 
 var _rewarded_ad : RewardedAd
 
 func _ready() -> void:
+    #The initializate needs to be done only once, ideally at app launch.
 	MobileAds.initialize()
 
 func _on_load_pressed():
@@ -134,7 +135,7 @@ func _on_load_pressed():
 
 When presenting a rewarded ad, you'll employ an `OnUserEarnedRewardListener` object to manage reward-related events.
 
-```gdscript linenums="1" hl_lines="3"
+```gdscript linenums="1" hl_lines="14"
 extends Node2D
 
 var _rewarded_ad : RewardedAd
@@ -158,6 +159,7 @@ Upon completion of an `RewardedAd`, it's important to invoke the `destroy()` fun
 ```gdscript 
 if _rewarded_ad:
     _rewarded_ad.destroy()
+    _rewarded_ad = null
 ```
 
 

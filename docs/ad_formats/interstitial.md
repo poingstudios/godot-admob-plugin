@@ -38,12 +38,13 @@ The code sample below demonstrates how to utilize the Interstitial. In this exam
 ### Load an ad
 To load an interstitial ad, utilize the `InterstitialAdLoader` class. Pass in an `InterstitialAdLoadCallback` to receive the loaded ad or any potential errors. It's worth noting that, similar to other format load callbacks, the `InterstitialAdLoadCallback` leverages `LoadAdError` to provide comprehensive error details.
 
-```gdscript linenums="1" hl_lines="29"
+```gdscript linenums="1" hl_lines="30"
 extends Node2D
 
 var _interstitial_ad : InterstitialAd
 
 func _ready() -> void:
+    #The initializate needs to be done only once, ideally at app launch.
 	MobileAds.initialize()
 
 func _on_load_pressed():
@@ -125,7 +126,8 @@ Upon completion of an `InterstitialAd`, it's important to invoke the `destroy()`
 
 ```gdscript 
 if _interstitial_ad:
-    _interstitial_ad.destroy()
+	_interstitial_ad.destroy()
+	_interstitial_ad = null
 ```
 
 
