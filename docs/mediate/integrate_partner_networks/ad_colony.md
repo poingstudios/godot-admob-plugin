@@ -49,7 +49,7 @@ We recommend following the tutorial for [Android](https://developers.google.com/
     === "iOS"
         ![ios-adcolony](../../assets/ios/adcolony.png)
 
-4. When export make sure to mark `Ad Mob Ad Colony`
+4. When export make sure to mark `Ad Mob` and `Ad Mob Ad Colony`
 
     === "Android"
         ![android-adcolony-export](../../assets/android/adcolony-export.png)
