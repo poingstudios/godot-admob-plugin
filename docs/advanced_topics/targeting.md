@@ -2,7 +2,7 @@
 This guide explains how to provide targeting information to an ad request. 
 
 ## Prerequisites
-- Complete the [Get started guide](README.md)
+- Complete the [Get started guide](../README.md)
 
 
 ## RequestConfiguration
