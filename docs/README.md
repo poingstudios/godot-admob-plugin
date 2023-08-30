@@ -7,7 +7,6 @@ This document is based on:
 - [Google Mobile Ads SDK Android Documentation](https://developers.google.com/admob/android/quick-start)
 - [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/quick-start)
 
-
 ## Prerequisites
 
 - Use Godot v4.1 or higher
@@ -120,7 +119,7 @@ The Google Mobile Ads SDK is now successfully imported, and you are prepared to 
   <p>Banner ads are rectangular advertisements, consisting of either images or text, that are integrated into an app's layout. These ads remain on the screen while users engage with the app and can automatically refresh after a designated time interval. If you're new to mobile advertising, banner ads provide an excellent starting point for your ad implementation journey.</p>
 </div>
 
-[Implement banner ads](ad_formats/banner.md){ .md-button .md-button--primary }
+[Implement banner ads](ad_formats/banner/get_started.md){ .md-button .md-button--primary }
 
 ### Interstitial
 <div class="image-text-container">
@@ -128,7 +127,7 @@ The Google Mobile Ads SDK is now successfully imported, and you are prepared to 
   <p>Interstitial ads are expansive, full-screen advertisements that overlay an app's interface and persist until they are closed by the user. They are most effective when strategically placed during natural pauses in the app's execution, such as between levels of a game or immediately after the completion of a task.</p>
 </div>
 
-[Implement interstitial ads](https://github.com/Poing-Studios/godot-admob-plugin/releases/latest){ .md-button .md-button--primary }
+[Implement interstitial ads](ad_formats/interstitial.md){ .md-button .md-button--primary }
 
 ### Rewarded
 <div class="image-text-container">
@@ -136,7 +135,7 @@ The Google Mobile Ads SDK is now successfully imported, and you are prepared to 
   <p>Rewarded video ads are immersive, full-screen video advertisements that provide users with the choice to watch them entirely. In return for their time and attention, users receive in-app rewards or benefits.</p>
 </div>
 
-[Implement rewarded ads](https://github.com/Poing-Studios/godot-admob-plugin/releases/latest){ .md-button .md-button--primary }
+[Implement rewarded ads](ad_formats/rewarded.md){ .md-button .md-button--primary }
 
 ### Rewarded Interstitial
 <div class="image-text-container">
@@ -144,7 +143,7 @@ The Google Mobile Ads SDK is now successfully imported, and you are prepared to 
   <p>A Rewarded Interstitial is a specific form of incentivized ad format that allows you to provide rewards in exchange for ads that appear automatically during natural app transitions. Unlike regular rewarded ads, users are not obligated to actively opt in to view a Rewarded Interstitial; they are seamlessly integrated into the app experience.</p>
 </div>
 
-[Implement rewarded interstitial ads](https://github.com/Poing-Studios/godot-admob-plugin/releases/latest){ .md-button .md-button--primary }
+[Implement rewarded interstitial ads](ad_formats/rewarded_interstitial.md){ .md-button .md-button--primary }
 
 <style>
   .image-text-container {

@@ -66,7 +66,7 @@ func _on_load_banner_pressed() -> void:
 	if OS.get_name() == "Android":
 		unit_id = "ca-app-pub-3940256099942544/6300978111"
 	elif OS.get_name() == "iOS":
-		unit_id = "ca-app-pub-3940256099942544/6300978111"
+		unit_id = "ca-app-pub-3940256099942544/2934735716"
 
 	var ad_view := AdView.new(unit_id, AdSize.BANNER, AdPosition.Values.TOP)
 	ad_view.load_ad(AdRequest.new())
