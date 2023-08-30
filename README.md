@@ -15,7 +15,7 @@ This addon provides an easy and beautiful way to configure AdMob directly throug
 
 </div>
 
-- Video Tutorial - Soon
+- Video tutorial: https://youtu.be/WpVGn7ZasKM.
 
 # 📦Installation
 ## 📥Godot Asset Library (recommended)
