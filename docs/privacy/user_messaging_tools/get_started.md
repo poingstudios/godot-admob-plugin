@@ -4,6 +4,11 @@ Under the Google [EU User Consent Policy](https://www.google.com/about/company/u
 
 To support publishers in meeting their duties under this policy, Google offers the User Messaging Platform (UMP) SDK. The UMP SDK has been updated to support the latest IAB standards. All of these configurations can now conveniently be handled in AdMob privacy & messaging.
 
+This document is based on:
+
+- [Google Mobile Ads SDK Android Documentation](https://developers.google.com/admob/android/privacy)
+- [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/privacy)
+
 ## Prerequisites
 
 - Complete the [Get started guide](../../README.md)

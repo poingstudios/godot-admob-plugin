@@ -5,6 +5,15 @@
 
 This guide explains how to utilize the Google Mobile Ads SDK for loading and presenting ads from the Meta Audience Network through [mediation](../get_started.md), with a focus on bidding integrations. It provides instructions on integrating the Meta Audience Network into the mediation configuration of a Godot app and integrating the Meta Audience Network SDK and adapter into your Godot app.
 
+This document is based on:
+
+- [Google Mobile Ads SDK Android Documentation](https://developers.google.com/admob/android/mediation/meta)
+- [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/mediation/meta)
+
+## Supported integrations and ad formats
+
+The AdMob mediation adapter for Meta Audience Network has the following capabilities:
+
 | Integration |   |
 |-------------|---|
 | Bidding     | ✅ |

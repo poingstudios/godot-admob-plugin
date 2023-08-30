@@ -5,6 +5,11 @@
 
 This guide explains how to utilize the Google Mobile Ads SDK for loading and presenting ads from Liftoff Monetize through [mediation](../get_started.md), with comprehensive coverage of both bidding and waterfall integrations. It provides instructions on integrating Liftoff Monetize into the mediation configuration of a Godot app and integrating the Vungle SDK and adapter into your Godot app.
 
+This document is based on:
+
+- [Google Mobile Ads SDK Android Documentation](https://developers.google.com/admob/android/mediation/liftoff-monetize)
+- [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/mediation/liftoff-monetize)
+
 ## Supported integrations and ad formats
 
 The AdMob mediation adapter for AdColony has the following capabilities:

@@ -2,6 +2,11 @@
 
 This guide demonstrates how to employ the Google Mobile Ads SDK to load and showcase ads from AdColony through [mediation](../get_started.md), encompassing both bidding and waterfall integration approaches. It elucidates the process of incorporating AdColony into an ad unit's mediation configuration and integrating the AdColony SDK and adapter into a Godot app.
 
+This document is based on:
+
+- [Google Mobile Ads SDK Android Documentation](https://developers.google.com/admob/android/mediation/adcolony)
+- [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/mediation/adcolony)
+
 ## Supported integrations and ad formats
 
 The AdMob mediation adapter for AdColony has the following capabilities:

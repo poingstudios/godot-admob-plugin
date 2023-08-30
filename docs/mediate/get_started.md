@@ -2,7 +2,6 @@
 
 AdMob mediation is a valuable feature that allows you to deliver ads to your applications from various sources. These sources encompass the AdMob Network, third-party ad networks, and [AdMob campaigns](https://support.google.com/admob/answer/6162747). The primary goal of AdMob mediation is to optimize your fill rate and enhance your monetization efforts. It achieves this by directing ad requests to multiple networks, ensuring that your app utilizes the most suitable network available to serve ads. This approach is exemplified through a [case study](https://admob.google.com/home/resources/cookapps-grows-ad-revenue-86-times-with-admob-rewarded-ads-and-mediation/).
 
-
 This comprehensive guide serves as your all-inclusive resource for integrating mediation into your AdMob app. It encompasses both bidding and waterfall integration methods, providing you with a complete reference for optimizing your ad serving strategy.
 
 !!! info
@@ -16,6 +15,11 @@ This comprehensive guide serves as your all-inclusive resource for integrating m
     - [Rewarded Interstitial Ads](../ad_formats/rewarded_interstitial.md)
 
 If you are new to mediation, it's advisable to review the [Overview of AdMob mediation](https://support.google.com/admob/answer/13420272) for a better understanding of the concept.
+
+This document is based on:
+
+- [Google Mobile Ads SDK Android Documentation](https://developers.google.com/admob/android/mediate)
+- [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/mediate)
 
 ## Initialize the Mobile Ads SDK
 

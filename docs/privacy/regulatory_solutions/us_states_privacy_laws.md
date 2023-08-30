@@ -13,6 +13,11 @@ Publishers should decide for themselves how restricted data processing can suppo
 
 This guide is intended to help publishers understand the steps required to enable these options on a per-ad request basis.
 
+This document is based on:
+
+- [Google Mobile Ads SDK Android Documentation](https://developers.google.com/admob/android/privacy/us-states)
+- [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/privacy/us-states)
+
 ## RDP signal
 
 To notify Google that RDP should be enabled using Google's signal, insert the key rdp as an extra parameter with a value of `1`.

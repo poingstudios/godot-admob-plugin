@@ -1,6 +1,11 @@
 # Targeting
 This guide explains how to provide targeting information to an ad request. 
 
+This document is based on:
+
+- [Google Mobile Ads SDK Android Documentation](https://developers.google.com/admob/android/targeting)
+- [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/targeting)
+
 ## Prerequisites
 - Complete the [Get started guide](../README.md)
 

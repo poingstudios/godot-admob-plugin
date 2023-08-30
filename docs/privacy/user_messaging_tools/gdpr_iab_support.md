@@ -2,6 +2,11 @@
 
 This guide outlines the steps required to support the GDPR IAB TCF v2 message as part of the UMP SDK. It is intended to be paired with [Get started](get_started.md) which gives an overview of how to get your app running with the UMP SDK and the basics of setting up your message. The guidance below is specific to the GDPR IAB TCF v2 message.
 
+This document is based on:
+
+- [Google Mobile Ads SDK Android Documentation](https://developers.google.com/admob/android/privacy/gdpr)
+- [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/privacy/gdpr)
+
 ## Prerequisites
 
 - Complete the [Get started guide](get_started.md)

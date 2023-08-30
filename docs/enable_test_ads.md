@@ -6,6 +6,11 @@ To obtain test ads, you have two options:
 1. Use Google's [Sample Ad Units](#sample-ad-units).
 2. Utilize Your Own Ad Unit and [Enable Test Devices](#enable-test-devices).
 
+This document is based on:
+
+- [Google Mobile Ads SDK Android Documentation](https://developers.google.com/admob/android/test-ads)
+- [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/test-ads)
+
 ## Prerequisites
 - Complete the [Get started guide](README.md)
 
