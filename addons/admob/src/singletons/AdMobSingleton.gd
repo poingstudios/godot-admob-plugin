@@ -1,3 +1,25 @@
+# MIT License
+
+# Copyright (c) 2023-present Poing Studios
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 extends Node
 
 signal initialization_complete(status, adapter_name)
@@ -75,10 +97,15 @@ func initialize() -> void:
 				is_real = config.debug.is_real 
 				is_test_europe_user_consent = config.debug.is_test_europe_user_consent
 		
-		_plugin.initialize(config.general.is_for_child_directed_treatment, config.general.max_ad_content_rating, is_real, is_test_europe_user_consent)
-
-
-
+		var google_request_agent := "Godot-PoingStudios-"+PoingAdMobVersionHelper.version_formated
+		
+		_plugin.initialize(
+			config.general.is_for_child_directed_treatment, 
+			config.general.max_ad_content_rating, 
+			is_real, 
+			is_test_europe_user_consent, 
+			google_request_agent
+		)
 
 func _connect_signals() -> void:
 	_plugin.connect("initialization_complete",Callable(self,"_on_AdMob_initialization_complete"))
