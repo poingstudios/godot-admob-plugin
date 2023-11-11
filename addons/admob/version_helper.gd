@@ -23,7 +23,7 @@
 class_name PoingAdMobVersionHelper
 extends Object
 
-static var version_formated : String = _get_plugin_version_formated() :
+var version_formated : String = _get_plugin_version_formated() :
 	set(value):
 		version_formated = _get_plugin_version_formated()
 
