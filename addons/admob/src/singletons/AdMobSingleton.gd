@@ -75,7 +75,8 @@ func initialize() -> void:
 				is_real = config.debug.is_real 
 				is_test_europe_user_consent = config.debug.is_test_europe_user_consent
 		
-		_plugin.initialize(config.general.is_for_child_directed_treatment, config.general.max_ad_content_rating, is_real, is_test_europe_user_consent)
+		var google_request_agent := "Godot-PoingStudios-"+PoingAdMobVersionHelper.new().version_formated
+		_plugin.initialize(config.general.is_for_child_directed_treatment, config.general.max_ad_content_rating, is_real, is_test_europe_user_consent, google_request_agent)
 
 
 
