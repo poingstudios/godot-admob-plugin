@@ -29,7 +29,8 @@ var extras : Dictionary
 func convert_to_dictionary() -> Dictionary:
 	return {
 		"mediation_extras" : _transform_mediation_extras_to_dictionary(),
-		"extras" : extras
+		"extras" : extras,
+		"google_request_agent" : "Godot-PoingStudios-"+PoingAdMobVersionHelper.version_formated
 	}
 
 func _transform_mediation_extras_to_dictionary() -> Dictionary:
@@ -41,3 +42,4 @@ func _transform_mediation_extras_to_dictionary() -> Dictionary:
 			"extras" : extra.extras
 		}
 	return mediation_extras_dictionary
+
