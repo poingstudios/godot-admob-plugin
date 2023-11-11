@@ -55,6 +55,9 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 			add_file(CFG_FILE_PATH, file.get_buffer(file.get_length()), false)
 		file.close()
 		
+	func _get_name() -> String:
+		return "PoingAdMob"
+		
 var _exporter := PoingAdMobEditorExportPlugin.new()
 func _enter_tree():
 	add_export_plugin(_exporter)
