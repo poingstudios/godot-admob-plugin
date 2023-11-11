@@ -20,26 +20,27 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name AdRequest
+class_name PoingAdMobVersionHelper
+extends Object
 
-var keywords : Array[String]
-var mediation_extras : Array[MediationExtras]
-var extras : Dictionary
+static var version_formated : String = _get_plugin_version_formated() :
+	set(value):
+		version_formated = _get_plugin_version_formated()
 
-func convert_to_dictionary() -> Dictionary:
-	return {
-		"mediation_extras" : _transform_mediation_extras_to_dictionary(),
-		"extras" : extras,
-		"google_request_agent" : "Godot-PoingStudios-"+PoingAdMobVersionHelper.version_formated
-	}
-
-func _transform_mediation_extras_to_dictionary() -> Dictionary:
-	var mediation_extras_dictionary : Dictionary
-	for i in mediation_extras.size():
-		var extra = mediation_extras[i] as MediationExtras
-		mediation_extras_dictionary[i] = {
-			"class_name" : extra.get_class_name(),
-			"extras" : extra.extras
-		}
-	return mediation_extras_dictionary
+static func _get_plugin_version_formated() -> String:
+	var plugin_config_file := ConfigFile.new()
+	var version: String = "v3.0.1" #redundancy
+	
+	if plugin_config_file.load("res://addons/admob/plugin.cfg") == OK:
+		version = plugin_config_file.get_value("plugin", "version")
+	else:
+		push_error("Failed to load plugin.cfg")
+	
+	var pattern = RegEx.new()
+	pattern.compile("(?:v)?(\\d+\\.\\d+\\.\\d+)")
+	
+	var matchs := pattern.search(version)
+	if matchs != null:
+		version = matchs.get_string(1)
+	return version
 

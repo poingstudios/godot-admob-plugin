@@ -19,8 +19,8 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
-
 @tool
+class_name AdMobEditorPlugin
 extends EditorPlugin
 
 var http_request_downloader := HTTPRequest.new()
@@ -34,8 +34,8 @@ var godot_version := "v" + str(Engine.get_version_info().major) + "." + str(Engi
 var plugin_version := get_plugin_version()
 
 var version_support := {
-	"android": "v3.0.0",
-	"ios": "v3.0.0"
+	"android": "v3.0.2",
+	"ios": "v3.0.2"
 }
 
 enum Items {
@@ -44,7 +44,21 @@ enum Items {
 	GitHub
 }
 
+
+class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
+	const CFG_FILE_PATH := "res://addons/admob/plugin.cfg"
+	
+	func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
+		var file = FileAccess.open(CFG_FILE_PATH, FileAccess.READ)
+		if file:
+			print("Exporting Poing AdMob '.cfg' file")
+			add_file(CFG_FILE_PATH, file.get_buffer(file.get_length()), false)
+		file.close()
+		
+var _exporter := PoingAdMobEditorExportPlugin.new()
 func _enter_tree():
+	add_export_plugin(_exporter)
+	
 	setup_timer()
 	create_download_directories()
 	_request_version_support()
@@ -80,11 +94,12 @@ func _enter_tree():
 	add_tool_submenu_item("AdMob Download Manager", popup)
 
 func _exit_tree():
+	remove_export_plugin(_exporter)
 	remove_tool_menu_item("AdMob Download Manager")
 
 
 func _request_version_support():
-	var url = "https://raw.githubusercontent.com/Poing-Studios/godot-admob-versions/" + plugin_version + "/versions.json"
+	var url = "https://raw.githubusercontent.com/Poing-Studios/godot-admob-versions/" + get_plugin_version() + "/versions.json"
 	var http_request = HTTPRequest.new()
 	http_request.request_completed.connect(_on_version_support_request_completed)
 	add_child(http_request)
@@ -161,19 +176,7 @@ func _on_popupmenu_id_pressed(id : int):
 			var path_directory = ProjectSettings.globalize_path(default_download_path)
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
-			OS.shell_open("https://github.com/Poing-Studios/godot-admob-plugin/tree/" + plugin_version)
-
-
-func get_plugin_version() -> String:
-	var plugin_config_file := ConfigFile.new()
-	var version: String = ""
-
-	if plugin_config_file.load("res://addons/admob/plugin.cfg") == OK:
-		version = plugin_config_file.get_value("plugin", "version")
-	else:
-		printerr("Failed to load plugin.cfg")
-	
-	return version
+			OS.shell_open("https://github.com/Poing-Studios/godot-admob-plugin/tree/" + get_plugin_version())
 
 func show_download_percent(url_download: String = ""):
 	if not url_download.is_empty():
