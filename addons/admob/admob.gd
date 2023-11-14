@@ -31,7 +31,7 @@ var ios_download_path := "res://addons/admob/downloads/ios/"
 var default_download_path := "res://addons/admob/downloads/"
 var current_download_path := default_download_path
 var godot_version := "v" + str(Engine.get_version_info().major) + "." + str(Engine.get_version_info().minor) + "." + str(Engine.get_version_info().patch)
-var plugin_version := get_plugin_version()
+var plugin_version := PoingAdMobVersionHelper.get_plugin_version()
 
 var version_support := {
 	"android": "v3.0.2",
@@ -43,7 +43,6 @@ enum Items {
 	Folder,
 	GitHub
 }
-
 
 class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 	const CFG_FILE_PATH := "res://addons/admob/plugin.cfg"
@@ -102,7 +101,7 @@ func _exit_tree():
 
 
 func _request_version_support():
-	var url = "https://raw.githubusercontent.com/Poing-Studios/godot-admob-versions/" + get_plugin_version() + "/versions.json"
+	var url = "https://raw.githubusercontent.com/Poing-Studios/godot-admob-versions/" + plugin_version + "/versions.json"
 	var http_request = HTTPRequest.new()
 	http_request.request_completed.connect(_on_version_support_request_completed)
 	add_child(http_request)
@@ -179,7 +178,7 @@ func _on_popupmenu_id_pressed(id : int):
 			var path_directory = ProjectSettings.globalize_path(default_download_path)
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
-			OS.shell_open("https://github.com/Poing-Studios/godot-admob-plugin/tree/" + get_plugin_version())
+			OS.shell_open("https://github.com/Poing-Studios/godot-admob-plugin/tree/" + plugin_version)
 
 func show_download_percent(url_download: String = ""):
 	if not url_download.is_empty():

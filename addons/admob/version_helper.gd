@@ -27,7 +27,7 @@ static var version_formated : String = _get_plugin_version_formated() :
 	set(value):
 		version_formated = _get_plugin_version_formated()
 
-static func _get_plugin_version_formated() -> String:
+static func get_plugin_version() -> String:
 	var plugin_config_file := ConfigFile.new()
 	var version: String = "v3.0.1" #redundancy
 	
@@ -35,6 +35,11 @@ static func _get_plugin_version_formated() -> String:
 		version = plugin_config_file.get_value("plugin", "version")
 	else:
 		push_error("Failed to load plugin.cfg")
+	
+	return version
+
+static func _get_plugin_version_formated() -> String:
+	var version := get_plugin_version()
 	
 	var pattern = RegEx.new()
 	pattern.compile("(?:v)?(\\d+\\.\\d+\\.\\d+)")

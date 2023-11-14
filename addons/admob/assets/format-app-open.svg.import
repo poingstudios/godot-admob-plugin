@@ -16,9 +16,9 @@ dest_files=["res://.godot/imported/format-app-open.svg-09f678ee2c2c062157f34ba08
 [params]
 
 compress/mode=0
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/bptc_ldr=0
 compress/normal_map=0
 compress/channel_pack=0
 mipmaps/generate=false
