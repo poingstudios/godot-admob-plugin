@@ -1,1 +1,9 @@
 *.zip
+
+# Android 
+*.aar
+*.gdap
+
+# iOS
+*.a
+*.gdip
