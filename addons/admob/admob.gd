@@ -35,7 +35,7 @@ var plugin_version := PoingAdMobVersionHelper.get_plugin_version()
 
 var version_support := {
 	"android": "v3.0.2",
-	"ios": "v3.0.2"
+	"ios": "v3.0.3"
 }
 
 enum Items {
@@ -59,6 +59,7 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 		
 var _exporter := PoingAdMobEditorExportPlugin.new()
 func _enter_tree():
+	godot_version = _format_version(godot_version)
 	add_export_plugin(_exporter)
 	
 	setup_timer()
@@ -99,6 +100,11 @@ func _exit_tree():
 	remove_export_plugin(_exporter)
 	remove_tool_menu_item("AdMob Download Manager")
 
+func _format_version(version: String) -> String:
+	var pattern = RegEx.new()
+	pattern.compile("^(v\\d+\\.\\d+)(\\.0)$")
+	var match_result = pattern.search(version)
+	return match_result.get_string(1) if match_result else version
 
 func _request_version_support():
 	var url = "https://raw.githubusercontent.com/Poing-Studios/godot-admob-versions/" + plugin_version + "/versions.json"
