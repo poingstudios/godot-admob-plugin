@@ -43,9 +43,9 @@ func load(
 		_plugin.load(ad_unit_id, ad_request.convert_to_dictionary(), ad_request.keywords, _uid)
 		_plugin.connect("on_rewarded_ad_loaded", func(uid : int):
 			if uid == _uid:
-				rewarded_ad_load_callback.on_ad_loaded.call(RewardedAd.new(uid))
+				rewarded_ad_load_callback.on_ad_loaded.call_deferred(RewardedAd.new(uid))
 		)
 		_plugin.connect("on_rewarded_ad_failed_to_load", func(uid : int, load_ad_error_dictionary : Dictionary): 
 			if uid == _uid:
-				rewarded_ad_load_callback.on_ad_failed_to_load.call(LoadAdError.create(load_ad_error_dictionary))
+				rewarded_ad_load_callback.on_ad_failed_to_load.call_deferred(LoadAdError.create(load_ad_error_dictionary))
 		)

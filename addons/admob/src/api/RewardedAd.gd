@@ -37,7 +37,7 @@ func show(on_user_earned_reward_listener := OnUserEarnedRewardListener.new()) ->
 		_plugin.show(_uid)
 		_plugin.connect("on_rewarded_ad_user_earned_reward", func(uid : int, rewarded_item_dictionary : Dictionary):
 			if uid == _uid:
-				on_user_earned_reward_listener.on_user_earned_reward.call(RewardedItem.create(rewarded_item_dictionary))
+				on_user_earned_reward_listener.on_user_earned_reward.call_deferred(RewardedItem.create(rewarded_item_dictionary))
 			)
 
 func destroy() -> void:
@@ -52,21 +52,21 @@ func register_callbacks() -> void:
 	if _plugin:
 		_plugin.connect("on_rewarded_ad_clicked", func(uid : int):
 			if uid == _uid:
-				full_screen_content_callback.on_ad_clicked.call()
+				full_screen_content_callback.on_ad_clicked.call_deferred()
 			)
 		_plugin.connect("on_rewarded_ad_dismissed_full_screen_content", func(uid : int):
 			if uid == _uid:
-				full_screen_content_callback.on_ad_dismissed_full_screen_content.call()
+				full_screen_content_callback.on_ad_dismissed_full_screen_content.call_deferred()
 			)
 		_plugin.connect("on_rewarded_ad_failed_to_show_full_screen_content", func(uid : int, ad_error_dictionary : Dictionary):
 			if uid == _uid:
-				full_screen_content_callback.on_ad_failed_to_show_full_screen_content.call(AdError.create(ad_error_dictionary))
+				full_screen_content_callback.on_ad_failed_to_show_full_screen_content.call_deferred(AdError.create(ad_error_dictionary))
 			)
 		_plugin.connect("on_rewarded_ad_impression", func(uid : int):
 			if uid == _uid:
-				full_screen_content_callback.on_ad_impression.call()
+				full_screen_content_callback.on_ad_impression.call_deferred()
 			)
 		_plugin.connect("on_rewarded_ad_showed_full_screen_content", func(uid : int):
 			if uid == _uid:
-				full_screen_content_callback.on_ad_showed_full_screen_content.call()
+				full_screen_content_callback.on_ad_showed_full_screen_content.call_deferred()
 			)
