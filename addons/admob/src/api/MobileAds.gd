@@ -35,7 +35,7 @@ static func initialize(on_initialization_complete_listener : OnInitializationCom
 				on_initialization_complete_listener.on_initialization_complete.call(initialization_status)
 			)
 
-static func set_request_configuration(request_configuration : RequestConfiguration):
+static func set_request_configuration(request_configuration : RequestConfiguration) -> void:
 	if _plugin:
 		#test_device_ids needs to be passed separarely because Dictionary can't serialize Arrays 
 		_plugin.set_request_configuration(request_configuration.convert_to_dictionary(), request_configuration.test_device_ids)
@@ -45,3 +45,7 @@ static func get_initialization_status() -> InitializationStatus:
 		var initialization_status_dictionary : Dictionary = _plugin.get_initialization_status()
 		return InitializationStatus.create(initialization_status_dictionary)
 	return null
+
+static func set_ios_app_pause_on_background(pause : bool) -> void:
+	if _plugin and OS.get_name() == "iOS":
+		_plugin.set_ios_app_pause_on_background(pause)

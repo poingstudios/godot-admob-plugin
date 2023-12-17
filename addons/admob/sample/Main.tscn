@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://0esyp38ds6yg"]
+[gd_scene load_steps=19 format=3 uid="uid://0esyp38ds6yg"]
 
 [ext_resource type="Script" path="res://addons/admob/sample/Main.gd" id="1_xm28w"]
 [ext_resource type="Texture2D" uid="uid://to8hnfn5fmrl" path="res://addons/admob/assets/icon-76.png" id="2_b280g"]
@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://iy12nk8vefwy" path="res://addons/admob/sample/Rewarded.tscn" id="8_atpxc"]
 [ext_resource type="PackedScene" uid="uid://cpxd2i7v6t6b6" path="res://addons/admob/sample/RewardedInterstitial.tscn" id="9_iwe72"]
 [ext_resource type="PackedScene" uid="uid://bnptawvmfxhhu" path="res://addons/admob/sample/Ump.tscn" id="10_7toto"]
+[ext_resource type="AudioStream" uid="uid://f3f176vu6pfo" path="res://addons/admob/assets/music.ogg" id="12_3yie5"]
+[ext_resource type="Script" path="res://addons/admob/sample/MobileAds.gd" id="12_tjkhy"]
 
 [sub_resource type="Theme" id="Theme_1p2mi"]
 default_font = ExtResource("3_acnhc")
@@ -133,8 +135,10 @@ text = "AdMob Plugin - Poing Studios"
 
 [node name="Body" type="TabContainer" parent="Background/Content/Main"]
 layout_mode = 2
+current_tab = 5
 
 [node name="Banner" parent="Background/Content/Main/Body" instance=ExtResource("6_xt5vc")]
+visible = false
 layout_mode = 2
 
 [node name="Interstitial" parent="Background/Content/Main/Body" instance=ExtResource("7_5rtn7")]
@@ -154,12 +158,27 @@ visible = false
 layout_mode = 2
 
 [node name="MobileAds" type="VBoxContainer" parent="Background/Content/Main/Body"]
-visible = false
 layout_mode = 2
+script = ExtResource("12_tjkhy")
 
 [node name="GetInitializationStatus" type="Button" parent="Background/Content/Main/Body/MobileAds"]
 layout_mode = 2
 text = "GetInitializationStatus"
+
+[node name="SetiOSAppPauseOnBackgroundButton" type="CheckButton" parent="Background/Content/Main/Body/MobileAds"]
+layout_mode = 2
+text = "Set iOS App Pause On Background"
+alignment = 1
+
+[node name="SetMuteMusic" type="CheckButton" parent="Background/Content/Main/Body/MobileAds"]
+layout_mode = 2
+text = "Mute Music"
+alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="Background/Content/Main/Body/MobileAds"]
+stream = ExtResource("12_3yie5")
+volume_db = -10.0
+autoplay = true
 
 [node name="Output" type="RichTextLabel" parent="Background/Content"]
 visible = false
@@ -174,3 +193,5 @@ visible_ratio = 0.480769
 [connection signal="pressed" from="Background/Content/DonateButtons/HBoxContainer/Ko-fi" to="Background/Content/DonateButtons/HBoxContainer/Ko-fi" method="_on_pressed"]
 [connection signal="pressed" from="Background/Content/DonateButtons2/HBoxContainer/PayPal" to="Background/Content/DonateButtons2/HBoxContainer/PayPal" method="_on_pressed"]
 [connection signal="pressed" from="Background/Content/Main/Body/MobileAds/GetInitializationStatus" to="." method="_on_get_initialization_status_pressed"]
+[connection signal="pressed" from="Background/Content/Main/Body/MobileAds/SetiOSAppPauseOnBackgroundButton" to="Background/Content/Main/Body/MobileAds" method="_on_set_ios_app_pause_on_background_button_pressed"]
+[connection signal="pressed" from="Background/Content/Main/Body/MobileAds/SetMuteMusic" to="Background/Content/Main/Body/MobileAds" method="_on_mute_music_pressed"]

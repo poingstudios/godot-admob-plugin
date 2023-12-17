@@ -33,6 +33,7 @@ func _ready() -> void:
 	request_configuration.convert_to_dictionary()
 	MobileAds.set_request_configuration(request_configuration)
 	MobileAds.initialize(on_initialization_complete_listener)
+
 	
 func _on_initialization_complete(initialization_status : InitializationStatus) -> void:
 	print("MobileAds initialization complete")
