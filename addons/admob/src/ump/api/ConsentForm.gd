@@ -37,6 +37,6 @@ func show(on_consent_form_dismissed := func(form_error : FormError) : pass) -> v
 		_plugin.connect("on_consent_form_dismissed", func(uid : int, form_error_dictionary : Dictionary) :
 			if uid == _uid:
 				var formError : FormError = FormError.create(form_error_dictionary) if not form_error_dictionary.is_empty() else null
-				on_consent_form_dismissed.call(formError)
+				on_consent_form_dismissed.call_deferred(formError)
 			)
 

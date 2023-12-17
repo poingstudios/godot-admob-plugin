@@ -34,9 +34,9 @@ static func load_consent_form(
 		_plugin.load_consent_form()
 #
 		_plugin.connect("on_consent_form_load_success_listener", func(UID : int): 
-			on_consent_form_load_success_listener.call(ConsentForm.new(UID))
+			on_consent_form_load_success_listener.call_deferred(ConsentForm.new(UID))
 		)
 
 		_plugin.connect("on_consent_form_load_failure_listener", func(form_error_dictionary : Dictionary): 
-			on_consent_form_load_failure_listener.call(FormError.create(form_error_dictionary))
+			on_consent_form_load_failure_listener.call_deferred(FormError.create(form_error_dictionary))
 		)

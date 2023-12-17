@@ -43,9 +43,9 @@ func load(
 		_plugin.load(ad_unit_id, ad_request.convert_to_dictionary(), ad_request.keywords, _uid)
 		_plugin.connect("on_interstitial_ad_loaded", func(uid : int):
 			if uid == _uid:
-				interstitial_ad_load_callback.on_ad_loaded.call(InterstitialAd.new(uid))
+				interstitial_ad_load_callback.on_ad_loaded.call_deferred(InterstitialAd.new(uid))
 		)
 		_plugin.connect("on_interstitial_ad_failed_to_load", func(uid : int, load_ad_error_dictionary : Dictionary): 
 			if uid == _uid:
-				interstitial_ad_load_callback.on_ad_failed_to_load.call(LoadAdError.create(load_ad_error_dictionary))
+				interstitial_ad_load_callback.on_ad_failed_to_load.call_deferred(LoadAdError.create(load_ad_error_dictionary))
 		)

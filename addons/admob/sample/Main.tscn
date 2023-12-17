@@ -135,10 +135,8 @@ text = "AdMob Plugin - Poing Studios"
 
 [node name="Body" type="TabContainer" parent="Background/Content/Main"]
 layout_mode = 2
-current_tab = 5
 
 [node name="Banner" parent="Background/Content/Main/Body" instance=ExtResource("6_xt5vc")]
-visible = false
 layout_mode = 2
 
 [node name="Interstitial" parent="Background/Content/Main/Body" instance=ExtResource("7_5rtn7")]
@@ -158,6 +156,7 @@ visible = false
 layout_mode = 2
 
 [node name="MobileAds" type="VBoxContainer" parent="Background/Content/Main/Body"]
+visible = false
 layout_mode = 2
 script = ExtResource("12_tjkhy")
 

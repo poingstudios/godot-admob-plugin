@@ -47,27 +47,27 @@ func _init(ad_unit_id : String, ad_size : AdSize, ad_position : AdPosition.Value
 		_uid = _plugin.create(ad_view_dictionary)
 		_plugin.connect("on_ad_clicked", func(uid : int): 
 			if uid == _uid:
-				ad_listener.on_ad_clicked.call()
+				ad_listener.on_ad_clicked.call_deferred()
 			)
 		_plugin.connect("on_ad_closed", func(uid : int): 
 			if uid == _uid:
-				ad_listener.on_ad_closed.call()
+				ad_listener.on_ad_closed.call_deferred()
 			)
 		_plugin.connect("on_ad_failed_to_load", func(uid : int, load_ad_error_dictionary : Dictionary): 
 			if uid == _uid:
-				ad_listener.on_ad_failed_to_load.call(LoadAdError.create(load_ad_error_dictionary))
+				ad_listener.on_ad_failed_to_load.call_deferred(LoadAdError.create(load_ad_error_dictionary))
 			)
 		_plugin.connect("on_ad_impression", func(uid : int): 
 			if uid == _uid:
-				ad_listener.on_ad_impression.call()
+				ad_listener.on_ad_impression.call_deferred()
 			)
 		_plugin.connect("on_ad_loaded", func(uid : int): 
 			if uid == _uid:
-				ad_listener.on_ad_loaded.call()
+				ad_listener.on_ad_loaded.call_deferred()
 			)
 		_plugin.connect("on_ad_opened", func(uid : int): 
 			if uid == _uid:
-				ad_listener.on_ad_opened.call()
+				ad_listener.on_ad_opened.call_deferred()
 			)
 
 func load_ad(ad_request : AdRequest) -> void:
