@@ -23,4 +23,4 @@ func _on_set_ios_app_pause_on_background_button_pressed() -> void:
 # Important notes
 
 If your game is multiplayer, probably you will need this value as `false` due to connection issues. 
-Read more about it here: https://github.com/Poing-Studios/godot-admob-ios/issues/70
+[Read more about it here](https://github.com/Poing-Studios/godot-admob-ios/issues/70).
