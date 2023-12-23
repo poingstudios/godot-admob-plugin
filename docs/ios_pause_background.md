@@ -1,4 +1,4 @@
-# Get Started
+# iOS Pause Background
 
 This step is only for iOS, it will indicate if your Game in Godot should be paused or not when a full-screen ad is shown, such as Interstitial, Rewarded, and Rewarded Interstitial.
 
