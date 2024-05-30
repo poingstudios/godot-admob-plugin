@@ -155,4 +155,4 @@ Remember that implementing interstitial ads should enhance, not detract from, th
 ## Further References
 
 ### Samples
-- [Sample Project](https://github.com/Poing-Studios/godot-admob-plugin/tree/master/addons/admob/sample): A Minimal Illustration of usage of all Ad Formats
+- [Sample Project](https://github.com/poingstudios/godot-admob-plugin/tree/master/addons/admob/sample): A Minimal Illustration of usage of all Ad Formats
