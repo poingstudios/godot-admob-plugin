@@ -33,7 +33,7 @@ static func initialize(on_initialization_complete_listener : OnInitializationCom
 			_plugin.connect("on_initialization_complete", func(admob_initialization_status : Dictionary):
 				var initialization_status := InitializationStatus.create(admob_initialization_status)
 				on_initialization_complete_listener.on_initialization_complete.call_deferred(initialization_status)
-			)
+			, CONNECT_ONE_SHOT)
 
 static func set_request_configuration(request_configuration : RequestConfiguration) -> void:
 	if _plugin:
