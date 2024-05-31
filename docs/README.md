@@ -25,7 +25,7 @@ The Godot AdMob Plugin from Poing Studios simplifies the process for Godot devel
 
 To access the plugin, you can either download the Godot package provided or explore its source code on GitHub through the links below.
 
-[Download from GitHub](https://github.com/Poing-Studios/godot-admob-plugin/releases/latest){ .md-button .md-button--primary } [Download from AssetLibrary](https://godotengine.org/asset-library/asset/2063){ .md-button .md-button--primary } [Source Code](https://github.com/Poing-Studios/godot-admob-plugin){ .md-button .md-button--primary }
+[Download from GitHub](https://github.com/poingstudios/godot-admob-plugin/releases/latest){ .md-button .md-button--primary } [Download from AssetLibrary](https://godotengine.org/asset-library/asset/2063){ .md-button .md-button--primary } [Source Code](https://github.com/poingstudios/godot-admob-plugin){ .md-button .md-button--primary }
 
 ### Importing the Godot AdMob Plugin on Project
 
@@ -49,7 +49,7 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 	1. In Godot, navigate to `Project > Tools > AdMob Download Manager > Android > LatestVersion`.
 	2. This action will download the appropriate Android library into your project, which is located at `res://addons/admob/downloads/android/`.
 
-	If you encounter any issues with the download, you can try downloading the library manually by clicking [here](https://github.com/Poing-Studios/godot-admob-android/releases/latest).
+	If you encounter any issues with the download, you can try downloading the library manually by clicking [here](https://github.com/poingstudios/godot-admob-android/releases/latest).
 
 === "iOS"
 
@@ -58,7 +58,7 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 	1. In Godot, navigate to `Project > Tools > AdMob Download Manager > iOS > LatestVersion`.
 	2. This action will download the appropriate iOS library into your project, which is located at `res://addons/admob/downloads/ios/`.
 
-	If you encounter any issues with the download, you can try downloading the library manually by clicking [here](https://github.com/Poing-Studios/godot-admob-ios/releases/latest).
+	If you encounter any issues with the download, you can try downloading the library manually by clicking [here](https://github.com/poingstudios/godot-admob-ios/releases/latest).
 
 ### Installing 
 

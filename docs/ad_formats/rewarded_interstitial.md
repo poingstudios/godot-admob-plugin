@@ -167,4 +167,4 @@ This action signals to the plugin that the object is no longer in use and that t
 ## Further References
 
 ### Samples
-- [Sample Project](https://github.com/Poing-Studios/godot-admob-plugin/tree/master/addons/admob/sample): A Minimal Illustration of usage of all Ad Formats
+- [Sample Project](https://github.com/poingstudios/godot-admob-plugin/tree/master/addons/admob/sample): A Minimal Illustration of usage of all Ad Formats

@@ -10,7 +10,7 @@ On iOS, the default value is `false`.
 
 - Complete the [Get started guide](README.md)
 - Use Godot v4.1 or higher
-- Use AdMob Plugin **[Editor](https://github.com/Poing-Studios/godot-admob-plugin/releases/tag/v3.1.0)** and **[iOS](https://github.com/Poing-Studios/godot-admob-ios/releases/tag/v3.1.0)**: v3.1.0+
+- Use AdMob Plugin **[Editor](https://github.com/poingstudios/godot-admob-plugin/releases/tag/v3.1.0)** and **[iOS](https://github.com/poingstudios/godot-admob-ios/releases/tag/v3.1.0)**: v3.1.0+
 
 # How to use
 You can use this whenever you want this method, before, during, or after the initialization, such as:
@@ -23,4 +23,4 @@ func _on_set_ios_app_pause_on_background_button_pressed() -> void:
 # Important notes
 
 If your game is multiplayer, probably you will need this value as `false` due to connection issues. 
-[Read more about it here](https://github.com/Poing-Studios/godot-admob-ios/issues/70).
+[Read more about it here](https://github.com/poingstudios/godot-admob-ios/issues/70).

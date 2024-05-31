@@ -107,7 +107,7 @@ func _format_version(version: String) -> String:
 	return match_result.get_string(1) if match_result else version
 
 func _request_version_support():
-	var url = "https://raw.githubusercontent.com/Poing-Studios/godot-admob-versions/" + plugin_version + "/versions.json"
+	var url = "https://raw.githubusercontent.com/poingstudios/godot-admob-versions/" + plugin_version + "/versions.json"
 	var http_request = HTTPRequest.new()
 	http_request.request_completed.connect(_on_version_support_request_completed)
 	add_child(http_request)
@@ -150,7 +150,7 @@ func start_download(platform: String, download_path: String, file_prefix: String
 		return
 
 	var file_name = file_prefix + godot_version + ".zip"
-	var url_download = "https://github.com/Poing-Studios/godot-admob-" + platform + "/releases/download/" + version_support[platform] + "/" + file_name
+	var url_download = "https://github.com/poingstudios/godot-admob-" + platform + "/releases/download/" + version_support[platform] + "/" + file_name
 
 	http_request_downloader.request_ready()
 	http_request_downloader.download_file = download_path + file_name
@@ -166,7 +166,7 @@ func _on_android_popupmenu_id_pressed(id: int):
 			var path_directory = ProjectSettings.globalize_path(android_download_path)
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
-			OS.shell_open("https://github.com/Poing-Studios/godot-admob-android/tree/" + version_support.android)
+			OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + version_support.android)
 
 func _on_ios_popupmenu_id_pressed(id: int):
 	match id:
@@ -176,7 +176,7 @@ func _on_ios_popupmenu_id_pressed(id: int):
 			var path_directory = ProjectSettings.globalize_path(ios_download_path)
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
-			OS.shell_open("https://github.com/Poing-Studios/godot-admob-ios/tree/" + version_support.ios)
+			OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + version_support.ios)
 
 func _on_popupmenu_id_pressed(id : int):
 	match id:
@@ -184,7 +184,7 @@ func _on_popupmenu_id_pressed(id : int):
 			var path_directory = ProjectSettings.globalize_path(default_download_path)
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
-			OS.shell_open("https://github.com/Poing-Studios/godot-admob-plugin/tree/" + plugin_version)
+			OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + plugin_version)
 
 func show_download_percent(url_download: String = ""):
 	if not url_download.is_empty():
