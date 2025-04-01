@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c6u6s82p5d6qs"]
 
-[ext_resource type="Script" path="res://addons/admob/sample/Banner.gd" id="1_5pjv8"]
+[ext_resource type="Script" uid="uid://d023ltbxjofyr" path="res://addons/admob/sample/Banner.gd" id="1_5pjv8"]
 
 [node name="Banner" type="VBoxContainer"]
 script = ExtResource("1_5pjv8")
