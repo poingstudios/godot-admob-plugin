@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cpxd2i7v6t6b6"]
 
-[ext_resource type="Script" path="res://addons/admob/sample/RewardedInterstitial.gd" id="1_58w2p"]
+[ext_resource type="Script" uid="uid://br5c0g1w1cbq3" path="res://addons/admob/sample/RewardedInterstitial.gd" id="1_58w2p"]
 
 [node name="RewardedInterstitial" type="VBoxContainer"]
 script = ExtResource("1_58w2p")
