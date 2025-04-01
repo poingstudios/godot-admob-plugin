@@ -45,12 +45,16 @@ func _on_load_banner_pressed() -> void:
 
 	var adSizecurrent_orientation := AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
 	print("adSizecurrent_orientation: ", adSizecurrent_orientation.width, ", ", adSizecurrent_orientation.height)
+
 	var adSizeportrait := AdSize.get_portrait_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
 	print("adSizeportrait: ", adSizeportrait.width, ", ", adSizeportrait.height)
+
 	var adSizelandscape := AdSize.get_landscape_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
 	print("adSizelandscape: ", adSizelandscape.width, ", ", adSizelandscape.height)
+
 	var adSizesmart := AdSize.get_smart_banner_ad_size()
 	print("adSizesmart: ", adSizesmart.width, ", ",adSizesmart.height)
+
 	ad_view = AdView.new("ca-app-pub-3940256099942544/2934735716", adSizecurrent_orientation, adPosition)
 	ad_view.ad_listener = ad_listener
 	var ad_request := AdRequest.new()

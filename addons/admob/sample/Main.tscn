@@ -74,6 +74,18 @@ offset_bottom = 129.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Description" type="RichTextLabel" parent="Background/Content"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("3_acnhc")
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[pulse freq=1.0 ease=-1.0]Support the project
+[/pulse]"
+fit_content = true
+horizontal_alignment = 1
+
 [node name="DonateButtons" type="PanelContainer" parent="Background/Content"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tj05g")
