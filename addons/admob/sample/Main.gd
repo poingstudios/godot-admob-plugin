@@ -68,4 +68,3 @@ func print_all_values(initialization_status : InitializationStatus) -> void:
 	for key in initialization_status.adapter_status_map:
 		var adapterStatus : AdapterStatus = initialization_status.adapter_status_map[key]
 		prints("Key:", key, "Latency:", adapterStatus.latency, "Initialization Status:", adapterStatus.initialization_status, "Description:", adapterStatus.description)
-
