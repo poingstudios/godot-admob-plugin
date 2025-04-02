@@ -25,8 +25,6 @@ extends MobileSingletonPlugin
 
 static var _plugin = _get_plugin("PoingGodotAdMobInterstitialAd")
 
-var ad_unit_id : String
-var ad_request : AdRequest
 var interstitial_ad_load_callback : InterstitialAdLoadCallback
 var _uid : int
 
@@ -40,8 +38,6 @@ func load(
 	interstitial_ad_load_callback := InterstitialAdLoadCallback.new()) -> void:
 
 	if _plugin:
-		self.ad_unit_id = ad_unit_id
-		self.ad_request = ad_request
 		self.interstitial_ad_load_callback = interstitial_ad_load_callback
 		_plugin.load(ad_unit_id, ad_request.convert_to_dictionary(), ad_request.keywords, _uid)
 		_plugin.connect("on_interstitial_ad_loaded", _on_interstitial_ad_loaded, CONNECT_ONE_SHOT)
