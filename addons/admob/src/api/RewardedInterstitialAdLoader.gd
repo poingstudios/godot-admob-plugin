@@ -38,8 +38,8 @@ func load(
 
 	if _plugin:
 		_plugin.load(ad_unit_id, ad_request.convert_to_dictionary(), ad_request.keywords, _uid)
-		_plugin.on_rewarded_interstitial_ad_loaded.connect(_on_rewarded_interstitial_ad_loaded.bind(_uid, rewarded_ad_load_callback), CONNECT_ONE_SHOT)
-		_plugin.on_rewarded_interstitial_ad_failed_to_load.connect(_on_rewarded_interstitial_ad_failed_to_load.bind(_uid, rewarded_ad_load_callback), CONNECT_ONE_SHOT)
+		_plugin.on_rewarded_interstitial_ad_loaded.connect(_on_rewarded_interstitial_ad_loaded.bind(_uid, rewarded_ad_load_callback))
+		_plugin.on_rewarded_interstitial_ad_failed_to_load.connect(_on_rewarded_interstitial_ad_failed_to_load.bind(_uid, rewarded_ad_load_callback))
 
 static func _on_rewarded_interstitial_ad_loaded(
 	uid_response : int,
