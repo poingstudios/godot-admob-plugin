@@ -25,7 +25,6 @@ extends MobileSingletonPlugin
 
 static var _plugin = _get_plugin("PoingGodotAdMobRewardedInterstitialAd")
 
-var rewarded_ad_load_callback : RewardedInterstitialAdLoadCallback
 var _uid : int
 
 func _init():
@@ -33,20 +32,28 @@ func _init():
 		_uid = _plugin.create()
 
 func load(
-	ad_unit_id : String, 
-	ad_request : AdRequest, 
+	ad_unit_id : String,
+	ad_request : AdRequest,
 	rewarded_ad_load_callback := RewardedInterstitialAdLoadCallback.new()) -> void:
 
 	if _plugin:
-		self.rewarded_ad_load_callback = rewarded_ad_load_callback
 		_plugin.load(ad_unit_id, ad_request.convert_to_dictionary(), ad_request.keywords, _uid)
-		_plugin.connect("on_rewarded_interstitial_ad_loaded", _on_rewarded_interstitial_ad_loaded, CONNECT_ONE_SHOT)
-		_plugin.connect("on_rewarded_interstitial_ad_failed_to_load", _on_rewarded_interstitial_ad_failed_to_load, CONNECT_ONE_SHOT)
+		_plugin.on_rewarded_interstitial_ad_loaded.connect(_on_rewarded_interstitial_ad_loaded.bind(_uid, rewarded_ad_load_callback), CONNECT_ONE_SHOT)
+		_plugin.on_rewarded_interstitial_ad_failed_to_load.connect(_on_rewarded_interstitial_ad_failed_to_load.bind(_uid, rewarded_ad_load_callback), CONNECT_ONE_SHOT)
 
-func _on_rewarded_interstitial_ad_loaded(uid : int) -> void:
-	if uid == _uid:
-		rewarded_ad_load_callback.on_ad_loaded.call_deferred(RewardedInterstitialAd.new(uid))
+static func _on_rewarded_interstitial_ad_loaded(
+	uid_response : int,
+	uid_requested : int,
+	rewarded_ad_load_callback : RewardedInterstitialAdLoadCallback) -> void:
 
-func _on_rewarded_interstitial_ad_failed_to_load(uid : int, load_ad_error_dictionary : Dictionary) -> void: 
-	if uid == _uid:
+	if uid_requested == uid_response:
+		rewarded_ad_load_callback.on_ad_loaded.call_deferred(RewardedInterstitialAd.new(uid_requested))
+
+static func _on_rewarded_interstitial_ad_failed_to_load(
+	uid_response : int,
+	load_ad_error_dictionary : Dictionary,
+	uid_requested : int,
+	rewarded_ad_load_callback : RewardedInterstitialAdLoadCallback) -> void:
+
+	if uid_requested == uid_response:
 		rewarded_ad_load_callback.on_ad_failed_to_load.call_deferred(LoadAdError.create(load_ad_error_dictionary))
