@@ -124,7 +124,8 @@ func _on_version_support_request_completed(result, response_code, headers, body)
 
 func _on_download_request_completed(result, response_code, headers, body):
 	if response_code == 200:
-		print("Download completed, you can check the downloaded file at: " + current_download_path)
+		var real_path = ProjectSettings.globalize_path(current_download_path)
+		print_rich("Download completed, you can check the downloaded file at: [color=CORNFLOWER_BLUE][url]" + real_path + "[/url][/color]")
 	else:
 		printerr("ERR_002: It is not possible to download the Android/iOS plugin. \n" \
 			+ "Read more about on: res://addons/admob/docs/errors/ERR_002.md")
