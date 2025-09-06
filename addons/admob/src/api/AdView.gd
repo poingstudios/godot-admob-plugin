@@ -45,30 +45,12 @@ func _init(ad_unit_id : String, ad_size : AdSize, ad_position : AdPosition.Value
 		}
 
 		_uid = _plugin.create(ad_view_dictionary)
-		_plugin.connect("on_ad_clicked", func(uid : int): 
-			if uid == _uid:
-				ad_listener.on_ad_clicked.call_deferred()
-			)
-		_plugin.connect("on_ad_closed", func(uid : int): 
-			if uid == _uid:
-				ad_listener.on_ad_closed.call_deferred()
-			)
-		_plugin.connect("on_ad_failed_to_load", func(uid : int, load_ad_error_dictionary : Dictionary): 
-			if uid == _uid:
-				ad_listener.on_ad_failed_to_load.call_deferred(LoadAdError.create(load_ad_error_dictionary))
-			)
-		_plugin.connect("on_ad_impression", func(uid : int): 
-			if uid == _uid:
-				ad_listener.on_ad_impression.call_deferred()
-			)
-		_plugin.connect("on_ad_loaded", func(uid : int): 
-			if uid == _uid:
-				ad_listener.on_ad_loaded.call_deferred()
-			)
-		_plugin.connect("on_ad_opened", func(uid : int): 
-			if uid == _uid:
-				ad_listener.on_ad_opened.call_deferred()
-			)
+		_plugin.connect("on_ad_clicked", _on_ad_clicked)
+		_plugin.connect("on_ad_closed", _on_ad_closed)
+		_plugin.connect("on_ad_failed_to_load", _on_ad_failed_to_load)
+		_plugin.connect("on_ad_impression", _on_ad_impression)
+		_plugin.connect("on_ad_loaded", _on_ad_loaded)
+		_plugin.connect("on_ad_opened", _on_ad_opened)
 
 func load_ad(ad_request : AdRequest) -> void:
 	if _plugin:
@@ -105,3 +87,27 @@ func get_height_in_pixels() -> int:
 	if _plugin:
 		return _plugin.get_height_in_pixels(_uid)
 	return -1
+
+func _on_ad_clicked(uid : int) -> void: 
+	if uid == _uid:
+		ad_listener.on_ad_clicked.call_deferred()
+
+func _on_ad_closed(uid : int) -> void: 
+	if uid == _uid:
+		ad_listener.on_ad_closed.call_deferred()
+
+func _on_ad_failed_to_load(uid : int, load_ad_error_dictionary : Dictionary) -> void: 
+	if uid == _uid:
+		ad_listener.on_ad_failed_to_load.call_deferred(LoadAdError.create(load_ad_error_dictionary))
+
+func _on_ad_impression(uid : int) -> void: 
+	if uid == _uid:
+		ad_listener.on_ad_impression.call_deferred()
+
+func _on_ad_loaded(uid : int) -> void: 
+	if uid == _uid:
+		ad_listener.on_ad_loaded.call_deferred()
+
+func _on_ad_opened(uid : int) -> void: 
+	if uid == _uid:
+		ad_listener.on_ad_opened.call_deferred()

@@ -25,15 +25,15 @@ extends MobileSingletonPlugin
 
 static var _plugin := _get_plugin("PoingGodotAdMob")
 
+static var _current_on_initialization_complete_listener : OnInitializationCompleteListener = null
+
 static func initialize(on_initialization_complete_listener : OnInitializationCompleteListener = null) -> void:
 	if _plugin:
 		_plugin.initialize()
 		
 		if on_initialization_complete_listener:
-			_plugin.connect("on_initialization_complete", func(admob_initialization_status : Dictionary):
-				var initialization_status := InitializationStatus.create(admob_initialization_status)
-				on_initialization_complete_listener.on_initialization_complete.call_deferred(initialization_status)
-			, CONNECT_ONE_SHOT)
+			_current_on_initialization_complete_listener = on_initialization_complete_listener
+			_plugin.connect("on_initialization_complete", _on_initialization_complete, CONNECT_ONE_SHOT)
 
 static func set_request_configuration(request_configuration : RequestConfiguration) -> void:
 	if _plugin:
@@ -49,3 +49,7 @@ static func get_initialization_status() -> InitializationStatus:
 static func set_ios_app_pause_on_background(pause : bool) -> void:
 	if _plugin and OS.get_name() == "iOS":
 		_plugin.set_ios_app_pause_on_background(pause)
+
+static func _on_initialization_complete(admob_initialization_status : Dictionary) -> void:
+	var initialization_status := InitializationStatus.create(admob_initialization_status)
+	_current_on_initialization_complete_listener.on_initialization_complete.call_deferred(initialization_status)
