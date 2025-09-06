@@ -97,11 +97,14 @@ func _enter_tree():
 	android_popup.add_item(str(Items.keys()[Items.LatestVersion]), Items.LatestVersion)
 	android_popup.add_item(str(Items.keys()[Items.Folder]), Items.Folder)
 	android_popup.add_item(str(Items.keys()[Items.GitHub]), Items.GitHub)
+	android_popup.add_item("Copy Metadata", 98)
+	android_popup.add_item("Open AndroidManifest.xml", 99)
 
 	ios_popup.connect("id_pressed", _on_ios_popupmenu_id_pressed)
 	ios_popup.add_item(str(Items.keys()[Items.LatestVersion]), Items.LatestVersion)
 	ios_popup.add_item(str(Items.keys()[Items.Folder]), Items.Folder)
 	ios_popup.add_item(str(Items.keys()[Items.GitHub]), Items.GitHub)
+	ios_popup.add_item("Copy shell command", 99)
 	
 	popup.connect("id_pressed", _on_popupmenu_id_pressed)
 	
@@ -210,6 +213,23 @@ func _on_android_popupmenu_id_pressed(id: int):
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
 			OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + version_support.android)
+		98:
+			var snippet := """<!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+			<meta-data
+				android:name="com.google.android.gms.ads.APPLICATION_ID"
+				android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>"""
+
+			DisplayServer.clipboard_set(snippet)
+
+			print_rich("[b][color=GREEN]✔ Copied AdMob Metadata to clipboard![/color][/b]\n" +
+					"[color=CORNFLOWER_BLUE]" + snippet + "[/color]")
+
+		99:
+			var manifest_path := ProjectSettings.globalize_path("res://android/build/AndroidManifest.xml")
+			OS.shell_open("file://" + manifest_path)
+
+			print_rich("[b]Opened:[/b] [color=CORNFLOWER_BLUE][url]file://" + manifest_path + "[/url][/color]")
+
 
 func _on_ios_popupmenu_id_pressed(id: int):
 	match id:
@@ -220,6 +240,13 @@ func _on_ios_popupmenu_id_pressed(id: int):
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
 			OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + version_support.ios)
+		99:
+			var snippet := "chmod +x update_and_install.sh\n./update_and_install.sh"
+
+			DisplayServer.clipboard_set(snippet)
+
+			print_rich("[b][color=GREEN]✔ Copied install command to clipboard![/color][/b]\n" +
+					"[code]" + snippet + "[/code]")
 
 func _on_popupmenu_id_pressed(id : int):
 	match id:
