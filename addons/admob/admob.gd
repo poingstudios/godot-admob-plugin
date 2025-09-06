@@ -44,6 +44,22 @@ enum Items {
 	GitHub
 }
 
+enum DocumentsItems {
+	Official,
+	Google,
+}
+
+enum HelpItems {
+	Discord,
+	SDK_Developers,
+}
+
+enum SupportItems {
+	Patreon,
+	KoFi,
+	PayPal
+}
+
 class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 	const CFG_FILE_PATH := "res://addons/admob/plugin.cfg"
 	
@@ -81,11 +97,14 @@ func _enter_tree():
 	android_popup.add_item(str(Items.keys()[Items.LatestVersion]), Items.LatestVersion)
 	android_popup.add_item(str(Items.keys()[Items.Folder]), Items.Folder)
 	android_popup.add_item(str(Items.keys()[Items.GitHub]), Items.GitHub)
+	android_popup.add_item("Copy Metadata", 98)
+	android_popup.add_item("Open AndroidManifest.xml", 99)
 
 	ios_popup.connect("id_pressed", _on_ios_popupmenu_id_pressed)
 	ios_popup.add_item(str(Items.keys()[Items.LatestVersion]), Items.LatestVersion)
 	ios_popup.add_item(str(Items.keys()[Items.Folder]), Items.Folder)
 	ios_popup.add_item(str(Items.keys()[Items.GitHub]), Items.GitHub)
+	ios_popup.add_item("Copy shell command", 99)
 	
 	popup.connect("id_pressed", _on_popupmenu_id_pressed)
 	
@@ -93,6 +112,32 @@ func _enter_tree():
 	popup.add_submenu_item(ios_popup.name, ios_popup.name)
 	popup.add_item(str(Items.keys()[Items.Folder]), Items.Folder)
 	popup.add_item(str(Items.keys()[Items.GitHub]), Items.GitHub)
+
+	var documents_popup := PopupMenu.new()
+	documents_popup.name = "Documents"
+	documents_popup.connect("id_pressed", _on_documents_popup_id_pressed)
+	documents_popup.add_item(str(DocumentsItems.keys()[DocumentsItems.Official]))
+	documents_popup.add_item(str(DocumentsItems.keys()[DocumentsItems.Google]))
+	popup.add_child(documents_popup)
+
+	var help_popup := PopupMenu.new()
+	help_popup.name = "Help"
+	help_popup.connect("id_pressed", _on_help_popup_id_pressed)
+	help_popup.add_item(str(HelpItems.keys()[HelpItems.Discord]))
+	help_popup.add_item(str(HelpItems.keys()[HelpItems.SDK_Developers]))
+	popup.add_child(help_popup)
+	popup.add_submenu_item(help_popup.name, help_popup.name)
+
+	var support_popup := PopupMenu.new()
+	support_popup.name = "Support"
+	support_popup.connect("id_pressed", _on_support_popup_id_pressed)
+	support_popup.add_item(str(SupportItems.keys()[SupportItems.Patreon]))
+	support_popup.add_item(str(SupportItems.keys()[SupportItems.KoFi]))
+	support_popup.add_item(str(SupportItems.keys()[SupportItems.PayPal]))
+	popup.add_child(support_popup)
+	popup.add_submenu_item(support_popup.name, support_popup.name)
+
+
 
 	add_tool_submenu_item("AdMob Download Manager", popup)
 
@@ -124,7 +169,8 @@ func _on_version_support_request_completed(result, response_code, headers, body)
 
 func _on_download_request_completed(result, response_code, headers, body):
 	if response_code == 200:
-		print("Download completed, you can check the downloaded file at: " + current_download_path)
+		var real_path = ProjectSettings.globalize_path(current_download_path)
+		print_rich("Download completed, you can check the downloaded file at: [color=CORNFLOWER_BLUE][url]" + real_path + "[/url][/color]")
 	else:
 		printerr("ERR_002: It is not possible to download the Android/iOS plugin. \n" \
 			+ "Read more about on: res://addons/admob/docs/errors/ERR_002.md")
@@ -167,6 +213,23 @@ func _on_android_popupmenu_id_pressed(id: int):
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
 			OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + version_support.android)
+		98:
+			var snippet := """<!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+			<meta-data
+				android:name="com.google.android.gms.ads.APPLICATION_ID"
+				android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>"""
+
+			DisplayServer.clipboard_set(snippet)
+
+			print_rich("[b][color=GREEN]✔ Copied AdMob Metadata to clipboard![/color][/b]\n" +
+					"[color=CORNFLOWER_BLUE]" + snippet + "[/color]")
+
+		99:
+			var manifest_path := ProjectSettings.globalize_path("res://android/build/AndroidManifest.xml")
+			OS.shell_open("file://" + manifest_path)
+
+			print_rich("[b]Opened:[/b] [color=CORNFLOWER_BLUE][url]file://" + manifest_path + "[/url][/color]")
+
 
 func _on_ios_popupmenu_id_pressed(id: int):
 	match id:
@@ -177,6 +240,13 @@ func _on_ios_popupmenu_id_pressed(id: int):
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
 			OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + version_support.ios)
+		99:
+			var snippet := "chmod +x update_and_install.sh\n./update_and_install.sh"
+
+			DisplayServer.clipboard_set(snippet)
+
+			print_rich("[b][color=GREEN]✔ Copied install command to clipboard![/color][/b]\n" +
+					"[code]" + snippet + "[/code]")
 
 func _on_popupmenu_id_pressed(id : int):
 	match id:
@@ -185,6 +255,29 @@ func _on_popupmenu_id_pressed(id : int):
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
 			OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + plugin_version)
+
+func _on_documents_popup_id_pressed(id : int):
+	match id:
+		DocumentsItems.Official:
+			OS.shell_open("https://poingstudios.github.io/godot-admob-plugin")
+		DocumentsItems.Google:
+			OS.shell_open("https://developers.google.com/admob")
+
+func _on_help_popup_id_pressed(id : int):
+	match id:
+		HelpItems.Discord:
+			OS.shell_open("https://discord.com/invite/YEPvYjSSMk")
+		HelpItems.SDK_Developers:
+			OS.shell_open("https://groups.google.com/g/google-admob-ads-sdk/")
+
+func _on_support_popup_id_pressed(id : int):
+	match id:
+		SupportItems.Patreon:
+			OS.shell_open("https://www.patreon.com/poingstudios")
+		SupportItems.KoFi:
+			OS.shell_open("https://ko-fi.com/poingstudios")
+		SupportItems.PayPal:
+			OS.shell_open("https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8")
 
 func show_download_percent(url_download: String = ""):
 	if not url_download.is_empty():

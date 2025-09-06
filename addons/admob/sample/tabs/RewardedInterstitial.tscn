@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://dkl0ov3vkn76o"]
+[gd_scene load_steps=2 format=3 uid="uid://cpxd2i7v6t6b6"]
 
-[ext_resource type="Script" uid="uid://iuwm4pp8nn0i" path="res://addons/admob/sample/Interstitial.gd" id="1_h2qnh"]
+[ext_resource type="Script" uid="uid://br5c0g1w1cbq3" path="res://addons/admob/sample/tabs/RewardedInterstitial.gd" id="1_58w2p"]
 
-[node name="Interstitial" type="VBoxContainer"]
-script = ExtResource("1_h2qnh")
+[node name="RewardedInterstitial" type="VBoxContainer"]
+script = ExtResource("1_58w2p")
 
 [node name="Load" type="Button" parent="."]
 layout_mode = 2
