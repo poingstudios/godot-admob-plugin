@@ -100,7 +100,7 @@ The `FullScreenContentCallback` manages events associated with the display of yo
 extends Node2D
 
 var _rewarded_ad : RewardedAd
-var _full_screen_content_callback : FullScreenContentCallback
+var _full_screen_content_callback := FullScreenContentCallback.new()
 
 func _ready() -> void:
 	#...
