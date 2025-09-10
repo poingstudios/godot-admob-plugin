@@ -74,6 +74,9 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 		android:name="com.google.android.gms.ads.APPLICATION_ID"
 		android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>
 	```
+	3.1. Beware this difference:
+	- App ID (~): For app registration and manifest
+	- Ad Unit ID (/): For loading specific ad formats (rewarded, banner, etc.)
 	4. When exporting your project, select `Use Custom Build` and ensure that `Ad Mob` is enabled, If you have Mediation, also mark `Ad Mob Meta`, `Ad Mob AdColony` etc...
 	![export](assets/android/export.png)
 
@@ -86,6 +89,9 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 	![export](assets/ios/skadnetworkitems.png)
 	4. When exporting your project, update the `GADApplicationIdentifier` with your [AdMob App ID](https://support.google.com/admob/answer/7356431) and and ensure that `Ad Mob` is enabled, If you have Mediation, also mark `Ad Mob Meta`, `Ad Mob AdColony` etc...
 	![gadapplicationidentifier](assets/ios/gadapplicationidentifier.png)
+	4.1. Beware this difference:
+	- App ID (~): For app registration and manifest
+	- Ad Unit ID (/): For loading specific ad formats (rewarded, banner, etc.)
 	5. Once exported, go to `{{ ios_xcode_export_folder }}/{{your_project_name}}/ios/plugins/poing-godot-admob/scripts/` folder and open the terminal (must be inside this folder) and run these commands:
 	```bash
 	chmod +x update_and_install.sh
