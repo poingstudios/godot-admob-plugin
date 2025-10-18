@@ -38,6 +38,8 @@ func show(on_user_earned_reward_listener := OnUserEarnedRewardListener.new()) ->
 	if _plugin:
 		self._on_user_earned_reward_listener = on_user_earned_reward_listener
 		_plugin.show(_uid)
+		if _plugin.is_connected("on_rewarded_ad_user_earned_reward", _on_rewarded_ad_user_earned_reward):
+			_plugin.disconnect("on_rewarded_ad_user_earned_reward", _on_rewarded_ad_user_earned_reward)
 		_plugin.connect("on_rewarded_ad_user_earned_reward", _on_rewarded_ad_user_earned_reward)
 
 func destroy() -> void:
