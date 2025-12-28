@@ -19,10 +19,10 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
 @tool
 class_name AdMobEditorPlugin
 extends EditorPlugin
-const LOCAL_CONFIG_FILE_PATH := "res://addons/admob/local.cfg"
 
 var http_request_downloader := HTTPRequest.new()
 var timer := Timer.new()
@@ -62,100 +62,21 @@ enum SupportItems {
 }
 
 class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
-	func _get_application_id() -> String:
-		if FileAccess.file_exists(LOCAL_CONFIG_FILE_PATH):
-			var config = ConfigFile.new()
-			var err = config.load(LOCAL_CONFIG_FILE_PATH)
-			if err == OK: 
-				return config.get_value("AdMob", "APPLICATION_ID", "")
-			else:
-				print("Error: Failed to load config.cfg, error code: ", err)
-				return ""
-		else:
-			print("Error: config.cfg file not found at ", LOCAL_CONFIG_FILE_PATH)
-			return ""
-
-
-	func _get_android_manifest_application_element_contents(platform: EditorExportPlatform, debug: bool) -> String:
-		return """
-		<meta-data
-			android:name="com.google.android.gms.ads.APPLICATION_ID"
-			android:value="%s"/>
-		""" % _get_application_id()
-
-	func _get_plugins() -> Array[EditorExportPlugin]:
-		var plugins : Array[EditorExportPlugin] 
-		var root_path := "res://addons/admob/bin/android"
-
-		var dir_access := DirAccess.open(root_path)
-		if not dir_access:
-			push_error("Failed to open AdMob directory: " + root_path)
-			return plugins
-
-		for subdir_name in dir_access.get_directories():
-			var subdir := DirAccess.open(root_path + "/" + subdir_name)
-			
-			if not subdir:
-				push_warning("Could not open AdMob subdirectory: " + subdir_name)
-				continue
-			
-			for file_name in subdir.get_files():
-				if file_name.ends_with(".gd"):
-					var plugin_path := root_path + "/" + subdir_name + "/" + file_name
-					var plugin : EditorExportPlugin = load(plugin_path).new()
-					plugins.append(plugin)
-		
-		return plugins
-		
+	const CFG_FILE_PATH := "res://addons/admob/plugin.cfg"
 	
-	func _supports_platform(platform: EditorExportPlatform) -> bool:
-		print(platform)
-		if platform is EditorExportPlatformAndroid:
-			return true
-		return false
-
 	func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
-		const CFG_FILE_PATH := "res://addons/admob/plugin.cfg"
 		var file = FileAccess.open(CFG_FILE_PATH, FileAccess.READ)
 		if file:
 			print("Exporting Poing AdMob '.cfg' file")
 			add_file(CFG_FILE_PATH, file.get_buffer(file.get_length()), false)
 		file.close()
-	
-
-	func _get_android_libraries(platform: EditorExportPlatform, debug: bool) -> PackedStringArray:
-		var libraries := PackedStringArray()
-
-		for plugin in _get_plugins():
-			libraries.append_array(plugin._get_android_libraries(platform, debug))
-
-		return libraries
-
-	func _get_android_dependencies(platform: EditorExportPlatform, debug: bool) -> PackedStringArray:
-		var dependencies := PackedStringArray()
-
-		for plugin in _get_plugins():
-			dependencies.append_array(plugin._get_android_dependencies(platform, debug))
-
-		return dependencies
-				
+		
 	func _get_name() -> String:
 		return "PoingAdMob"
-
-
+		
 var _exporter := PoingAdMobEditorExportPlugin.new()
 
-func create_config_file():
-	if not FileAccess.file_exists(LOCAL_CONFIG_FILE_PATH):
-		var config = ConfigFile.new()
-		config.set_value("AdMob", "APPLICATION_ID", "ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy")
-		config.set_value("AdMob", "SAMPLE_APPLICATION_ID", "ca-app-pub-3940256099942544~3347511713")
-		config.save(LOCAL_CONFIG_FILE_PATH)
-
-
 func _enter_tree():
-	create_config_file()
-	
 	godot_version = _format_version(godot_version)
 	add_export_plugin(_exporter)
 	
@@ -219,7 +140,6 @@ func _enter_tree():
 	popup.add_submenu_item(support_popup.name, support_popup.name)
 
 
-
 	add_tool_submenu_item("AdMob Download Manager", popup)
 
 func _exit_tree():
@@ -246,7 +166,7 @@ func _on_version_support_request_completed(result, response_code, headers, body)
 			version_support = json.get_data() as Dictionary
 			return
 	printerr("ERR_001: Couldn't get version supported dynamic for AdMob, the latest supported version listed may be outdated. \n" \
-	+ "Read more about on: res://addons/admob/docs/errors/ERR_001.md")
+	+"Read more about on: res://addons/admob/docs/errors/ERR_001.md")
 
 func _on_download_request_completed(result, response_code, headers, body):
 	if response_code == 200:
@@ -254,7 +174,7 @@ func _on_download_request_completed(result, response_code, headers, body):
 		print_rich("Download completed, you can check the downloaded file at: [color=CORNFLOWER_BLUE][url]" + real_path + "[/url][/color]")
 	else:
 		printerr("ERR_002: It is not possible to download the Android/iOS plugin. \n" \
-			+ "Read more about on: res://addons/admob/docs/errors/ERR_002.md")
+			+"Read more about on: res://addons/admob/docs/errors/ERR_002.md")
 	
 	timer.stop()
 
@@ -329,7 +249,7 @@ func _on_ios_popupmenu_id_pressed(id: int):
 			print_rich("[b][color=GREEN]✔ Copied install command to clipboard![/color][/b]\n" +
 					"[code]" + snippet + "[/code]")
 
-func _on_popupmenu_id_pressed(id : int):
+func _on_popupmenu_id_pressed(id: int):
 	match id:
 		Items.Folder:
 			var path_directory = ProjectSettings.globalize_path(default_download_path)
@@ -337,21 +257,21 @@ func _on_popupmenu_id_pressed(id : int):
 		Items.GitHub:
 			OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + plugin_version)
 
-func _on_documents_popup_id_pressed(id : int):
+func _on_documents_popup_id_pressed(id: int):
 	match id:
 		DocumentsItems.Official:
 			OS.shell_open("https://poingstudios.github.io/godot-admob-plugin")
 		DocumentsItems.Google:
 			OS.shell_open("https://developers.google.com/admob")
 
-func _on_help_popup_id_pressed(id : int):
+func _on_help_popup_id_pressed(id: int):
 	match id:
 		HelpItems.Discord:
 			OS.shell_open("https://discord.com/invite/YEPvYjSSMk")
 		HelpItems.SDK_Developers:
 			OS.shell_open("https://groups.google.com/g/google-admob-ads-sdk/")
 
-func _on_support_popup_id_pressed(id : int):
+func _on_support_popup_id_pressed(id: int):
 	match id:
 		SupportItems.Patreon:
 			OS.shell_open("https://www.patreon.com/poingstudios")

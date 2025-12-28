@@ -1,5 +1,5 @@
 [![Version](https://img.shields.io/github/v/tag/poingstudios/godot-admob-plugin?label=Version&style=for-the-badge)](https://github.com/poingstudios/godot-admob-plugin/releases)
-[![Download Asset Library](https://img.shields.io/badge/Download-Asset%20Library-darkgreen?style=for-the-badge)](https://godotengine.org/asset-library/asset/1108)
+[![Download Asset Library](https://img.shields.io/badge/Download-Asset%20Library-darkgreen?style=for-the-badge)](https://godotengine.org/asset-library/asset/2063)
 [![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)](https://github.com/poingstudios/godot-admob-android)
 [![iOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)](https://github.com/poingstudios/godot-admob-ios)
 ![License](https://img.shields.io/github/license/poingstudios/godot-admob-plugin?style=for-the-badge)
