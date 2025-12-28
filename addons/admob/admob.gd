@@ -75,10 +75,12 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 		return "PoingAdMob"
 		
 var _exporter := PoingAdMobEditorExportPlugin.new()
+var _android_exporter := preload("res://addons/admob/android/export_plugin.gd").new()
 
 func _enter_tree():
 	godot_version = _format_version(godot_version)
 	add_export_plugin(_exporter)
+	add_export_plugin(_android_exporter)
 	
 	setup_timer()
 	create_download_directories()
@@ -144,6 +146,7 @@ func _enter_tree():
 
 func _exit_tree():
 	remove_export_plugin(_exporter)
+	remove_export_plugin(_android_exporter)
 	remove_tool_menu_item("AdMob Download Manager")
 
 func _format_version(version: String) -> String:

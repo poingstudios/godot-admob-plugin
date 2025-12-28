@@ -23,10 +23,9 @@
 extends Object
 
 const IS_ENABLED := true
-# Sample: ca-app-pub-3940256099942544~3347511713
-const APPLICATION_ID := "ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"
+const APPLICATION_ID := "ca-app-pub-3940256099942544~3347511713" # Change this to your own AdMob App ID when releasing your game.
 
 class Mediations:
-    const VUNGLE := true
-    const META := true
-    const AD_COLONY := true
+    const VUNGLE := false
+    const META := false
+    const AD_COLONY := false

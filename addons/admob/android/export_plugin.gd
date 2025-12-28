@@ -26,26 +26,18 @@ const Config := preload("res://addons/admob/android/config.gd")
 
 func _get_plugins() -> Array[EditorExportPlugin]:
 	var plugins: Array[EditorExportPlugin]
-	var root_path := "res://addons/admob/bin/android"
+	var root_path := "res://addons/admob/android/bin"
 
 	var dir_access := DirAccess.open(root_path)
 	if not dir_access:
 		push_error("Failed to open AdMob directory: " + root_path)
 		return plugins
 
-	for subdir_name in dir_access.get_directories():
-		var subdir := DirAccess.open(root_path + "/" + subdir_name)
-		
-		if not subdir:
-			push_warning("Could not open AdMob subdirectory: " + subdir_name)
-			continue
-		
-		for file_name in subdir.get_files():
-			if file_name.ends_with(".gd"):
-				var plugin_path := root_path + "/" + subdir_name + "/" + file_name
-				var plugin: EditorExportPlugin = load(plugin_path).new()
-				plugins.append(plugin)
-	
+	for file_name in dir_access.get_files():
+		if file_name.ends_with(".gd"):
+			var plugin_path := root_path + "/" + file_name
+			var plugin: EditorExportPlugin = load(plugin_path).new()
+			plugins.append(plugin)
 	return plugins
 
 func _get_android_libraries(platform: EditorExportPlatform, debug: bool) -> PackedStringArray:

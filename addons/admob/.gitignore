@@ -2,8 +2,6 @@
 
 # Android 
 !android/
-*.aar
-*.gdap
 
 # iOS
 *.a
