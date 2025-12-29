@@ -22,22 +22,21 @@
 
 extends EditorExportPlugin
 
-const Config := preload("res://addons/admob/android/config.gd")
+const ConfigScript := preload("res://addons/admob/android/config.gd")
 
 func _get_plugins() -> Array[EditorExportPlugin]:
 	var plugins: Array[EditorExportPlugin]
-	var root_path := "res://addons/admob/android/bin"
+	var root_bin_path := ConfigScript.AndroidAdMobLibrary.ROOT_BIN_PATH
+	var dir_access := DirAccess.open(root_bin_path)
 
-	var dir_access := DirAccess.open(root_path)
 	if not dir_access:
-		push_error("Failed to open AdMob directory: " + root_path)
+		push_error("Failed to open AdMob directory: " + root_bin_path)
 		return plugins
 
-	for file_name in dir_access.get_files():
-		if file_name.ends_with(".gd"):
-			var plugin_path := root_path + "/" + file_name
-			var plugin: EditorExportPlugin = load(plugin_path).new()
-			plugins.append(plugin)
+	for lib in ConfigScript.new().libraries:
+		if not lib.is_enabled:
+			continue
+		plugins.append(lib.get_plugin())
 	return plugins
 
 func _get_android_libraries(platform: EditorExportPlatform, debug: bool) -> PackedStringArray:
@@ -57,14 +56,31 @@ func _get_android_dependencies(platform: EditorExportPlatform, debug: bool) -> P
 	return dependencies
 
 func _get_android_manifest_application_element_contents(platform: EditorExportPlatform, debug: bool) -> String:
-	return """
+	var content := PackedStringArray()
+	
+	for lib in ConfigScript.new().libraries:
+		if not lib.is_enabled:
+			continue
+			
+		if FileAccess.file_exists(lib.get_full_path()):
+			continue
+
+		content.append("""
+		<meta-data
+			android:name="%s_CONFIGURATION_ERROR"
+			android:enabled="%s doesn't exists, please check your addons/admob/android/bin folder or disable in addons/admob/android/config.gd"/>
+		""" % [lib.path, lib.get_full_path()])
+		
+	content.append("""
 	<meta-data
 		android:name="com.google.android.gms.ads.APPLICATION_ID"
 		android:value="%s"/>
-	""" % Config.APPLICATION_ID
+	""" % ConfigScript.APPLICATION_ID)
+	
+	return "\n".join(content)
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
-	return platform is EditorExportPlatformAndroid and Config.IS_ENABLED
+	return platform is EditorExportPlatformAndroid and ConfigScript.new().is_ads_enabled()
 
 func _get_name() -> String:
 	return "PoingAdMobAndroid"

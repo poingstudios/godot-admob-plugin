@@ -22,10 +22,37 @@
 
 extends Object
 
-const IS_ENABLED := true
-const APPLICATION_ID := "ca-app-pub-3940256099942544~3347511713" # Change this to your own AdMob App ID when releasing your game.
+const APPLICATION_ID := "ca-app-pub-3940256099942544~3347511713" # Change to your own AdMob App ID when releasing your game.
 
-class Mediations:
-    const VUNGLE := false
-    const META := false
-    const AD_COLONY := false
+var libraries: Array[AndroidAdMobLibrary] = [
+	AndroidAdMobLibrary.new("ads", true), # Disable if you don't want to use AdMob.
+	
+	# Mediations
+	AndroidAdMobLibrary.new("adcolony", true),
+	AndroidAdMobLibrary.new("meta", true),
+	AndroidAdMobLibrary.new("vungle", true)
+]
+
+####################################################################
+
+func is_ads_enabled() -> bool:
+	for lib in libraries:
+		if lib.path == "ads":
+			return lib.is_enabled
+	return false
+
+class AndroidAdMobLibrary:
+	const ROOT_BIN_PATH := "res://addons/admob/android/bin"
+	
+	var path: String
+	var is_enabled: bool
+
+	func _init(path: String, is_enabled: bool = true) -> void:
+		self.path = path
+		self.is_enabled = is_enabled
+
+	func get_full_path() -> String:
+		return ROOT_BIN_PATH + "/" + "poing_godot_admob_" + path + ".gd"
+
+	func get_plugin() -> EditorExportPlugin:
+		return load(get_full_path()).new()
