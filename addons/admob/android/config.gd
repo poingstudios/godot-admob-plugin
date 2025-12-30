@@ -52,7 +52,7 @@ class AndroidAdMobLibrary:
 		self.is_enabled = is_enabled
 
 	func get_full_path() -> String:
-		return ROOT_BIN_PATH + "/" + "poing_godot_admob_" + path + ".gd"
+		return ROOT_BIN_PATH + "/" + path + "/poing_godot_admob_" + path + ".gd"
 
 	func get_plugin() -> EditorExportPlugin:
 		return load(get_full_path()).new()
