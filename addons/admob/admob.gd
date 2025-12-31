@@ -76,8 +76,10 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 		
 var _exporter := PoingAdMobEditorExportPlugin.new()
 var _android_exporter := preload("res://addons/admob/android/export_plugin.gd").new()
+func _extract_zip(zip_path: String, destination_path: String, clean_destination: bool = false) -> void:
+	if clean_destination:
+		_delete_dir_recursive(destination_path)
 
-func extract_zip(zip_path: String, destination_path: String) -> void:
 	var zip_reader = ZIPReader.new()
 	var error = zip_reader.open(zip_path)
 	
@@ -106,7 +108,29 @@ func extract_zip(zip_path: String, destination_path: String) -> void:
 			file_access.close()
 
 	zip_reader.close()
-	EditorInterface.get_resource_filesystem().scan()
+	
+	if Engine.is_editor_hint() or OS.has_feature("editor"):
+		EditorInterface.get_resource_filesystem().scan()
+
+func _delete_dir_recursive(path: String) -> void:
+	var dir := DirAccess.open(path)
+	if dir == null:
+		return
+
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while file_name != "":
+		if file_name != "." and file_name != "..":
+			var full_path := path.path_join(file_name)
+			if dir.current_is_dir():
+				_delete_dir_recursive(full_path)
+			else:
+				DirAccess.remove_absolute(full_path)
+		file_name = dir.get_next()
+	dir.list_dir_end()
+
+	DirAccess.remove_absolute(path)
+
 
 func _enter_tree():
 	godot_version = _format_version(godot_version)
@@ -243,7 +267,7 @@ func _on_android_popupmenu_id_pressed(id: int):
 	match id:
 		Items.LatestVersion:
 			start_download("android", android_download_path, "poing-godot-admob-android-")
-			extract_zip(android_download_path + "poing-godot-admob-android-" + godot_version + ".zip", "res://addons/admob/android/bin/")
+			_extract_zip(android_download_path + "poing-godot-admob-android-" + godot_version + ".zip", "res://addons/admob/android/bin/", true)
 		Items.Folder:
 			var path_directory = ProjectSettings.globalize_path(android_download_path)
 			OS.shell_open(str("file://", path_directory))
