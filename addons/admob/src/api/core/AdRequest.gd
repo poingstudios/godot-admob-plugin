@@ -42,4 +42,3 @@ func _transform_mediation_extras_to_dictionary() -> Dictionary:
 			"extras" : extra.extras
 		}
 	return mediation_extras_dictionary
-

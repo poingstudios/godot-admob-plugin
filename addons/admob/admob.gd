@@ -77,6 +77,37 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 var _exporter := PoingAdMobEditorExportPlugin.new()
 var _android_exporter := preload("res://addons/admob/android/export_plugin.gd").new()
 
+func extract_zip(zip_path: String, destination_path: String) -> void:
+	var zip_reader = ZIPReader.new()
+	var error = zip_reader.open(zip_path)
+	
+	if error != OK:
+		push_error("Failed to open zip: %d" % error)
+		return
+
+	var files = zip_reader.get_files()
+	
+	for file_path in files:
+		var target_path = destination_path.path_join(file_path)
+		
+		if file_path.ends_with("/"):
+			DirAccess.make_dir_recursive_absolute(target_path)
+			continue
+			
+		var content = zip_reader.read_file(file_path)
+		var base_dir = target_path.get_base_dir()
+		
+		if not DirAccess.dir_exists_absolute(base_dir):
+			DirAccess.make_dir_recursive_absolute(base_dir)
+		
+		var file_access = FileAccess.open(target_path, FileAccess.WRITE)
+		if file_access:
+			file_access.store_buffer(content)
+			file_access.close()
+
+	zip_reader.close()
+	EditorInterface.get_resource_filesystem().scan()
+
 func _enter_tree():
 	godot_version = _format_version(godot_version)
 	add_export_plugin(_exporter)
@@ -212,6 +243,7 @@ func _on_android_popupmenu_id_pressed(id: int):
 	match id:
 		Items.LatestVersion:
 			start_download("android", android_download_path, "poing-godot-admob-android-")
+			extract_zip(android_download_path + "poing-godot-admob-android-" + godot_version + ".zip", "res://addons/admob/android/bin/")
 		Items.Folder:
 			var path_directory = ProjectSettings.globalize_path(android_download_path)
 			OS.shell_open(str("file://", path_directory))

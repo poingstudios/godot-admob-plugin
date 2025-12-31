@@ -47,4 +47,3 @@ static func _get_plugin_version_formated() -> String:
 	if matchs != null:
 		version = matchs.get_string(1)
 	return version
-

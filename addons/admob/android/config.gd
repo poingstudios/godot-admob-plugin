@@ -25,6 +25,7 @@ extends Object
 const APPLICATION_ID := "ca-app-pub-3940256099942544~3347511713" # Change to your own AdMob App ID when releasing your game.
 
 var libraries: Array[AndroidAdMobLibrary] = [
+	# Main Plugin
 	AndroidAdMobLibrary.new("ads", true), # Disable if you don't want to use AdMob.
 	
 	# Mediations
