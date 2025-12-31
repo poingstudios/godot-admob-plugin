@@ -18,6 +18,9 @@ data_*/
 AdMobAddon.csproj
 AdMobAddon.sln
 
+# VSCode specific ignores
+.vscode/
 
+# Android & iOS specific ignores
 android/
 ios/

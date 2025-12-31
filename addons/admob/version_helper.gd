@@ -23,13 +23,13 @@
 class_name PoingAdMobVersionHelper
 extends Object
 
-static var version_formated : String = _get_plugin_version_formated() :
+static var version_formated: String = _get_plugin_version_formated():
 	set(value):
 		version_formated = _get_plugin_version_formated()
 
 static func get_plugin_version() -> String:
 	var plugin_config_file := ConfigFile.new()
-	var version: String = "v3.1.2" #redundancy
+	var version: String = "v4.0.0" # redundancy
 	
 	if plugin_config_file.load("res://addons/admob/plugin.cfg") == OK:
 		version = plugin_config_file.get_value("plugin", "version")
