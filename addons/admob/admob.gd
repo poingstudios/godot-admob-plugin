@@ -32,7 +32,7 @@ var ios_download_path := "res://addons/admob/downloads/ios/"
 var default_download_path := "res://addons/admob/downloads/"
 var current_download_path := default_download_path
 var godot_version := "v" + str(Engine.get_version_info().major) + "." + str(Engine.get_version_info().minor) + "." + str(Engine.get_version_info().patch)
-var plugin_version := PoingAdMobVersionHelper.get_plugin_version()
+var plugin_version := AdMobPluginVersion.get_plugin_version()
 
 var version_support := {
 	"android": "v3.0.2",
@@ -73,7 +73,7 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 		
 	func _get_name() -> String:
 		return "PoingAdMob"
-		
+
 var _exporter := PoingAdMobEditorExportPlugin.new()
 var _android_exporter := preload("res://addons/admob/android/export_plugin.gd").new()
 func _extract_zip(zip_path: String, destination_path: String, clean_destination: bool = false) -> void:

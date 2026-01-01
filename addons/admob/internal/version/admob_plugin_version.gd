@@ -19,3 +19,27 @@
 # LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
+
+extends Object
+class_name AdMobPluginVersion
+
+const PLUGIN_CONFIG_PATH := "res://addons/admob/plugin.cfg"
+
+static var _cached_version: String = ""
+
+static func get_plugin_version() -> String:
+	if not _cached_version.is_empty():
+		return _cached_version
+	
+	const DEFAULT_VERSION := "v4.0.0"
+	
+	var plugin_config_file := ConfigFile.new()
+	if plugin_config_file.load(PLUGIN_CONFIG_PATH) == OK:
+		_cached_version = plugin_config_file.get_value("plugin", "version", DEFAULT_VERSION)
+	else:
+		push_error("AdMob: Failed to load plugin.cfg at " + PLUGIN_CONFIG_PATH)
+		_cached_version = DEFAULT_VERSION
+	return _cached_version
+
+static func get_plugin_version_formatted() -> String:
+	return get_plugin_version().trim_prefix("v")
