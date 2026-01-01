@@ -24,41 +24,18 @@
 class_name AdMobEditorPlugin
 extends EditorPlugin
 
-const AdMobDownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
-const AdMobVersionService := preload("res://addons/admob/internal/services/network/version_service.gd")
-const AdMobAndroidHandler := preload("res://addons/admob/internal/handlers/android_handler.gd")
-const AdMobIOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd")
-const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_plugin_version.gd")
+const MENU_NAME := "AdMob Download Manager"
 const AdMobEditorMenu := preload("res://addons/admob/internal/ui/editor_menu.gd")
 
 var _main_exporter := preload("res://addons/admob/internal/exporters/main_export_plugin.gd").new()
 var _android_exporter := preload("res://addons/admob/internal/exporters/android_export_plugin.gd").new()
 
-func _enter_tree():
+func _enter_tree() -> void:
 	add_export_plugin(_main_exporter)
 	add_export_plugin(_android_exporter)
-	
-	var version_http_request := HTTPRequest.new()
-	add_child(version_http_request)
-	var version_service := AdMobVersionService.new(version_http_request)
-	version_service.check_for_updates()
-	
+	add_tool_submenu_item(MENU_NAME, AdMobEditorMenu.new(self))
 
-	var download_http_request := HTTPRequest.new()
-	add_child(download_http_request)
-	
-	var progress_timer := Timer.new()
-	progress_timer.wait_time = 3.0
-	add_child(progress_timer)
-	
-	var download_service := AdMobDownloadService.new(download_http_request, progress_timer)
-	var android_handler := AdMobAndroidHandler.new(download_service)
-	var ios_handler := AdMobIOSHandler.new(download_service)
-	
-	var popup := AdMobEditorMenu.new(android_handler, ios_handler)
-	add_tool_submenu_item("AdMob Download Manager", popup)
-
-func _exit_tree():
+func _exit_tree() -> void:
 	remove_export_plugin(_main_exporter)
 	remove_export_plugin(_android_exporter)
-	remove_tool_menu_item("AdMob Download Manager")
+	remove_tool_menu_item(MENU_NAME)

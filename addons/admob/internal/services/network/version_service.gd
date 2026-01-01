@@ -26,20 +26,22 @@ const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_p
 
 var _http_request: HTTPRequest
 
-func _init(http_request: HTTPRequest) -> void:
-    _http_request = http_request
-    _http_request.request_completed.connect(_on_request_completed)
+func _init(host: Node) -> void:
+	_http_request = HTTPRequest.new()
+	_http_request.name = "AdMobVersionHTTPRequest"
+	host.add_child(_http_request)
+	_http_request.request_completed.connect(_on_request_completed)
 
 func check_for_updates() -> void:
-    var url = "https://raw.githubusercontent.com/poingstudios/godot-admob-versions/" + AdMobPluginVersion.current + "/versions.json"
-    _http_request.request(url)
+	var url = "https://raw.githubusercontent.com/poingstudios/godot-admob-versions/" + AdMobPluginVersion.current + "/versions.json"
+	_http_request.request(url)
 
-func _on_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
-    if response_code == 200:
-        var json = JSON.new()
-        if json.parse(body.get_string_from_utf8()) == OK:
-            AdMobPluginVersion.support = json.get_data() as Dictionary
-            return
-            
-    printerr("ERR_001: Couldn't get version supported dynamic for AdMob, the latest supported version listed may be outdated. \n" \
-    +"Read more about on: res://addons/admob/docs/errors/ERR_001.md")
+func _on_request_completed(_result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
+	if response_code == 200:
+		var json = JSON.new()
+		if json.parse(body.get_string_from_utf8()) == OK:
+			AdMobPluginVersion.support = json.get_data() as Dictionary
+			return
+		
+	printerr("ERR_001: Couldn't get version supported dynamic for AdMob, the latest supported version listed may be outdated. \n" \
+	+"Read more about on: res://addons/admob/docs/errors/ERR_001.md")

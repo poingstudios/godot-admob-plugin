@@ -22,6 +22,8 @@
 
 extends PopupMenu
 
+const AdMobVersionService := preload("res://addons/admob/internal/services/network/version_service.gd")
+const AdMobDownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
 const AdMobAndroidHandler := preload("res://addons/admob/internal/handlers/android_handler.gd")
 const AdMobIOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd")
 const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_plugin_version.gd")
@@ -52,12 +54,21 @@ enum SupportItems {
 	PayPal
 }
 
-var _android_handler: AdMobAndroidHandler
-var _ios_handler: AdMobIOSHandler
+var _version_service: RefCounted
+var _download_service: RefCounted
+var _android_handler: RefCounted
+var _ios_handler: RefCounted
 
-func _init(android_handler: AdMobAndroidHandler, ios_handler: AdMobIOSHandler) -> void:
-	_android_handler = android_handler
-	_ios_handler = ios_handler
+func _init(host: Node) -> void:
+	# Initialize Services
+	_version_service = AdMobVersionService.new(host)
+	_version_service.check_for_updates()
+	
+	_download_service = AdMobDownloadService.new(host)
+	
+	# Initialize Handlers
+	_android_handler = AdMobAndroidHandler.new(_download_service)
+	_ios_handler = AdMobIOSHandler.new(_download_service)
 	
 	_setup_menu()
 

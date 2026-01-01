@@ -20,6 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+extends RefCounted
 
 signal download_completed(success: bool)
 signal download_progress(percent: int)
@@ -27,10 +28,13 @@ signal download_progress(percent: int)
 var _http_request: HTTPRequest
 var _progress_timer: Timer
 
-func _init(http_request: HTTPRequest, progress_timer: Timer) -> void:
-	_http_request = http_request
-	_progress_timer = progress_timer
+func _init(host: Node) -> void:
+	_http_request = HTTPRequest.new()
+	host.add_child(_http_request)
 	_http_request.request_completed.connect(_on_request_completed)
+	
+	_progress_timer = Timer.new()
+	host.add_child(_progress_timer)
 	_progress_timer.timeout.connect(_on_progress_timer_timeout)
 
 func download_file(url: String, destination_path: String) -> void:
@@ -43,9 +47,9 @@ func download_file(url: String, destination_path: String) -> void:
 	print("Downloading " + url)
 	_http_request.download_file = destination_path
 	_http_request.request(url)
-	_progress_timer.start()
+	_progress_timer.start(3.0)
 
-func _on_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+func _on_request_completed(_result: int, response_code: int, _headers: PackedStringArray, _body: PackedByteArray) -> void:
 	_progress_timer.stop()
 	
 	if response_code == 200:
