@@ -30,36 +30,12 @@ const AdMobFolderService = preload("res://addons/admob/internal/services/file_sy
 const AdMobAndroidHandler = preload("res://addons/admob/internal/handlers/android_handler.gd")
 const AdMobIOSHandler = preload("res://addons/admob/internal/handlers/ios_handler.gd")
 const AdMobPluginVersion = preload("res://addons/admob/internal/version/admob_plugin_version.gd")
+const AdMobEditorMenu = preload("res://addons/admob/internal/ui/editor_menu.gd")
 
 var android_download_path := "res://addons/admob/downloads/android/"
 var ios_download_path := "res://addons/admob/downloads/ios/"
 var default_download_path := "res://addons/admob/downloads/"
 var godot_version := "v" + str(Engine.get_version_info().major) + "." + str(Engine.get_version_info().minor) + "." + str(Engine.get_version_info().patch)
-
-var _android_handler: AdMobAndroidHandler
-var _ios_handler: AdMobIOSHandler
-
-enum Items {
-	LatestVersion,
-	Folder,
-	GitHub
-}
-
-enum DocumentsItems {
-	Official,
-	Google,
-}
-
-enum HelpItems {
-	Discord,
-	SDK_Developers,
-}
-
-enum SupportItems {
-	Patreon,
-	KoFi,
-	PayPal
-}
 
 var _main_exporter := preload("res://addons/admob/internal/exporters/main_export_plugin.gd").new()
 var _android_exporter := preload("res://addons/admob/internal/exporters/android_export_plugin.gd").new()
@@ -78,65 +54,16 @@ func _enter_tree():
 	add_child(progress_timer)
 	
 	var download_service = AdMobDownloadService.new(http_request, progress_timer)
+	var android_handler = AdMobAndroidHandler.new(download_service)
+	var ios_handler = AdMobIOSHandler.new(download_service)
 	
-	_android_handler = AdMobAndroidHandler.new(download_service)
-	_ios_handler = AdMobIOSHandler.new(download_service)
+	var download_paths = {
+		"android": android_download_path,
+		"ios": ios_download_path,
+		"default_path": default_download_path
+	}
 	
-	var popup := PopupMenu.new()
-
-	var android_popup := PopupMenu.new()
-	android_popup.name = "Android"
-	popup.add_child(android_popup)
-
-	var ios_popup := PopupMenu.new()
-	ios_popup.name = "iOS"
-	popup.add_child(ios_popup)
-	
-	android_popup.connect("id_pressed", _on_android_popupmenu_id_pressed)
-	android_popup.add_item(str(Items.keys()[Items.LatestVersion]), Items.LatestVersion)
-	android_popup.add_item(str(Items.keys()[Items.Folder]), Items.Folder)
-	android_popup.add_item(str(Items.keys()[Items.GitHub]), Items.GitHub)
-	android_popup.add_item("Copy Metadata", 98)
-	android_popup.add_item("Open AndroidManifest.xml", 99)
-
-	ios_popup.connect("id_pressed", _on_ios_popupmenu_id_pressed)
-	ios_popup.add_item(str(Items.keys()[Items.LatestVersion]), Items.LatestVersion)
-	ios_popup.add_item(str(Items.keys()[Items.Folder]), Items.Folder)
-	ios_popup.add_item(str(Items.keys()[Items.GitHub]), Items.GitHub)
-	ios_popup.add_item("Copy shell command", 99)
-	
-	popup.id_pressed.connect(_on_popupmenu_id_pressed)
-	
-	popup.add_submenu_item(android_popup.name, android_popup.name)
-	popup.add_submenu_item(ios_popup.name, ios_popup.name)
-	popup.add_item(str(Items.keys()[Items.Folder]), Items.Folder)
-	popup.add_item(str(Items.keys()[Items.GitHub]), Items.GitHub)
-
-	var documents_popup := PopupMenu.new()
-	documents_popup.name = "Documents"
-	documents_popup.connect("id_pressed", _on_documents_popup_id_pressed)
-	documents_popup.add_item(str(DocumentsItems.keys()[DocumentsItems.Official]))
-	documents_popup.add_item(str(DocumentsItems.keys()[DocumentsItems.Google]))
-	popup.add_child(documents_popup)
-
-	var help_popup := PopupMenu.new()
-	help_popup.name = "Help"
-	help_popup.connect("id_pressed", _on_help_popup_id_pressed)
-	help_popup.add_item(str(HelpItems.keys()[HelpItems.Discord]))
-	help_popup.add_item(str(HelpItems.keys()[HelpItems.SDK_Developers]))
-	popup.add_child(help_popup)
-	popup.add_submenu_item(help_popup.name, help_popup.name)
-
-	var support_popup := PopupMenu.new()
-	support_popup.name = "Support"
-	support_popup.connect("id_pressed", _on_support_popup_id_pressed)
-	support_popup.add_item(str(SupportItems.keys()[SupportItems.Patreon]))
-	support_popup.add_item(str(SupportItems.keys()[SupportItems.KoFi]))
-	support_popup.add_item(str(SupportItems.keys()[SupportItems.PayPal]))
-	popup.add_child(support_popup)
-	popup.add_submenu_item(support_popup.name, support_popup.name)
-
-
+	var popup = AdMobEditorMenu.new(android_handler, ios_handler, godot_version, download_paths)
 	add_tool_submenu_item("AdMob Download Manager", popup)
 
 func _exit_tree():
@@ -159,77 +86,3 @@ func _on_version_support_request_completed(result, response_code, headers, body)
 			return
 	printerr("ERR_001: Couldn't get version supported dynamic for AdMob, the latest supported version listed may be outdated. \n" \
 	+"Read more about on: res://addons/admob/docs/errors/ERR_001.md")
-
-func _on_android_popupmenu_id_pressed(id: int):
-	match id:
-		Items.LatestVersion:
-			_android_handler.install(godot_version, AdMobPluginVersion.support["android"], android_download_path)
-		Items.Folder:
-			var path_directory = ProjectSettings.globalize_path(android_download_path)
-			OS.shell_open(str("file://", path_directory))
-		Items.GitHub:
-			OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + AdMobPluginVersion.support.android)
-		98:
-			var snippet := """<!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
-			<meta-data
-				android:name="com.google.android.gms.ads.APPLICATION_ID"
-				android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>"""
-
-			DisplayServer.clipboard_set(snippet)
-
-			print_rich("[b][color=GREEN]✔ Copied AdMob Metadata to clipboard![/color][/b]\n" +
-					"[color=CORNFLOWER_BLUE]" + snippet + "[/color]")
-
-		99:
-			var manifest_path := ProjectSettings.globalize_path("res://android/build/AndroidManifest.xml")
-			OS.shell_open("file://" + manifest_path)
-
-			print_rich("[b]Opened:[/b] [color=CORNFLOWER_BLUE][url]file://" + manifest_path + "[/url][/color]")
-
-func _on_ios_popupmenu_id_pressed(id: int):
-	match id:
-		Items.LatestVersion:
-			_ios_handler.download(godot_version, AdMobPluginVersion.support["ios"], ios_download_path)
-		Items.Folder:
-			var path_directory = ProjectSettings.globalize_path(ios_download_path)
-			OS.shell_open(str("file://", path_directory))
-		Items.GitHub:
-			OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + AdMobPluginVersion.support.ios)
-		99:
-			var snippet := "chmod +x update_and_install.sh\n./update_and_install.sh"
-
-			DisplayServer.clipboard_set(snippet)
-
-			print_rich("[b][color=GREEN]✔ Copied install command to clipboard![/color][/b]\n" +
-					"[code]" + snippet + "[/code]")
-
-func _on_popupmenu_id_pressed(id: int):
-	match id:
-		Items.Folder:
-			var path_directory = ProjectSettings.globalize_path(default_download_path)
-			OS.shell_open(str("file://", path_directory))
-		Items.GitHub:
-			OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + AdMobPluginVersion.current)
-
-func _on_documents_popup_id_pressed(id: int):
-	match id:
-		DocumentsItems.Official:
-			OS.shell_open("https://poingstudios.github.io/godot-admob-plugin")
-		DocumentsItems.Google:
-			OS.shell_open("https://developers.google.com/admob")
-
-func _on_help_popup_id_pressed(id: int):
-	match id:
-		HelpItems.Discord:
-			OS.shell_open("https://discord.com/invite/YEPvYjSSMk")
-		HelpItems.SDK_Developers:
-			OS.shell_open("https://groups.google.com/g/google-admob-ads-sdk/")
-
-func _on_support_popup_id_pressed(id: int):
-	match id:
-		SupportItems.Patreon:
-			OS.shell_open("https://www.patreon.com/poingstudios")
-		SupportItems.KoFi:
-			OS.shell_open("https://ko-fi.com/poingstudios")
-		SupportItems.PayPal:
-			OS.shell_open("https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8")
