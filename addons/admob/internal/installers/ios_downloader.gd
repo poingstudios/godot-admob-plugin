@@ -20,17 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name AdMobAndroidInstaller
-extends AdMobInstaller
+class_name AdMobIOSDownloader
+extends AdMobDownloader
 
 func _init(download_service: AdMobDownloadService) -> void:
 	super (download_service)
 
 func _get_zip_file_name() -> String:
-	return "poing-godot-admob-android-" + _godot_version + ".zip"
+	return "poing-godot-admob-ios-" + _godot_version + ".zip"
 
 func _get_download_url(version: String, file_name: String) -> String:
-	return "https://github.com/poingstudios/godot-admob-android/releases/download/" + version + "/" + file_name
-
-func _get_extract_path() -> String:
-	return "res://addons/admob/android/bin/"
+	return "https://github.com/poingstudios/godot-admob-ios/releases/download/" + version + "/" + file_name

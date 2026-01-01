@@ -20,17 +20,27 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name AdMobAndroidInstaller
-extends AdMobInstaller
+@abstract class_name AdMobInstaller
+extends AdMobDownloader
 
-func _init(download_service: AdMobDownloadService) -> void:
-	super (download_service)
+signal installation_completed(success: bool)
 
-func _get_zip_file_name() -> String:
-	return "poing-godot-admob-android-" + _godot_version + ".zip"
+func install(godot_version: String, version: String, download_path: String) -> void:
+	download(godot_version, version, download_path)
 
-func _get_download_url(version: String, file_name: String) -> String:
-	return "https://github.com/poingstudios/godot-admob-android/releases/download/" + version + "/" + file_name
+func _on_download_completed(success: bool) -> void:
+	if not success:
+		installation_completed.emit(false)
+		return
+	
+	_extract()
 
-func _get_extract_path() -> String:
-	return "res://addons/admob/android/bin/"
+func _extract() -> void:
+	var file_name = _get_zip_file_name()
+	var zip_path = _download_path.path_join(file_name)
+	var extract_path = _get_extract_path()
+	
+	var success = AdMobZipService.extract_zip(zip_path, extract_path, true)
+	installation_completed.emit(success)
+
+@abstract func _get_extract_path() -> String;

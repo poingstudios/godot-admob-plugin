@@ -28,7 +28,8 @@ const AdMobDownloadService = preload("res://addons/admob/internal/services/netwo
 const AdMobZipService = preload("res://addons/admob/internal/services/archive/zip_service.gd")
 const AdMobFolderService = preload("res://addons/admob/internal/services/file_system/folder_service.gd")
 const AdMobAndroidInstaller = preload("res://addons/admob/internal/installers/android_installer.gd")
-const AdMobIOSInstaller = preload("res://addons/admob/internal/installers/ios_installer.gd")
+const AdMobIOSDownloader = preload("res://addons/admob/internal/installers/ios_downloader.gd")
+const AdMobPluginVersion = preload("res://addons/admob/internal/version/admob_plugin_version.gd")
 
 var android_download_path := "res://addons/admob/downloads/android/"
 var ios_download_path := "res://addons/admob/downloads/ios/"
@@ -38,7 +39,7 @@ var plugin_version := AdMobPluginVersion.get_plugin_version()
 var version_support := AdMobPluginVersion.get_fallback_version_support()
 
 var _android_installer: AdMobAndroidInstaller
-var _ios_installer: AdMobIOSInstaller
+var _ios_downloader: AdMobIOSDownloader
 
 enum Items {
 	LatestVersion,
@@ -97,7 +98,7 @@ func _enter_tree():
 	var download_service = AdMobDownloadService.new(http_request, progress_timer)
 	
 	_android_installer = AdMobAndroidInstaller.new(download_service)
-	_ios_installer = AdMobIOSInstaller.new(download_service)
+	_ios_downloader = AdMobIOSDownloader.new(download_service)
 	
 	var popup := PopupMenu.new()
 
@@ -212,7 +213,7 @@ func _on_android_popupmenu_id_pressed(id: int):
 func _on_ios_popupmenu_id_pressed(id: int):
 	match id:
 		Items.LatestVersion:
-			_ios_installer.download(godot_version, version_support["ios"], ios_download_path)
+			_ios_downloader.download(godot_version, version_support["ios"], ios_download_path)
 		Items.Folder:
 			var path_directory = ProjectSettings.globalize_path(ios_download_path)
 			OS.shell_open(str("file://", path_directory))

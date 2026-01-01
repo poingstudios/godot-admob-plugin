@@ -20,24 +20,30 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name AdMobIOSInstaller
-
-const AdMobDownloadService = preload("res://addons/admob/internal/services/network/download_service.gd")
+@abstract class_name AdMobDownloader extends RefCounted
 
 signal download_completed(success: bool)
 
 var _download_service: AdMobDownloadService
+var _godot_version: String
+var _download_path: String
 
 func _init(download_service: AdMobDownloadService) -> void:
 	_download_service = download_service
 	_download_service.download_completed.connect(_on_download_completed)
 
-func download(godot_version: String, ios_version: String, download_path: String) -> void:
-	var file_name = "poing-godot-admob-ios-" + godot_version + ".zip"
-	var url = "https://github.com/poingstudios/godot-admob-ios/releases/download/" + ios_version + "/" + file_name
-	var destination = download_path + file_name
+func download(godot_version: String, version: String, download_path: String) -> void:
+	_godot_version = godot_version
+	_download_path = download_path
+	
+	var file_name = _get_zip_file_name()
+	var url = _get_download_url(version, file_name)
+	var destination = _download_path.path_join(file_name)
 	
 	_download_service.download_file(url, destination)
 
 func _on_download_completed(success: bool) -> void:
 	download_completed.emit(success)
+
+@abstract func _get_zip_file_name() -> String;
+@abstract func _get_download_url(version: String, file_name: String) -> String;
