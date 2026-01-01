@@ -54,10 +54,10 @@ enum SupportItems {
 	PayPal
 }
 
-var _version_service: RefCounted
-var _download_service: RefCounted
-var _android_handler: RefCounted
-var _ios_handler: RefCounted
+var _version_service: Object
+var _download_service: Object
+var _android_handler: Object
+var _ios_handler: Object
 
 func _init(host: Node) -> void:
 	# Initialize Services

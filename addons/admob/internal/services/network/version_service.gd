@@ -20,8 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends RefCounted
-
 const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_plugin_version.gd")
 
 var _http_request: HTTPRequest
