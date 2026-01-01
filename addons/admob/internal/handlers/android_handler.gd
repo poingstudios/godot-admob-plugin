@@ -20,11 +20,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name AdMobAndroidHandler
 extends RefCounted
 
-const AdMobDownloadService = preload("res://addons/admob/internal/services/network/download_service.gd")
-const AdMobZipService = preload("res://addons/admob/internal/services/archive/zip_service.gd")
+const AdMobDownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
+const AdMobZipService := preload("res://addons/admob/internal/services/archive/zip_service.gd")
 
 signal installation_completed(success: bool)
 

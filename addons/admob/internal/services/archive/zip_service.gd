@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name AdMobZipService
 
 static func extract_zip(zip_path: String, destination_path: String, clean_destination: bool = false) -> bool:
 	if clean_destination:

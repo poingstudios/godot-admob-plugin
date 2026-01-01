@@ -20,12 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name AdMobEditorMenu
 extends PopupMenu
 
-const AdMobAndroidHandler = preload("res://addons/admob/internal/handlers/android_handler.gd")
-const AdMobIOSHandler = preload("res://addons/admob/internal/handlers/ios_handler.gd")
-const AdMobPluginVersion = preload("res://addons/admob/internal/version/admob_plugin_version.gd")
+const AdMobAndroidHandler := preload("res://addons/admob/internal/handlers/android_handler.gd")
+const AdMobIOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd")
+const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_plugin_version.gd")
 
 var _android_download_path := "res://addons/admob/downloads/android/"
 var _ios_download_path := "res://addons/admob/downloads/ios/"

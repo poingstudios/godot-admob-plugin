@@ -20,7 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name AdMobDownloadService
 
 signal download_completed(success: bool)
 signal download_progress(percent: int)

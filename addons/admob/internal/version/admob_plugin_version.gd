@@ -20,8 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name AdMobPluginVersion
-
 const PLUGIN_CONFIG_PATH := "res://addons/admob/plugin.cfg"
 
 # These versions are used as a fallback if the remote 'versions.json' cannot be fetched.
