@@ -24,20 +24,21 @@
 class_name AdMobEditorPlugin
 extends EditorPlugin
 
-var http_request_downloader := HTTPRequest.new()
-var timer := Timer.new()
+const AdMobDownloadService = preload("res://addons/admob/internal/services/network/download_service.gd")
+const AdMobZipService = preload("res://addons/admob/internal/services/archive/zip_service.gd")
+const AdMobFolderService = preload("res://addons/admob/internal/services/file_system/folder_service.gd")
+const AdMobAndroidInstaller = preload("res://addons/admob/internal/installers/android_installer.gd")
+const AdMobIOSInstaller = preload("res://addons/admob/internal/installers/ios_installer.gd")
 
 var android_download_path := "res://addons/admob/downloads/android/"
 var ios_download_path := "res://addons/admob/downloads/ios/"
 var default_download_path := "res://addons/admob/downloads/"
-var current_download_path := default_download_path
 var godot_version := "v" + str(Engine.get_version_info().major) + "." + str(Engine.get_version_info().minor) + "." + str(Engine.get_version_info().patch)
 var plugin_version := AdMobPluginVersion.get_plugin_version()
+var version_support := AdMobPluginVersion.get_fallback_version_support()
 
-var version_support := {
-	"android": "v3.0.2",
-	"ios": "v3.0.3"
-}
+var _android_installer: AdMobAndroidInstaller
+var _ios_installer: AdMobIOSInstaller
 
 enum Items {
 	LatestVersion,
@@ -76,60 +77,6 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 
 var _exporter := PoingAdMobEditorExportPlugin.new()
 var _android_exporter := preload("res://addons/admob/android/export_plugin.gd").new()
-func _extract_zip(zip_path: String, destination_path: String, clean_destination: bool = false) -> void:
-	if clean_destination:
-		_delete_dir_recursive(destination_path)
-
-	var zip_reader = ZIPReader.new()
-	var error = zip_reader.open(zip_path)
-	
-	if error != OK:
-		push_error("Failed to open zip: %d" % error)
-		return
-
-	var files = zip_reader.get_files()
-	
-	for file_path in files:
-		var target_path = destination_path.path_join(file_path)
-		
-		if file_path.ends_with("/"):
-			DirAccess.make_dir_recursive_absolute(target_path)
-			continue
-			
-		var content = zip_reader.read_file(file_path)
-		var base_dir = target_path.get_base_dir()
-		
-		if not DirAccess.dir_exists_absolute(base_dir):
-			DirAccess.make_dir_recursive_absolute(base_dir)
-		
-		var file_access = FileAccess.open(target_path, FileAccess.WRITE)
-		if file_access:
-			file_access.store_buffer(content)
-			file_access.close()
-
-	zip_reader.close()
-	
-	if Engine.is_editor_hint() or OS.has_feature("editor"):
-		EditorInterface.get_resource_filesystem().scan()
-
-func _delete_dir_recursive(path: String) -> void:
-	var dir := DirAccess.open(path)
-	if dir == null:
-		return
-
-	dir.list_dir_begin()
-	var file_name := dir.get_next()
-	while file_name != "":
-		if file_name != "." and file_name != "..":
-			var full_path := path.path_join(file_name)
-			if dir.current_is_dir():
-				_delete_dir_recursive(full_path)
-			else:
-				DirAccess.remove_absolute(full_path)
-		file_name = dir.get_next()
-	dir.list_dir_end()
-
-	DirAccess.remove_absolute(path)
 
 
 func _enter_tree():
@@ -137,10 +84,20 @@ func _enter_tree():
 	add_export_plugin(_exporter)
 	add_export_plugin(_android_exporter)
 	
-	setup_timer()
-	create_download_directories()
+	AdMobFolderService.create_download_directories(android_download_path, ios_download_path)
 	_request_version_support()
-	_setup_download_request_listener()
+	
+	var http_request := HTTPRequest.new()
+	add_child(http_request)
+	
+	var progress_timer := Timer.new()
+	progress_timer.wait_time = 3.0
+	add_child(progress_timer)
+	
+	var download_service = AdMobDownloadService.new(http_request, progress_timer)
+	
+	_android_installer = AdMobAndroidInstaller.new(download_service)
+	_ios_installer = AdMobIOSInstaller.new(download_service)
 	
 	var popup := PopupMenu.new()
 
@@ -226,48 +183,10 @@ func _on_version_support_request_completed(result, response_code, headers, body)
 	printerr("ERR_001: Couldn't get version supported dynamic for AdMob, the latest supported version listed may be outdated. \n" \
 	+"Read more about on: res://addons/admob/docs/errors/ERR_001.md")
 
-func _on_download_request_completed(result, response_code, headers, body):
-	if response_code == 200:
-		var real_path = ProjectSettings.globalize_path(current_download_path)
-		print_rich("Download completed, you can check the downloaded file at: [color=CORNFLOWER_BLUE][url]" + real_path + "[/url][/color]")
-	else:
-		printerr("ERR_002: It is not possible to download the Android/iOS plugin. \n" \
-			+"Read more about on: res://addons/admob/docs/errors/ERR_002.md")
-	
-	timer.stop()
-
-func _setup_download_request_listener():
-	http_request_downloader.request_completed.connect(_on_download_request_completed)
-	add_child(http_request_downloader)
-
-func setup_timer():
-	timer.wait_time = 3
-	timer.timeout.connect(show_download_percent)
-	add_child(timer)
-
-func create_download_directories():
-	DirAccess.make_dir_recursive_absolute(android_download_path)
-	DirAccess.make_dir_recursive_absolute(ios_download_path)
-
-func start_download(platform: String, download_path: String, file_prefix: String):
-	if http_request_downloader.get_http_client_status() != HTTPClient.STATUS_DISCONNECTED:
-		printerr("http_request_downloader is processing a request, wait for completion")
-		return
-
-	var file_name = file_prefix + godot_version + ".zip"
-	var url_download = "https://github.com/poingstudios/godot-admob-" + platform + "/releases/download/" + version_support[platform] + "/" + file_name
-
-	http_request_downloader.request_ready()
-	http_request_downloader.download_file = download_path + file_name
-	http_request_downloader.request(url_download)
-	show_download_percent(url_download)
-	timer.start()
-
 func _on_android_popupmenu_id_pressed(id: int):
 	match id:
 		Items.LatestVersion:
-			start_download("android", android_download_path, "poing-godot-admob-android-")
-			_extract_zip(android_download_path + "poing-godot-admob-android-" + godot_version + ".zip", "res://addons/admob/android/bin/", true)
+			_android_installer.install(godot_version, version_support["android"], android_download_path)
 		Items.Folder:
 			var path_directory = ProjectSettings.globalize_path(android_download_path)
 			OS.shell_open(str("file://", path_directory))
@@ -290,11 +209,10 @@ func _on_android_popupmenu_id_pressed(id: int):
 
 			print_rich("[b]Opened:[/b] [color=CORNFLOWER_BLUE][url]file://" + manifest_path + "[/url][/color]")
 
-
 func _on_ios_popupmenu_id_pressed(id: int):
 	match id:
 		Items.LatestVersion:
-			start_download("ios", ios_download_path, "poing-godot-admob-ios-")
+			_ios_installer.download(godot_version, version_support["ios"], ios_download_path)
 		Items.Folder:
 			var path_directory = ProjectSettings.globalize_path(ios_download_path)
 			OS.shell_open(str("file://", path_directory))
@@ -338,13 +256,3 @@ func _on_support_popup_id_pressed(id: int):
 			OS.shell_open("https://ko-fi.com/poingstudios")
 		SupportItems.PayPal:
 			OS.shell_open("https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8")
-
-func show_download_percent(url_download: String = ""):
-	if not url_download.is_empty():
-		print("Downloading " + url_download)
-	
-	var bodySize = http_request_downloader.get_body_size()
-	var downloadedBytes = http_request_downloader.get_downloaded_bytes()
-	
-	var percent = int(downloadedBytes * 100 / bodySize)
-	print("Download percent: " + str(percent) + "%")

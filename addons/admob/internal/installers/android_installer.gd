@@ -1,0 +1,58 @@
+# MIT License
+
+# Copyright (c) 2026-present Poing Studios
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+class_name AdMobAndroidInstaller
+
+const AdMobDownloadService = preload("res://addons/admob/internal/services/network/download_service.gd")
+const AdMobZipService = preload("res://addons/admob/internal/services/archive/zip_service.gd")
+
+signal installation_completed(success: bool)
+
+var _download_service: AdMobDownloadService
+var _download_path: String
+var _godot_version: String
+
+func _init(download_service: AdMobDownloadService) -> void:
+	_download_service = download_service
+	_download_service.download_completed.connect(_on_download_completed)
+
+func install(godot_version: String, android_version: String, download_path: String) -> void:
+	_godot_version = godot_version
+	_download_path = download_path
+	
+	var file_name = "poing-godot-admob-android-" + godot_version + ".zip"
+	var url = "https://github.com/poingstudios/godot-admob-android/releases/download/" + android_version + "/" + file_name
+	var destination = download_path + file_name
+	
+	_download_service.download_file(url, destination)
+
+func _on_download_completed(success: bool) -> void:
+	if not success:
+		installation_completed.emit(false)
+		return
+	
+	var file_name = "poing-godot-admob-android-" + _godot_version + ".zip"
+	var zip_path = _download_path + file_name
+	var extract_path = "res://addons/admob/android/bin/"
+	
+	var extract_success = AdMobZipService.extract_zip(zip_path, extract_path, true)
+	installation_completed.emit(extract_success)
