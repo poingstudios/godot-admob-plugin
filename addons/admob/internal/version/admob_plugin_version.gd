@@ -63,3 +63,8 @@ static var current: String:
 static var formatted: String:
 	get:
 		return current.trim_prefix("v")
+
+static var godot: String:
+	get:
+		var info := Engine.get_version_info()
+		return "v%d.%d.%d" % [info.major, info.minor, info.patch]

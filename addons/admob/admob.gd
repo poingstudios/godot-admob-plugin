@@ -24,18 +24,13 @@
 class_name AdMobEditorPlugin
 extends EditorPlugin
 
-const AdMobDownloadService = preload("res://addons/admob/internal/services/network/download_service.gd")
-const AdMobZipService = preload("res://addons/admob/internal/services/archive/zip_service.gd")
-const AdMobFolderService = preload("res://addons/admob/internal/services/file_system/folder_service.gd")
-const AdMobAndroidHandler = preload("res://addons/admob/internal/handlers/android_handler.gd")
-const AdMobIOSHandler = preload("res://addons/admob/internal/handlers/ios_handler.gd")
-const AdMobPluginVersion = preload("res://addons/admob/internal/version/admob_plugin_version.gd")
-const AdMobEditorMenu = preload("res://addons/admob/internal/ui/editor_menu.gd")
-
-var android_download_path := "res://addons/admob/downloads/android/"
-var ios_download_path := "res://addons/admob/downloads/ios/"
-var default_download_path := "res://addons/admob/downloads/"
-var godot_version := "v" + str(Engine.get_version_info().major) + "." + str(Engine.get_version_info().minor) + "." + str(Engine.get_version_info().patch)
+const AdMobDownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
+const AdMobZipService := preload("res://addons/admob/internal/services/archive/zip_service.gd")
+const AdMobFolderService := preload("res://addons/admob/internal/services/file_system/folder_service.gd")
+const AdMobAndroidHandler := preload("res://addons/admob/internal/handlers/android_handler.gd")
+const AdMobIOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd")
+const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_plugin_version.gd")
+const AdMobEditorMenu := preload("res://addons/admob/internal/ui/editor_menu.gd")
 
 var _main_exporter := preload("res://addons/admob/internal/exporters/main_export_plugin.gd").new()
 var _android_exporter := preload("res://addons/admob/internal/exporters/android_export_plugin.gd").new()
@@ -53,17 +48,11 @@ func _enter_tree():
 	progress_timer.wait_time = 3.0
 	add_child(progress_timer)
 	
-	var download_service = AdMobDownloadService.new(http_request, progress_timer)
-	var android_handler = AdMobAndroidHandler.new(download_service)
-	var ios_handler = AdMobIOSHandler.new(download_service)
+	var download_service := AdMobDownloadService.new(http_request, progress_timer)
+	var android_handler := AdMobAndroidHandler.new(download_service)
+	var ios_handler := AdMobIOSHandler.new(download_service)
 	
-	var download_paths = {
-		"android": android_download_path,
-		"ios": ios_download_path,
-		"default_path": default_download_path
-	}
-	
-	var popup = AdMobEditorMenu.new(android_handler, ios_handler, godot_version, download_paths)
+	var popup := AdMobEditorMenu.new(android_handler, ios_handler)
 	add_tool_submenu_item("AdMob Download Manager", popup)
 
 func _exit_tree():

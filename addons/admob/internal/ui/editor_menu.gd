@@ -27,6 +27,10 @@ const AdMobAndroidHandler = preload("res://addons/admob/internal/handlers/androi
 const AdMobIOSHandler = preload("res://addons/admob/internal/handlers/ios_handler.gd")
 const AdMobPluginVersion = preload("res://addons/admob/internal/version/admob_plugin_version.gd")
 
+var _android_download_path := "res://addons/admob/downloads/android/"
+var _ios_download_path := "res://addons/admob/downloads/ios/"
+var _default_download_path := "res://addons/admob/downloads/"
+
 enum Items {
 	LatestVersion,
 	Folder,
@@ -51,18 +55,10 @@ enum SupportItems {
 
 var _android_handler: AdMobAndroidHandler
 var _ios_handler: AdMobIOSHandler
-var _godot_version: String
-var _android_download_path: String
-var _ios_download_path: String
-var _default_download_path: String
 
-func _init(android_handler: AdMobAndroidHandler, ios_handler: AdMobIOSHandler, godot_version: String, download_paths: Dictionary) -> void:
+func _init(android_handler: AdMobAndroidHandler, ios_handler: AdMobIOSHandler) -> void:
 	_android_handler = android_handler
 	_ios_handler = ios_handler
-	_godot_version = godot_version
-	_android_download_path = download_paths.android
-	_ios_download_path = download_paths.ios
-	_default_download_path = download_paths.default_path
 	
 	_setup_menu()
 
@@ -123,7 +119,7 @@ func _setup_menu() -> void:
 func _on_android_popupmenu_id_pressed(id: int):
 	match id:
 		Items.LatestVersion:
-			_android_handler.install(_godot_version, AdMobPluginVersion.support["android"], _android_download_path)
+			_android_handler.install(AdMobPluginVersion.godot, AdMobPluginVersion.support["android"], _android_download_path)
 		Items.Folder:
 			var path_directory = ProjectSettings.globalize_path(_android_download_path)
 			OS.shell_open(str("file://", path_directory))
@@ -149,7 +145,7 @@ func _on_android_popupmenu_id_pressed(id: int):
 func _on_ios_popupmenu_id_pressed(id: int):
 	match id:
 		Items.LatestVersion:
-			_ios_handler.download(_godot_version, AdMobPluginVersion.support["ios"], _ios_download_path)
+			_ios_handler.download(AdMobPluginVersion.godot, AdMobPluginVersion.support["ios"], _ios_download_path)
 		Items.Folder:
 			var path_directory = ProjectSettings.globalize_path(_ios_download_path)
 			OS.shell_open(str("file://", path_directory))
