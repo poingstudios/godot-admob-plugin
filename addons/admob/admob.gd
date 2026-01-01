@@ -61,21 +61,8 @@ enum SupportItems {
 	PayPal
 }
 
-class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
-	const CFG_FILE_PATH := "res://addons/admob/plugin.cfg"
-	
-	func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
-		var file = FileAccess.open(CFG_FILE_PATH, FileAccess.READ)
-		if file:
-			print("Exporting Poing AdMob '.cfg' file")
-			add_file(CFG_FILE_PATH, file.get_buffer(file.get_length()), false)
-		file.close()
-		
-	func _get_name() -> String:
-		return "PoingAdMob"
-
-var _main_exporter := PoingAdMobEditorExportPlugin.new()
-var _android_exporter := preload("res://addons/admob/android/export_plugin.gd").new()
+var _main_exporter := preload("res://addons/admob/internal/exporters/main_export_plugin.gd").new()
+var _android_exporter := preload("res://addons/admob/internal/exporters/android_export_plugin.gd").new()
 
 func _enter_tree():
 	add_export_plugin(_main_exporter)
@@ -118,7 +105,7 @@ func _enter_tree():
 	ios_popup.add_item(str(Items.keys()[Items.GitHub]), Items.GitHub)
 	ios_popup.add_item("Copy shell command", 99)
 	
-	popup.connect("id_pressed", _on_popupmenu_id_pressed)
+	popup.id_pressed.connect(_on_popupmenu_id_pressed)
 	
 	popup.add_submenu_item(android_popup.name, android_popup.name)
 	popup.add_submenu_item(ios_popup.name, ios_popup.name)
