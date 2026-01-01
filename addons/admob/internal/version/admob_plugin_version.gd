@@ -30,25 +30,36 @@ const FALLBACK_ANDROID_VERSION := "v3.0.6"
 const FALLBACK_IOS_VERSION := "v3.1.3"
 const FALLBACK_PLUGIN_VERSION := "v4.0.0"
 
-static func get_fallback_version_support() -> Dictionary:
-	return {
-		"android": FALLBACK_ANDROID_VERSION,
-		"ios": FALLBACK_IOS_VERSION
-	}
+static var _cached_version := ""
+static var _remote_support := {}
+static var _fallbacks: Dictionary:
+	get:
+		return {
+			"android": FALLBACK_ANDROID_VERSION,
+			"ios": FALLBACK_IOS_VERSION
+		}
 
-static var _cached_version: String = ""
+static var support: Dictionary:
+	get:
+		if _remote_support.is_empty():
+			return _fallbacks
+		return _remote_support
+	set(value):
+		_remote_support = value
 
-static func get_plugin_version() -> String:
-	if not _cached_version.is_empty():
+static var current: String:
+	get:
+		if not _cached_version.is_empty():
+			return _cached_version
+		
+		var plugin_config_file := ConfigFile.new()
+		if plugin_config_file.load(PLUGIN_CONFIG_PATH) == OK:
+			_cached_version = plugin_config_file.get_value("plugin", "version", FALLBACK_PLUGIN_VERSION)
+		else:
+			push_error("AdMob: Failed to load plugin.cfg at " + PLUGIN_CONFIG_PATH)
+			_cached_version = FALLBACK_PLUGIN_VERSION
 		return _cached_version
-	
-	var plugin_config_file := ConfigFile.new()
-	if plugin_config_file.load(PLUGIN_CONFIG_PATH) == OK:
-		_cached_version = plugin_config_file.get_value("plugin", "version", FALLBACK_PLUGIN_VERSION)
-	else:
-		push_error("AdMob: Failed to load plugin.cfg at " + PLUGIN_CONFIG_PATH)
-		_cached_version = FALLBACK_PLUGIN_VERSION
-	return _cached_version
 
-static func get_plugin_version_formatted() -> String:
-	return get_plugin_version().trim_prefix("v")
+static var formatted: String:
+	get:
+		return current.trim_prefix("v")

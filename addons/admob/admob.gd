@@ -35,8 +35,6 @@ var android_download_path := "res://addons/admob/downloads/android/"
 var ios_download_path := "res://addons/admob/downloads/ios/"
 var default_download_path := "res://addons/admob/downloads/"
 var godot_version := "v" + str(Engine.get_version_info().major) + "." + str(Engine.get_version_info().minor) + "." + str(Engine.get_version_info().patch)
-var plugin_version := AdMobPluginVersion.get_plugin_version()
-var version_support := AdMobPluginVersion.get_fallback_version_support()
 
 var _android_handler: AdMobAndroidHandler
 var _ios_handler: AdMobIOSHandler
@@ -76,13 +74,11 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 	func _get_name() -> String:
 		return "PoingAdMob"
 
-var _exporter := PoingAdMobEditorExportPlugin.new()
+var _main_exporter := PoingAdMobEditorExportPlugin.new()
 var _android_exporter := preload("res://addons/admob/android/export_plugin.gd").new()
 
-
 func _enter_tree():
-	godot_version = _format_version(godot_version)
-	add_export_plugin(_exporter)
+	add_export_plugin(_main_exporter)
 	add_export_plugin(_android_exporter)
 
 	_request_version_support()
@@ -157,18 +153,12 @@ func _enter_tree():
 	add_tool_submenu_item("AdMob Download Manager", popup)
 
 func _exit_tree():
-	remove_export_plugin(_exporter)
+	remove_export_plugin(_main_exporter)
 	remove_export_plugin(_android_exporter)
 	remove_tool_menu_item("AdMob Download Manager")
 
-func _format_version(version: String) -> String:
-	var pattern = RegEx.new()
-	pattern.compile("^(v\\d+\\.\\d+)(\\.0)$")
-	var match_result = pattern.search(version)
-	return match_result.get_string(1) if match_result else version
-
 func _request_version_support():
-	var url = "https://raw.githubusercontent.com/poingstudios/godot-admob-versions/" + plugin_version + "/versions.json"
+	var url = "https://raw.githubusercontent.com/poingstudios/godot-admob-versions/" + AdMobPluginVersion.current + "/versions.json"
 	var http_request = HTTPRequest.new()
 	http_request.request_completed.connect(_on_version_support_request_completed)
 	add_child(http_request)
@@ -178,7 +168,7 @@ func _on_version_support_request_completed(result, response_code, headers, body)
 	if response_code == 200:
 		var json = JSON.new()
 		if json.parse(body.get_string_from_utf8()) == OK:
-			version_support = json.get_data() as Dictionary
+			AdMobPluginVersion.support = json.get_data() as Dictionary
 			return
 	printerr("ERR_001: Couldn't get version supported dynamic for AdMob, the latest supported version listed may be outdated. \n" \
 	+"Read more about on: res://addons/admob/docs/errors/ERR_001.md")
@@ -186,12 +176,12 @@ func _on_version_support_request_completed(result, response_code, headers, body)
 func _on_android_popupmenu_id_pressed(id: int):
 	match id:
 		Items.LatestVersion:
-			_android_handler.install(godot_version, version_support["android"], android_download_path)
+			_android_handler.install(godot_version, AdMobPluginVersion.support["android"], android_download_path)
 		Items.Folder:
 			var path_directory = ProjectSettings.globalize_path(android_download_path)
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
-			OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + version_support.android)
+			OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + AdMobPluginVersion.support.android)
 		98:
 			var snippet := """<!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
 			<meta-data
@@ -212,12 +202,12 @@ func _on_android_popupmenu_id_pressed(id: int):
 func _on_ios_popupmenu_id_pressed(id: int):
 	match id:
 		Items.LatestVersion:
-			_ios_handler.download(godot_version, version_support["ios"], ios_download_path)
+			_ios_handler.download(godot_version, AdMobPluginVersion.support["ios"], ios_download_path)
 		Items.Folder:
 			var path_directory = ProjectSettings.globalize_path(ios_download_path)
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
-			OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + version_support.ios)
+			OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + AdMobPluginVersion.support.ios)
 		99:
 			var snippet := "chmod +x update_and_install.sh\n./update_and_install.sh"
 
@@ -232,7 +222,7 @@ func _on_popupmenu_id_pressed(id: int):
 			var path_directory = ProjectSettings.globalize_path(default_download_path)
 			OS.shell_open(str("file://", path_directory))
 		Items.GitHub:
-			OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + plugin_version)
+			OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + AdMobPluginVersion.current)
 
 func _on_documents_popup_id_pressed(id: int):
 	match id:

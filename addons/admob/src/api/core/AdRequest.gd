@@ -30,7 +30,7 @@ func convert_to_dictionary() -> Dictionary:
 	return {
 		"mediation_extras": _transform_mediation_extras_to_dictionary(),
 		"extras": extras,
-		"google_request_agent": "Godot-PoingStudios-" + AdMobPluginVersion.get_plugin_version_formatted()
+		"google_request_agent": "Godot-PoingStudios-" + AdMobPluginVersion.formatted
 	}
 
 func _transform_mediation_extras_to_dictionary() -> Dictionary:
