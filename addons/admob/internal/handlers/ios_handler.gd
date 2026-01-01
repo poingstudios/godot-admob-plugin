@@ -20,11 +20,26 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name AdMobFolderService
+class_name AdMobIOSHandler
+extends RefCounted
 
-static func create_directory(path: String) -> void:
-	DirAccess.make_dir_recursive_absolute(path)
+signal download_completed(success: bool)
 
-static func create_download_directories(android_path: String, ios_path: String) -> void:
-	create_directory(android_path)
-	create_directory(ios_path)
+var _download_service: AdMobDownloadService
+
+func _init(download_service: AdMobDownloadService) -> void:
+	_download_service = download_service
+	_download_service.download_completed.connect(_on_download_completed)
+
+func download(godot_version: String, version: String, download_path: String) -> void:
+	var file_name = _get_zip_file_name(godot_version)
+	var url = "https://github.com/poingstudios/godot-admob-ios/releases/download/" + version + "/" + file_name
+	var destination = download_path.path_join(file_name)
+	
+	_download_service.download_file(url, destination)
+
+func _on_download_completed(success: bool) -> void:
+	download_completed.emit(success)
+
+func _get_zip_file_name(godot_version: String) -> String:
+	return "poing-godot-admob-ios-" + godot_version + ".zip"

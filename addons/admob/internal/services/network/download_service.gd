@@ -39,6 +39,8 @@ func download_file(url: String, destination_path: String) -> void:
 		push_error("AdMob: Download already in progress")
 		return
 	
+	DirAccess.make_dir_recursive_absolute(destination_path.get_base_dir())
+	
 	print("Downloading " + url)
 	_http_request.download_file = destination_path
 	_http_request.request(url)

@@ -20,9 +20,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-@abstract class_name AdMobDownloader extends RefCounted
+class_name AdMobAndroidHandler
+extends RefCounted
 
-signal download_completed(success: bool)
+const AdMobDownloadService = preload("res://addons/admob/internal/services/network/download_service.gd")
+const AdMobZipService = preload("res://addons/admob/internal/services/archive/zip_service.gd")
+
+signal installation_completed(success: bool)
 
 var _download_service: AdMobDownloadService
 var _godot_version: String
@@ -32,18 +36,27 @@ func _init(download_service: AdMobDownloadService) -> void:
 	_download_service = download_service
 	_download_service.download_completed.connect(_on_download_completed)
 
-func download(godot_version: String, version: String, download_path: String) -> void:
+func install(godot_version: String, version: String, download_path: String) -> void:
 	_godot_version = godot_version
 	_download_path = download_path
 	
 	var file_name = _get_zip_file_name()
-	var url = _get_download_url(version, file_name)
-	var destination = _download_path.path_join(file_name)
+	var url = "https://github.com/poingstudios/godot-admob-android/releases/download/" + version + "/" + file_name
+	var destination = download_path.path_join(file_name)
 	
 	_download_service.download_file(url, destination)
 
 func _on_download_completed(success: bool) -> void:
-	download_completed.emit(success)
+	if not success:
+		installation_completed.emit(false)
+		return
+	
+	var file_name = _get_zip_file_name()
+	var zip_path = _download_path.path_join(file_name)
+	var extract_path = "res://addons/admob/android/bin/"
+	
+	var extract_success = AdMobZipService.extract_zip(zip_path, extract_path, true)
+	installation_completed.emit(extract_success)
 
-@abstract func _get_zip_file_name() -> String;
-@abstract func _get_download_url(version: String, file_name: String) -> String;
+func _get_zip_file_name() -> String:
+	return "poing-godot-admob-android-" + _godot_version + ".zip"
