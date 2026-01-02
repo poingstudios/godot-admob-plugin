@@ -1,6 +1,6 @@
 # MIT License
 
-# Copyright (c) 2023-present Poing Studios
+# Copyright (c) 2026-present Poing Studios
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,21 +20,28 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-@tool
-extends EditorPlugin
+extends PopupMenu
 
-const MENU_NAME := "AdMob Download Manager"
-const AdMobEditorMenu := preload("res://addons/admob/internal/ui/editor_menu.gd")
+enum Items {
+	Patreon,
+	KoFi,
+	PayPal
+}
 
-var _main_exporter := preload("res://addons/admob/internal/exporters/main_export_plugin.gd").new()
-var _android_exporter := preload("res://addons/admob/internal/exporters/android_export_plugin.gd").new()
+func _init() -> void:
+	name = "Support"
+	
+	add_item(str(Items.keys()[Items.Patreon]))
+	add_item(str(Items.keys()[Items.KoFi]))
+	add_item(str(Items.keys()[Items.PayPal]))
+	
+	id_pressed.connect(_on_id_pressed)
 
-func _enter_tree() -> void:
-	add_export_plugin(_main_exporter)
-	add_export_plugin(_android_exporter)
-	add_tool_submenu_item(MENU_NAME, AdMobEditorMenu.new(self))
-
-func _exit_tree() -> void:
-	remove_export_plugin(_main_exporter)
-	remove_export_plugin(_android_exporter)
-	remove_tool_menu_item(MENU_NAME)
+func _on_id_pressed(id: int) -> void:
+	match id:
+		Items.Patreon:
+			OS.shell_open("https://www.patreon.com/poingstudios")
+		Items.KoFi:
+			OS.shell_open("https://ko-fi.com/poingstudios")
+		Items.PayPal:
+			OS.shell_open("https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8")
