@@ -30,10 +30,14 @@ const DOWNLOAD_DIR := "res://addons/admob/downloads/android/"
 const EXTRACT_PATH := "res://addons/admob/android/bin/"
 const BASE_URL := "https://github.com/poingstudios/godot-admob-android/releases/download/%s/%s"
 
-var _download_service: AdMobDownloadService
+const AdMobDialogService := preload("res://addons/admob/internal/services/ui/dialog_service.gd")
 
-func _init(download_service: AdMobDownloadService) -> void:
+var _download_service: AdMobDownloadService
+var _dialog_service: AdMobDialogService
+
+func _init(download_service: AdMobDownloadService, dialog_service: AdMobDialogService) -> void:
 	_download_service = download_service
+	_dialog_service = dialog_service
 	_download_service.download_completed.connect(_on_download_completed)
 
 func check_dependencies() -> void:
@@ -65,11 +69,12 @@ func _on_download_completed(success: bool) -> void:
 	var zip_path := DOWNLOAD_DIR.path_join(file_name)
 	
 	var extract_success := AdMobZipService.extract_zip(zip_path, EXTRACT_PATH, true)
-	if not extract_success:
-		return
-
-	print_rich("[color=GREEN]AdMob Android plugin installed successfully[/color]")
-	print_rich("Modify your config in [color=CORNFLOWER_BLUE][url]%s[/url][/color]" % AndroidExportPlugin.CONFIG_PATH)
+	if extract_success:
+		_dialog_service.show_confirmation(
+			"Android plugin installed successfully!\n\nWould you like to open the configuration file now?",
+			func(): EditorInterface.edit_resource(AndroidExportPlugin.Config),
+			"Open config.gd"
+		)
 
 func _get_zip_file_name() -> String:
 	return "poing-godot-admob-android-" + PluginVersion.godot + ".zip"

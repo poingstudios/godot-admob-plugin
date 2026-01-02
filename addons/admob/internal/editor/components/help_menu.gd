@@ -20,11 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends "res://addons/admob/internal/ui/menu/popup_menu.gd"
+extends "res://addons/admob/internal/editor/popup_menu.gd"
 
 func _init() -> void:
     super._init()
-    name = "Documents"
+    name = "Help"
     
-    add_menu_item("Official", func(): OS.shell_open("https://poingstudios.github.io/godot-admob-plugin"))
-    add_menu_item("Google", func(): OS.shell_open("https://developers.google.com/admob"))
+    add_menu_item("Discord", func(): OS.shell_open("https://discord.com/invite/YEPvYjSSMk"))
+    add_menu_item("SDK Developers", func(): OS.shell_open("https://groups.google.com/g/google-admob-ads-sdk/"))

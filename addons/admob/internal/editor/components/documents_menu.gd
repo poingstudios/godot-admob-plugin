@@ -1,6 +1,6 @@
 # MIT License
 
-# Copyright (c) 2023-present Poing Studios
+# Copyright (c) 2026-present Poing Studios
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,21 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-@tool
-extends EditorPlugin
+extends "res://addons/admob/internal/editor/popup_menu.gd"
 
-const MENU_NAME := "AdMob Download Manager"
-const AdMobEditorMenu := preload("res://addons/admob/internal/editor/editor_menu.gd")
-
-var _main_exporter := preload("res://addons/admob/internal/exporters/main_export_plugin.gd").new()
-var _android_exporter := preload("res://addons/admob/internal/exporters/android_export_plugin.gd").new()
-
-func _enter_tree() -> void:
-	add_export_plugin(_main_exporter)
-	add_export_plugin(_android_exporter)
-	add_tool_submenu_item(MENU_NAME, AdMobEditorMenu.new(self))
-
-func _exit_tree() -> void:
-	remove_export_plugin(_main_exporter)
-	remove_export_plugin(_android_exporter)
-	remove_tool_menu_item(MENU_NAME)
+func _init() -> void:
+    super._init()
+    name = "Documents"
+    
+    add_menu_item("Official", func(): OS.shell_open("https://poingstudios.github.io/godot-admob-plugin"))
+    add_menu_item("Google", func(): OS.shell_open("https://developers.google.com/admob"))

@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends "res://addons/admob/internal/ui/menu/popup_menu.gd"
+extends "res://addons/admob/internal/editor/popup_menu.gd"
 
 # Services
 const AdMobVersionService := preload("res://addons/admob/internal/services/network/version_service.gd")
@@ -31,17 +31,19 @@ const AdMobAndroidHandler := preload("res://addons/admob/internal/handlers/andro
 const AdMobIOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd")
 
 # UI Components
-const AndroidMenu := preload("res://addons/admob/internal/ui/menu/components/android_menu.gd")
-const IOSMenu := preload("res://addons/admob/internal/ui/menu/components/ios_menu.gd")
-const DocumentsMenu := preload("res://addons/admob/internal/ui/menu/components/documents_menu.gd")
-const HelpMenu := preload("res://addons/admob/internal/ui/menu/components/help_menu.gd")
-const SupportMenu := preload("res://addons/admob/internal/ui/menu/components/support_menu.gd")
+const AndroidMenu := preload("res://addons/admob/internal/editor/components/android_menu.gd")
+const IOSMenu := preload("res://addons/admob/internal/editor/components/ios_menu.gd")
+const DocumentsMenu := preload("res://addons/admob/internal/editor/components/documents_menu.gd")
+const HelpMenu := preload("res://addons/admob/internal/editor/components/help_menu.gd")
+const SupportMenu := preload("res://addons/admob/internal/editor/components/support_menu.gd")
+const AdMobDialogService := preload("res://addons/admob/internal/services/ui/dialog_service.gd")
 
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 
 var _default_download_path := "res://addons/admob/downloads/"
 
 var _version_service: AdMobVersionService
+var _dialog_service: AdMobDialogService
 var _android_handler: AdMobAndroidHandler
 var _ios_handler: AdMobIOSHandler
 
@@ -52,8 +54,11 @@ func _init(host: Node) -> void:
     _version_service.version_received.connect(_on_version_received)
     _version_service.check_for_updates()
     
+    # Initialize Dialog Service
+    _dialog_service = AdMobDialogService.new()
+    
     # Initialize Handlers
-    _android_handler = AdMobAndroidHandler.new(AdMobDownloadService.new(host))
+    _android_handler = AdMobAndroidHandler.new(AdMobDownloadService.new(host), _dialog_service)
     _ios_handler = AdMobIOSHandler.new(AdMobDownloadService.new(host))
     
     _setup_menu()

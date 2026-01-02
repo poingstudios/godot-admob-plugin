@@ -20,27 +20,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends "res://addons/admob/internal/ui/menu/popup_menu.gd"
-
-const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
-const AdMobIOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd")
-
-var _handler: AdMobIOSHandler
-
-func _init(handler: AdMobIOSHandler) -> void:
-	super._init()
-	name = "iOS"
-	_handler = handler
+func show_confirmation(text: String, on_confirmed: Callable, ok_text := "OK") -> void:
+	var dialog := ConfirmationDialog.new()
+	dialog.title = "AdMob"
+	dialog.dialog_text = text
+	dialog.ok_button_text = ok_text
 	
-	add_menu_item("LatestVersion", func(): _handler.download())
-	add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(handler.DOWNLOAD_DIR))))
-	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + PluginVersion.support.ios))
-	add_menu_item("Copy shell command", _copy_shell_command)
-
-func _copy_shell_command() -> void:
-	var snippet := "chmod +x update_and_install.sh\n./update_and_install.sh"
-
-	DisplayServer.clipboard_set(snippet)
-
-	print_rich("[b][color=GREEN]✔ Copied install command to clipboard![/color][/b]\n" +
-			"[code]" + snippet + "[/code]")
+	EditorInterface.get_base_control().add_child(dialog)
+	dialog.get_cancel_button().text = "Close"
+	
+	dialog.confirmed.connect(on_confirmed)
+	dialog.visibility_changed.connect(func(): if not dialog.visible: dialog.queue_free())
+	
+	dialog.popup_centered()

@@ -20,19 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends "res://addons/admob/internal/ui/menu/popup_menu.gd"
+extends "res://addons/admob/internal/editor/popup_menu.gd"
 
-const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
-const AdMobAndroidHandler := preload("res://addons/admob/internal/handlers/android_handler.gd")
-const AndroidExportPlugin := preload("res://addons/admob/internal/exporters/android_export_plugin.gd")
-
-var _handler: AdMobAndroidHandler
-
-func _init(handler: AdMobAndroidHandler) -> void:
-	super._init()
-	name = "Android"
-	_handler = handler
-	
-	add_menu_item("Download & Install", func(): _handler.install())
-	add_menu_item("Open config.gd", func(): EditorInterface.edit_resource(AndroidExportPlugin.Config))
-	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + PluginVersion.support.android))
+func _init() -> void:
+    super._init()
+    name = "Support"
+    
+    add_menu_item("Patreon", func(): OS.shell_open("https://www.patreon.com/poingstudios"))
+    add_menu_item("KoFi", func(): OS.shell_open("https://ko-fi.com/poingstudios"))
+    add_menu_item("PayPal", func(): OS.shell_open("https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8"))
