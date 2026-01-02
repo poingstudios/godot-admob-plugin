@@ -22,18 +22,19 @@
 
 extends EditorExportPlugin
 
-const AndroidConfig := preload("res://addons/admob/android/config.gd")
+const CONFIG_PATH := "res://addons/admob/android/config.gd"
+const Config := preload(CONFIG_PATH)
 
 func _get_plugins() -> Array[EditorExportPlugin]:
 	var plugins: Array[EditorExportPlugin]
-	var root_bin_path := AndroidConfig.AndroidAdMobLibrary.ROOT_BIN_PATH
+	var root_bin_path := Config.AndroidAdMobLibrary.ROOT_BIN_PATH
 	var dir_access := DirAccess.open(root_bin_path)
 
 	if not dir_access:
 		push_error("Failed to open AdMob directory: " + root_bin_path)
 		return plugins
 
-	for lib in AndroidConfig.new().libraries:
+	for lib in Config.new().libraries:
 		if not lib.is_enabled:
 			continue
 		plugins.append(lib.get_plugin())
@@ -58,7 +59,7 @@ func _get_android_dependencies(platform: EditorExportPlatform, debug: bool) -> P
 func _get_android_manifest_application_element_contents(platform: EditorExportPlatform, debug: bool) -> String:
 	var content := PackedStringArray()
 	
-	for lib in AndroidConfig.new().libraries:
+	for lib in Config.new().libraries:
 		if not lib.is_enabled:
 			continue
 			
@@ -75,12 +76,12 @@ func _get_android_manifest_application_element_contents(platform: EditorExportPl
 	<meta-data
 		android:name="com.google.android.gms.ads.APPLICATION_ID"
 		android:value="%s"/>
-	""" % AndroidConfig.APPLICATION_ID)
+	""" % Config.APPLICATION_ID)
 	
 	return "\n".join(content)
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
-	return platform is EditorExportPlatformAndroid and AndroidConfig.new().is_ads_enabled()
+	return platform is EditorExportPlatformAndroid and Config.new().is_ads_enabled()
 
 func _get_name() -> String:
 	return "PoingAdMobAndroid"

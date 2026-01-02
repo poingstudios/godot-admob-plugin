@@ -40,10 +40,12 @@ static var support: PlatformSupport:
 	set(value):
 		_remote_support = value
 
-static var installed := PlatformSupport.new(
-	_get_local_version(ANDROID_PACKAGE_PATH),
-	_get_local_version(IOS_PACKAGE_PATH)
-)
+static var installed: PlatformSupport:
+	get:
+		return PlatformSupport.new(
+			_get_local_version(ANDROID_PACKAGE_PATH),
+			_get_local_version(IOS_PACKAGE_PATH)
+		)
 
 static var current: String:
 	get:

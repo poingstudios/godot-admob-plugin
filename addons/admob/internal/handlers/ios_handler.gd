@@ -27,13 +27,6 @@ var _download_service: AdMobDownloadService
 
 func _init(download_service: AdMobDownloadService) -> void:
 	_download_service = download_service
-	_download_service.download_completed.connect(_on_download_completed)
-
-func _on_download_completed(success: bool, download_path: String) -> void:
-	if not success:
-		return
-	print_rich("Download completed, you can check the downloaded file at: [color=CORNFLOWER_BLUE][url]" + download_path + "[/url][/color]")
-
 
 func download() -> void:
 	var file_name = _get_zip_file_name()

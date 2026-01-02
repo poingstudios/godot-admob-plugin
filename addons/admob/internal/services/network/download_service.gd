@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-signal download_completed(success: bool, download_path: String)
+signal download_completed(success: bool)
 signal download_progress(percent: int)
 
 var _http_request: HTTPRequest
@@ -51,13 +51,15 @@ func _on_request_completed(_result: int, response_code: int, _headers: PackedStr
 	_progress_timer.stop()
 	
 	var is_success := response_code == 200
-	var download_path := ProjectSettings.globalize_path(_http_request.download_file.get_base_dir())
-	
-	if not is_success:
+
+	if is_success:
+		var download_path := ProjectSettings.globalize_path(_http_request.download_file.get_base_dir())
+		print_rich("Download completed at: [color=CORNFLOWER_BLUE][url]" + download_path + "[/url][/color]")
+	else:
 		printerr("ERR_002: It is not possible to download the Android/iOS plugin. \n" +
 				"Read more about on: res://addons/admob/docs/errors/ERR_002.md")
 	
-	download_completed.emit(is_success, download_path)
+	download_completed.emit(is_success)
 
 func _on_progress_timer_timeout() -> void:
 	var body_size = _http_request.get_body_size()

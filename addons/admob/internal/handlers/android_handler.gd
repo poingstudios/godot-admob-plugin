@@ -23,6 +23,7 @@
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 const AdMobDownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
 const AdMobZipService := preload("res://addons/admob/internal/services/archive/zip_service.gd")
+const AndroidExportPlugin := preload("res://addons/admob/internal/exporters/android_export_plugin.gd")
 
 const PACKAGE_PATH := "res://addons/admob/android/bin/package.gd"
 const DOWNLOAD_DIR := "res://addons/admob/downloads/android/"
@@ -56,7 +57,7 @@ func install() -> void:
 	
 	_download_service.download_file(url, destination)
 
-func _on_download_completed(success: bool, _path: String) -> void:
+func _on_download_completed(success: bool) -> void:
 	if not success:
 		return
 	
@@ -64,6 +65,11 @@ func _on_download_completed(success: bool, _path: String) -> void:
 	var zip_path := DOWNLOAD_DIR.path_join(file_name)
 	
 	var extract_success := AdMobZipService.extract_zip(zip_path, EXTRACT_PATH, true)
+	if not extract_success:
+		return
+
+	print_rich("[color=GREEN]AdMob Android plugin installed successfully[/color]")
+	print_rich("Modify your config in [color=CORNFLOWER_BLUE][url]%s[/url][/color]" % AndroidExportPlugin.CONFIG_PATH)
 
 func _get_zip_file_name() -> String:
 	return "poing-godot-admob-android-" + PluginVersion.godot + ".zip"

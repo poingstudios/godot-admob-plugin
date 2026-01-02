@@ -20,44 +20,46 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-
-static func extract_zip(zip_path: String, destination_path: String, clean_destination: bool = false) -> bool:
+static func extract_zip(zip_path: String, destination_path: String, clean_destination := false) -> bool:
 	if clean_destination:
 		_delete_dir_recursive(destination_path)
 	
-	var zip_reader = ZIPReader.new()
-	var error = zip_reader.open(zip_path)
-	
-	if error != OK:
-		push_error("Failed to open zip: %d" % error)
+	var zip_reader := ZIPReader.new()
+	if zip_reader.open(ProjectSettings.globalize_path(zip_path)) != OK:
 		return false
 	
-	var files = zip_reader.get_files()
+	var files := zip_reader.get_files()
+	var root := files[0] if not files.is_empty() and files[0].ends_with("/") else ""
 	
-	for file_path in files:
-		var target_path = destination_path.path_join(file_path)
+	for path in files:
+		if not root.is_empty() and path == root: continue
 		
-		if file_path.ends_with("/"):
-			DirAccess.make_dir_recursive_absolute(target_path)
-			continue
-		
-		var content = zip_reader.read_file(file_path)
-		var base_dir = target_path.get_base_dir()
-		
-		if not DirAccess.dir_exists_absolute(base_dir):
-			DirAccess.make_dir_recursive_absolute(base_dir)
-		
-		var file_access = FileAccess.open(target_path, FileAccess.WRITE)
-		if file_access:
-			file_access.store_buffer(content)
-			file_access.close()
+		var target := destination_path.path_join(path.trim_prefix(root))
+		if path.ends_with("/"):
+			DirAccess.make_dir_recursive_absolute(target)
+		else:
+			_store_file(target, zip_reader.read_file(path))
 	
 	zip_reader.close()
-	
+	_refresh_filesystem()
+
+	print_rich("Extracted zip to: [color=CORNFLOWER_BLUE][url]%s[/url][/color]" % ProjectSettings.globalize_path(destination_path))
+	return true
+
+static func _store_file(path: String, content: PackedByteArray) -> void:
+	var base_dir := path.get_base_dir()
+	if not DirAccess.dir_exists_absolute(base_dir):
+		DirAccess.make_dir_recursive_absolute(base_dir)
+		
+	var file := FileAccess.open(path, FileAccess.WRITE)
+	if file:
+		file.store_buffer(content)
+		file.close()
+
+static func _refresh_filesystem() -> void:
 	if Engine.is_editor_hint() or OS.has_feature("editor"):
 		EditorInterface.get_resource_filesystem().scan()
-	
-	return true
+		EditorInterface.get_resource_filesystem().scan_sources()
 
 static func _delete_dir_recursive(path: String) -> void:
 	var dir := DirAccess.open(path)
