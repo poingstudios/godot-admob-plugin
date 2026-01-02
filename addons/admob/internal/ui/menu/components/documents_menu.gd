@@ -20,12 +20,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends "res://addons/admob/internal/ui/base/admob_popup_menu.gd"
+extends "res://addons/admob/internal/ui/menu/popup_menu.gd"
 
 func _init() -> void:
     super._init()
-    name = "Support"
+    name = "Documents"
     
-    add_menu_item("Patreon", func(): OS.shell_open("https://www.patreon.com/poingstudios"))
-    add_menu_item("KoFi", func(): OS.shell_open("https://ko-fi.com/poingstudios"))
-    add_menu_item("PayPal", func(): OS.shell_open("https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8"))
+    add_menu_item("Official", func(): OS.shell_open("https://poingstudios.github.io/godot-admob-plugin"))
+    add_menu_item("Google", func(): OS.shell_open("https://developers.google.com/admob"))

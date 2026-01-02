@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_plugin_version.gd")
+const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 
 var _http_request: HTTPRequest
 
@@ -31,14 +31,14 @@ func _init(host: Node) -> void:
 	_http_request.request_completed.connect(_on_request_completed)
 
 func check_for_updates() -> void:
-	var url = "https://raw.githubusercontent.com/poingstudios/godot-admob-versions/" + AdMobPluginVersion.current + "/versions.json"
+	var url = "https://raw.githubusercontent.com/poingstudios/godot-admob-versions/" + PluginVersion.current + "/versions.json"
 	_http_request.request(url)
 
 func _on_request_completed(_result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	if response_code == 200:
 		var json = JSON.new()
 		if json.parse(body.get_string_from_utf8()) == OK:
-			AdMobPluginVersion.support = json.get_data() as Dictionary
+			PluginVersion.support = json.get_data() as Dictionary
 			return
 		
 	printerr("ERR_001: Couldn't get version supported dynamic for AdMob, the latest supported version listed may be outdated. \n" \

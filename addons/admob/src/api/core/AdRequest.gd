@@ -21,7 +21,7 @@
 # SOFTWARE.
 
 class_name AdRequest
-const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_plugin_version.gd")
+const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 
 var keywords: Array[String]
 var mediation_extras: Array[MediationExtras]
@@ -31,7 +31,7 @@ func convert_to_dictionary() -> Dictionary:
 	return {
 		"mediation_extras": _transform_mediation_extras_to_dictionary(),
 		"extras": extras,
-		"google_request_agent": "Godot-PoingStudios-" + AdMobPluginVersion.formatted
+		"google_request_agent": "Godot-PoingStudios-" + PluginVersion.formatted
 	}
 
 func _transform_mediation_extras_to_dictionary() -> Dictionary:

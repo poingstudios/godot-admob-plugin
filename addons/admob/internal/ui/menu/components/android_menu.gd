@@ -20,9 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends "res://addons/admob/internal/ui/base/admob_popup_menu.gd"
+extends "res://addons/admob/internal/ui/menu/popup_menu.gd"
 
-const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_plugin_version.gd")
+const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 const AdMobAndroidHandler := preload("res://addons/admob/internal/handlers/android_handler.gd")
 
 var _handler: AdMobAndroidHandler
@@ -33,9 +33,9 @@ func _init(handler: AdMobAndroidHandler) -> void:
 	name = "Android"
 	_handler = handler
 	
-	add_menu_item("Latest Version", func(): _handler.install(AdMobPluginVersion.godot, AdMobPluginVersion.support["android"], _download_path))
+	add_menu_item("Latest Version", func(): _handler.install(PluginVersion.godot, PluginVersion.support["android"], _download_path))
 	add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(_download_path))))
-	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + AdMobPluginVersion.support.android))
+	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + PluginVersion.support.android))
 	add_menu_item("Copy Metadata", _copy_metadata)
 	add_menu_item("Open AndroidManifest.xml", _open_manifest)
 

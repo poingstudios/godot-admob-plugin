@@ -25,8 +25,11 @@ signal download_progress(percent: int)
 
 var _http_request: HTTPRequest
 var _progress_timer: Timer
+var _is_verbose: bool
 
-func _init(host: Node) -> void:
+func _init(host: Node, is_verbose: bool = false) -> void:
+	_is_verbose = is_verbose
+
 	_http_request = HTTPRequest.new()
 	host.add_child(_http_request)
 	_http_request.request_completed.connect(_on_request_completed)
@@ -51,8 +54,9 @@ func _on_request_completed(_result: int, response_code: int, _headers: PackedStr
 	_progress_timer.stop()
 	
 	if response_code == 200:
-		var real_path = ProjectSettings.globalize_path(_http_request.download_file.get_base_dir())
-		print_rich("Download completed, you can check the downloaded file at: [color=CORNFLOWER_BLUE][url]" + real_path + "[/url][/color]")
+		if _is_verbose:
+			var real_path = ProjectSettings.globalize_path(_http_request.download_file.get_base_dir())
+			print_rich("Download completed, you can check the downloaded file at: [color=CORNFLOWER_BLUE][url]" + real_path + "[/url][/color]")
 		download_completed.emit(true)
 	else:
 		printerr("ERR_002: It is not possible to download the Android/iOS plugin. \n" \

@@ -22,13 +22,10 @@
 
 const AdMobDownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
 
-signal download_completed(success: bool)
-
 var _download_service: AdMobDownloadService
 
 func _init(download_service: AdMobDownloadService) -> void:
 	_download_service = download_service
-	_download_service.download_completed.connect(_on_download_completed)
 
 func download(godot_version: String, version: String, download_path: String) -> void:
 	var file_name = _get_zip_file_name(godot_version)
@@ -36,9 +33,6 @@ func download(godot_version: String, version: String, download_path: String) -> 
 	var destination = download_path.path_join(file_name)
 	
 	_download_service.download_file(url, destination)
-
-func _on_download_completed(success: bool) -> void:
-	download_completed.emit(success)
 
 func _get_zip_file_name(godot_version: String) -> String:
 	return "poing-godot-admob-ios-" + godot_version + ".zip"

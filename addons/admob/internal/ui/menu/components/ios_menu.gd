@@ -20,9 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends "res://addons/admob/internal/ui/base/admob_popup_menu.gd"
+extends "res://addons/admob/internal/ui/menu/popup_menu.gd"
 
-const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_plugin_version.gd")
+const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 const AdMobIOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd")
 
 var _handler: AdMobIOSHandler
@@ -33,9 +33,9 @@ func _init(handler: AdMobIOSHandler) -> void:
 	name = "iOS"
 	_handler = handler
 	
-	add_menu_item("LatestVersion", func(): _handler.download(AdMobPluginVersion.godot, AdMobPluginVersion.support["ios"], _download_path))
+	add_menu_item("LatestVersion", func(): _handler.download(PluginVersion.godot, PluginVersion.support["ios"], _download_path))
 	add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(_download_path))))
-	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + AdMobPluginVersion.support.ios))
+	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + PluginVersion.support.ios))
 	add_menu_item("Copy shell command", _copy_shell_command)
 
 func _copy_shell_command() -> void:
