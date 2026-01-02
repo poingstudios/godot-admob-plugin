@@ -20,16 +20,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends "res://addons/admob/internal/exporters/android_config_base.gd"
-
-const APPLICATION_ID := "ca-app-pub-3940256099942544~3347511713" # Change to your own AdMob App ID when releasing your game.
-
-var libraries: Array[AndroidAdMobLibrary] = [
-	# Main Plugin
-	AndroidAdMobLibrary.new("ads", true), # Disable if you don't want to use AdMob.
+class AndroidAdMobLibrary:
+	const ROOT_BIN_PATH := "res://addons/admob/android/bin"
 	
-	# Mediations
-	AndroidAdMobLibrary.new("adcolony", true),
-	AndroidAdMobLibrary.new("meta", true),
-	AndroidAdMobLibrary.new("vungle", true)
-]
+	var path: String
+	var is_enabled: bool
+
+	func _init(p_path: String, p_is_enabled: bool = true) -> void:
+		path = p_path
+		is_enabled = p_is_enabled
+
+	func get_full_path() -> String:
+		return ROOT_BIN_PATH + "/" + path + "/poing_godot_admob_" + path + ".gd"
+
+	func get_plugin() -> EditorExportPlugin:
+		return load(get_full_path()).new()
