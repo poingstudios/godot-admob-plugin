@@ -23,16 +23,27 @@
 const PLUGIN_CONFIG_PATH := "res://addons/admob/plugin.cfg"
 const FALLBACK_PLUGIN_VERSION := "v4.0.0"
 
+const ANDROID_PACKAGE_PATH := "res://addons/admob/android/bin/package.gd"
+const IOS_PACKAGE_PATH := "res://addons/admob/ios/bin/package.gd" # Placeholder for future
+
 static var _cached_version := ""
 static var _remote_support: PlatformSupport = null
 
 static var support: PlatformSupport:
 	get:
 		if _remote_support == null:
-			_remote_support = PlatformSupport.new()
+			_remote_support = PlatformSupport.new(
+				PlatformSupport.FALLBACK_ANDROID_VERSION,
+				PlatformSupport.FALLBACK_IOS_VERSION
+			)
 		return _remote_support
 	set(value):
 		_remote_support = value
+
+static var installed := PlatformSupport.new(
+	_get_local_version(ANDROID_PACKAGE_PATH),
+	_get_local_version(IOS_PACKAGE_PATH)
+)
 
 static var current: String:
 	get:
@@ -56,6 +67,16 @@ static var godot: String:
 		var info := Engine.get_version_info()
 		return "v%d.%d.%d" % [info.major, info.minor, info.patch]
 
+static func _get_local_version(path: String) -> String:
+	if not FileAccess.file_exists(path):
+		return ""
+	
+	var script := load(path)
+	if script and "VERSION" in script:
+		return str(script.get("VERSION"))
+	
+	return ""
+
 class PlatformSupport:
 	# These versions are used as a fallback if the remote 'versions.json' cannot be fetched.
 	# Reference: https://github.com/poingstudios/godot-admob-versions/
@@ -65,9 +86,15 @@ class PlatformSupport:
 	var android := ""
 	var ios := ""
 
-	func _init(data := {}):
-		android = data.get("android", FALLBACK_ANDROID_VERSION)
-		ios = data.get("ios", FALLBACK_IOS_VERSION)
+	func _init(p_android := "", p_ios := ""):
+		android = p_android
+		ios = p_ios
+
+	static func create(data := {}) -> PlatformSupport:
+		return PlatformSupport.new(
+			data.get("android", ""),
+			data.get("ios", "")
+		)
 
 	func is_empty() -> bool:
 		return android.is_empty() and ios.is_empty()

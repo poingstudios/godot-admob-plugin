@@ -38,7 +38,7 @@ func _on_request_completed(_result: int, response_code: int, _headers: PackedStr
 	if response_code == 200:
 		var json = JSON.new()
 		if json.parse(body.get_string_from_utf8()) == OK:
-			PluginVersion.support = PluginVersion.PlatformSupport.new(json.get_data())
+			PluginVersion.support = PluginVersion.PlatformSupport.create(json.get_data())
 			version_received.emit()
 			return
 

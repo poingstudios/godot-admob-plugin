@@ -37,7 +37,7 @@ func _init(download_service: AdMobDownloadService) -> void:
 
 func check_dependencies() -> void:
 	var remote_version := PluginVersion.support.android
-	var local_version := _get_local_version()
+	var local_version := PluginVersion.installed.android
 	
 	if local_version == remote_version:
 		return
@@ -64,16 +64,6 @@ func _on_download_completed(success: bool, _path: String) -> void:
 	var zip_path := DOWNLOAD_DIR.path_join(file_name)
 	
 	var extract_success := AdMobZipService.extract_zip(zip_path, EXTRACT_PATH, true)
-
-func _get_local_version() -> String:
-	if not FileAccess.file_exists(PACKAGE_PATH):
-		return ""
-	
-	var script := load(PACKAGE_PATH)
-	if script and "VERSION" in script:
-		return str(script.get("VERSION"))
-	
-	return ""
 
 func _get_zip_file_name() -> String:
 	return "poing-godot-admob-android-" + PluginVersion.godot + ".zip"
