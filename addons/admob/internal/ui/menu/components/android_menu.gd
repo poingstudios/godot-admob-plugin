@@ -32,6 +32,6 @@ func _init(handler: AdMobAndroidHandler) -> void:
 	name = "Android"
 	_handler = handler
 	
-	add_menu_item("Download & Install", func(): _handler.install(PluginVersion.support["android"]))
-	add_menu_item("Open config.gd", func(): EditorInterface.edit_resource(load("res://addons/admob/android/config.gd")))
+	add_menu_item("Download & Install", func(): _handler.install())
+	add_menu_item("Open config.gd", func(): EditorInterface.edit_resource(load(handler.PACKAGE_PATH)))
 	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + PluginVersion.support.android))

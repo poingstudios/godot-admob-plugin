@@ -20,8 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 const AdMobDownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
-
+const DOWNLOAD_DIR := "res://addons/admob/downloads/ios/"
 var _download_service: AdMobDownloadService
 
 func _init(download_service: AdMobDownloadService) -> void:
@@ -34,12 +35,12 @@ func _on_download_completed(success: bool, download_path: String) -> void:
 	print_rich("Download completed, you can check the downloaded file at: [color=CORNFLOWER_BLUE][url]" + download_path + "[/url][/color]")
 
 
-func download(godot_version: String, version: String, download_path: String) -> void:
-	var file_name = _get_zip_file_name(godot_version)
-	var url = "https://github.com/poingstudios/godot-admob-ios/releases/download/" + version + "/" + file_name
-	var destination = download_path.path_join(file_name)
+func download() -> void:
+	var file_name = _get_zip_file_name()
+	var url = "https://github.com/poingstudios/godot-admob-ios/releases/download/" + PluginVersion.support.ios + "/" + file_name
+	var destination = DOWNLOAD_DIR.path_join(file_name)
 	
 	_download_service.download_file(url, destination)
 
-func _get_zip_file_name(godot_version: String) -> String:
-	return "poing-godot-admob-ios-" + godot_version + ".zip"
+func _get_zip_file_name() -> String:
+	return "poing-godot-admob-ios-" + PluginVersion.godot + ".zip"

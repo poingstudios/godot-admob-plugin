@@ -21,26 +21,15 @@
 # SOFTWARE.
 
 const PLUGIN_CONFIG_PATH := "res://addons/admob/plugin.cfg"
-
-# These versions are used as a fallback if the remote 'versions.json' cannot be fetched.
-# Reference: https://github.com/poingstudios/godot-admob-versions/
-const FALLBACK_ANDROID_VERSION := "v3.0.6"
-const FALLBACK_IOS_VERSION := "v3.1.3"
 const FALLBACK_PLUGIN_VERSION := "v4.0.0"
 
 static var _cached_version := ""
-static var _remote_support := {}
-static var _fallbacks: Dictionary:
-	get:
-		return {
-			"android": FALLBACK_ANDROID_VERSION,
-			"ios": FALLBACK_IOS_VERSION
-		}
+static var _remote_support: PlatformSupport = null
 
-static var support: Dictionary:
+static var support: PlatformSupport:
 	get:
-		if _remote_support.is_empty():
-			return _fallbacks
+		if _remote_support == null:
+			_remote_support = PlatformSupport.new()
 		return _remote_support
 	set(value):
 		_remote_support = value
@@ -66,3 +55,19 @@ static var godot: String:
 	get:
 		var info := Engine.get_version_info()
 		return "v%d.%d.%d" % [info.major, info.minor, info.patch]
+
+class PlatformSupport:
+	# These versions are used as a fallback if the remote 'versions.json' cannot be fetched.
+	# Reference: https://github.com/poingstudios/godot-admob-versions/
+	const FALLBACK_ANDROID_VERSION := "v3.0.6"
+	const FALLBACK_IOS_VERSION := "v3.1.3"
+
+	var android := ""
+	var ios := ""
+
+	func _init(data := {}):
+		android = data.get("android", FALLBACK_ANDROID_VERSION)
+		ios = data.get("ios", FALLBACK_IOS_VERSION)
+
+	func is_empty() -> bool:
+		return android.is_empty() and ios.is_empty()

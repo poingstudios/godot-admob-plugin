@@ -26,15 +26,14 @@ const PluginVersion := preload("res://addons/admob/internal/version/plugin_versi
 const AdMobIOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd")
 
 var _handler: AdMobIOSHandler
-var _download_path: String = "res://addons/admob/downloads/ios/"
 
 func _init(handler: AdMobIOSHandler) -> void:
 	super._init()
 	name = "iOS"
 	_handler = handler
 	
-	add_menu_item("LatestVersion", func(): _handler.download(PluginVersion.godot, PluginVersion.support["ios"], _download_path))
-	add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(_download_path))))
+	add_menu_item("LatestVersion", func(): _handler.download())
+	add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(handler.DOWNLOAD_DIR))))
 	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + PluginVersion.support.ios))
 	add_menu_item("Copy shell command", _copy_shell_command)
 

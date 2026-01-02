@@ -36,7 +36,7 @@ func _init(download_service: AdMobDownloadService) -> void:
 	_download_service.download_completed.connect(_on_download_completed)
 
 func check_dependencies() -> void:
-	var remote_version: String = PluginVersion.support.get("android")
+	var remote_version := PluginVersion.support.android
 	var local_version := _get_local_version()
 	
 	if local_version == remote_version:
@@ -47,11 +47,11 @@ func check_dependencies() -> void:
 	else:
 		print_rich("[color=YELLOW]AdMob Android plugin is outdated. Local: %s, Remote: %s. Downloading automatically...[/color]" % [local_version, remote_version])
 	
-	install(remote_version)
+	install()
 
-func install(version: String) -> void:
+func install() -> void:
 	var file_name := _get_zip_file_name()
-	var url := BASE_URL % [version, file_name]
+	var url := BASE_URL % [PluginVersion.support.android, file_name]
 	var destination := DOWNLOAD_DIR.path_join(file_name)
 	
 	_download_service.download_file(url, destination)
