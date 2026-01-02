@@ -20,53 +20,38 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends PopupMenu
+extends "res://addons/admob/internal/ui/base/admob_popup_menu.gd"
 
 const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_plugin_version.gd")
+const AdMobAndroidHandler := preload("res://addons/admob/internal/handlers/android_handler.gd")
 
-enum Items {
-	LatestVersion,
-	Folder,
-	GitHub
-}
-
-var _handler: Object
+var _handler: AdMobAndroidHandler
 var _download_path: String = "res://addons/admob/downloads/android/"
 
-func _init(handler: Object) -> void:
+func _init(handler: AdMobAndroidHandler) -> void:
+	super._init()
 	name = "Android"
 	_handler = handler
 	
-	add_item(str(Items.keys()[Items.LatestVersion]), Items.LatestVersion)
-	add_item(str(Items.keys()[Items.Folder]), Items.Folder)
-	add_item(str(Items.keys()[Items.GitHub]), Items.GitHub)
-	add_item("Copy Metadata", 98)
-	add_item("Open AndroidManifest.xml", 99)
-	
-	id_pressed.connect(_on_id_pressed)
+	add_menu_item("Latest Version", func(): _handler.install(AdMobPluginVersion.godot, AdMobPluginVersion.support["android"], _download_path))
+	add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(_download_path))))
+	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + AdMobPluginVersion.support.android))
+	add_menu_item("Copy Metadata", _copy_metadata)
+	add_menu_item("Open AndroidManifest.xml", _open_manifest)
 
-func _on_id_pressed(id: int) -> void:
-	match id:
-		Items.LatestVersion:
-			_handler.install(AdMobPluginVersion.godot, AdMobPluginVersion.support["android"], _download_path)
-		Items.Folder:
-			var path_directory = ProjectSettings.globalize_path(_download_path)
-			OS.shell_open(str("file://", path_directory))
-		Items.GitHub:
-			OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + AdMobPluginVersion.support.android)
-		98:
-			var snippet := """<!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
-			<meta-data
-				android:name="com.google.android.gms.ads.APPLICATION_ID"
-				android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>"""
+func _copy_metadata() -> void:
+	var snippet := """<!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+	<meta-data
+		android:name="com.google.android.gms.ads.APPLICATION_ID"
+		android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>"""
 
-			DisplayServer.clipboard_set(snippet)
+	DisplayServer.clipboard_set(snippet)
 
-			print_rich("[b][color=GREEN]✔ Copied AdMob Metadata to clipboard![/color][/b]\n" +
-					"[color=CORNFLOWER_BLUE]" + snippet + "[/color]")
+	print_rich("[b][color=GREEN]✔ Copied AdMob Metadata to clipboard![/color][/b]\n" +
+			"[color=CORNFLOWER_BLUE]" + snippet + "[/color]")
 
-		99:
-			var manifest_path := ProjectSettings.globalize_path("res://android/build/AndroidManifest.xml")
-			OS.shell_open("file://" + manifest_path)
+func _open_manifest() -> void:
+	var manifest_path := ProjectSettings.globalize_path("res://android/build/AndroidManifest.xml")
+	OS.shell_open("file://" + manifest_path)
 
-			print_rich("[b]Opened:[/b] [color=CORNFLOWER_BLUE][url]file://" + manifest_path + "[/url][/color]")
+	print_rich("[b]Opened:[/b] [color=CORNFLOWER_BLUE][url]file://" + manifest_path + "[/url][/color]")

@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends PopupMenu
+extends "res://addons/admob/internal/ui/base/admob_popup_menu.gd"
 
 # Services
 const AdMobVersionService := preload("res://addons/admob/internal/services/network/version_service.gd")
@@ -40,53 +40,41 @@ const SupportMenu := preload("res://addons/admob/internal/ui/components/support_
 const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_plugin_version.gd")
 
 var _default_download_path := "res://addons/admob/downloads/"
+var _menu_name := "AdMob Download Manager"
 
-enum Items {
-	Folder,
-	GitHub
-}
-
-var _version_service: Object
-var _download_service: Object
-var _android_handler: Object
-var _ios_handler: Object
+var _version_service: AdMobVersionService
+var _download_service: AdMobDownloadService
+var _android_handler: AdMobAndroidHandler
+var _ios_handler: AdMobIOSHandler
 
 func _init(host: Node) -> void:
-	# Initialize Services
-	_version_service = AdMobVersionService.new(host)
-	_version_service.check_for_updates()
-	
-	_download_service = AdMobDownloadService.new(host)
-	
-	# Initialize Handlers
-	_android_handler = AdMobAndroidHandler.new(_download_service)
-	_ios_handler = AdMobIOSHandler.new(_download_service)
-	
-	_setup_menu()
+    super._init()
+    # Initialize Services
+    _version_service = AdMobVersionService.new(host)
+    _version_service.check_for_updates()
+    
+    _download_service = AdMobDownloadService.new(host)
+    
+    # Initialize Handlers
+    _android_handler = AdMobAndroidHandler.new(_download_service)
+    _ios_handler = AdMobIOSHandler.new(_download_service)
+    
+    _setup_menu()
 
 func _setup_menu() -> void:
-	# Add Submenus
-	_add_submenu(AndroidMenu.new(_android_handler))
-	_add_submenu(IOSMenu.new(_ios_handler))
-	
-	# Add Main Items
-	add_item(str(Items.keys()[Items.Folder]), Items.Folder)
-	add_item(str(Items.keys()[Items.GitHub]), Items.GitHub)
-	id_pressed.connect(_on_id_pressed)
-	
-	# Add Other Submenus
-	_add_submenu(DocumentsMenu.new())
-	_add_submenu(HelpMenu.new())
-	_add_submenu(SupportMenu.new())
+    # Add Submenus
+    _add_submenu(AndroidMenu.new(_android_handler))
+    _add_submenu(IOSMenu.new(_ios_handler))
+    
+    # Add Main Items
+    add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(_default_download_path))))
+    add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + AdMobPluginVersion.current))
+
+    # Add Other Submenus
+    _add_submenu(DocumentsMenu.new())
+    _add_submenu(HelpMenu.new())
+    _add_submenu(SupportMenu.new())
 
 func _add_submenu(menu: PopupMenu) -> void:
-	add_child(menu)
-	add_submenu_item(menu.name, menu.name)
-
-func _on_id_pressed(id: int) -> void:
-	match id:
-		Items.Folder:
-			var path_directory = ProjectSettings.globalize_path(_default_download_path)
-			OS.shell_open(str("file://", path_directory))
-		Items.GitHub:
-			OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + AdMobPluginVersion.current)
+    add_child(menu)
+    add_submenu_item(menu.name, menu.name)

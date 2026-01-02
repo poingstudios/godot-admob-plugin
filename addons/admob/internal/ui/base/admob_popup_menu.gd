@@ -20,11 +20,18 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends "res://addons/admob/internal/ui/base/admob_popup_menu.gd"
+extends PopupMenu
+
+var _callbacks := {}
 
 func _init() -> void:
-    super._init()
-    name = "Documents"
-    
-    add_menu_item("Official", func(): OS.shell_open("https://poingstudios.github.io/godot-admob-plugin"))
-    add_menu_item("Google", func(): OS.shell_open("https://developers.google.com/admob"))
+    id_pressed.connect(_on_id_pressed)
+
+func add_menu_item(label: String, callback: Callable) -> void:
+    var id := item_count
+    add_item(label, id)
+    _callbacks[id] = callback
+
+func _on_id_pressed(id: int) -> void:
+    if _callbacks.has(id):
+        _callbacks[id].call()

@@ -20,28 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends PopupMenu
-
-enum Items {
-	Patreon,
-	KoFi,
-	PayPal
-}
+extends "res://addons/admob/internal/ui/base/admob_popup_menu.gd"
 
 func _init() -> void:
-	name = "Support"
-	
-	add_item(str(Items.keys()[Items.Patreon]))
-	add_item(str(Items.keys()[Items.KoFi]))
-	add_item(str(Items.keys()[Items.PayPal]))
-	
-	id_pressed.connect(_on_id_pressed)
-
-func _on_id_pressed(id: int) -> void:
-	match id:
-		Items.Patreon:
-			OS.shell_open("https://www.patreon.com/poingstudios")
-		Items.KoFi:
-			OS.shell_open("https://ko-fi.com/poingstudios")
-		Items.PayPal:
-			OS.shell_open("https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8")
+    super._init()
+    name = "Support"
+    
+    add_menu_item("Patreon", func(): OS.shell_open("https://www.patreon.com/poingstudios"))
+    add_menu_item("KoFi", func(): OS.shell_open("https://ko-fi.com/poingstudios"))
+    add_menu_item("PayPal", func(): OS.shell_open("https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8"))

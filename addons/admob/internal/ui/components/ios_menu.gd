@@ -20,43 +20,28 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends PopupMenu
+extends "res://addons/admob/internal/ui/base/admob_popup_menu.gd"
 
 const AdMobPluginVersion := preload("res://addons/admob/internal/version/admob_plugin_version.gd")
+const AdMobIOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd")
 
-enum Items {
-	LatestVersion,
-	Folder,
-	GitHub
-}
-
-var _handler: Object
+var _handler: AdMobIOSHandler
 var _download_path: String = "res://addons/admob/downloads/ios/"
 
-func _init(handler: Object) -> void:
+func _init(handler: AdMobIOSHandler) -> void:
+	super._init()
 	name = "iOS"
 	_handler = handler
 	
-	add_item(str(Items.keys()[Items.LatestVersion]), Items.LatestVersion)
-	add_item(str(Items.keys()[Items.Folder]), Items.Folder)
-	add_item(str(Items.keys()[Items.GitHub]), Items.GitHub)
-	add_item("Copy shell command", 99)
-	
-	id_pressed.connect(_on_id_pressed)
+	add_menu_item("LatestVersion", func(): _handler.download(AdMobPluginVersion.godot, AdMobPluginVersion.support["ios"], _download_path))
+	add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(_download_path))))
+	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + AdMobPluginVersion.support.ios))
+	add_menu_item("Copy shell command", _copy_shell_command)
 
-func _on_id_pressed(id: int) -> void:
-	match id:
-		Items.LatestVersion:
-			_handler.download(AdMobPluginVersion.godot, AdMobPluginVersion.support["ios"], _download_path)
-		Items.Folder:
-			var path_directory = ProjectSettings.globalize_path(_download_path)
-			OS.shell_open(str("file://", path_directory))
-		Items.GitHub:
-			OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + AdMobPluginVersion.support.ios)
-		99:
-			var snippet := "chmod +x update_and_install.sh\n./update_and_install.sh"
+func _copy_shell_command() -> void:
+	var snippet := "chmod +x update_and_install.sh\n./update_and_install.sh"
 
-			DisplayServer.clipboard_set(snippet)
+	DisplayServer.clipboard_set(snippet)
 
-			print_rich("[b][color=GREEN]✔ Copied install command to clipboard![/color][/b]\n" +
-					"[code]" + snippet + "[/code]")
+	print_rich("[b][color=GREEN]✔ Copied install command to clipboard![/color][/b]\n" +
+			"[code]" + snippet + "[/code]")
