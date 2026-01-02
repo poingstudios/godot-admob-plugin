@@ -29,7 +29,18 @@ static func extract_zip(zip_path: String, destination_path: String, clean_destin
 		return false
 	
 	var files := zip_reader.get_files()
-	var root := files[0] if not files.is_empty() and files[0].ends_with("/") else ""
+	var root := ""
+	
+	if not files.is_empty() and files[0].ends_with("/"):
+		var possible_root := files[0]
+		var is_common := true
+		for file in files:
+			if not file.begins_with(possible_root):
+				is_common = false
+				break
+		
+		if is_common:
+			root = possible_root
 	
 	for path in files:
 		if not root.is_empty() and path == root: continue
