@@ -20,9 +20,9 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-const PLUGIN_CONFIG_PATH := "res://addons/admob/plugin.cfg"
 const FALLBACK_PLUGIN_VERSION := "v4.0.0"
 
+const PLUGIN_CONFIG_PATH := "res://addons/admob/plugin.cfg"
 const ANDROID_PACKAGE_PATH := "res://addons/admob/android/bin/package.gd"
 const IOS_PACKAGE_PATH := "res://addons/admob/ios/bin/package.gd" # Placeholder for future
 
@@ -60,6 +60,14 @@ static var current: String:
 			_cached_version = FALLBACK_PLUGIN_VERSION
 		return _cached_version
 
+static var is_android_outdated: bool:
+	get:
+		return installed.android.is_empty() or not is_at_least(installed.android, support.android)
+
+static var is_ios_outdated: bool:
+	get:
+		return installed.ios.is_empty() or not is_at_least(installed.ios, support.ios)
+
 static var formatted: String:
 	get:
 		return current.trim_prefix("v")
@@ -69,13 +77,29 @@ static var godot: String:
 		var info := Engine.get_version_info()
 		return "v%d.%d.%d" % [info.major, info.minor, info.patch]
 
+static func is_at_least(current_version: String, target_version: String) -> bool:
+	var v1 := current_version.trim_prefix("v").split(".")
+	var v2 := target_version.trim_prefix("v").split(".")
+	
+	for i in range(max(v1.size(), v2.size())):
+		var s1 := v1[i] if i < v1.size() else "0"
+		var s2 := v2[i] if i < v2.size() else "0"
+		
+		var n1 := s1.to_int()
+		var n2 := s2.to_int()
+		
+		if n1 > n2: return true
+		if n1 < n2: return false
+	return true
+
 static func _get_local_version(path: String) -> String:
 	if not FileAccess.file_exists(path):
 		return ""
 	
 	var script := load(path)
 	if script and "VERSION" in script:
-		return str(script.get("VERSION"))
+		var version_val = script.get("VERSION")
+		return str(version_val)
 	
 	return ""
 

@@ -41,16 +41,12 @@ func _init(download_service: AdMobDownloadService, dialog_service: AdMobDialogSe
 	_download_service.download_completed.connect(_on_download_completed)
 
 func check_dependencies() -> void:
-	var remote_version := PluginVersion.support.android
-	var local_version := PluginVersion.installed.android
-	
-	if local_version == remote_version:
+	if not PluginVersion.is_android_outdated:
 		return
-
-	if local_version.is_empty():
-		print_rich("[color=YELLOW]AdMob Android plugin not found. Downloading version %s automatically...[/color]" % remote_version)
-	else:
-		print_rich("[color=YELLOW]AdMob Android plugin is outdated. Local: %s, Remote: %s. Downloading automatically...[/color]" % [local_version, remote_version])
+	
+	var local_version := PluginVersion.installed.android
+	var status := "not found" if local_version.is_empty() else "outdated (local: %s, remote: %s)" % [local_version, PluginVersion.support.android]
+	print_rich("[color=YELLOW]AdMob Android plugin %s. Installing...[/color]" % status)
 	
 	install()
 
