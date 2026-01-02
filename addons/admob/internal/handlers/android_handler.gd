@@ -43,9 +43,8 @@ func install(godot_version: String, version: String, download_path: String) -> v
 	
 	_download_service.download_file(url, destination)
 
-func _on_download_completed(success: bool) -> void:
+func _on_download_completed(success: bool, _unused_path: String) -> void:
 	if not success:
-		installation_completed.emit(false)
 		return
 	
 	var file_name = _get_zip_file_name()

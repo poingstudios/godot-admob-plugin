@@ -53,7 +53,7 @@ func _init(host: Node) -> void:
     
     # Initialize Handlers
     _android_handler = AdMobAndroidHandler.new(AdMobDownloadService.new(host))
-    _ios_handler = AdMobIOSHandler.new(AdMobDownloadService.new(host, true))
+    _ios_handler = AdMobIOSHandler.new(AdMobDownloadService.new(host))
     
     _setup_menu()
 

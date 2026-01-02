@@ -26,7 +26,6 @@ var _http_request: HTTPRequest
 
 func _init(host: Node) -> void:
 	_http_request = HTTPRequest.new()
-	_http_request.name = "AdMobVersionHTTPRequest"
 	host.add_child(_http_request)
 	_http_request.request_completed.connect(_on_request_completed)
 

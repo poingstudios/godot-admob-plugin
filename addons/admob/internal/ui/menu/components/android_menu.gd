@@ -33,25 +33,6 @@ func _init(handler: AdMobAndroidHandler) -> void:
 	name = "Android"
 	_handler = handler
 	
-	add_menu_item("Latest Version", func(): _handler.install(PluginVersion.godot, PluginVersion.support["android"], _download_path))
-	add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(_download_path))))
+	add_menu_item("Download & Install", func(): _handler.install(PluginVersion.godot, PluginVersion.support["android"], _download_path))
+	add_menu_item("Open config.gd", func(): EditorInterface.edit_resource(load("res://addons/admob/android/config.gd")))
 	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + PluginVersion.support.android))
-	add_menu_item("Copy Metadata", _copy_metadata)
-	add_menu_item("Open AndroidManifest.xml", _open_manifest)
-
-func _copy_metadata() -> void:
-	var snippet := """<!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
-	<meta-data
-		android:name="com.google.android.gms.ads.APPLICATION_ID"
-		android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>"""
-
-	DisplayServer.clipboard_set(snippet)
-
-	print_rich("[b][color=GREEN]✔ Copied AdMob Metadata to clipboard![/color][/b]\n" +
-			"[color=CORNFLOWER_BLUE]" + snippet + "[/color]")
-
-func _open_manifest() -> void:
-	var manifest_path := ProjectSettings.globalize_path("res://android/build/AndroidManifest.xml")
-	OS.shell_open("file://" + manifest_path)
-
-	print_rich("[b]Opened:[/b] [color=CORNFLOWER_BLUE][url]file://" + manifest_path + "[/url][/color]")
