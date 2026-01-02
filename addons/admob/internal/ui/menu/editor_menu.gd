@@ -49,6 +49,7 @@ func _init(host: Node) -> void:
     super._init()
     # Initialize Services
     _version_service = AdMobVersionService.new(host)
+    _version_service.version_received.connect(_on_version_received)
     _version_service.check_for_updates()
     
     # Initialize Handlers
@@ -72,3 +73,6 @@ func _setup_menu() -> void:
 func _add_submenu(menu: PopupMenu) -> void:
     add_child(menu)
     add_submenu_item(menu.name, menu.name)
+
+func _on_version_received() -> void:
+    _android_handler.check_dependencies()

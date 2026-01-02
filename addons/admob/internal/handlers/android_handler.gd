@@ -20,39 +20,60 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 const AdMobDownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
 const AdMobZipService := preload("res://addons/admob/internal/services/archive/zip_service.gd")
 
-signal installation_completed(success: bool)
+const PACKAGE_PATH := "res://addons/admob/android/bin/package.gd"
+const DOWNLOAD_DIR := "res://addons/admob/downloads/android/"
+const EXTRACT_PATH := "res://addons/admob/android/bin/"
+const BASE_URL := "https://github.com/poingstudios/godot-admob-android/releases/download/%s/%s"
 
 var _download_service: AdMobDownloadService
-var _godot_version: String
-var _download_path: String
 
 func _init(download_service: AdMobDownloadService) -> void:
 	_download_service = download_service
 	_download_service.download_completed.connect(_on_download_completed)
 
-func install(godot_version: String, version: String, download_path: String) -> void:
-	_godot_version = godot_version
-	_download_path = download_path
+func check_dependencies() -> void:
+	var remote_version: String = PluginVersion.support.get("android")
+	var local_version := _get_local_version()
 	
-	var file_name = _get_zip_file_name()
-	var url = "https://github.com/poingstudios/godot-admob-android/releases/download/" + version + "/" + file_name
-	var destination = download_path.path_join(file_name)
+	if local_version == remote_version:
+		return
+
+	if local_version.is_empty():
+		print_rich("[color=YELLOW]AdMob Android plugin not found. Downloading version %s automatically...[/color]" % remote_version)
+	else:
+		print_rich("[color=YELLOW]AdMob Android plugin is outdated. Local: %s, Remote: %s. Downloading automatically...[/color]" % [local_version, remote_version])
+	
+	install(remote_version)
+
+func install(version: String) -> void:
+	var file_name := _get_zip_file_name()
+	var url := BASE_URL % [version, file_name]
+	var destination := DOWNLOAD_DIR.path_join(file_name)
 	
 	_download_service.download_file(url, destination)
 
-func _on_download_completed(success: bool, _unused_path: String) -> void:
+func _on_download_completed(success: bool, _path: String) -> void:
 	if not success:
 		return
 	
-	var file_name = _get_zip_file_name()
-	var zip_path = _download_path.path_join(file_name)
-	var extract_path = "res://addons/admob/android/bin/"
+	var file_name := _get_zip_file_name()
+	var zip_path := DOWNLOAD_DIR.path_join(file_name)
 	
-	var extract_success = AdMobZipService.extract_zip(zip_path, extract_path, true)
-	installation_completed.emit(extract_success)
+	var extract_success := AdMobZipService.extract_zip(zip_path, EXTRACT_PATH, true)
+
+func _get_local_version() -> String:
+	if not FileAccess.file_exists(PACKAGE_PATH):
+		return ""
+	
+	var script := load(PACKAGE_PATH)
+	if script and "VERSION" in script:
+		return str(script.get("VERSION"))
+	
+	return ""
 
 func _get_zip_file_name() -> String:
-	return "poing-godot-admob-android-" + _godot_version + ".zip"
+	return "poing-godot-admob-android-" + PluginVersion.godot + ".zip"

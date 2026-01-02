@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
+signal version_received()
 
 var _http_request: HTTPRequest
 
@@ -38,7 +39,8 @@ func _on_request_completed(_result: int, response_code: int, _headers: PackedStr
 		var json = JSON.new()
 		if json.parse(body.get_string_from_utf8()) == OK:
 			PluginVersion.support = json.get_data() as Dictionary
+			version_received.emit()
 			return
-		
-	printerr("ERR_001: Couldn't get version supported dynamic for AdMob, the latest supported version listed may be outdated. \n" \
-	+"Read more about on: res://addons/admob/docs/errors/ERR_001.md")
+
+	printerr("ERR_001: Couldn't get version supported dynamic for AdMob, the latest supported version listed may be outdated. \n" +
+	"Read more about on: res://addons/admob/docs/errors/ERR_001.md")
