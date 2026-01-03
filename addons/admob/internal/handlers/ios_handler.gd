@@ -51,7 +51,7 @@ func _on_download_completed(success: bool) -> void:
 	var file_name := _get_zip_file_name()
 	var zip_path := DOWNLOAD_DIR.path_join(file_name)
 	
-	var extract_success := ZipService.extract_zip_stripping_first_level(zip_path, EXTRACT_PATH)
+	var extract_success := ZipService.extract_zip(zip_path, EXTRACT_PATH, false, ZipService.StripMode.FORCE)
 	if extract_success:
 		_dialog_service.show_confirmation(
 			"iOS plugin installed successfully!\n\nRemember to check your iOS export settings.",

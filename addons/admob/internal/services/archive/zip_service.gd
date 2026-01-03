@@ -20,103 +20,119 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-static func extract_zip(zip_path: String, destination_path: String, clean_destination := false) -> bool:
+class_name ZipExtractor
+
+enum StripMode {NONE, AUTO_DETECT, FORCE}
+
+static func extract_zip(zip_path: String, destination_path: String, clean_destination: bool, strip_mode: StripMode = StripMode.NONE) -> bool:
 	if clean_destination:
 		_delete_dir_recursive(destination_path)
-	
-	var zip_reader := ZIPReader.new()
-	if zip_reader.open(ProjectSettings.globalize_path(zip_path)) != OK:
+	return _extract(zip_path, destination_path, strip_mode)
+
+static func _extract(zip_path: String, destination_path: String, strip_mode: StripMode) -> bool:
+	var reader := _open_zip(zip_path)
+	if not reader:
 		return false
 	
-	var files := zip_reader.get_files()
-	var root := ""
+	var files := reader.get_files()
+	var root_prefix := _determine_root_prefix(files, strip_mode)
 	
-	if not files.is_empty() and files[0].ends_with("/"):
-		var possible_root := files[0]
-		var is_common := true
-		for file in files:
-			if not file.begins_with(possible_root):
-				is_common = false
-				break
-		
-		if is_common:
-			root = possible_root
+	_extract_files(reader, files, destination_path, root_prefix)
+	reader.close()
 	
-	for path in files:
-		if not root.is_empty() and path == root: continue
-		
-		var target := destination_path.path_join(path.trim_prefix(root))
-		if path.ends_with("/"):
-			DirAccess.make_dir_recursive_absolute(target)
-		else:
-			_store_file(target, zip_reader.read_file(path))
-	
-	zip_reader.close()
 	_refresh_filesystem()
-
-	print_rich("[color=GREEN]Extracted[/color] zip to: [color=CORNFLOWER_BLUE][url]%s[/url][/color]" % ProjectSettings.globalize_path(destination_path))
+	_print_success(destination_path)
 	return true
 
-static func extract_zip_stripping_first_level(zip_path: String, destination_path: String) -> bool:
-	var zip_reader := ZIPReader.new()
-	if zip_reader.open(ProjectSettings.globalize_path(zip_path)) != OK:
-		return false
+static func _open_zip(zip_path: String) -> ZIPReader:
+	var reader := ZIPReader.new()
+	if reader.open(ProjectSettings.globalize_path(zip_path)) != OK:
+		return null
+	return reader
+
+static func _determine_root_prefix(files: PackedStringArray, strip_mode: StripMode) -> String:
+	if files.is_empty():
+		return ""
 	
-	var files := zip_reader.get_files()
+	match strip_mode:
+		StripMode.FORCE:
+			return _get_first_directory(files)
+		StripMode.AUTO_DETECT:
+			return _detect_common_root(files)
+		_:
+			return ""
+
+static func _get_first_directory(files: PackedStringArray) -> String:
+	for file in files:
+		if file.ends_with("/"):
+			return file
+	return files[0].get_base_dir() + "/"
+
+static func _detect_common_root(files: PackedStringArray) -> String:
+	if not files[0].ends_with("/"):
+		return ""
 	
-	for path in files:
-		var parts := path.split("/", false)
-		if parts.size() <= 1 and path.ends_with("/"):
-			continue # Skip the first level directory item itself
-		
-		# Strip the first part of the path
-		parts.remove_at(0)
-		var stripped_path := "/".join(parts)
-		if stripped_path.is_empty():
+	var candidate := files[0]
+	for file in files:
+		if not file.begins_with(candidate):
+			return ""
+	return candidate
+
+static func _extract_files(reader: ZIPReader, files: PackedStringArray, destination: String, root_prefix: String) -> void:
+	for file_path in files:
+		var relative_path := _calculate_relative_path(file_path, root_prefix)
+		if relative_path.is_empty():
 			continue
-			
-		var target := destination_path.path_join(stripped_path)
-		if path.ends_with("/"):
-			DirAccess.make_dir_recursive_absolute(target)
-		else:
-			_store_file(target, zip_reader.read_file(path))
-	
-	zip_reader.close()
-	_refresh_filesystem()
-
-	print_rich("[color=GREEN]Extracted[/color] zip (stripped) to: [color=CORNFLOWER_BLUE][url]%s[/url][/color]" % ProjectSettings.globalize_path(destination_path))
-	return true
-
-static func _store_file(path: String, content: PackedByteArray) -> void:
-	var base_dir := path.get_base_dir()
-	if not DirAccess.dir_exists_absolute(base_dir):
-		DirAccess.make_dir_recursive_absolute(base_dir)
 		
+		var target_path := destination.path_join(relative_path)
+		
+		if file_path.ends_with("/"):
+			DirAccess.make_dir_recursive_absolute(target_path)
+		else:
+			_write_file(target_path, reader.read_file(file_path))
+
+static func _calculate_relative_path(file_path: String, root_prefix: String) -> String:
+	if file_path == root_prefix:
+		return ""
+	return file_path.trim_prefix(root_prefix)
+
+static func _write_file(path: String, content: PackedByteArray) -> void:
+	DirAccess.make_dir_recursive_absolute(path.get_base_dir())
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file:
 		file.store_buffer(content)
-		file.close()
 
 static func _refresh_filesystem() -> void:
 	if Engine.is_editor_hint() or OS.has_feature("editor"):
-		EditorInterface.get_resource_filesystem().scan()
-		EditorInterface.get_resource_filesystem().scan_sources()
+		var fs := EditorInterface.get_resource_filesystem()
+		fs.scan()
+		fs.scan_sources()
+
+static func _print_success(destination: String) -> void:
+	var path := ProjectSettings.globalize_path(destination)
+	print_rich("[color=GREEN]Extracted[/color] zip to: [color=CORNFLOWER_BLUE][url]%s[/url][/color]" % path)
 
 static func _delete_dir_recursive(path: String) -> void:
 	var dir := DirAccess.open(path)
-	if dir == null:
+	if not dir:
 		return
 	
-	dir.list_dir_begin()
-	var file_name := dir.get_next()
-	while file_name != "":
-		if file_name != "." and file_name != "..":
-			var full_path := path.path_join(file_name)
-			if dir.current_is_dir():
-				_delete_dir_recursive(full_path)
-			else:
-				DirAccess.remove_absolute(full_path)
-		file_name = dir.get_next()
-	dir.list_dir_end()
+	for item in _list_directory_contents(dir):
+		var full_path := path.path_join(item)
+		if dir.current_is_dir():
+			_delete_dir_recursive(full_path)
+		else:
+			DirAccess.remove_absolute(full_path)
 	
 	DirAccess.remove_absolute(path)
+
+static func _list_directory_contents(dir: DirAccess) -> Array[String]:
+	var contents: Array[String] = []
+	dir.list_dir_begin()
+	var name := dir.get_next()
+	while name != "":
+		if name not in [".", ".."]:
+			contents.append(name)
+		name = dir.get_next()
+	dir.list_dir_end()
+	return contents
