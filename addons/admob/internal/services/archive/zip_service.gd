@@ -20,8 +20,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name ZipExtractor
-
 enum StripMode {NONE, AUTO_DETECT, FORCE}
 
 static func extract_zip(zip_path: String, destination_path: String, clean_destination: bool, strip_mode: StripMode = StripMode.NONE) -> bool:
@@ -35,9 +33,9 @@ static func _extract(zip_path: String, destination_path: String, strip_mode: Str
 		return false
 	
 	var files := reader.get_files()
-	var root_prefix := _determine_root_prefix(files, strip_mode)
+	var common_root := _detect_common_root(files) if strip_mode == StripMode.AUTO_DETECT else ""
 	
-	_extract_files(reader, files, destination_path, root_prefix)
+	_extract_files(reader, files, destination_path, strip_mode, common_root)
 	reader.close()
 	
 	_refresh_filesystem()
@@ -50,26 +48,8 @@ static func _open_zip(zip_path: String) -> ZIPReader:
 		return null
 	return reader
 
-static func _determine_root_prefix(files: PackedStringArray, strip_mode: StripMode) -> String:
-	if files.is_empty():
-		return ""
-	
-	match strip_mode:
-		StripMode.FORCE:
-			return _get_first_directory(files)
-		StripMode.AUTO_DETECT:
-			return _detect_common_root(files)
-		_:
-			return ""
-
-static func _get_first_directory(files: PackedStringArray) -> String:
-	for file in files:
-		if file.ends_with("/"):
-			return file
-	return files[0].get_base_dir() + "/"
-
 static func _detect_common_root(files: PackedStringArray) -> String:
-	if not files[0].ends_with("/"):
+	if files.is_empty() or not files[0].ends_with("/"):
 		return ""
 	
 	var candidate := files[0]
@@ -78,9 +58,9 @@ static func _detect_common_root(files: PackedStringArray) -> String:
 			return ""
 	return candidate
 
-static func _extract_files(reader: ZIPReader, files: PackedStringArray, destination: String, root_prefix: String) -> void:
+static func _extract_files(reader: ZIPReader, files: PackedStringArray, destination: String, strip_mode: StripMode, common_root: String) -> void:
 	for file_path in files:
-		var relative_path := _calculate_relative_path(file_path, root_prefix)
+		var relative_path := _calculate_relative_path(file_path, strip_mode, common_root)
 		if relative_path.is_empty():
 			continue
 		
@@ -91,10 +71,20 @@ static func _extract_files(reader: ZIPReader, files: PackedStringArray, destinat
 		else:
 			_write_file(target_path, reader.read_file(file_path))
 
-static func _calculate_relative_path(file_path: String, root_prefix: String) -> String:
-	if file_path == root_prefix:
-		return ""
-	return file_path.trim_prefix(root_prefix)
+static func _calculate_relative_path(file_path: String, strip_mode: StripMode, common_root: String) -> String:
+	if strip_mode == StripMode.FORCE:
+		var parts := file_path.split("/", false)
+		if parts.size() <= 1 and file_path.ends_with("/"):
+			return ""
+		parts.remove_at(0)
+		return "/".join(parts)
+	
+	if not common_root.is_empty():
+		if file_path == common_root:
+			return ""
+		return file_path.trim_prefix(common_root)
+		
+	return file_path
 
 static func _write_file(path: String, content: PackedByteArray) -> void:
 	DirAccess.make_dir_recursive_absolute(path.get_base_dir())
