@@ -72,7 +72,7 @@ func _setup_menu() -> void:
 	_add_submenu(SupportMenu.new())
 
 	# Add Main Items
-	add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(DEFAULT_DOWNLOAD_PATH))))
+	add_menu_item("Downloads Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(DEFAULT_DOWNLOAD_PATH))))
 	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + PluginVersion.current))
 
 func _add_submenu(menu: PopupMenu) -> void:

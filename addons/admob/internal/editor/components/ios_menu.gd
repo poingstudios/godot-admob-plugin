@@ -33,9 +33,8 @@ func _init(handler: IOSHandler) -> void:
 	_handler = handler
 	
 	add_menu_item("Download & Install", func(): _handler.install())
-	add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(handler.DOWNLOAD_DIR))))
-	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + PluginVersion.support.ios))
 	add_menu_item("Copy shell command", _copy_shell_command)
+	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-ios/tree/" + PluginVersion.support.ios))
 
 func _copy_shell_command() -> void:
 	var snippet := "chmod +x update_and_install.sh\n./update_and_install.sh"
