@@ -6,3 +6,6 @@
 # iOS
 *.a
 *.gdip
+
+/downloads/*
+!/downloads/.gitkeep

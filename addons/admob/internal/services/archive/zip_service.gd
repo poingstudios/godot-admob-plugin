@@ -54,7 +54,7 @@ static func extract_zip(zip_path: String, destination_path: String, clean_destin
 	zip_reader.close()
 	_refresh_filesystem()
 
-	print_rich("Extracted zip to: [color=CORNFLOWER_BLUE][url]%s[/url][/color]" % ProjectSettings.globalize_path(destination_path))
+	print_rich("[color=GREEN]Extracted[/color] zip to: [color=CORNFLOWER_BLUE][url]%s[/url][/color]" % ProjectSettings.globalize_path(destination_path))
 	return true
 
 static func _store_file(path: String, content: PackedByteArray) -> void:

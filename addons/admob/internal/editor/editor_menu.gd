@@ -48,36 +48,36 @@ var _android_handler: AndroidHandler
 var _ios_handler: IOSHandler
 
 func _init(host: Node) -> void:
-    super._init()
-    # Initialize Services
-    _version_service = VersionService.new(host)
-    _version_service.version_received.connect(_on_version_received)
-    _version_service.check_for_updates()
-    
-    # Initialize Dialog Service
-    _dialog_service = DialogService.new()
-    
-    # Initialize Handlers
-    _android_handler = AndroidHandler.new(DownloadService.new(host), _dialog_service)
-    _ios_handler = IOSHandler.new(DownloadService.new(host))
-    
-    _setup_menu()
+	super._init()
+	# Initialize Services
+	_version_service = VersionService.new(host)
+	_version_service.version_received.connect(_on_version_received)
+	_version_service.check_for_updates()
+	
+	# Initialize Dialog Service
+	_dialog_service = DialogService.new()
+	
+	# Initialize Handlers
+	_android_handler = AndroidHandler.new(DownloadService.new(host), _dialog_service)
+	_ios_handler = IOSHandler.new(DownloadService.new(host))
+	
+	_setup_menu()
 
 func _setup_menu() -> void:
-    # Add Submenus
-    _add_submenu(AndroidMenu.new(_android_handler))
-    _add_submenu(IOSMenu.new(_ios_handler))
-    _add_submenu(DocumentsMenu.new())
-    _add_submenu(HelpMenu.new())
-    _add_submenu(SupportMenu.new())
+	# Add Submenus
+	_add_submenu(AndroidMenu.new(_android_handler))
+	_add_submenu(IOSMenu.new(_ios_handler))
+	_add_submenu(DocumentsMenu.new())
+	_add_submenu(HelpMenu.new())
+	_add_submenu(SupportMenu.new())
 
-    # Add Main Items
-    add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(DEFAULT_DOWNLOAD_PATH))))
-    add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + PluginVersion.current))
+	# Add Main Items
+	add_menu_item("Folder", func(): OS.shell_open(str("file://", ProjectSettings.globalize_path(DEFAULT_DOWNLOAD_PATH))))
+	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + PluginVersion.current))
 
 func _add_submenu(menu: PopupMenu) -> void:
-    add_child(menu)
-    add_submenu_item(menu.name, menu.name)
+	add_child(menu)
+	add_submenu_item(menu.name, menu.name)
 
 func _on_version_received() -> void:
-    _android_handler.check_dependencies()
+	_android_handler.check_dependencies()

@@ -22,5 +22,5 @@ AdMobAddon.sln
 .vscode/
 
 # Android & iOS specific ignores
-android/
-ios/
+/android/
+/ios/
