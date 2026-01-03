@@ -23,11 +23,11 @@
 extends "res://addons/admob/internal/editor/popup_menu.gd"
 
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
-const AdMobIOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd")
+const IOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd")
 
-var _handler: AdMobIOSHandler
+var _handler: IOSHandler
 
-func _init(handler: AdMobIOSHandler) -> void:
+func _init(handler: IOSHandler) -> void:
 	super._init()
 	name = "iOS"
 	_handler = handler

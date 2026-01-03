@@ -21,8 +21,8 @@
 # SOFTWARE.
 
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
-const AdMobDownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
-const AdMobZipService := preload("res://addons/admob/internal/services/archive/zip_service.gd")
+const DownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
+const ZipService := preload("res://addons/admob/internal/services/archive/zip_service.gd")
 const AndroidExportPlugin := preload("res://addons/admob/internal/exporters/android/export_plugin.gd")
 
 const PACKAGE_PATH := "res://addons/admob/android/bin/package.gd"
@@ -30,12 +30,12 @@ const DOWNLOAD_DIR := "res://addons/admob/downloads/android/"
 const EXTRACT_PATH := "res://addons/admob/android/bin/"
 const BASE_URL := "https://github.com/poingstudios/godot-admob-android/releases/download/%s/%s"
 
-const AdMobDialogService := preload("res://addons/admob/internal/services/ui/dialog_service.gd")
+const DialogService := preload("res://addons/admob/internal/services/ui/dialog_service.gd")
 
-var _download_service: AdMobDownloadService
-var _dialog_service: AdMobDialogService
+var _download_service: DownloadService
+var _dialog_service: DialogService
 
-func _init(download_service: AdMobDownloadService, dialog_service: AdMobDialogService) -> void:
+func _init(download_service: DownloadService, dialog_service: DialogService) -> void:
 	_download_service = download_service
 	_dialog_service = dialog_service
 	_download_service.download_completed.connect(_on_download_completed)
@@ -72,7 +72,7 @@ func _on_download_completed(success: bool) -> void:
 	var file_name := _get_zip_file_name()
 	var zip_path := DOWNLOAD_DIR.path_join(file_name)
 	
-	var extract_success := AdMobZipService.extract_zip(zip_path, EXTRACT_PATH, true)
+	var extract_success := ZipService.extract_zip(zip_path, EXTRACT_PATH, true)
 	if extract_success:
 		_dialog_service.show_confirmation(
 			"Android plugin installed successfully!\n\nWould you like to open the configuration file now?",

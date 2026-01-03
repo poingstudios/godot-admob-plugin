@@ -21,11 +21,11 @@
 # SOFTWARE.
 
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
-const AdMobDownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
+const DownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
 const DOWNLOAD_DIR := "res://addons/admob/downloads/ios/"
-var _download_service: AdMobDownloadService
+var _download_service: DownloadService
 
-func _init(download_service: AdMobDownloadService) -> void:
+func _init(download_service: DownloadService) -> void:
 	_download_service = download_service
 
 func download() -> void:
