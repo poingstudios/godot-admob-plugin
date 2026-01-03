@@ -81,3 +81,4 @@ func _add_submenu(menu: PopupMenu) -> void:
 
 func _on_version_received() -> void:
 	_android_handler.check_dependencies()
+	_ios_handler.check_dependencies()
