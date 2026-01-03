@@ -57,6 +57,36 @@ static func extract_zip(zip_path: String, destination_path: String, clean_destin
 	print_rich("[color=GREEN]Extracted[/color] zip to: [color=CORNFLOWER_BLUE][url]%s[/url][/color]" % ProjectSettings.globalize_path(destination_path))
 	return true
 
+static func extract_zip_stripping_first_level(zip_path: String, destination_path: String) -> bool:
+	var zip_reader := ZIPReader.new()
+	if zip_reader.open(ProjectSettings.globalize_path(zip_path)) != OK:
+		return false
+	
+	var files := zip_reader.get_files()
+	
+	for path in files:
+		var parts := path.split("/", false)
+		if parts.size() <= 1 and path.ends_with("/"):
+			continue # Skip the first level directory item itself
+		
+		# Strip the first part of the path
+		parts.remove_at(0)
+		var stripped_path := "/".join(parts)
+		if stripped_path.is_empty():
+			continue
+			
+		var target := destination_path.path_join(stripped_path)
+		if path.ends_with("/"):
+			DirAccess.make_dir_recursive_absolute(target)
+		else:
+			_store_file(target, zip_reader.read_file(path))
+	
+	zip_reader.close()
+	_refresh_filesystem()
+
+	print_rich("[color=GREEN]Extracted[/color] zip (stripped) to: [color=CORNFLOWER_BLUE][url]%s[/url][/color]" % ProjectSettings.globalize_path(destination_path))
+	return true
+
 static func _store_file(path: String, content: PackedByteArray) -> void:
 	var base_dir := path.get_base_dir()
 	if not DirAccess.dir_exists_absolute(base_dir):

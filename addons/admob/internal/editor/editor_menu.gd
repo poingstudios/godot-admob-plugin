@@ -59,7 +59,7 @@ func _init(host: Node) -> void:
 	
 	# Initialize Handlers
 	_android_handler = AndroidHandler.new(DownloadService.new(host), _dialog_service)
-	_ios_handler = IOSHandler.new(DownloadService.new(host))
+	_ios_handler = IOSHandler.new(DownloadService.new(host), _dialog_service)
 	
 	_setup_menu()
 

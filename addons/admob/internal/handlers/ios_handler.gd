@@ -22,18 +22,42 @@
 
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 const DownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
+const ZipService := preload("res://addons/admob/internal/services/archive/zip_service.gd")
+const DialogService := preload("res://addons/admob/internal/services/ui/dialog_service.gd")
+
 const DOWNLOAD_DIR := "res://addons/admob/downloads/ios/"
+const EXTRACT_PATH := "res://ios/plugins/"
+const BASE_URL := "https://github.com/poingstudios/godot-admob-ios/releases/download/%s/%s"
+
 var _download_service: DownloadService
+var _dialog_service: DialogService
 
-func _init(download_service: DownloadService) -> void:
+func _init(download_service: DownloadService, dialog_service: DialogService) -> void:
 	_download_service = download_service
+	_dialog_service = dialog_service
+	_download_service.download_completed.connect(_on_download_completed)
 
-func download() -> void:
-	var file_name = _get_zip_file_name()
-	var url = "https://github.com/poingstudios/godot-admob-ios/releases/download/" + PluginVersion.support.ios + "/" + file_name
-	var destination = DOWNLOAD_DIR.path_join(file_name)
+func install() -> void:
+	var file_name := _get_zip_file_name()
+	var url := BASE_URL % [PluginVersion.support.ios, file_name]
+	var destination := DOWNLOAD_DIR.path_join(file_name)
 	
 	_download_service.download_file(url, destination)
+
+func _on_download_completed(success: bool) -> void:
+	if not success:
+		return
+	
+	var file_name := _get_zip_file_name()
+	var zip_path := DOWNLOAD_DIR.path_join(file_name)
+	
+	var extract_success := ZipService.extract_zip_stripping_first_level(zip_path, EXTRACT_PATH)
+	if extract_success:
+		_dialog_service.show_confirmation(
+			"iOS plugin installed successfully!\n\nRemember to check your iOS export settings.",
+			func(): pass , # No specific config to open for iOS yet
+			"OK"
+		)
 
 func _get_zip_file_name() -> String:
 	return "poing-godot-admob-ios-" + PluginVersion.godot + ".zip"

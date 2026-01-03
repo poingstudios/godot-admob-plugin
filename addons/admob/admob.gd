@@ -23,7 +23,7 @@
 @tool
 extends EditorPlugin
 
-const MENU_NAME := "AdMob Download Manager"
+const MENU_NAME := "AdMob Manager"
 const AdMobEditorMenu := preload("res://addons/admob/internal/editor/editor_menu.gd")
 
 var _main_exporter := preload("res://addons/admob/internal/exporters/main_export_plugin.gd").new()
