@@ -22,13 +22,13 @@
 
 extends EditorExportPlugin
 
-const CONFIG_PATH := "res://addons/admob/android/config.gd"
-const Config := preload(CONFIG_PATH)
+const Library := preload("res://addons/admob/internal/exporters/android/library.gd")
+const Config := preload("res://addons/admob/android/config.gd")
 
 func _get_plugins() -> Array[EditorExportPlugin]:
 	var plugins: Array[EditorExportPlugin]
-	var config := Config.new()
-	var root_bin_path := config.AndroidAdMobLibrary.ROOT_BIN_PATH
+	var config := _create_config()
+	var root_bin_path := Library.ROOT_BIN_PATH
 	var dir_access := DirAccess.open(root_bin_path)
 
 	if not dir_access:
@@ -40,6 +40,7 @@ func _get_plugins() -> Array[EditorExportPlugin]:
 			continue
 		plugins.append(lib.get_plugin())
 	return plugins
+
 func _get_android_libraries(platform: EditorExportPlatform, debug: bool) -> PackedStringArray:
 	var libraries := PackedStringArray()
 
@@ -58,7 +59,7 @@ func _get_android_dependencies(platform: EditorExportPlatform, debug: bool) -> P
 
 func _get_android_manifest_application_element_contents(platform: EditorExportPlatform, debug: bool) -> String:
 	var content := PackedStringArray()
-	var config := Config.new()
+	var config := _create_config()
 	
 	for lib in config.libraries:
 		if not lib.is_enabled:
@@ -77,12 +78,12 @@ func _get_android_manifest_application_element_contents(platform: EditorExportPl
 	<meta-data
 		android:name="com.google.android.gms.ads.APPLICATION_ID"
 		android:value="%s"/>
-	""" % Config.APPLICATION_ID)
+	""" % config.APPLICATION_ID)
 	
 	return "\n".join(content)
 
 func _is_ads_enabled() -> bool:
-	var config := Config.new()
+	var config := _create_config()
 	for lib in config.libraries:
 		if lib.path == "ads":
 			return lib.is_enabled
@@ -93,3 +94,13 @@ func _supports_platform(platform: EditorExportPlatform) -> bool:
 
 func _get_name() -> String:
 	return "PoingAdMobAndroid"
+
+# Development override config
+func _create_config() -> Config:
+	const OVERRIDE_CONFIG_PATH := "res://config/admob_android_config_override_1337.gd" # Development override config
+
+	if FileAccess.file_exists(OVERRIDE_CONFIG_PATH):
+		var script = load(OVERRIDE_CONFIG_PATH)
+		if script:
+			return script.new()
+	return Config.new()

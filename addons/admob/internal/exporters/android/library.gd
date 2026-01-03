@@ -20,18 +20,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class AndroidAdMobLibrary:
-	const ROOT_BIN_PATH := "res://addons/admob/android/bin"
-	
-	var path: String
-	var is_enabled: bool
+const ROOT_BIN_PATH := "res://addons/admob/android/bin"
 
-	func _init(p_path: String, p_is_enabled: bool = true) -> void:
-		path = p_path
-		is_enabled = p_is_enabled
+var path: String
+var is_enabled: bool
 
-	func get_full_path() -> String:
-		return ROOT_BIN_PATH + "/" + path + "/poing_godot_admob_" + path + ".gd"
+func _init(p_path: String, p_is_enabled: bool = true) -> void:
+	path = p_path
+	is_enabled = p_is_enabled
 
-	func get_plugin() -> EditorExportPlugin:
-		return load(get_full_path()).new()
+func get_full_path() -> String:
+	return ROOT_BIN_PATH + "/" + path + "/poing_godot_admob_" + path + ".gd"
+
+func get_plugin() -> EditorExportPlugin:
+	return load(get_full_path()).new()

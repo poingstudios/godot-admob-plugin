@@ -23,7 +23,7 @@
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 const AdMobDownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
 const AdMobZipService := preload("res://addons/admob/internal/services/archive/zip_service.gd")
-const AndroidExportPlugin := preload("res://addons/admob/internal/exporters/android_export_plugin.gd")
+const AndroidExportPlugin := preload("res://addons/admob/internal/exporters/android/export_plugin.gd")
 
 const PACKAGE_PATH := "res://addons/admob/android/bin/package.gd"
 const DOWNLOAD_DIR := "res://addons/admob/downloads/android/"

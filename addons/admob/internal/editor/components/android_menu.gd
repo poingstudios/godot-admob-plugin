@@ -23,12 +23,12 @@
 extends "res://addons/admob/internal/editor/popup_menu.gd"
 
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
-const AdMobAndroidHandler := preload("res://addons/admob/internal/handlers/android_handler.gd")
-const AndroidExportPlugin := preload("res://addons/admob/internal/exporters/android_export_plugin.gd")
+const AndroidHandler := preload("res://addons/admob/internal/handlers/android_handler.gd")
+const AndroidExportPlugin := preload("res://addons/admob/internal/exporters/android/export_plugin.gd")
 
-var _handler: AdMobAndroidHandler
+var _handler: AndroidHandler
 
-func _init(handler: AdMobAndroidHandler) -> void:
+func _init(handler: AndroidHandler) -> void:
 	super._init()
 	name = "Android"
 	_handler = handler

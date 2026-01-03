@@ -20,16 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-const Library := preload("res://addons/admob/internal/exporters/android/library.gd")
+extends "res://addons/admob/android/config.gd"
 
-const APPLICATION_ID := "ca-app-pub-3940256099942544~3347511713" # Change to your own AdMob App ID when releasing your game.
+func _init() -> void:
+	# Override settings for development/testing purposes
+	libraries = [
+		Library.new("ads", true),
 
-var libraries: Array[Library] = [
-	# Main Plugin
-	Library.new("ads", true), # Disable if you don't want to use AdMob.
-	
-	# Supported Mediations
-	Library.new("adcolony", false),
-	Library.new("meta", false),
-	Library.new("vungle", false)
-]
+		Library.new("adcolony", true),
+		Library.new("meta", true),
+		Library.new("vungle", true)
+	]
