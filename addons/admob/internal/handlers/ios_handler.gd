@@ -24,6 +24,7 @@ const PluginVersion := preload("res://addons/admob/internal/version/plugin_versi
 const DownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
 const ZipService := preload("res://addons/admob/internal/services/archive/zip_service.gd")
 const DialogService := preload("res://addons/admob/internal/services/ui/dialog_service.gd")
+const FileService := preload("res://addons/admob/internal/services/ui/file_service.gd")
 
 const DOWNLOAD_DIR := "res://addons/admob/downloads/ios/"
 const EXTRACT_PATH := "res://ios/plugins/"
@@ -72,7 +73,6 @@ func _on_download_completed(success: bool) -> void:
 	var extract_success := ZipService.extract_zip(zip_path, EXTRACT_PATH, false, ZipService.StripMode.FORCE)
 	if extract_success:
 		_create_package_file()
-		ZipService._refresh_filesystem()
 		_dialog_service.show_confirmation(
 			"iOS plugin installed successfully!\n\nRemember to check your iOS export settings.",
 			func(): pass , # No specific config to open for iOS yet
@@ -81,10 +81,7 @@ func _on_download_completed(success: bool) -> void:
 
 func _create_package_file() -> void:
 	var content := "const VERSION := \"%s\"" % PluginVersion.support.ios
-	var file := FileAccess.open(PluginVersion.IOS_PACKAGE_PATH, FileAccess.WRITE)
-	if file:
-		file.store_string(content)
-		file.close()
+	FileService.write_file(PluginVersion.IOS_PACKAGE_PATH, content)
 
 func _get_zip_file_name() -> String:
 	return "poing-godot-admob-ios-" + PluginVersion.godot + ".zip"

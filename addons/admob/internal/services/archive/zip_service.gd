@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+const FileService := preload("res://addons/admob/internal/services/ui/file_service.gd")
+
 enum StripMode {NONE, AUTO_DETECT, FORCE}
 
 static func extract_zip(zip_path: String, destination_path: String, clean_destination: bool, strip_mode: StripMode = StripMode.NONE) -> bool:
@@ -38,7 +40,7 @@ static func _extract(zip_path: String, destination_path: String, strip_mode: Str
 	_extract_files(reader, files, destination_path, strip_mode, common_root)
 	reader.close()
 	
-	_refresh_filesystem()
+	FileService.refresh_filesystem()
 	_print_success(destination_path)
 	return true
 
@@ -92,11 +94,6 @@ static func _write_file(path: String, content: PackedByteArray) -> void:
 	if file:
 		file.store_buffer(content)
 
-static func _refresh_filesystem() -> void:
-	if Engine.is_editor_hint() or OS.has_feature("editor"):
-		var fs := EditorInterface.get_resource_filesystem()
-		fs.scan()
-		fs.scan_sources()
 
 static func _print_success(destination: String) -> void:
 	var path := ProjectSettings.globalize_path(destination)
