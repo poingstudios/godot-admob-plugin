@@ -25,6 +25,7 @@ func show_confirmation(text: String, on_confirmed: Callable, ok_text := "OK") ->
 	dialog.title = "AdMob"
 	dialog.dialog_text = text
 	dialog.ok_button_text = ok_text
+	dialog.exclusive = false
 	
 	EditorInterface.get_base_control().add_child(dialog)
 	dialog.get_cancel_button().text = "Close"

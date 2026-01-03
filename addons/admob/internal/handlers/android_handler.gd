@@ -45,10 +45,18 @@ func check_dependencies() -> void:
 		return
 	
 	var local_version := PluginVersion.installed.android
-	var status := "not found" if local_version.is_empty() else "outdated (local: %s, remote: %s)" % [local_version, PluginVersion.support.android]
-	print_rich("[color=YELLOW]AdMob Android plugin %s. Installing...[/color]" % status)
 	
-	install()
+	if local_version.is_empty():
+		print_rich("[color=YELLOW]AdMob Android plugin not found. Installing...[/color]")
+		install()
+	else:
+		var formatted_local := local_version if local_version.begins_with("v") else "v" + local_version
+		var status := "outdated (local: %s, remote: %s)" % [formatted_local, PluginVersion.support.android]
+		_dialog_service.show_confirmation(
+			"AdMob Android plugin %s.\n\nWould you like to install it automatically?" % status,
+			install,
+			"Install"
+		)
 
 func install() -> void:
 	var file_name := _get_zip_file_name()
