@@ -1,9 +1,11 @@
 *.zip
 
 # Android 
-*.aar
-*.gdap
+!android/
 
 # iOS
 *.a
 *.gdip
+
+/downloads/*
+!/downloads/.gitkeep
