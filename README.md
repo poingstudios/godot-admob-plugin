@@ -1,6 +1,6 @@
 <div align="center">
   <h1>
-    <img src="https://i.imgur.com/T3Beai0.png" width="32" style="vertical-align: middle;"> Godot AdMob Plugin
+    <img src="https://i.imgur.com/T3Beai0.png" width="40" style="vertical-align: middle;"> Godot AdMob Plugin
   </h1>
 
   [![Version](https://img.shields.io/github/v/tag/poingstudios/godot-admob-plugin?label=Version&style=flat-square)](https://github.com/poingstudios/godot-admob-plugin/releases)
@@ -12,13 +12,12 @@
   [![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white)](https://github.com/poingstudios/godot-admob-android)
   [![iOS](https://img.shields.io/badge/iOS-000000?style=flat-square&logo=ios&logoColor=white)](https://github.com/poingstudios/godot-admob-ios)
 
-  **This addon provides an easy and beautiful way to configure AdMob directly through the editor.**  
-  It supports [godot-admob-android](https://github.com/poingstudios/godot-admob-android) and [godot-admob-ios](https://github.com/poingstudios/godot-admob-ios) natively.
-
+  **The complete solution for AdMob integration in Godot.**  
+  Supports [godot-admob-android](https://github.com/poingstudios/godot-admob-android) and [godot-admob-ios](https://github.com/poingstudios/godot-admob-ios) natively.
   ![Plugin Usage](static/usage.webp)
-</div>
+  [🎬 Watch Video Tutorial](https://youtu.be/WpVGn7ZasKM) • [📖 Read Documentation](https://poingstudios.github.io/godot-admob-plugin/latest/)
 
-- Video tutorial: https://youtu.be/WpVGn7ZasKM.
+</div>
 
 # 📦Installation
 
