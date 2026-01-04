@@ -1,6 +1,6 @@
 # MIT License
 
-# Copyright (c) 2023-present Poing Studios
+# Copyright (c) 2025-present Poing Studios
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,31 +20,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-class_name PoingAdMobVersionHelper
-extends Object
+const ROOT_BIN_PATH := "res://addons/admob/android/bin"
 
-static var version_formated : String = _get_plugin_version_formated() :
-	set(value):
-		version_formated = _get_plugin_version_formated()
+var path: String
+var is_enabled: bool
 
-static func get_plugin_version() -> String:
-	var plugin_config_file := ConfigFile.new()
-	var version: String = "v3.1.2" #redundancy
-	
-	if plugin_config_file.load("res://addons/admob/plugin.cfg") == OK:
-		version = plugin_config_file.get_value("plugin", "version")
-	else:
-		push_error("Failed to load plugin.cfg")
-	return version
+func _init(p_path: String, p_is_enabled: bool = true) -> void:
+	path = p_path
+	is_enabled = p_is_enabled
 
-static func _get_plugin_version_formated() -> String:
-	var version := get_plugin_version()
-	
-	var pattern = RegEx.new()
-	pattern.compile("(?:v)?(\\d+\\.\\d+\\.\\d+)")
-	
-	var matchs := pattern.search(version)
-	if matchs != null:
-		version = matchs.get_string(1)
-	return version
+func get_full_path() -> String:
+	return ROOT_BIN_PATH + "/" + path + "/poing_godot_admob_" + path + ".gd"
 
+func get_plugin() -> EditorExportPlugin:
+	return load(get_full_path()).new()
