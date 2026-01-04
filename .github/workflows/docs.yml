@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - master
+    tags:
+      - '*'
 permissions:
   contents: write
 jobs:
@@ -24,8 +26,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-      - name: First deployment - Create version 3.1
+      - name: Deploy documentation
         run: |
-          mike delete --all || true
-          mike deploy --push --update-aliases 3.1 stable latest
-          mike set-default --push stable
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/}
+            VERSION=${VERSION#v}
+            
+            mike deploy --push --update-aliases $VERSION stable
+            mike set-default --push stable
+          else
+            mike deploy --push --update-aliases latest
+          fi
