@@ -21,6 +21,13 @@ AdMobAddon.sln
 # VSCode specific ignores
 .vscode/
 
+# Python specific ignores
+.cache/
+.venv/
+
+# Documentation specific ignores
+/site/
+
 # Android & iOS specific ignores
 /android/
 /ios/

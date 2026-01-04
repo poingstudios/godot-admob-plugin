@@ -9,14 +9,23 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0 
+      - uses: actions/setup-python@v6
         with:
           python-version: 3.x
-      - uses: actions/cache@v4
+      - uses: actions/cache@v6
         with:
           key: ${{ github.ref }}
           path: .cache
-      - run: pip install mkdocs-material
-      - run: pip install pillow cairosvg
-      - run: mkdocs gh-deploy --force
+      - run: pip install mkdocs-material pillow cairosvg mike
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: First deployment - Create version 3.1
+        run: |
+          mike delete --all || true
+          mike deploy --push --update-aliases 3.1 stable latest
+          mike set-default --push stable
