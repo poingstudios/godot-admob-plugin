@@ -57,9 +57,7 @@ func register_callbacks() -> void:
 		safe_connect(_plugin, "on_rewarded_ad_showed_full_screen_content", _on_rewarded_ad_showed_full_screen_content)
 
 func _on_rewarded_ad_user_earned_reward(uid: int, rewarded_item_dictionary: Dictionary) -> void:
-	print("1 _on_rewarded_ad_user_earned_reward")
 	if uid == _uid:
-		print("2 _on_rewarded_ad_user_earned_reward will notify")
 		_on_user_earned_reward_listener.on_user_earned_reward.call_deferred(RewardedItem.create(rewarded_item_dictionary))
 
 func _on_rewarded_ad_clicked(uid: int) -> void:
