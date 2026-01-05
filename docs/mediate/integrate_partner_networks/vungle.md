@@ -30,7 +30,7 @@ The AdMob mediation adapter for AdColony has the following capabilities:
 [^2]: For access to this feature, contact your Liftoff Monetize account manager.
 
 ## Prerequisites
-- Godot 4.1+
+- Godot 4.2+
 - Latest [Godot AdMob Plugin](https://github.com/poingstudios/godot-admob-plugin/releases/latest) 
 - Android deploy:
     - Android API level 19 or higher

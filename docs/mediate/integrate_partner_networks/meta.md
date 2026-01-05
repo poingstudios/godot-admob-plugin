@@ -28,7 +28,7 @@ The AdMob mediation adapter for Meta Audience Network has the following capabili
 [^1]: Meta Audience Network became [bidding only](https://www.facebook.com/audiencenetwork/resources/blog/audience-network-to-become-bidding-only-beginning-with-ios-in-2021) in 2021.
 
 ## Prerequisites
-- Godot 4.1+
+- Godot 4.2+
 - Latest [Godot AdMob Plugin](https://github.com/poingstudios/godot-admob-plugin/releases/latest) 
 - Android deploy:
     - Android API level 19 or higher
