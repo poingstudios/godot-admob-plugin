@@ -36,7 +36,7 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 3. In the search bar, enter `AdMob` and ensure that the publisher is set to `poing.studios`.
 ![activate_plugin](assets/asset_library.png)
 4. Locate the AdMob plugin and click the `Download` button.
-5. Once the download is complete, go to `Project > Project Settings` within the Godot editor.
+5. Once the download is complete, go to `Project → Project Settings` within the Godot editor.
 6. In the `Plugins` section, find the `AdMob` plugin and activate it.
 ![activate_plugin](assets/activate_plugin.png)
 7. The Android and iOS libraries will be downloaded and installed automatically.
@@ -44,17 +44,14 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 
 ## Download & Install
 !!! info
-
-    This section is typically **not required**, as the plugin handles libraries automatically. Only follow these steps if:
-    - The automatic download or installation process failed to complete.
-    - You need to install a specific or legacy version of the Android/iOS binaries.
+    This section is typically **not required**, as the plugin handles libraries automatically. Only follow these steps if the automatic download failed or you need a specific legacy version.
 
 === "Android"
 
 	To integrate the required Android library for AdMob in Godot, follow these steps:
 
-	1. In Godot, navigate to `Project > Tools > AdMob Manager > Android > Download & Install`.
-	2. This action will download and install the appropriate Android library into your project, which is located at `res://addons/admob/android/bin/`.
+	1. In Godot, navigate to `Project → Tools → AdMob Manager → Android → Download & Install`.
+	1. This action will download and install the appropriate Android library into your project, which is located at `res://addons/admob/android/bin/`.
 
 	If you encounter any issues with the download, you can try downloading the library manually by clicking [here](https://github.com/poingstudios/godot-admob-android/releases/latest).
 
@@ -62,8 +59,8 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 
 	To integrate the required iOS library for AdMob in Godot, follow these steps:
 
-	1. In Godot, navigate to `Project > Tools > AdMob Manager > iOS > Download & Install`.
-	2. This action will download and install the appropriate iOS library into your project, which is located at `res://ios/plugins/`.
+	1. In Godot, navigate to `Project → Tools → AdMob Manager → iOS → Download & Install`.
+	1. This action will download and install the appropriate iOS library into your project, which is located at `res://ios/plugins/`.
 
 	If you encounter any issues with the download, you can try downloading the library manually by clicking [here](https://github.com/poingstudios/godot-admob-ios/releases/latest).
 
@@ -71,40 +68,58 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 
 === "Android"
 
-	1. Install the Android Build Template by navigating to `Project > Install Android Build Template`.
-	2. Add your [AdMob App ID](https://support.google.com/admob/answer/7356431) to your app's `res://addons/admob/android/config.gd` file by changing the variable `APPLICATION_ID`.
-		2.1. **Important — App ID vs Ad Unit ID**
-		- **App ID** (contains `~`): used for app registration and manifest.
-		- **Ad Unit ID** (contains `/`): used to load specific ad formats (banner, rewarded, etc.).
-	3. If you have Mediation, set true the libraries at `res://addons/admob/android/config.gd`, such as: `adcolony`, `meta`, `vungle`, etc...
-	4. When exporting your project, select `Use Gradle Build`.
-	![export](assets/android/export.png)
+	1. Install the [Android Build Template](https://docs.godotengine.org/en/stable/tutorials/export/android_gradle_build.html) by navigating to `Project → Install Android Build Template`.
+	1. Add your [AdMob App ID](https://support.google.com/admob/answer/7356431) to your app's `res://addons/admob/android/config.gd` file by changing the variable `APPLICATION_ID`.
+	
+	    !!! tip "App ID vs Ad Unit ID"
+	        - **App ID** (contains `~`): Used for app registration and internal configuration.
+	        - **Ad Unit ID** (contains `/`): Used to load specific ad formats in your code.
+	
+	1. If you have Mediation, set true the libraries at `res://addons/admob/android/config.gd`, such as: `adcolony`, `meta`, `vungle`, etc...
+	1. When exporting your project, select `Use Gradle Build`.
+	
+	    ![export](assets/android/export.png)
 
 === "iOS"
 
-	1. Within `res://ios/plugins/poing-godot-admob-ads.gdip`, if you are using Mediation, locate the `SKAdNetworkItems` section. Here, you can remove the comments associated with the [Mediation Networks](https://developers.google.com/admob/ios/choose-networks) that you are using.
-	![export](assets/ios/skadnetworkitems.png)
-	2. When exporting your project, update the `GADApplicationIdentifier` with your [AdMob App ID](https://support.google.com/admob/answer/7356431) and and ensure that `Ad Mob` is enabled, If you have Mediation, also mark `Ad Mob Meta`, `Ad Mob AdColony` etc...
-	![gadapplicationidentifier](assets/ios/gadapplicationidentifier.png)
-    	2.1. **Important — App ID vs Ad Unit ID**
-		- **App ID** (contains `~`): used for app registration and manifest.
-		- **Ad Unit ID** (contains `/`): used to load specific ad formats (banner, rewarded, etc.).
-	6. Once exported, go to `{{ ios_xcode_export_folder }}/{{your_project_name}}/ios/plugins/poing-godot-admob/scripts/` folder and open the terminal (must be inside this folder) and run these commands:
+    1. Within `res://ios/plugins/poing-godot-admob-ads.gdip`, if you are using Mediation, locate the `SKAdNetworkItems` section. Here, you can remove the comments associated with the [Mediation Networks](https://developers.google.com/admob/ios/choose-networks) that you are using.
+    
+        ![export](assets/ios/skadnetworkitems.png)
+    
+    1. When exporting your project, update the `GADApplicationIdentifier` with your [AdMob App ID](https://support.google.com/admob/answer/7356431) and ensure that `Ad Mob` is enabled. If you have Mediation, also mark `Ad Mob Meta`, `Ad Mob AdColony` etc...
+    
+        ![gadapplicationidentifier](assets/ios/gadapplicationidentifier.png)
+    
+        !!! tip "App ID vs Ad Unit ID"
+            - **App ID** (contains `~`): Used for app registration and internal configuration.
+            - **Ad Unit ID** (contains `/`): Used to load specific ad formats in your code.
+    
+    1. Once exported, go to `{{ ios_xcode_export_folder }}/{{your_project_name}}/ios/plugins/poing-godot-admob/scripts/` folder and open the terminal (must be inside this folder) and run these commands:
 	```bash
 	chmod +x update_and_install.sh
 	./update_and_install.sh
 	```
-	![update_and_installsh](assets/ios/update_and_installsh.png)
-	7. This will create for your a `{{ your_project_name }}.xcworkspace` (e.g.: `AdMobAddon.xcworkspace`) file on your `{{ ios_xcode_export_folder }}`, open this file.
-	8. Go to the Target of your Application and them `General -> Frameworks, Libraries, and Embedded Content` and add all `Pods` in section **except** the `.bundle`.
-	![add_libraries](assets/ios/add_libraries.png)
-	9. Select all Frameworks (⌘ + A) and put as `Do Not Embed`
-	![do_not_embed](assets/ios/do_not_embed.png)
-	10. [If you are facing "__swift_FORCE_LOAD_" error, read this](https://github.com/poingstudios/godot-admob-ios/issues/127).
-		10.1. Create a `Untitled.swift` file and Xcode will ask you to Create Bridge Header -> Accept -> then it'll build normally.
-		![untitled.swift](assets/ios/untitled.swift.png)
-	11. Run the Game.
-	12. [If you are trying to run on Simulator and is not working read this](https://github.com/godotengine/godot/issues/44681#issuecomment-751399783).
+        
+        ![update_and_installsh](assets/ios/update_and_installsh.png)
+    
+    1. This will create for you a `{{ your_project_name }}.xcworkspace` (e.g.: `AdMobAddon.xcworkspace`) file on your `{{ ios_xcode_export_folder }}`. Open this file.
+    
+    1. Go to the Target of your Application and then `General -> Frameworks, Libraries, and Embedded Content` and add all `Pods` in section **except** the `.bundle`.
+    
+        ![add_libraries](assets/ios/add_libraries.png)
+    
+    1. Select all Frameworks (⌘ + A) and put as `Do Not Embed`.
+    
+        ![do_not_embed](assets/ios/do_not_embed.png)
+    
+    1. [If you are facing "__swift_FORCE_LOAD_" error, read this](https://github.com/poingstudios/godot-admob-ios/issues/127).
+
+        1. Create a `Untitled.swift` file and Xcode will ask you to `Create Bridge Header → Accept` → then it'll build normally.
+            ![untitled.swift](assets/ios/untitled.swift.png)
+    
+    1. Run the Game.
+    
+    1. [If you are trying to run on Simulator and is not working read this](https://github.com/godotengine/godot/issues/44681#issuecomment-751399783).
 
 ## Initialize the Google Mobile Ads SDK
 Prior to loading ads, ensure that your application initializes the Google Mobile Ads SDK. You can accomplish this by calling MobileAds.initialize(). This function initializes the SDK and triggers a completion listener once the initialization process is finished, or if it exceeds a 30-second timeout. It's important to note that this initialization should occur only once, ideally during the app's launch phase.
