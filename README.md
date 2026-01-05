@@ -15,7 +15,7 @@
   **The complete solution for AdMob integration in Godot.**  
   Supports [godot-admob-android](https://github.com/poingstudios/godot-admob-android) and [godot-admob-ios](https://github.com/poingstudios/godot-admob-ios) natively.
   ![Plugin Usage](static/usage.webp)
-  
+
   [🎬 Watch Video Tutorial](https://youtu.be/WpVGn7ZasKM) • [📖 Read Documentation](https://poingstudios.github.io/godot-admob-plugin/latest/)
 
 </div>
@@ -40,8 +40,8 @@
 ### ⚙️Post-installation
 
 1. Enable in `Project → Project Settings → Plugins`.
-2. Download [godot-admob-android](https://github.com/poingstudios/godot-admob-android) and/or [godot-admob-ios](https://github.com/poingstudios/godot-admob-ios) in `Project → Tools → AdMob Manager → Android/iOS → Download & Install`.
-3. To know how to deploy, check the README.md of [godot-admob-android](https://github.com/poingstudios/godot-admob-android/#usage) and/or [godot-admob-ios](https://github.com/poingstudios/godot-admob-ios/#usage).
+	- **If the automatic download & installation fails**, go to `Project → Tools → AdMob Manager → Android/iOS → Download & Install`.
+2. To know how to deploy, check the README.md of [godot-admob-android](https://github.com/poingstudios/godot-admob-android/#usage) and/or [godot-admob-ios](https://github.com/poingstudios/godot-admob-ios/#usage).
 
 # 🙋‍♂️How to use
 After installation, all the methods will be available for use in any `.gd` script.
