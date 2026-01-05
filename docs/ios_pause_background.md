@@ -9,7 +9,7 @@ On iOS, the default value is `false`.
 # Prerequisites
 
 - Complete the [Get started guide](README.md)
-- Use Godot v4.1 or higher
+- Use Godot v4.2 or higher
 - Use AdMob Plugin **[Editor](https://github.com/poingstudios/godot-admob-plugin/releases/tag/v3.1.0)** and **[iOS](https://github.com/poingstudios/godot-admob-ios/releases/tag/v3.1.0)**: v3.1.0+
 
 # How to use
