@@ -335,22 +335,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#obtaining-external-libraries" class="md-nav__link">
+  <a href="#download-install" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Obtaining external libraries
+        Download &amp; Install
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Obtaining external libraries">
+    <nav class="md-nav" aria-label="Download &amp; Install">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#installing" class="md-nav__link">
+  <a href="#exporting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installing
+        Exporting
       
     </span>
   </a>
@@ -1563,22 +1563,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#obtaining-external-libraries" class="md-nav__link">
+  <a href="#download-install" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Obtaining external libraries
+        Download &amp; Install
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Obtaining external libraries">
+    <nav class="md-nav" aria-label="Download &amp; Install">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#installing" class="md-nav__link">
+  <a href="#exporting" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installing
+        Exporting
       
     </span>
   </a>
@@ -1680,7 +1680,7 @@
 
 
 <h1 id="get-started">Get Started</h1>
-<p>Integrating the AdMob plugin into your Godot project, specifically for Godot v4.1+, is the initial and crucial step in enabling ad displays and revenue generation. After successfully incorporating this plugin, you'll have the flexibility to select from various ad formats, like Banner or Interstitial, and proceed with the necessary implementation steps.</p>
+<p>Integrating the AdMob plugin into your Godot project, specifically for Godot v4.2+, is the initial and crucial step in enabling ad displays and revenue generation. After successfully incorporating this plugin, you'll have the flexibility to select from various ad formats, like Banner or Interstitial, and proceed with the necessary implementation steps.</p>
 <p>This document is based on:</p>
 <ul>
 <li><a href="https://developers.google.com/admob/android/quick-start">Google Mobile Ads SDK Android Documentation</a></li>
@@ -1688,15 +1688,15 @@
 </ul>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
-<li>Use Godot v4.1 or higher</li>
+<li>Use Godot v4.2 or higher</li>
 <li>Deploy Android:<ul>
-<li><code>minSdkVersion</code> of 19 or higher</li>
-<li><code>compileSdkVersion</code> of 28 or higher</li>
+<li><code>minSdkVersion</code> of 24 or higher</li>
+<li><code>compileSdkVersion</code> of 36 or higher</li>
 </ul>
 </li>
 <li>Deploy iOS:<ul>
-<li>Use Xcode 14.1 or higher</li>
-<li>Target iOS 11.0 or higher</li>
+<li>Use Xcode 26.2 or higher</li>
+<li>Target iOS 16.0 or higher</li>
 <li><a href="https://guides.cocoapods.org/using/getting-started.html">CocoaPods</a></li>
 </ul>
 </li>
@@ -1717,76 +1717,77 @@
 <li>Once the download is complete, go to <code>Project &gt; Project Settings</code> within the Godot editor.</li>
 <li>In the <code>Plugins</code> section, find the <code>AdMob</code> plugin and activate it.
 <img alt="activate_plugin" src="assets/activate_plugin.png" /></li>
+<li>The Android and iOS libraries will be downloaded and installed automatically.</li>
 <li>With these steps, you'll have successfully integrated the AdMob plugin into your Godot project without the need for additional manual file imports.</li>
 </ol>
-<h2 id="obtaining-external-libraries">Obtaining external libraries</h2>
+<h2 id="download-install">Download &amp; Install</h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This section is typically <strong>not required</strong>, as the plugin handles libraries automatically. Only follow these steps if:
+- The automatic download or installation process failed to complete.
+- You need to install a specific or legacy version of the Android/iOS binaries.</p>
+</div>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Android</label><label for="__tabbed_1_2">iOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>To integrate the required Android library for AdMob in Godot, follow these steps:</p>
 <ol>
-<li>In Godot, navigate to <code>Project &gt; Tools &gt; AdMob Download Manager &gt; Android &gt; LatestVersion</code>.</li>
-<li>This action will download the appropriate Android library into your project, which is located at <code>res://addons/admob/downloads/android/</code>.</li>
+<li>In Godot, navigate to <code>Project &gt; Tools &gt; AdMob Manager &gt; Android &gt; Download &amp; Install</code>.</li>
+<li>This action will download and install the appropriate Android library into your project, which is located at <code>res://addons/admob/android/bin/</code>.</li>
 </ol>
 <p>If you encounter any issues with the download, you can try downloading the library manually by clicking <a href="https://github.com/poingstudios/godot-admob-android/releases/latest">here</a>.</p>
 </div>
 <div class="tabbed-block">
 <p>To integrate the required iOS library for AdMob in Godot, follow these steps:</p>
 <ol>
-<li>In Godot, navigate to <code>Project &gt; Tools &gt; AdMob Download Manager &gt; iOS &gt; LatestVersion</code>.</li>
-<li>This action will download the appropriate iOS library into your project, which is located at <code>res://addons/admob/downloads/ios/</code>.</li>
+<li>In Godot, navigate to <code>Project &gt; Tools &gt; AdMob Manager &gt; iOS &gt; Download &amp; Install</code>.</li>
+<li>This action will download and install the appropriate iOS library into your project, which is located at <code>res://ios/plugins/</code>.</li>
 </ol>
 <p>If you encounter any issues with the download, you can try downloading the library manually by clicking <a href="https://github.com/poingstudios/godot-admob-ios/releases/latest">here</a>.</p>
 </div>
 </div>
 </div>
-<h3 id="installing">Installing</h3>
+<h3 id="exporting">Exporting</h3>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Android</label><label for="__tabbed_2_2">iOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <ol>
 <li>Install the Android Build Template by navigating to <code>Project &gt; Install Android Build Template</code>.</li>
-<li>Go to the directory <code>res://android/plugins/</code> and extract the contents of the <code>ads</code> folder from the downloaded <code>.zip</code> located at <code>res://addons/admob/downloads/android/</code>. If you have Mediation, do the same for <code>meta</code>, <code>adcolony</code> etc....
-<img alt="folder" src="assets/android/folder.png" /></li>
-<li>Add your <a href="https://support.google.com/admob/answer/7356431">AdMob App ID</a> to your app's <code>res://android/build/AndroidManifest.xml</code> file by adding a <code>&lt;meta-data&gt;</code> tag with name <code>com.google.android.gms.ads.APPLICATION_ID</code>, as shown below. If you don't do this then you App will crash on start-up.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cm">&lt;!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 --&gt;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">&lt;meta-data</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="na">android:name=</span><span class="s">&quot;com.google.android.gms.ads.APPLICATION_ID&quot;</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="na">android:value=</span><span class="s">&quot;ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy&quot;</span><span class="nt">/&gt;</span>
-</code></pre></div>
-    3.1. <strong>Important — App ID vs Ad Unit ID</strong><ul>
+<li>Add your <a href="https://support.google.com/admob/answer/7356431">AdMob App ID</a> to your app's <code>res://addons/admob/android/config.gd</code> file by changing the variable <code>APPLICATION_ID</code>.
+    2.1. <strong>Important — App ID vs Ad Unit ID</strong><ul>
 <li><strong>App ID</strong> (contains <code>~</code>): used for app registration and manifest.</li>
 <li><strong>Ad Unit ID</strong> (contains <code>/</code>): used to load specific ad formats (banner, rewarded, etc.).</li>
 </ul>
 </li>
-<li>When exporting your project, select <code>Use Custom Build</code> and ensure that <code>Ad Mob</code> is enabled, If you have Mediation, also mark <code>Ad Mob Meta</code>, <code>Ad Mob AdColony</code> etc...
+<li>If you have Mediation, set true the libraries at <code>res://addons/admob/android/config.gd</code>, such as: <code>adcolony</code>, <code>meta</code>, <code>vungle</code>, etc...</li>
+<li>When exporting your project, select <code>Use Gradle Build</code>.
 <img alt="export" src="assets/android/export.png" /></li>
 </ol>
 </div>
 <div class="tabbed-block">
 <ol>
-<li>Create the iOS Plugin folder if doesn't exists on <code>res://ios/plugins/</code>.</li>
-<li>Go to the directory <code>res://ios/plugins/</code> and extract the contents of the <code>ads</code> folder from the downloaded <code>.zip</code> located at <code>res://addons/admob/downloads/ios/</code>. If you have Mediation, do the same for <code>meta</code>, <code>adcolony</code> etc....
-<img alt="folder" src="assets/ios/folder.png" /></li>
 <li>Within <code>res://ios/plugins/poing-godot-admob-ads.gdip</code>, if you are using Mediation, locate the <code>SKAdNetworkItems</code> section. Here, you can remove the comments associated with the <a href="https://developers.google.com/admob/ios/choose-networks">Mediation Networks</a> that you are using.
 <img alt="export" src="assets/ios/skadnetworkitems.png" /></li>
 <li>When exporting your project, update the <code>GADApplicationIdentifier</code> with your <a href="https://support.google.com/admob/answer/7356431">AdMob App ID</a> and and ensure that <code>Ad Mob</code> is enabled, If you have Mediation, also mark <code>Ad Mob Meta</code>, <code>Ad Mob AdColony</code> etc...
 <img alt="gadapplicationidentifier" src="assets/ios/gadapplicationidentifier.png" />
-    4.1. <strong>Important — App ID vs Ad Unit ID</strong><ul>
+    2.1. <strong>Important — App ID vs Ad Unit ID</strong><ul>
 <li><strong>App ID</strong> (contains <code>~</code>): used for app registration and manifest.</li>
 <li><strong>Ad Unit ID</strong> (contains <code>/</code>): used to load specific ad formats (banner, rewarded, etc.).</li>
 </ul>
 </li>
 <li>Once exported, go to <code>{{ ios_xcode_export_folder }}/{{your_project_name}}/ios/plugins/poing-godot-admob/scripts/</code> folder and open the terminal (must be inside this folder) and run these commands:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>update_and_install.sh
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>./update_and_install.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>update_and_install.sh
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>./update_and_install.sh
 </code></pre></div>
 <img alt="update_and_installsh" src="assets/ios/update_and_installsh.png" /></li>
 <li>This will create for your a <code>{{ your_project_name }}.xcworkspace</code> (e.g.: <code>AdMobAddon.xcworkspace</code>) file on your <code>{{ ios_xcode_export_folder }}</code>, open this file.</li>
-<li>Go to the Target of your Application and them <code>General -&gt; Frameworks, Libraries, and Embedded Content</code> and add all <code>Pods</code> in section.
+<li>Go to the Target of your Application and them <code>General -&gt; Frameworks, Libraries, and Embedded Content</code> and add all <code>Pods</code> in section <strong>except</strong> the <code>.bundle</code>.
 <img alt="add_libraries" src="assets/ios/add_libraries.png" /></li>
 <li>Select all Frameworks (⌘ + A) and put as <code>Do Not Embed</code>
 <img alt="do_not_embed" src="assets/ios/do_not_embed.png" /></li>
+<li><a href="https://github.com/poingstudios/godot-admob-ios/issues/127">If you are facing "__swift_FORCE_LOAD_" error, read this</a>.
+    10.1. Create a <code>Untitled.swift</code> file and Xcode will ask you to Create Bridge Header -&gt; Accept -&gt; then it'll build normally.
+    <img alt="untitled.swift" src="assets/ios/untitled.swift.png" /></li>
 <li>Run the Game.</li>
 <li><a href="https://github.com/godotengine/godot/issues/44681#issuecomment-751399783">If you are trying to run on Simulator and is not working read this</a>.</li>
 </ol>
@@ -1795,8 +1796,8 @@
 </div>
 <h2 id="initialize-the-google-mobile-ads-sdk">Initialize the Google Mobile Ads SDK</h2>
 <p>Prior to loading ads, ensure that your application initializes the Google Mobile Ads SDK. You can accomplish this by calling MobileAds.initialize(). This function initializes the SDK and triggers a completion listener once the initialization process is finished, or if it exceeds a 30-second timeout. It's important to note that this initialization should occur only once, ideally during the app's launch phase.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="n">MobileAds</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">MobileAds</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 </code></pre></div>
 <p>If you are utilizing mediation, it's essential to wait for the completion handler to be called before proceeding with ad loading. This step ensures that all mediation adapters are properly initialized before ad requests are made.</p>
 <h2 id="select-an-ad-format">Select an ad format</h2>
