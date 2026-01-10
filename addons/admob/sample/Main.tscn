@@ -97,7 +97,7 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("4_arial")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 35
 text = "AdMob Plugin"
 vertical_alignment = 1
 
@@ -114,7 +114,7 @@ clip_contents = false
 layout_mode = 2
 theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 0.8)
 theme_override_fonts/normal_font = ExtResource("4_arial")
-theme_override_font_sizes/normal_font_size = 12
+theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "[center][b]S U P P O R T   T H E   P R O J E C T[/b][/center]"
 fit_content = true
@@ -125,7 +125,7 @@ theme_override_constants/separation = 30
 alignment = 1
 
 [node name="Patreon" type="TextureButton" parent="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons"]
-custom_minimum_size = Vector2(130, 35)
+custom_minimum_size = Vector2(180, 55)
 layout_mode = 2
 texture_normal = ExtResource("5_patreon")
 ignore_texture_size = true
@@ -133,7 +133,7 @@ stretch_mode = 5
 script = SubResource("GDScript_1vvio")
 
 [node name="Ko-fi" type="TextureButton" parent="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons"]
-custom_minimum_size = Vector2(100, 35)
+custom_minimum_size = Vector2(140, 55)
 layout_mode = 2
 texture_normal = ExtResource("6_kofi")
 ignore_texture_size = true
@@ -141,7 +141,7 @@ stretch_mode = 5
 script = SubResource("GDScript_hcar3")
 
 [node name="PayPal" type="TextureButton" parent="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons"]
-custom_minimum_size = Vector2(110, 35)
+custom_minimum_size = Vector2(150, 55)
 layout_mode = 2
 texture_normal = ExtResource("7_paypal")
 ignore_texture_size = true

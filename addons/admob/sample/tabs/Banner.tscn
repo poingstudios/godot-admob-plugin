@@ -68,63 +68,63 @@ theme_override_constants/v_separation = 15
 columns = 3
 
 [node name="TOP_LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Top Left"
 icon = ExtResource("2_tl")
 expand_icon = true
 
 [node name="TOP" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Top"
 icon = ExtResource("3_t")
 expand_icon = true
 
 [node name="TOP_RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Top Right"
 icon = ExtResource("4_tr")
 expand_icon = true
 
 [node name="LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Left"
 icon = ExtResource("5_l")
 expand_icon = true
 
 [node name="CENTER" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Center"
 icon = ExtResource("6_c")
 expand_icon = true
 
 [node name="RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Right"
 icon = ExtResource("7_r")
 expand_icon = true
 
 [node name="BOTTOM_LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Bottom Left"
 icon = ExtResource("8_bl")
 expand_icon = true
 
 [node name="BOTTOM" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Bottom"
 icon = ExtResource("9_b")
 expand_icon = true
 
 [node name="BOTTOM_RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Bottom Right"
 icon = ExtResource("10_br")

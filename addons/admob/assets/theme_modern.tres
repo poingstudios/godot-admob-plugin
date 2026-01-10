@@ -18,10 +18,10 @@ corner_radius_bottom_left = 100
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p1r38"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_hover"]
-content_margin_left = 20.0
-content_margin_top = 10.0
-content_margin_right = 20.0
-content_margin_bottom = 10.0
+content_margin_left = 30.0
+content_margin_top = 18.0
+content_margin_right = 30.0
+content_margin_bottom = 18.0
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 100
 corner_radius_top_right = 100
@@ -31,10 +31,10 @@ shadow_color = Color(1, 1, 1, 0.3)
 shadow_size = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
-content_margin_left = 20.0
-content_margin_top = 10.0
-content_margin_right = 20.0
-content_margin_bottom = 10.0
+content_margin_left = 30.0
+content_margin_top = 18.0
+content_margin_right = 30.0
+content_margin_bottom = 18.0
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 100
 corner_radius_top_right = 100
@@ -45,10 +45,10 @@ shadow_size = 4
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_pressed"]
-content_margin_left = 20.0
-content_margin_top = 10.0
-content_margin_right = 20.0
-content_margin_bottom = 10.0
+content_margin_left = 30.0
+content_margin_top = 18.0
+content_margin_right = 30.0
+content_margin_bottom = 18.0
 bg_color = Color(0.8, 0.8, 0.8, 1)
 corner_radius_top_left = 100
 corner_radius_top_right = 100
@@ -168,13 +168,14 @@ corner_radius_top_right = 15
 
 [resource]
 default_font = ExtResource("1_arial")
-default_font_size = 18
+default_font_size = 20
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_disabled_color = Color(1, 1, 1, 0.4)
 Button/colors/font_focus_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_color = Color(0, 0, 0, 1)
 Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
 Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 22
 Button/styles/disabled = SubResource("StyleBoxFlat_button_disabled")
 Button/styles/focus = SubResource("StyleBoxEmpty_p1r38")
 Button/styles/hover = SubResource("StyleBoxFlat_button_hover")
@@ -200,7 +201,7 @@ Label/colors/font_shadow_color = Color(0, 0, 0, 0.2)
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
 Label/constants/shadow_outline_size = 2
-Label/font_sizes/font_size = 18
+Label/font_sizes/font_size = 24
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_panel_rounded")
 SectionCard/base_type = &"PanelContainer"
 SectionCard/styles/panel = SubResource("StyleBoxFlat_section_card")
