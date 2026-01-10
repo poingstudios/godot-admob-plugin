@@ -64,14 +64,17 @@ func _on_destroy_banner_pressed() -> void:
 		ad_view.destroy()
 		ad_view = null
 		_set_buttons_state(false)
+		get_tree().call_group("SafeArea", "reset_ad_overlap")
 
 func _on_show_banner_pressed() -> void:
 	if ad_view:
 		ad_view.show()
+		get_tree().call_group("SafeArea", "update_ad_overlap", ad_view)
 
 func _on_hide_banner_pressed() -> void:
 	if ad_view:
 		ad_view.hide()
+		get_tree().call_group("SafeArea", "reset_ad_overlap")
 
 func _on_get_width_pressed() -> void:
 	if ad_view:
@@ -80,6 +83,7 @@ func _on_get_width_pressed() -> void:
 func _on_ad_failed_to_load(load_ad_error: LoadAdError) -> void:
 	print("_on_ad_failed_to_load: " + load_ad_error.message)
 	_set_buttons_state(false) # Re-enable Load button if it fails
+	get_tree().call_group("SafeArea", "reset_ad_overlap")
 	
 func _on_ad_clicked() -> void:
 	print("_on_ad_clicked")
@@ -93,6 +97,7 @@ func _on_ad_impression() -> void:
 func _on_ad_loaded() -> void:
 	print("_on_ad_loaded")
 	_set_buttons_state(true)
+	get_tree().call_group("SafeArea", "update_ad_overlap", ad_view)
 	
 func _on_ad_opened() -> void:
 	print("_on_ad_opened")
