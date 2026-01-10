@@ -31,6 +31,7 @@ jobs:
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${GITHUB_REF#refs/tags/}
             VERSION=${VERSION#v}
+            VERSION=$(echo $VERSION | cut -d. -f1,2)
             
             mike deploy --push --update-aliases $VERSION stable
             mike set-default --push stable
