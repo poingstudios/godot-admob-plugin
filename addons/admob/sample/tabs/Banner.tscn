@@ -5,86 +5,115 @@
 [node name="Banner" type="VBoxContainer"]
 script = ExtResource("1_5pjv8")
 
-[node name="LoadBanner" type="Button" parent="."]
+[node name="BannerActions" type="VBoxContainer" parent="."]
 layout_mode = 2
-text = "LoadBanner"
+theme_override_constants/separation = 10
 
-[node name="DestroyBanner" type="Button" parent="."]
+[node name="LoadBanner" type="Button" parent="BannerActions"]
 layout_mode = 2
-disabled = true
-text = "DestroyBanner"
+text = "Load Banner"
 
-[node name="ShowBanner" type="Button" parent="."]
-layout_mode = 2
-disabled = true
-text = "ShowBanner"
-
-[node name="HideBanner" type="Button" parent="."]
+[node name="DestroyBanner" type="Button" parent="BannerActions"]
 layout_mode = 2
 disabled = true
-text = "HideBanner"
+text = "Destroy Banner"
 
-[node name="GetWidth" type="Button" parent="."]
+[node name="ShowBanner" type="Button" parent="BannerActions"]
 layout_mode = 2
 disabled = true
-text = "GetWidth"
+text = "Show Banner"
 
-[node name="Label" type="Label" parent="."]
+[node name="HideBanner" type="Button" parent="BannerActions"]
+layout_mode = 2
+disabled = true
+text = "Hide Banner"
+
+[node name="GetWidth" type="Button" parent="BannerActions"]
+layout_mode = 2
+disabled = true
+text = "Get Width"
+
+[node name="HSeparator" type="HSeparator" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="AdPositions" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"SectionCard"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AdPositions"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="AdPositions/VBoxContainer"]
 layout_mode = 2
 text = "AD POSITIONS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AdPositionList" type="VBoxContainer" parent="."]
+[node name="AdPositionList" type="GridContainer" parent="AdPositions/VBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
 
-[node name="TOP" type="Button" parent="AdPositionList"]
+[node name="TOP" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "TOP"
 
-[node name="BOTTOM" type="Button" parent="AdPositionList"]
+[node name="BOTTOM" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "BOTTOM"
 
-[node name="LEFT" type="Button" parent="AdPositionList"]
+[node name="LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "LEFT"
 
-[node name="RIGHT" type="Button" parent="AdPositionList"]
+[node name="RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "RIGHT"
 
-[node name="TOP_LEFT" type="Button" parent="AdPositionList"]
+[node name="TOP_LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "TOP LEFT"
 
-[node name="TOP_RIGHT" type="Button" parent="AdPositionList"]
+[node name="TOP_RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "TOP RIGHT"
 
-[node name="BOTTOM_LEFT" type="Button" parent="AdPositionList"]
+[node name="BOTTOM_LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "BOTTOM LEFT"
 
-[node name="BOTTOM_RIGHT" type="Button" parent="AdPositionList"]
+[node name="BOTTOM_RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "BOTTOM RIGHT"
 
-[node name="CENTER" type="Button" parent="AdPositionList"]
+[node name="CENTER" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 text = "CENTER"
 
-[connection signal="pressed" from="LoadBanner" to="." method="_on_load_banner_pressed"]
-[connection signal="pressed" from="DestroyBanner" to="." method="_on_destroy_banner_pressed"]
-[connection signal="pressed" from="ShowBanner" to="." method="_on_show_banner_pressed"]
-[connection signal="pressed" from="HideBanner" to="." method="_on_hide_banner_pressed"]
-[connection signal="pressed" from="GetWidth" to="." method="_on_get_width_pressed"]
-[connection signal="pressed" from="AdPositionList/TOP" to="." method="_on_top_pressed"]
-[connection signal="pressed" from="AdPositionList/BOTTOM" to="." method="_on_bottom_pressed"]
-[connection signal="pressed" from="AdPositionList/LEFT" to="." method="_on_left_pressed"]
-[connection signal="pressed" from="AdPositionList/RIGHT" to="." method="_on_right_pressed"]
-[connection signal="pressed" from="AdPositionList/TOP_LEFT" to="." method="_on_top_left_pressed"]
-[connection signal="pressed" from="AdPositionList/TOP_RIGHT" to="." method="_on_top_right_pressed"]
-[connection signal="pressed" from="AdPositionList/BOTTOM_LEFT" to="." method="_on_bottom_left_pressed"]
-[connection signal="pressed" from="AdPositionList/BOTTOM_RIGHT" to="." method="_on_bottom_right_pressed"]
-[connection signal="pressed" from="AdPositionList/CENTER" to="." method="_on_center_pressed"]
+[connection signal="pressed" from="BannerActions/LoadBanner" to="." method="_on_load_banner_pressed"]
+[connection signal="pressed" from="BannerActions/DestroyBanner" to="." method="_on_destroy_banner_pressed"]
+[connection signal="pressed" from="BannerActions/ShowBanner" to="." method="_on_show_banner_pressed"]
+[connection signal="pressed" from="BannerActions/HideBanner" to="." method="_on_hide_banner_pressed"]
+[connection signal="pressed" from="BannerActions/GetWidth" to="." method="_on_get_width_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP" to="." method="_on_top_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/BOTTOM" to="." method="_on_bottom_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/LEFT" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/RIGHT" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP_LEFT" to="." method="_on_top_left_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP_RIGHT" to="." method="_on_top_right_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/BOTTOM_LEFT" to="." method="_on_bottom_left_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/BOTTOM_RIGHT" to="." method="_on_bottom_right_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/CENTER" to="." method="_on_center_pressed"]

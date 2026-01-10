@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://0esyp38ds6yg"]
+[gd_scene load_steps=20 format=3 uid="uid://0esyp38ds6yg"]
 
 [ext_resource type="Script" uid="uid://bvlvnb742xsr1" path="res://addons/admob/sample/Main.gd" id="1_xm28w"]
 [ext_resource type="Texture2D" uid="uid://to8hnfn5fmrl" path="res://addons/admob/assets/icon-76.png" id="2_b280g"]
@@ -11,15 +11,17 @@
 [ext_resource type="PackedScene" uid="uid://iy12nk8vefwy" path="res://addons/admob/sample/tabs/Rewarded.tscn" id="8_atpxc"]
 [ext_resource type="PackedScene" uid="uid://cpxd2i7v6t6b6" path="res://addons/admob/sample/tabs/RewardedInterstitial.tscn" id="9_iwe72"]
 [ext_resource type="PackedScene" uid="uid://bnptawvmfxhhu" path="res://addons/admob/sample/tabs/Ump.tscn" id="10_7toto"]
+[ext_resource type="FontFile" uid="uid://cbpndyigigom6" path="res://addons/admob/assets/fonts/orange_juice_2_0.ttf" id="11_juice"]
 [ext_resource type="AudioStream" uid="uid://f3f176vu6pfo" path="res://addons/admob/assets/music.ogg" id="12_3yie5"]
 [ext_resource type="Script" uid="uid://bh53g1jdwb21i" path="res://addons/admob/sample/tabs/MobileAds.gd" id="12_tjkhy"]
-
-[sub_resource type="Theme" id="Theme_1p2mi"]
-default_font = ExtResource("3_acnhc")
-default_font_size = 20
+[ext_resource type="Theme" uid="uid://cax2scu7f6q4k" path="res://addons/admob/assets/theme_modern.tres" id="13_modern"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tj05g"]
-bg_color = Color(0.805616, 0.781486, 0.781947, 1)
+bg_color = Color(1, 1, 1, 0.15)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="GDScript" id="GDScript_1vvio"]
 script/source = "extends TextureButton
@@ -51,7 +53,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_1p2mi")
+theme = ExtResource("13_modern")
 script = ExtResource("1_xm28w")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -66,87 +68,100 @@ color = Color(0.996094, 0.425781, 0, 1)
 [node name="Content" type="VBoxContainer" parent="Background"]
 layout_mode = 1
 anchors_preset = 14
-anchor_top = 0.5
+anchor_top = 0.0
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = -129.5
-offset_bottom = 129.5
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Description" type="RichTextLabel" parent="Background/Content"]
+[node name="Header" type="PanelContainer" parent="Background/Content"]
 layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/outline_size = 2
+theme_type_variation = &"GlassPanel"
+
+[node name="Content" type="VBoxContainer" parent="Background/Content/Header"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Identity" type="HBoxContainer" parent="Background/Content/Header/Content"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Icon" type="TextureRect" parent="Background/Content/Header/Content/Identity"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("2_b280g")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Title" type="Label" parent="Background/Content/Header/Content/Identity"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("3_acnhc")
+theme_override_font_sizes/font_size = 28
+text = "AdMob Plugin"
+vertical_alignment = 1
+
+[node name="SupportCard" type="PanelContainer" parent="Background/Content/Header/Content"]
+layout_mode = 2
+theme_type_variation = &"SupportCard"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Background/Content/Header/Content/SupportCard"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SupportLabel" type="RichTextLabel" parent="Background/Content/Header/Content/SupportCard/VBoxContainer"]
+layout_mode = 2
+clip_contents = false
+theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 0.8)
 theme_override_fonts/normal_font = ExtResource("3_acnhc")
-theme_override_font_sizes/normal_font_size = 40
+theme_override_font_sizes/normal_font_size = 12
 bbcode_enabled = true
-text = "[pulse freq=1.0 ease=-1.0]Support the project
-[/pulse]"
+text = "[center][b]S U P P O R T   T H E   P R O J E C T[/b][/center]"
 fit_content = true
-horizontal_alignment = 1
 
-[node name="DonateButtons" type="PanelContainer" parent="Background/Content"]
+[node name="SupportButtons" type="HBoxContainer" parent="Background/Content/Header/Content/SupportCard/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tj05g")
+theme_override_constants/separation = 30
+alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/Content/DonateButtons"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="Patreon" type="TextureButton" parent="Background/Content/DonateButtons/HBoxContainer"]
-custom_minimum_size = Vector2(250, 60)
+[node name="Patreon" type="TextureButton" parent="Background/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons"]
+custom_minimum_size = Vector2(130, 35)
 layout_mode = 2
 texture_normal = ExtResource("3_t3dmm")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 5
 script = SubResource("GDScript_1vvio")
 
-[node name="Ko-fi" type="TextureButton" parent="Background/Content/DonateButtons/HBoxContainer"]
-custom_minimum_size = Vector2(150, 50)
+[node name="Ko-fi" type="TextureButton" parent="Background/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons"]
+custom_minimum_size = Vector2(100, 35)
 layout_mode = 2
 texture_normal = ExtResource("4_5kmgw")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 5
 script = SubResource("GDScript_hcar3")
 
-[node name="DonateButtons2" type="PanelContainer" parent="Background/Content"]
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_tj05g")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/Content/DonateButtons2"]
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="PayPal" type="TextureButton" parent="Background/Content/DonateButtons2/HBoxContainer"]
-custom_minimum_size = Vector2(250, 60)
+[node name="PayPal" type="TextureButton" parent="Background/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons"]
+custom_minimum_size = Vector2(110, 35)
 layout_mode = 2
 texture_normal = ExtResource("5_o2ew0")
 ignore_texture_size = true
-stretch_mode = 0
+stretch_mode = 5
 script = SubResource("GDScript_8xyos")
 
 [node name="Main" type="VBoxContainer" parent="Background/Content"]
 layout_mode = 2
-
-[node name="Title" type="PanelContainer" parent="Background/Content/Main"]
-layout_mode = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/Content/Main/Title"]
-layout_mode = 2
-
-[node name="Icon" type="TextureRect" parent="Background/Content/Main/Title/HBoxContainer"]
-layout_mode = 2
-texture = ExtResource("2_b280g")
-
-[node name="Description" type="Label" parent="Background/Content/Main/Title/HBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_acnhc")
-theme_override_font_sizes/font_size = 25
-text = "AdMob Plugin - Poing Studios"
+size_flags_vertical = 3
 
 [node name="Body" type="TabContainer" parent="Background/Content/Main"]
 layout_mode = 2
+size_flags_vertical = 3
 current_tab = 0
 
 [node name="Banner" parent="Background/Content/Main/Body" instance=ExtResource("6_xt5vc")]

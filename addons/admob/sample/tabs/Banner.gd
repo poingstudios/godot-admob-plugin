@@ -22,14 +22,14 @@
 
 extends VBoxContainer
 
-var ad_view : AdView
+var ad_view: AdView
 var ad_listener := AdListener.new()
 var adPosition := AdPosition.Values.TOP
-@onready var LoadButton := $LoadBanner
-@onready var DestroyButton := $DestroyBanner
-@onready var ShowButton := $ShowBanner
-@onready var HideButton := $HideBanner
-@onready var GetWidthButton := $GetWidth
+@onready var LoadButton := $BannerActions/LoadBanner
+@onready var DestroyButton := $BannerActions/DestroyBanner
+@onready var ShowButton := $BannerActions/ShowBanner
+@onready var HideButton := $BannerActions/HideBanner
+@onready var GetWidthButton := $BannerActions/GetWidth
 
 func _ready() -> void:
 	ad_listener.on_ad_failed_to_load = _on_ad_failed_to_load
@@ -41,7 +41,7 @@ func _ready() -> void:
 
 func _on_load_banner_pressed() -> void:
 	if ad_view:
-		ad_view.destroy() #always try to destroy the ad_view if won't use anymore to clear memory
+		ad_view.destroy() # always try to destroy the ad_view if won't use anymore to clear memory
 
 	var adSizecurrent_orientation := AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
 	print("adSizecurrent_orientation: ", adSizecurrent_orientation.width, ", ", adSizecurrent_orientation.height)
@@ -53,7 +53,7 @@ func _on_load_banner_pressed() -> void:
 	print("adSizelandscape: ", adSizelandscape.width, ", ", adSizelandscape.height)
 
 	var adSizesmart := AdSize.get_smart_banner_ad_size()
-	print("adSizesmart: ", adSizesmart.width, ", ",adSizesmart.height)
+	print("adSizesmart: ", adSizesmart.width, ", ", adSizesmart.height)
 
 	ad_view = AdView.new("ca-app-pub-3940256099942544/2934735716", adSizecurrent_orientation, adPosition)
 	ad_view.ad_listener = ad_listener
@@ -90,7 +90,7 @@ func _on_get_width_pressed() -> void:
 	if ad_view:
 		print(ad_view.get_width(), ", ", ad_view.get_height(), ", ", ad_view.get_width_in_pixels(), ", ", ad_view.get_height_in_pixels())
 
-func _on_ad_failed_to_load(load_ad_error : LoadAdError) -> void:
+func _on_ad_failed_to_load(load_ad_error: LoadAdError) -> void:
 	print("_on_ad_failed_to_load: " + load_ad_error.message)
 	
 func _on_ad_clicked() -> void:
