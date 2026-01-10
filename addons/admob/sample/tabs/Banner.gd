@@ -38,45 +38,32 @@ func _ready() -> void:
 	ad_listener.on_ad_impression = _on_ad_impression
 	ad_listener.on_ad_loaded = _on_ad_loaded
 	ad_listener.on_ad_opened = _on_ad_opened
+	_set_buttons_state(false)
+
+func _set_buttons_state(is_loaded: bool) -> void:
+	LoadButton.disabled = is_loaded
+	DestroyButton.disabled = !is_loaded
+	ShowButton.disabled = !is_loaded
+	HideButton.disabled = !is_loaded
+	GetWidthButton.disabled = !is_loaded
 
 func _on_load_banner_pressed() -> void:
 	if ad_view:
 		ad_view.destroy() # always try to destroy the ad_view if won't use anymore to clear memory
+	
+	_set_buttons_state(false) # Reset states while loading
 
 	var adSizecurrent_orientation := AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
-	print("adSizecurrent_orientation: ", adSizecurrent_orientation.width, ", ", adSizecurrent_orientation.height)
-
-	var adSizeportrait := AdSize.get_portrait_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
-	print("adSizeportrait: ", adSizeportrait.width, ", ", adSizeportrait.height)
-
-	var adSizelandscape := AdSize.get_landscape_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
-	print("adSizelandscape: ", adSizelandscape.width, ", ", adSizelandscape.height)
-
-	var adSizesmart := AdSize.get_smart_banner_ad_size()
-	print("adSizesmart: ", adSizesmart.width, ", ", adSizesmart.height)
-
 	ad_view = AdView.new("ca-app-pub-3940256099942544/2934735716", adSizecurrent_orientation, adPosition)
 	ad_view.ad_listener = ad_listener
 	var ad_request := AdRequest.new()
-	var vungle_mediation_extras := VungleInterstitialMediationExtras.new()
-	vungle_mediation_extras.all_placements = ["placement1", "placement2"]
-	vungle_mediation_extras.sound_enabled = true
-	vungle_mediation_extras.user_id = "testuserid"
-	
-	var ad_colony_mediation_extras := AdColonyMediationExtras.new()
-	ad_colony_mediation_extras.show_post_popup = false
-	ad_colony_mediation_extras.show_pre_popup = true
-	ad_request.mediation_extras.append(vungle_mediation_extras)
-	ad_request.mediation_extras.append(ad_colony_mediation_extras)
-	ad_request.keywords.append("21313")
-	ad_request.extras["ID"] = "value"
-
 	ad_view.load_ad(ad_request)
 
 func _on_destroy_banner_pressed() -> void:
 	if ad_view:
 		ad_view.destroy()
 		ad_view = null
+		_set_buttons_state(false)
 
 func _on_show_banner_pressed() -> void:
 	if ad_view:
@@ -92,6 +79,7 @@ func _on_get_width_pressed() -> void:
 
 func _on_ad_failed_to_load(load_ad_error: LoadAdError) -> void:
 	print("_on_ad_failed_to_load: " + load_ad_error.message)
+	_set_buttons_state(false) # Re-enable Load button if it fails
 	
 func _on_ad_clicked() -> void:
 	print("_on_ad_clicked")
@@ -104,46 +92,40 @@ func _on_ad_impression() -> void:
 	
 func _on_ad_loaded() -> void:
 	print("_on_ad_loaded")
-	DestroyButton.disabled = false
-	ShowButton.disabled = false
-	HideButton.disabled = false
-	GetWidthButton.disabled = false
+	_set_buttons_state(true)
 	
 func _on_ad_opened() -> void:
 	print("_on_ad_opened")
 
 
-func _on_top_pressed():
-	adPosition = AdPosition.Values.TOP
+func _update_position(new_position: int) -> void:
+	adPosition = new_position
+	if ad_view:
+		_on_load_banner_pressed()
 
+func _on_top_pressed():
+	_update_position(AdPosition.Values.TOP)
 
 func _on_bottom_pressed():
-	adPosition = AdPosition.Values.BOTTOM
-
+	_update_position(AdPosition.Values.BOTTOM)
 
 func _on_left_pressed():
-	adPosition = AdPosition.Values.LEFT
-
+	_update_position(AdPosition.Values.LEFT)
 
 func _on_right_pressed():
-	adPosition = AdPosition.Values.RIGHT
-
+	_update_position(AdPosition.Values.RIGHT)
 
 func _on_top_left_pressed():
-	adPosition = AdPosition.Values.TOP_LEFT
-
+	_update_position(AdPosition.Values.TOP_LEFT)
 
 func _on_top_right_pressed():
-	adPosition = AdPosition.Values.TOP_RIGHT
-
+	_update_position(AdPosition.Values.TOP_RIGHT)
 
 func _on_bottom_left_pressed():
-	adPosition = AdPosition.Values.BOTTOM_LEFT
-
+	_update_position(AdPosition.Values.BOTTOM_LEFT)
 
 func _on_bottom_right_pressed():
-	adPosition = AdPosition.Values.BOTTOM_RIGHT
-
+	_update_position(AdPosition.Values.BOTTOM_RIGHT)
 
 func _on_center_pressed():
-	adPosition = AdPosition.Values.CENTER
+	_update_position(AdPosition.Values.CENTER)

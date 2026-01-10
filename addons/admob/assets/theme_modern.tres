@@ -1,8 +1,8 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://cax2scu7f6q4k"]
+[gd_resource type="Theme" load_steps=18 format=3 uid="uid://cax2scu7f6q4k"]
 
 [ext_resource type="FontFile" uid="uid://ctd0my3oi3sl7" path="res://addons/admob/assets/fonts/arial.ttf" id="1_arial"]
-[ext_resource type="Texture2D" path="res://addons/admob/assets/arrow_left.svg" id="2_arrow_left"]
-[ext_resource type="Texture2D" path="res://addons/admob/assets/arrow_right.svg" id="3_arrow_right"]
+[ext_resource type="Texture2D" uid="uid://cco8g2kg2bb1h" path="res://addons/admob/assets/arrow_left.svg" id="2_arrow_left"]
+[ext_resource type="Texture2D" uid="uid://dsl4ryirrswdy" path="res://addons/admob/assets/arrow_right.svg" id="3_arrow_right"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]
 content_margin_left = 20.0
@@ -29,7 +29,6 @@ corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
 shadow_color = Color(1, 1, 1, 0.3)
 shadow_size = 8
-shadow_offset = Vector2(0, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_normal"]
 content_margin_left = 20.0
@@ -71,24 +70,6 @@ shadow_color = Color(0, 0, 0, 0.15)
 shadow_size = 10
 shadow_offset = Vector2(0, 5)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_support_card"]
-content_margin_left = 15.0
-content_margin_top = 15.0
-content_margin_right = 15.0
-content_margin_bottom = 15.0
-bg_color = Color(1, 1, 1, 0.4)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 0.3)
-shadow_color = Color(0, 0, 0, 0.05)
-shadow_size = 4
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel_rounded"]
 bg_color = Color(1, 1, 1, 0.15)
 corner_radius_top_left = 20
@@ -111,6 +92,24 @@ corner_radius_top_left = 20
 corner_radius_top_right = 20
 corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_support_card"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(1, 1, 1, 0.4)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.3)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.05)
+shadow_size = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_scroll_button"]
 content_margin_left = 25.0
@@ -193,6 +192,8 @@ CheckButton/styles/hover = SubResource("StyleBoxFlat_button_hover")
 CheckButton/styles/hover_pressed = SubResource("StyleBoxFlat_button_pressed")
 CheckButton/styles/normal = SubResource("StyleBoxFlat_button_normal")
 CheckButton/styles/pressed = SubResource("StyleBoxFlat_button_pressed")
+GlassPanel/base_type = &"PanelContainer"
+GlassPanel/styles/panel = SubResource("StyleBoxFlat_glass_panel")
 HSeparator/styles/separator = SubResource("StyleBoxEmpty_p1r38")
 Label/colors/font_color = Color(1, 1, 1, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0.2)
@@ -203,8 +204,6 @@ Label/font_sizes/font_size = 18
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_panel_rounded")
 SectionCard/base_type = &"PanelContainer"
 SectionCard/styles/panel = SubResource("StyleBoxFlat_section_card")
-GlassPanel/base_type = &"PanelContainer"
-GlassPanel/styles/panel = SubResource("StyleBoxFlat_glass_panel")
 SupportCard/base_type = &"PanelContainer"
 SupportCard/styles/panel = SubResource("StyleBoxFlat_support_card")
 TabContainer/colors/font_selected_color = Color(0, 0, 0, 1)

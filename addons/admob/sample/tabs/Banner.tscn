@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6u6s82p5d6qs"]
+[gd_scene load_steps=11 format=3 uid="uid://c6u6s82p5d6qs"]
 
 [ext_resource type="Script" uid="uid://d023ltbxjofyr" path="res://addons/admob/sample/tabs/Banner.gd" id="1_5pjv8"]
+[ext_resource type="Texture2D" uid="uid://c6d7aye5nwtvi" path="res://addons/admob/assets/pos_top_left.svg" id="2_tl"]
+[ext_resource type="Texture2D" uid="uid://kakk2nrappoc" path="res://addons/admob/assets/pos_top.svg" id="3_t"]
+[ext_resource type="Texture2D" uid="uid://ba3m3mh4pn8of" path="res://addons/admob/assets/pos_top_right.svg" id="4_tr"]
+[ext_resource type="Texture2D" uid="uid://cr4ao6vsp5736" path="res://addons/admob/assets/pos_left.svg" id="5_l"]
+[ext_resource type="Texture2D" uid="uid://b41mioah3scis" path="res://addons/admob/assets/pos_center.svg" id="6_c"]
+[ext_resource type="Texture2D" uid="uid://ceou56162w5po" path="res://addons/admob/assets/pos_right.svg" id="7_r"]
+[ext_resource type="Texture2D" uid="uid://bp0dyr8cp5ye0" path="res://addons/admob/assets/pos_bottom_left.svg" id="8_bl"]
+[ext_resource type="Texture2D" uid="uid://5v6slm2g7ad0" path="res://addons/admob/assets/pos_bottom.svg" id="9_b"]
+[ext_resource type="Texture2D" uid="uid://e3dqlgeny8lx" path="res://addons/admob/assets/pos_bottom_right.svg" id="10_br"]
 
 [node name="Banner" type="VBoxContainer"]
 script = ExtResource("1_5pjv8")
@@ -54,66 +63,84 @@ vertical_alignment = 1
 [node name="AdPositionList" type="GridContainer" parent="AdPositions/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/h_separation = 10
-theme_override_constants/v_separation = 10
-columns = 2
-
-[node name="TOP" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-text = "TOP"
-
-[node name="BOTTOM" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-text = "BOTTOM"
-
-[node name="LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-text = "LEFT"
-
-[node name="RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-text = "RIGHT"
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 3
 
 [node name="TOP_LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(160, 0)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-text = "TOP LEFT"
+tooltip_text = "Top Left"
+icon = ExtResource("2_tl")
+expand_icon = true
+
+[node name="TOP" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+tooltip_text = "Top"
+icon = ExtResource("3_t")
+expand_icon = true
 
 [node name="TOP_RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(160, 0)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-text = "TOP RIGHT"
+tooltip_text = "Top Right"
+icon = ExtResource("4_tr")
+expand_icon = true
 
-[node name="BOTTOM_LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(160, 0)
+[node name="LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-text = "BOTTOM LEFT"
-
-[node name="BOTTOM_RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(160, 0)
-layout_mode = 2
-text = "BOTTOM RIGHT"
+tooltip_text = "Left"
+icon = ExtResource("5_l")
+expand_icon = true
 
 [node name="CENTER" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
-custom_minimum_size = Vector2(160, 0)
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-text = "CENTER"
+tooltip_text = "Center"
+icon = ExtResource("6_c")
+expand_icon = true
+
+[node name="RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+tooltip_text = "Right"
+icon = ExtResource("7_r")
+expand_icon = true
+
+[node name="BOTTOM_LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+tooltip_text = "Bottom Left"
+icon = ExtResource("8_bl")
+expand_icon = true
+
+[node name="BOTTOM" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+tooltip_text = "Bottom"
+icon = ExtResource("9_b")
+expand_icon = true
+
+[node name="BOTTOM_RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+tooltip_text = "Bottom Right"
+icon = ExtResource("10_br")
+expand_icon = true
 
 [connection signal="pressed" from="BannerActions/LoadBanner" to="." method="_on_load_banner_pressed"]
 [connection signal="pressed" from="BannerActions/DestroyBanner" to="." method="_on_destroy_banner_pressed"]
 [connection signal="pressed" from="BannerActions/ShowBanner" to="." method="_on_show_banner_pressed"]
 [connection signal="pressed" from="BannerActions/HideBanner" to="." method="_on_hide_banner_pressed"]
 [connection signal="pressed" from="BannerActions/GetWidth" to="." method="_on_get_width_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP" to="." method="_on_top_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/BOTTOM" to="." method="_on_bottom_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/LEFT" to="." method="_on_left_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/RIGHT" to="." method="_on_right_pressed"]
 [connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP_LEFT" to="." method="_on_top_left_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP" to="." method="_on_top_pressed"]
 [connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP_RIGHT" to="." method="_on_top_right_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/BOTTOM_LEFT" to="." method="_on_bottom_left_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/BOTTOM_RIGHT" to="." method="_on_bottom_right_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/LEFT" to="." method="_on_left_pressed"]
 [connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/CENTER" to="." method="_on_center_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/RIGHT" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/BOTTOM_LEFT" to="." method="_on_bottom_left_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/BOTTOM" to="." method="_on_bottom_pressed"]
+[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/BOTTOM_RIGHT" to="." method="_on_bottom_right_pressed"]

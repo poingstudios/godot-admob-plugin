@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://0esyp38ds6yg"]
+[gd_scene load_steps=18 format=3 uid="uid://0esyp38ds6yg"]
 
 [ext_resource type="Script" uid="uid://bvlvnb742xsr1" path="res://addons/admob/sample/Main.gd" id="1_xm28w"]
 [ext_resource type="Texture2D" uid="uid://to8hnfn5fmrl" path="res://addons/admob/assets/icon-76.png" id="2_b280g"]
@@ -11,17 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://iy12nk8vefwy" path="res://addons/admob/sample/tabs/Rewarded.tscn" id="8_atpxc"]
 [ext_resource type="PackedScene" uid="uid://cpxd2i7v6t6b6" path="res://addons/admob/sample/tabs/RewardedInterstitial.tscn" id="9_iwe72"]
 [ext_resource type="PackedScene" uid="uid://bnptawvmfxhhu" path="res://addons/admob/sample/tabs/Ump.tscn" id="10_7toto"]
-[ext_resource type="FontFile" uid="uid://cbpndyigigom6" path="res://addons/admob/assets/fonts/orange_juice_2_0.ttf" id="11_juice"]
 [ext_resource type="AudioStream" uid="uid://f3f176vu6pfo" path="res://addons/admob/assets/music.ogg" id="12_3yie5"]
 [ext_resource type="Script" uid="uid://bh53g1jdwb21i" path="res://addons/admob/sample/tabs/MobileAds.gd" id="12_tjkhy"]
 [ext_resource type="Theme" uid="uid://cax2scu7f6q4k" path="res://addons/admob/assets/theme_modern.tres" id="13_modern"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tj05g"]
-bg_color = Color(1, 1, 1, 0.15)
-corner_radius_top_left = 20
-corner_radius_top_right = 20
-corner_radius_bottom_right = 20
-corner_radius_bottom_left = 20
 
 [sub_resource type="GDScript" id="GDScript_1vvio"]
 script/source = "extends TextureButton
@@ -67,8 +59,7 @@ color = Color(0.996094, 0.425781, 0, 1)
 
 [node name="Content" type="VBoxContainer" parent="Background"]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 10.0
@@ -117,8 +108,8 @@ layout_mode = 2
 theme_override_constants/separation = 12
 
 [node name="SupportLabel" type="RichTextLabel" parent="Background/Content/Header/Content/SupportCard/VBoxContainer"]
-layout_mode = 2
 clip_contents = false
+layout_mode = 2
 theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 0.8)
 theme_override_fonts/normal_font = ExtResource("3_acnhc")
 theme_override_font_sizes/normal_font_size = 12
@@ -222,9 +213,6 @@ scroll_following = true
 visible_characters = 1
 visible_ratio = 0.480769
 
-[connection signal="pressed" from="Background/Content/DonateButtons/HBoxContainer/Patreon" to="Background/Content/DonateButtons/HBoxContainer/Patreon" method="_on_pressed"]
-[connection signal="pressed" from="Background/Content/DonateButtons/HBoxContainer/Ko-fi" to="Background/Content/DonateButtons/HBoxContainer/Ko-fi" method="_on_pressed"]
-[connection signal="pressed" from="Background/Content/DonateButtons2/HBoxContainer/PayPal" to="Background/Content/DonateButtons2/HBoxContainer/PayPal" method="_on_pressed"]
 [connection signal="pressed" from="Background/Content/Main/Body/MobileAds/GetInitializationStatus" to="." method="_on_get_initialization_status_pressed"]
 [connection signal="pressed" from="Background/Content/Main/Body/MobileAds/SetiOSAppPauseOnBackgroundButton" to="Background/Content/Main/Body/MobileAds" method="_on_set_ios_app_pause_on_background_button_pressed"]
 [connection signal="pressed" from="Background/Content/Main/Body/MobileAds/SetMuteMusic" to="Background/Content/Main/Body/MobileAds" method="_on_mute_music_pressed"]
