@@ -96,7 +96,7 @@ theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_fonts/font = ExtResource("4_arial")
 theme_override_font_sizes/font_size = 35
-text = "AdMob Plugin"
+text = "AdMob Plugin - Poing Studios"
 vertical_alignment = 1
 
 [node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox"]
