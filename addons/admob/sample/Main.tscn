@@ -26,14 +26,12 @@ func _on_pressed():
 [sub_resource type="GDScript" id="GDScript_hcar3"]
 script/source = "extends TextureButton
 
-
 func _on_pressed():
 	OS.shell_open(\"https://ko-fi.com/poingstudios\") 
 "
 
 [sub_resource type="GDScript" id="GDScript_8xyos"]
 script/source = "extends TextureButton
-
 
 func _on_pressed():
 	OS.shell_open(\"https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8\") 
@@ -67,31 +65,31 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_safe")
 
-[node name="Content" type="VBoxContainer" parent="Background/SafeArea"]
+[node name="LayoutContainer" type="VBoxContainer" parent="Background/SafeArea"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Header" type="PanelContainer" parent="Background/SafeArea/Content"]
+[node name="HeaderContainer" type="PanelContainer" parent="Background/SafeArea/LayoutContainer"]
 layout_mode = 2
 theme_type_variation = &"GlassPanel"
 
-[node name="Content" type="VBoxContainer" parent="Background/SafeArea/Content/Header"]
+[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="Identity" type="HBoxContainer" parent="Background/SafeArea/Content/Header/Content"]
+[node name="LogoContainer" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="Icon" type="TextureRect" parent="Background/SafeArea/Content/Header/Content/Identity"]
+[node name="AppIcon" type="TextureRect" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("3_icon")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="Title" type="Label" parent="Background/SafeArea/Content/Header/Content/Identity"]
+[node name="AppTitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer"]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2)
 theme_override_constants/shadow_offset_x = 1
@@ -101,15 +99,15 @@ theme_override_font_sizes/font_size = 35
 text = "AdMob Plugin"
 vertical_alignment = 1
 
-[node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/Content/Header/Content"]
+[node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox"]
 layout_mode = 2
 theme_type_variation = &"SupportCard"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Background/SafeArea/Content/Header/Content/SupportCard"]
+[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard"]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="SupportLabel" type="RichTextLabel" parent="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer"]
+[node name="SupportLabel" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox"]
 clip_contents = false
 layout_mode = 2
 theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 0.8)
@@ -119,12 +117,12 @@ bbcode_enabled = true
 text = "[center][b]S U P P O R T   T H E   P R O J E C T[/b][/center]"
 fit_content = true
 
-[node name="SupportButtons" type="HBoxContainer" parent="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer"]
+[node name="SupportButtons" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox"]
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Patreon" type="TextureButton" parent="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons"]
+[node name="Patreon" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons"]
 custom_minimum_size = Vector2(180, 55)
 layout_mode = 2
 texture_normal = ExtResource("5_patreon")
@@ -132,7 +130,7 @@ ignore_texture_size = true
 stretch_mode = 5
 script = SubResource("GDScript_1vvio")
 
-[node name="Ko-fi" type="TextureButton" parent="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons"]
+[node name="Ko-fi" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons"]
 custom_minimum_size = Vector2(140, 55)
 layout_mode = 2
 texture_normal = ExtResource("6_kofi")
@@ -140,7 +138,7 @@ ignore_texture_size = true
 stretch_mode = 5
 script = SubResource("GDScript_hcar3")
 
-[node name="PayPal" type="TextureButton" parent="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons"]
+[node name="PayPal" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons"]
 custom_minimum_size = Vector2(150, 55)
 layout_mode = 2
 texture_normal = ExtResource("7_paypal")
@@ -148,80 +146,79 @@ ignore_texture_size = true
 stretch_mode = 5
 script = SubResource("GDScript_8xyos")
 
-[node name="Main" type="VBoxContainer" parent="Background/SafeArea/Content"]
+[node name="TabContent" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Body" type="TabContainer" parent="Background/SafeArea/Content/Main"]
+[node name="MainTabs" type="TabContainer" parent="Background/SafeArea/LayoutContainer/TabContent"]
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 0
 
-[node name="Banner" parent="Background/SafeArea/Content/Main/Body" instance=ExtResource("8_banner")]
+[node name="Banner" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" instance=ExtResource("8_banner")]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Interstitial" parent="Background/SafeArea/Content/Main/Body" instance=ExtResource("9_interstitial")]
+[node name="Interstitial" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" instance=ExtResource("9_interstitial")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Rewarded" parent="Background/SafeArea/Content/Main/Body" instance=ExtResource("10_rewarded")]
+[node name="Rewarded" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" instance=ExtResource("10_rewarded")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="RewardedInterstitial" parent="Background/SafeArea/Content/Main/Body" instance=ExtResource("11_rewarded_interstitial")]
+[node name="RewardedInterstitial" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" instance=ExtResource("11_rewarded_interstitial")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
-[node name="UMP" parent="Background/SafeArea/Content/Main/Body" instance=ExtResource("12_ump")]
+[node name="UMP" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" instance=ExtResource("12_ump")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
-[node name="MobileAds" type="VBoxContainer" parent="Background/SafeArea/Content/Main/Body"]
+[node name="MobileAds" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs"]
 visible = false
 layout_mode = 2
 script = ExtResource("14_mobile_ads_script")
 metadata/_tab_index = 5
 
-[node name="GetInitializationStatus" type="Button" parent="Background/SafeArea/Content/Main/Body/MobileAds"]
+[node name="GetInitStatus" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
 layout_mode = 2
-text = "GetInitializationStatus"
+text = "Get Initialization Status"
 
-[node name="SetiOSAppPauseOnBackgroundButton" type="CheckButton" parent="Background/SafeArea/Content/Main/Body/MobileAds"]
+[node name="iOSAppPause" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
 layout_mode = 2
 text = "Set iOS App Pause On Background"
 alignment = 1
 
-[node name="SetMuteMusic" type="CheckButton" parent="Background/SafeArea/Content/Main/Body/MobileAds"]
+[node name="MuteMusic" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
 layout_mode = 2
 text = "Mute Music"
 alignment = 1
 
-[node name="Music" type="AudioStreamPlayer" parent="Background/SafeArea/Content/Main/Body/MobileAds"]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
 stream = ExtResource("13_music")
 volume_db = -10.0
 autoplay = true
 
-[node name="OutputContainer" type="PanelContainer" parent="Background/SafeArea/Content"]
+[node name="ConsolePanel" type="PanelContainer" parent="Background/SafeArea/LayoutContainer"]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 theme_type_variation = &"GlassPanel"
 
-[node name="Output" type="RichTextLabel" parent="Background/SafeArea/Content/OutputContainer"]
+[node name="ConsoleOutput" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/ConsolePanel"]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
 text = "--- LOGS START ---"
-scroll_active = true
 scroll_following = true
 
-[connection signal="pressed" from="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons/Patreon" to="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons/Patreon" method="_on_pressed"]
-[connection signal="pressed" from="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons/Ko-fi" to="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons/Ko-fi" method="_on_pressed"]
-[connection signal="pressed" from="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons/PayPal" to="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons/PayPal" method="_on_pressed"]
-[connection signal="pressed" from="Background/SafeArea/Content/Main/Body/MobileAds/GetInitializationStatus" to="." method="_on_get_initialization_status_pressed"]
-[connection signal="pressed" from="Background/SafeArea/Content/Main/Body/MobileAds/SetiOSAppPauseOnBackgroundButton" to="Background/SafeArea/Content/Main/Body/MobileAds" method="_on_set_ios_app_pause_on_background_button_pressed"]
-[connection signal="pressed" from="Background/SafeArea/Content/Main/Body/MobileAds/SetMuteMusic" to="Background/SafeArea/Content/Main/Body/MobileAds" method="_on_mute_music_pressed"]
+[connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" method="_on_pressed"]
+[connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Ko-fi" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Ko-fi" method="_on_pressed"]
+[connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/PayPal" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/PayPal" method="_on_pressed"]
+[connection signal="pressed" from="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/GetInitStatus" to="." method="_on_get_initialization_status_pressed"]
+[connection signal="pressed" from="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/iOSAppPause" to="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" method="_on_set_ios_app_pause_on_background_button_pressed"]
+[connection signal="pressed" from="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/MuteMusic" to="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" method="_on_mute_music_pressed"]

@@ -46,84 +46,84 @@ text = "Get Size"
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="AdPositions" type="PanelContainer" parent="."]
+[node name="PositionCard" type="PanelContainer" parent="."]
 layout_mode = 2
 theme_type_variation = &"SectionCard"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AdPositions"]
+[node name="VBox" type="VBoxContainer" parent="PositionCard"]
 layout_mode = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="AdPositions/VBoxContainer"]
+[node name="Label" type="Label" parent="PositionCard/VBox"]
 layout_mode = 2
 text = "AD POSITIONS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AdPositionList" type="GridContainer" parent="AdPositions/VBoxContainer"]
+[node name="PositionGrid" type="GridContainer" parent="PositionCard/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_constants/h_separation = 15
 theme_override_constants/v_separation = 15
 columns = 3
 
-[node name="TOP_LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+[node name="TOP_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Top Left"
 icon = ExtResource("2_tl")
 expand_icon = true
 
-[node name="TOP" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+[node name="TOP" type="Button" parent="PositionCard/VBox/PositionGrid"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Top"
 icon = ExtResource("3_t")
 expand_icon = true
 
-[node name="TOP_RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+[node name="TOP_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Top Right"
 icon = ExtResource("4_tr")
 expand_icon = true
 
-[node name="LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+[node name="LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Left"
 icon = ExtResource("5_l")
 expand_icon = true
 
-[node name="CENTER" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+[node name="CENTER" type="Button" parent="PositionCard/VBox/PositionGrid"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Center"
 icon = ExtResource("6_c")
 expand_icon = true
 
-[node name="RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+[node name="RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Right"
 icon = ExtResource("7_r")
 expand_icon = true
 
-[node name="BOTTOM_LEFT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+[node name="BOTTOM_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Bottom Left"
 icon = ExtResource("8_bl")
 expand_icon = true
 
-[node name="BOTTOM" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+[node name="BOTTOM" type="Button" parent="PositionCard/VBox/PositionGrid"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Bottom"
 icon = ExtResource("9_b")
 expand_icon = true
 
-[node name="BOTTOM_RIGHT" type="Button" parent="AdPositions/VBoxContainer/AdPositionList"]
+[node name="BOTTOM_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
 custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 tooltip_text = "Bottom Right"
@@ -135,12 +135,12 @@ expand_icon = true
 [connection signal="pressed" from="BannerActions/ShowBanner" to="." method="_on_show_banner_pressed"]
 [connection signal="pressed" from="BannerActions/HideBanner" to="." method="_on_hide_banner_pressed"]
 [connection signal="pressed" from="BannerActions/GetSize" to="." method="_on_get_size_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP_LEFT" to="." method="_on_top_left_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP" to="." method="_on_top_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP_RIGHT" to="." method="_on_top_right_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/LEFT" to="." method="_on_left_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/CENTER" to="." method="_on_center_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/RIGHT" to="." method="_on_right_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/BOTTOM_LEFT" to="." method="_on_bottom_left_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/BOTTOM" to="." method="_on_bottom_pressed"]
-[connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/BOTTOM_RIGHT" to="." method="_on_bottom_right_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/TOP_LEFT" to="." method="_on_top_left_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/TOP" to="." method="_on_top_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/TOP_RIGHT" to="." method="_on_top_right_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/LEFT" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/CENTER" to="." method="_on_center_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/RIGHT" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/BOTTOM_LEFT" to="." method="_on_bottom_left_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/BOTTOM" to="." method="_on_bottom_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/BOTTOM_RIGHT" to="." method="_on_bottom_right_pressed"]
