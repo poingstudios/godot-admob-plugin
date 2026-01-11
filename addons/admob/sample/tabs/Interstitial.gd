@@ -22,6 +22,8 @@
 
 extends VBoxContainer
 
+const Registry = preload("res://addons/admob/internal/sample_registry.gd")
+
 var interstitial_ad: InterstitialAd
 var interstitial_ad_load_callback := InterstitialAdLoadCallback.new()
 var full_screen_content_callback := FullScreenContentCallback.new()
@@ -35,26 +37,27 @@ func _ready():
 	interstitial_ad_load_callback.on_ad_loaded = on_interstitial_ad_loaded
 
 	full_screen_content_callback.on_ad_clicked = func() -> void:
-		print("on_ad_clicked")
+		_log("on_ad_clicked")
 	full_screen_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
-		print("on_ad_dismissed_full_screen_content")
+		_log("on_ad_dismissed_full_screen_content")
 		destroy()
 		
 	full_screen_content_callback.on_ad_failed_to_show_full_screen_content = func(ad_error: AdError) -> void:
-		print("on_ad_failed_to_show_full_screen_content")
+		_log("on_ad_failed_to_show_full_screen_content")
 	full_screen_content_callback.on_ad_impression = func() -> void:
-		print("on_ad_impression")
+		_log("on_ad_impression")
 	full_screen_content_callback.on_ad_showed_full_screen_content = func() -> void:
-		print("on_ad_showed_full_screen_content")
+		_log("on_ad_showed_full_screen_content")
 
 func _on_load_pressed():
+	_log("Loading interstitial...")
 	InterstitialAdLoader.new().load("ca-app-pub-3940256099942544/1033173712", AdRequest.new(), interstitial_ad_load_callback)
 
 func on_interstitial_ad_failed_to_load(adError: LoadAdError) -> void:
-	print(adError.message)
+	_log(adError.message)
 	
 func on_interstitial_ad_loaded(interstitial_ad: InterstitialAd) -> void:
-	print("interstitial ad loaded" + str(interstitial_ad._uid))
+	_log("interstitial ad loaded" + str(interstitial_ad._uid))
 	interstitial_ad.full_screen_content_callback = full_screen_content_callback
 	self.interstitial_ad = interstitial_ad
 	DestroyButton.disabled = false
@@ -63,6 +66,7 @@ func on_interstitial_ad_loaded(interstitial_ad: InterstitialAd) -> void:
 
 func _on_show_pressed():
 	if interstitial_ad:
+		_log("Showing interstitial")
 		interstitial_ad.show()
 
 func _on_destroy_pressed():
@@ -72,6 +76,11 @@ func destroy():
 	if interstitial_ad:
 		interstitial_ad.destroy()
 		interstitial_ad = null # need to load again
+		_log("Interstitial destroyed")
 		DestroyButton.disabled = true
 		ShowButton.disabled = true
 		LoadButton.disabled = false
+
+func _log(message: String) -> void:
+	if Registry.logger:
+		Registry.logger.log_msg("[Interstitial] " + message)

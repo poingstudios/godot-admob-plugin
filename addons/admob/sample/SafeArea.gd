@@ -1,10 +1,12 @@
 extends MarginContainer
 
+const Registry = preload("res://addons/admob/internal/sample_registry.gd")
+
 var ad_margin_top := 0.0
 var ad_margin_bottom := 0.0
 
 func _ready() -> void:
-	add_to_group("SafeArea")
+	Registry.safe_area = self
 	_update_safe_area()
 	get_viewport().size_changed.connect(_update_safe_area)
 
@@ -47,16 +49,21 @@ func _update_safe_area() -> void:
 	if window_size.x == 0 or window_size.y == 0:
 		return
 		
-	# On mobile, DisplayServer returns physical pixels.
-	# Control nodes use logical pixels (defined in project settings).
-	# We need to scale physical to logical.
+	# Convert physical to logical.
 	var viewport_size := Vector2(get_viewport().get_visible_rect().size)
 	var scale_factor := viewport_size.y / window_size.y
 	
-	var m_top = (safe_area.position.y + ad_margin_top) * scale_factor
-	var m_left = safe_area.position.x * scale_factor
-	var m_bottom = (window_size.y - (safe_area.position.y + safe_area.size.y) + ad_margin_bottom) * scale_factor
-	var m_right = (window_size.x - (safe_area.position.x + safe_area.size.x)) * scale_factor
+	# Current DisplayServer Safe Area
+	var safe_top := safe_area.position.y
+	var safe_left := safe_area.position.x
+	var safe_bottom := window_size.y - (safe_area.position.y + safe_area.size.y)
+	var safe_right := window_size.x - (safe_area.position.x + safe_area.size.x)
+	
+	# Final Margins (Physical) then Scaled
+	var m_top = (safe_top + ad_margin_top) * scale_factor
+	var m_left = safe_left * scale_factor
+	var m_bottom = (safe_bottom + ad_margin_bottom) * scale_factor
+	var m_right = safe_right * scale_factor
 	
 	add_theme_constant_override("margin_top", m_top)
 	add_theme_constant_override("margin_left", m_left)

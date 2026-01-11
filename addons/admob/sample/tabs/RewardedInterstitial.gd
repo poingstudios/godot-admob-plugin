@@ -22,8 +22,10 @@
 
 extends VBoxContainer
 
+const Registry = preload("res://addons/admob/internal/sample_registry.gd")
+
 var on_user_earned_reward_listener := OnUserEarnedRewardListener.new()
-var rewarded_interstitial_ad : RewardedInterstitialAd
+var rewarded_interstitial_ad: RewardedInterstitialAd
 var rewarded_interstitial_ad_load_callback := RewardedInterstitialAdLoadCallback.new()
 var full_screen_content_callback := FullScreenContentCallback.new()
 
@@ -38,26 +40,27 @@ func _ready():
 	rewarded_interstitial_ad_load_callback.on_ad_loaded = on_rewarded_interstitial_ad_loaded
 
 	full_screen_content_callback.on_ad_clicked = func() -> void:
-		print("on_ad_clicked")
+		_log("on_ad_clicked")
 	full_screen_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
-		print("on_ad_dismissed_full_screen_content")
+		_log("on_ad_dismissed_full_screen_content")
 		destroy()
 		
-	full_screen_content_callback.on_ad_failed_to_show_full_screen_content = func(ad_error : AdError) -> void:
-		print("on_ad_failed_to_show_full_screen_content")
+	full_screen_content_callback.on_ad_failed_to_show_full_screen_content = func(ad_error: AdError) -> void:
+		_log("on_ad_failed_to_show_full_screen_content")
 	full_screen_content_callback.on_ad_impression = func() -> void:
-		print("on_ad_impression")
+		_log("on_ad_impression")
 	full_screen_content_callback.on_ad_showed_full_screen_content = func() -> void:
-		print("on_ad_showed_full_screen_content")
+		_log("on_ad_showed_full_screen_content")
 
 func _on_load_pressed():
+	_log("Loading rewarded interstitial...")
 	RewardedInterstitialAdLoader.new().load("ca-app-pub-3940256099942544/5354046379", AdRequest.new(), rewarded_interstitial_ad_load_callback)
 
-func on_rewarded_interstitial_ad_failed_to_load(adError : LoadAdError) -> void:
-	print(adError.message)
+func on_rewarded_interstitial_ad_failed_to_load(adError: LoadAdError) -> void:
+	_log(adError.message)
 	
-func on_rewarded_interstitial_ad_loaded(rewarded_interstitial_ad : RewardedInterstitialAd) -> void:
-	print("rewarded interstitial ad loaded" + str(rewarded_interstitial_ad._uid))
+func on_rewarded_interstitial_ad_loaded(rewarded_interstitial_ad: RewardedInterstitialAd) -> void:
+	_log("rewarded interstitial ad loaded" + str(rewarded_interstitial_ad._uid))
 	rewarded_interstitial_ad.full_screen_content_callback = full_screen_content_callback
 
 	var server_side_verification_options := ServerSideVerificationOptions.new()
@@ -71,10 +74,11 @@ func on_rewarded_interstitial_ad_loaded(rewarded_interstitial_ad : RewardedInter
 
 func _on_show_pressed():
 	if rewarded_interstitial_ad:
+		_log("Showing rewarded interstitial")
 		rewarded_interstitial_ad.show(on_user_earned_reward_listener)
 		
-func on_user_earned_reward(rewarded_item : RewardedItem):
-	print("on_user_earned_reward, rewarded_item interstitial:", rewarded_item.amount, rewarded_item.type)
+func on_user_earned_reward(rewarded_item: RewardedItem):
+	_log("on_user_earned_reward, rewarded_item interstitial: %d %s" % [rewarded_item.amount, rewarded_item.type])
 
 func _on_destroy_pressed():
 	destroy()
@@ -82,8 +86,13 @@ func _on_destroy_pressed():
 func destroy():
 	if rewarded_interstitial_ad:
 		rewarded_interstitial_ad.destroy()
-		rewarded_interstitial_ad = null #need to load again
+		rewarded_interstitial_ad = null # need to load again
+		_log("Rewarded interstitial destroyed")
 		
 		DestroyButton.disabled = true
 		ShowButton.disabled = true
 		LoadButton.disabled = false
+
+func _log(message: String) -> void:
+	if Registry.logger:
+		Registry.logger.log_msg("[RewardedInterstitial] " + message)

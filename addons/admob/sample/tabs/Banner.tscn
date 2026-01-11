@@ -37,10 +37,10 @@ layout_mode = 2
 disabled = true
 text = "Hide Banner"
 
-[node name="GetWidth" type="Button" parent="BannerActions"]
+[node name="GetSize" type="Button" parent="BannerActions"]
 layout_mode = 2
 disabled = true
-text = "Get Width"
+text = "Get Size"
 
 [node name="HSeparator" type="HSeparator" parent="."]
 layout_mode = 2
@@ -134,7 +134,7 @@ expand_icon = true
 [connection signal="pressed" from="BannerActions/DestroyBanner" to="." method="_on_destroy_banner_pressed"]
 [connection signal="pressed" from="BannerActions/ShowBanner" to="." method="_on_show_banner_pressed"]
 [connection signal="pressed" from="BannerActions/HideBanner" to="." method="_on_hide_banner_pressed"]
-[connection signal="pressed" from="BannerActions/GetWidth" to="." method="_on_get_width_pressed"]
+[connection signal="pressed" from="BannerActions/GetSize" to="." method="_on_get_size_pressed"]
 [connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP_LEFT" to="." method="_on_top_left_pressed"]
 [connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP" to="." method="_on_top_pressed"]
 [connection signal="pressed" from="AdPositions/VBoxContainer/AdPositionList/TOP_RIGHT" to="." method="_on_top_right_pressed"]

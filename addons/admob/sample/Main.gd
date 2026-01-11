@@ -22,7 +22,13 @@
 
 extends Control
 
+const Registry = preload("res://addons/admob/internal/sample_registry.gd")
+
+@onready var output_label: RichTextLabel = $Background/SafeArea/Content/OutputContainer/Output
+
 func _ready() -> void:
+	Registry.logger = self
+	log_msg("Main initialized")
 	var on_initialization_complete_listener := OnInitializationCompleteListener.new()
 	on_initialization_complete_listener.on_initialization_complete = _on_initialization_complete
 	var request_configuration := RequestConfiguration.new()
@@ -34,24 +40,27 @@ func _ready() -> void:
 	MobileAds.set_request_configuration(request_configuration)
 	MobileAds.initialize(on_initialization_complete_listener)
 
-	
-func _on_initialization_complete(initialization_status : InitializationStatus) -> void:
-	print("MobileAds initialization complete")
+func log_msg(message: String) -> void:
+	print(message) # Keep console print
+	if output_label:
+		output_label.text += "\n" + message
+
+func _on_initialization_complete(initialization_status: InitializationStatus) -> void:
+	log_msg("MobileAds initialization complete")
 	print_all_values(initialization_status)
 	var ad_colony_app_options := AdColonyAppOptions.new()
-	print("set values ad_colony")
+	log_msg("set values ad_colony")
 	ad_colony_app_options.set_privacy_consent_string(AdColonyAppOptions.CCPA, "STRIaNG CCPA")
 	ad_colony_app_options.set_privacy_framework_required(AdColonyAppOptions.CCPA, false)
 	ad_colony_app_options.set_user_id("asdaaaad")
 	ad_colony_app_options.set_test_mode(false)
 	
-	print(ad_colony_app_options.get_privacy_consent_string(AdColonyAppOptions.CCPA))
-	print(ad_colony_app_options.get_privacy_framework_required(AdColonyAppOptions.CCPA))
-	print(ad_colony_app_options.get_user_id())
-	print(ad_colony_app_options.get_test_mode())
+	log_msg(str(ad_colony_app_options.get_privacy_consent_string(AdColonyAppOptions.CCPA)))
+	log_msg(str(ad_colony_app_options.get_privacy_framework_required(AdColonyAppOptions.CCPA)))
+	log_msg(str(ad_colony_app_options.get_user_id()))
+	log_msg(str(ad_colony_app_options.get_test_mode()))
 	
 	if OS.get_name() == "iOS":
-		#FBAdSettings is available only for iOS, Google didn't put this method on Android SDK
 		FBAdSettings.set_advertiser_tracking_enabled(true)
 		
 	Vungle.update_ccpa_status(Vungle.Consent.OPTED_IN)
@@ -64,7 +73,8 @@ func _on_get_initialization_status_pressed() -> void:
 	if initialization_status:
 		print_all_values(initialization_status)
 
-func print_all_values(initialization_status : InitializationStatus) -> void:
+func print_all_values(initialization_status: InitializationStatus) -> void:
 	for key in initialization_status.adapter_status_map:
-		var adapterStatus : AdapterStatus = initialization_status.adapter_status_map[key]
-		prints("Key:", key, "Latency:", adapterStatus.latency, "Initialization State:", adapterStatus.initialization_state, "Description:", adapterStatus.description)
+		var adapterStatus: AdapterStatus = initialization_status.adapter_status_map[key]
+		var line := "Key: %s Latency: %d State: %d Desc: %s" % [key, adapterStatus.latency, adapterStatus.initialization_state, adapterStatus.description]
+		log_msg(line)

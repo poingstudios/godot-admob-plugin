@@ -22,6 +22,8 @@
 
 extends VBoxContainer
 
+const Registry = preload("res://addons/admob/internal/sample_registry.gd")
+
 var ad_view: AdView
 var ad_listener := AdListener.new()
 var adPosition := AdPosition.Values.TOP
@@ -29,7 +31,7 @@ var adPosition := AdPosition.Values.TOP
 @onready var DestroyButton := $BannerActions/DestroyBanner
 @onready var ShowButton := $BannerActions/ShowBanner
 @onready var HideButton := $BannerActions/HideBanner
-@onready var GetWidthButton := $BannerActions/GetWidth
+@onready var GetSizeButton := $BannerActions/GetSize
 
 func _ready() -> void:
 	ad_listener.on_ad_failed_to_load = _on_ad_failed_to_load
@@ -45,7 +47,7 @@ func _set_buttons_state(is_loaded: bool) -> void:
 	DestroyButton.disabled = !is_loaded
 	ShowButton.disabled = !is_loaded
 	HideButton.disabled = !is_loaded
-	GetWidthButton.disabled = !is_loaded
+	GetSizeButton.disabled = !is_loaded
 
 func _on_load_banner_pressed() -> void:
 	if ad_view:
@@ -53,6 +55,7 @@ func _on_load_banner_pressed() -> void:
 	
 	_set_buttons_state(false) # Reset states while loading
 
+	_log("Loading banner...")
 	var adSizecurrent_orientation := AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
 	ad_view = AdView.new("ca-app-pub-3940256099942544/2934735716", adSizecurrent_orientation, adPosition)
 	ad_view.ad_listener = ad_listener
@@ -63,44 +66,58 @@ func _on_destroy_banner_pressed() -> void:
 	if ad_view:
 		ad_view.destroy()
 		ad_view = null
+		_log("Banner destroyed")
 		_set_buttons_state(false)
-		get_tree().call_group("SafeArea", "reset_ad_overlap")
+		if Registry.safe_area:
+			Registry.safe_area.reset_ad_overlap()
 
 func _on_show_banner_pressed() -> void:
 	if ad_view:
 		ad_view.show()
-		get_tree().call_group("SafeArea", "update_ad_overlap", ad_view)
+		_log("Showing banner")
+		if Registry.safe_area:
+			Registry.safe_area.update_ad_overlap(ad_view)
 
 func _on_hide_banner_pressed() -> void:
 	if ad_view:
 		ad_view.hide()
-		get_tree().call_group("SafeArea", "reset_ad_overlap")
+		_log("Banner hidden")
+		if Registry.safe_area:
+			Registry.safe_area.reset_ad_overlap()
 
-func _on_get_width_pressed() -> void:
+func _on_get_size_pressed() -> void:
 	if ad_view:
-		print(ad_view.get_width(), ", ", ad_view.get_height(), ", ", ad_view.get_width_in_pixels(), ", ", ad_view.get_height_in_pixels())
+		var size_info := "W: %d, H: %d | Pixels: %dx%d" % [
+			ad_view.get_width(),
+			ad_view.get_height(),
+			ad_view.get_width_in_pixels(),
+			ad_view.get_height_in_pixels()
+		]
+		_log(size_info)
 
 func _on_ad_failed_to_load(load_ad_error: LoadAdError) -> void:
-	print("_on_ad_failed_to_load: " + load_ad_error.message)
+	_log("_on_ad_failed_to_load: " + load_ad_error.message)
 	_set_buttons_state(false) # Re-enable Load button if it fails
-	get_tree().call_group("SafeArea", "reset_ad_overlap")
+	if Registry.safe_area:
+		Registry.safe_area.reset_ad_overlap()
 	
 func _on_ad_clicked() -> void:
-	print("_on_ad_clicked")
+	_log("_on_ad_clicked")
 	
 func _on_ad_closed() -> void:
-	print("_on_ad_closed")
+	_log("_on_ad_closed")
 	
 func _on_ad_impression() -> void:
-	print("_on_ad_impression")
+	_log("_on_ad_impression")
 	
 func _on_ad_loaded() -> void:
-	print("_on_ad_loaded")
+	_log("_on_ad_loaded")
 	_set_buttons_state(true)
-	get_tree().call_group("SafeArea", "update_ad_overlap", ad_view)
+	if Registry.safe_area:
+		Registry.safe_area.update_ad_overlap(ad_view)
 	
 func _on_ad_opened() -> void:
-	print("_on_ad_opened")
+	_log("_on_ad_opened")
 
 
 func _update_position(new_position: int) -> void:
@@ -134,3 +151,9 @@ func _on_bottom_right_pressed():
 
 func _on_center_pressed():
 	_update_position(AdPosition.Values.CENTER)
+
+func _log(message: String) -> void:
+	if Registry.logger:
+		Registry.logger.log_msg("[Banner] " + message)
+	else:
+		print("[Banner] (Logger not found) " + message)

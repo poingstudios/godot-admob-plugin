@@ -5,10 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://dsl4ryirrswdy" path="res://addons/admob/assets/arrow_right.svg" id="3_arrow_right"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]
-content_margin_left = 20.0
-content_margin_top = 10.0
-content_margin_right = 20.0
-content_margin_bottom = 10.0
+content_margin_left = 30.0
+content_margin_top = 18.0
+content_margin_right = 30.0
+content_margin_bottom = 18.0
 bg_color = Color(1, 1, 1, 0.3)
 corner_radius_top_left = 100
 corner_radius_top_right = 100

@@ -206,14 +206,18 @@ stream = ExtResource("13_music")
 volume_db = -10.0
 autoplay = true
 
-[node name="Output" type="RichTextLabel" parent="Background/SafeArea/Content"]
-visible = false
+[node name="OutputContainer" type="PanelContainer" parent="Background/SafeArea/Content"]
+custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
-text = "TEST"
-fit_content = true
+theme_type_variation = &"GlassPanel"
+
+[node name="Output" type="RichTextLabel" parent="Background/SafeArea/Content/OutputContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "--- LOGS START ---"
+scroll_active = true
 scroll_following = true
-visible_characters = 1
-visible_ratio = 0.480769
 
 [connection signal="pressed" from="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons/Patreon" to="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons/Patreon" method="_on_pressed"]
 [connection signal="pressed" from="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons/Ko-fi" to="Background/SafeArea/Content/Header/Content/SupportCard/VBoxContainer/SupportButtons/Ko-fi" method="_on_pressed"]

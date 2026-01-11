@@ -22,6 +22,8 @@
 
 extends VBoxContainer
 
+const Registry = preload("res://addons/admob/internal/sample_registry.gd")
+
 var rewarded_ad: RewardedAd
 var on_user_earned_reward_listener := OnUserEarnedRewardListener.new()
 var rewarded_ad_load_callback := RewardedAdLoadCallback.new()
@@ -38,26 +40,27 @@ func _ready():
 	rewarded_ad_load_callback.on_ad_loaded = on_rewarded_ad_loaded
 
 	full_screen_content_callback.on_ad_clicked = func() -> void:
-		print("on_ad_clicked")
+		_log("on_ad_clicked")
 	full_screen_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
-		print("on_ad_dismissed_full_screen_content")
+		_log("on_ad_dismissed_full_screen_content")
 		destroy()
 		
 	full_screen_content_callback.on_ad_failed_to_show_full_screen_content = func(ad_error: AdError) -> void:
-		print("on_ad_failed_to_show_full_screen_content")
+		_log("on_ad_failed_to_show_full_screen_content")
 	full_screen_content_callback.on_ad_impression = func() -> void:
-		print("on_ad_impression")
+		_log("on_ad_impression")
 	full_screen_content_callback.on_ad_showed_full_screen_content = func() -> void:
-		print("on_ad_showed_full_screen_content")
+		_log("on_ad_showed_full_screen_content")
 
 func _on_load_pressed() -> void:
+	_log("Loading rewarded ad...")
 	RewardedAdLoader.new().load("ca-app-pub-3940256099942544/1712485313", AdRequest.new(), rewarded_ad_load_callback)
 
 func on_rewarded_ad_failed_to_load(adError: LoadAdError) -> void:
-	print(adError.message)
+	_log(adError.message)
 	
 func on_rewarded_ad_loaded(rewarded_ad: RewardedAd) -> void:
-	print("rewarded ad loaded" + str(rewarded_ad._uid))
+	_log("rewarded ad loaded" + str(rewarded_ad._uid))
 	rewarded_ad.full_screen_content_callback = full_screen_content_callback
 
 	var server_side_verification_options := ServerSideVerificationOptions.new()
@@ -72,10 +75,11 @@ func on_rewarded_ad_loaded(rewarded_ad: RewardedAd) -> void:
 
 func _on_show_pressed():
 	if rewarded_ad:
+		_log("Showing rewarded ad")
 		rewarded_ad.show(on_user_earned_reward_listener)
 
 func on_user_earned_reward(rewarded_item: RewardedItem):
-	print("on_user_earned_reward, rewarded_item: rewarded", rewarded_item.amount, rewarded_item.type)
+	_log("on_user_earned_reward, rewarded_item: rewarded %d %s" % [rewarded_item.amount, rewarded_item.type])
 
 func _on_destroy_pressed():
 	destroy()
@@ -84,6 +88,11 @@ func destroy():
 	if rewarded_ad:
 		rewarded_ad.destroy()
 		rewarded_ad = null # need to load again
+		_log("Rewarded ad destroyed")
 		DestroyButton.disabled = true
 		ShowButton.disabled = true
 		LoadButton.disabled = false
+
+func _log(message: String) -> void:
+	if Registry.logger:
+		Registry.logger.log_msg("[Rewarded] " + message)
