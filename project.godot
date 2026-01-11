@@ -72,7 +72,7 @@ config={
 config/name="AdMobAddon"
 run/main_scene="res://addons/admob/sample/Main.tscn"
 config/features=PackedStringArray("4.5", "GL Compatibility")
-config/icon="res://addons/admob/assets/icon-76.png"
+config/icon="uid://cg0bma40wb4dp"
 
 [display]
 

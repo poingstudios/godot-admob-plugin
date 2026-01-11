@@ -1,17 +1,17 @@
 # MIT License
-
+#
 # Copyright (c) 2023-present Poing Studios
-
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,56 +22,70 @@
 
 extends VBoxContainer
 
-var interstitial_ad: InterstitialAd
-var interstitial_ad_load_callback := InterstitialAdLoadCallback.new()
-var full_screen_content_callback := FullScreenContentCallback.new()
+const Registry = preload("res://addons/admob/internal/sample_registry.gd")
 
-@onready var LoadButton := $Load
-@onready var ShowButton := $Show
-@onready var DestroyButton := $Destroy
+var _interstitial_ad: InterstitialAd
+var _load_callback := InterstitialAdLoadCallback.new()
+var _content_callback := FullScreenContentCallback.new()
 
-func _ready():
-	interstitial_ad_load_callback.on_ad_failed_to_load = on_interstitial_ad_failed_to_load
-	interstitial_ad_load_callback.on_ad_loaded = on_interstitial_ad_loaded
+@onready var _load_button: Button = $Load
+@onready var _show_button: Button = $Show
+@onready var _destroy_button: Button = $Destroy
 
-	full_screen_content_callback.on_ad_clicked = func() -> void:
-		print("on_ad_clicked")
-	full_screen_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
-		print("on_ad_dismissed_full_screen_content")
-		destroy()
+func _ready() -> void:
+	_load_callback.on_ad_failed_to_load = _on_ad_failed_to_load
+	_load_callback.on_ad_loaded = _on_ad_loaded
+
+	_content_callback.on_ad_clicked = func() -> void: _log("Ad clicked")
+	_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
+		_log("Ad dismissed")
+		_destroy_ad()
 		
-	full_screen_content_callback.on_ad_failed_to_show_full_screen_content = func(ad_error: AdError) -> void:
-		print("on_ad_failed_to_show_full_screen_content")
-	full_screen_content_callback.on_ad_impression = func() -> void:
-		print("on_ad_impression")
-	full_screen_content_callback.on_ad_showed_full_screen_content = func() -> void:
-		print("on_ad_showed_full_screen_content")
-
-func _on_load_pressed():
-	InterstitialAdLoader.new().load("ca-app-pub-3940256099942544/1033173712", AdRequest.new(), interstitial_ad_load_callback)
-
-func on_interstitial_ad_failed_to_load(adError: LoadAdError) -> void:
-	print(adError.message)
+	_content_callback.on_ad_failed_to_show_full_screen_content = func(err: AdError) -> void:
+		_log("Failed to show: " + err.message)
+	_content_callback.on_ad_impression = func() -> void: _log("Impression recorded")
+	_content_callback.on_ad_showed_full_screen_content = func() -> void: _log("Ad showed")
 	
-func on_interstitial_ad_loaded(interstitial_ad: InterstitialAd) -> void:
-	print("interstitial ad loaded" + str(interstitial_ad._uid))
-	interstitial_ad.full_screen_content_callback = full_screen_content_callback
-	self.interstitial_ad = interstitial_ad
-	DestroyButton.disabled = false
-	ShowButton.disabled = false
-	LoadButton.disabled = true
+	_update_ui_state(false)
 
-func _on_show_pressed():
-	if interstitial_ad:
-		interstitial_ad.show()
+func _update_ui_state(is_loaded: bool) -> void:
+	_load_button.disabled = is_loaded
+	_show_button.disabled = !is_loaded
+	_destroy_button.disabled = !is_loaded
 
-func _on_destroy_pressed():
-	destroy()
+func _on_load_pressed() -> void:
+	_log("Loading interstitial...")
+	InterstitialAdLoader.new().load("ca-app-pub-3940256099942544/1033173712", AdRequest.new(), _load_callback)
 
-func destroy():
-	if interstitial_ad:
-		interstitial_ad.destroy()
-		interstitial_ad = null # need to load again
-		DestroyButton.disabled = true
-		ShowButton.disabled = true
-		LoadButton.disabled = false
+func _on_show_pressed() -> void:
+	if _interstitial_ad:
+		_log("Showing interstitial ad...")
+		_interstitial_ad.show()
+
+func _on_destroy_pressed() -> void:
+	_destroy_ad()
+
+func _destroy_ad() -> void:
+	if _interstitial_ad:
+		_interstitial_ad.destroy()
+		_interstitial_ad = null
+		_log("Ad destroyed")
+		_update_ui_state(false)
+
+#region Callbacks
+func _on_ad_failed_to_load(error: LoadAdError) -> void:
+	_log("Failed to load: " + error.message)
+	_update_ui_state(false)
+	
+func _on_ad_loaded(ad: InterstitialAd) -> void:
+	_log("Ad loaded successfully (UID: %s)" % str(ad._uid))
+	ad.full_screen_content_callback = _content_callback
+	_interstitial_ad = ad
+	_update_ui_state(true)
+#endregion
+
+func _log(message: String) -> void:
+	if Registry.logger:
+		Registry.logger.log_message("[Interstitial] " + message)
+	else:
+		print("[Interstitial] " + message)

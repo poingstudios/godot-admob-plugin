@@ -1,17 +1,17 @@
 # MIT License
-
+#
 # Copyright (c) 2023-present Poing Studios
-
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,49 +22,66 @@
 
 extends Control
 
-func _ready() -> void:
-	var on_initialization_complete_listener := OnInitializationCompleteListener.new()
-	on_initialization_complete_listener.on_initialization_complete = _on_initialization_complete
-	var request_configuration := RequestConfiguration.new()
-	request_configuration.tag_for_child_directed_treatment = 1
-	request_configuration.tag_for_under_age_of_consent = 1
-	request_configuration.max_ad_content_rating = RequestConfiguration.MAX_AD_CONTENT_RATING_G
-	request_configuration.test_device_ids = ["asdasda"]
-	request_configuration.convert_to_dictionary()
-	MobileAds.set_request_configuration(request_configuration)
-	MobileAds.initialize(on_initialization_complete_listener)
+const Registry = preload("res://addons/admob/internal/sample_registry.gd")
 
+@onready var _console_output: RichTextLabel = $Background/SafeArea/LayoutContainer/ConsolePanel/ConsoleOutput
+
+func _ready() -> void:
+	Registry.logger = self
+	log_message("Main initialized")
 	
-func _on_initialization_complete(initialization_status : InitializationStatus) -> void:
-	print("MobileAds initialization complete")
-	print_all_values(initialization_status)
-	var ad_colony_app_options := AdColonyAppOptions.new()
-	print("set values ad_colony")
-	ad_colony_app_options.set_privacy_consent_string(AdColonyAppOptions.CCPA, "STRIaNG CCPA")
-	ad_colony_app_options.set_privacy_framework_required(AdColonyAppOptions.CCPA, false)
-	ad_colony_app_options.set_user_id("asdaaaad")
-	ad_colony_app_options.set_test_mode(false)
+	_initialize_mobile_ads()
+
+func log_message(message: String) -> void:
+	print(message)
+	if _console_output:
+		_console_output.text += "\n" + message
+
+func _initialize_mobile_ads() -> void:
+	var on_init_listener := OnInitializationCompleteListener.new()
+	on_init_listener.on_initialization_complete = _on_initialization_complete
 	
-	print(ad_colony_app_options.get_privacy_consent_string(AdColonyAppOptions.CCPA))
-	print(ad_colony_app_options.get_privacy_framework_required(AdColonyAppOptions.CCPA))
-	print(ad_colony_app_options.get_user_id())
-	print(ad_colony_app_options.get_test_mode())
+	var request_config := RequestConfiguration.new()
+	request_config.tag_for_child_directed_treatment = RequestConfiguration.TagForChildDirectedTreatment.TRUE
+	request_config.tag_for_under_age_of_consent = RequestConfiguration.TagForUnderAgeOfConsent.TRUE
+	request_config.max_ad_content_rating = RequestConfiguration.MAX_AD_CONTENT_RATING_G
+	request_config.test_device_ids = [] # Production ready
+	
+	MobileAds.set_request_configuration(request_config)
+	MobileAds.initialize(on_init_listener)
+
+func _on_initialization_complete(status: InitializationStatus) -> void:
+	log_message("MobileAds initialization complete")
+	_log_adapter_status(status)
+	
+	_setup_mediation_adapters()
 	
 	if OS.get_name() == "iOS":
-		#FBAdSettings is available only for iOS, Google didn't put this method on Android SDK
 		FBAdSettings.set_advertiser_tracking_enabled(true)
-		
-	Vungle.update_ccpa_status(Vungle.Consent.OPTED_IN)
+
+func _setup_mediation_adapters() -> void:
+	# AdColony setup example
+	var ad_colony_options := AdColonyAppOptions.new()
+	ad_colony_options.set_privacy_consent_string(AdColonyAppOptions.CCPA, "OPTED_OUT")
+	ad_colony_options.set_privacy_framework_required(AdColonyAppOptions.CCPA, false)
+	ad_colony_options.set_test_mode(false)
+	
+	# Vungle setup example
 	Vungle.update_ccpa_status(Vungle.Consent.OPTED_OUT)
-	Vungle.update_consent_status(Vungle.Consent.OPTED_IN, "message1")
-	Vungle.update_consent_status(Vungle.Consent.OPTED_OUT, "message2")
+	Vungle.update_consent_status(Vungle.Consent.OPTED_IN, "consent_message")
 
 func _on_get_initialization_status_pressed() -> void:
-	var initialization_status := MobileAds.get_initialization_status()
-	if initialization_status:
-		print_all_values(initialization_status)
+	var status := MobileAds.get_initialization_status()
+	if status:
+		_log_adapter_status(status)
 
-func print_all_values(initialization_status : InitializationStatus) -> void:
-	for key in initialization_status.adapter_status_map:
-		var adapterStatus : AdapterStatus = initialization_status.adapter_status_map[key]
-		prints("Key:", key, "Latency:", adapterStatus.latency, "Initialization State:", adapterStatus.initialization_state, "Description:", adapterStatus.description)
+func _log_adapter_status(status: InitializationStatus) -> void:
+	for adapter_name in status.adapter_status_map:
+		var adapter_status: AdapterStatus = status.adapter_status_map[adapter_name]
+		var info := "[%s] State: %d | Latency: %dms | Desc: %s" % [
+			adapter_name,
+			adapter_status.initialization_state,
+			adapter_status.latency,
+			adapter_status.description
+		]
+		log_message(info)

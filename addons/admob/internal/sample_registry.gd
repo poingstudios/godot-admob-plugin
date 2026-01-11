@@ -1,6 +1,6 @@
 # MIT License
 #
-# Copyright (c) 2023-present Poing Studios
+# Copyright (c) 2026-present Poing Studios
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -20,26 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends VBoxContainer
+# This static registry allows for decoupled communication between sample components.
+# It avoids the use of global groups and complex node path dependencies.
 
-const Registry = preload("res://addons/admob/internal/sample_registry.gd")
-
-@onready var _ios_pause_check: CheckButton = $iOSAppPause
-@onready var _mute_music_check: CheckButton = $MuteMusic
-@onready var _music_player: AudioStreamPlayer = $MusicPlayer
-
-func _on_set_ios_app_pause_on_background_button_pressed() -> void:
-	var is_enabled := _ios_pause_check.button_pressed
-	_log("Setting iOS App Pause on Background: " + str(is_enabled))
-	MobileAds.set_ios_app_pause_on_background(is_enabled)
-
-func _on_mute_music_pressed() -> void:
-	var is_muted := _mute_music_check.button_pressed
-	_log("Muting music: " + str(is_muted))
-	_music_player.stream_paused = is_muted
-
-func _log(message: String) -> void:
-	if Registry.logger:
-		Registry.logger.log_message("[MobileAds] " + message)
-	else:
-		print("[MobileAds] " + message)
+static var logger: Node = null # Expects a node with a 'log_message(String)' method
+static var safe_area: Node = null # Expects a SafeArea node instance
