@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://0esyp38ds6yg"]
+[gd_scene format=3 uid="uid://0esyp38ds6yg"]
 
 [ext_resource type="Script" uid="uid://bvlvnb742xsr1" path="res://addons/admob/sample/Main.gd" id="1_xm28w"]
 [ext_resource type="Script" uid="uid://ccy0heku3fag" path="res://addons/admob/sample/SafeArea.gd" id="2_safe"]
@@ -37,7 +37,7 @@ func _on_pressed():
 	OS.shell_open(\"https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8\") 
 "
 
-[node name="Main" type="Control"]
+[node name="Main" type="Control" unique_id=1832778232]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +47,7 @@ grow_vertical = 2
 theme = ExtResource("15_theme")
 script = ExtResource("1_xm28w")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=1942836878]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,7 +56,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.996094, 0.425781, 0, 1)
 
-[node name="SafeArea" type="MarginContainer" parent="Background"]
+[node name="SafeArea" type="MarginContainer" parent="Background" unique_id=1638496235]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,31 +65,31 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_safe")
 
-[node name="LayoutContainer" type="VBoxContainer" parent="Background/SafeArea"]
+[node name="LayoutContainer" type="VBoxContainer" parent="Background/SafeArea" unique_id=2057200662]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="HeaderContainer" type="PanelContainer" parent="Background/SafeArea/LayoutContainer"]
+[node name="HeaderContainer" type="PanelContainer" parent="Background/SafeArea/LayoutContainer" unique_id=38038062]
 layout_mode = 2
 theme_type_variation = &"GlassPanel"
 
-[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer"]
+[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer" unique_id=789473909]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="LogoContainer" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox"]
+[node name="LogoContainer" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox" unique_id=796450913]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="AppIcon" type="TextureRect" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer"]
+[node name="AppIcon" type="TextureRect" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer" unique_id=1323060165]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("3_icon")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AppTitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer"]
+[node name="AppTitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer" unique_id=1372599038]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2)
 theme_override_constants/shadow_offset_x = 1
@@ -99,15 +99,15 @@ theme_override_font_sizes/font_size = 35
 text = "AdMob Plugin - Poing Studios"
 vertical_alignment = 1
 
-[node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox"]
+[node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox" unique_id=147720098]
 layout_mode = 2
 theme_type_variation = &"SupportCard"
 
-[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard"]
+[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard" unique_id=1919517316]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="SupportLabel" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox"]
+[node name="SupportLabel" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=1292975985]
 clip_contents = false
 layout_mode = 2
 theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 0.8)
@@ -117,12 +117,12 @@ bbcode_enabled = true
 text = "[center][b]S U P P O R T   T H E   P R O J E C T[/b][/center]"
 fit_content = true
 
-[node name="SupportButtons" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox"]
+[node name="SupportButtons" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=846813546]
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Patreon" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons"]
+[node name="Patreon" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=1602398362]
 custom_minimum_size = Vector2(180, 55)
 layout_mode = 2
 texture_normal = ExtResource("5_patreon")
@@ -130,7 +130,7 @@ ignore_texture_size = true
 stretch_mode = 5
 script = SubResource("GDScript_1vvio")
 
-[node name="Ko-fi" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons"]
+[node name="Ko-fi" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=231267142]
 custom_minimum_size = Vector2(140, 55)
 layout_mode = 2
 texture_normal = ExtResource("6_kofi")
@@ -138,7 +138,7 @@ ignore_texture_size = true
 stretch_mode = 5
 script = SubResource("GDScript_hcar3")
 
-[node name="PayPal" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons"]
+[node name="PayPal" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=324206342]
 custom_minimum_size = Vector2(150, 55)
 layout_mode = 2
 texture_normal = ExtResource("7_paypal")
@@ -146,70 +146,70 @@ ignore_texture_size = true
 stretch_mode = 5
 script = SubResource("GDScript_8xyos")
 
-[node name="TabContent" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer"]
+[node name="TabContent" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer" unique_id=2130940613]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MainTabs" type="TabContainer" parent="Background/SafeArea/LayoutContainer/TabContent"]
+[node name="MainTabs" type="TabContainer" parent="Background/SafeArea/LayoutContainer/TabContent" unique_id=1194212701]
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 0
 
-[node name="Banner" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" instance=ExtResource("8_banner")]
+[node name="Banner" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=1384004359 instance=ExtResource("8_banner")]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="Interstitial" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" instance=ExtResource("9_interstitial")]
+[node name="Interstitial" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=252705233 instance=ExtResource("9_interstitial")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
-[node name="Rewarded" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" instance=ExtResource("10_rewarded")]
+[node name="Rewarded" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=1701539580 instance=ExtResource("10_rewarded")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 2
 
-[node name="RewardedInterstitial" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" instance=ExtResource("11_rewarded_interstitial")]
+[node name="RewardedInterstitial" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=720146644 instance=ExtResource("11_rewarded_interstitial")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3
 
-[node name="UMP" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" instance=ExtResource("12_ump")]
+[node name="UMP" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=672142508 instance=ExtResource("12_ump")]
 visible = false
 layout_mode = 2
 metadata/_tab_index = 4
 
-[node name="MobileAds" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs"]
+[node name="MobileAds" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=1283119144]
 visible = false
 layout_mode = 2
 script = ExtResource("14_mobile_ads_script")
 metadata/_tab_index = 5
 
-[node name="GetInitStatus" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
+[node name="GetInitStatus" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=946846338]
 layout_mode = 2
 text = "Get Initialization Status"
 
-[node name="iOSAppPause" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
+[node name="iOSAppPause" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=996153257]
 layout_mode = 2
 text = "Set iOS App Pause On Background"
 alignment = 1
 
-[node name="MuteMusic" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
+[node name="MuteMusic" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=1134705458]
 layout_mode = 2
 text = "Mute Music"
 alignment = 1
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=1499804228]
 stream = ExtResource("13_music")
 volume_db = -10.0
 autoplay = true
 
-[node name="ConsolePanel" type="PanelContainer" parent="Background/SafeArea/LayoutContainer"]
+[node name="ConsolePanel" type="PanelContainer" parent="Background/SafeArea/LayoutContainer" unique_id=35469342]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 theme_type_variation = &"GlassPanel"
 
-[node name="ConsoleOutput" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/ConsolePanel"]
+[node name="ConsoleOutput" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/ConsolePanel" unique_id=393436169]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true

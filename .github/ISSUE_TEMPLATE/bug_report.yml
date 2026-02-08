@@ -5,25 +5,25 @@ body:
 - type: input
   attributes:
     label: Godot version
-    placeholder: '3.5'
+    placeholder: '4.6'
   validations:
     required: true
 - type: input
   attributes:
     label: Plugin version
-    placeholder: '1.2.3'
+    placeholder: '4.0.0'
   validations:
     required: true
 - type: input
   attributes:
     label: System information
-    placeholder: 'Catalina 10.15.7'
+    placeholder: 'Windows 11'
   validations:
     required: true
 - type: input
   attributes:
     label: Phone information, if applicable
-    placeholder: 'iPhone 6 running iOS 8.1'
+    placeholder: 'Samsung Galaxy S23 running Android 13'
 - type: textarea
   attributes:
     label: Issue description

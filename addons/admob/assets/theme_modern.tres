@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=18 format=3 uid="uid://cax2scu7f6q4k"]
+[gd_resource type="Theme" format=3 uid="uid://cax2scu7f6q4k"]
 
 [ext_resource type="FontFile" uid="uid://ctd0my3oi3sl7" path="res://addons/admob/assets/fonts/arial.ttf" id="1_arial"]
 [ext_resource type="Texture2D" uid="uid://cco8g2kg2bb1h" path="res://addons/admob/assets/arrow_left.svg" id="2_arrow_left"]
