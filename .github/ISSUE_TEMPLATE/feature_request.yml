@@ -3,12 +3,12 @@ description: Suggest an idea for this project
 body:
 - type: textarea
   attributes:
-    label: Is your feature request related to a problem? If so, please describe.
-- type: textarea
-  attributes:
     label: What feature or improvement would you like to see?
   validations:
     required: true
+- type: textarea
+  attributes:
+    label: Is your feature request related to a problem? If so, please describe.
 - type: textarea
   attributes:
     label: Additional context

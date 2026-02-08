@@ -67,11 +67,15 @@ config={
 }
 }
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="AdMobAddon"
 run/main_scene="res://addons/admob/sample/Main.tscn"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="uid://cg0bma40wb4dp"
 
 [display]
