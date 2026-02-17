@@ -16,7 +16,7 @@
   Supports [godot-admob-android](https://github.com/poingstudios/godot-admob-android) and [godot-admob-ios](https://github.com/poingstudios/godot-admob-ios) natively.
   ![Plugin Usage](static/usage.webp)
 
-  [🎬 Watch Video Tutorial](https://youtu.be/WpVGn7ZasKM) • [📖 Read Documentation](https://poingstudios.github.io/godot-admob-plugin/latest/)
+  [🎬 Watch Video Tutorial](https://youtu.be/TB7WhP8mieo) • [📖 Read Documentation](https://poingstudios.github.io/godot-admob-plugin/latest/)
 
 </div>
 
