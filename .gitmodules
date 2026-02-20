@@ -1,0 +1,6 @@
+[submodule "platforms/android"]
+	path = platforms/android
+	url = https://github.com/poingstudios/godot-admob-android
+[submodule "platforms/ios"]
+	path = platforms/ios
+	url = https://github.com/poingstudios/godot-admob-ios
