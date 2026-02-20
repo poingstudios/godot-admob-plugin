@@ -80,7 +80,7 @@ func _on_download_completed(success: bool) -> void:
 		return
 	
 	var zip_path := DOWNLOAD_DIR.path_join(_current_download)
-	var extract_success := ZipService.extract_zip(zip_path, EXTRACT_PATH, false, ZipService.StripMode.FORCE)
+	var extract_success := ZipService.extract_zip(zip_path, EXTRACT_PATH, false, ZipService.StripMode.NONE)
 	
 	if extract_success:
 		_download_next()
@@ -99,6 +99,6 @@ func _create_package_file() -> void:
 
 func _get_zip_file_names() -> Array[String]:
 	return [
-		"poing-godot-admob-ios-internal-" + PluginVersion.support.ios + ".zip",
+		"poing-godot-admob-ios-internal-" + PluginVersion.godot + ".zip",
 		"poing-godot-admob-ios-sdk-external-dependencies.zip"
 	]
