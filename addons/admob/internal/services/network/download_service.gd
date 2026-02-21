@@ -25,6 +25,7 @@ signal download_progress(percent: int)
 
 var _http_request: HTTPRequest
 var _progress_timer: Timer
+var _platform: String = ""
 
 func _init(host: Node) -> void:
 	_http_request = HTTPRequest.new()
@@ -35,11 +36,12 @@ func _init(host: Node) -> void:
 	host.add_child(_progress_timer)
 	_progress_timer.timeout.connect(_on_progress_timer_timeout)
 
-func download_file(url: String, destination_path: String) -> void:
+func download_file(url: String, destination_path: String, platform: String = "") -> void:
 	if _http_request.get_http_client_status() != HTTPClient.STATUS_DISCONNECTED:
 		push_error("AdMob: Download already in progress")
 		return
 	
+	_platform = platform
 	DirAccess.make_dir_recursive_absolute(destination_path.get_base_dir())
 	
 	print("Downloading " + url)
@@ -56,7 +58,8 @@ func _on_request_completed(_result: int, response_code: int, _headers: PackedStr
 		var download_path := ProjectSettings.globalize_path(_http_request.download_file.get_base_dir())
 		print_rich("[color=GREEN]Downloaded[/color] at: [color=CORNFLOWER_BLUE][url]" + download_path + "[/url][/color]")
 	else:
-		printerr("ERR_002: It is not possible to download the Android/iOS plugin. \n" +
+		var platform_str := _platform if not _platform.is_empty() else "Android/iOS"
+		printerr("ERR_002: It is not possible to download the %s plugin. \n" % platform_str +
 				"Read more about on: res://addons/admob/docs/errors/ERR_002.md")
 	
 	download_completed.emit(is_success)

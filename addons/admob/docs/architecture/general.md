@@ -8,39 +8,39 @@ The **Godot AdMob Editor Plugin** acts as a central hub for integrating Google A
 
 ```mermaid
 graph TD
-    subgraph External [External Repositories]
-        Versions[godot-admob-versions<br/>JSON Config]
-        RepoAndroid[godot-admob-android<br/>Android Native Source]
-        RepoiOS[godot-admob-ios<br/>iOS Native Source]
-    end
+	subgraph External [External Repositories]
+		Versions[godot-admob-versions<br/>JSON Config]
+		RepoAndroid[godot-admob-android<br/>Android Native Source]
+		RepoiOS[godot-admob-ios<br/>iOS Native Source]
+	end
 
-    subgraph Editor [Godot Editor]
-        UserLogic[User Game Logic<br/>GDScript]
-        Plugin[AdMob Editor Plugin<br/>admob.gd]
-    end
+	subgraph Editor [Godot Editor]
+		UserLogic[User Game Logic<br/>GDScript]
+		Plugin[AdMob Editor Plugin<br/>admob.gd]
+	end
 
-    subgraph Runtime_Android [Runtime: Android Device]
-        AndroidBridge[Android Bridge<br/>.AAR Plugin]
-        AndroidSDK[AdMob Android SDK]
-    end
+	subgraph Runtime_Android [Runtime: Android Device]
+		AndroidBridge[Android Bridge<br/>.AAR Plugin]
+		AndroidSDK[AdMob Android SDK]
+	end
 
-    subgraph Runtime_iOS [Runtime: iOS Device]
-        iOSBridge[iOS Bridge<br/>.a framewok Plugin]
-        iOSSDK[AdMob iOS SDK]
-    end
+	subgraph Runtime_iOS [Runtime: iOS Device]
+		iOSBridge[iOS Bridge<br/>.a framewok Plugin]
+		iOSSDK[AdMob iOS SDK]
+	end
 
-    %% Editor Flow
-    Plugin -- 1. Fetch Version Info --> Versions
-    Plugin -- 2. Download .AAR --> RepoAndroid
-    Plugin -- 2. Download .a framework --> RepoiOS
-    
-    %% Game Logic Flow
-    UserLogic -- 3. Calls API --> Plugin
-    
-    %% Export/Runtime Flow
-    Plugin -.->|Export| AndroidBridge
-    Plugin -.->|Export| iOSBridge
-    
-    AndroidBridge -- 4. Calls --> AndroidSDK
-    iOSBridge -- 4. Calls --> iOSSDK
+	%% Editor Flow
+	Plugin -- 1. Fetch Version Info --> Versions
+	Plugin -- 2. Download .AAR --> RepoAndroid
+	Plugin -- 2. Download .a framework --> RepoiOS
+	
+	%% Game Logic Flow
+	UserLogic -- 3. Calls API --> Plugin
+	
+	%% Export/Runtime Flow
+	Plugin -.->|Export| AndroidBridge
+	Plugin -.->|Export| iOSBridge
+	
+	AndroidBridge -- 4. Calls --> AndroidSDK
+	iOSBridge -- 4. Calls --> iOSSDK
 ```
