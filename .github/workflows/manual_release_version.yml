@@ -9,7 +9,7 @@ jobs:
     runs-on: "ubuntu-latest"
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v6
       with:
         fetch-depth: 0
 
@@ -17,59 +17,32 @@ jobs:
       run: |
         #BRANCH_NAME=${{ github.ref_name }}
 
-    - name: Define Godot version based on branch name
+    - name: Check branch
       run: |
-        GODOT_VERSION=""
-
-        if [ "${{ github.ref_name }}" = "master" ]; then
-          GODOT_VERSION=4
-        elif [ "${{ github.ref_name }}" = "godot3" ]; then
-          GODOT_VERSION=3
-        else
-          echo "ERROR! Check if branch name matches with the pattern: godot?" && exit 1
+        if [ "${{ github.ref_name }}" != "master" ]; then
+          echo "This workflow only runs on the master branch."
+          exit 1
         fi
 
-        echo "GODOT_VERSION=${GODOT_VERSION}" >> $GITHUB_ENV
-        echo "TAG_PREFIX=godot${GODOT_VERSION}-" >> $GITHUB_ENV
-
-    - name: Get plugin version
-      uses: paulhatch/semantic-version@v5.0.0
-      id: version
-      with:
-        tag_prefix: "${{env.TAG_PREFIX}}v"
-        major_pattern: "BREAKING CHANGE:"
-        minor_pattern: "feat:"
-        version_format: "v${major}.${minor}.${patch}"
-    
-    - name: Change version
+    - name: Get version from plugin.cfg
       run: |
-        echo "PLUGIN_VERSION=${{env.TAG_PREFIX}}${{ steps.version.outputs.version }}" >> $GITHUB_ENV
-
-        REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE='(?<=version=")[^"]+'
-
-        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{env.PLUGIN_VERSION}}/g" addons/admob/plugin.cfg
-
-        cat addons/admob/plugin.cfg
-
-    - name: Git Auto Commit
-      run: |
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git add .
-          git commit -m "Auto changed version with CI/CD"
-          git push
-
-          echo "LAST_COMMIT_HASH=$(git log -1 --pretty=format:%H)" >> $GITHUB_ENV
+        VERSION=$(grep "version=" addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_VERSION=$VERSION" >> $GITHUB_ENV
 
     - name: Create Release
-      uses: ncipollo/release-action@v1.12.0
+      uses: softprops/action-gh-release@v2
       with:
-        generateReleaseNotes: true
-        commit: ${{env.LAST_COMMIT_HASH}}
-        tag: ${{env.PLUGIN_VERSION}}
+        tag_name: ${{env.PLUGIN_VERSION}}
+        name: ${{env.PLUGIN_VERSION}}
+        body: "Manual release for version ${{env.PLUGIN_VERSION}}"
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v6
       with:
         python-version: '3.8'
 
@@ -81,6 +54,6 @@ jobs:
         USERNAME: ${{ secrets.ASSET_LIBRARY_USERNAME }}
         PASSWORD: ${{ secrets.ASSET_LIBRARY_PASSWORD }}
         VERSION: ${{env.PLUGIN_VERSION}}
-        COMMIT_HASH: ${{env.LAST_COMMIT_HASH}}
+        COMMIT_HASH: ${{ github.sha }}
       run: |
         python3 static/workflow_files/push.py
