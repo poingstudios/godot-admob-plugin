@@ -57,3 +57,7 @@ jobs:
         COMMIT_HASH: ${{ github.sha }}
       run: |
         python3 static/workflow_files/push.py
+
+  deploy-docs:
+    needs: release-version
+    uses: ./.github/workflows/docs.yml
