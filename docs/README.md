@@ -43,7 +43,7 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 
 ## Download & Install
 !!! info
-    This section is typically **not required**, as the plugin handles libraries automatically. Only follow these steps if the automatic download failed or you need a specific legacy version.
+    This section is typically **not required**, as the plugin handles libraries automatically. Only follow these steps if the automatic download failed.
 
 === "Android"
 
@@ -58,10 +58,10 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 
 	To integrate the required iOS library for AdMob in Godot, follow these steps:
 
-	1. In Godot, navigate to `Project → Tools → AdMob Manager → iOS → Install`.
-	1. This action will automatically download and install the two required zip files (internal implementation and external dependencies) into your project at `res://ios/plugins/`.
+	1. In Godot, navigate to `Project → Tools → AdMob Manager → iOS → Download & Install`.
+	1. This action will automatically download and install the required iOS library into your project at `res://ios/plugins/`.
 
-	If you encounter any issues with the download, you can try downloading the libraries manually from the [releases tab](https://github.com/poingstudios/godot-admob-ios/releases). You will need both the `internal` (specific to your Godot version) and the `sdk-external-dependencies` zip files. Extract both into `res://ios/plugins/`.
+	If you encounter any issues with the download, you can try downloading the library manually by clicking [here](https://github.com/poingstudios/godot-admob-ios/releases/latest).
 
 ### Exporting 
 
@@ -80,10 +80,6 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 	    ![export](assets/android/export.png)
 
 === "iOS"
-
-    1. Within `res://ios/plugins/poing-godot-admob-ads.gdip`, if you are using Mediation, locate the `SKAdNetworkItems` section. Here, you can remove the comments associated with the [Mediation Networks](https://developers.google.com/admob/ios/choose-networks) that you are using.
-    
-        ![export](assets/ios/skadnetworkitems.png)
     
     1. When exporting your project, update the `GADApplicationIdentifier` with your [AdMob App ID](https://support.google.com/admob/answer/7356431) and ensure that `Ad Mob` is enabled in the Plugins section of the Export dialog. If you have Mediation, also mark `Ad Mob Meta`, `Ad Mob AdColony`, etc...
     
