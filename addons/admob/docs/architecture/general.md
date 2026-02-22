@@ -25,14 +25,14 @@ graph TD
 	end
 
 	subgraph Runtime_iOS [Runtime: iOS Device]
-		iOSBridge[iOS Bridge<br/>.a framewok Plugin]
+		iOSBridge[iOS Bridge<br/>.xcframework Plugin]
 		iOSSDK[AdMob iOS SDK]
 	end
 
 	%% Editor Flow
 	Plugin -- 1. Fetch Version Info --> Versions
 	Plugin -- 2. Download .AAR --> RepoAndroid
-	Plugin -- 2. Download .a framework --> RepoiOS
+	Plugin -- 2. Download .xcframework --> RepoiOS
 	
 	%% Game Logic Flow
 	UserLogic -- 3. Calls API --> Plugin
