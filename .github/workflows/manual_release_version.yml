@@ -33,8 +33,6 @@ jobs:
       uses: softprops/action-gh-release@v2
       with:
         tag_name: ${{env.PLUGIN_VERSION}}
-        name: ${{env.PLUGIN_VERSION}}
-        body: "Manual release for version ${{env.PLUGIN_VERSION}}"
         draft: false
         prerelease: false
         generate_release_notes: true
@@ -57,3 +55,7 @@ jobs:
         COMMIT_HASH: ${{ github.sha }}
       run: |
         python3 static/workflow_files/push.py
+
+  deploy-docs:
+    needs: release-version
+    uses: ./.github/workflows/docs.yml
