@@ -5,7 +5,10 @@ on:
       - master
     tags:
       - '*'
-  workflow_call:
+  workflow_run:
+    workflows: ["Manual Release Version"]
+    types:
+      - completed
 
 permissions:
   contents: write
@@ -13,6 +16,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -31,7 +35,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
       - name: Deploy documentation
         run: |
-          if [[ $GITHUB_REF == refs/tags/* ]] || [[ $GITHUB_EVENT_NAME == "workflow_call" ]]; then
+          if [[ $GITHUB_REF == refs/tags/* ]] || [[ $GITHUB_EVENT_NAME == "workflow_run" ]]; then
             VERSION=$(grep "version=" addons/admob/plugin.cfg | cut -d'"' -f2 | sed 's/^v//' | cut -d. -f1,2)
             
             mike deploy --push --update-aliases $VERSION stable
