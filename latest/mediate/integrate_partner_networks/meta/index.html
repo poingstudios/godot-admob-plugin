@@ -19,7 +19,7 @@
       
       
       <link rel="icon" href="../../../assets/icon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
     
     
       
@@ -1806,18 +1806,6 @@
 </table>
 <h2 id="prerequisites">Prerequisites</h2>
 <ul>
-<li>Godot 4.2+</li>
-<li>Latest <a href="https://github.com/poingstudios/godot-admob-plugin/releases/latest">Godot AdMob Plugin</a> </li>
-<li>Android deploy:<ul>
-<li>Android API level 19 or higher</li>
-<li>Latest <a href="https://github.com/poingstudios/godot-admob-android/releases/latest">Godot AdMob Android Plugin</a></li>
-</ul>
-</li>
-<li>iOS deploy:<ul>
-<li>iOS deployment target of 11.0 or higher</li>
-<li>Latest <a href="https://github.com/poingstudios/godot-admob-ios/releases/latest">Godot AdMob iOS Plugin</a></li>
-</ul>
-</li>
 <li>Complete the <a href="../../../">Get started guide</a></li>
 <li>Complete the mediation <a href="../../get_started/">Get started guide</a></li>
 </ul>
@@ -1826,24 +1814,24 @@
 <h2 id="step-2-configure-mediation-settings-for-your-admob-ad-unit">Step 2: Configure mediation settings for your AdMob ad unit</h2>
 <p>We recommend following the tutorial for <a href="https://developers.google.com/admob/android/mediation/meta#configure_mediation">Android</a> or <a href="https://developers.google.com/admob/ios/mediation/meta#configure_mediation">iOS</a>, as it will be the same for both.</p>
 <h2 id="step-3-import-the-meta-audience-network-plugin">Step 3: Import the Meta Audience Network plugin</h2>
-<ol>
-<li>Download the plugin for <a href="https://github.com/poingstudios/godot-admob-android/releases/latest">Android</a> and/or <a href="https://github.com/poingstudios/godot-admob-ios/releases/latest">iOS</a>.</li>
-<li>Extract the <code>.zip</code> file. Inside, you will find an <code>meta</code> folder.</li>
-<li>
-<p>Copy the contents of the <code>meta</code> folder and paste the copied contents into the Android and/or iOS plugin folder.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Android</label><label for="__tabbed_1_2">iOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p><img alt="android-meta" src="../../../assets/android/meta.png" /></p>
+<ol>
+<li>Download the plugin for <a href="https://github.com/poingstudios/godot-admob-android/releases/latest">Android</a>.</li>
+<li>Extract the <code>.zip</code> file. Inside, you will find a <code>meta</code> folder.</li>
+<li>Copy the contents of the <code>meta</code> folder and paste them into the Android plugin folder at <code>res://addons/admob/android/bin/</code>.
+<img alt="android-meta" src="../../../assets/android/meta.png" /></li>
+</ol>
 </div>
 <div class="tabbed-block">
-<p><img alt="ios-meta" src="../../../assets/ios/meta.png" /></p>
+<p>The Meta Audience Network adapter is <strong>already included</strong> in the standard iOS plugin download. If you followed the <a href="../../../#download-install">iOS Installation guide</a>, you should already have the necessary files (<code>poing-godot-admob-meta.gdip</code> and related frameworks) in your <code>res://ios/plugins/</code> directory.</p>
 </div>
 </div>
 </div>
-</li>
+<ol>
 <li>
-<p>When export make sure to mark <code>Ad Mob</code> and <code>Ad Mob Meta</code></p>
+<p>When exporting, make sure to mark <code>Ad Mob</code> and <code>Ad Mob Meta</code>.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Android</label><label for="__tabbed_2_2">iOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">

@@ -17,7 +17,7 @@
       
       
       <link rel="icon" href="assets/icon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.2">
     
     
       
@@ -1697,7 +1697,6 @@
 <li>Deploy iOS:<ul>
 <li>Use Xcode 26.2 or higher</li>
 <li>Target iOS 16.0 or higher</li>
-<li><a href="https://guides.cocoapods.org/using/getting-started.html">CocoaPods</a></li>
 </ul>
 </li>
 <li>Recommended: <a href="https://support.google.com/admob/answer/7356219?visit_id=638286911958663013-3847536692&amp;rd=1">Create an AdMob account</a> and <a href="https://support.google.com/admob/answer/9989980?visit_id=638286911964685099-3190075945&amp;rd=1">register an app</a>.</li>
@@ -1723,7 +1722,7 @@
 <h2 id="download-install">Download &amp; Install</h2>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>This section is typically <strong>not required</strong>, as the plugin handles libraries automatically. Only follow these steps if the automatic download failed or you need a specific legacy version.</p>
+<p>This section is typically <strong>not required</strong>, as the plugin handles libraries automatically. Only follow these steps if the automatic download failed.</p>
 </div>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Android</label><label for="__tabbed_1_2">iOS</label></div>
 <div class="tabbed-content">
@@ -1739,7 +1738,7 @@
 <p>To integrate the required iOS library for AdMob in Godot, follow these steps:</p>
 <ol>
 <li>In Godot, navigate to <code>Project → Tools → AdMob Manager → iOS → Download &amp; Install</code>.</li>
-<li>This action will download and install the appropriate iOS library into your project, which is located at <code>res://ios/plugins/</code>.</li>
+<li>This action will automatically download and install the required iOS library into your project at <code>res://ios/plugins/</code>.</li>
 </ol>
 <p>If you encounter any issues with the download, you can try downloading the library manually by clicking <a href="https://github.com/poingstudios/godot-admob-ios/releases/latest">here</a>.</p>
 </div>
@@ -1773,11 +1772,7 @@
 <div class="tabbed-block">
 <ol>
 <li>
-<p>Within <code>res://ios/plugins/poing-godot-admob-ads.gdip</code>, if you are using Mediation, locate the <code>SKAdNetworkItems</code> section. Here, you can remove the comments associated with the <a href="https://developers.google.com/admob/ios/choose-networks">Mediation Networks</a> that you are using.</p>
-<p><img alt="export" src="assets/ios/skadnetworkitems.png" /></p>
-</li>
-<li>
-<p>When exporting your project, update the <code>GADApplicationIdentifier</code> with your <a href="https://support.google.com/admob/answer/7356431">AdMob App ID</a> and ensure that <code>Ad Mob</code> is enabled. If you have Mediation, also mark <code>Ad Mob Meta</code>, <code>Ad Mob AdColony</code> etc...</p>
+<p>When exporting your project, update the <code>GADApplicationIdentifier</code> with your <a href="https://support.google.com/admob/answer/7356431">AdMob App ID</a> and ensure that <code>Ad Mob</code> is enabled in the Plugins section of the Export dialog. If you have Mediation, also mark <code>Ad Mob Meta</code>, <code>Ad Mob AdColony</code>, etc...</p>
 <p><img alt="gadapplicationidentifier" src="assets/ios/gadapplicationidentifier.png" /></p>
 <div class="admonition tip">
 <p class="admonition-title">App ID vs Ad Unit ID</p>
@@ -1788,27 +1783,14 @@
 </div>
 </li>
 <li>
-<p>Once exported, go to <code>{{ ios_xcode_export_folder }}/{{your_project_name}}/ios/plugins/poing-godot-admob/scripts/</code> folder and open the terminal (must be inside this folder) and run these commands:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>update_and_install.sh
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>./update_and_install.sh
-</code></pre></div></p>
-<p><img alt="update_and_installsh" src="assets/ios/update_and_installsh.png" /></p>
-</li>
-<li>
-<p>This will create for you a <code>{{ your_project_name }}.xcworkspace</code> (e.g.: <code>AdMobAddon.xcworkspace</code>) file on your <code>{{ ios_xcode_export_folder }}</code>. Open this file.</p>
-</li>
-<li>
-<p>Go to the Target of your Application and then <code>General -&gt; Frameworks, Libraries, and Embedded Content</code> and add all <code>Pods</code> in section <strong>except</strong> the <code>.bundle</code>.</p>
-<p><img alt="add_libraries" src="assets/ios/add_libraries.png" /></p>
-</li>
-<li>
-<p>Select all Frameworks (⌘ + A) and put as <code>Do Not Embed</code>.</p>
-<p><img alt="do_not_embed" src="assets/ios/do_not_embed.png" /></p>
+<p><strong>That's it!</strong> Since this plugin uses <code>.xcframework</code> bundles, Godot 4.2+ will automatically integrate all necessary libraries and frameworks into your Xcode project. No manual terminal commands, CocoaPods, or Xcode configuration steps are required.</p>
 </li>
 <li>
 <p><a href="https://github.com/poingstudios/godot-admob-ios/issues/127">If you are facing "__swift_FORCE_LOAD_" error, read this</a>.</p>
 <ol>
-<li>Create a <code>Untitled.swift</code> file and Xcode will ask you to <code>Create Bridge Header → Accept</code> → then it'll build normally.
+<li>Create a <code>Untitled.swift</code> file in your Xcode project.</li>
+<li>Xcode will ask you to <code>Create Bridge Header → Accept</code>.</li>
+<li>Your project should now build normally.
     <img alt="untitled.swift" src="assets/ios/untitled.swift.png" /></li>
 </ol>
 </li>
@@ -1816,7 +1798,7 @@
 <p>Run the Game.</p>
 </li>
 <li>
-<p><a href="https://github.com/godotengine/godot/issues/44681#issuecomment-751399783">If you are trying to run on Simulator and is not working read this</a>.</p>
+<p><a href="https://github.com/godotengine/godot/issues/44681#issuecomment-751399783">If you are trying to run on Simulator and it is not working, read this</a>.</p>
 </li>
 </ol>
 </div>
@@ -1824,8 +1806,8 @@
 </div>
 <h2 id="initialize-the-google-mobile-ads-sdk">Initialize the Google Mobile Ads SDK</h2>
 <p>Prior to loading ads, ensure that your application initializes the Google Mobile Ads SDK. You can accomplish this by calling MobileAds.initialize(). This function initializes the SDK and triggers a completion listener once the initialization process is finished, or if it exceeds a 30-second timeout. It's important to note that this initialization should occur only once, ideally during the app's launch phase.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">MobileAds</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">MobileAds</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
 </code></pre></div>
 <p>If you are utilizing mediation, it's essential to wait for the completion handler to be called before proceeding with ad loading. This step ensures that all mediation adapters are properly initialized before ad requests are made.</p>
 <h2 id="select-an-ad-format">Select an ad format</h2>
