@@ -63,7 +63,7 @@ func install() -> void:
 	var url := BASE_URL % [PluginVersion.support.android, file_name]
 	var destination := DOWNLOAD_DIR.path_join(file_name)
 	
-	_download_service.download_file(url, destination)
+	_download_service.download_file(url, destination, "Android")
 
 func _on_download_completed(success: bool) -> void:
 	if not success:

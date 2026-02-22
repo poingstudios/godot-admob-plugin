@@ -30,14 +30,6 @@ The AdMob mediation adapter for AdColony has the following capabilities:
 [^2]: For access to this feature, contact your Liftoff Monetize account manager.
 
 ## Prerequisites
-- Godot 4.2+
-- Latest [Godot AdMob Plugin](https://github.com/poingstudios/godot-admob-plugin/releases/latest) 
-- Android deploy:
-    - Android API level 19 or higher
-    - Latest [Godot AdMob Android Plugin](https://github.com/poingstudios/godot-admob-android/releases/latest)
-- iOS deploy:
-    - iOS deployment target of 11.0 or higher
-    - Latest [Godot AdMob iOS Plugin](https://github.com/poingstudios/godot-admob-ios/releases/latest)
 - Complete the [Get started guide](../../README.md)
 - Complete the mediation [Get started guide](../get_started.md)
 
@@ -57,15 +49,14 @@ We recommend following the tutorial for [Android](https://developers.google.com/
 
 ## Step 3: Import the Vungle SDK plugin
 
-1. Download the plugin for [Android](https://github.com/poingstudios/godot-admob-android/releases/latest) and/or [iOS](https://github.com/poingstudios/godot-admob-ios/releases/latest).
-2. Extract the `.zip` file. Inside, you will find an `vungle` folder.
-3. Copy the contents of the `vungle` folder and paste the copied contents into the Android and/or iOS plugin folder.
+=== "Android"
+    1. Download the plugin for [Android](https://github.com/poingstudios/godot-admob-android/releases/latest).
+    2. Extract the `.zip` file. Inside, you will find a `vungle` folder.
+    3. Copy the contents of the `vungle` folder and paste them into the Android plugin folder at `res://addons/admob/android/bin/`.
+    ![android-vungle](../../assets/android/vungle.png)
 
-    === "Android"
-        ![android-vungle](../../assets/android/vungle.png)
-
-    === "iOS"
-        ![ios-vungle](../../assets/ios/vungle.png)
+=== "iOS"
+    The Liftoff Monetize (Vungle) adapter is **already included** in the standard iOS plugin download. If you followed the [iOS Installation guide](../../README.md#download-install), you should already have the necessary files (`poing-godot-admob-vungle.gdip` and related frameworks) in your `res://ios/plugins/` directory.
 
 4. When export make sure to mark `Ad Mob` and `Ad Mob vungle`
 

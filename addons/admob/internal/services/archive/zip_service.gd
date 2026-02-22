@@ -75,9 +75,9 @@ static func _extract_files(reader: ZIPReader, files: PackedStringArray, destinat
 
 static func _calculate_relative_path(file_path: String, strip_mode: StripMode, common_root: String) -> String:
 	if strip_mode == StripMode.FORCE:
+		if not "/" in file_path or (file_path.ends_with("/") and file_path.count("/") == 1):
+			return file_path
 		var parts := file_path.split("/", false)
-		if parts.size() <= 1 and file_path.ends_with("/"):
-			return ""
 		parts.remove_at(0)
 		return "/".join(parts)
 	
