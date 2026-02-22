@@ -72,16 +72,11 @@ func _on_download_completed(success: bool) -> void:
 	
 	var extract_success := ZipService.extract_zip(zip_path, EXTRACT_PATH, false, ZipService.StripMode.NONE)
 	if extract_success:
-		_create_package_file()
 		_dialog_service.show_confirmation(
 			"iOS plugin installed successfully!\n\nRemember to check your iOS export settings.",
 			func(): pass , # No specific config to open for iOS yet
 			"OK"
 		)
-
-func _create_package_file() -> void:
-	var content := "const VERSION := \"%s\"" % PluginVersion.support.ios
-	FileService.write_file(PluginVersion.IOS_PACKAGE_PATH, content)
 
 func _get_zip_file_name() -> String:
 	return "poing-godot-admob-ios-" + PluginVersion.godot + ".zip"
