@@ -163,11 +163,11 @@ jobs:
 
     - name: Import Project Resources
       run: |
-        godot --headless --import
+        timeout 120 godot --headless --import --quit || true
 
     - name: Install Android Build Template
       run: |
-        godot --headless --install-android-build-template
+        timeout 120 godot --headless --install-android-build-template --quit || true
 
     - name: Export APK
       run: |
