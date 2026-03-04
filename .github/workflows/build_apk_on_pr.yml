@@ -1,0 +1,210 @@
+name: Build APK on PR
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  detect-latest:
+    name: Check latest Godot version
+    runs-on: ubuntu-latest
+    outputs:
+      godot_version: ${{ steps.detect.outputs.godot_version }}
+    steps:
+    - name: Detect latest Godot version
+      id: detect
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        LATEST=$(gh api repos/godotengine/godot/releases \
+          --jq '[.[] | select(.tag_name | test("^4\\.[0-9]+(\\.[0-9]+)?-stable$")) | .tag_name][0]' \
+          | sed 's/-stable//' \
+          | awk -F. '{if(NF==2) print $0".0"; else print $0}')
+        echo "godot_version=$LATEST" >> $GITHUB_OUTPUT
+
+  build-apk:
+    name: Build APK & Upload Artifact
+    needs: detect-latest
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        submodules: true
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Cache Godot Editor
+      id: cache-godot
+      uses: actions/cache@v4
+      with:
+        path: /usr/local/bin/godot
+        key: godot-linux-${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Download Godot
+      if: steps.cache-godot.outputs.cache-hit != 'true'
+      run: |
+        GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
+        wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip" -O godot.zip
+        unzip -q godot.zip
+        mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 /usr/local/bin/godot
+        chmod +x /usr/local/bin/godot
+
+    - name: Cache Export Templates
+      id: cache-templates
+      uses: actions/cache@v4
+      with:
+        path: ~/.local/share/godot/export_templates
+        key: godot-templates-${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Download Export Templates
+      if: steps.cache-templates.outputs.cache-hit != 'true'
+      run: |
+        GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
+        wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz" -O templates.tpz
+        mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+        unzip -q templates.tpz
+        mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Cache Gradle
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: gradle-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
+        restore-keys: gradle-
+
+    - name: Set Android SDK Path for Godot
+      run: |
+        mkdir -p ~/.config/godot
+        cat > ~/.config/godot/editor_settings-4.tres <<EOF
+        [gd_resource type="EditorSettings" format=3]
+        [resource]
+        export/android/android_sdk_path = "$ANDROID_HOME"
+        export/android/java_sdk_path = "$JAVA_HOME"
+        EOF
+
+    - name: Build Android Plugins
+      working-directory: platforms/android
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Copy Plugin Binaries to Addon
+      working-directory: platforms/android
+      run: |
+        ./gradlew exportFiles -PpluginExportPath="${GITHUB_WORKSPACE}/addons/admob/android/bin"
+
+    - name: Generate Export Presets
+      run: |
+        cat > export_presets.cfg <<'EOF'
+        [preset.0]
+
+        name="Android"
+        platform="Android"
+        runnable=true
+        dedicated_server=false
+        custom_features=""
+        export_filter="all_resources"
+        include_filter=""
+        exclude_filter=""
+        export_path=""
+        encryption_include_filters=""
+        encryption_exclude_filters=""
+        seed=0
+        encrypt_pck=false
+        encrypt_directory=false
+        script_export_mode=2
+
+        [preset.0.options]
+
+        custom_template/debug=""
+        custom_template/release=""
+        gradle_build/use_gradle_build=true
+        gradle_build/gradle_build_directory=""
+        gradle_build/android_source_template=""
+        gradle_build/compress_native_libraries=false
+        gradle_build/export_format=0
+        gradle_build/min_sdk=""
+        gradle_build/target_sdk=""
+        architectures/armeabi-v7a=false
+        architectures/arm64-v8a=true
+        architectures/x86=false
+        architectures/x86_64=false
+        version/code=1
+        version/name=""
+        package/unique_name="com.poingstudios.admob.sample"
+        package/name="AdMob Sample"
+        package/signed=true
+        package/app_category=2
+        package/retain_data_on_uninstall=false
+        package/exclude_from_recents=false
+        package/show_in_android_tv=false
+        package/show_in_app_library=true
+        package/show_as_launcher_app=false
+        graphics/opengl_debug=false
+        xr_features/xr_mode=0
+        screen/immersive_mode=true
+        screen/support_small=true
+        screen/support_normal=true
+        screen/support_large=true
+        screen/support_xlarge=true
+        EOF
+
+    - name: Export APK
+      run: |
+        mkdir -p .output
+        godot --headless --export-debug "Android" .output/AdMobAddon.apk
+
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      id: artifact-upload-step
+      with:
+        name: AdMobAddon-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: .output/AdMobAddon.apk
+        retention-days: 14
+
+    - name: Comment PR with Artifact Link
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const artifactUrl = '${{ steps.artifact-upload-step.outputs.artifact-url }}';
+          const commitSha = '${{ github.event.pull_request.head.sha }}'.substring(0, 7);
+          const body = `✅ **APK Build Successful!** (Commit: \`${commitSha}\`)\n\nThe project has been exported as an APK for Godot ${ '${{ needs.detect-latest.outputs.godot_version }}' }.\n\n📦 [Download APK](${artifactUrl})`;
+          
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+          });
+          
+          const botComment = comments.find(comment => 
+            comment.user.type === 'Bot' && comment.body.includes('Download APK')
+          );
+          
+          if (botComment) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: botComment.id,
+              body: body
+            });
+          } else {
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+          }
