@@ -161,6 +161,10 @@ jobs:
         screen/support_xlarge=true
         EOF
 
+    - name: Import Project Resources
+      run: |
+        godot --headless --import
+
     - name: Install Android Build Template
       run: |
         godot --headless --install-android-build-template
