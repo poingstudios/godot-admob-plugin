@@ -161,6 +161,10 @@ jobs:
         screen/support_xlarge=true
         EOF
 
+    - name: Install Android Build Template
+      run: |
+        godot --headless --install-android-build-template
+
     - name: Export APK
       run: |
         mkdir -p .output
