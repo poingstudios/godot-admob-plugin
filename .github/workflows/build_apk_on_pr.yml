@@ -170,7 +170,7 @@ jobs:
         GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
         mkdir -p android/build
         unzip ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/android_source.zip -d android/build
-        echo "${GODOT_VERSION}.stable" > android/build/.build_version
+        echo "${GODOT_VERSION}.stable" > android/.build_version
 
     - name: Export APK
       run: |
