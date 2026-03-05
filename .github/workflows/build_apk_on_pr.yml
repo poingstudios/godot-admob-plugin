@@ -165,10 +165,6 @@ jobs:
       run: |
         timeout 120 godot --headless --import --quit || true
 
-    - name: Install Android Build Template
-      run: |
-        timeout 120 godot --headless --install-android-build-template --quit || true
-
     - name: Export APK
       run: |
         mkdir -p .output
