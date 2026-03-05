@@ -199,6 +199,27 @@ layout_mode = 2
 text = "Mute Music"
 alignment = 1
 
+[node name="AdVolumeContainer" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=250001]
+layout_mode = 2
+
+[node name="AdVolumeLabel" type="Label" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/AdVolumeContainer" unique_id=250002]
+layout_mode = 2
+text = "Ad Volume"
+
+[node name="AdVolumeSlider" type="HSlider" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/AdVolumeContainer" unique_id=250003]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.0
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="AdMuted" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=250004]
+layout_mode = 2
+text = "Mute Ads"
+alignment = 1
+
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=1499804228]
 stream = ExtResource("13_music")
 volume_db = -10.0
@@ -222,3 +243,5 @@ scroll_following = true
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/GetInitStatus" to="." method="_on_get_initialization_status_pressed"]
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/iOSAppPause" to="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" method="_on_set_ios_app_pause_on_background_button_pressed"]
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/MuteMusic" to="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" method="_on_mute_music_pressed"]
+[connection signal="value_changed" from="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/AdVolumeContainer/AdVolumeSlider" to="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" method="_on_ad_volume_changed"]
+[connection signal="pressed" from="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/AdMuted" to="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" method="_on_ad_muted_pressed"]
