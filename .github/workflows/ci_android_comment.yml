@@ -1,0 +1,131 @@
+name: CI Android PR Comment
+
+on:
+  workflow_run:
+    workflows: ["CI Android PR"]
+    types: [completed]
+
+jobs:
+  comment:
+    name: Comment PR with result
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.event == 'pull_request'
+    permissions:
+      pull-requests: write
+      actions: read
+
+    steps:
+    - name: Get PR number
+      id: pr
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        PR_NUMBER=$(gh api \
+          "repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }}/attempts/1/jobs" \
+          --jq '.jobs[0].run_id' \
+          > /dev/null 2>&1 || true)
+
+        PR_NUMBER=$(gh api \
+          "repos/${{ github.repository }}/pulls?head=${{ github.event.workflow_run.head_repository.owner.login }}:${{ github.event.workflow_run.head_branch }}&state=open" \
+          --jq '.[0].number')
+
+        echo "number=$PR_NUMBER" >> $GITHUB_OUTPUT
+
+    - name: Comment on success
+      if: github.event.workflow_run.conclusion == 'success'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const prNumber = ${{ steps.pr.outputs.number }};
+          if (!prNumber) {
+            console.log('Could not determine PR number, skipping comment.');
+            return;
+          }
+
+          const runId = ${{ github.event.workflow_run.id }};
+          const commitSha = '${{ github.event.workflow_run.head_sha }}'.substring(0, 7);
+
+          const { data: artifacts } = await github.rest.actions.listWorkflowRunArtifacts({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            run_id: runId,
+          });
+
+          const artifact = artifacts.artifacts.find(a => a.name.startsWith('poing-godot-admob-android-'));
+          const godotVersion = artifact
+            ? artifact.name.replace(/^poing-godot-admob-android-v/, '').replace(/-[a-f0-9]+$/, '')
+            : 'unknown';
+          const artifactUrl = artifact
+            ? `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}/artifacts/${artifact.id}`
+            : `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}`;
+
+          const body = `✅ **Build Successful!** (Commit: \`${commitSha}\`)\n\nThe plugin has been compiled for Godot ${godotVersion}.\n\n📦 [Download Artifact ZIP](${artifactUrl})`;
+
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: prNumber,
+          });
+
+          const botComment = comments.find(comment =>
+            comment.user.type === 'Bot' && comment.body.includes('Download Artifact ZIP')
+          );
+
+          if (botComment) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: botComment.id,
+              body: body
+            });
+          } else {
+            await github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+          }
+
+    - name: Comment on failure
+      if: github.event.workflow_run.conclusion == 'failure'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const prNumber = ${{ steps.pr.outputs.number }};
+          if (!prNumber) {
+            console.log('Could not determine PR number, skipping comment.');
+            return;
+          }
+
+          const runId = ${{ github.event.workflow_run.id }};
+          const commitSha = '${{ github.event.workflow_run.head_sha }}'.substring(0, 7);
+          const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}`;
+
+          const body = `❌ **Build Failed!** (Commit: \`${commitSha}\`)\n\n[View Logs](${runUrl})`;
+
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: prNumber,
+          });
+
+          const botComment = comments.find(comment =>
+            comment.user.type === 'Bot' && (comment.body.includes('Download Artifact ZIP') || comment.body.includes('Build Failed'))
+          );
+
+          if (botComment) {
+            await github.rest.issues.updateComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: botComment.id,
+              body: body
+            });
+          } else {
+            await github.rest.issues.createComment({
+              issue_number: prNumber,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body
+            });
+          }

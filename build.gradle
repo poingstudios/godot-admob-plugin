@@ -1,0 +1,101 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+plugins {
+    id 'com.android.application' version '8.13.2' apply false
+    id 'com.android.library' version '8.13.2' apply false
+    id 'org.jetbrains.kotlin.android' version '2.3.0' apply false
+}
+
+subprojects {
+    plugins.withId("org.jetbrains.kotlin.android") {
+        android {
+            compileSdk 36
+            defaultConfig {
+                minSdk 24
+            }
+        }
+        kotlin {
+            jvmToolchain(17)
+        }
+    }
+}
+
+def pluginContent = copySpec {
+    rootProject.subprojects.each { subproject ->
+        if (subproject.name == "core"){
+            from(subproject.file("config")) {
+                include '*.gd'
+            }
+        }
+        else if (subproject.file("src").exists()) {
+            into(subproject.name) {
+                from(subproject.file("config")) {
+                    include '*.gd'
+                }
+
+                into("libs") {
+                    from(subproject.file("build/outputs/aar")) {
+                        include '*.aar'
+                    }
+                }
+            }
+        }
+    }
+}
+
+tasks.register('exportFiles', Copy) {
+    with pluginContent
+    into pluginExportPath
+}
+
+tasks.register('zipPlugins', Zip) {
+    def godotVersion = project.hasProperty("godotVersion") ? project.getProperty("godotVersion") : ""
+    def zipName = "poing-godot-admob-android${godotVersion ? '-v' + godotVersion : ''}.zip"
+
+    archiveFileName.set(zipName)
+    destinationDirectory.set(file("${rootProject.projectDir}/.output"))
+
+    with pluginContent
+}
+
+tasks.register('clean', Delete) {
+    delete rootProject.layout.buildDirectory
+}
+
+
+gradle.taskGraph.whenReady { taskGraph ->
+    if (taskGraph.hasTask(exportFiles)) {
+        if (pluginExportPath == null) {
+            throw new GradleException("The export path for AAR files is not defined. Use the command './gradlew exportFiles -PpluginExportPath=<desired-path>' to export the AAR files.")
+        }
+        println "Exporting AAR files to: $pluginExportPath"
+    }
+}
+
+ext {
+    pluginExportPath = project.hasProperty('pluginExportPath') ? project.property('pluginExportPath') : null
+
+    readDependencyLibrary = { File gdFile ->
+        if (!gdFile.exists()) {
+            throw new GradleException("File does not exist: ${gdFile}")
+        }
+
+        def matcher = gdFile.text =~ /_dependency_library\s*(?::=|=)\s*(\[[^]]+])/
+
+        if (!matcher.find()) {
+            throw new GradleException("_dependency_library not found in ${gdFile}")
+        }
+
+        def arrayText = matcher.group(1)
+        return Eval.me(arrayText)
+    }
+
+    buildFullModuleName = { Project project ->
+        def startName = PLUGIN_ID
+        def moduleName = project.getName().replaceAll(":", "-")
+        def fullModuleName = "${startName}-${moduleName}"
+
+        println "Module find: $fullModuleName"
+
+        return fullModuleName
+    }
+}

@@ -1,0 +1,93 @@
+name: Build Android
+
+on: workflow_dispatch
+
+jobs:
+  check-release:
+    name: Check if release already exists
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        ref: ${{ github.ref_name }}
+
+    - name: Set plugin version on env
+      run: |
+        PLUGIN_VERSION=$(find . -name "package.gd" -exec grep 'const VERSION' {} \; | head -n 1 | awk -F'"' '{print $2}')
+        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+
+    - name: Fail if release already exists
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        if gh api "repos/${{ github.repository }}/releases/tags/${{ env.PLUGIN_VERSION }}" > /dev/null 2>&1; then
+          echo "::error::Release ${{ env.PLUGIN_VERSION }} already exists. Bump the version before releasing."
+          exit 1
+        fi
+        echo "No existing release found for ${{ env.PLUGIN_VERSION }}. Proceeding..."
+
+  android-template:
+    name: Compiling Gradle (Android)
+    needs: check-release
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        GODOT_VERSIONS: ["4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.6.0", "4.6.1"]
+
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        ref: ${{ github.ref_name }}
+
+    - name: Set plugin version on env
+      run: |
+        PLUGIN_VERSION=$(find . -name "package.gd" -exec grep 'const VERSION' {} \; | head -n 1 | awk -F'"' '{print $2}')
+        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+
+    - name: Build Plugins
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build -PgodotVersion=${{matrix.GODOT_VERSIONS}}
+
+    - name: Compress the artifact output
+      run: |
+        ./gradlew zipPlugins -PgodotVersion="${{matrix.GODOT_VERSIONS}}"
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        target_commit: ${{ github.ref_name }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: .output/poing-godot-admob-android-v${{matrix.GODOT_VERSIONS}}.zip
+        tag: ${{env.PLUGIN_VERSION}}
+        release_name: ${{env.PLUGIN_VERSION}}
+        body: ""
+        overwrite: true
+
+  release-notes:
+    name: Update release notes
+    needs: android-template
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        ref: ${{ github.ref_name }}
+        fetch-depth: 0
+
+    - name: Set plugin version on env
+      run: |
+        PLUGIN_VERSION=$(find . -name "package.gd" -exec grep 'const VERSION' {} \; | head -n 1 | awk -F'"' '{print $2}')
+        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+
+    - name: Update release with proper title and notes
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: ${{env.PLUGIN_VERSION}}
+        name: ${{env.PLUGIN_VERSION}}
+        draft: false
+        prerelease: false
+        generate_release_notes: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
