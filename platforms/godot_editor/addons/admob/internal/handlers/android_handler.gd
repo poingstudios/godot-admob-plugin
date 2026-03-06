@@ -28,7 +28,7 @@ const AndroidExportPlugin := preload("res://addons/admob/internal/exporters/andr
 const PACKAGE_PATH := "res://addons/admob/android/bin/package.gd"
 const DOWNLOAD_DIR := "res://addons/admob/downloads/android/"
 const EXTRACT_PATH := "res://addons/admob/android/bin/"
-const BASE_URL := "https://github.com/poingstudios/godot-admob-android/releases/download/%s/%s"
+const BASE_URL := "https://github.com/poingstudios/godot-admob-plugin/releases/download/%s/%s"
 
 const DialogService := preload("res://addons/admob/internal/services/ui/dialog_service.gd")
 
@@ -41,22 +41,11 @@ func _init(download_service: DownloadService, dialog_service: DialogService) -> 
 	_download_service.download_completed.connect(_on_download_completed)
 
 func check_dependencies() -> void:
-	if not PluginVersion.is_android_outdated:
-		return
-	
 	var local_version := PluginVersion.installed.android
 	
 	if local_version.is_empty():
 		print_rich("[color=YELLOW]AdMob Android plugin not found. Installing...[/color]")
 		install()
-	else:
-		var formatted_local := local_version if local_version.begins_with("v") else "v" + local_version
-		var status := "outdated (local: %s, remote: %s)" % [formatted_local, PluginVersion.support.android]
-		_dialog_service.show_confirmation(
-			"AdMob Android plugin %s.\n\nWould you like to install it automatically?" % status,
-			install,
-			"Install"
-		)
 
 func install() -> void:
 	var file_name := _get_zip_file_name()

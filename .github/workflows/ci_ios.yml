@@ -37,7 +37,7 @@ jobs:
       id: ios-template-cache
       uses: actions/cache@v5
       with:
-        path: ${{github.workspace}}/godot/.scons_cache/
+        path: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
         key: ${{github.job}}-master-${{github.ref}}-${{github.sha}}
         restore-keys: |
           ${{github.job}}-master-${{github.ref}}-${{github.sha}}
@@ -57,14 +57,15 @@ jobs:
     - name: Cache SPM dependencies
       uses: actions/cache@v5
       with:
-        path: .build
-        key: spm-${{ hashFiles('Package.swift', 'Package.resolved') }}
+        path: platforms/ios/.build
+        key: spm-${{ hashFiles('platforms/ios/Package.swift', 'platforms/ios/Package.resolved') }}
         restore-keys: |
           spm-
 
     - name: Compiles the Source Code
+      working-directory: platforms/ios
       env:
-        SCONS_CACHE: ${{github.workspace}}/godot/.scons_cache/
+        SCONS_CACHE: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
       run: |
         ./scripts/build.sh ${{ needs.detect-latest.outputs.godot_version }}
 
@@ -73,5 +74,5 @@ jobs:
       id: artifact-upload-step
       with:
         name: poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
-        path: bin/release/*.zip
+        path: platforms/ios/bin/release/*.zip
         retention-days: 14

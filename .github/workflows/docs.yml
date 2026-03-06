@@ -36,7 +36,7 @@ jobs:
       - name: Deploy documentation
         run: |
           if [[ $GITHUB_REF == refs/tags/* ]] || [[ $GITHUB_EVENT_NAME == "workflow_run" ]]; then
-            VERSION=$(grep "version=" addons/admob/plugin.cfg | cut -d'"' -f2 | sed 's/^v//' | cut -d. -f1,2)
+            VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2 | sed 's/^v//' | cut -d. -f1,2)
             
             mike deploy --push --update-aliases $VERSION stable
             mike set-default --push stable

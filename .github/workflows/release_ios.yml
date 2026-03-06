@@ -13,6 +13,7 @@ jobs:
         ref: ${{ github.ref_name }}
 
     - name: Set plugin version on env
+      working-directory: platforms/ios
       run: |
         PACKAGE_FILE=$(find src/ads/config -name "*package.gd" | head -n 1)
         PLUGIN_VERSION=$(grep -hE "VERSION\s*:=\s*\"" $PACKAGE_FILE | sed -E 's/.*"([^"]+)".*/\1/')
@@ -42,6 +43,7 @@ jobs:
         ref: ${{ github.ref_name }}
 
     - name: Set plugin version on env
+      working-directory: platforms/ios
       run: |
         PACKAGE_FILE=$(find src/ads/config -name "*package.gd" | head -n 1)
         PLUGIN_VERSION=$(grep -hE "VERSION\s*:=\s*\"" $PACKAGE_FILE | sed -E 's/.*"([^"]+)".*/\1/')
@@ -57,7 +59,7 @@ jobs:
       id: ios-template-cache
       uses: actions/cache@v5
       with:
-        path: ${{github.workspace}}/godot/.scons_cache/
+        path: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
         key: ${{github.job}}-master-${{github.ref}}-${{github.sha}}
         restore-keys: |
           ${{github.job}}-master-${{github.ref}}-${{github.sha}}
@@ -77,14 +79,15 @@ jobs:
     - name: Cache SPM dependencies
       uses: actions/cache@v5
       with:
-        path: .build
-        key: spm-${{ hashFiles('Package.swift', 'Package.resolved') }}
+        path: platforms/ios/.build
+        key: spm-${{ hashFiles('platforms/ios/Package.swift', 'platforms/ios/Package.resolved') }}
         restore-keys: |
           spm-
 
     - name: Compiles the Source Code
+      working-directory: platforms/ios
       env:
-        SCONS_CACHE: ${{github.workspace}}/godot/.scons_cache/
+        SCONS_CACHE: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
       run: |
         ./scripts/build.sh ${{env.CURRENT_GODOT_VERSION}}
 
@@ -92,7 +95,7 @@ jobs:
       uses: actions/upload-artifact@v6
       with:
         name: poing-godot-admob-ios-v${{ env.CURRENT_GODOT_VERSION }}
-        path: bin/release/*.zip
+        path: platforms/ios/bin/release/*.zip
         if-no-files-found: error
         retention-days: 1
 
@@ -101,7 +104,7 @@ jobs:
       with:
         target_commit: ${{ github.ref_name }}
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: bin/release/*.zip
+        file: platforms/ios/bin/release/*.zip
         file_glob: true
         tag: ${{env.PLUGIN_VERSION}}
         release_name: ${{env.PLUGIN_VERSION}}
@@ -120,6 +123,7 @@ jobs:
         fetch-depth: 0
 
     - name: Set plugin version on env
+      working-directory: platforms/ios
       run: |
         PACKAGE_FILE=$(find src/ads/config -name "*package.gd" | head -n 1)
         PLUGIN_VERSION=$(grep -hE "VERSION\s*:=\s*\"" $PACKAGE_FILE | sed -E 's/.*"([^"]+)".*/\1/')

@@ -25,11 +25,13 @@ jobs:
         echo "CURRENT_GODOT_VERSION=${CURRENT_GODOT_VERSION}" >> $GITHUB_ENV
 
     - name: Build Plugins
+      working-directory: platforms/android
       run: |
         chmod +x ./gradlew
         ./gradlew build -PgodotVersion=${{env.CURRENT_GODOT_VERSION}}
 
     - name: Compress the artifact output
+      working-directory: platforms/android
       run: |
         ./gradlew zipPlugins -PgodotVersion="${{env.CURRENT_GODOT_VERSION}}"
       
@@ -37,6 +39,6 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: .output/poing-godot-admob-android-v${{env.CURRENT_GODOT_VERSION}}.zip
+        file: platforms/android/.output/poing-godot-admob-android-v${{env.CURRENT_GODOT_VERSION}}.zip
         tag: ${{ github.event.inputs.tag }}
         overwrite: true

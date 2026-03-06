@@ -30,18 +30,21 @@ jobs:
     - uses: actions/checkout@v6
 
     - name: Build Plugins
+      working-directory: platforms/android
       run: |
         chmod +x ./gradlew
         ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }}
 
     - name: Compress the artifact output
+      working-directory: platforms/android
       run: |
         ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}"
 
     - name: Upload artifact
       uses: actions/upload-artifact@v4
+      id: artifact-upload-step
       with:
         name: poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
-        path: .output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip
+        path: platforms/android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip
         retention-days: 14
 

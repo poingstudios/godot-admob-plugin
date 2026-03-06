@@ -1,8 +1,0 @@
-blank_issues_enabled: false
-contact_links:
-  - name: Issue with AdMob on Android only
-    url: https://github.com/Poing-Studios/godot-admob-android
-    about: Check the Android plugin repository.
-  - name: Issue with AdMob on Godot Editor
-    url: https://github.com/Poing-Studios/godot-admob-plugin
-    about: Check the Godot plugin repository.

@@ -29,7 +29,7 @@ jobs:
       id: ios-template-cache
       uses: actions/cache@v5
       with:
-        path: ${{github.workspace}}/godot-${{env.CURRENT_GODOT_VERSION}}-stable/.scons_cache/
+        path: ${{github.workspace}}/platforms/ios/godot-${{env.CURRENT_GODOT_VERSION}}-stable/.scons_cache/
         key: ${{github.job}}-master-${{github.ref}}-${{github.sha}}
         restore-keys: |
           ${{github.job}}-master-${{github.ref}}-${{github.sha}}
@@ -54,14 +54,15 @@ jobs:
     - name: Cache SPM dependencies
       uses: actions/cache@v5
       with:
-        path: .build
-        key: spm-${{ hashFiles('Package.swift', 'Package.resolved') }}
+        path: platforms/ios/.build
+        key: spm-${{ hashFiles('platforms/ios/Package.swift', 'platforms/ios/Package.resolved') }}
         restore-keys: |
           spm-
 
     - name: Compiles the Source Code
+      working-directory: platforms/ios
       env:
-        SCONS_CACHE: ${{github.workspace}}/godot/.scons_cache/
+        SCONS_CACHE: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
       run: |
         ./scripts/build.sh ${{env.CURRENT_GODOT_VERSION}}
 
@@ -69,7 +70,7 @@ jobs:
       uses: actions/upload-artifact@v6
       with:
         name: poing-godot-admob-ios-v${{ env.CURRENT_GODOT_VERSION }}
-        path: bin/release/*.zip
+        path: platforms/ios/bin/release/*.zip
         if-no-files-found: error
         retention-days: 1
 
@@ -77,7 +78,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: bin/release/*.zip
+        file: platforms/ios/bin/release/*.zip
         file_glob: true
         tag: ${{ github.event.inputs.tag }}
         overwrite: true

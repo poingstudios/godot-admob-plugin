@@ -35,4 +35,4 @@ func _init(handler: AndroidHandler) -> void:
 	
 	add_menu_item("Download & Install", func(): _handler.install())
 	add_menu_item("Open config.gd", func(): EditorInterface.edit_resource(AndroidExportPlugin.Config))
-	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-android/tree/" + PluginVersion.support.android))
+	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + PluginVersion.current + "/platforms/android"))
