@@ -9,11 +9,11 @@
   [![Discord](https://img.shields.io/badge/Discord-7289DA?style=flat-square&logo=discord&logoColor=white)](https://discord.com/invite/YEPvYjSSMk)
   [![Stars](https://img.shields.io/github/stars/poingstudios/godot-admob-plugin?style=flat-square)](https://github.com/poingstudios/godot-admob-plugin/stargazers)
 
-  [![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white)](https://github.com/poingstudios/godot-admob-android)
-  [![iOS](https://img.shields.io/badge/iOS-000000?style=flat-square&logo=ios&logoColor=white)](https://github.com/poingstudios/godot-admob-ios)
+  [![Android](https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white)](https://github.com/poingstudios/godot-admob-plugin/tree/master/platforms/android)
+  [![iOS](https://img.shields.io/badge/iOS-000000?style=flat-square&logo=ios&logoColor=white)](https://github.com/poingstudios/godot-admob-plugin/tree/master/platforms/ios)
 
   **The complete solution for AdMob integration in Godot.**  
-  Supports [godot-admob-android](https://github.com/poingstudios/godot-admob-android) and [godot-admob-ios](https://github.com/poingstudios/godot-admob-ios) natively.
+  Supports [godot-admob-android](https://github.com/poingstudios/godot-admob-plugin/tree/master/platforms/android) and [godot-admob-ios](https://github.com/poingstudios/godot-admob-plugin/tree/master/platforms/ios) natively.
   ![Plugin Usage](static/usage.webp)
 
   [🎬 Watch Video Tutorial](https://youtu.be/TB7WhP8mieo) • [📖 Read Documentation](https://poingstudios.github.io/godot-admob-plugin/latest/)
@@ -41,7 +41,7 @@
 
 1. Enable in `Project → Project Settings → Plugins`.
 	- **If the automatic download & installation fails**, go to `Project → Tools → AdMob Manager → Android/iOS → Download & Install`.
-2. To know how to deploy, check the README.md of [godot-admob-android](https://github.com/poingstudios/godot-admob-android/#usage) and/or [godot-admob-ios](https://github.com/poingstudios/godot-admob-ios/#usage).
+2. To know how to deploy, check the README.md of [godot-admob-android](https://github.com/poingstudios/godot-admob-plugin/tree/master/platforms/android) and/or [godot-admob-ios](https://github.com/poingstudios/godot-admob-plugin/tree/master/platforms/ios).
 
 # 🙋‍♂️How to use
 After installation, all the methods will be available for use in any `.gd` script.
@@ -211,8 +211,8 @@ func _on_show_pressed():
 
 
 ## 📎Useful links:
-- 🍏 iOS: https://github.com/poingstudios/godot-admob-ios
-- 🤖 Android: https://github.com/poingstudios/godot-admob-android
+- 🍏 iOS: https://github.com/poingstudios/godot-admob-plugin/tree/master/platforms/ios
+- 🤖 Android: https://github.com/poingstudios/godot-admob-plugin/tree/master/platforms/android
 - ⏳ Plugin for Godot below v4.2: https://github.com/poingstudios/godot-admob-plugin/tree/v3
 
 ## 📄Documentation
