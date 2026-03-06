@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+	<uses-permission android:name="android.permission.AD_ID" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application>
+        <meta-data
+            android:name="org.godotengine.plugin.v2.PoingGodotAdMob"
+            android:value="com.poingstudios.godot.admob.ads.PoingGodotAdMob" />
+        <meta-data
+            android:name="org.godotengine.plugin.v2.PoingGodotAdMobAdView"
+            android:value="com.poingstudios.godot.admob.ads.PoingGodotAdMobAdView" />
+        <meta-data
+            android:name="org.godotengine.plugin.v2.PoingGodotAdMobAdSize"
+            android:value="com.poingstudios.godot.admob.ads.PoingGodotAdMobAdSize" />
+
+        <meta-data
+            android:name="org.godotengine.plugin.v2.PoingGodotAdMobInterstitialAd"
+            android:value="com.poingstudios.godot.admob.ads.PoingGodotAdMobInterstitialAd" />
+        <meta-data
+            android:name="org.godotengine.plugin.v2.PoingGodotAdMobRewardedAd"
+            android:value="com.poingstudios.godot.admob.ads.PoingGodotAdMobRewardedAd" />
+        <meta-data
+            android:name="org.godotengine.plugin.v2.PoingGodotAdMobRewardedInterstitialAd"
+            android:value="com.poingstudios.godot.admob.ads.PoingGodotAdMobRewardedInterstitialAd" />
+
+        <meta-data
+            android:name="org.godotengine.plugin.v2.PoingGodotAdMobConsentInformation"
+            android:value="com.poingstudios.godot.admob.ads.PoingGodotAdMobConsentInformation" />
+        <meta-data
+            android:name="org.godotengine.plugin.v2.PoingGodotAdMobUserMessagingPlatform"
+            android:value="com.poingstudios.godot.admob.ads.PoingGodotAdMobUserMessagingPlatform" />
+    </application>
+
+</manifest>

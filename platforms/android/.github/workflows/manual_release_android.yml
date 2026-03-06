@@ -1,0 +1,42 @@
+name: Manual Build Android
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to publish the build (e.g., v4.0.0)'
+        required: true
+      godot_version:
+        description: 'Godot version to be builded (e.g., 4.6.0)'
+        required: true
+
+jobs:
+  android-template:
+    name: Compiling Gradle (Android)
+    runs-on: "ubuntu-latest"
+
+    steps:
+    - uses: actions/checkout@v6
+    
+    - name: Verify current inputs godot_version
+      run: |
+        CURRENT_GODOT_VERSION=${{ github.event.inputs.godot_version }}
+        if [ ${#CURRENT_GODOT_VERSION} -eq 1 ]; then CURRENT_GODOT_VERSION="${CURRENT_GODOT_VERSION}.0"; fi
+        echo "CURRENT_GODOT_VERSION=${CURRENT_GODOT_VERSION}" >> $GITHUB_ENV
+
+    - name: Build Plugins
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build -PgodotVersion=${{env.CURRENT_GODOT_VERSION}}
+
+    - name: Compress the artifact output
+      run: |
+        ./gradlew zipPlugins -PgodotVersion="${{env.CURRENT_GODOT_VERSION}}"
+      
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: .output/poing-godot-admob-android-v${{env.CURRENT_GODOT_VERSION}}.zip
+        tag: ${{ github.event.inputs.tag }}
+        overwrite: true
