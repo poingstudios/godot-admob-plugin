@@ -1,0 +1,127 @@
+name: Auto Build iOS
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  detect-latest:
+    name: Check latest Godot version
+    runs-on: ubuntu-latest
+    outputs:
+      godot_version: ${{ steps.detect.outputs.godot_version }}
+      should_build: ${{ steps.detect.outputs.should_build }}
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        ref: ${{ github.ref_name }}
+
+    - name: Set plugin version on env
+      run: |
+        PACKAGE_FILE=$(find src/ads/config -name "*package.gd" | head -n 1)
+        PLUGIN_VERSION=$(grep -hE "VERSION\s*:=\s*\"" $PACKAGE_FILE | sed -E 's/.*"([^"]+)".*/\1/')
+        echo "PLUGIN_VERSION=${PLUGIN_VERSION}" >> $GITHUB_ENV
+
+    - name: Detect latest Godot version
+      id: detect
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        LATEST=$(gh api repos/godotengine/godot/releases \
+          --jq '[.[] | select(.tag_name | test("^4\\.[0-9]+(\\.[0-9]+)?-stable$")) | .tag_name][0]' \
+          | sed 's/-stable/')
+          
+        LATEST_PAD=$(echo "$LATEST" | awk -F. '{if(NF==2) print $0".0"; else print $0}')
+
+        echo "Latest Godot version: $LATEST_PAD"
+
+        RELEASE_EXISTS=$(gh api "repos/${{ github.repository }}/releases/tags/${PLUGIN_VERSION}" > /dev/null 2>&1 && echo "true" || echo "false")
+
+        if [ "$RELEASE_EXISTS" = "true" ]; then
+          EXISTS=$(gh api "repos/${{ github.repository }}/releases/tags/${PLUGIN_VERSION}" \
+            --jq ".assets[].name" 2>/dev/null \
+            | grep -q "poing-godot-admob-ios-v${LATEST_PAD}.zip" && echo "true" || echo "false")
+        else
+          EXISTS="false"
+        fi
+
+        if [ "$EXISTS" = "true" ]; then
+          echo "should_build=false" >> $GITHUB_OUTPUT
+          echo "Already built for $LATEST_PAD"
+        else
+          echo "should_build=true" >> $GITHUB_OUTPUT
+          echo "godot_version=$LATEST_PAD" >> $GITHUB_OUTPUT
+
+          echo "Need to build for $LATEST_PAD"
+        fi
+
+  ios-template:
+    name: Compiling for iOS (Godot ${{ needs.detect-latest.outputs.godot_version }})
+    needs: detect-latest
+    if: needs.detect-latest.outputs.should_build == 'true'
+    runs-on: "macos-latest"
+
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        ref: ${{ github.ref_name }}
+
+    - name: Set plugin version on env
+      run: |
+        PACKAGE_FILE=$(find src/ads/config -name "*package.gd" | head -n 1)
+        PLUGIN_VERSION=$(grep -hE "VERSION\s*:=\s*\"" $PACKAGE_FILE | sed -E 's/.*"([^"]+)".*/\1/')
+        echo "PLUGIN_VERSION=${PLUGIN_VERSION}" >> $GITHUB_ENV
+
+    - name: Load .scons_cache directory
+      id: ios-template-cache
+      uses: actions/cache@v5
+      with:
+        path: ${{github.workspace}}/godot/.scons_cache/
+        key: ${{github.job}}-master-${{github.ref}}-${{github.sha}}
+        restore-keys: |
+          ${{github.job}}-master-${{github.ref}}-${{github.sha}}
+          ${{github.job}}-master-${{github.ref}}
+          ${{github.job}}-master
+
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+
+    - name: Configuring Python packages
+      run: |
+        python -m pip install scons
+
+    - name: Cache SPM dependencies
+      uses: actions/cache@v5
+      with:
+        path: .build
+        key: spm-${{ hashFiles('Package.swift', 'Package.resolved') }}
+        restore-keys: |
+          spm-
+
+    - name: Compiles the Source Code
+      env:
+        SCONS_CACHE: ${{github.workspace}}/godot/.scons_cache/
+      run: |
+        ./scripts/build.sh ${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v6
+      with:
+        name: poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}
+        path: bin/release/*.zip
+        if-no-files-found: error
+        retention-days: 1
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        target_commit: ${{ github.ref_name }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: bin/release/*.zip
+        file_glob: true
+        tag: ${{env.PLUGIN_VERSION}}
+        overwrite: true
