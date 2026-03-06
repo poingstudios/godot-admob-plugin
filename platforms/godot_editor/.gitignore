@@ -1,0 +1,24 @@
+# Godot 4+ specific ignores
+.godot/
+
+# Godot-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+
+# Mono-specific ignores
+.mono/
+mono_crash*.json
+data_*/
+*.csproj
+*.sln
+
+# Android & iOS specific ignores
+android/
+ios/
+
+# Ignore test files
+.DS_STORE
+
+# VSCode specific ignores
+.vscode/
