@@ -1,0 +1,1244 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 60;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5E027D892A74A770001551B6 /* PoingGodotAdMobInterstitialAd.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E027D882A74A770001551B6 /* PoingGodotAdMobInterstitialAd.mm */; };
+		5E38B5DB2A7546EF00E35218 /* InterstitialAd.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E38B5DA2A7546EF00E35218 /* InterstitialAd.mm */; };
+		5E4BF4A62B2F361A00E6C2AA /* StaticVariablesHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E4BF4A52B2F361A00E6C2AA /* StaticVariablesHelper.mm */; };
+		5E52D3662F47A379006869F4 /* PoingGodotAdMobDeps in Frameworks */ = {isa = PBXBuildFile; productRef = 5E52D3652F47A379006869F4 /* PoingGodotAdMobDeps */; };
+		5E52D3682F47A38B006869F4 /* PoingGodotAdMobDeps in Frameworks */ = {isa = PBXBuildFile; productRef = 5E52D3672F47A38B006869F4 /* PoingGodotAdMobDeps */; };
+		5E52D36A2F47A38F006869F4 /* PoingGodotAdMobDeps in Frameworks */ = {isa = PBXBuildFile; productRef = 5E52D3692F47A38F006869F4 /* PoingGodotAdMobDeps */; };
+		5E52D36C2F47A392006869F4 /* PoingGodotAdMobDeps in Frameworks */ = {isa = PBXBuildFile; productRef = 5E52D36B2F47A392006869F4 /* PoingGodotAdMobDeps */; };
+		5E5BDE182A4632770071BE86 /* PoingGodotAdMobModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BDE172A4632770071BE86 /* PoingGodotAdMobModule.mm */; };
+		5E63D64F2A64636100BDC600 /* ObjectToGodotDictionary.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E63D64E2A64636100BDC600 /* ObjectToGodotDictionary.mm */; };
+		5E80AAD52A44A50C001C750F /* PoingGodotAdMob.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E80AAD42A44A50C001C750F /* PoingGodotAdMob.mm */; };
+		5E80AAD62A44A50C001C750F /* PoingGodotAdMob.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5E80AAD32A44A50C001C750F /* PoingGodotAdMob.h */; };
+		5E80AAE42A44A74A001C750F /* AdNetworkExtras.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E80AAE32A44A74A001C750F /* AdNetworkExtras.mm */; };
+		5E80AAE52A44A74A001C750F /* AdNetworkExtras.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5E80AAE22A44A74A001C750F /* AdNetworkExtras.h */; };
+		5E80AAF12A44A82F001C750F /* PoingGodotAdMobMetaModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E80AAF02A44A82F001C750F /* PoingGodotAdMobMetaModule.mm */; };
+		5E80AAF22A44A82F001C750F /* PoingGodotAdMobMetaModule.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5E80AAEF2A44A82F001C750F /* PoingGodotAdMobMetaModule.h */; };
+		5E80AB002A44AA77001C750F /* VunglePoingExtrasBuilder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E80AAFF2A44AA77001C750F /* VunglePoingExtrasBuilder.mm */; };
+		5E80AB012A44AA77001C750F /* VunglePoingExtrasBuilder.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5E80AAFE2A44AA77001C750F /* VunglePoingExtrasBuilder.h */; };
+		5EA276132A66FC6A00D5CF1E /* PoingGodotAdMobAdView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EA276122A66FC6A00D5CF1E /* PoingGodotAdMobAdView.mm */; };
+		5EA276172A6739D200D5CF1E /* BannerAd.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EA276162A6739D200D5CF1E /* BannerAd.mm */; };
+		5EA2761A2A67461A00D5CF1E /* GodotDictionaryToObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EA276192A67461A00D5CF1E /* GodotDictionaryToObject.mm */; };
+		5EA595992A76B08400968B18 /* PoingGodotAdMobRewardedAd.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EA595982A76B08400968B18 /* PoingGodotAdMobRewardedAd.mm */; };
+		5EA5959C2A76B10000968B18 /* RewardedAd.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EA5959B2A76B10000968B18 /* RewardedAd.mm */; };
+		5EAF24902A7EBB420050C77A /* PoingGodotAdMobVungleModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF248F2A7EBB420050C77A /* PoingGodotAdMobVungleModule.mm */; };
+		5EAF24932A7EBC3D0050C77A /* PoingGodotAdMobVungle.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF24922A7EBC3D0050C77A /* PoingGodotAdMobVungle.mm */; };
+		5EAFBD212A7C96600045DAB8 /* PoingGodotAdMobMetaFBAdSettings.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EAFBD202A7C96600045DAB8 /* PoingGodotAdMobMetaFBAdSettings.mm */; };
+		5EB13DE52A76FF7800054CFC /* PoingGodotAdMobRewardedInterstitialAd.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EB13DE42A76FF7800054CFC /* PoingGodotAdMobRewardedInterstitialAd.mm */; };
+		5EB13DE82A77003500054CFC /* RewardedInterstitialAd.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EB13DE72A77003500054CFC /* RewardedInterstitialAd.mm */; };
+		5EB13DEB2A7706AE00054CFC /* PoingGodotAdMobConsentInformation.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EB13DEA2A7706AE00054CFC /* PoingGodotAdMobConsentInformation.mm */; };
+		5EB13DED2A773ACC00054CFC /* AdFormatBase.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EB13DEC2A773ACC00054CFC /* AdFormatBase.mm */; };
+		5EB13DF02A773BE600054CFC /* PoingGodotAdMobUserMessagingPlatform.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EB13DEF2A773BE600054CFC /* PoingGodotAdMobUserMessagingPlatform.mm */; };
+		5EB13DF42A773CA000054CFC /* PoingGodotAdMobConsentForm.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EB13DF32A773CA000054CFC /* PoingGodotAdMobConsentForm.mm */; };
+		5EB63E4E2A65DF0700699D72 /* PoingGodotAdMobAdSize.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EB63E4D2A65DF0700699D72 /* PoingGodotAdMobAdSize.mm */; };
+		5EB759202A68860400523E88 /* DeviceOrientationHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5EB7591F2A68860400523E88 /* DeviceOrientationHelper.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5E80AACE2A44A50C001C750F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				5E80AAD62A44A50C001C750F /* PoingGodotAdMob.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E80AADE2A44A74A001C750F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				5E80AAE52A44A74A001C750F /* AdNetworkExtras.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E80AAEB2A44A82E001C750F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				5E80AAF22A44A82F001C750F /* PoingGodotAdMobMetaModule.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E80AAFA2A44AA77001C750F /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				5E80AB012A44AA77001C750F /* VunglePoingExtrasBuilder.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		5E0126402AE8A13100E487EE /* admob_package.gd */ = {isa = PBXFileReference; lastKnownFileType = text; path = admob_package.gd; sourceTree = "<group>"; };
+		5E027D872A74A75C001551B6 /* PoingGodotAdMobInterstitialAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobInterstitialAd.h; sourceTree = "<group>"; };
+		5E027D882A74A770001551B6 /* PoingGodotAdMobInterstitialAd.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobInterstitialAd.mm; sourceTree = "<group>"; };
+		5E38B5D92A7546D100E35218 /* InterstitialAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterstitialAd.h; sourceTree = "<group>"; };
+		5E38B5DA2A7546EF00E35218 /* InterstitialAd.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = InterstitialAd.mm; sourceTree = "<group>"; };
+		5E4BF4A42B2F360900E6C2AA /* StaticVariablesHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StaticVariablesHelper.h; sourceTree = "<group>"; };
+		5E4BF4A52B2F361A00E6C2AA /* StaticVariablesHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = StaticVariablesHelper.mm; sourceTree = "<group>"; };
+		5E5BDE162A4632300071BE86 /* PoingGodotAdMobModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobModule.h; sourceTree = "<group>"; };
+		5E5BDE172A4632770071BE86 /* PoingGodotAdMobModule.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobModule.mm; sourceTree = "<group>"; };
+		5E63D64D2A64632D00BDC600 /* ObjectToGodotDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectToGodotDictionary.h; sourceTree = "<group>"; };
+		5E63D64E2A64636100BDC600 /* ObjectToGodotDictionary.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ObjectToGodotDictionary.mm; sourceTree = "<group>"; };
+		5E6F5B132F47C15F00152FA9 /* PoingGodotAdMob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMob.h; sourceTree = "<group>"; };
+		5E6F5B152F47C15F00152FA9 /* PoingGodotAdMobMetaModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobMetaModule.h; sourceTree = "<group>"; };
+		5E6F5B192F47C15F00152FA9 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
+		5E6F5B1A2F47C15F00152FA9 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		5E6F5B1B2F47C15F00152FA9 /* LiftoffMonetizeAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = LiftoffMonetizeAdapter.framework; sourceTree = "<group>"; };
+		5E6F5B1C2F47C15F00152FA9 /* MetaAdapter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MetaAdapter.framework; sourceTree = "<group>"; };
+		5E6F5B1D2F47C15F00152FA9 /* poing-godot-admob-ads.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-ads.a"; sourceTree = "<group>"; };
+		5E6F5B1E2F47C15F00152FA9 /* poing-godot-admob-meta.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-meta.a"; sourceTree = "<group>"; };
+		5E6F5B1F2F47C15F00152FA9 /* UserMessagingPlatform.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UserMessagingPlatform.framework; sourceTree = "<group>"; };
+		5E6F5B202F47C15F00152FA9 /* VungleAdsSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = VungleAdsSDK.framework; sourceTree = "<group>"; };
+		5E6F5B222F47C15F00152FA9 /* poing-godot-admob-ios-internal-v4.6.1.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "poing-godot-admob-ios-internal-v4.6.1.zip"; sourceTree = "<group>"; };
+		5E6F5B232F47C15F00152FA9 /* poing-godot-admob-ios-sdk-external-dependencies.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "poing-godot-admob-ios-sdk-external-dependencies.zip"; sourceTree = "<group>"; };
+		5E6F5B252F47C15F00152FA9 /* libpoing-godot-admob-ads.arm64-ios.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-ads.arm64-ios.release.a"; sourceTree = "<group>"; };
+		5E6F5B262F47C15F00152FA9 /* libpoing-godot-admob-ads.arm64-ios.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-ads.arm64-ios.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B272F47C15F00152FA9 /* libpoing-godot-admob-ads.arm64-simulator.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-ads.arm64-simulator.release.a"; sourceTree = "<group>"; };
+		5E6F5B282F47C15F00152FA9 /* libpoing-godot-admob-ads.arm64-simulator.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-ads.arm64-simulator.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B292F47C15F00152FA9 /* libpoing-godot-admob-ads.x86_64-simulator.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-ads.x86_64-simulator.release.a"; sourceTree = "<group>"; };
+		5E6F5B2A2F47C15F00152FA9 /* libpoing-godot-admob-ads.x86_64-simulator.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-ads.x86_64-simulator.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B2B2F47C15F00152FA9 /* poing-godot-admob-ads.debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-ads.debug.a"; sourceTree = "<group>"; };
+		5E6F5B2C2F47C15F00152FA9 /* poing-godot-admob-ads.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-ads.release.a"; sourceTree = "<group>"; };
+		5E6F5B2D2F47C15F00152FA9 /* poing-godot-admob-ads.simulator.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-ads.simulator.release.a"; sourceTree = "<group>"; };
+		5E6F5B2E2F47C15F00152FA9 /* poing-godot-admob-ads.simulator.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-ads.simulator.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B302F47C15F00152FA9 /* libpoing-godot-admob-meta.arm64-ios.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-meta.arm64-ios.release.a"; sourceTree = "<group>"; };
+		5E6F5B312F47C15F00152FA9 /* libpoing-godot-admob-meta.arm64-ios.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-meta.arm64-ios.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B322F47C15F00152FA9 /* libpoing-godot-admob-meta.arm64-simulator.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-meta.arm64-simulator.release.a"; sourceTree = "<group>"; };
+		5E6F5B332F47C15F00152FA9 /* libpoing-godot-admob-meta.arm64-simulator.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-meta.arm64-simulator.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B342F47C15F00152FA9 /* libpoing-godot-admob-meta.x86_64-simulator.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-meta.x86_64-simulator.release.a"; sourceTree = "<group>"; };
+		5E6F5B352F47C15F00152FA9 /* libpoing-godot-admob-meta.x86_64-simulator.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-meta.x86_64-simulator.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B362F47C15F00152FA9 /* poing-godot-admob-meta.debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-meta.debug.a"; sourceTree = "<group>"; };
+		5E6F5B372F47C15F00152FA9 /* poing-godot-admob-meta.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-meta.release.a"; sourceTree = "<group>"; };
+		5E6F5B382F47C15F00152FA9 /* poing-godot-admob-meta.simulator.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-meta.simulator.release.a"; sourceTree = "<group>"; };
+		5E6F5B392F47C15F00152FA9 /* poing-godot-admob-meta.simulator.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-meta.simulator.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B3B2F47C15F00152FA9 /* libpoing-godot-admob-vungle.arm64-ios.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-vungle.arm64-ios.release.a"; sourceTree = "<group>"; };
+		5E6F5B3C2F47C15F00152FA9 /* libpoing-godot-admob-vungle.arm64-ios.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-vungle.arm64-ios.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B3D2F47C15F00152FA9 /* libpoing-godot-admob-vungle.arm64-simulator.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-vungle.arm64-simulator.release.a"; sourceTree = "<group>"; };
+		5E6F5B3E2F47C15F00152FA9 /* libpoing-godot-admob-vungle.arm64-simulator.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-vungle.arm64-simulator.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B3F2F47C15F00152FA9 /* libpoing-godot-admob-vungle.x86_64-simulator.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-vungle.x86_64-simulator.release.a"; sourceTree = "<group>"; };
+		5E6F5B402F47C15F00152FA9 /* libpoing-godot-admob-vungle.x86_64-simulator.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libpoing-godot-admob-vungle.x86_64-simulator.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B412F47C15F00152FA9 /* poing-godot-admob-vungle.debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-vungle.debug.a"; sourceTree = "<group>"; };
+		5E6F5B422F47C15F00152FA9 /* poing-godot-admob-vungle.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-vungle.release.a"; sourceTree = "<group>"; };
+		5E6F5B432F47C15F00152FA9 /* poing-godot-admob-vungle.simulator.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-vungle.simulator.release.a"; sourceTree = "<group>"; };
+		5E6F5B442F47C15F00152FA9 /* poing-godot-admob-vungle.simulator.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "poing-godot-admob-vungle.simulator.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B472F47C15F00152FA9 /* poing-godot-admob-ads.debug.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "poing-godot-admob-ads.debug.xcframework"; sourceTree = "<group>"; };
+		5E6F5B482F47C15F00152FA9 /* poing-godot-admob-ads.release.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "poing-godot-admob-ads.release.xcframework"; sourceTree = "<group>"; };
+		5E6F5B4A2F47C15F00152FA9 /* poing-godot-admob-meta.debug.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "poing-godot-admob-meta.debug.xcframework"; sourceTree = "<group>"; };
+		5E6F5B4B2F47C15F00152FA9 /* poing-godot-admob-meta.release.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "poing-godot-admob-meta.release.xcframework"; sourceTree = "<group>"; };
+		5E6F5B4D2F47C15F00152FA9 /* poing-godot-admob-vungle.debug.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "poing-godot-admob-vungle.debug.xcframework"; sourceTree = "<group>"; };
+		5E6F5B4E2F47C15F00152FA9 /* poing-godot-admob-vungle.release.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = "poing-godot-admob-vungle.release.xcframework"; sourceTree = "<group>"; };
+		5E6F5B512F47C15F00152FA9 /* libadmob.arm64-iphone.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libadmob.arm64-iphone.release.a"; sourceTree = "<group>"; };
+		5E6F5B522F47C15F00152FA9 /* libadmob.arm64-iphone.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libadmob.arm64-iphone.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B532F47C15F00152FA9 /* libadmob.armv7-iphone.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libadmob.armv7-iphone.release.a"; sourceTree = "<group>"; };
+		5E6F5B542F47C15F00152FA9 /* libadmob.armv7-iphone.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libadmob.armv7-iphone.release_debug.a"; sourceTree = "<group>"; };
+		5E6F5B552F47C15F00152FA9 /* libadmob.x86_64-simulator.release.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libadmob.x86_64-simulator.release.a"; sourceTree = "<group>"; };
+		5E6F5B562F47C15F00152FA9 /* libadmob.x86_64-simulator.release_debug.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libadmob.x86_64-simulator.release_debug.a"; sourceTree = "<group>"; };
+		5E80AAD02A44A50C001C750F /* poing-godot-admob-ads.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 1; path = "poing-godot-admob-ads.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E80AAD32A44A50C001C750F /* PoingGodotAdMob.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMob.h; sourceTree = "<group>"; };
+		5E80AAD42A44A50C001C750F /* PoingGodotAdMob.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMob.mm; sourceTree = "<group>"; };
+		5E80AAE02A44A74A001C750F /* poing-godot-admob-core.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 1; path = "poing-godot-admob-core.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E80AAE22A44A74A001C750F /* AdNetworkExtras.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdNetworkExtras.h; sourceTree = "<group>"; };
+		5E80AAE32A44A74A001C750F /* AdNetworkExtras.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AdNetworkExtras.mm; sourceTree = "<group>"; };
+		5E80AAED2A44A82E001C750F /* poing-godot-admob-meta.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 1; path = "poing-godot-admob-meta.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E80AAEF2A44A82F001C750F /* PoingGodotAdMobMetaModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobMetaModule.h; sourceTree = "<group>"; };
+		5E80AAF02A44A82F001C750F /* PoingGodotAdMobMetaModule.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobMetaModule.mm; sourceTree = "<group>"; };
+		5E80AAFC2A44AA77001C750F /* poing-godot-admob-vungle.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 1; path = "poing-godot-admob-vungle.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E80AAFE2A44AA77001C750F /* VunglePoingExtrasBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VunglePoingExtrasBuilder.h; sourceTree = "<group>"; };
+		5E80AAFF2A44AA77001C750F /* VunglePoingExtrasBuilder.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = VunglePoingExtrasBuilder.mm; sourceTree = "<group>"; };
+		5E9575692A46998300CE30AF /* poing-godot-admob-ads.gdip */ = {isa = PBXFileReference; lastKnownFileType = text; path = "poing-godot-admob-ads.gdip"; sourceTree = "<group>"; };
+		5EA276112A66FC5C00D5CF1E /* PoingGodotAdMobAdView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobAdView.h; sourceTree = "<group>"; };
+		5EA276122A66FC6A00D5CF1E /* PoingGodotAdMobAdView.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobAdView.mm; sourceTree = "<group>"; };
+		5EA276152A67396200D5CF1E /* BannerAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BannerAd.h; sourceTree = "<group>"; };
+		5EA276162A6739D200D5CF1E /* BannerAd.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BannerAd.mm; sourceTree = "<group>"; };
+		5EA276182A6745CD00D5CF1E /* GodotDictionaryToObject.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GodotDictionaryToObject.h; sourceTree = "<group>"; };
+		5EA276192A67461A00D5CF1E /* GodotDictionaryToObject.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = GodotDictionaryToObject.mm; sourceTree = "<group>"; };
+		5EA595972A76B06D00968B18 /* PoingGodotAdMobRewardedAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobRewardedAd.h; sourceTree = "<group>"; };
+		5EA595982A76B08400968B18 /* PoingGodotAdMobRewardedAd.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobRewardedAd.mm; sourceTree = "<group>"; };
+		5EA5959A2A76B0F200968B18 /* RewardedAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardedAd.h; sourceTree = "<group>"; };
+		5EA5959B2A76B10000968B18 /* RewardedAd.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RewardedAd.mm; sourceTree = "<group>"; };
+		5EA5959D2A76B39E00968B18 /* VectorHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VectorHelper.h; sourceTree = "<group>"; };
+		5EA5959E2A76C0BA00968B18 /* ObjectController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ObjectController.h; sourceTree = "<group>"; };
+		5EA5959F2A76C56500968B18 /* AdFormatBase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AdFormatBase.h; sourceTree = "<group>"; };
+		5EAF248C2A7EBAC60050C77A /* PoingGodotAdMobVungleModule.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobVungleModule.h; sourceTree = "<group>"; };
+		5EAF248E2A7EBB040050C77A /* poing-godot-admob-vungle.gdip */ = {isa = PBXFileReference; lastKnownFileType = text; path = "poing-godot-admob-vungle.gdip"; sourceTree = "<group>"; };
+		5EAF248F2A7EBB420050C77A /* PoingGodotAdMobVungleModule.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobVungleModule.mm; sourceTree = "<group>"; };
+		5EAF24912A7EBC350050C77A /* PoingGodotAdMobVungle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobVungle.h; sourceTree = "<group>"; };
+		5EAF24922A7EBC3D0050C77A /* PoingGodotAdMobVungle.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobVungle.mm; sourceTree = "<group>"; };
+		5EAFBD1E2A7C94EA0045DAB8 /* poing-godot-admob-meta.gdip */ = {isa = PBXFileReference; lastKnownFileType = text; path = "poing-godot-admob-meta.gdip"; sourceTree = "<group>"; };
+		5EAFBD1F2A7C96540045DAB8 /* PoingGodotAdMobMetaFBAdSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobMetaFBAdSettings.h; sourceTree = "<group>"; };
+		5EAFBD202A7C96600045DAB8 /* PoingGodotAdMobMetaFBAdSettings.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobMetaFBAdSettings.mm; sourceTree = "<group>"; };
+		5EB13DE32A76FF6300054CFC /* PoingGodotAdMobRewardedInterstitialAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobRewardedInterstitialAd.h; sourceTree = "<group>"; };
+		5EB13DE42A76FF7800054CFC /* PoingGodotAdMobRewardedInterstitialAd.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobRewardedInterstitialAd.mm; sourceTree = "<group>"; };
+		5EB13DE62A77002B00054CFC /* RewardedInterstitialAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RewardedInterstitialAd.h; sourceTree = "<group>"; };
+		5EB13DE72A77003500054CFC /* RewardedInterstitialAd.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = RewardedInterstitialAd.mm; sourceTree = "<group>"; };
+		5EB13DE92A7706A300054CFC /* PoingGodotAdMobConsentInformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobConsentInformation.h; sourceTree = "<group>"; };
+		5EB13DEA2A7706AE00054CFC /* PoingGodotAdMobConsentInformation.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobConsentInformation.mm; sourceTree = "<group>"; };
+		5EB13DEC2A773ACC00054CFC /* AdFormatBase.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = AdFormatBase.mm; sourceTree = "<group>"; };
+		5EB13DEE2A773BDB00054CFC /* PoingGodotAdMobUserMessagingPlatform.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobUserMessagingPlatform.h; sourceTree = "<group>"; };
+		5EB13DEF2A773BE600054CFC /* PoingGodotAdMobUserMessagingPlatform.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobUserMessagingPlatform.mm; sourceTree = "<group>"; };
+		5EB13DF22A773C9800054CFC /* PoingGodotAdMobConsentForm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobConsentForm.h; sourceTree = "<group>"; };
+		5EB13DF32A773CA000054CFC /* PoingGodotAdMobConsentForm.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobConsentForm.mm; sourceTree = "<group>"; };
+		5EB63E4D2A65DF0700699D72 /* PoingGodotAdMobAdSize.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobAdSize.mm; sourceTree = "<group>"; };
+		5EB63E4F2A65DF1B00699D72 /* PoingGodotAdMobAdSize.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobAdSize.h; sourceTree = "<group>"; };
+		5EB7591F2A68860400523E88 /* DeviceOrientationHelper.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = DeviceOrientationHelper.mm; sourceTree = "<group>"; };
+		5EB759212A68865600523E88 /* DeviceOrientationHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeviceOrientationHelper.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5E80AACD2A44A50C001C750F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E52D3662F47A379006869F4 /* PoingGodotAdMobDeps in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E80AADD2A44A74A001C750F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E52D3682F47A38B006869F4 /* PoingGodotAdMobDeps in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E80AAEA2A44A82E001C750F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E52D36A2F47A38F006869F4 /* PoingGodotAdMobDeps in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E80AAF92A44AA77001C750F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E52D36C2F47A392006869F4 /* PoingGodotAdMobDeps in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5E63D64C2A6461B300BDC600 /* converters */ = {
+			isa = PBXGroup;
+			children = (
+				5E63D64D2A64632D00BDC600 /* ObjectToGodotDictionary.h */,
+				5E63D64E2A64636100BDC600 /* ObjectToGodotDictionary.mm */,
+				5EA276182A6745CD00D5CF1E /* GodotDictionaryToObject.h */,
+				5EA276192A67461A00D5CF1E /* GodotDictionaryToObject.mm */,
+			);
+			path = converters;
+			sourceTree = "<group>";
+		};
+		5E6F5B142F47C15F00152FA9 /* ads */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B132F47C15F00152FA9 /* PoingGodotAdMob.h */,
+			);
+			path = ads;
+			sourceTree = "<group>";
+		};
+		5E6F5B162F47C15F00152FA9 /* meta */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B152F47C15F00152FA9 /* PoingGodotAdMobMetaModule.h */,
+			);
+			path = meta;
+			sourceTree = "<group>";
+		};
+		5E6F5B172F47C15F00152FA9 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B142F47C15F00152FA9 /* ads */,
+				5E6F5B162F47C15F00152FA9 /* meta */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		5E6F5B182F47C15F00152FA9 /* PackageFrameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = PackageFrameworks;
+			sourceTree = "<group>";
+		};
+		5E6F5B212F47C15F00152FA9 /* Debug--iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B172F47C15F00152FA9 /* include */,
+				5E6F5B182F47C15F00152FA9 /* PackageFrameworks */,
+				5E6F5B192F47C15F00152FA9 /* FBAudienceNetwork.framework */,
+				5E6F5B1A2F47C15F00152FA9 /* GoogleMobileAds.framework */,
+				5E6F5B1B2F47C15F00152FA9 /* LiftoffMonetizeAdapter.framework */,
+				5E6F5B1C2F47C15F00152FA9 /* MetaAdapter.framework */,
+				5E6F5B1D2F47C15F00152FA9 /* poing-godot-admob-ads.a */,
+				5E6F5B1E2F47C15F00152FA9 /* poing-godot-admob-meta.a */,
+				5E6F5B1F2F47C15F00152FA9 /* UserMessagingPlatform.framework */,
+				5E6F5B202F47C15F00152FA9 /* VungleAdsSDK.framework */,
+			);
+			path = "Debug--iphonesimulator";
+			sourceTree = "<group>";
+		};
+		5E6F5B242F47C15F00152FA9 /* release */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B222F47C15F00152FA9 /* poing-godot-admob-ios-internal-v4.6.1.zip */,
+				5E6F5B232F47C15F00152FA9 /* poing-godot-admob-ios-sdk-external-dependencies.zip */,
+			);
+			path = release;
+			sourceTree = "<group>";
+		};
+		5E6F5B2F2F47C15F00152FA9 /* ads */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B252F47C15F00152FA9 /* libpoing-godot-admob-ads.arm64-ios.release.a */,
+				5E6F5B262F47C15F00152FA9 /* libpoing-godot-admob-ads.arm64-ios.release_debug.a */,
+				5E6F5B272F47C15F00152FA9 /* libpoing-godot-admob-ads.arm64-simulator.release.a */,
+				5E6F5B282F47C15F00152FA9 /* libpoing-godot-admob-ads.arm64-simulator.release_debug.a */,
+				5E6F5B292F47C15F00152FA9 /* libpoing-godot-admob-ads.x86_64-simulator.release.a */,
+				5E6F5B2A2F47C15F00152FA9 /* libpoing-godot-admob-ads.x86_64-simulator.release_debug.a */,
+				5E6F5B2B2F47C15F00152FA9 /* poing-godot-admob-ads.debug.a */,
+				5E6F5B2C2F47C15F00152FA9 /* poing-godot-admob-ads.release.a */,
+				5E6F5B2D2F47C15F00152FA9 /* poing-godot-admob-ads.simulator.release.a */,
+				5E6F5B2E2F47C15F00152FA9 /* poing-godot-admob-ads.simulator.release_debug.a */,
+			);
+			path = ads;
+			sourceTree = "<group>";
+		};
+		5E6F5B3A2F47C15F00152FA9 /* meta */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B302F47C15F00152FA9 /* libpoing-godot-admob-meta.arm64-ios.release.a */,
+				5E6F5B312F47C15F00152FA9 /* libpoing-godot-admob-meta.arm64-ios.release_debug.a */,
+				5E6F5B322F47C15F00152FA9 /* libpoing-godot-admob-meta.arm64-simulator.release.a */,
+				5E6F5B332F47C15F00152FA9 /* libpoing-godot-admob-meta.arm64-simulator.release_debug.a */,
+				5E6F5B342F47C15F00152FA9 /* libpoing-godot-admob-meta.x86_64-simulator.release.a */,
+				5E6F5B352F47C15F00152FA9 /* libpoing-godot-admob-meta.x86_64-simulator.release_debug.a */,
+				5E6F5B362F47C15F00152FA9 /* poing-godot-admob-meta.debug.a */,
+				5E6F5B372F47C15F00152FA9 /* poing-godot-admob-meta.release.a */,
+				5E6F5B382F47C15F00152FA9 /* poing-godot-admob-meta.simulator.release.a */,
+				5E6F5B392F47C15F00152FA9 /* poing-godot-admob-meta.simulator.release_debug.a */,
+			);
+			path = meta;
+			sourceTree = "<group>";
+		};
+		5E6F5B452F47C15F00152FA9 /* vungle */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B3B2F47C15F00152FA9 /* libpoing-godot-admob-vungle.arm64-ios.release.a */,
+				5E6F5B3C2F47C15F00152FA9 /* libpoing-godot-admob-vungle.arm64-ios.release_debug.a */,
+				5E6F5B3D2F47C15F00152FA9 /* libpoing-godot-admob-vungle.arm64-simulator.release.a */,
+				5E6F5B3E2F47C15F00152FA9 /* libpoing-godot-admob-vungle.arm64-simulator.release_debug.a */,
+				5E6F5B3F2F47C15F00152FA9 /* libpoing-godot-admob-vungle.x86_64-simulator.release.a */,
+				5E6F5B402F47C15F00152FA9 /* libpoing-godot-admob-vungle.x86_64-simulator.release_debug.a */,
+				5E6F5B412F47C15F00152FA9 /* poing-godot-admob-vungle.debug.a */,
+				5E6F5B422F47C15F00152FA9 /* poing-godot-admob-vungle.release.a */,
+				5E6F5B432F47C15F00152FA9 /* poing-godot-admob-vungle.simulator.release.a */,
+				5E6F5B442F47C15F00152FA9 /* poing-godot-admob-vungle.simulator.release_debug.a */,
+			);
+			path = vungle;
+			sourceTree = "<group>";
+		};
+		5E6F5B462F47C15F00152FA9 /* static_libraries */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B2F2F47C15F00152FA9 /* ads */,
+				5E6F5B3A2F47C15F00152FA9 /* meta */,
+				5E6F5B452F47C15F00152FA9 /* vungle */,
+			);
+			path = static_libraries;
+			sourceTree = "<group>";
+		};
+		5E6F5B492F47C15F00152FA9 /* ads */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B472F47C15F00152FA9 /* poing-godot-admob-ads.debug.xcframework */,
+				5E6F5B482F47C15F00152FA9 /* poing-godot-admob-ads.release.xcframework */,
+			);
+			path = ads;
+			sourceTree = "<group>";
+		};
+		5E6F5B4C2F47C15F00152FA9 /* meta */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B4A2F47C15F00152FA9 /* poing-godot-admob-meta.debug.xcframework */,
+				5E6F5B4B2F47C15F00152FA9 /* poing-godot-admob-meta.release.xcframework */,
+			);
+			path = meta;
+			sourceTree = "<group>";
+		};
+		5E6F5B4F2F47C15F00152FA9 /* vungle */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B4D2F47C15F00152FA9 /* poing-godot-admob-vungle.debug.xcframework */,
+				5E6F5B4E2F47C15F00152FA9 /* poing-godot-admob-vungle.release.xcframework */,
+			);
+			path = vungle;
+			sourceTree = "<group>";
+		};
+		5E6F5B502F47C15F00152FA9 /* xcframeworks */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B492F47C15F00152FA9 /* ads */,
+				5E6F5B4C2F47C15F00152FA9 /* meta */,
+				5E6F5B4F2F47C15F00152FA9 /* vungle */,
+			);
+			path = xcframeworks;
+			sourceTree = "<group>";
+		};
+		5E6F5B572F47C15F00152FA9 /* bin */ = {
+			isa = PBXGroup;
+			children = (
+				5E6F5B212F47C15F00152FA9 /* Debug--iphonesimulator */,
+				5E6F5B242F47C15F00152FA9 /* release */,
+				5E6F5B462F47C15F00152FA9 /* static_libraries */,
+				5E6F5B502F47C15F00152FA9 /* xcframeworks */,
+				5E6F5B512F47C15F00152FA9 /* libadmob.arm64-iphone.release.a */,
+				5E6F5B522F47C15F00152FA9 /* libadmob.arm64-iphone.release_debug.a */,
+				5E6F5B532F47C15F00152FA9 /* libadmob.armv7-iphone.release.a */,
+				5E6F5B542F47C15F00152FA9 /* libadmob.armv7-iphone.release_debug.a */,
+				5E6F5B552F47C15F00152FA9 /* libadmob.x86_64-simulator.release.a */,
+				5E6F5B562F47C15F00152FA9 /* libadmob.x86_64-simulator.release_debug.a */,
+			);
+			path = bin;
+			sourceTree = "<group>";
+		};
+		5E80AAC72A44A50C001C750F = {
+			isa = PBXGroup;
+			children = (
+				5E80AAF72A44A84B001C750F /* src */,
+				5E80AAD12A44A50C001C750F /* Products */,
+				5E6F5B572F47C15F00152FA9 /* bin */,
+			);
+			sourceTree = "<group>";
+		};
+		5E80AAD12A44A50C001C750F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5E80AAD02A44A50C001C750F /* poing-godot-admob-ads.a */,
+				5E80AAE02A44A74A001C750F /* poing-godot-admob-core.a */,
+				5E80AAED2A44A82E001C750F /* poing-godot-admob-meta.a */,
+				5E80AAFC2A44AA77001C750F /* poing-godot-admob-vungle.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5E80AAD22A44A50C001C750F /* ads */ = {
+			isa = PBXGroup;
+			children = (
+				5EB7591E2A6885EA00523E88 /* helpers */,
+				5EA276142A6738B700D5CF1E /* adformats */,
+				5E63D64C2A6461B300BDC600 /* converters */,
+				5EB13DF12A773C2000054CFC /* ump */,
+				5E9575682A46997400CE30AF /* config */,
+				5EA5959E2A76C0BA00968B18 /* ObjectController.h */,
+				5E80AAD32A44A50C001C750F /* PoingGodotAdMob.h */,
+				5E80AAD42A44A50C001C750F /* PoingGodotAdMob.mm */,
+				5E5BDE162A4632300071BE86 /* PoingGodotAdMobModule.h */,
+				5E5BDE172A4632770071BE86 /* PoingGodotAdMobModule.mm */,
+				5EB63E4F2A65DF1B00699D72 /* PoingGodotAdMobAdSize.h */,
+				5EB63E4D2A65DF0700699D72 /* PoingGodotAdMobAdSize.mm */,
+				5EA276112A66FC5C00D5CF1E /* PoingGodotAdMobAdView.h */,
+				5EA276122A66FC6A00D5CF1E /* PoingGodotAdMobAdView.mm */,
+				5E027D872A74A75C001551B6 /* PoingGodotAdMobInterstitialAd.h */,
+				5E027D882A74A770001551B6 /* PoingGodotAdMobInterstitialAd.mm */,
+				5EA595972A76B06D00968B18 /* PoingGodotAdMobRewardedAd.h */,
+				5EA595982A76B08400968B18 /* PoingGodotAdMobRewardedAd.mm */,
+				5EB13DE32A76FF6300054CFC /* PoingGodotAdMobRewardedInterstitialAd.h */,
+				5EB13DE42A76FF7800054CFC /* PoingGodotAdMobRewardedInterstitialAd.mm */,
+				5EB13DE92A7706A300054CFC /* PoingGodotAdMobConsentInformation.h */,
+				5EB13DEA2A7706AE00054CFC /* PoingGodotAdMobConsentInformation.mm */,
+				5EB13DEE2A773BDB00054CFC /* PoingGodotAdMobUserMessagingPlatform.h */,
+				5EB13DEF2A773BE600054CFC /* PoingGodotAdMobUserMessagingPlatform.mm */,
+			);
+			path = ads;
+			sourceTree = "<group>";
+		};
+		5E80AAE12A44A74A001C750F /* core */ = {
+			isa = PBXGroup;
+			children = (
+				5E80AAE22A44A74A001C750F /* AdNetworkExtras.h */,
+				5E80AAE32A44A74A001C750F /* AdNetworkExtras.mm */,
+			);
+			path = core;
+			sourceTree = "<group>";
+		};
+		5E80AAEE2A44A82F001C750F /* meta */ = {
+			isa = PBXGroup;
+			children = (
+				5EAFBD1D2A7C94B30045DAB8 /* config */,
+				5E80AAEF2A44A82F001C750F /* PoingGodotAdMobMetaModule.h */,
+				5E80AAF02A44A82F001C750F /* PoingGodotAdMobMetaModule.mm */,
+				5EAFBD1F2A7C96540045DAB8 /* PoingGodotAdMobMetaFBAdSettings.h */,
+				5EAFBD202A7C96600045DAB8 /* PoingGodotAdMobMetaFBAdSettings.mm */,
+			);
+			path = meta;
+			sourceTree = "<group>";
+		};
+		5E80AAF62A44A835001C750F /* mediation */ = {
+			isa = PBXGroup;
+			children = (
+				5E80AAFD2A44AA77001C750F /* vungle */,
+				5E80AAEE2A44A82F001C750F /* meta */,
+			);
+			path = mediation;
+			sourceTree = "<group>";
+		};
+		5E80AAF72A44A84B001C750F /* src */ = {
+			isa = PBXGroup;
+			children = (
+				5E80AAF62A44A835001C750F /* mediation */,
+				5E80AAD22A44A50C001C750F /* ads */,
+				5E80AAE12A44A74A001C750F /* core */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		5E80AAFD2A44AA77001C750F /* vungle */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF248D2A7EBAF20050C77A /* config */,
+				5E80AAFE2A44AA77001C750F /* VunglePoingExtrasBuilder.h */,
+				5E80AAFF2A44AA77001C750F /* VunglePoingExtrasBuilder.mm */,
+				5EAF248C2A7EBAC60050C77A /* PoingGodotAdMobVungleModule.h */,
+				5EAF248F2A7EBB420050C77A /* PoingGodotAdMobVungleModule.mm */,
+				5EAF24912A7EBC350050C77A /* PoingGodotAdMobVungle.h */,
+				5EAF24922A7EBC3D0050C77A /* PoingGodotAdMobVungle.mm */,
+			);
+			path = vungle;
+			sourceTree = "<group>";
+		};
+		5E9575682A46997400CE30AF /* config */ = {
+			isa = PBXGroup;
+			children = (
+				5E0126402AE8A13100E487EE /* admob_package.gd */,
+				5E9575692A46998300CE30AF /* poing-godot-admob-ads.gdip */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		5EA276142A6738B700D5CF1E /* adformats */ = {
+			isa = PBXGroup;
+			children = (
+				5EA5959F2A76C56500968B18 /* AdFormatBase.h */,
+				5EB13DEC2A773ACC00054CFC /* AdFormatBase.mm */,
+				5EA276152A67396200D5CF1E /* BannerAd.h */,
+				5EA276162A6739D200D5CF1E /* BannerAd.mm */,
+				5E38B5D92A7546D100E35218 /* InterstitialAd.h */,
+				5E38B5DA2A7546EF00E35218 /* InterstitialAd.mm */,
+				5EA5959A2A76B0F200968B18 /* RewardedAd.h */,
+				5EA5959B2A76B10000968B18 /* RewardedAd.mm */,
+				5EB13DE62A77002B00054CFC /* RewardedInterstitialAd.h */,
+				5EB13DE72A77003500054CFC /* RewardedInterstitialAd.mm */,
+			);
+			path = adformats;
+			sourceTree = "<group>";
+		};
+		5EAF248D2A7EBAF20050C77A /* config */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF248E2A7EBB040050C77A /* poing-godot-admob-vungle.gdip */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		5EAFBD1D2A7C94B30045DAB8 /* config */ = {
+			isa = PBXGroup;
+			children = (
+				5EAFBD1E2A7C94EA0045DAB8 /* poing-godot-admob-meta.gdip */,
+			);
+			path = config;
+			sourceTree = "<group>";
+		};
+		5EB13DF12A773C2000054CFC /* ump */ = {
+			isa = PBXGroup;
+			children = (
+				5EB13DF22A773C9800054CFC /* PoingGodotAdMobConsentForm.h */,
+				5EB13DF32A773CA000054CFC /* PoingGodotAdMobConsentForm.mm */,
+			);
+			path = ump;
+			sourceTree = "<group>";
+		};
+		5EB7591E2A6885EA00523E88 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				5EB7591F2A68860400523E88 /* DeviceOrientationHelper.mm */,
+				5EB759212A68865600523E88 /* DeviceOrientationHelper.h */,
+				5EA5959D2A76B39E00968B18 /* VectorHelper.h */,
+				5E4BF4A42B2F360900E6C2AA /* StaticVariablesHelper.h */,
+				5E4BF4A52B2F361A00E6C2AA /* StaticVariablesHelper.mm */,
+			);
+			path = helpers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5E80AACF2A44A50C001C750F /* ads */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E80AAD92A44A50C001C750F /* Build configuration list for PBXNativeTarget "ads" */;
+			buildPhases = (
+				5E80AACC2A44A50C001C750F /* Sources */,
+				5E80AACD2A44A50C001C750F /* Frameworks */,
+				5E80AACE2A44A50C001C750F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ads;
+			productName = PoingGodotAdMob;
+			productReference = 5E80AAD02A44A50C001C750F /* poing-godot-admob-ads.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		5E80AADF2A44A74A001C750F /* core */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E80AAE62A44A74A001C750F /* Build configuration list for PBXNativeTarget "core" */;
+			buildPhases = (
+				5E80AADC2A44A74A001C750F /* Sources */,
+				5E80AADD2A44A74A001C750F /* Frameworks */,
+				5E80AADE2A44A74A001C750F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = core;
+			productName = Core;
+			productReference = 5E80AAE02A44A74A001C750F /* poing-godot-admob-core.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		5E80AAEC2A44A82E001C750F /* meta */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E80AAF32A44A82F001C750F /* Build configuration list for PBXNativeTarget "meta" */;
+			buildPhases = (
+				5E80AAE92A44A82E001C750F /* Sources */,
+				5E80AAEA2A44A82E001C750F /* Frameworks */,
+				5E80AAEB2A44A82E001C750F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = meta;
+			productName = Meta;
+			productReference = 5E80AAED2A44A82E001C750F /* poing-godot-admob-meta.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		5E80AAFB2A44AA77001C750F /* vungle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5E80AB022A44AA77001C750F /* Build configuration list for PBXNativeTarget "vungle" */;
+			buildPhases = (
+				5E80AAF82A44AA77001C750F /* Sources */,
+				5E80AAF92A44AA77001C750F /* Frameworks */,
+				5E80AAFA2A44AA77001C750F /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = vungle;
+			productName = Vungle;
+			productReference = 5E80AAFC2A44AA77001C750F /* poing-godot-admob-vungle.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5E80AAC82A44A50C001C750F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					5E80AACF2A44A50C001C750F = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					5E80AADF2A44A74A001C750F = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					5E80AAEC2A44A82E001C750F = {
+						CreatedOnToolsVersion = 14.2;
+					};
+					5E80AAFB2A44AA77001C750F = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 5E80AACB2A44A50C001C750F /* Build configuration list for PBXProject "PoingGodotAdMob" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5E80AAC72A44A50C001C750F;
+			packageReferences = (
+				5E1EFB7F2F4790BD00E6B348 /* XCLocalSwiftPackageReference "." */,
+			);
+			productRefGroup = 5E80AAD12A44A50C001C750F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5E80AACF2A44A50C001C750F /* ads */,
+				5E80AADF2A44A74A001C750F /* core */,
+				5E80AAEC2A44A82E001C750F /* meta */,
+				5E80AAFB2A44AA77001C750F /* vungle */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5E80AACC2A44A50C001C750F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EB13DE82A77003500054CFC /* RewardedInterstitialAd.mm in Sources */,
+				5E027D892A74A770001551B6 /* PoingGodotAdMobInterstitialAd.mm in Sources */,
+				5EB13DED2A773ACC00054CFC /* AdFormatBase.mm in Sources */,
+				5E38B5DB2A7546EF00E35218 /* InterstitialAd.mm in Sources */,
+				5EB13DF42A773CA000054CFC /* PoingGodotAdMobConsentForm.mm in Sources */,
+				5EA5959C2A76B10000968B18 /* RewardedAd.mm in Sources */,
+				5EB759202A68860400523E88 /* DeviceOrientationHelper.mm in Sources */,
+				5E80AAD52A44A50C001C750F /* PoingGodotAdMob.mm in Sources */,
+				5EA2761A2A67461A00D5CF1E /* GodotDictionaryToObject.mm in Sources */,
+				5EA276172A6739D200D5CF1E /* BannerAd.mm in Sources */,
+				5E4BF4A62B2F361A00E6C2AA /* StaticVariablesHelper.mm in Sources */,
+				5E63D64F2A64636100BDC600 /* ObjectToGodotDictionary.mm in Sources */,
+				5EA595992A76B08400968B18 /* PoingGodotAdMobRewardedAd.mm in Sources */,
+				5EB13DEB2A7706AE00054CFC /* PoingGodotAdMobConsentInformation.mm in Sources */,
+				5EB13DE52A76FF7800054CFC /* PoingGodotAdMobRewardedInterstitialAd.mm in Sources */,
+				5EB13DF02A773BE600054CFC /* PoingGodotAdMobUserMessagingPlatform.mm in Sources */,
+				5E5BDE182A4632770071BE86 /* PoingGodotAdMobModule.mm in Sources */,
+				5EB63E4E2A65DF0700699D72 /* PoingGodotAdMobAdSize.mm in Sources */,
+				5EA276132A66FC6A00D5CF1E /* PoingGodotAdMobAdView.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E80AADC2A44A74A001C750F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5E80AAE42A44A74A001C750F /* AdNetworkExtras.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E80AAE92A44A82E001C750F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EAFBD212A7C96600045DAB8 /* PoingGodotAdMobMetaFBAdSettings.mm in Sources */,
+				5E80AAF12A44A82F001C750F /* PoingGodotAdMobMetaModule.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E80AAF82A44AA77001C750F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5EAF24902A7EBB420050C77A /* PoingGodotAdMobVungleModule.mm in Sources */,
+				5EAF24932A7EBC3D0050C77A /* PoingGodotAdMobVungle.mm in Sources */,
+				5E80AB002A44AA77001C750F /* VunglePoingExtrasBuilder.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5E80AAD72A44A50C001C750F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/bin/$(CONFIGURATION)-$(EFFECTIVE_PLATFORM_NAME)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		5E80AAD82A44A50C001C750F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/bin/$(CONFIGURATION)-$(EFFECTIVE_PLATFORM_NAME)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5E80AADA2A44A50C001C750F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = "";
+				EXECUTABLE_PREFIX = "poing-godot-admob-";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/godot/platform/ios",
+					"$(SRCROOT)/godot",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				OTHER_CFLAGS = (
+					"-DVERSION_4_0",
+					"-DIPHONE_ENABLED",
+					"-DUNIX_ENABLED",
+					"-DCOREAUDIO_ENABLED",
+					"-DIOS_ENABLED",
+					"-DAPPLE_EMBEDDED_ENABLED",
+					"-DDEBUG_ENABLED",
+					"-fcxx-modules",
+					"-fmodules",
+					"-g",
+					"-DDEBUG",
+					"-DDEBUG_MEMORY_ALLOC",
+					"-DDISABLE_FORCED_INLINE",
+					"-DTYPED_METHOD_BIND",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSION_INFO_PREFIX = "";
+				VERSION_INFO_SUFFIX = "";
+			};
+			name = Debug;
+		};
+		5E80AADB2A44A50C001C750F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = "";
+				EXECUTABLE_PREFIX = "poing-godot-admob-";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/godot/platform/ios",
+					"$(SRCROOT)/godot",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				OTHER_CFLAGS = (
+					"-DVERSION_4_0",
+					"-DIPHONE_ENABLED",
+					"-DUNIX_ENABLED",
+					"-DCOREAUDIO_ENABLED",
+					"-DIOS_ENABLED",
+					"-DAPPLE_EMBEDDED_ENABLED",
+					"-fcxx-modules",
+					"-fmodules",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSION_INFO_PREFIX = "";
+				VERSION_INFO_SUFFIX = "";
+			};
+			name = Release;
+		};
+		5E80AAE72A44A74A001C750F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = "";
+				EXECUTABLE_PREFIX = "poing-godot-admob-";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/godot/platform/ios",
+					"$(SRCROOT)/godot",
+				);
+				OTHER_CFLAGS = (
+					"-DVERSION_4_0",
+					"-DIPHONE_ENABLED",
+					"-DUNIX_ENABLED",
+					"-DCOREAUDIO_ENABLED",
+					"-DIOS_ENABLED",
+					"-DAPPLE_EMBEDDED_ENABLED",
+					"-DDEBUG_ENABLED",
+					"-fcxx-modules",
+					"-fmodules",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5E80AAE82A44A74A001C750F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = "";
+				EXECUTABLE_PREFIX = "poing-godot-admob-";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/godot/platform/ios",
+					"$(SRCROOT)/godot",
+				);
+				OTHER_CFLAGS = (
+					"-DVERSION_4_0",
+					"-DIPHONE_ENABLED",
+					"-DUNIX_ENABLED",
+					"-DCOREAUDIO_ENABLED",
+					"-DIOS_ENABLED",
+					"-DAPPLE_EMBEDDED_ENABLED",
+					"-fcxx-modules",
+					"-fmodules",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5E80AAF42A44A82F001C750F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = "";
+				EXECUTABLE_PREFIX = "poing-godot-admob-";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/godot/platform/ios",
+					"$(SRCROOT)/godot",
+				);
+				OTHER_CFLAGS = (
+					"-DVERSION_4_0",
+					"-DIPHONE_ENABLED",
+					"-DUNIX_ENABLED",
+					"-DCOREAUDIO_ENABLED",
+					"-DIOS_ENABLED",
+					"-DAPPLE_EMBEDDED_ENABLED",
+					"-DDEBUG_ENABLED",
+					"-fcxx-modules",
+					"-fmodules",
+					"-g",
+					"-DDEBUG",
+					"-DDEBUG_MEMORY_ALLOC",
+					"-DDISABLE_FORCED_INLINE",
+					"-DTYPED_METHOD_BIND",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5E80AAF52A44A82F001C750F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = "";
+				EXECUTABLE_PREFIX = "poing-godot-admob-";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/godot/platform/ios",
+					"$(SRCROOT)/godot",
+				);
+				OTHER_CFLAGS = (
+					"-DVERSION_4_0",
+					"-DIPHONE_ENABLED",
+					"-DUNIX_ENABLED",
+					"-DCOREAUDIO_ENABLED",
+					"-DIOS_ENABLED",
+					"-DAPPLE_EMBEDDED_ENABLED",
+					"-fcxx-modules",
+					"-fmodules",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		5E80AB032A44AA77001C750F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = "";
+				EXECUTABLE_PREFIX = "poing-godot-admob-";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/godot/platform/ios",
+					"$(SRCROOT)/godot",
+				);
+				OTHER_CFLAGS = (
+					"-DVERSION_4_0",
+					"-DIPHONE_ENABLED",
+					"-DUNIX_ENABLED",
+					"-DCOREAUDIO_ENABLED",
+					"-DIOS_ENABLED",
+					"-DAPPLE_EMBEDDED_ENABLED",
+					"-DDEBUG_ENABLED",
+					"-fcxx-modules",
+					"-fmodules",
+					"-g",
+					"-DDEBUG",
+					"-DDEBUG_MEMORY_ALLOC",
+					"-DDISABLE_FORCED_INLINE",
+					"-DTYPED_METHOD_BIND",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		5E80AB042A44AA77001C750F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CODE_SIGN_STYLE = Automatic;
+				EXCLUDED_ARCHS = "";
+				EXECUTABLE_PREFIX = "poing-godot-admob-";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*]" = "$(inherited)";
+				"FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(inherited)";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/godot/platform/ios",
+					"$(SRCROOT)/godot",
+				);
+				OTHER_CFLAGS = (
+					"-DVERSION_4_0",
+					"-DIPHONE_ENABLED",
+					"-DUNIX_ENABLED",
+					"-DCOREAUDIO_ENABLED",
+					"-DIOS_ENABLED",
+					"-DAPPLE_EMBEDDED_ENABLED",
+					"-fcxx-modules",
+					"-fmodules",
+				);
+				OTHER_CPLUSPLUSFLAGS = "$(OTHER_CFLAGS)";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5E80AACB2A44A50C001C750F /* Build configuration list for PBXProject "PoingGodotAdMob" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E80AAD72A44A50C001C750F /* Debug */,
+				5E80AAD82A44A50C001C750F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E80AAD92A44A50C001C750F /* Build configuration list for PBXNativeTarget "ads" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E80AADA2A44A50C001C750F /* Debug */,
+				5E80AADB2A44A50C001C750F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E80AAE62A44A74A001C750F /* Build configuration list for PBXNativeTarget "core" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E80AAE72A44A74A001C750F /* Debug */,
+				5E80AAE82A44A74A001C750F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E80AAF32A44A82F001C750F /* Build configuration list for PBXNativeTarget "meta" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E80AAF42A44A82F001C750F /* Debug */,
+				5E80AAF52A44A82F001C750F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5E80AB022A44AA77001C750F /* Build configuration list for PBXNativeTarget "vungle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5E80AB032A44AA77001C750F /* Debug */,
+				5E80AB042A44AA77001C750F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		5E1EFB7F2F4790BD00E6B348 /* XCLocalSwiftPackageReference "." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ".";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5E52D3652F47A379006869F4 /* PoingGodotAdMobDeps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E1EFB7F2F4790BD00E6B348 /* XCLocalSwiftPackageReference "." */;
+			productName = PoingGodotAdMobDeps;
+		};
+		5E52D3672F47A38B006869F4 /* PoingGodotAdMobDeps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E1EFB7F2F4790BD00E6B348 /* XCLocalSwiftPackageReference "." */;
+			productName = PoingGodotAdMobDeps;
+		};
+		5E52D3692F47A38F006869F4 /* PoingGodotAdMobDeps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E1EFB7F2F4790BD00E6B348 /* XCLocalSwiftPackageReference "." */;
+			productName = PoingGodotAdMobDeps;
+		};
+		5E52D36B2F47A392006869F4 /* PoingGodotAdMobDeps */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5E1EFB7F2F4790BD00E6B348 /* XCLocalSwiftPackageReference "." */;
+			productName = PoingGodotAdMobDeps;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 5E80AAC82A44A50C001C750F /* Project object */;
+}

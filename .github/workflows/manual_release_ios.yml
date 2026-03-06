@@ -1,0 +1,83 @@
+name: Manual Build iOS
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to publish the build (e.g., v4.0.0)'
+        required: true
+      godot_version:
+        description: 'Godot version to be builded (e.g., 4.6.0)'
+        required: true
+
+jobs:
+  ios-template:
+    name: Compiling for iOS
+    runs-on: "macos-latest"
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Verify current inputs godot_version
+      run: |
+        CURRENT_GODOT_VERSION=${{ github.event.inputs.godot_version }}
+        if [ ${#CURRENT_GODOT_VERSION} -eq 1 ]; then CURRENT_GODOT_VERSION="${CURRENT_GODOT_VERSION}.0"; fi
+        echo "CURRENT_GODOT_VERSION=${CURRENT_GODOT_VERSION}" >> $GITHUB_ENV
+
+    # Upload cache on completion and check it out now
+    - name: Load .scons_cache directory
+      id: ios-template-cache
+      uses: actions/cache@v5
+      with:
+        path: ${{github.workspace}}/godot-${{env.CURRENT_GODOT_VERSION}}-stable/.scons_cache/
+        key: ${{github.job}}-master-${{github.ref}}-${{github.sha}}
+        restore-keys: |
+          ${{github.job}}-master-${{github.ref}}-${{github.sha}}
+          ${{github.job}}-master-${{github.ref}}
+          ${{github.job}}-master
+
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v6
+      with:
+        # Semantic version range syntax or exact version of a Python version
+        python-version: '3.x'
+        # Optional - x64 or x86 architecture, defaults to x64
+        architecture: 'x64'
+
+    - name: Configuring Python packages
+      run: |
+        python -c "import sys; print(sys.version)"
+        python -m pip install scons
+        python --version
+        scons --version
+
+    - name: Cache SPM dependencies
+      uses: actions/cache@v5
+      with:
+        path: .build
+        key: spm-${{ hashFiles('Package.swift', 'Package.resolved') }}
+        restore-keys: |
+          spm-
+
+    - name: Compiles the Source Code
+      env:
+        SCONS_CACHE: ${{github.workspace}}/godot/.scons_cache/
+      run: |
+        ./scripts/build.sh ${{env.CURRENT_GODOT_VERSION}}
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v6
+      with:
+        name: poing-godot-admob-ios-v${{ env.CURRENT_GODOT_VERSION }}
+        path: bin/release/*.zip
+        if-no-files-found: error
+        retention-days: 1
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: bin/release/*.zip
+        file_glob: true
+        tag: ${{ github.event.inputs.tag }}
+        overwrite: true

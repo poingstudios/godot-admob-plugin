@@ -1,0 +1,19 @@
+[config]
+name="AdMob Meta"
+binary="poing-godot-admob/bin/poing-godot-admob-meta.xcframework"
+
+initialization="register_poing_godot_admob_meta_types"
+deinitialization="unregister_poing_godot_admob_meta_types"
+
+[dependencies]
+linked=[]
+embedded=[]
+system=[]
+capabilities=[]
+files=[]
+linker_flags=[]
+admob_packages=[
+    "https://github.com/googleads/googleads-mobile-ios-mediation-meta.git@exact:6.20.100|MetaAdapterTarget"
+]
+
+[plist]
