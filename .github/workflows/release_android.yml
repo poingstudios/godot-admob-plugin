@@ -14,8 +14,8 @@ jobs:
 
     - name: Set plugin version on env
       run: |
-        PLUGIN_VERSION=$(find . -name "package.gd" -exec grep 'const VERSION' {} \; | head -n 1 | awk -F'"' '{print $2}')
-        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+        PLUGIN_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_VERSION=${PLUGIN_VERSION}" >> $GITHUB_ENV
 
     - name: Fail if release already exists
       env:
@@ -42,15 +42,17 @@ jobs:
 
     - name: Set plugin version on env
       run: |
-        PLUGIN_VERSION=$(find . -name "package.gd" -exec grep 'const VERSION' {} \; | head -n 1 | awk -F'"' '{print $2}')
-        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+        PLUGIN_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_VERSION=${PLUGIN_VERSION}" >> $GITHUB_ENV
 
     - name: Build Plugins
+      working-directory: platforms/android
       run: |
         chmod +x ./gradlew
         ./gradlew build -PgodotVersion=${{matrix.GODOT_VERSIONS}}
 
     - name: Compress the artifact output
+      working-directory: platforms/android
       run: |
         ./gradlew zipPlugins -PgodotVersion="${{matrix.GODOT_VERSIONS}}"
 
@@ -59,7 +61,7 @@ jobs:
       with:
         target_commit: ${{ github.ref_name }}
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: .output/poing-godot-admob-android-v${{matrix.GODOT_VERSIONS}}.zip
+        file: platforms/android/.output/poing-godot-admob-android-v${{matrix.GODOT_VERSIONS}}.zip
         tag: ${{env.PLUGIN_VERSION}}
         release_name: ${{env.PLUGIN_VERSION}}
         body: ""
@@ -78,8 +80,8 @@ jobs:
 
     - name: Set plugin version on env
       run: |
-        PLUGIN_VERSION=$(find . -name "package.gd" -exec grep 'const VERSION' {} \; | head -n 1 | awk -F'"' '{print $2}')
-        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+        PLUGIN_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_VERSION=${PLUGIN_VERSION}" >> $GITHUB_ENV
 
     - name: Update release with proper title and notes
       uses: softprops/action-gh-release@v2

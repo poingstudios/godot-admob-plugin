@@ -2,7 +2,7 @@ name: Auto Build Android
 
 on:
   schedule:
-    - cron: '0 6 * * *'
+    - cron: '0 22 * * *'
   workflow_dispatch:
 
 jobs:
@@ -19,8 +19,8 @@ jobs:
 
     - name: Set plugin version on env
       run: |
-        PLUGIN_VERSION=$(find . -name "package.gd" -exec grep 'const VERSION' {} \; | head -n 1 | awk -F'"' '{print $2}')
-        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+        PLUGIN_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_VERSION=${PLUGIN_VERSION}" >> $GITHUB_ENV
 
     - name: Detect latest Godot version
       id: detect
@@ -67,15 +67,17 @@ jobs:
 
     - name: Set plugin version on env
       run: |
-        PLUGIN_VERSION=$(find . -name "package.gd" -exec grep 'const VERSION' {} \; | head -n 1 | awk -F'"' '{print $2}')
-        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+        PLUGIN_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_VERSION=${PLUGIN_VERSION}" >> $GITHUB_ENV
 
     - name: Build Plugins
+      working-directory: platforms/android
       run: |
         chmod +x ./gradlew
         ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }}
 
     - name: Compress the artifact output
+      working-directory: platforms/android
       run: |
         ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}"
 
@@ -84,6 +86,6 @@ jobs:
       with:
         target_commit: ${{ github.ref_name }}
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: .output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip
+        file: platforms/android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip
         tag: ${{env.PLUGIN_VERSION}}
         overwrite: true

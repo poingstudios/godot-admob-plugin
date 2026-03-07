@@ -15,9 +15,8 @@ jobs:
     - name: Set plugin version on env
       working-directory: platforms/ios
       run: |
-        PACKAGE_FILE=$(find src/ads/config -name "*package.gd" | head -n 1)
-        PLUGIN_VERSION=$(grep -hE "VERSION\s*:=\s*\"" $PACKAGE_FILE | sed -E 's/.*"([^"]+)".*/\1/')
-        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+        PLUGIN_VERSION=$(grep "version=" ../godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_VERSION=${PLUGIN_VERSION}" >> $GITHUB_ENV
 
     - name: Fail if release already exists
       env:
@@ -45,9 +44,8 @@ jobs:
     - name: Set plugin version on env
       working-directory: platforms/ios
       run: |
-        PACKAGE_FILE=$(find src/ads/config -name "*package.gd" | head -n 1)
-        PLUGIN_VERSION=$(grep -hE "VERSION\s*:=\s*\"" $PACKAGE_FILE | sed -E 's/.*"([^"]+)".*/\1/')
-        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+        PLUGIN_VERSION=$(grep "version=" ../godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_VERSION=${PLUGIN_VERSION}" >> $GITHUB_ENV
 
     - name: Verify current matrix's GODOT_VERSIONS
       run: |
@@ -125,9 +123,8 @@ jobs:
     - name: Set plugin version on env
       working-directory: platforms/ios
       run: |
-        PACKAGE_FILE=$(find src/ads/config -name "*package.gd" | head -n 1)
-        PLUGIN_VERSION=$(grep -hE "VERSION\s*:=\s*\"" $PACKAGE_FILE | sed -E 's/.*"([^"]+)".*/\1/')
-        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+        PLUGIN_VERSION=$(grep "version=" ../godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_VERSION=${PLUGIN_VERSION}" >> $GITHUB_ENV
 
     - name: Update release with proper title and notes
       uses: softprops/action-gh-release@v2
