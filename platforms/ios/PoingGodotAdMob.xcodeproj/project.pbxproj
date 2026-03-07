@@ -86,7 +86,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		5E0126402AE8A13100E487EE /* admob_package.gd */ = {isa = PBXFileReference; lastKnownFileType = text; path = admob_package.gd; sourceTree = "<group>"; };
+		5E0126402AE8A13100E487EE /* package.gd */ = {isa = PBXFileReference; lastKnownFileType = text; path = package.gd; sourceTree = "<group>"; };
 		5E027D872A74A75C001551B6 /* PoingGodotAdMobInterstitialAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PoingGodotAdMobInterstitialAd.h; sourceTree = "<group>"; };
 		5E027D882A74A770001551B6 /* PoingGodotAdMobInterstitialAd.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = PoingGodotAdMobInterstitialAd.mm; sourceTree = "<group>"; };
 		5E38B5D92A7546D100E35218 /* InterstitialAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InterstitialAd.h; sourceTree = "<group>"; };
@@ -530,7 +530,7 @@
 		5E9575682A46997400CE30AF /* config */ = {
 			isa = PBXGroup;
 			children = (
-				5E0126402AE8A13100E487EE /* admob_package.gd */,
+				5E0126402AE8A13100E487EE /* package.gd */,
 				5E9575692A46998300CE30AF /* poing-godot-admob-ads.gdip */,
 			);
 			path = config;
