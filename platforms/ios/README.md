@@ -59,7 +59,7 @@ The **purpose** of this plugin is to always keep **up to date with Godot**, supp
 ## 📦Installing:
 
 ### 📥Download
-- To get started, download the `poing-godot-admob-ios-v{{ your_godot_version }}.zip` file from the [releases tab](https://github.com/PoingStudios/godot-admob-ios/releases). We recommend checking the [supported Godot version](https://github.com/PoingStudios/godot-admob-versions/blob/master/versions.json) before proceeding. You can also use the [AdMob Plugin](https://github.com/PoingStudios/godot-admob-plugin) for this step by navigating to `Tools -> AdMob Manager -> iOS -> Download & Install`.
+- To get started, download the `poing-godot-admob-ios-v{{ your_godot_version }}.zip` file from the [releases tab](https://github.com/poingstudios/godot-admob-plugin/releases). You can also use the [AdMob Plugin](https://github.com/PoingStudios/godot-admob-plugin) for this step by navigating to `Project -> Tools -> AdMob Manager -> iOS -> Download & Install`.
 
 
 ### 🧑‍💻Usage

@@ -104,8 +104,7 @@ static func _get_local_version(path: String) -> String:
 	return ""
 
 class PlatformSupport:
-	# These versions are used as a fallback if the remote 'versions.json' cannot be fetched.
-	# Reference: https://github.com/poingstudios/godot-admob-versions/
+	# These versions are used as a fallback.
 	const FALLBACK_ANDROID_VERSION := "v4.0.1"
 	const FALLBACK_IOS_VERSION := "v4.0.0"
 

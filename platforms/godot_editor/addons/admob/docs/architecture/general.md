@@ -9,9 +9,7 @@ The **Godot AdMob Editor Plugin** acts as a central hub for integrating Google A
 ```mermaid
 graph TD
 	subgraph External [External Repositories]
-		Versions[godot-admob-versions<br/>JSON Config]
-		RepoAndroid[godot-admob-android<br/>Android Native Source]
-		RepoiOS[godot-admob-ios<br/>iOS Native Source]
+		Monorepo[godot-admob-plugin<br/>GitHub Releases]
 	end
 
 	subgraph Editor [Godot Editor]
@@ -30,9 +28,8 @@ graph TD
 	end
 
 	%% Editor Flow
-	Plugin -- 1. Fetch Version Info --> Versions
-	Plugin -- 2. Download .AAR --> RepoAndroid
-	Plugin -- 2. Download .xcframework --> RepoiOS
+	Plugin -- Download .AAR --> Monorepo
+	Plugin -- Download .xcframework --> Monorepo
 	
 	%% Game Logic Flow
 	UserLogic -- 3. Calls API --> Plugin
