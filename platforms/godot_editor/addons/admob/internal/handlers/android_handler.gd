@@ -63,11 +63,24 @@ func _on_download_completed(success: bool) -> void:
 	
 	var extract_success := ZipService.extract_zip(zip_path, EXTRACT_PATH, true)
 	if extract_success:
+		_create_local_package(PACKAGE_PATH)
 		_dialog_service.show_confirmation(
 			"Android plugin installed successfully!\n\nWould you like to open the configuration file now?",
 			func(): EditorInterface.edit_resource(AndroidExportPlugin.Config),
 			"Open config.gd"
 		)
+
+func _create_local_package(path: String) -> void:
+	var file := FileAccess.open(path, FileAccess.WRITE)
+	if file:
+		var content := """# This file is dynamically generated.
+# It defines the current installed version of the platform plugin.
+# Do not modify this manually.
+
+const VERSION := "%s"
+""" % PluginVersion.current
+		file.store_string(content)
+		file.close()
 
 func _get_zip_file_name() -> String:
 	return "poing-godot-admob-android-" + PluginVersion.godot + ".zip"

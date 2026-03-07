@@ -24,7 +24,7 @@ const FALLBACK_PLUGIN_VERSION := "v4.0.0"
 
 const PLUGIN_CONFIG_PATH := "res://addons/admob/plugin.cfg"
 const ANDROID_PACKAGE_PATH := "res://addons/admob/android/bin/package.gd"
-const IOS_PACKAGE_PATH := "res://ios/plugins/admob_package.gd"
+const IOS_PACKAGE_PATH := "res://ios/plugins/package.gd"
 
 static var _cached_version := ""
 static var _remote_support: PlatformSupport = null
@@ -91,6 +91,17 @@ static func is_at_least(current_version: String, target_version: String) -> bool
 		if n1 > n2: return true
 		if n1 < n2: return false
 	return true
+
+static func _get_local_version(path: String) -> String:
+	if not FileAccess.file_exists(path):
+		return ""
+	
+	var script := load(path)
+	if script and "VERSION" in script:
+		var version_val = script.get("VERSION")
+		return str(version_val)
+	
+	return ""
 
 static func _get_local_version(path: String) -> String:
 	if not FileAccess.file_exists(path):
