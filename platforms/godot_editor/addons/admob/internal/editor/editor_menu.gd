@@ -23,7 +23,7 @@
 extends "res://addons/admob/internal/editor/popup_menu.gd"
 
 # Services
-const VersionService := preload("res://addons/admob/internal/services/network/version_service.gd")
+
 const DownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
 
 # Handlers
@@ -42,24 +42,23 @@ const PluginVersion := preload("res://addons/admob/internal/version/plugin_versi
 
 const DEFAULT_DOWNLOAD_PATH := "res://addons/admob/downloads/"
 
-var _version_service: VersionService
+
 var _dialog_service: DialogService
 var _android_handler: AndroidHandler
 var _ios_handler: IOSHandler
 
 func _init(host: Node) -> void:
 	super._init()
-	# Initialize Services
-	_version_service = VersionService.new(host)
-	_version_service.version_received.connect(_on_version_received)
-	_version_service.check_for_updates()
-	
+
 	# Initialize Dialog Service
 	_dialog_service = DialogService.new()
 	
 	# Initialize Handlers
 	_android_handler = AndroidHandler.new(DownloadService.new(host), _dialog_service)
 	_ios_handler = IOSHandler.new(DownloadService.new(host), _dialog_service)
+	
+	_android_handler.check_dependencies()
+	_ios_handler.check_dependencies()
 	
 	_setup_menu()
 
@@ -78,7 +77,3 @@ func _setup_menu() -> void:
 func _add_submenu(menu: PopupMenu) -> void:
 	add_child(menu)
 	add_submenu_item(menu.name, menu.name)
-
-func _on_version_received() -> void:
-	_android_handler.check_dependencies()
-	_ios_handler.check_dependencies()

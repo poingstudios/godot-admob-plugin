@@ -49,7 +49,7 @@ func check_dependencies() -> void:
 
 func install() -> void:
 	var file_name := _get_zip_file_name()
-	var url := BASE_URL % [PluginVersion.support.android, file_name]
+	var url := BASE_URL % [PluginVersion.current, file_name]
 	var destination := DOWNLOAD_DIR.path_join(file_name)
 	
 	_download_service.download_file(url, destination, "Android")
