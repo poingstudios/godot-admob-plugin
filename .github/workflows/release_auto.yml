@@ -53,6 +53,10 @@ jobs:
       run: |
         chmod +x ./gradlew
         ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Compress the artifact output
+      working-directory: platforms/android
+      run: |
         ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}"
 
     - name: Upload binary
