@@ -1,4 +1,4 @@
-name: Build APK on PR
+name: PR Checks
 
 on:
   pull_request:
@@ -22,11 +22,87 @@ jobs:
           | awk -F. '{if(NF==2) print $0".0"; else print $0}')
         echo "godot_version=$LATEST" >> $GITHUB_OUTPUT
 
+  build-android:
+    name: Build Android Binaries
+    needs: detect-latest
+    runs-on: "ubuntu-latest"
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Build Plugins
+      working-directory: platforms/android
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Compress the artifact output
+      working-directory: platforms/android
+      run: |
+        ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}"
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip
+        retention-days: 14
+
+  build-ios:
+    name: Build iOS Binaries
+    needs: detect-latest
+    runs-on: "macos-latest"
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+
+    - name: Load .scons_cache directory
+      uses: actions/cache@v5
+      with:
+        path: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
+        key: ${{github.job}}-master-${{github.ref}}-${{github.sha}}
+        restore-keys: |
+          ${{github.job}}-master-${{github.ref}}-${{github.sha}}
+          ${{github.job}}-master-${{github.ref}}
+          ${{github.job}}-master
+
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+
+    - name: Configuring Python packages
+      run: |
+        python -m pip install scons
+
+    - name: Cache SPM dependencies
+      uses: actions/cache@v5
+      with:
+        path: platforms/ios/.build
+        key: spm-${{ hashFiles('platforms/ios/Package.swift', 'platforms/ios/Package.resolved') }}
+        restore-keys: |
+          spm-
+
+    - name: Compiles the Source Code
+      working-directory: platforms/ios
+      env:
+        SCONS_CACHE: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
+      run: |
+        ./scripts/build.sh ${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v6
+      with:
+        name: poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/ios/bin/release/*.zip
+        if-no-files-found: ignore
+        retention-days: 14
+
   build-apk:
-    name: Build APK & Upload Artifact
+    name: Build Test APK
     needs: detect-latest
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v6
 
@@ -90,7 +166,7 @@ jobs:
         export/android/java_sdk_path = "$JAVA_HOME"
         EOF
 
-    - name: Build Android Plugins
+    - name: Build Android Plugin
       working-directory: platforms/android
       run: |
         chmod +x ./gradlew

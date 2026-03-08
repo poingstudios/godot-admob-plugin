@@ -1,0 +1,89 @@
+name: PR Comment
+
+on:
+  workflow_run:
+    workflows: ["PR Checks"]
+    types: [completed]
+
+jobs:
+  comment:
+    name: Comment PR with results
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.event == 'pull_request'
+    permissions:
+      pull-requests: write
+      actions: read
+
+    steps:
+    - name: Get PR number
+      id: pr
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        PR_NUMBER=$(gh api \
+          "repos/${{ github.repository }}/pulls?head=${{ github.event.workflow_run.head_repository.owner.login }}:${{ github.event.workflow_run.head_branch }}&state=open" \
+          --jq '.[0].number')
+        echo "number=$PR_NUMBER" >> $GITHUB_OUTPUT
+
+    - name: Comment on success
+      if: github.event.workflow_run.conclusion == 'success'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const prNumber = ${{ steps.pr.outputs.number }};
+          if (!prNumber) return;
+
+          const runId = ${{ github.event.workflow_run.id }};
+          const commitSha = '${{ github.event.workflow_run.head_sha }}'.substring(0, 7);
+
+          const { data: artifacts } = await github.rest.actions.listWorkflowRunArtifacts({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            run_id: runId,
+          });
+
+          const androidArtifact = artifacts.artifacts.find(a => a.name.startsWith('poing-godot-admob-android-'));
+          const iosArtifact = artifacts.artifacts.find(a => a.name.startsWith('poing-godot-admob-ios-'));
+          const apkArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-'));
+
+          const getUrl = (artifact) => artifact ? `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}/artifacts/${artifact.id}` : `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}`;
+
+          const body = `✅ **PR Checks Passed!** (Commit: \`${commitSha}\`)\n\n⬇️ **Download Artifacts**\n- 📦 [Android Plugin (\`.aar\` / \`.zip\`)](${getUrl(androidArtifact)})\n- 🍎 [iOS Plugin (\`.xcframework\` / \`.zip\`)](${getUrl(iosArtifact)})\n- 📱 [Test Godot Project APK](${getUrl(apkArtifact)})`;
+
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner, repo: context.repo.repo, issue_number: prNumber,
+          });
+
+          const botComment = comments.find(comment => comment.user.type === 'Bot' && comment.body.includes('PR Checks'));
+
+          if (botComment) {
+            await github.rest.issues.updateComment({ owner: context.repo.owner, repo: context.repo.repo, comment_id: botComment.id, body });
+          } else {
+            await github.rest.issues.createComment({ issue_number: prNumber, owner: context.repo.owner, repo: context.repo.repo, body });
+          }
+
+    - name: Comment on failure
+      if: github.event.workflow_run.conclusion == 'failure'
+      uses: actions/github-script@v7
+      with:
+        script: |
+          const prNumber = ${{ steps.pr.outputs.number }};
+          if (!prNumber) return;
+
+          const runId = ${{ github.event.workflow_run.id }};
+          const commitSha = '${{ github.event.workflow_run.head_sha }}'.substring(0, 7);
+          const runUrl = `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}`;
+
+          const body = `❌ **PR Checks Failed!** (Commit: \`${commitSha}\`)\n\n[View Logs](${runUrl})`;
+
+          const { data: comments } = await github.rest.issues.listComments({
+            owner: context.repo.owner, repo: context.repo.repo, issue_number: prNumber,
+          });
+
+          const botComment = comments.find(comment => comment.user.type === 'Bot' && comment.body.includes('PR Checks'));
+
+          if (botComment) {
+            await github.rest.issues.updateComment({ owner: context.repo.owner, repo: context.repo.repo, comment_id: botComment.id, body });
+          } else {
+            await github.rest.issues.createComment({ issue_number: prNumber, owner: context.repo.owner, repo: context.repo.repo, body });
+          }

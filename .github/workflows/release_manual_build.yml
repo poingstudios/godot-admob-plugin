@@ -1,0 +1,67 @@
+name: Manual Build (Target Godot Version)
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag to publish the build (e.g., v4.1.0)'
+        required: true
+      godot_version:
+        description: 'Godot version to build for (e.g., 4.6.0)'
+        required: true
+
+jobs:
+  android-template:
+    runs-on: "ubuntu-latest"
+    steps:
+    - uses: actions/checkout@v6
+    
+    - name: Verify godot_version
+      run: |
+        CV=${{ github.event.inputs.godot_version }}
+        if [ ${#CV} -eq 1 ]; then CV="${CV}.0"; fi
+        echo "CURRENT_GODOT_VERSION=${CV}" >> $GITHUB_ENV
+
+    - name: Build Plugins
+      working-directory: platforms/android
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build -PgodotVersion=${{env.CURRENT_GODOT_VERSION}}
+        ./gradlew zipPlugins -PgodotVersion="${{env.CURRENT_GODOT_VERSION}}"
+      
+    - name: Upload binary
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: platforms/android/.output/poing-godot-admob-android-v${{env.CURRENT_GODOT_VERSION}}.zip
+        tag: ${{ github.event.inputs.tag }}
+        overwrite: true
+
+  ios-template:
+    runs-on: "macos-latest"
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Verify godot_version
+      run: |
+        CV=${{ github.event.inputs.godot_version }}
+        if [ ${#CV} -eq 1 ]; then CV="${CV}.0"; fi
+        echo "CURRENT_GODOT_VERSION=${CV}" >> $GITHUB_ENV
+
+    - name: Install scons
+      uses: actions/setup-python@v6
+      with: { python-version: '3.x' }
+    - run: python -m pip install scons
+
+    - name: Build Source
+      working-directory: platforms/ios
+      run: ./scripts/build.sh ${{env.CURRENT_GODOT_VERSION}}
+
+    - name: Upload binary
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: platforms/ios/bin/release/*.zip
+        file_glob: true
+        tag: ${{ github.event.inputs.tag }}
+        overwrite: true
