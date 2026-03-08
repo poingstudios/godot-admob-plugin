@@ -2,107 +2,113 @@
 
 [ext_resource type="Script" uid="uid://r1tdkrukutxf" path="res://addons/admob/sample/CSharpExample.cs" id="1_csharpexample"]
 
-[node name="CSharpExample" type="Control"]
-layout_mode = 3
+[node name="CSharpExample" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
 script = ExtResource("1_csharpexample")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-anchor_right = 1.0
-anchor_bottom = 1.0
-theme_override_constants/separation = 8
-
-[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="."]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
 text = "AdMob C# Example"
 horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
 
-[node name="StatusLabel" type="Label" parent="VBoxContainer"]
+[node name="StatusLabel" type="Label" parent="."]
 layout_mode = 2
 text = "Not initialized"
 horizontal_alignment = 1
 
-[node name="ButtonsContainer" type="ScrollContainer" parent="VBoxContainer"]
-custom_minimum_size = Vector2(0, 300)
+[node name="ButtonsScroll" type="ScrollContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="LogOutput" type="RichTextLabel" parent="VBoxContainer"]
+[node name="Buttons" type="VBoxContainer" parent="ButtonsScroll"]
 layout_mode = 2
-size_flags_vertical = 3
-text = "Log output will appear here..."
-scroll_following = true
-
-[node name="ButtonsContainer#Buttons" type="VBoxContainer" parent="."]
-layout_mode = 0
 size_flags_horizontal = 3
-theme_override_constants/separation = 6
+theme_override_constants/separation = 12
 
-[node name="ButtonsContainer_Buttons#InitializeButton" type="Button" parent="."]
-layout_mode = 0
+[node name="InitializeButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Initialize MobileAds"
 
-[node name="ButtonsContainer_Buttons#BannerSectionLabel" type="Label" parent="."]
-layout_mode = 0
-text = "── Banner ──"
+[node name="BannerLabel" type="Label" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+text = "-- Banner --"
 horizontal_alignment = 1
 
-[node name="ButtonsContainer_Buttons#LoadBannerButton" type="Button" parent="."]
-layout_mode = 0
+[node name="LoadBannerButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Load Banner"
 
-[node name="ButtonsContainer_Buttons#ShowBannerButton" type="Button" parent="."]
-layout_mode = 0
-disabled = true
+[node name="ShowBannerButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Show Banner"
-
-[node name="ButtonsContainer_Buttons#HideBannerButton" type="Button" parent="."]
-layout_mode = 0
 disabled = true
+
+[node name="HideBannerButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Hide Banner"
-
-[node name="ButtonsContainer_Buttons#DestroyBannerButton" type="Button" parent="."]
-layout_mode = 0
 disabled = true
-text = "Destroy Banner"
 
-[node name="ButtonsContainer_Buttons#InterstitialSectionLabel" type="Label" parent="."]
-layout_mode = 0
-text = "── Interstitial ──"
+[node name="DestroyBannerButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Destroy Banner"
+disabled = true
+
+[node name="InterstitialLabel" type="Label" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+text = "-- Interstitial --"
 horizontal_alignment = 1
 
-[node name="ButtonsContainer_Buttons#LoadInterstitialButton" type="Button" parent="."]
-layout_mode = 0
+[node name="LoadInterstitialButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Load Interstitial"
 
-[node name="ButtonsContainer_Buttons#ShowInterstitialButton" type="Button" parent="."]
-layout_mode = 0
-disabled = true
+[node name="ShowInterstitialButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Show Interstitial"
+disabled = true
 
-[node name="ButtonsContainer_Buttons#RewardedSectionLabel" type="Label" parent="."]
-layout_mode = 0
-text = "── Rewarded ──"
+[node name="RewardedLabel" type="Label" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+text = "-- Rewarded --"
 horizontal_alignment = 1
 
-[node name="ButtonsContainer_Buttons#LoadRewardedButton" type="Button" parent="."]
-layout_mode = 0
+[node name="LoadRewardedButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Load Rewarded"
 
-[node name="ButtonsContainer_Buttons#ShowRewardedButton" type="Button" parent="."]
-layout_mode = 0
-disabled = true
+[node name="ShowRewardedButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Show Rewarded"
+disabled = true
 
-[node name="ButtonsContainer_Buttons#ConsentSectionLabel" type="Label" parent="."]
-layout_mode = 0
-text = "── Consent (UMP) ──"
+[node name="ConsentLabel" type="Label" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+text = "-- Consent (UMP) --"
 horizontal_alignment = 1
 
-[node name="ButtonsContainer_Buttons#RequestConsentButton" type="Button" parent="."]
-layout_mode = 0
+[node name="RequestConsentButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Request Consent"
+
+[node name="LogOutput" type="RichTextLabel" parent="."]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+size_flags_vertical = 3
+scroll_following = true
+text = "Log output will appear here..."

@@ -6,6 +6,8 @@
   <ItemGroup>
     <!-- Addon source is compiled by its own project; exclude it here -->
     <Compile Remove="addons\admob\src\**\*.cs" />
+    <!-- Android export copies files into android/build; exclude to avoid duplicate type conflicts with AdMobAddon reference -->
+    <Compile Remove="android\**\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="addons\admob\AdMobAddon.csproj" />

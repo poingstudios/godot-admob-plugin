@@ -31,7 +31,7 @@ using PoingStudios.AdMob.Ump.Core;
 /// Example scene demonstrating how to use the AdMob C# API.
 /// Replace test ad unit IDs with your own before publishing.
 /// </summary>
-public partial class CSharpExample : Control
+public partial class CSharpExample : VBoxContainer
 {
     // Google test ad unit IDs — safe to use during development.
     // Replace with your real ad unit IDs before releasing.
@@ -61,25 +61,25 @@ public partial class CSharpExample : Control
 
     public override void _Ready()
     {
-        _statusLabel = GetNode<Label>("VBoxContainer/StatusLabel");
-        _logOutput = GetNode<RichTextLabel>("VBoxContainer/LogOutput");
+        _statusLabel = GetNode<Label>("StatusLabel");
+        _logOutput = GetNode<RichTextLabel>("LogOutput");
 
-        _showBannerButton = GetNode<Button>("VBoxContainer/ButtonsContainer/Buttons/ShowBannerButton");
-        _hideBannerButton = GetNode<Button>("VBoxContainer/ButtonsContainer/Buttons/HideBannerButton");
-        _destroyBannerButton = GetNode<Button>("VBoxContainer/ButtonsContainer/Buttons/DestroyBannerButton");
-        _showInterstitialButton = GetNode<Button>("VBoxContainer/ButtonsContainer/Buttons/ShowInterstitialButton");
-        _showRewardedButton = GetNode<Button>("VBoxContainer/ButtonsContainer/Buttons/ShowRewardedButton");
+        _showBannerButton = GetNode<Button>("ButtonsScroll/Buttons/ShowBannerButton");
+        _hideBannerButton = GetNode<Button>("ButtonsScroll/Buttons/HideBannerButton");
+        _destroyBannerButton = GetNode<Button>("ButtonsScroll/Buttons/DestroyBannerButton");
+        _showInterstitialButton = GetNode<Button>("ButtonsScroll/Buttons/ShowInterstitialButton");
+        _showRewardedButton = GetNode<Button>("ButtonsScroll/Buttons/ShowRewardedButton");
 
-        GetNode<Button>("VBoxContainer/ButtonsContainer/Buttons/InitializeButton").Pressed += OnInitializePressed;
-        GetNode<Button>("VBoxContainer/ButtonsContainer/Buttons/LoadBannerButton").Pressed += OnLoadBannerPressed;
+        GetNode<Button>("ButtonsScroll/Buttons/InitializeButton").Pressed += OnInitializePressed;
+        GetNode<Button>("ButtonsScroll/Buttons/LoadBannerButton").Pressed += OnLoadBannerPressed;
         _showBannerButton.Pressed += OnShowBannerPressed;
         _hideBannerButton.Pressed += OnHideBannerPressed;
         _destroyBannerButton.Pressed += OnDestroyBannerPressed;
-        GetNode<Button>("VBoxContainer/ButtonsContainer/Buttons/LoadInterstitialButton").Pressed += OnLoadInterstitialPressed;
+        GetNode<Button>("ButtonsScroll/Buttons/LoadInterstitialButton").Pressed += OnLoadInterstitialPressed;
         _showInterstitialButton.Pressed += OnShowInterstitialPressed;
-        GetNode<Button>("VBoxContainer/ButtonsContainer/Buttons/LoadRewardedButton").Pressed += OnLoadRewardedPressed;
+        GetNode<Button>("ButtonsScroll/Buttons/LoadRewardedButton").Pressed += OnLoadRewardedPressed;
         _showRewardedButton.Pressed += OnShowRewardedPressed;
-        GetNode<Button>("VBoxContainer/ButtonsContainer/Buttons/RequestConsentButton").Pressed += OnRequestConsentPressed;
+        GetNode<Button>("ButtonsScroll/Buttons/RequestConsentButton").Pressed += OnRequestConsentPressed;
 
         Log("Ready — press \"Initialize MobileAds\" to begin.");
     }
