@@ -31,3 +31,4 @@ AdMobAddon.sln
 # Android & iOS specific ignores
 /android/
 /ios/
+.vs/

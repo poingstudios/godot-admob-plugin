@@ -1,0 +1,108 @@
+[gd_scene load_steps=2 format=3 uid="uid://bshvjiqlgngc8"]
+
+[ext_resource type="Script" uid="uid://r1tdkrukutxf" path="res://addons/admob/sample/CSharpExample.cs" id="1_csharpexample"]
+
+[node name="CSharpExample" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_csharpexample")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/separation = 8
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "AdMob C# Example"
+horizontal_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Not initialized"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer" type="ScrollContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="LogOutput" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Log output will appear here..."
+scroll_following = true
+
+[node name="ButtonsContainer#Buttons" type="VBoxContainer" parent="."]
+layout_mode = 0
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="ButtonsContainer_Buttons#InitializeButton" type="Button" parent="."]
+layout_mode = 0
+text = "Initialize MobileAds"
+
+[node name="ButtonsContainer_Buttons#BannerSectionLabel" type="Label" parent="."]
+layout_mode = 0
+text = "── Banner ──"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer_Buttons#LoadBannerButton" type="Button" parent="."]
+layout_mode = 0
+text = "Load Banner"
+
+[node name="ButtonsContainer_Buttons#ShowBannerButton" type="Button" parent="."]
+layout_mode = 0
+disabled = true
+text = "Show Banner"
+
+[node name="ButtonsContainer_Buttons#HideBannerButton" type="Button" parent="."]
+layout_mode = 0
+disabled = true
+text = "Hide Banner"
+
+[node name="ButtonsContainer_Buttons#DestroyBannerButton" type="Button" parent="."]
+layout_mode = 0
+disabled = true
+text = "Destroy Banner"
+
+[node name="ButtonsContainer_Buttons#InterstitialSectionLabel" type="Label" parent="."]
+layout_mode = 0
+text = "── Interstitial ──"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer_Buttons#LoadInterstitialButton" type="Button" parent="."]
+layout_mode = 0
+text = "Load Interstitial"
+
+[node name="ButtonsContainer_Buttons#ShowInterstitialButton" type="Button" parent="."]
+layout_mode = 0
+disabled = true
+text = "Show Interstitial"
+
+[node name="ButtonsContainer_Buttons#RewardedSectionLabel" type="Label" parent="."]
+layout_mode = 0
+text = "── Rewarded ──"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer_Buttons#LoadRewardedButton" type="Button" parent="."]
+layout_mode = 0
+text = "Load Rewarded"
+
+[node name="ButtonsContainer_Buttons#ShowRewardedButton" type="Button" parent="."]
+layout_mode = 0
+disabled = true
+text = "Show Rewarded"
+
+[node name="ButtonsContainer_Buttons#ConsentSectionLabel" type="Label" parent="."]
+layout_mode = 0
+text = "── Consent (UMP) ──"
+horizontal_alignment = 1
+
+[node name="ButtonsContainer_Buttons#RequestConsentButton" type="Button" parent="."]
+layout_mode = 0
+text = "Request Consent"
