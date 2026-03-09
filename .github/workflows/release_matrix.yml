@@ -107,9 +107,34 @@ jobs:
         release_name: ${{env.PLUGIN_VERSION}}
         overwrite: true
 
+  godot_editor:
+    name: Compiling Godot Editor Plugin
+    needs: check-release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Compress Godot Editor Plugin
+      working-directory: platforms/godot_editor
+      run: |
+        PLUGIN_VERSION=v$(grep "version=" addons/admob/plugin.cfg | cut -d'"' -f2)
+        zip -r "poing-godot-admob-${PLUGIN_VERSION}.zip" addons/admob
+        echo "ZIP_NAME=poing-godot-admob-${PLUGIN_VERSION}.zip" >> $GITHUB_ENV
+        echo "PLUGIN_VERSION=${PLUGIN_VERSION}" >> $GITHUB_ENV
+
+    - name: Upload zip to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        target_commit: ${{ github.ref_name }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: platforms/godot_editor/${{ env.ZIP_NAME }}
+        tag: ${{ env.PLUGIN_VERSION }}
+        release_name: ${{ env.PLUGIN_VERSION }}
+        overwrite: true
+
   release-notes:
     name: Generate Release Notes
-    needs: [android-template, ios-template]
+    needs: [android-template, ios-template, godot_editor]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
