@@ -53,5 +53,6 @@ jobs:
         PASSWORD: ${{ secrets.ASSET_LIBRARY_PASSWORD }}
         VERSION: ${{env.PLUGIN_VERSION}}
         COMMIT_HASH: ${{ github.sha }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
       run: |
         python3 static/workflow_files/push.py
