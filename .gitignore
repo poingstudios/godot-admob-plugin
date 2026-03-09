@@ -4,7 +4,7 @@
 # Ignore test files
 .DS_STORE
 
-!addons/admob/icon.png
+!platforms/godot_editor/addons/admob/icon.png
 
 # Godot-specific ignores
 .import/
@@ -29,5 +29,5 @@ AdMobAddon.sln
 /site/
 
 # Android & iOS specific ignores
-/android/
-/ios/
+/platforms/godot_editor/android/
+/platforms/godot_editor/ios/

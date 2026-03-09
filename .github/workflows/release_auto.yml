@@ -1,0 +1,93 @@
+name: Auto Build Daily
+
+on:
+  schedule:
+    - cron: '0 22 * * *'
+  workflow_dispatch:
+
+jobs:
+  detect-latest:
+    name: Check latest Godot version
+    runs-on: ubuntu-latest
+    outputs:
+      godot_version: ${{ steps.detect.outputs.godot_version }}
+      should_build: ${{ steps.detect.outputs.should_build }}
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Detect
+      id: detect
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        LATEST=$(gh api repos/godotengine/godot/releases --jq '[.[] | select(.tag_name | test("^4\\.[0-9]+(\\.[0-9]+)?-stable$")) | .tag_name][0]' | sed 's/-stable//')
+        LATEST_PAD=$(echo "$LATEST" | awk -F. '{if(NF==2) print $0".0"; else print $0}')
+        PLUGIN_VERSION=v$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        
+        RELEASE_EXISTS=$(gh api "repos/${{ github.repository }}/releases/tags/${PLUGIN_VERSION}" > /dev/null 2>&1 && echo "true" || echo "false")
+        
+        if [ "$RELEASE_EXISTS" = "true" ]; then
+          A_EXISTS=$(gh api "repos/${{ github.repository }}/releases/tags/${PLUGIN_VERSION}" --jq ".assets[].name" 2>/dev/null | grep -q "poing-godot-admob-android-v${LATEST_PAD}.zip" && echo "true" || echo "false")
+          I_EXISTS=$(gh api "repos/${{ github.repository }}/releases/tags/${PLUGIN_VERSION}" --jq ".assets[].name" 2>/dev/null | grep -q "poing-godot-admob-ios-v${LATEST_PAD}.zip" && echo "true" || echo "false")
+        else
+          A_EXISTS="false"
+          I_EXISTS="false"
+        fi
+
+        if [ "$A_EXISTS" = "true" ] && [ "$I_EXISTS" = "true" ]; then
+          echo "should_build=false" >> $GITHUB_OUTPUT
+        else
+          echo "should_build=true" >> $GITHUB_OUTPUT
+          echo "godot_version=$LATEST_PAD" >> $GITHUB_OUTPUT
+        fi
+
+  android:
+    needs: detect-latest
+    if: needs.detect-latest.outputs.should_build == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+    
+    - name: Build Plugins
+      working-directory: platforms/android
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Compress the artifact output
+      working-directory: platforms/android
+      run: |
+        ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}"
+
+    - name: Upload binary
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: platforms/android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip
+        tag: v$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        overwrite: true
+
+  ios:
+    needs: detect-latest
+    if: needs.detect-latest.outputs.should_build == 'true'
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Dependencies
+      uses: actions/setup-python@v6
+      with: { python-version: '3.x' }
+    - run: python -m pip install scons
+
+    - name: Build 
+      working-directory: platforms/ios
+      run: ./scripts/build.sh ${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Upload binary
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: platforms/ios/bin/release/*.zip
+        file_glob: true
+        tag: v$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        overwrite: true

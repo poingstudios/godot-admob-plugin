@@ -1,0 +1,147 @@
+name: Built Plugin Release
+
+on: workflow_dispatch
+
+jobs:
+  check-release:
+    name: Check if release already exists
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set plugin version
+      run: |
+        PLUGIN_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+
+    - name: Fail if release already exists
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        if gh api "repos/${{ github.repository }}/releases/tags/${{ env.PLUGIN_VERSION }}" > /dev/null 2>&1; then
+          echo "::error::Release ${{ env.PLUGIN_VERSION }} already exists. Bump the version before releasing."
+          exit 1
+        fi
+        echo "No existing release found for ${{ env.PLUGIN_VERSION }}. Proceeding..."
+
+  android-template:
+    name: Compiling Android (Godot ${{matrix.GODOT_VERSIONS}})
+    needs: check-release
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        GODOT_VERSIONS: ["4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.6.0", "4.6.1"]
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set plugin version
+      run: |
+        PLUGIN_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+
+    - name: Build Plugins
+      working-directory: platforms/android
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build -PgodotVersion=${{matrix.GODOT_VERSIONS}}
+
+    - name: Compress the artifact output
+      working-directory: platforms/android
+      run: |
+        ./gradlew zipPlugins -PgodotVersion="${{matrix.GODOT_VERSIONS}}"
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        target_commit: ${{ github.ref_name }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: platforms/android/.output/poing-godot-admob-android-v${{matrix.GODOT_VERSIONS}}.zip
+        tag: ${{env.PLUGIN_VERSION}}
+        release_name: ${{env.PLUGIN_VERSION}}
+        overwrite: true
+
+  ios-template:
+    name: Compiling iOS (Godot ${{matrix.GODOT_VERSIONS}})
+    needs: check-release
+    runs-on: "macos-latest"
+    strategy:
+      matrix:
+        GODOT_VERSIONS: ["4.1.0", "4.1.1", "4.1.2", "4.1.3", "4.1.4", "4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.6.0", "4.6.1"]
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set plugin version
+      run: |
+        PLUGIN_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_VERSION=v${PLUGIN_VERSION}" >> $GITHUB_ENV
+
+    - name: Verify matrix
+      run: |
+        CV=${{matrix.GODOT_VERSIONS}}
+        if [ ${#CV} -eq 1 ]; then CV="${CV}.0"; fi
+        echo "CURRENT_GODOT_VERSION=${CV}" >> $GITHUB_ENV
+
+    - name: Cache & Load Python/SPM
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.x'
+
+    - name: Install scons
+      run: python -m pip install scons
+
+    - name: Compiles the Source Code
+      working-directory: platforms/ios
+      run: |
+        ./scripts/build.sh ${{env.CURRENT_GODOT_VERSION}}
+
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        target_commit: ${{ github.ref_name }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: platforms/ios/bin/release/*.zip
+        file_glob: true
+        tag: ${{env.PLUGIN_VERSION}}
+        release_name: ${{env.PLUGIN_VERSION}}
+        overwrite: true
+
+  godot_editor:
+    name: Compiling Godot Editor Plugin
+    needs: check-release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Compress Godot Editor Plugin
+      working-directory: platforms/godot_editor
+      run: |
+        PLUGIN_VERSION=v$(grep "version=" addons/admob/plugin.cfg | cut -d'"' -f2)
+        zip -r "poing-godot-admob-${PLUGIN_VERSION}.zip" addons/admob
+        echo "ZIP_NAME=poing-godot-admob-${PLUGIN_VERSION}.zip" >> $GITHUB_ENV
+        echo "PLUGIN_VERSION=${PLUGIN_VERSION}" >> $GITHUB_ENV
+
+    - name: Upload zip to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        target_commit: ${{ github.ref_name }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: platforms/godot_editor/${{ env.ZIP_NAME }}
+        tag: ${{ env.PLUGIN_VERSION }}
+        release_name: ${{ env.PLUGIN_VERSION }}
+        overwrite: true
+
+  release-notes:
+    name: Generate Release Notes
+    needs: [android-template, ios-template, godot_editor]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set version & create release properly
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        PLUGIN_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        gh release edit "v${PLUGIN_VERSION}" --title "v${PLUGIN_VERSION}" --notes "" --draft=false --prerelease=false

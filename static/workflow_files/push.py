@@ -13,7 +13,7 @@ response = json.loads(login_response.text)
 asset_data = {
     "token": response["token"],
     "version_string": os.environ["VERSION"],
-    "download_commit": os.environ["COMMIT_HASH"]
+    "download_commit": f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/releases/download/{os.environ['VERSION']}/poing-godot-admob-{os.environ['VERSION']}.zip"
 }
 upload_response = requests.post("https://godotengine.org/asset-library/api/asset/" + get_asset_id(), data=asset_data)
 upload_response.raise_for_status()

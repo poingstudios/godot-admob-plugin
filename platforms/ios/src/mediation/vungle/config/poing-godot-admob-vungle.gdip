@@ -1,0 +1,19 @@
+[config]
+name="AdMob Vungle"
+binary="poing-godot-admob/bin/poing-godot-admob-vungle.xcframework"
+
+initialization="register_poing_godot_admob_vungle_types"
+deinitialization="unregister_poing_godot_admob_vungle_types"
+
+[dependencies]
+linked=[]
+embedded=[]
+system=[]
+capabilities=[]
+files=[]
+linker_flags=[]
+admob_packages=[
+    "https://github.com/googleads/googleads-mobile-ios-mediation-liftoffmonetize.git@exact:7.5.300|LiftoffMonetizeAdapterTarget"
+]
+
+[plist]
