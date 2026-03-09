@@ -123,6 +123,8 @@ for PLUGIN in "${ALL_PLUGINS[@]}"; do
     cp "$CONFIG_DIR"/*.gd "$STAGING_INTERNAL/" 2>/dev/null || true
 done
 
+echo -e "# This file is dynamically generated.\nconst VERSION := \"$GODOT_VERSION\"" > "$STAGING_INTERNAL/package.gd"
+
 # Only create zip if staging is new or forced (we could optimize this further but the zip is fast compared to build)
 ./scripts/lib/create_zip.sh "plugin" "internal" "$GODOT_VERSION" || exit 1
 rm -rf "$STAGING_INTERNAL"

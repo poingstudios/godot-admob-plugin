@@ -40,9 +40,7 @@ func _init(download_service: DownloadService, dialog_service: DialogService) -> 
 	_download_service.download_completed.connect(_on_download_completed)
 
 func check_dependencies() -> void:
-	var local_version := PluginVersion.installed.ios
-	
-	if local_version.is_empty():
+	if not PluginVersion.is_ios_installed:
 		print_rich("[color=YELLOW]AdMob iOS plugin not found. Installing...[/color]")
 		install()
 
