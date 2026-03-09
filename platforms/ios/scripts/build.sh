@@ -13,6 +13,7 @@ fi
 CLEAN_BUILD=false
 GENERATE_SDK=false
 GODOT_VERSION=""
+PLUGIN_CONFIG_PATH="../godot_editor/addons/admob/plugin.cfg"
 
 # Help function
 show_help() {
@@ -21,6 +22,7 @@ show_help() {
     echo "Options:"
     echo "  --clean       Perform a clean build (removes all artifacts first)"
     echo "  --sdk         Generate the 'sdk-external-dependencies' zip"
+    echo "  --plugin-config <path>   Provide a custom path to plugin.cfg"
     echo "  --help        Show this help message"
     echo ""
     echo "Arguments:"
@@ -38,6 +40,15 @@ while [[ "$#" -gt 0 ]]; do
     case $1 in
         --clean) CLEAN_BUILD=true ;;
         --sdk) GENERATE_SDK=true ;;
+        --plugin-config) 
+            if [ -n "$2" ] && [[ "$2" != --* ]]; then
+                PLUGIN_CONFIG_PATH="$2"
+                shift
+            else
+                log_error "Error: Argument for $1 is missing"
+                show_help; exit 1
+            fi
+            ;;
         --help) show_help; exit 0 ;;
         *) 
             if [ -z "$GODOT_VERSION" ]; then
@@ -123,7 +134,12 @@ for PLUGIN in "${ALL_PLUGINS[@]}"; do
     cp "$CONFIG_DIR"/*.gd "$STAGING_INTERNAL/" 2>/dev/null || true
 done
 
-echo -e "# This file is dynamically generated.\nconst VERSION := \"$GODOT_VERSION\"" > "$STAGING_INTERNAL/package.gd"
+PLUGIN_VERSION=$(grep -E '^version=' "$PLUGIN_CONFIG_PATH" | cut -d '"' -f 2)
+if [ -z "$PLUGIN_VERSION" ]; then
+    log_error "Could not extract version from $PLUGIN_CONFIG_PATH"
+    exit 1
+fi
+echo -e "# This file is dynamically generated.\nconst VERSION := \"$PLUGIN_VERSION\"" > "$STAGING_INTERNAL/poing-godot-admob/package.gd"
 
 # Only create zip if staging is new or forced (we could optimize this further but the zip is fast compared to build)
 ./scripts/lib/create_zip.sh "plugin" "internal" "$GODOT_VERSION" || exit 1

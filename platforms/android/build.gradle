@@ -1,3 +1,4 @@
+import org.gradle.api.GradleException
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
     id 'com.android.application' version '8.13.2' apply false
@@ -20,6 +21,30 @@ subprojects {
 }
 
 def pluginContent = copySpec {
+    def pluginConfigPath = project.hasProperty('pluginConfigPath') ? project.property('pluginConfigPath') : "${rootProject.projectDir}/../godot_editor/addons/admob/plugin.cfg"
+    def pluginConfigFile = file(pluginConfigPath)
+    def pluginVersion = ""
+    if (pluginConfigFile.exists()) {
+        def matcher = pluginConfigFile.text =~ /(?m)^version\s*=\s*"([^"]+)"/
+        if (matcher.find()) {
+            pluginVersion = matcher.group(1)
+        } else {
+            throw new GradleException("Could not find version in plugin.cfg")
+        }
+    } else {
+        throw new GradleException("plugin.cfg not found at ${pluginConfigFile.absolutePath}")
+    }
+    
+    // Generate package.gd dynamically in-memory and write to build directory to package it
+    def generatedDir = file("${rootProject.buildDir}/generated_package")
+    generatedDir.mkdirs()
+    def packageFile = new File(generatedDir, "package.gd")
+    packageFile.text = "# This file is dynamically generated.\nconst VERSION := \"${pluginVersion}\"\n"
+    
+    from(generatedDir) {
+        include 'package.gd'
+    }
+
     rootProject.subprojects.each { subproject ->
         if (subproject.name == "core"){
             from(subproject.file("config")) {

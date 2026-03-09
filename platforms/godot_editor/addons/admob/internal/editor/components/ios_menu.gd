@@ -33,13 +33,4 @@ func _init(handler: IOSHandler) -> void:
 	_handler = handler
 	
 	add_menu_item("Download & Install", func(): _handler.install())
-	add_menu_item("Copy shell command", _copy_shell_command)
 	add_menu_item("GitHub", func(): OS.shell_open("https://github.com/poingstudios/godot-admob-plugin/tree/" + PluginVersion.current + "/platforms/ios"))
-
-func _copy_shell_command() -> void:
-	var snippet := "chmod +x update_and_install.sh\n./update_and_install.sh"
-
-	DisplayServer.clipboard_set(snippet)
-
-	print_rich("[b][color=GREEN]✔ Copied install command to clipboard![/color][/b]\n" +
-			"[code]" + snippet + "[/code]")
