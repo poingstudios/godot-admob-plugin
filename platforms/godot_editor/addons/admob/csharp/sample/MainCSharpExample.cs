@@ -31,7 +31,7 @@ using PoingStudios.AdMob.Ump.Core;
 /// Example scene demonstrating how to use the AdMob C# API.
 /// Replace test ad unit IDs with your own before publishing.
 /// </summary>
-public partial class CSharpExample : VBoxContainer
+public partial class MainCSharpExample : VBoxContainer
 {
 	// Google test ad unit IDs — safe to use during development.
 	// Replace with your real ad unit IDs before releasing.
