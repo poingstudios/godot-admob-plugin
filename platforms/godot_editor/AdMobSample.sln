@@ -2,8 +2,6 @@
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdMobSample", "AdMobSample.csproj", "{8E4F9B2A-3C6D-4E7F-8A9B-0C1D2E3F4A5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdMobAddon", "addons\admob\AdMobAddon.csproj", "{FCEF6655-DDA5-441E-8A40-B1F5CA0BBC8F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 	Debug|Any CPU = Debug|Any CPU

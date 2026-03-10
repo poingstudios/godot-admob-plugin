@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://bshvjiqlgngc8"]
+[gd_scene format=3 uid="uid://bshvjiqlgngc8"]
 
 [ext_resource type="Script" uid="uid://r1tdkrukutxf" path="res://addons/admob/sample/CSharpExample.cs" id="1_csharpexample"]
 
