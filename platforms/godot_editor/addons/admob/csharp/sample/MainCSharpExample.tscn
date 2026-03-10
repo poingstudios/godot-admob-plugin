@@ -1,114 +1,389 @@
-[gd_scene format=3 uid="uid://bshvjiqlgngc8"]
+[gd_scene load_steps=22 format=3 uid="uid://bshvjiqlgngc8"]
 
-[ext_resource type="Script" uid="uid://r1tdkrukutxf" path="res://addons/admob/csharp/sample/MainCSharpExample.cs" id="1_csharpexample"]
+[ext_resource type="Script" uid="uid://c5ru3ymgh15wp" path="res://addons/admob/csharp/sample/MainCSharpExample.cs" id="1_csharp"]
+[ext_resource type="Script" path="res://addons/admob/gdscript/sample/SafeArea.gd" id="2_safe"]
+[ext_resource type="Texture2D" uid="uid://to8hnfn5fmrl" path="res://addons/admob/assets/icon-76.png" id="3_icon"]
+[ext_resource type="FontFile" uid="uid://ctd0my3oi3sl7" path="res://addons/admob/assets/fonts/arial.ttf" id="4_arial"]
+[ext_resource type="Texture2D" uid="uid://b04npsmf70fhr" path="res://addons/admob/assets/donate/Patreon_logo_with_wordmark.svg" id="5_patreon"]
+[ext_resource type="Texture2D" uid="uid://c1p3ju4a5gwe3" path="res://addons/admob/assets/donate/Ko-fi_Logo_RGB_ColorBg.png" id="6_kofi"]
+[ext_resource type="Texture2D" uid="uid://jksg4sbkq0p7" path="res://addons/admob/assets/donate/PayPal.svg" id="7_paypal"]
+[ext_resource type="AudioStream" uid="uid://f3f176vu6pfo" path="res://addons/admob/assets/music.ogg" id="13_music"]
+[ext_resource type="Theme" uid="uid://cax2scu7f6q4k" path="res://addons/admob/assets/theme_modern.tres" id="15_theme"]
+[ext_resource type="Texture2D" uid="uid://c6d7aye5nwtvi" path="res://addons/admob/assets/pos_top_left.svg" id="16_tl"]
+[ext_resource type="Texture2D" uid="uid://kakk2nrappoc" path="res://addons/admob/assets/pos_top.svg" id="17_t"]
+[ext_resource type="Texture2D" uid="uid://ba3m3mh4pn8of" path="res://addons/admob/assets/pos_top_right.svg" id="18_tr"]
+[ext_resource type="Texture2D" uid="uid://cr4ao6vsp5736" path="res://addons/admob/assets/pos_left.svg" id="19_l"]
+[ext_resource type="Texture2D" uid="uid://b41mioah3scis" path="res://addons/admob/assets/pos_center.svg" id="20_c"]
+[ext_resource type="Texture2D" uid="uid://ceou56162w5po" path="res://addons/admob/assets/pos_right.svg" id="21_r"]
+[ext_resource type="Texture2D" uid="uid://bp0dyr8cp5ye0" path="res://addons/admob/assets/pos_bottom_left.svg" id="22_bl"]
+[ext_resource type="Texture2D" uid="uid://5v6slm2g7ad0" path="res://addons/admob/assets/pos_bottom.svg" id="23_b"]
+[ext_resource type="Texture2D" uid="uid://e3dqlgeny8lx" path="res://addons/admob/assets/pos_bottom_right.svg" id="24_br"]
 
-[node name="MainCSharpExample" type="VBoxContainer"]
+[sub_resource type="GDScript" id="GDScript_1vvio"]
+script/source = "extends TextureButton
+func _on_pressed(): OS.shell_open(\"https://www.patreon.com/poingstudios\") 
+"
+
+[sub_resource type="GDScript" id="GDScript_hcar3"]
+script/source = "extends TextureButton
+func _on_pressed(): OS.shell_open(\"https://ko-fi.com/poingstudios\") 
+"
+
+[sub_resource type="GDScript" id="GDScript_8xyos"]
+script/source = "extends TextureButton
+func _on_pressed(): OS.shell_open(\"https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8\") 
+"
+
+[node name="MainCSharpExample" type="Control"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 0
-script = ExtResource("1_csharpexample")
+theme = ExtResource("15_theme")
+script = ExtResource("1_csharp")
 
-[node name="TitleLabel" type="Label" parent="."]
-layout_mode = 2
-text = "AdMob C# Example"
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 24
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.996094, 0.425781, 0, 1)
 
-[node name="StatusLabel" type="Label" parent="."]
-layout_mode = 2
-text = "Not initialized"
-horizontal_alignment = 1
+[node name="SafeArea" type="MarginContainer" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_safe")
 
-[node name="ButtonsScroll" type="ScrollContainer" parent="."]
+[node name="LayoutContainer" type="VBoxContainer" parent="Background/SafeArea"]
 layout_mode = 2
-size_flags_vertical = 3
+theme_override_constants/separation = 10
 
-[node name="Buttons" type="VBoxContainer" parent="ButtonsScroll"]
+[node name="HeaderContainer" type="PanelContainer" parent="Background/SafeArea/LayoutContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+theme_type_variation = &"GlassPanel"
+
+[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="LogoContainer" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="AppIcon" type="TextureRect" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("3_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AppTitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_fonts/font = ExtResource("4_arial")
+theme_override_font_sizes/font_size = 35
+text = "AdMob Plugin - Poing Studios"
+vertical_alignment = 1
+
+[node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox"]
+layout_mode = 2
+theme_type_variation = &"SupportCard"
+
+[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard"]
+layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="InitializeButton" type="Button" parent="ButtonsScroll/Buttons"]
+[node name="SupportLabel" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox"]
+clip_contents = false
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Initialize MobileAds"
+theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 0.8)
+theme_override_fonts/normal_font = ExtResource("4_arial")
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center][b]S U P P O R T   T H E   P R O J E C T[/b][/center]"
+fit_content = true
 
-[node name="BannerLabel" type="Label" parent="ButtonsScroll/Buttons"]
+[node name="SupportButtons" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox"]
 layout_mode = 2
-text = "-- Banner --"
-horizontal_alignment = 1
+theme_override_constants/separation = 30
+alignment = 1
 
-[node name="LoadBannerButton" type="Button" parent="ButtonsScroll/Buttons"]
+[node name="Patreon" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons"]
+custom_minimum_size = Vector2(180, 55)
 layout_mode = 2
-size_flags_horizontal = 3
+texture_normal = ExtResource("5_patreon")
+ignore_texture_size = true
+stretch_mode = 5
+script = SubResource("GDScript_1vvio")
+
+[node name="Ko-fi" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons"]
+custom_minimum_size = Vector2(140, 55)
+layout_mode = 2
+texture_normal = ExtResource("6_kofi")
+ignore_texture_size = true
+stretch_mode = 5
+script = SubResource("GDScript_hcar3")
+
+[node name="PayPal" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons"]
+custom_minimum_size = Vector2(150, 55)
+layout_mode = 2
+texture_normal = ExtResource("7_paypal")
+ignore_texture_size = true
+stretch_mode = 5
+script = SubResource("GDScript_8xyos")
+
+[node name="TabContent" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MainTabs" type="TabContainer" parent="Background/SafeArea/LayoutContainer/TabContent"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Banner" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="BannerActions" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LoadBanner" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/BannerActions"]
+layout_mode = 2
 text = "Load Banner"
 
-[node name="ShowBannerButton" type="Button" parent="ButtonsScroll/Buttons"]
+[node name="DestroyBanner" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/BannerActions"]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Show Banner"
 disabled = true
-
-[node name="HideBannerButton" type="Button" parent="ButtonsScroll/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Hide Banner"
-disabled = true
-
-[node name="DestroyBannerButton" type="Button" parent="ButtonsScroll/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
 text = "Destroy Banner"
-disabled = true
 
-[node name="InterstitialLabel" type="Label" parent="ButtonsScroll/Buttons"]
+[node name="ShowBanner" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/BannerActions"]
 layout_mode = 2
-text = "-- Interstitial --"
+disabled = true
+text = "Show Banner"
+
+[node name="HideBanner" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/BannerActions"]
+layout_mode = 2
+disabled = true
+text = "Hide Banner"
+
+[node name="GetSize" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/BannerActions"]
+layout_mode = 2
+disabled = true
+text = "Get Size"
+
+[node name="HSeparator" type="HSeparator" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="PositionCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner"]
+layout_mode = 2
+theme_type_variation = &"SectionCard"
+
+[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/PositionCard"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/PositionCard/VBox"]
+layout_mode = 2
+text = "AD POSITIONS"
 horizontal_alignment = 1
 
-[node name="LoadInterstitialButton" type="Button" parent="ButtonsScroll/Buttons"]
+[node name="PositionGrid" type="GridContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/PositionCard/VBox"]
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Load Interstitial"
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 3
 
-[node name="ShowInterstitialButton" type="Button" parent="ButtonsScroll/Buttons"]
+[node name="TOP_LEFT" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(80, 80)
 layout_mode = 2
-size_flags_horizontal = 3
-text = "Show Interstitial"
+icon = ExtResource("16_tl")
+expand_icon = true
+
+[node name="TOP" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("17_t")
+expand_icon = true
+
+[node name="TOP_RIGHT" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("18_tr")
+expand_icon = true
+
+[node name="LEFT" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("19_l")
+expand_icon = true
+
+[node name="CENTER" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("20_c")
+expand_icon = true
+
+[node name="RIGHT" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("21_r")
+expand_icon = true
+
+[node name="BOTTOM_LEFT" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("22_bl")
+expand_icon = true
+
+[node name="BOTTOM" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("23_b")
+expand_icon = true
+
+[node name="BOTTOM_RIGHT" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner/PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+icon = ExtResource("24_br")
+expand_icon = true
+
+[node name="Interstitial" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Load" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Interstitial"]
+layout_mode = 2
+text = "Load"
+
+[node name="Show" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Interstitial"]
+layout_mode = 2
 disabled = true
+text = "Show"
 
-[node name="RewardedLabel" type="Label" parent="ButtonsScroll/Buttons"]
+[node name="Destroy" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Interstitial"]
 layout_mode = 2
-text = "-- Rewarded --"
-horizontal_alignment = 1
-
-[node name="LoadRewardedButton" type="Button" parent="ButtonsScroll/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Load Rewarded"
-
-[node name="ShowRewardedButton" type="Button" parent="ButtonsScroll/Buttons"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Show Rewarded"
 disabled = true
+text = "Destroy"
 
-[node name="ConsentLabel" type="Label" parent="ButtonsScroll/Buttons"]
+[node name="Rewarded" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs"]
+visible = false
 layout_mode = 2
-text = "-- Consent (UMP) --"
-horizontal_alignment = 1
+metadata/_tab_index = 2
 
-[node name="RequestConsentButton" type="Button" parent="ButtonsScroll/Buttons"]
+[node name="Load" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Rewarded"]
+layout_mode = 2
+text = "Load"
+
+[node name="Show" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Rewarded"]
+layout_mode = 2
+disabled = true
+text = "Show"
+
+[node name="Destroy" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Rewarded"]
+layout_mode = 2
+disabled = true
+text = "Destroy"
+
+[node name="RewardedInterstitial" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="Load" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/RewardedInterstitial"]
+layout_mode = 2
+text = "Load"
+
+[node name="Show" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/RewardedInterstitial"]
+layout_mode = 2
+disabled = true
+text = "Show"
+
+[node name="Destroy" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/RewardedInterstitial"]
+layout_mode = 2
+disabled = true
+text = "Destroy"
+
+[node name="UMP" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
+
+[node name="GetConsentStatus" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/UMP"]
+layout_mode = 2
+text = "GetConsentStatus"
+
+[node name="ResetConsentInformation" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/UMP"]
+layout_mode = 2
+text = "ResetConsentInformation"
+
+[node name="MobileAds" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 5
+
+[node name="GetInitStatus" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
+layout_mode = 2
+text = "Get Initialization Status"
+
+[node name="iOSAppPause" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
+layout_mode = 2
+text = "Set iOS App Pause On Background"
+
+[node name="MuteMusic" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
+layout_mode = 2
+text = "Mute Music"
+
+[node name="AdVolumeContainer" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
+layout_mode = 2
+
+[node name="AdVolumeLabel" type="Label" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/AdVolumeContainer"]
+layout_mode = 2
+text = "Ad Volume"
+
+[node name="AdVolumeSlider" type="HSlider" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/AdVolumeContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Request Consent"
+max_value = 1.0
+step = 0.01
+value = 1.0
 
-[node name="LogOutput" type="RichTextLabel" parent="."]
+[node name="AdMuted" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
 layout_mode = 2
-custom_minimum_size = Vector2(0, 120)
+text = "Mute Ads"
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds"]
+stream = ExtResource("13_music")
+volume_db = -10.0
+autoplay = true
+
+[node name="ConsolePanel" type="PanelContainer" parent="Background/SafeArea/LayoutContainer"]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+theme_type_variation = &"GlassPanel"
+
+[node name="ConsoleOutput" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/ConsolePanel"]
+layout_mode = 2
 size_flags_vertical = 3
+bbcode_enabled = true
+text = "--- LOGS START ---"
 scroll_following = true
-text = "Log output will appear here..."
+
+[connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" method="_on_pressed"]
+[connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Ko-fi" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Ko-fi" method="_on_pressed"]
+[connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/PayPal" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/PayPal" method="_on_pressed"]

@@ -27,73 +27,158 @@ using PoingStudios.AdMob.Api.Listeners;
 using PoingStudios.AdMob.Ump.Api;
 using PoingStudios.AdMob.Ump.Core;
 
-/// <summary>
-/// Example scene demonstrating how to use the AdMob C# API.
-/// Replace test ad unit IDs with your own before publishing.
-/// </summary>
-public partial class MainCSharpExample : VBoxContainer
+public partial class MainCSharpExample : Control
 {
-	// Google test ad unit IDs — safe to use during development.
-	// Replace with your real ad unit IDs before releasing.
 	private const string BannerAdUnitIdAndroid = "ca-app-pub-3940256099942544/6300978111";
 	private const string BannerAdUnitIdIos = "ca-app-pub-3940256099942544/2934735716";
 	private const string InterstitialAdUnitIdAndroid = "ca-app-pub-3940256099942544/1033173712";
 	private const string InterstitialAdUnitIdIos = "ca-app-pub-3940256099942544/4411468910";
 	private const string RewardedAdUnitIdAndroid = "ca-app-pub-3940256099942544/5224354917";
 	private const string RewardedAdUnitIdIos = "ca-app-pub-3940256099942544/1712485313";
+	private const string RewardedInterstitialAdUnitIdAndroid = "ca-app-pub-3940256099942544/5354046379";
+	private const string RewardedInterstitialAdUnitIdIos = "ca-app-pub-3940256099942544/6978759866";
 
 	private string BannerAdUnitId => OS.GetName() == "iOS" ? BannerAdUnitIdIos : BannerAdUnitIdAndroid;
 	private string InterstitialAdUnitId => OS.GetName() == "iOS" ? InterstitialAdUnitIdIos : InterstitialAdUnitIdAndroid;
 	private string RewardedAdUnitId => OS.GetName() == "iOS" ? RewardedAdUnitIdIos : RewardedAdUnitIdAndroid;
+	private string RewardedInterstitialAdUnitId => OS.GetName() == "iOS" ? RewardedInterstitialAdUnitIdIos : RewardedInterstitialAdUnitIdAndroid;
 
 	private AdView _adView;
 	private InterstitialAd _interstitialAd;
 	private RewardedAd _rewardedAd;
+	private RewardedInterstitialAd _rewardedInterstitialAd;
 
-	// UI node references populated in _Ready
-	private Label _statusLabel;
-	private RichTextLabel _logOutput;
-	private Button _showBannerButton;
-	private Button _hideBannerButton;
-	private Button _destroyBannerButton;
-	private Button _showInterstitialButton;
-	private Button _showRewardedButton;
+	private RichTextLabel _consoleOutput;
+	private Node _safeArea; // MarginContainer for safe area logic
+
+	private const string TabsRoot = "Background/SafeArea/LayoutContainer/TabContent/MainTabs/";
+
+	// UI References
+	private Button _bannerLoad, _bannerDestroy, _bannerShow, _bannerHide, _bannerGetSize;
+	private Button _interstitialLoad, _interstitialShow, _interstitialDestroy;
+	private Button _rewardedLoad, _rewardedShow, _rewardedDestroy;
+	private Button _rewardedInterstitialLoad, _rewardedInterstitialShow, _rewardedInterstitialDestroy;
+	
+	// MobileAds Tab controls
+	private AudioStreamPlayer _musicPlayer;
+	private CheckButton _iosAppPauseCheck, _muteMusicCheck, _adMutedCheck;
+	private HSlider _adVolumeSlider;
+
+	private AdPosition _currentAdPosition = AdPosition.Bottom;
 
 	public override void _Ready()
 	{
-		_statusLabel = GetNode<Label>("StatusLabel");
-		_logOutput = GetNode<RichTextLabel>("LogOutput");
+		_consoleOutput = GetNode<RichTextLabel>("Background/SafeArea/LayoutContainer/ConsolePanel/ConsoleOutput");
+		_safeArea = GetNode<MarginContainer>("Background/SafeArea");
 
-		_showBannerButton = GetNode<Button>("ButtonsScroll/Buttons/ShowBannerButton");
-		_hideBannerButton = GetNode<Button>("ButtonsScroll/Buttons/HideBannerButton");
-		_destroyBannerButton = GetNode<Button>("ButtonsScroll/Buttons/DestroyBannerButton");
-		_showInterstitialButton = GetNode<Button>("ButtonsScroll/Buttons/ShowInterstitialButton");
-		_showRewardedButton = GetNode<Button>("ButtonsScroll/Buttons/ShowRewardedButton");
+		SetupBannerTab();
+		SetupInterstitialTab();
+		SetupRewardedTab();
+		SetupRewardedInterstitialTab();
+		SetupUmpTab();
+		SetupMobileAdsTab();
 
-		GetNode<Button>("ButtonsScroll/Buttons/InitializeButton").Pressed += OnInitializePressed;
-		GetNode<Button>("ButtonsScroll/Buttons/LoadBannerButton").Pressed += OnLoadBannerPressed;
-		_showBannerButton.Pressed += OnShowBannerPressed;
-		_hideBannerButton.Pressed += OnHideBannerPressed;
-		_destroyBannerButton.Pressed += OnDestroyBannerPressed;
-		GetNode<Button>("ButtonsScroll/Buttons/LoadInterstitialButton").Pressed += OnLoadInterstitialPressed;
-		_showInterstitialButton.Pressed += OnShowInterstitialPressed;
-		GetNode<Button>("ButtonsScroll/Buttons/LoadRewardedButton").Pressed += OnLoadRewardedPressed;
-		_showRewardedButton.Pressed += OnShowRewardedPressed;
-		GetNode<Button>("ButtonsScroll/Buttons/RequestConsentButton").Pressed += OnRequestConsentPressed;
+		InitializeMobileAds();
+	}
 
-		Log("Ready — press \"Initialize MobileAds\" to begin.");
+	private void SetupBannerTab()
+	{
+		string path = TabsRoot + "Banner/";
+		_bannerLoad = GetNode<Button>(path + "BannerActions/LoadBanner");
+		_bannerDestroy = GetNode<Button>(path + "BannerActions/DestroyBanner");
+		_bannerShow = GetNode<Button>(path + "BannerActions/ShowBanner");
+		_bannerHide = GetNode<Button>(path + "BannerActions/HideBanner");
+		_bannerGetSize = GetNode<Button>(path + "BannerActions/GetSize");
+
+		_bannerLoad.Pressed += OnLoadBannerPressed;
+		_bannerDestroy.Pressed += OnDestroyBannerPressed;
+		_bannerShow.Pressed += OnShowBannerPressed;
+		_bannerHide.Pressed += OnHideBannerPressed;
+		_bannerGetSize.Pressed += OnGetSizePressed;
+
+		// Position Grid
+		string grid = path + "PositionCard/VBox/PositionGrid/";
+		GetNode<Button>(grid + "TOP_LEFT").Pressed += () => UpdatePosition(AdPosition.TopLeft);
+		GetNode<Button>(grid + "TOP").Pressed += () => UpdatePosition(AdPosition.Top);
+		GetNode<Button>(grid + "TOP_RIGHT").Pressed += () => UpdatePosition(AdPosition.TopRight);
+		GetNode<Button>(grid + "LEFT").Pressed += () => UpdatePosition(AdPosition.Left);
+		GetNode<Button>(grid + "CENTER").Pressed += () => UpdatePosition(AdPosition.Center);
+		GetNode<Button>(grid + "RIGHT").Pressed += () => UpdatePosition(AdPosition.Right);
+		GetNode<Button>(grid + "BOTTOM_LEFT").Pressed += () => UpdatePosition(AdPosition.BottomLeft);
+		GetNode<Button>(grid + "BOTTOM").Pressed += () => UpdatePosition(AdPosition.Bottom);
+		GetNode<Button>(grid + "BOTTOM_RIGHT").Pressed += () => UpdatePosition(AdPosition.BottomRight);
+	}
+
+	private void SetupInterstitialTab()
+	{
+		string path = TabsRoot + "Interstitial/";
+		_interstitialLoad = GetNode<Button>(path + "Load");
+		_interstitialShow = GetNode<Button>(path + "Show");
+		_interstitialDestroy = GetNode<Button>(path + "Destroy");
+
+		_interstitialLoad.Pressed += OnLoadInterstitialPressed;
+		_interstitialShow.Pressed += OnShowInterstitialPressed;
+		_interstitialDestroy.Pressed += OnDestroyInterstitialPressed;
+	}
+
+	private void SetupRewardedTab()
+	{
+		string path = TabsRoot + "Rewarded/";
+		_rewardedLoad = GetNode<Button>(path + "Load");
+		_rewardedShow = GetNode<Button>(path + "Show");
+		_rewardedDestroy = GetNode<Button>(path + "Destroy");
+
+		_rewardedLoad.Pressed += OnLoadRewardedPressed;
+		_rewardedShow.Pressed += OnShowRewardedPressed;
+		_rewardedDestroy.Pressed += OnDestroyRewardedPressed;
+	}
+
+	private void SetupRewardedInterstitialTab()
+	{
+		string path = TabsRoot + "RewardedInterstitial/";
+		_rewardedInterstitialLoad = GetNode<Button>(path + "Load");
+		_rewardedInterstitialShow = GetNode<Button>(path + "Show");
+		_rewardedInterstitialDestroy = GetNode<Button>(path + "Destroy");
+
+		_rewardedInterstitialLoad.Pressed += OnLoadRewardedInterstitialPressed;
+		_rewardedInterstitialShow.Pressed += OnShowRewardedInterstitialPressed;
+		_rewardedInterstitialDestroy.Pressed += OnDestroyRewardedInterstitialPressed;
+	}
+
+	private void SetupUmpTab()
+	{
+		string path = TabsRoot + "UMP/";
+		GetNode<Button>(path + "GetConsentStatus").Pressed += OnGetConsentStatusPressed;
+		GetNode<Button>(path + "ResetConsentInformation").Pressed += OnResetConsentPressed;
+	}
+
+	private void SetupMobileAdsTab()
+	{
+		string path = TabsRoot + "MobileAds/";
+		GetNode<Button>(path + "GetInitStatus").Pressed += OnGetInitStatusPressed;
+		
+		_iosAppPauseCheck = GetNode<CheckButton>(path + "iOSAppPause");
+		_muteMusicCheck = GetNode<CheckButton>(path + "MuteMusic");
+		_adMutedCheck = GetNode<CheckButton>(path + "AdMuted");
+		_adVolumeSlider = GetNode<HSlider>(path + "AdVolumeContainer/AdVolumeSlider");
+		_musicPlayer = GetNode<AudioStreamPlayer>(path + "MusicPlayer");
+
+		_iosAppPauseCheck.Pressed += () => MobileAds.SetIosAppPauseOnBackground(_iosAppPauseCheck.ButtonPressed);
+		_muteMusicCheck.Pressed += () => _musicPlayer.StreamPaused = _muteMusicCheck.ButtonPressed;
+		_adMutedCheck.Pressed += () => MobileAds.SetAppMuted(_adMutedCheck.ButtonPressed);
+		_adVolumeSlider.ValueChanged += (val) => MobileAds.SetAppVolume((float)val);
 	}
 
 	// ── Initialization ─────────────────────────────────────────────────────────
 
-	private void OnInitializePressed()
+	private void InitializeMobileAds()
 	{
 		Log("Initializing MobileAds...");
-		_statusLabel.Text = "Initializing...";
 
 		var config = new RequestConfiguration
 		{
-			ChildDirectedTreatment = RequestConfiguration.TagForChildDirectedTreatment.Unspecified,
+			ChildDirectedTreatment = RequestConfiguration.TagForChildDirectedTreatment.True,
+			UnderAgeOfConsent = RequestConfiguration.TagForUnderAgeOfConsent.True,
 			MaxAdContentRating = RequestConfiguration.MaxAdContentRatingG,
 		};
 		MobileAds.SetRequestConfiguration(config);
@@ -102,168 +187,298 @@ public partial class MainCSharpExample : VBoxContainer
 		{
 			OnInitializationComplete = status =>
 			{
-				_statusLabel.Text = "Initialized ✓";
-				Log("MobileAds initialized.");
+				Log("MobileAds initialization complete.");
 				foreach (var (name, adapterStatus) in status.AdapterStatusMap)
-					Log($"  Adapter [{name}] state={adapterStatus.State} latency={adapterStatus.Latency}ms");
+					Log($"  [{name}] State: {adapterStatus.State} | Latency: {adapterStatus.Latency}ms | Desc: {adapterStatus.Description}");
+				
+				if (OS.GetName() == "iOS")
+				{
+					// For Meta Audience Network on iOS
+					// FBAdSettings.SetAdvertiserTrackingEnabled(true);
+				}
 			}
 		});
 	}
 
+	private void OnGetInitStatusPressed()
+	{
+		var status = MobileAds.GetInitializationStatus();
+		if (status != null)
+		{
+			Log("MobileAds initialization status:");
+			foreach (var (name, adapterStatus) in status.AdapterStatusMap)
+				Log($"  [{name}] State: {adapterStatus.State} | Latency: {adapterStatus.Latency}ms");
+		}
+	}
+
 	// ── Banner ─────────────────────────────────────────────────────────────────
+
+	private void UpdateBannerUI(bool isLoaded)
+	{
+		_bannerLoad.Disabled = isLoaded;
+		_bannerDestroy.Disabled = !isLoaded;
+		_bannerShow.Disabled = !isLoaded;
+		_bannerHide.Disabled = !isLoaded;
+		_bannerGetSize.Disabled = !isLoaded;
+	}
+
+	private void UpdatePosition(AdPosition newPos)
+	{
+		_currentAdPosition = newPos;
+		Log($"[Banner] Position updated to: {newPos}");
+		if (_adView != null) OnLoadBannerPressed();
+	}
 
 	private void OnLoadBannerPressed()
 	{
-		Log("Loading banner ad...");
 		_adView?.Destroy();
+		UpdateBannerUI(false);
+		Log("[Banner] Loading adaptive banner...");
 
 		var size = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(AdSize.FullWidth);
-		_adView = new AdView(BannerAdUnitId, size, AdPosition.Bottom);
+		_adView = new AdView(BannerAdUnitId, size, _currentAdPosition);
 		_adView.AdListener = new AdListener
 		{
 			OnAdLoaded = () =>
 			{
-				Log("Banner loaded.");
-				_showBannerButton.Disabled = false;
-				_hideBannerButton.Disabled = false;
-				_destroyBannerButton.Disabled = false;
+				Log("[Banner] Ad loaded successfully");
+				UpdateBannerUI(true);
+				// FIXME: AdView in C# is not a GodotObject, cannot pass to SafeArea.gd directly
+				// if (_safeArea.HasMethod("update_ad_overlap")) _safeArea.Call("update_ad_overlap", _adView);
 			},
-			OnAdFailedToLoad = err => Log($"Banner failed to load: {err.Message}"),
-			OnAdClicked = () => Log("Banner clicked."),
-			OnAdOpened = () => Log("Banner opened."),
-			OnAdClosed = () => Log("Banner closed."),
-			OnAdImpression = () => Log("Banner impression."),
+			OnAdFailedToLoad = err => { Log($"[Banner] Failed to load: {err.Message}"); UpdateBannerUI(false); },
+			OnAdClicked = () => Log("[Banner] Ad clicked"),
+			OnAdOpened = () => Log("[Banner] Ad opened"),
+			OnAdClosed = () => Log("[Banner] Ad closed"),
+			OnAdImpression = () => Log("[Banner] Impression recorded"),
 		};
 		_adView.LoadAd(new AdRequest());
 	}
 
-	private void OnShowBannerPressed() => _adView?.Show();
+	private void OnShowBannerPressed() { _adView?.Show(); Log("[Banner] Banner shown"); }
 
-	private void OnHideBannerPressed() => _adView?.Hide();
+	private void OnHideBannerPressed() { _adView?.Hide(); Log("[Banner] Banner hidden"); }
 
 	private void OnDestroyBannerPressed()
 	{
 		_adView?.Destroy();
 		_adView = null;
-		_showBannerButton.Disabled = true;
-		_hideBannerButton.Disabled = true;
-		_destroyBannerButton.Disabled = true;
-		Log("Banner destroyed.");
+		Log("[Banner] Banner destroyed");
+		UpdateBannerUI(false);
+		if (_safeArea.HasMethod("reset_ad_overlap")) _safeArea.Call("reset_ad_overlap");
+	}
+
+	private void OnGetSizePressed()
+	{
+		if (_adView != null)
+		{
+			Log($"[Banner] W: {_adView.GetWidth()}, H: {_adView.GetHeight()} | Pixels: {_adView.GetWidthInPixels()}x{_adView.GetHeightInPixels()}");
+		}
 	}
 
 	// ── Interstitial ───────────────────────────────────────────────────────────
 
+	private void UpdateInterstitialUI(bool isLoaded)
+	{
+		_interstitialLoad.Disabled = isLoaded;
+		_interstitialShow.Disabled = !isLoaded;
+		_interstitialDestroy.Disabled = !isLoaded;
+	}
+
 	private void OnLoadInterstitialPressed()
 	{
-		Log("Loading interstitial ad...");
-		_showInterstitialButton.Disabled = true;
+		Log("[Interstitial] Loading...");
+		UpdateInterstitialUI(false);
 
 		new InterstitialAdLoader().Load(InterstitialAdUnitId, new AdRequest(), new InterstitialAdLoadCallback
 		{
 			OnAdLoaded = ad =>
 			{
-				Log("Interstitial loaded.");
+				Log($"[Interstitial] Ad loaded successfully (UID: {ad.GetHashCode()})");
 				_interstitialAd = ad;
 				_interstitialAd.FullScreenContentCallback = new FullScreenContentCallback
 				{
-					OnAdShowedFullScreenContent = () => Log("Interstitial showed."),
+					OnAdShowedFullScreenContent = () => Log("[Interstitial] Ad showed"),
 					OnAdDismissedFullScreenContent = () =>
 					{
-						Log("Interstitial dismissed.");
-						_interstitialAd = null;
-						_showInterstitialButton.Disabled = true;
+						Log("[Interstitial] Ad dismissed");
+						OnDestroyInterstitialPressed();
 					},
-					OnAdFailedToShowFullScreenContent = err => Log($"Interstitial failed to show: {err.Message}"),
-					OnAdClicked = () => Log("Interstitial clicked."),
-					OnAdImpression = () => Log("Interstitial impression."),
+					OnAdFailedToShowFullScreenContent = err => Log($"[Interstitial] Failed to show: {err.Message}"),
+					OnAdClicked = () => Log("[Interstitial] Ad clicked"),
+					OnAdImpression = () => Log("[Interstitial] Impression recorded"),
 				};
-				_showInterstitialButton.Disabled = false;
+				UpdateInterstitialUI(true);
 			},
-			OnAdFailedToLoad = err => Log($"Interstitial failed to load: {err.Message}"),
+			OnAdFailedToLoad = err => { Log($"[Interstitial] Failed to load: {err.Message}"); UpdateInterstitialUI(false); },
 		});
 	}
 
-	private void OnShowInterstitialPressed()
+	private void OnShowInterstitialPressed() => _interstitialAd?.Show();
+
+	private void OnDestroyInterstitialPressed()
 	{
-		if (_interstitialAd == null) { Log("No interstitial loaded."); return; }
-		_interstitialAd.Show();
+		if (_interstitialAd != null)
+		{
+			_interstitialAd.Destroy();
+			_interstitialAd = null;
+			Log("[Interstitial] Ad destroyed");
+			UpdateInterstitialUI(false);
+		}
 	}
 
 	// ── Rewarded ───────────────────────────────────────────────────────────────
 
+	private void UpdateRewardedUI(bool isLoaded)
+	{
+		_rewardedLoad.Disabled = isLoaded;
+		_rewardedShow.Disabled = !isLoaded;
+		_rewardedDestroy.Disabled = !isLoaded;
+	}
+
 	private void OnLoadRewardedPressed()
 	{
-		Log("Loading rewarded ad...");
-		_showRewardedButton.Disabled = true;
+		Log("[Rewarded] Loading...");
+		UpdateRewardedUI(false);
 
 		new RewardedAdLoader().Load(RewardedAdUnitId, new AdRequest(), new RewardedAdLoadCallback
 		{
 			OnAdLoaded = ad =>
 			{
-				Log("Rewarded ad loaded.");
+				Log($"[Rewarded] Ad loaded successfully (UID: {ad.GetHashCode()})");
 				_rewardedAd = ad;
 				_rewardedAd.FullScreenContentCallback = new FullScreenContentCallback
 				{
-					OnAdShowedFullScreenContent = () => Log("Rewarded ad showed."),
+					OnAdShowedFullScreenContent = () => Log("[Rewarded] Ad showed"),
 					OnAdDismissedFullScreenContent = () =>
 					{
-						Log("Rewarded ad dismissed.");
-						_rewardedAd = null;
-						_showRewardedButton.Disabled = true;
+						Log("[Rewarded] Ad dismissed");
+						OnDestroyRewardedPressed();
 					},
-					OnAdFailedToShowFullScreenContent = err => Log($"Rewarded failed to show: {err.Message}"),
+					OnAdFailedToShowFullScreenContent = err => Log($"[Rewarded] Failed to show: {err.Message}"),
 				};
-				_showRewardedButton.Disabled = false;
+				
+				// Optional: SSV setup mirror
+				var ssv = new ServerSideVerificationOptions { CustomData = "TEST_DATA", UserId = "test_user" };
+				_rewardedAd.SetServerSideVerificationOptions(ssv);
+
+				UpdateRewardedUI(true);
 			},
-			OnAdFailedToLoad = err => Log($"Rewarded failed to load: {err.Message}"),
+			OnAdFailedToLoad = err => { Log($"[Rewarded] Failed to load: {err.Message}"); UpdateRewardedUI(false); },
 		});
 	}
 
 	private void OnShowRewardedPressed()
 	{
-		if (_rewardedAd == null) { Log("No rewarded ad loaded."); return; }
-		_rewardedAd.Show(new OnUserEarnedRewardListener
+		_rewardedAd?.Show(new OnUserEarnedRewardListener
 		{
-			OnUserEarnedReward = reward => Log($"Reward earned: {reward.Amount} {reward.Type}"),
+			OnUserEarnedReward = reward => Log($"[Rewarded] Reward earned: {reward.Amount} {reward.Type}"),
 		});
 	}
 
-	// ── Consent (UMP) ──────────────────────────────────────────────────────────
-
-	private void OnRequestConsentPressed()
+	private void OnDestroyRewardedPressed()
 	{
-		Log("Requesting consent info...");
+		if (_rewardedAd != null)
+		{
+			_rewardedAd.Destroy();
+			_rewardedAd = null;
+			Log("[Rewarded] Ad destroyed");
+			UpdateRewardedUI(false);
+		}
+	}
+
+	// ── Rewarded Interstitial ──────────────────────────────────────────────────
+
+	private void UpdateRewardedInterstitialUI(bool isLoaded)
+	{
+		_rewardedInterstitialLoad.Disabled = isLoaded;
+		_rewardedInterstitialShow.Disabled = !isLoaded;
+		_rewardedInterstitialDestroy.Disabled = !isLoaded;
+	}
+
+	private void OnLoadRewardedInterstitialPressed()
+	{
+		Log("[RewardedInterstitial] Loading...");
+		UpdateRewardedInterstitialUI(false);
+
+		new RewardedInterstitialAdLoader().Load(RewardedInterstitialAdUnitId, new AdRequest(), new RewardedInterstitialAdLoadCallback
+		{
+			OnAdLoaded = ad =>
+			{
+				Log($"[RewardedInterstitial] Ad loaded successfully (UID: {ad.GetHashCode()})");
+				_rewardedInterstitialAd = ad;
+				_rewardedInterstitialAd.FullScreenContentCallback = new FullScreenContentCallback
+				{
+					OnAdShowedFullScreenContent = () => Log("[RewardedInterstitial] Ad showed"),
+					OnAdDismissedFullScreenContent = () =>
+					{
+						Log("[RewardedInterstitial] Ad dismissed");
+						OnDestroyRewardedInterstitialPressed();
+					},
+					OnAdFailedToShowFullScreenContent = err => Log($"[RewardedInterstitial] Failed to show: {err.Message}"),
+				};
+				UpdateRewardedInterstitialUI(true);
+			},
+			OnAdFailedToLoad = err => { Log($"[RewardedInterstitial] Failed to load: {err.Message}"); UpdateRewardedInterstitialUI(false); },
+		});
+	}
+
+	private void OnShowRewardedInterstitialPressed()
+	{
+		_rewardedInterstitialAd?.Show(new OnUserEarnedRewardListener
+		{
+			OnUserEarnedReward = reward => Log($"[RewardedInterstitial] Reward earned: {reward.Amount} {reward.Type}"),
+		});
+	}
+
+	private void OnDestroyRewardedInterstitialPressed()
+	{
+		if (_rewardedInterstitialAd != null)
+		{
+			_rewardedInterstitialAd.Destroy();
+			_rewardedInterstitialAd = null;
+			Log("[RewardedInterstitial] Ad destroyed");
+			UpdateRewardedInterstitialUI(false);
+		}
+	}
+
+	// ── UMP (Consent) ──────────────────────────────────────────────────────────
+
+	private void OnGetConsentStatusPressed()
+	{
+		var info = UserMessagingPlatform.ConsentInformation;
+		Log($"[UMP] Current Consent Status: {info.GetConsentStatus()}");
+	}
+
+	private void OnResetConsentPressed()
+	{
+		Log("[UMP] Resetting consent information...");
+		var info = UserMessagingPlatform.ConsentInformation;
+		info.Reset();
 
 		var parameters = new ConsentRequestParameters
 		{
-			// Remove or adjust ConsentDebugSettings before releasing to production.
-			ConsentDebugSettings = new ConsentDebugSettings
-			{
-				DebugGeography = DebugGeography.Eea,
-			},
+			ConsentDebugSettings = new ConsentDebugSettings { DebugGeography = DebugGeography.Eea },
 		};
 
-		var info = UserMessagingPlatform.ConsentInformation;
 		info.Update(parameters,
 			onSuccess: () =>
 			{
-				Log($"Consent status: {info.GetConsentStatus()}");
-				if (!info.GetIsConsentFormAvailable())
+				Log($"[UMP] Consent info updated. Status: {info.GetConsentStatus()}");
+				if (info.GetIsConsentFormAvailable())
 				{
-					Log("No consent form available.");
-					return;
+					Log("[UMP] Consent form available, loading...");
+					UserMessagingPlatform.LoadConsentForm(
+						onSuccess: form =>
+						{
+							Log("[UMP] Form loaded. Showing...");
+							form.Show(err => Log(err == null ? "[UMP] Form dismissed." : $"[UMP] Form error: {err.Message}"));
+						},
+						onFailure: err => Log($"[UMP] Form load error: {err.Message}")
+					);
 				}
-				UserMessagingPlatform.LoadConsentForm(
-					onSuccess: form =>
-					{
-						Log("Consent form loaded. Showing...");
-						form.Show(err =>
-							Log(err == null ? "Consent form dismissed." : $"Form error: {err.Message}"));
-					},
-					onFailure: err => Log($"Consent form load error: {err.Message}")
-				);
 			},
-			onFailure: err => Log($"Consent update error: {err.Message}")
+			onFailure: err => Log($"[UMP] Consent update error: {err.Message}")
 		);
 	}
 
@@ -272,7 +487,7 @@ public partial class MainCSharpExample : VBoxContainer
 	private void Log(string message)
 	{
 		GD.Print($"[AdMob] {message}");
-		if (_logOutput != null)
-			_logOutput.Text += $"\n{message}";
+		if (_consoleOutput != null)
+			_consoleOutput.Text += $"\n{message}";
 	}
 }
