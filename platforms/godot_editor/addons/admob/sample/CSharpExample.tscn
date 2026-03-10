@@ -1,0 +1,114 @@
+[gd_scene load_steps=2 format=3 uid="uid://bshvjiqlgngc8"]
+
+[ext_resource type="Script" uid="uid://r1tdkrukutxf" path="res://addons/admob/sample/CSharpExample.cs" id="1_csharpexample"]
+
+[node name="CSharpExample" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+script = ExtResource("1_csharpexample")
+
+[node name="TitleLabel" type="Label" parent="."]
+layout_mode = 2
+text = "AdMob C# Example"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 24
+
+[node name="StatusLabel" type="Label" parent="."]
+layout_mode = 2
+text = "Not initialized"
+horizontal_alignment = 1
+
+[node name="ButtonsScroll" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Buttons" type="VBoxContainer" parent="ButtonsScroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 12
+
+[node name="InitializeButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Initialize MobileAds"
+
+[node name="BannerLabel" type="Label" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+text = "-- Banner --"
+horizontal_alignment = 1
+
+[node name="LoadBannerButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Load Banner"
+
+[node name="ShowBannerButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Show Banner"
+disabled = true
+
+[node name="HideBannerButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Hide Banner"
+disabled = true
+
+[node name="DestroyBannerButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Destroy Banner"
+disabled = true
+
+[node name="InterstitialLabel" type="Label" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+text = "-- Interstitial --"
+horizontal_alignment = 1
+
+[node name="LoadInterstitialButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Load Interstitial"
+
+[node name="ShowInterstitialButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Show Interstitial"
+disabled = true
+
+[node name="RewardedLabel" type="Label" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+text = "-- Rewarded --"
+horizontal_alignment = 1
+
+[node name="LoadRewardedButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Load Rewarded"
+
+[node name="ShowRewardedButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Show Rewarded"
+disabled = true
+
+[node name="ConsentLabel" type="Label" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+text = "-- Consent (UMP) --"
+horizontal_alignment = 1
+
+[node name="RequestConsentButton" type="Button" parent="ButtonsScroll/Buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Request Consent"
+
+[node name="LogOutput" type="RichTextLabel" parent="."]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 120)
+size_flags_vertical = 3
+scroll_following = true
+text = "Log output will appear here..."

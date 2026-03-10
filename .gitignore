@@ -31,3 +31,6 @@ AdMobAddon.sln
 # Android & iOS specific ignores
 /platforms/godot_editor/android/
 /platforms/godot_editor/ios/
+
+# Visual Studio ignores
+.vs/
