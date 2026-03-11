@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://r2gni3w45ooj7"]
 
-[ext_resource type="Script" path="res://addons/admob/csharp/sample/tabs/Rewarded.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://degy3rrgu8m48" path="res://addons/admob/csharp/sample/tabs/Rewarded.cs" id="1_script"]
 
 [node name="Rewarded" type="VBoxContainer"]
 script = ExtResource("1_script")

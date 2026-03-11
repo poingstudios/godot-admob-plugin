@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=12 format=3 uid="uid://fw5n4y4tco09c"]
 
-[ext_resource type="Script" path="res://addons/admob/csharp/sample/tabs/Banner.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://cms3u6npd4bot" path="res://addons/admob/csharp/sample/tabs/Banner.cs" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://c6d7aye5nwtvi" path="res://addons/admob/assets/pos_top_left.svg" id="16_tl"]
 [ext_resource type="Texture2D" uid="uid://kakk2nrappoc" path="res://addons/admob/assets/pos_top.svg" id="17_t"]
 [ext_resource type="Texture2D" uid="uid://ba3m3mh4pn8of" path="res://addons/admob/assets/pos_top_right.svg" id="18_tr"]
@@ -58,60 +58,60 @@ horizontal_alignment = 1
 [node name="PositionGrid" type="GridContainer" parent="PositionCard/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_constants/h_separation = 15
-theme_override_constants/v_separation = 15
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
 columns = 3
 
 [node name="TOP_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("16_tl")
 expand_icon = true
 
 [node name="TOP" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("17_t")
 expand_icon = true
 
 [node name="TOP_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("18_tr")
 expand_icon = true
 
 [node name="LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("19_l")
 expand_icon = true
 
 [node name="CENTER" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("20_c")
 expand_icon = true
 
 [node name="RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("21_r")
 expand_icon = true
 
 [node name="BOTTOM_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("22_bl")
 expand_icon = true
 
 [node name="BOTTOM" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("23_b")
 expand_icon = true
 
 [node name="BOTTOM_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(120, 120)
 layout_mode = 2
 icon = ExtResource("24_br")
 expand_icon = true
