@@ -1,0 +1,25 @@
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdMobSample", "AdMobSample.csproj", "{8E4F9B2A-3C6D-4E7F-8A9B-0C1D2E3F4A5B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+	Debug|Any CPU = Debug|Any CPU
+	ExportDebug|Any CPU = ExportDebug|Any CPU
+	ExportRelease|Any CPU = ExportRelease|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E4F9B2A-3C6D-4E7F-8A9B-0C1D2E3F4A5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E4F9B2A-3C6D-4E7F-8A9B-0C1D2E3F4A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E4F9B2A-3C6D-4E7F-8A9B-0C1D2E3F4A5B}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{8E4F9B2A-3C6D-4E7F-8A9B-0C1D2E3F4A5B}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{8E4F9B2A-3C6D-4E7F-8A9B-0C1D2E3F4A5B}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{8E4F9B2A-3C6D-4E7F-8A9B-0C1D2E3F4A5B}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{FCEF6655-DDA5-441E-8A40-B1F5CA0BBC8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCEF6655-DDA5-441E-8A40-B1F5CA0BBC8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCEF6655-DDA5-441E-8A40-B1F5CA0BBC8F}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{FCEF6655-DDA5-441E-8A40-B1F5CA0BBC8F}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{FCEF6655-DDA5-441E-8A40-B1F5CA0BBC8F}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{FCEF6655-DDA5-441E-8A40-B1F5CA0BBC8F}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+	EndGlobalSection
+EndGlobal
