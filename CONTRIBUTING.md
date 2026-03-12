@@ -34,10 +34,10 @@ Thank you for your interest in contributing to the Godot AdMob Plugin! This guid
 The plugin consists of a Godot editor component and native binaries for Android and iOS.
 
 ### General Build (Auto-updating the Editor Plugin)
-To build the native binaries and automatically copy/extract them to the [`platforms/godot_editor`](./platforms/godot_editor) directory, use the provided local build script. **This script handles the export process automatically for the selected platform(s).**
+To build the native binaries and automatically copy/extract them to the [`platforms/godot_editor/`](./platforms/godot_editor/) directory, use the provided local build script. **This script handles the export process automatically for the selected platform(s).**
 
-- **Android** binaries are built via Gradle and exported to `platforms/godot_editor/addons/admob/android/bin`.
-- **iOS** binaries are built via SCons/SPM and extracted to `platforms/godot_editor/ios/plugins`.
+- **Android** binaries are built via Gradle and exported to `platforms/godot_editor/addons/admob/android/bin/`.
+- **iOS** binaries are built via SCons/SPM and extracted to `platforms/godot_editor/ios/plugins/`.
 
 ```bash
 # Usage: ./scripts/build_local.sh [android|ios|all] <godot_version>
@@ -45,7 +45,7 @@ To build the native binaries and automatically copy/extract them to the [`platfo
 ```
 
 ### 🤖 Android Build Details
-Located in [`platforms/android`](./platforms/android). Build and export are handled via Gradle.
+Located in [`platforms/android/`](./platforms/android/). Build and export are handled via Gradle.
 
 - **Tools**: Android Studio / SDK.
 - **Manual Build**:
@@ -57,7 +57,7 @@ Located in [`platforms/android`](./platforms/android). Build and export are hand
 - **Logging**: `adb logcat -s poing-godot-admob godot`
 
 ### 🍎 iOS Build Details
-Located in [`platforms/ios`](./platforms/ios). Build is handled via a dedicated shell script.
+Located in [`platforms/ios/`](./platforms/ios/). Build is handled via a dedicated shell script.
 
 - **Tools**: Xcode 15+, SCons.
 - **Manual Build**:
