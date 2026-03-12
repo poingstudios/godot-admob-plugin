@@ -72,30 +72,70 @@ Liftoff Monetize necessitates a list of all placements that will be employed in 
 
 === "Interstitial"
 
-    ```gdscript
-    var vungle_mediation_extras := VungleInterstitialMediationExtras.new()
-
-    if OS.get_name() == "iOS":
-        vungle_mediation_extras.all_placements = ["ios_placement1", "ios_placement2"]
-    elif OS.get_name() == "Android":
-        vungle_mediation_extras.all_placements = ["android_placement1", "android_placement2"]
-
-    var ad_request := AdRequest.new()
-    ad_request.mediation_extras.append(vungle_mediation_extras)
-    ```
+    === "GDScript"
+    
+        ```gdscript
+        var vungle_mediation_extras := VungleInterstitialMediationExtras.new()
+    
+        if OS.get_name() == "iOS":
+            vungle_mediation_extras.all_placements = ["ios_placement1", "ios_placement2"]
+        elif OS.get_name() == "Android":
+            vungle_mediation_extras.all_placements = ["android_placement1", "android_placement2"]
+    
+        var ad_request := AdRequest.new()
+        ad_request.mediation_extras.append(vungle_mediation_extras)
+        ```
+    
+    === "C#"
+    
+        ```csharp
+        var vungleMediationExtras = new VungleInterstitialMediationExtras();
+        
+        if (OS.GetName() == "iOS")
+        {
+            vungleMediationExtras.AllPlacements = new string[] { "ios_placement1", "ios_placement2" };
+        }
+        else if (OS.GetName() == "Android")
+        {
+            vungleMediationExtras.AllPlacements = new string[] { "android_placement1", "android_placement2" };
+        }
+        
+        var adRequest = new AdRequest();
+        adRequest.MediationExtras.Add(vungleMediationExtras);
+        ```
 === "Rewarded"
 
-    ```gdscript
-	var vungle_mediation_extras := VungleRewardedMediationExtras.new()
-	
-	if OS.get_name() == "iOS":
-		vungle_mediation_extras.all_placements = ["ios_placement1", "ios_placement2"]
-	elif OS.get_name() == "Android":
-		vungle_mediation_extras.all_placements = ["android_placement1", "android_placement2"]
-	
-	var ad_request := AdRequest.new()
-	ad_request.mediation_extras.append(vungle_mediation_extras)
-    ```
+    === "GDScript"
+    
+        ```gdscript
+    	var vungle_mediation_extras := VungleRewardedMediationExtras.new()
+    	
+    	if OS.get_name() == "iOS":
+    		vungle_mediation_extras.all_placements = ["ios_placement1", "ios_placement2"]
+    	elif OS.get_name() == "Android":
+    		vungle_mediation_extras.all_placements = ["android_placement1", "android_placement2"]
+    	
+    	var ad_request := AdRequest.new()
+    	ad_request.mediation_extras.append(vungle_mediation_extras)
+        ```
+    
+    === "C#"
+    
+        ```csharp
+        var vungleMediationExtras = new VungleRewardedMediationExtras();
+        
+        if (OS.GetName() == "iOS")
+        {
+            vungleMediationExtras.AllPlacements = new string[] { "ios_placement1", "ios_placement2" };
+        }
+        else if (OS.GetName() == "Android")
+        {
+            vungleMediationExtras.AllPlacements = new string[] { "android_placement1", "android_placement2" };
+        }
+        
+        var adRequest = new AdRequest();
+        adRequest.MediationExtras.Add(vungleMediationExtras);
+        ```
 
 ---
 
@@ -122,9 +162,17 @@ Under the Google [EU User Consent Policy](https://www.google.com/about/company/c
 
 The following sample code shows how to pass this consent information to the Vungle SDK. If you choose to call this method, it is recommended that you do so prior to requesting ads through the Google Mobile Ads SDK.
 
-```gdscript
-Vungle.update_consent_status(Vungle.Consent.OPTED_IN, "1.0.0")
-```
+=== "GDScript"
+
+    ```gdscript
+    Vungle.update_consent_status(Vungle.Consent.OPTED_IN, "1.0.0")
+    ```
+
+=== "C#"
+
+    ```csharp
+    Vungle.UpdateConsentStatus(Vungle.Consent.OptedIn, "1.0.0");
+    ```
 
 See [GDPR recommended implementation instructions](https://support.vungle.com/hc/en-us/articles/360047780372#gdpr-recommended-implementation-instructions-0-1) for more details and the values that can be provided in the method.
 
@@ -138,9 +186,17 @@ The [CCPA preparation](../../privacy/regulatory_solutions/us_states_privacy_laws
 
 The following sample code shows how to pass this consent information to the Vungle SDK. If you choose to call this method, it is recommended that you do so prior to requesting ads through the Google Mobile Ads SDK.
 
-```gdscript
-Vungle.update_ccpa_status(Vungle.Consent.OPTED_IN)
-```
+=== "GDScript"
+
+    ```gdscript
+    Vungle.update_ccpa_status(Vungle.Consent.OPTED_IN)
+    ```
+
+=== "C#"
+
+    ```csharp
+    Vungle.UpdateCcpaStatus(Vungle.Consent.OptedIn);
+    ```
 
 #### Add Liftoff to CCPA ad partners list
 Follow the steps in [CCPA settings](https://support.google.com/admob/answer/10860309) to add Liftoff to the CCPA ad partners list in the AdMob UI.
@@ -160,38 +216,86 @@ Here's a code example of how to create an ad request that sets these parameters:
 
 === "Interstitial"
 
-    ```gdscript
-	var vungle_mediation_extras := VungleInterstitialMediationExtras.new()
-	
-	if OS.get_name() == "iOS":
-		vungle_mediation_extras.all_placements = ["ios_placement1", "ios_placement2"]
-		vungle_mediation_extras.sound_enabled = true
-		vungle_mediation_extras.user_id = "ios_user_id"
-	elif OS.get_name() == "Android":
-		vungle_mediation_extras.all_placements = ["android_placement1", "android_placement2"]
-		vungle_mediation_extras.sound_enabled = true
-		vungle_mediation_extras.user_id = "android_user_id"
-	
-	var ad_request := AdRequest.new()
-	ad_request.mediation_extras.append(vungle_mediation_extras)
-    ```
+    === "GDScript"
+    
+        ```gdscript
+    	var vungle_mediation_extras := VungleInterstitialMediationExtras.new()
+    	
+    	if OS.get_name() == "iOS":
+    		vungle_mediation_extras.all_placements = ["ios_placement1", "ios_placement2"]
+    		vungle_mediation_extras.sound_enabled = true
+    		vungle_mediation_extras.user_id = "ios_user_id"
+    	elif OS.get_name() == "Android":
+    		vungle_mediation_extras.all_placements = ["android_placement1", "android_placement2"]
+    		vungle_mediation_extras.sound_enabled = true
+    		vungle_mediation_extras.user_id = "android_user_id"
+    	
+    	var ad_request := AdRequest.new()
+    	ad_request.mediation_extras.append(vungle_mediation_extras)
+        ```
+    
+    === "C#"
+    
+        ```csharp
+        var vungleMediationExtras = new VungleInterstitialMediationExtras();
+        
+        if (OS.GetName() == "iOS")
+        {
+            vungleMediationExtras.AllPlacements = new string[] { "ios_placement1", "ios_placement2" };
+            vungleMediationExtras.SoundEnabled = true;
+            vungleMediationExtras.UserId = "ios_user_id";
+        }
+        else if (OS.GetName() == "Android")
+        {
+            vungleMediationExtras.AllPlacements = new string[] { "android_placement1", "android_placement2" };
+            vungleMediationExtras.SoundEnabled = true;
+            vungleMediationExtras.UserId = "android_user_id";
+        }
+        
+        var adRequest = new AdRequest();
+        adRequest.MediationExtras.Add(vungleMediationExtras);
+        ```
 === "Rewarded"
 
-    ```gdscript
-    var vungle_mediation_extras := VungleRewardedMediationExtras.new()
-
-    if OS.get_name() == "iOS":
-        vungle_mediation_extras.all_placements = ["ios_placement1", "ios_placement2"]
-        vungle_mediation_extras.sound_enabled = true
-        vungle_mediation_extras.user_id = "ios_user_id"
-    elif OS.get_name() == "Android":
-        vungle_mediation_extras.all_placements = ["android_placement1", "android_placement2"]
-        vungle_mediation_extras.sound_enabled = true
-        vungle_mediation_extras.user_id = "android_user_id"
-
-    var ad_request := AdRequest.new()
-    ad_request.mediation_extras.append(vungle_mediation_extras)
-    ```
+    === "GDScript"
+    
+        ```gdscript
+        var vungle_mediation_extras := VungleRewardedMediationExtras.new()
+    
+        if OS.get_name() == "iOS":
+            vungle_mediation_extras.all_placements = ["ios_placement1", "ios_placement2"]
+            vungle_mediation_extras.sound_enabled = true
+            vungle_mediation_extras.user_id = "ios_user_id"
+        elif OS.get_name() == "Android":
+            vungle_mediation_extras.all_placements = ["android_placement1", "android_placement2"]
+            vungle_mediation_extras.sound_enabled = true
+            vungle_mediation_extras.user_id = "android_user_id"
+    
+        var ad_request := AdRequest.new()
+        ad_request.mediation_extras.append(vungle_mediation_extras)
+        ```
+    
+    === "C#"
+    
+        ```csharp
+        var vungleMediationExtras = new VungleRewardedMediationExtras();
+        
+        if (OS.GetName() == "iOS")
+        {
+            vungleMediationExtras.AllPlacements = new string[] { "ios_placement1", "ios_placement2" };
+            vungleMediationExtras.SoundEnabled = true;
+            vungleMediationExtras.UserId = "ios_user_id";
+        }
+        else if (OS.GetName() == "Android")
+        {
+            vungleMediationExtras.AllPlacements = new string[] { "android_placement1", "android_placement2" };
+            vungleMediationExtras.SoundEnabled = true;
+            vungleMediationExtras.UserId = "android_user_id";
+        }
+        
+        var adRequest = new AdRequest();
+        adRequest.MediationExtras.Add(vungleMediationExtras);
+        ```
 
 
 ## Error codes

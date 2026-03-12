@@ -9,18 +9,19 @@ This document is based on:
 
 ## Prerequisites
 
-- Use Godot v4.2 or higher
 - Deploy Android:
+	- Use Godot v4.2 or higher
 	- `minSdkVersion` of 24 or higher
 	- `compileSdkVersion` of 36 or higher
 - Deploy iOS:
+	- Use Godot v4.1 or higher
 	- Use Xcode 26.2 or higher
 	- Target iOS 16.0 or higher
 - Recommended: [Create an AdMob account](https://support.google.com/admob/answer/7356219?visit_id=638286911958663013-3847536692&rd=1) and [register an app](https://support.google.com/admob/answer/9989980?visit_id=638286911964685099-3190075945&rd=1).
 
 ## Download the Godot AdMob Plugin from Poing Studios
 
-The Godot AdMob Plugin from Poing Studios simplifies the process for Godot developers to incorporate Google Mobile Ads into their Android and iOS apps, eliminating the need to write Java/Kotlin or Objective-C++ code. Instead, this plugin offers a GDScript-based interface for ad requests, which can be seamlessly integrated into your Godot project. 
+The Godot AdMob Plugin from Poing Studios simplifies the process for Godot developers to incorporate Google Mobile Ads into their Android and iOS apps, eliminating the need to write Java/Kotlin or Objective-C++ code. Instead, this plugin offers a GDScript and C#-based interface for ad requests, which can be seamlessly integrated into your Godot project. 
 
 To access the plugin, you can either download the Godot package provided or explore its source code on GitHub through the links below.
 
@@ -105,10 +106,21 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 ## Initialize the Google Mobile Ads SDK
 Prior to loading ads, ensure that your application initializes the Google Mobile Ads SDK. You can accomplish this by calling MobileAds.initialize(). This function initializes the SDK and triggers a completion listener once the initialization process is finished, or if it exceeds a 30-second timeout. It's important to note that this initialization should occur only once, ideally during the app's launch phase.
 
-```gdscript
-func _ready() -> void:
-	MobileAds.initialize()
-```
+=== "GDScript"
+
+    ```gdscript
+    func _ready() -> void:
+    	MobileAds.initialize()
+    ```
+
+=== "C#"
+
+    ```csharp
+    public override void _Ready()
+    {
+    	MobileAds.Initialize();
+    }
+    ```
 
 If you are utilizing mediation, it's essential to wait for the completion handler to be called before proceeding with ad loading. This step ensures that all mediation adapters are properly initialized before ad requests are made.
 

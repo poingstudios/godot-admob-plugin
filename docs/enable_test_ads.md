@@ -89,12 +89,32 @@ Copy your test device ID to your clipboard.
 
 3. Update your code to include the test device IDs within your `RequestConfiguration.test_device_ids` array like this:
 
-```gdscript linenums="1" hl_lines="3 4"
-func _ready() -> void:
-	var request_configuration := RequestConfiguration.new()
-	request_configuration.test_device_ids = ["2077ef9a63d2b398840261c8221a0c9b"]
-	MobileAds.set_request_configuration(request_configuration)
-```
+=== "GDScript"
+
+    ```gdscript linenums="1" hl_lines="3 4"
+    func _ready() -> void:
+    	var request_configuration := RequestConfiguration.new()
+    	request_configuration.test_device_ids = ["2077ef9a63d2b398840261c8221a0c9b"]
+    	MobileAds.set_request_configuration(request_configuration)
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1" hl_lines="10 11"
+    using Godot;
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Api.Core;
+    
+    public partial class TestAdsExample : Node2D
+    {
+        public override void _Ready()
+        {
+            var requestConfiguration = new RequestConfiguration();
+            requestConfiguration.TestDeviceIds.Add("2077ef9a63d2b398840261c8221a0c9b");
+            MobileAds.SetRequestConfiguration(requestConfiguration);
+        }
+    }
+    ```
 !!! info
 
     Remember to eliminate the code responsible for defining these test devices prior to releasing your app.

@@ -28,26 +28,65 @@ The quick start guide provides instructions on how to [initialize the Mobile Ads
 The following sample code demonstrates how you can verify the initialization status of each adapter before initiating an ad request.
 
 
-```gdscript
-extends Control
+=== "GDScript"
 
-func _ready() -> void:
-	var on_initialization_complete_listener := OnInitializationCompleteListener.new()
-	on_initialization_complete_listener.on_initialization_complete = _on_initialization_complete
-	MobileAds.initialize(on_initialization_complete_listener)
-	
-func _on_initialization_complete(initialization_status : InitializationStatus) -> void:
-	print("MobileAds initialization complete")
-	for key in initialization_status.adapter_status_map:
-		var adapterStatus : AdapterStatus = initialization_status.adapter_status_map[key]
-		prints(
-			"Key:", key, 
-			"Latency:", adapterStatus.latency, 
-			"Initialization Status:", adapterStatus.initialization_status, 
-			"Description:", adapterStatus.description
-		)
-		
-```
+    ```gdscript
+    extends Control
+    
+    func _ready() -> void:
+    	var on_initialization_complete_listener := OnInitializationCompleteListener.new()
+    	on_initialization_complete_listener.on_initialization_complete = _on_initialization_complete
+    	MobileAds.initialize(on_initialization_complete_listener)
+    	
+    func _on_initialization_complete(initialization_status : InitializationStatus) -> void:
+    	print("MobileAds initialization complete")
+    	for key in initialization_status.adapter_status_map:
+    		var adapterStatus : AdapterStatus = initialization_status.adapter_status_map[key]
+    		prints(
+    			"Key:", key, 
+    			"Latency:", adapterStatus.latency, 
+    			"Initialization Status:", adapterStatus.initialization_status, 
+    			"Description:", adapterStatus.description
+    		)
+    		
+    ```
+
+=== "C#"
+
+    ```csharp
+    using Godot;
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Api.Listeners;
+    using PoingStudios.AdMob.Api.Core;
+    
+    public partial class MediationExample : Control
+    {
+        public override void _Ready()
+        {
+            var onInitializationCompleteListener = new OnInitializationCompleteListener
+            {
+                OnInitializationComplete = OnInitializationComplete
+            };
+            MobileAds.Initialize(onInitializationCompleteListener);
+        }
+    
+        private void OnInitializationComplete(InitializationStatus initializationStatus)
+        {
+            GD.Print("MobileAds initialization complete");
+            foreach (var kvp in initializationStatus.AdapterStatusMap)
+            {
+                string key = kvp.Key;
+                AdapterStatus adapterStatus = kvp.Value;
+                GD.Print(
+                    "Key: ", key, 
+                    " Latency: ", adapterStatus.Latency, 
+                    " Initialization Status: ", adapterStatus.State, 
+                    " Description: ", adapterStatus.Description
+                );
+            }
+        }
+    }
+    ```
 
 ## Banner ads mediation
 When utilizing banner ads in AdMob mediation, it's essential to disable refresh settings in all third-party ad networks' user interfaces for the banner ad units you're using in mediation. This action prevents the occurrence of double refreshes, as AdMob also triggers a refresh based on your banner ad unit's predefined refresh rate.

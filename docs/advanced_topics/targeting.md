@@ -29,11 +29,24 @@ To implement this setting, you can use `RequestConfiguration.new().tag_for_child
 
 The following example indicates that you want your content treated as child-directed for purposes of COPPA:
 
-```gdscript
-var request_configuration := RequestConfiguration.new()
-request_configuration.tag_for_child_directed_treatment = RequestConfiguration.TagForChildDirectedTreatment.TRUE
-MobileAds.set_request_configuration(request_configuration)
-```
+=== "GDScript"
+
+    ```gdscript
+    var request_configuration := RequestConfiguration.new()
+    request_configuration.tag_for_child_directed_treatment = RequestConfiguration.TagForChildDirectedTreatment.TRUE
+    MobileAds.set_request_configuration(request_configuration)
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1"
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Api.Core;
+
+    var requestConfiguration = new RequestConfiguration();
+    requestConfiguration.ChildDirectedTreatment = RequestConfiguration.TagForChildDirectedTreatment.True;
+    MobileAds.SetRequestConfiguration(requestConfiguration);
+    ```
 
 ### Users under the age of consent
 
@@ -51,11 +64,24 @@ Similar to the child-directed settings, you can utilize the property in `Request
 
 Here's an example indicating your intention to include TFUA in your ad requests:
 
-```gdscript
-var request_configuration := RequestConfiguration.new()
-request_configuration.tag_for_under_age_of_consent = RequestConfiguration.TagForUnderAgeOfConsent.UNSPECIFIED
-MobileAds.set_request_configuration(request_configuration)
-```
+=== "GDScript"
+
+    ```gdscript
+    var request_configuration := RequestConfiguration.new()
+    request_configuration.tag_for_under_age_of_consent = RequestConfiguration.TagForUnderAgeOfConsent.UNSPECIFIED
+    MobileAds.set_request_configuration(request_configuration)
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1"
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Api.Core;
+
+    var requestConfiguration = new RequestConfiguration();
+    requestConfiguration.UnderAgeOfConsent = RequestConfiguration.TagForUnderAgeOfConsent.Unspecified;
+    MobileAds.SetRequestConfiguration(requestConfiguration);
+    ```
 
 The tags to enable the [Child-directed setting](#child-directed-setting) and `tag_for_under_age_of_consent` property should not both simultaneously be set to `true`. If they are, the child-directed setting takes precedence.
 
@@ -75,11 +101,24 @@ Apps can specify a maximum ad content rating for their ad requests using the `ma
 
 The following code demonstrates how to configure a `RequestConfiguration` object to specify that ad content returned should not exceed a digital content label designation of `G`:
 
-```gdscript
-var request_configuration := RequestConfiguration.new()
-request_configuration.max_ad_content_rating = RequestConfiguration.MAX_AD_CONTENT_RATING_G
-MobileAds.set_request_configuration(request_configuration)
-```
+=== "GDScript"
+
+    ```gdscript
+    var request_configuration := RequestConfiguration.new()
+    request_configuration.max_ad_content_rating = RequestConfiguration.MAX_AD_CONTENT_RATING_G
+    MobileAds.set_request_configuration(request_configuration)
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1"
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Api.Core;
+
+    var requestConfiguration = new RequestConfiguration();
+    requestConfiguration.MaxAdContentRating = RequestConfiguration.MaxAdContentRatingG;
+    MobileAds.SetRequestConfiguration(requestConfiguration);
+    ```
 
 Learn more about:
 

@@ -48,17 +48,35 @@ To accomplish this:
 1. [Load a form](get_started.md#load-a-form-if-available) every time the user launches your app, so that the form is ready to display in case the user wishes to change their consent setting.
 2. Present the form when the user selects the link in your app's menu.
 
-```gdscript
-var _consent_form : ConsentForm
+=== "GDScript"
 
-func present_form() -> void:
-	_consent_form.show(_on_consent_form_dismissed)
-	
-func _on_consent_form_dismissed(form_error : FormError):
-	# Handle dismissal by reloading form.
-	load_form()
+    ```gdscript
+    var _consent_form : ConsentForm
+    
+    func present_form() -> void:
+    	_consent_form.show(_on_consent_form_dismissed)
+    	
+    func _on_consent_form_dismissed(form_error : FormError):
+    	# Handle dismissal by reloading form.
+    	load_form()
+    ```
 
-```
+=== "C#"
+
+    ```csharp
+    private ConsentForm _consentForm;
+    
+    private void PresentForm()
+    {
+        _consentForm.Show(OnConsentFormDismissed);
+    }
+    
+    private void OnConsentFormDismissed(FormError formError)
+    {
+        // Handle dismissal by reloading form.
+        LoadForm();
+    }
+    ```
 
 ## Mediation
 Follow the steps in [Add ad partners to published GDPR messages](https://support.google.com/admob/answer/10113004#adding_ad_partners_to_published_gdpr_messages) to add your mediation partners to the ad partners list. Failure to do so can lead to partners failing to serve ads on your app.
