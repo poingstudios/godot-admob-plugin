@@ -41,7 +41,7 @@ To build the native binaries and automatically copy/extract them to the [`platfo
 
 ```bash
 # Usage: ./scripts/build_local.sh [android|ios|all] <godot_version>
-./scripts/build_local.sh all 4.2.2
+./scripts/build_local.sh all 4.6.1
 ```
 
 ### 🤖 Android Build Details
