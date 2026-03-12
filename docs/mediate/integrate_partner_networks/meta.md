@@ -94,10 +94,22 @@ We recommend following the tutorial for [Android](https://developers.google.com/
         
         **Important Point**: You need to set this flag prior to initializing the Mobile Ads SDK.
 
+=== "GDScript"
+
     ```gdscript
     if OS.get_name() == "iOS":
         #FBAdSettings is available only for iOS, Google didn't put this method on Android SDK
         FBAdSettings.set_advertiser_tracking_enabled(true)
+    ```
+
+=== "C#"
+
+    ```csharp
+    if (OS.GetName() == "iOS")
+    {
+        //FBAdSettings is available only for iOS, Google didn't put this method on Android SDK
+        FBAdSettings.SetAdvertiserTrackingEnabled(true);
+    }
     ```
 
 ## Step 5: Test your implementation

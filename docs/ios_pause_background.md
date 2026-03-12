@@ -15,10 +15,21 @@ On iOS, the default value is `false`.
 # How to use
 You can use this whenever you want this method, before, during, or after the initialization, such as:
 
-```gdscript linenums="1" hl_lines="2"
-func _on_set_ios_app_pause_on_background_button_pressed() -> void:
-	MobileAds.set_ios_app_pause_on_background(true)
-```
+=== "GDScript"
+
+    ```gdscript linenums="1" hl_lines="2"
+    func _on_set_ios_app_pause_on_background_button_pressed() -> void:
+    	MobileAds.set_ios_app_pause_on_background(true)
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1" hl_lines="3"
+    private void OnSetIosAppPauseOnBackgroundButtonPressed()
+    {
+        MobileAds.SetIosAppPauseOnBackground(true);
+    }
+    ```
 
 # Important notes
 

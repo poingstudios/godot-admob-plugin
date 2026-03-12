@@ -11,13 +11,25 @@ Use `set_app_volume()` to set the relative volume (0.0 to 1.0) and `set_app_mute
 
 # How to use
 
-```gdscript
-# Set ad volume (0.0 = silent, 1.0 = full volume)
-MobileAds.set_app_volume(0.5)
+=== "GDScript"
 
-# Mute or unmute ads
-MobileAds.set_app_muted(true)
-```
+    ```gdscript
+    # Set ad volume (0.0 = silent, 1.0 = full volume)
+    MobileAds.set_app_volume(0.5)
+    
+    # Mute or unmute ads
+    MobileAds.set_app_muted(true)
+    ```
+
+=== "C#"
+
+    ```csharp
+    // Set ad volume (0.0 = silent, 1.0 = full volume)
+    MobileAds.SetAppVolume(0.5f);
+    
+    // Mute or unmute ads
+    MobileAds.SetAppMuted(true);
+    ```
 
 # API Reference
 

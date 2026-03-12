@@ -28,7 +28,7 @@ jobs:
         with:
           key: ${{ github.ref }}
           path: .cache
-      - run: pip install mkdocs-material pillow cairosvg mike
+      - run: pip install mkdocs-material pillow cairosvg mike mkdocs-awesome-pages-plugin
       - name: Configure Git
         run: |
           git config user.name "github-actions[bot]"
