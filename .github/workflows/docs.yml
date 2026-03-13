@@ -36,10 +36,25 @@ jobs:
       - name: Deploy documentation
         run: |
           if [[ $GITHUB_REF == refs/tags/* ]] || [[ $GITHUB_EVENT_NAME == "workflow_run" ]]; then
+            # Extract the version (e.g., 4.3)
             VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2 | sed 's/^v//' | cut -d. -f1,2)
             
-            mike deploy --push --update-aliases $VERSION stable
+            # Deploy versioned and stable as distinct menu entries
+            mike deploy --push --update-aliases $VERSION
+            mike deploy --push --update-aliases stable
+            
             mike set-default --push stable
           else
+            # Define the warning message for the 'latest' version.
+            # Using printf/echo makes it easier to maintain line-by-line without breaking YAML indentation.
+            printf '  announcement: ":material-alert: **Attention: Here be dragons**<br>' > announcement.yml
+            printf 'This is the `latest` (unstable) version of this documentation, ' >> announcement.yml
+            printf 'which may document features not available in or compatible with released stable versions of Godot.<br>' >> announcement.yml
+            printf 'See the [stable version](https://poingstudios.github.io/godot-admob-plugin/stable/) of this documentation page instead."' >> announcement.yml
+            echo '' >> announcement.yml
+
+            # Inject the announcement right after the 'extra:' tag in mkdocs.yml
+            sed -i '/extra:/r announcement.yml' mkdocs.yml
+            
             mike deploy --push --update-aliases latest
           fi
