@@ -30,14 +30,23 @@ public partial class MainCSharpExample : Control, ISampleLogger
 {
 	private RichTextLabel _consoleOutput;
 
-	public override void _Ready()
+	public override async void _Ready()
 	{
 		_consoleOutput = GetNode<RichTextLabel>("Background/SafeArea/LayoutContainer/ConsolePanel/ConsoleOutput");
 
+		var mainTabs = GetNode<TabContainer>("Background/SafeArea/LayoutContainer/TabContent/MainTabs");
+		
 		SampleRegistry.Logger = this;
 		LogMessage("Main initialized");
 
 		InitializeMobileAds();
+
+		// Workaround for TabContainer headers not showing up on start in Godot 4
+		// We wait for a couple of frames to ensure the layout and theme are fully applied
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+		mainTabs.TabsVisible = false;
+		mainTabs.TabsVisible = true;
 	}
 
 	public void LogMessage(string message)

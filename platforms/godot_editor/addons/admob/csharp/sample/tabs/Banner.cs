@@ -79,26 +79,46 @@ public partial class Banner : VBoxContainer
 			{
 				Log("Ad loaded successfully");
 				UpdateUI(true);
+				SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
 			},
-			OnAdFailedToLoad = err => { Log($"Failed to load: {err.Message}"); UpdateUI(false); },
+			OnAdFailedToLoad = err => 
+			{ 
+				Log($"Failed to load: {err.Message}"); 
+				UpdateUI(false); 
+				SampleRegistry.SafeArea?.ResetAdOverlap();
+			},
 			OnAdClicked = () => Log("Ad clicked"),
 			OnAdOpened = () => Log("Ad opened"),
-			OnAdClosed = () => Log("Ad closed"),
+			OnAdClosed = () => 
+			{ 
+				Log("Ad closed"); 
+				SampleRegistry.SafeArea?.ResetAdOverlap();
+			},
 			OnAdImpression = () => Log("Impression recorded"),
 		};
 		_adView.LoadAd(new AdRequest());
 	}
 
-	private void OnShowPressed() { _adView?.Show(); Log("Banner shown"); }
+	private void OnShowPressed() 
+	{ 
+		_adView?.Show(); 
+		Log("Banner shown"); 
+		SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
+	}
 
-	private void OnHidePressed() { _adView?.Hide(); Log("Banner hidden"); }
+	private void OnHidePressed() 
+	{ 
+		_adView?.Hide(); 
+		Log("Banner hidden"); 
+		SampleRegistry.SafeArea?.ResetAdOverlap();
+	}
 
 	private void OnDestroyPressed()
 	{
 		DestroyAd();
 		Log("Banner destroyed");
 		UpdateUI(false);
-		SampleRegistry.SafeArea?.Call("reset_ad_overlap");
+		SampleRegistry.SafeArea?.ResetAdOverlap();
 	}
 
 	private void OnGetSizePressed()

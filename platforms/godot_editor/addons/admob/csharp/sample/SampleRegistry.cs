@@ -13,6 +13,6 @@ namespace PoingStudios.AdMob.Sample
 	public static class SampleRegistry
 	{
 		public static ISampleLogger Logger { get; set; }
-		public static MarginContainer SafeArea { get; set; }
+		public static SafeArea SafeArea { get; set; }
 	}
 }
