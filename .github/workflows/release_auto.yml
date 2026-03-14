@@ -9,6 +9,7 @@ jobs:
   detect-latest:
     name: Check latest Godot version
     runs-on: ubuntu-latest
+    if: github.repository == 'poingstudios/godot-admob-plugin'
     outputs:
       godot_version: ${{ steps.detect.outputs.godot_version }}
       should_build: ${{ steps.detect.outputs.should_build }}
