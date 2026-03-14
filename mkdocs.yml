@@ -13,6 +13,7 @@ theme:
     - content.code.annotation
     - content.code.copy
   name: material
+  custom_dir: docs/overrides
   favicon: assets/icon.ico
   logo: assets/icon.ico
   language: en
