@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block announce %}
+  {% if config.extra.announcement %}
+    {{ config.extra.announcement | safe }}
+  {% endif %}
+{% endblock %}
