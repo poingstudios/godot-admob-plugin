@@ -109,7 +109,7 @@ jobs:
 
   build-apk:
     name: Build Test APK
-    needs: detect-latest
+    needs: [detect-latest, build-android]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
