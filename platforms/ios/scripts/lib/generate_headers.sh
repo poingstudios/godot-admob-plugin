@@ -24,29 +24,36 @@ if [ ! -d "godot" ]; then
     exit 1
 fi
 
+# Suppress Python SyntaxWarnings (common when running older Godot scripts with newer Python versions)
+export PYTHONWARNINGS="ignore::SyntaxWarning"
+
 cd ./godot || exit 1
 
 
-# Using timeout script to prevent hanging if configured
-TIMEOUT_CMD=""
-if [ -f "../scripts/lib/timeout" ]; then
-    TIMEOUT_CMD="../scripts/lib/timeout"
+# Detect Godot version-specific flags
+SCONS_FLAGS=""
+if [ -f ".version" ] && [ "$(cat .version)" == "4.3" ]; then
+    log_info "Applying Godot 4.3 specific flags"
+    SCONS_FLAGS="ccflags=\"-Wno-module-import-in-extern-c\""
+fi
+
+# Essential targets for all 4.x versions
+TARGETS=(
+    "core/version_generated.gen.h"
+    "core/disabled_classes.gen.h"
+    "core/object/gdvirtual.gen.inc"
+    "modules/modules_enabled.gen.h"
+)
+
+# GDExtension interface header (added in Godot 4.2/4.4+)
+# We check if the directory exists instead of parsing the version string.
+if [ -d "core/extension" ]; then
+    TARGETS+=("core/extension/gdextension_interface.gen.h")
 fi
 
 log_info "Running SCons to generate headers..."
-# Use -Wno-module-import-in-extern-c to avoid issues with Vulkan headers in Godot 4.3.0 on modern macOS/Clang
-SCONS_FLAGS=""
-if [ -f ".version" ]; then
-    GODOT_VERSION=$(cat .version)
-    log_info "Detected Godot version: $GODOT_VERSION"
-    if [ "$GODOT_VERSION" == "4.3" ]; then
-        SCONS_FLAGS="ccflags=\"-Wno-module-import-in-extern-c\""
-    fi
-fi
-$TIMEOUT_CMD scons -j $NUM_CORES platform=ios target=template_release $SCONS_FLAGS
+scons -j $NUM_CORES platform=ios target=template_release --keep-going "${TARGETS[@]}" $SCONS_FLAGS
 
-# We don't check for exit code here because the process is intentionally 
-# interrupted by the timeout script once headers are likely generated.
-log_success "Proceeding after header generation attempt."
+log_success "Headers generated successfully."
 
 cd ..

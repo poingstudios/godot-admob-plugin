@@ -29,6 +29,15 @@ jobs:
     steps:
     - uses: actions/checkout@v6
 
+    - name: Cache Gradle
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: android-gradle-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
+        restore-keys: android-gradle-
+
     - name: Build Plugins
       working-directory: platforms/android
       run: |
@@ -60,11 +69,10 @@ jobs:
       uses: actions/cache@v5
       with:
         path: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
-        key: ${{github.job}}-master-${{github.ref}}-${{github.sha}}
+        key: scons-ios-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/scripts/**') }}
         restore-keys: |
-          ${{github.job}}-master-${{github.ref}}-${{github.sha}}
-          ${{github.job}}-master-${{github.ref}}
-          ${{github.job}}-master
+          scons-ios-${{ needs.detect-latest.outputs.godot_version }}-
+          scons-ios-
 
     - name: Set up Python 3.x
       uses: actions/setup-python@v6
@@ -101,7 +109,7 @@ jobs:
 
   build-apk:
     name: Build Test APK
-    needs: detect-latest
+    needs: [detect-latest, build-android]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
@@ -147,14 +155,17 @@ jobs:
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
 
-    - name: Cache Gradle
-      uses: actions/cache@v4
+    - name: Download Android Plugin Binaries
+      uses: actions/download-artifact@v4
       with:
-        path: |
-          ~/.gradle/caches
-          ~/.gradle/wrapper
-        key: gradle-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
-        restore-keys: gradle-
+        name: poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/android/.output/
+
+    - name: Extract Plugin Binaries to Addon
+      working-directory: platforms/godot_editor
+      run: |
+        mkdir -p addons/admob/android/bin
+        unzip -o ../android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/android/bin/
 
     - name: Set Android SDK Path for Godot
       run: |
@@ -165,17 +176,6 @@ jobs:
         export/android/android_sdk_path = "$ANDROID_HOME"
         export/android/java_sdk_path = "$JAVA_HOME"
         EOF
-
-    - name: Build Android Plugin
-      working-directory: platforms/android
-      run: |
-        chmod +x ./gradlew
-        ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }}
-
-    - name: Copy Plugin Binaries to Addon
-      working-directory: platforms/android
-      run: |
-        ./gradlew exportFiles -PpluginExportPath="${GITHUB_WORKSPACE}/platforms/godot_editor/addons/admob/android/bin"
 
     - name: Generate Export Presets
       working-directory: platforms/godot_editor
