@@ -27,29 +27,14 @@ fi
 cd ./godot || exit 1
 
 
-# Detect Godot version and set specific flags if needed
+# Detect Godot version-specific flags
 SCONS_FLAGS=""
-IS_MODERN=false
-if [ -f ".version" ]; then
-    GODOT_VERSION=$(cat .version)
-    log_info "Detected Godot version: $GODOT_VERSION"
-    
-    # Use -Wno-module-import-in-extern-c to avoid issues with Vulkan headers in Godot 4.3.0
-    if [ "$GODOT_VERSION" == "4.3" ]; then
-        SCONS_FLAGS="ccflags=\"-Wno-module-import-in-extern-c\""
-    fi
-
-    # Extract major and minor version for comparison
-    MAJOR=$(echo "$GODOT_VERSION" | cut -d. -f1)
-    MINOR=$(echo "$GODOT_VERSION" | cut -d. -f2)
-    
-    # GDExtension interface header exists only in Godot 4.2+
-    if [ "$MAJOR" -eq 4 ] && [ "$MINOR" -ge 2 ]; then
-        IS_MODERN=true
-    fi
+if [ -f ".version" ] && [ "$(cat .version)" == "4.3" ]; then
+    log_info "Applying Godot 4.3 specific flags"
+    SCONS_FLAGS="ccflags=\"-Wno-module-import-in-extern-c\""
 fi
 
-# Essential targets for all versions
+# Essential targets for all 4.x versions
 TARGETS=(
     "core/version_generated.gen.h"
     "core/disabled_classes.gen.h"
@@ -57,15 +42,14 @@ TARGETS=(
     "modules/modules_enabled.gen.h"
 )
 
-# Add version-specific targets
-if [ "$IS_MODERN" = true ]; then
+# GDExtension interface header (added in Godot 4.2/4.4+)
+# We check if the directory exists instead of parsing the version string.
+if [ -d "core/extension" ]; then
     TARGETS+=("core/extension/gdextension_interface.gen.h")
 fi
 
 log_info "Running SCons to generate headers..."
-# We build only the required generated files. This is extremely fast and 
-# ensures all headers are present for the plugin to compile.
-scons -j $NUM_CORES platform=ios target=template_release "${TARGETS[@]}" $SCONS_FLAGS
+scons -j $NUM_CORES platform=ios target=template_release --keep-going "${TARGETS[@]}" $SCONS_FLAGS
 
 log_success "Headers generated successfully."
 
