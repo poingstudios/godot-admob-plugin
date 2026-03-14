@@ -44,7 +44,7 @@ jobs:
 
   android:
     needs: detect-latest
-    if: needs.detect-latest.outputs.should_build == 'true' && github.repository == 'poingstudios/godot-admob-plugin'
+    if: needs.detect-latest.outputs.should_build == 'true'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
