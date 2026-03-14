@@ -1,4 +1,6 @@
 site_name: Godot AdMob Plugin - Poing Studios
+extra_css:
+  - stylesheets/extra.css
 theme:
   features:
     - content.tabs.link
