@@ -24,6 +24,9 @@ if [ ! -d "godot" ]; then
     exit 1
 fi
 
+# Suppress Python SyntaxWarnings (common when running older Godot scripts with newer Python versions)
+export PYTHONWARNINGS="ignore::SyntaxWarning"
+
 cd ./godot || exit 1
 
 
