@@ -1,0 +1,20 @@
+/* Stylize the announcement bar to look like Godot's warning */
+.md-announce {
+  background-color: #fcf1c3; /* Yellow background */
+  color: #555;               /* Darker text for contrast */
+}
+
+/* Ensure links are clearly visible */
+.md-announce a {
+  color: #1a73e8;
+  font-weight: bold;
+}
+
+.md-announce strong {
+  color: #c09853; /* Darker yellow/brown for the "Attention" title */
+}
+
+.md-announce code {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: inherit;
+}
