@@ -1,35 +1,87 @@
-/* Stylize the announcement bar to look like Godot's warning */
-.md-banner {
-  background-color: #fcf1c3; /* Yellow background */
-  color: #555;               /* Darker text for contrast */
+:root {
+  --banner-height: 0px;
+}
+
+/* Stickiness Fix: The wrapper needs to be sticky, not the banner inside */
+[data-md-component="announce"] {
   position: sticky;
   top: 0;
-  z-index: 3;                /* Ensure it stays above everything */
+  z-index: 100;
 }
 
-/* Adjust the header to sit below the sticky announcement */
+/* Push the header down by the height of the banner */
 .md-header {
-  top: 0; /* Default */
+  top: var(--banner-height) !important;
 }
 
-/* When the banner is present, we need to push the header and sidebar down */
-/* This only applies if the banner has content */
-.md-banner:not(:empty) + .md-container .md-header {
-  top: 0; /* MkDocs handles some of this, but let's be explicit if needed */
+/* Sidebars need to account for both header and banner */
+.md-sidebar {
+  top: var(--banner-height) !important;
 }
 
-/* Ensure links are clearly visible */
-.md-banner a {
-  color: #1a73e8;
-  font-weight: bold;
-  text-decoration: underline;
+/* Smooth transition for when banner appears/disappears */
+[data-md-component="announce"], .md-header, .md-sidebar {
+  transition: top 0.2s ease, padding-top 0.2s ease;
+}
+
+/* Premium Godot-inspired Warning Banner */
+.md-banner {
+  background-color: #fff9c4 !important; /* Soft yellow background */
+  color: #374151 !important;           /* Dark slate text */
+  border-left: 8px solid #fbc02d;      /* Vibrant gold left accent */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.md-banner__inner {
+  padding: 0.6rem 0.8rem !important;
 }
 
 .md-banner strong {
-  color: #c09853; /* Darker yellow/brown for the "Attention" title */
+  color: #b17d00 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+}
+
+.md-banner a {
+  color: #009688 !important; /* Teal to match the primary theme */
+  text-decoration: underline;
+  font-weight: 700;
+  transition: color 0.2s ease;
+}
+
+.md-banner a:hover {
+  color: #004d40 !important;
+  text-decoration: underline;
 }
 
 .md-banner code {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: inherit;
+  background-color: rgba(0, 0, 0, 0.06) !important;
+  color: #1f2937 !important;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* Dark Mode Appearance (for 'slate' scheme) */
+[data-md-color-scheme="slate"] .md-banner {
+  background-color: #2a281a !important; /* Deep dark yellow/brown */
+  color: #e5e7eb !important;           /* Light gray text */
+  border-left-color: #f9a825;          /* Brighter gold for contrast */
+}
+
+[data-md-color-scheme="slate"] .md-banner strong {
+  color: #fbc02d !important;
+}
+
+[data-md-color-scheme="slate"] .md-banner a {
+  color: #4db6ac !important;
+}
+
+[data-md-color-scheme="slate"] .md-banner code {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  color: #fffde7 !important;
 }
