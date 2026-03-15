@@ -55,6 +55,7 @@ markdown_extensions:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 extra:
+  announcement: "⚠️ <strong>Attention: Here be dragons</strong><br>This is the <code>latest</code> (unstable) version of this documentation, which may document features not available in or compatible with released stable versions of Godot.<br>See the <a href='https://poingstudios.github.io/godot-admob-plugin/stable/'>stable version</a> of this documentation page instead."
   version:
     provider: mike
     default: stable
