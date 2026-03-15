@@ -1,302 +1,198 @@
-/* SIDE SCROLL FIX */
-html, body {
-  overflow-x: hidden !important;
+/* 🎨 CORE DESIGN SYSTEM - IDENTICAL TO STABLE */
+html,
+body {
+  /* Prevent horizontal scroll without breaking sticky context */
+  overflow-x: clip;
   width: 100%;
-  position: relative;
 }
 
-/* COLOR SETTINGS AND SPACING RESET */
-.md-banner,
+/* 🧱 THE GRID SYSTEM (Scaling 61rem) */
+.md-grid,
+.md-header__inner,
+.md-main__inner,
 .md-banner__inner,
-[data-md-component="announce"],
-.announcement-wrapper {
-  background: transparent !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  width: 100% !important;
-  max-width: none !important;
-  border: none !important;
-  border-radius: 0 !important;
-  overflow: hidden !important; /* Block any scroll */
-  overflow-y: hidden !important;
+.announcement-content {
+  max-width: 61rem !important; /* 1:1 with Material standard */
+  margin-right: auto !important;
+  margin-left: auto !important;
 }
 
-/* Main announcement container background */
+/* 📢 ANNOUNCEMENT BANNER SYSTEM */
+.md-banner {
+  background: transparent !important;
+  padding: 0 !important;
+  overflow: visible !important; /* Critical to avoid theme scrollbar */
+}
+
+.md-banner__inner {
+  display: flex !important;
+  align-items: center;
+  /* Align with logo by default, or center if requested */
+  justify-content: center !important; 
+  padding: 0 0.8rem !important; /* Standard grid gutter */
+}
+
+/* Background Layer (Full Width) */
 .md-announce {
   position: relative;
   overflow: hidden !important;
-  overflow-y: hidden !important;
-  width: 100% !important;
-  max-width: none !important;
-  height: auto !important;
-  min-height: 100px;
   background: linear-gradient(-45deg, #f0932b, #ffbe76, #e67e22, #d35400) !important;
   background-size: 300% 300% !important;
   animation: gradientShift 15s ease infinite !important;
   z-index: 10;
-  display: flex !important;
-  align-items: center;
-  justify-content: center;
-  margin: 0 !important;
   border-radius: 0 !important;
 }
 
-/* ANIMATIONS */
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-
-  50% {
-    background-position: 100% 50%;
-  }
-
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* SLOW BASE MOVEMENT (Always running) */
-@keyframes float-slow {
-  0% { translate: 0 0; rotate: 0deg; }
-  33% { translate: 5vw -2vh; rotate: 2deg; }
-  66% { translate: -3vw 3vh; rotate: -2deg; }
-  100% { translate: 0 0; rotate: 0deg; }
-}
-
-/* EXTRA FAST MOVEMENT (Hover activated) */
-@keyframes float-turbo {
-  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  50% { transform: translate(40px, -20px) scale(1.2) rotate(5deg); }
-  100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-}
-
-/* 🏆 FULL WIDTH AREA */
-/* Redundancy removed, style above covers .md-announce */
-
-/* Overlay Glassmorphism - Visibility adjusted */
+/* Glassmorphism Overlay */
 .md-announce::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(255, 255, 255, 0.97) !important;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   z-index: 1;
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-md-color-scheme="slate"] .md-announce::before {
-  background: rgba(15, 17, 26, 0.94) !important;
-}
-
-/* HOVER REACTION (WHOLE AREA) */
-.md-announce:hover::before {
-  background: rgba(255, 255, 255, 0.85) !important;
-  /* More transparent to see colors */
-  backdrop-filter: blur(6px);
-}
-
-[data-md-color-scheme="slate"] .md-announce:hover::before {
-  background: rgba(15, 17, 26, 0.75) !important;
-}
-
-/* EXPANDED SHAPES (EMOJI) */
-.announcement-bg-shapes {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.3;
-  /* More visible by default */
-  transition: all 0.6s ease;
-}
-
-.md-announce:hover .announcement-bg-shapes {
-  opacity: 0.8;
-  /* Glows more on hover */
-  transform: scale(1.05);
-}
-
-.shape {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  filter: blur(2px);
-  user-select: none;
-  pointer-events: none;
-  opacity: 0.15;
-  
-  /* Two animations on the same element: one running, one paused */
-  animation: 
-    float-slow 20s infinite linear,
-    float-turbo 2.5s infinite ease-in-out paused;
-  
-  transition: opacity 0.6s ease, filter 0.6s ease;
-}
-
-.shape-1 { font-size: 150px; top: -30px; left: 10%; animation-duration: 20s, 2.5s; }
-.shape-2 { font-size: 100px; bottom: -20px; right: 15%; animation-duration: 16s, 2s; }
-.shape-3 { font-size: 80px; top: 20%; right: 40%; animation-duration: 22s, 3s; }
-
-/* TURBO LOGIC ON HOVER */
-.md-announce:hover .shape,
-.announcement-wrapper:hover .shape,
-[data-md-component="announce"]:hover .shape {
-  animation-play-state: running, running; /* Triggers the turbo animation */
-  opacity: 0.3 !important;
-  filter: blur(1px);
-}
-
-/* Subtle background feedback to confirm hover */
-.md-announce:hover {
-  filter: brightness(1.1);
+  background: rgba(15, 17, 26, 0.93) !important;
 }
 
 /* INTERNAL STRUCTURE */
 .announcement-content {
   position: relative;
   z-index: 2;
-  padding: 32px 40px;
+  padding: 0.75rem 0.8rem; /* Align with grid gutter */
+  /* Reduced height by half */
   display: flex !important;
   align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
+  justify-content: center !important;
+  /* Centered group as requested */
+  font-size: 0.9rem;
   font-weight: 600;
-  line-height: 1.6;
-  gap: 40px;
+  line-height: 1.4;
+  gap: 32px;
   width: 100%;
+  max-width: 61rem !important; /* Standard grid */
   box-sizing: border-box !important;
   margin: 0 auto !important;
-  overflow: hidden !important; /* Prevent internal scroll */
-  overflow-y: hidden !important;
+  /* CRITICAL: Centers the container */
 }
 
-.announcement-text,
+/* 📝 ELEMENTS */
 .announcement-title {
-  margin: 0 !important;
+  background: #f0932b !important;
+  color: #fff !important;
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .announcement-text {
-  text-align: left;
-  color: #24292f !important;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
-  /* Improve readability on hover */
-}
-
-[data-md-color-scheme="slate"] .announcement-text {
-  color: #f0f6fc !important;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
-}
-
-.announcement-title {
-  padding: 8px 20px;
-  border-radius: 10px; /* Restored rounding */
-  font-weight: 900;
-  text-transform: uppercase;
-  color: white !important;
-  background: #f0932b !important;
-  box-shadow: 0 4px 15px rgba(240, 147, 43, 0.4);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--md-default-fg-color);
 }
 
 .announcement-badge {
-  padding: 4px 16px;
-  border-radius: 100px; /* Restored rounding */
-  font-family: var(--md-code-font-family, monospace);
-  font-weight: 800;
-  text-decoration: none !important;
-  display: inline-flex;
-  background: rgba(240, 147, 43, 0.1) !important;
+  background: rgba(240, 147, 43, 0.1);
   color: #f0932b !important;
-  border: 1px solid rgba(240, 147, 43, 0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-decoration: none;
 }
 
 .announcement-link {
-  font-weight: 800;
   color: #0969da !important;
-  text-decoration: underline !important;
+  font-weight: 700;
+  text-decoration: underline;
 }
 
 [data-md-color-scheme="slate"] .announcement-link {
   color: #58a6ff !important;
 }
 
-/* RESPONSIVENESS */
+/* 💠 FLOATING SHAPES */
+.announcement-bg-shapes {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.15;
+}
+
+.shape {
+  position: absolute;
+  opacity: 0.2;
+  animation: float-slow 15s infinite ease-in-out;
+}
+
+.shape-1 { font-size: 80px; top: -10px; left: 10%; }
+.shape-2 { font-size: 60px; bottom: -5px; right: 15%; animation-delay: -5s; }
+.shape-3 { font-size: 40px; top: 15%; right: 35%; animation-delay: -10s; }
+
+/* 🌀 ANIMATIONS */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes float-slow {
+  0% { translate: 0 0; rotate: 0deg; }
+  33% { translate: 20px -10px; rotate: 2deg; }
+  66% { translate: -15px 15px; rotate: -2deg; }
+  100% { translate: 0 0; rotate: 0deg; }
+}
+
+@keyframes float-turbo {
+  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  50% { transform: translate(40px, -20px) scale(1.1) rotate(4deg); }
+  100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+
+/* 🐭 HOVER INTERACTION */
+.md-announce:hover::before {
+  background: rgba(255, 255, 255, 0.88) !important;
+  backdrop-filter: blur(4px);
+}
+
+[data-md-color-scheme="slate"] .md-announce:hover::before {
+  background: rgba(15, 17, 26, 0.85) !important;
+}
+
+.md-announce:hover .announcement-bg-shapes {
+  opacity: 0.4;
+}
+
+.md-announce:hover .shape {
+  animation-name: float-slow, float-turbo !important;
+  animation-play-state: running, running !important;
+  opacity: 0.5 !important;
+  filter: blur(0px);
+}
+
+/* 📱 RESPONSIVENESS */
 @media screen and (max-width: 76.25em) {
   .announcement-content {
-    flex-direction: column !important;
-    padding: 32px 20px !important; /* Ensures it doesn't stick to the top on mobile */
-    gap: 24px;
-    text-align: center;
-  }
-
-  .announcement-text {
-    text-align: center;
-    font-size: 0.85rem;
-    line-height: 1.8;
-  }
-
-  .announcement-title {
-    font-size: 0.85rem;
-    padding: 8px 18px;
-    margin-bottom: 8px !important; /* Extra space below title */
-  }
-
-  .announcement-badge {
-    padding: 2px 10px;
-    font-size: 0.8rem;
-    display: inline-block;
-    vertical-align: middle;
-    margin: 4px 0;
-  }
-
-  .announcement-bg-shapes {
-    display: block !important; /* Enable animation on mobile */
-    opacity: 0.2; /* Slightly more visible on mobile */
-  }
-
-  .shape-1 { font-size: 80px; }
-  .shape-2 { font-size: 60px; }
-  .shape-3 { font-size: 50px; }
-}
-
-/* RESTORE MKDOCS DEFAULT (Header and Sidebars) */
-
-/* Ensures main container has correct spacing for sticky sidebars */
-.md-container {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Fine-tune sidebars to scroll correctly below the header */
-@media screen and (min-width: 76.25em) {
-  .md-sidebar {
-    height: 0;
-    top: 3rem !important; /* Default alignment below the header */
-  }
-
-  .md-sidebar__inner {
-    padding-top: 0.5rem !important; /* Spacing identical to stable */
-  }
-
-  .md-content__inner {
-    padding-top: 1.5rem !important;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    gap: 16px;
   }
 }
 
-/* Remove forced margins that break native sticky */
-.md-main__inner {
-  margin-top: 0 !important;
-}
-
+/* 🏠 THEME SYNC (Header & Sidebar) */
 .md-header {
-  /* Let MkDocs manage sticky, just ensuring z-index */
-  z-index: 10;
+  position: sticky !important;
+  top: 0;
+}
+
+.md-main__inner {
+  margin-top: 2rem !important;
 }
