@@ -2,43 +2,99 @@
   --banner-height: 0px;
 }
 
-/* Stickiness Fix: The wrapper needs to be sticky, not the banner inside */
+/* 1. Banner Styling & Transition */
 [data-md-component="announce"] {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 101;
+  max-height: 200px;
+  /* Suficiente para o texto */
+  opacity: 1;
+  overflow: hidden;
+  transition:
+    max-height 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease-out;
 }
 
-/* Push the header down by the height of the banner */
+/* Estado de fechado (Snappy & Fluid) */
+[data-md-component="announce"].banner-dismissed {
+  max-height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* 2. Header (Barra Verde) colada no banner */
 .md-header {
   top: var(--banner-height) !important;
+  z-index: 100;
+  transition: top 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Sidebars need to account for both header and banner */
+/* 3. Barras Laterais */
 .md-sidebar {
-  top: var(--banner-height) !important;
+  top: calc(48px + var(--banner-height)) !important;
+  transition: top 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Smooth transition for when banner appears/disappears */
-[data-md-component="announce"], .md-header, .md-sidebar {
-  transition: top 0.2s ease, padding-top 0.2s ease;
+/* Completely hide the container if hidden to avoid ghost lines */
+[data-md-component="announce"]:has(#announcement-wrapper[style*="display: none"]),
+[data-md-component="announce"]:empty {
+  display: none !important;
+  height: 0 !important;
 }
 
-/* Premium Godot-inspired Warning Banner */
+/* Base Banner Styling */
 .md-banner {
-  background-color: #fff9c4 !important; /* Soft yellow background */
-  color: #374151 !important;           /* Dark slate text */
-  border-left: 8px solid #fbc02d;      /* Vibrant gold left accent */
+  background-color: #fff9c4 !important;
+  color: #374151 !important;
+  border-left: 8px solid #fbc02d;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   font-size: 0.75rem;
   line-height: 1.6;
 }
 
-.md-banner__inner {
+/* Layout for content and close button */
+.announcement-container {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
   padding: 0.6rem 0.8rem !important;
+  gap: 1rem;
 }
 
+.announcement-content {
+  flex: 1;
+}
+
+/* Close Button Styling */
+.announcement-close {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #374151;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.announcement-close:hover {
+  background-color: rgba(0, 0, 0, 0.08);
+  transform: scale(1.1);
+}
+
+.announcement-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Content Accents */
 .md-banner strong {
   color: #b17d00 !important;
   text-transform: uppercase;
@@ -48,7 +104,7 @@
 }
 
 .md-banner a {
-  color: #009688 !important; /* Teal to match the primary theme */
+  color: #009688 !important;
   text-decoration: underline;
   font-weight: 700;
   transition: color 0.2s ease;
@@ -56,21 +112,77 @@
 
 .md-banner a:hover {
   color: #004d40 !important;
-  text-decoration: underline;
 }
 
-.md-banner code {
-  background-color: rgba(0, 0, 0, 0.06) !important;
-  color: #1f2937 !important;
-  padding: 1px 4px;
-  border-radius: 3px;
+/* SPA Feel: Progress bar color */
+.md-progress {
+  background-color: #009688 !important;
 }
 
-/* Dark Mode Appearance (for 'slate' scheme) */
+/* Mobile Optimizations */
+@media screen and (max-width: 76.25em) {
+  :root {
+    --header-height: 48px;
+    /* Material mobile header height */
+  }
+
+  .md-banner {
+    font-size: 0.65rem;
+    /* Smaller text on mobile */
+  }
+
+  .announcement-container {
+    padding: 0.4rem 0.6rem !important;
+    gap: 0.5rem;
+  }
+
+  /* Hide <br> tags on mobile but ensure they act as a space */
+  .announcement-content br {
+    display: inline;
+    content: "";
+  }
+
+  .announcement-content br::after {
+    content: " ";
+  }
+
+  .announcement-content strong {
+    display: inline;
+    /* Keep strong inline on mobile */
+    margin-right: 4px;
+    font-size: 0.65rem;
+  }
+
+  .md-banner {
+    border-left-width: 4px !important;
+    /* Thinner border on mobile */
+  }
+
+  .announcement-container {
+    padding: 0.4rem 0.5rem !important;
+    gap: 0.4rem;
+  }
+
+  .announcement-close {
+    width: 22px;
+    height: 22px;
+    margin-left: auto;
+  }
+}
+
+/* Dark Mode Appearance */
 [data-md-color-scheme="slate"] .md-banner {
-  background-color: #2a281a !important; /* Deep dark yellow/brown */
-  color: #e5e7eb !important;           /* Light gray text */
-  border-left-color: #f9a825;          /* Brighter gold for contrast */
+  background-color: #2a281a !important;
+  color: #e5e7eb !important;
+  border-left-color: #f9a825;
+}
+
+[data-md-color-scheme="slate"] .announcement-close {
+  color: #e5e7eb;
+}
+
+[data-md-color-scheme="slate"] .announcement-close:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 [data-md-color-scheme="slate"] .md-banner strong {
@@ -79,9 +191,4 @@
 
 [data-md-color-scheme="slate"] .md-banner a {
   color: #4db6ac !important;
-}
-
-[data-md-color-scheme="slate"] .md-banner code {
-  background-color: rgba(255, 255, 255, 0.1) !important;
-  color: #fffde7 !important;
 }
