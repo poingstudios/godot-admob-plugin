@@ -1,20 +1,35 @@
 /* Stylize the announcement bar to look like Godot's warning */
-.md-announce {
+.md-banner {
   background-color: #fcf1c3; /* Yellow background */
   color: #555;               /* Darker text for contrast */
+  position: sticky;
+  top: 0;
+  z-index: 3;                /* Ensure it stays above everything */
+}
+
+/* Adjust the header to sit below the sticky announcement */
+.md-header {
+  top: 0; /* Default */
+}
+
+/* When the banner is present, we need to push the header and sidebar down */
+/* This only applies if the banner has content */
+.md-banner:not(:empty) + .md-container .md-header {
+  top: 0; /* MkDocs handles some of this, but let's be explicit if needed */
 }
 
 /* Ensure links are clearly visible */
-.md-announce a {
+.md-banner a {
   color: #1a73e8;
   font-weight: bold;
+  text-decoration: underline;
 }
 
-.md-announce strong {
+.md-banner strong {
   color: #c09853; /* Darker yellow/brown for the "Attention" title */
 }
 
-.md-announce code {
+.md-banner code {
   background-color: rgba(0, 0, 0, 0.05);
   color: inherit;
 }
