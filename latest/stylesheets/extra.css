@@ -37,6 +37,7 @@ body {
   background: linear-gradient(-45deg, #f0932b, #ffbe76, #e67e22, #d35400) !important;
   background-size: 300% 300% !important;
   animation: gradientShift 15s ease infinite !important;
+  animation-delay: calc(var(--sync-clock, 0) * -1s) !important;
   z-index: 10;
   min-height: 100px;
   /* Balanced high impact */
@@ -82,6 +83,7 @@ body {
   opacity: 0.15;
   /* Soft base */
   animation: shapes-drift 20s infinite ease-in-out;
+  animation-delay: calc(var(--sync-clock, 0) * -1s) !important;
   transition:
     opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
     filter 0.8s cubic-bezier(0.4, 0, 0.2, 1),
