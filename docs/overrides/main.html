@@ -2,7 +2,7 @@
 
 {% block announce %}
   {% if config.extra.announcement %}
-    <div class="announcement-wrapper">
+    <div class="announcement-wrapper" data-md-component="announcement">
       <div class="announcement-content">
         {{ config.extra.announcement | safe }}
       </div>
