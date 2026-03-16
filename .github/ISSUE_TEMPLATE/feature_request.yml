@@ -1,6 +1,19 @@
 name: Feature request
 description: Suggest an idea for this project
 body:
+- type: dropdown
+  id: platform
+  attributes:
+    label: Platform / Component
+    description: Which part of the plugin is this targetting?
+    options:
+      - All
+      - Godot (Addon / Editor)
+      - Android
+      - iOS
+    default: 0
+  validations:
+    required: true
 - type: textarea
   attributes:
     label: What feature or improvement would you like to see?
