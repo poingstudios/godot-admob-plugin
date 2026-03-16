@@ -1,18 +1,15 @@
-/* 🎨 CORE DESIGN SYSTEM - IDENTICAL TO STABLE */
+/* 🎨 CORE DESIGN SYSTEM */
 html,
 body {
-  /* Prevent horizontal scroll without breaking sticky context */
   overflow-x: clip;
   width: 100%;
 }
 
-/* 🧱 THE GRID SYSTEM (Scaling 61rem) */
+/* 🧱 THE GRID SYSTEM */
 .md-grid,
 .md-header__inner,
-.md-main__inner,
-.md-banner__inner,
-.announcement-content {
-  max-width: 61rem !important; /* 1:1 with Material standard */
+.md-main__inner {
+  max-width: 61rem !important;
   margin-right: auto !important;
   margin-left: auto !important;
 }
@@ -21,40 +18,48 @@ body {
 .md-banner {
   background: transparent !important;
   padding: 0 !important;
-  overflow: visible !important; /* Critical to avoid theme scrollbar */
+  overflow: visible !important;
 }
 
+/* Force theme container to be full-width */
 .md-banner__inner {
-  display: flex !important;
-  align-items: center;
-  /* Align with logo by default, or center if requested */
-  justify-content: center !important; 
-  padding: 0 0.8rem !important; /* Standard grid gutter */
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* Background Layer (Full Width) */
-.md-announce {
+/* THE CONTAINER (Full Width Background) */
+.announcement-wrapper {
+  width: 100% !important;
   position: relative;
   overflow: hidden !important;
   background: linear-gradient(-45deg, #f0932b, #ffbe76, #e67e22, #d35400) !important;
   background-size: 300% 300% !important;
   animation: gradientShift 15s ease infinite !important;
   z-index: 10;
-  border-radius: 0 !important;
+  min-height: 100px;
+  /* Balanced high impact */
+  display: flex !important;
+  align-items: center;
 }
 
 /* Glassmorphism Overlay */
-.md-announce::before {
+.announcement-wrapper::before {
   content: "";
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(255, 255, 255, 0.95) !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9) !important;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   z-index: 1;
+  transition: backdrop-filter 0.6s ease;
 }
 
-[data-md-color-scheme="slate"] .md-announce::before {
+[data-md-color-scheme="slate"] .announcement-wrapper::before {
   background: rgba(15, 17, 26, 0.93) !important;
 }
 
@@ -62,39 +67,76 @@ body {
 .announcement-content {
   position: relative;
   z-index: 2;
-  padding: 0.75rem 0.8rem; /* Align with grid gutter */
-  /* Reduced height by half */
   display: flex !important;
   align-items: center;
   justify-content: center !important;
-  /* Centered group as requested */
-  font-size: 0.9rem;
-  font-weight: 600;
-  line-height: 1.4;
   gap: 32px;
+  padding: 4rem 20px;
   width: 100%;
-  max-width: 61rem !important; /* Standard grid */
-  box-sizing: border-box !important;
-  margin: 0 auto !important;
-  /* CRITICAL: Centers the container */
+  margin: 0 auto;
+}
+
+/* 🌀 ANIMATION LOGIC (ZERO JUMP SYSTEM) */
+.shape {
+  position: absolute;
+  opacity: 0.15;
+  /* Soft base */
+  animation: shapes-drift 20s infinite ease-in-out;
+  transition:
+    opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  filter: blur(4px);
+}
+
+@keyframes shapes-drift {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+
+  33% {
+    transform: translate(60px, -30px) rotate(5deg);
+  }
+
+  66% {
+    transform: translate(-40px, 40px) rotate(-5deg);
+  }
+
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+}
+
+/* 🐭 HOVER INTERACTION (Desktop Only) */
+@media (hover: hover) {
+  .announcement-wrapper:hover .shape {
+    opacity: 0.4 !important;
+    /* Subtle boost */
+    filter: blur(0px);
+    transform: translate(0, -10px) scale(1.15) !important;
+  }
+
+  .announcement-wrapper:hover::before {
+    backdrop-filter: blur(4px);
+  }
 }
 
 /* 📝 ELEMENTS */
 .announcement-title {
   background: #f0932b !important;
   color: #fff !important;
-  padding: 6px 16px;
+  padding: 8px 20px;
   border-radius: 4px;
   font-weight: 800;
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
-  white-space: nowrap;
 }
 
 .announcement-text {
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.5;
   text-align: center;
   color: var(--md-default-fg-color);
 }
@@ -102,7 +144,7 @@ body {
 .announcement-badge {
   background: rgba(240, 147, 43, 0.1);
   color: #f0932b !important;
-  padding: 2px 8px;
+  padding: 2px 10px;
   border-radius: 4px;
   font-weight: 700;
   text-decoration: none;
@@ -118,76 +160,47 @@ body {
   color: #58a6ff !important;
 }
 
-/* 💠 FLOATING SHAPES */
+/* 💠 FLOATING SHAPES POSITIONING */
 .announcement-bg-shapes {
   position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 0;
   pointer-events: none;
-  opacity: 0.15;
 }
 
-.shape {
-  position: absolute;
-  opacity: 0.2;
-  animation: float-slow 15s infinite ease-in-out;
+.shape-1 {
+  font-size: 120px;
+  top: 10%;
+  left: 10%;
 }
 
-.shape-1 { font-size: 80px; top: -10px; left: 10%; }
-.shape-2 { font-size: 60px; bottom: -5px; right: 15%; animation-delay: -5s; }
-.shape-3 { font-size: 40px; top: 15%; right: 35%; animation-delay: -10s; }
-
-/* 🌀 ANIMATIONS */
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+.shape-2 {
+  font-size: 100px;
+  bottom: 15%;
+  right: 15%;
+  animation-delay: -5s;
 }
 
-@keyframes float-slow {
-  0% { translate: 0 0; rotate: 0deg; }
-  33% { translate: 20px -10px; rotate: 2deg; }
-  66% { translate: -15px 15px; rotate: -2deg; }
-  100% { translate: 0 0; rotate: 0deg; }
-}
-
-@keyframes float-turbo {
-  0% { transform: translate(0, 0) scale(1) rotate(0deg); }
-  50% { transform: translate(40px, -20px) scale(1.1) rotate(4deg); }
-  100% { transform: translate(0, 0) scale(1) rotate(0deg); }
-}
-
-/* 🐭 HOVER INTERACTION */
-.md-announce:hover::before {
-  background: rgba(255, 255, 255, 0.88) !important;
-  backdrop-filter: blur(4px);
-}
-
-[data-md-color-scheme="slate"] .md-announce:hover::before {
-  background: rgba(15, 17, 26, 0.85) !important;
-}
-
-.md-announce:hover .announcement-bg-shapes {
-  opacity: 0.4;
-}
-
-.md-announce:hover .shape {
-  animation-name: float-slow, float-turbo !important;
-  animation-play-state: running, running !important;
-  opacity: 0.5 !important;
-  filter: blur(0px);
+.shape-3 {
+  font-size: 80px;
+  top: 30%;
+  right: 35%;
+  animation-delay: -10s;
 }
 
 /* 📱 RESPONSIVENESS */
 @media screen and (max-width: 76.25em) {
   .announcement-content {
     flex-direction: column;
-    padding: 1.5rem 1rem;
-    gap: 16px;
+    padding: 2.5rem 1rem;
+    gap: 20px;
   }
 }
 
-/* 🏠 THEME SYNC (Header & Sidebar) */
+/* 🏠 THEME SYNC */
 .md-header {
   position: sticky !important;
   top: 0;
@@ -195,4 +208,18 @@ body {
 
 .md-main__inner {
   margin-top: 2rem !important;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
