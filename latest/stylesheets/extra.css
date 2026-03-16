@@ -29,16 +29,38 @@ body {
   padding: 0 !important;
 }
 
+/* 💫 ACCESSIBLE FLUID FOCUS (High Contrast & Compact) */
+.md-option:focus + .md-header__button,
+.md-option:focus-visible + .md-header__button,
+.md-option:focus ~ .md-header__button,
+.md-option:focus-visible ~ .md-header__button,
+.md-header__button:hover,
+.md-header__button:focus-within,
+.md-header__button:focus,
+[data-md-color-scheme="slate"] .md-option:focus + .md-header__button,
+[data-md-color-scheme="slate"] .md-option:focus ~ .md-header__button {
+  background-color: rgba(255, 255, 255, 0.35) !important;
+  color: #fff !important;
+  border-radius: 50% !important;
+  transition: all 0.2s ease-in-out !important;
+  outline: none !important;
+  /* High visibility AdMob Yellow, 25% more compact (3px) */
+  box-shadow: 0 0 0 3px #FBBC04 !important; 
+  z-index: 10 !important;
+}
+
+
+
 /* THE CONTAINER (Full Width Background) */
 .announcement-wrapper {
   width: 100% !important;
   position: relative;
   overflow: hidden !important;
-  background: linear-gradient(-45deg, #f0932b, #ffbe76, #e67e22, #d35400) !important;
-  background-size: 300% 300% !important;
+  background: linear-gradient(-45deg, #4285F4, #EA4335, #FBBC04, #34A853) !important;
+  background-size: 400% 400% !important;
   animation: gradientShift 15s ease infinite !important;
   animation-delay: calc(var(--sync-clock, 0) * -1s) !important;
-  z-index: 10;
+  z-index: 3;
   min-height: 100px;
   /* Balanced high impact */
   display: flex !important;
@@ -126,8 +148,8 @@ body {
 
 /* 📝 ELEMENTS */
 .announcement-title {
-  background: #f0932b !important;
-  color: #fff !important;
+  background: #FBBC04 !important;
+  color: #000 !important; /* Dark text for better contrast on yellow */
   padding: 8px 20px;
   border-radius: 4px;
   font-weight: 800;
@@ -144,8 +166,8 @@ body {
 }
 
 .announcement-badge {
-  background: rgba(240, 147, 43, 0.1);
-  color: #f0932b !important;
+  background: rgba(66, 133, 244, 0.1);
+  color: #4285F4 !important;
   padding: 2px 10px;
   border-radius: 4px;
   font-weight: 700;
@@ -153,13 +175,9 @@ body {
 }
 
 .announcement-link {
-  color: #0969da !important;
+  color: #4285F4 !important;
   font-weight: 700;
   text-decoration: underline;
-}
-
-[data-md-color-scheme="slate"] .announcement-link {
-  color: #58a6ff !important;
 }
 
 /* 💠 FLOATING SHAPES POSITIONING */
@@ -223,5 +241,30 @@ body {
 
   100% {
     background-position: 0% 50%;
+  }
+}
+
+/* 📱 MOBILE NAVIGATION FIXES */
+@media screen and (max-width: 76.25em) {
+  /* Keep the banner bright and visible above the dark overlay when the drawer is open */
+  [data-md-component="announce"] {
+    z-index: 99 !important;
+  }
+
+  /* Compact the banner and fix its height for mobile alignment */
+  .announcement-content {
+    padding: 1.2rem 1rem !important; /* Sightly tighter padding */
+    min-height: 3.4rem;
+    box-sizing: border-box;
+    gap: 16px !important;
+  }
+
+  .announcement-wrapper {
+    min-height: auto !important;
+  }
+
+  .announcement-text {
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
   }
 }
