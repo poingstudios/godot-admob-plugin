@@ -63,7 +63,7 @@ jobs:
           zip -r PoingGodotAdMob-Test-Unsigned.ipa Payload/
 
       - name: Upload Test Artifact
-        uses: actions/artifact@v4
+        uses: actions/upload-artifact@v4
         with:
           name: ios-test-ipa
           path: platforms/ios/PoingGodotAdMob-Test-Unsigned.ipa
@@ -73,6 +73,6 @@ jobs:
       - name: Build Summary
         run: |
           echo "### 🚀 iOS Test Build Successful" >> $GITHUB_STEP_SUMMARY
-          echo "O arquivo .ipa gerado está pronto para **Sideloading**." >> $GITHUB_STEP_SUMMARY
-          echo "- **Método:** No-Sign (Fake Signing)" >> $GITHUB_STEP_SUMMARY
-          echo "- **Uso:** Baixe o artefato e utilize AltStore ou Sideloadly para instalar no dispositivo." >> $GITHUB_STEP_SUMMARY
+          echo "The generated .ipa file is ready for **Sideloading**." >> $GITHUB_STEP_SUMMARY
+          echo "- **Method:** No-Sign (Fake Signing)" >> $GITHUB_STEP_SUMMARY
+          echo "- **Usage:** Download the artifact and use AltStore or Sideloadly to install it on your device." >> $GITHUB_STEP_SUMMARY
