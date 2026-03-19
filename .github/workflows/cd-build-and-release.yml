@@ -96,12 +96,47 @@ jobs:
       run: |
         ./scripts/build.sh ${{env.CURRENT_GODOT_VERSION}}
 
+    - name: Build Test IPA (No Signing)
+      working-directory: platforms/ios
+      run: |
+        xcodebuild build \
+          -project PoingGodotAdMob.xcodeproj \
+          -scheme PoingGodotAdMob \
+          -configuration Debug \
+          -sdk iphoneos \
+          -derivedDataPath build_output \
+          CODE_SIGNING_ALLOWED=NO \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGN_IDENTITY="" \
+          AD_HOC_CODE_SIGNING_ALLOWED=YES
+
+    - name: Package Test IPA
+      working-directory: platforms/ios
+      run: |
+        mkdir -p Payload
+        APP_PATH=$(find build_output/Build/Products/Debug-iphoneos -name "*.app" -type d | head -n 1)
+        if [ -n "$APP_PATH" ]; then
+          cp -r "$APP_PATH" Payload/
+          zip -r "PoingGodotAdMob-Test-v${{env.CURRENT_GODOT_VERSION}}.ipa" Payload/
+        fi
+
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
         target_commit: ${{ github.ref_name }}
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: platforms/ios/bin/release/*.zip
+        file_glob: true
+        tag: ${{ env.PLUGIN_TAG }}
+        release_name: ${{ env.PLUGIN_TAG }}
+        overwrite: true
+
+    - name: Upload Test IPA to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        target_commit: ${{ github.ref_name }}
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: platforms/ios/*.ipa
         file_glob: true
         tag: ${{ env.PLUGIN_TAG }}
         release_name: ${{ env.PLUGIN_TAG }}
