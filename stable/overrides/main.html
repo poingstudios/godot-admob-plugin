@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block announce %}
+  {% if config.extra.announcement %}
+    <div class="announcement-wrapper">
+      <div class="announcement-content">
+        {{ config.extra.announcement | safe }}
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  <script>
+    (function() {
+      function syncSidebarTop() {
+        var header = document.querySelector('.md-header');
+        var sidebar = document.querySelector('.md-sidebar--primary');
+        if (header && sidebar) {
+          if (window.innerWidth <= 1220) {
+            var rect = header.getBoundingClientRect();
+            var topOffset = Math.max(0, rect.top);
+            sidebar.style.setProperty('top', topOffset + 'px', 'important');
+            sidebar.style.setProperty('height', 'calc(100vh - ' + topOffset + 'px)', 'important');
+          } else {
+            sidebar.style.removeProperty('top');
+            sidebar.style.removeProperty('height');
+          }
+        }
+      }
+      window.addEventListener('scroll', syncSidebarTop, { passive: true });
+      window.addEventListener('resize', syncSidebarTop);
+      document.addEventListener('DOMContentLoaded', syncSidebarTop);
+      setInterval(syncSidebarTop, 200); // Guarantees sync against DOM recalculations
+    })();
+  </script>
+{% endblock %}
