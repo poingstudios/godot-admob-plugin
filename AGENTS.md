@@ -4,6 +4,7 @@ This file is the authoritative source of truth for ALL AI agents (Gemini, Claude
 **Read this first** to minimize token usage and ensure architectural consistency.
 
 ## 🏗️ Repository Architecture
+- **Primary Branch:** `master`
 - **GDScript (Core):** `platforms/godot_editor/addons/admob/`
   - `admob.gd`: Main entry point.
   - `internal/`: Logic. **Rule: No `class_name` here, use `preload`.**
@@ -20,6 +21,7 @@ This file is the authoritative source of truth for ALL AI agents (Gemini, Claude
   - *Example (All):* `./scripts/build_local.sh all 4.6.1`
   - *Example (iOS):* `./scripts/build_local.sh ios 4.6.1`
   - *Example (Android):* `./scripts/build_local.sh android 4.6.1`
+- **GitHub CLI:** Use `gh` to check status of `issues` or `prs`.
 
 ## 📝 Coding Standards
 - **License Header:** EVERY new file MUST start with the project's MIT License header.
