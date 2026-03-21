@@ -601,6 +601,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#optional-generate-an-adview-with-a-customized-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (Optional) Generate an AdView with a customized position
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#optional-generate-an-adview-with-a-customized-size" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1631,6 +1642,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#optional-generate-an-adview-with-a-customized-position" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        (Optional) Generate an AdView with a customized position
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#optional-generate-an-adview-with-a-customized-size" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1814,7 +1836,7 @@
 <a id="__codelineno-2-17" name="__codelineno-2-17"></a><span class="w">    </span><span class="k">elif</span><span class="w"> </span><span class="n">OS</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;iOS&quot;</span><span class="p">:</span>
 <a id="__codelineno-2-18" name="__codelineno-2-18"></a><span class="w">        </span><span class="n">unit_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ca-app-pub-3940256099942544/2934735716&quot;</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19"></a>
-<a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="hll"><span class="w">    </span><span class="n">_ad_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">AdSize</span><span class="o">.</span><span class="n">BANNER</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">Values</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20"></a><span class="hll"><span class="w">    </span><span class="n">_ad_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">AdSize</span><span class="o">.</span><span class="n">BANNER</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -1885,171 +1907,193 @@
 <ul>
 <li><code>unit_id</code>: The AdMob ad unit ID from which the AdView should load ads.</li>
 <li><code>AdSize</code>: The AdMob ad size you wish to utilize (refer to <a href="#adview-sizes">AdView sizes</a> for specifics).</li>
-<li><code>AdPosition</code>: The position at which the banner ad should be positioned. The <code>AdPosition.Values</code> (GDScript) or <code>AdPosition</code> (C#) enum enumerates the valid ad position values.</li>
+<li><code>AdPosition</code>: The position at which the banner ad should be positioned. The <code>AdPosition</code> (GDScript) or <code>AdPosition</code> (C#) class exposes static instances for valid ad position values (e.g., <code>AdPosition.TOP</code>).</li>
 </ul>
 <p>Take note of the distinct ad units used based on the platform. When making ad requests on iOS, you should utilize an iOS ad unit, while for Android, you must use an Android ad unit.</p>
-<h4 id="optional-generate-an-adview-with-a-customized-size">(Optional) Generate an AdView with a customized size</h4>
-<p>In addition to utilizing predefined AdSize constants, you can also specify a custom size for your ad:</p>
+<h4 id="optional-generate-an-adview-with-a-customized-position">(Optional) Generate an AdView with a customized position</h4>
+<p>Instead of using standard anchors (like <code>Top</code> or <code>Bottom</code>), you can define specific <code>x</code> and <code>y</code> coordinates to place the banner at a custom point. The coordinates determine where the top-left corner of the banner view will be placed.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1">1</a></span>
-<span class="normal"><a href="#__codelineno-4-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_size</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdSize</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="n">_ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">ad_size</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">Values</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-4-2">2</a></span>
+<span class="normal"><a href="#__codelineno-4-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1"></a><span class="c1"># Create a banner at coordinate (0, 50) on screen.</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2"></a><span class="k">var</span><span class="w"> </span><span class="n">custom_position</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">custom</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3"></a><span class="n">_ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">AdSize</span><span class="o">.</span><span class="n">BANNER</span><span class="p">,</span><span class="w"> </span><span class="n">custom_position</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-5-1">1</a></span>
-<span class="normal"><a href="#__codelineno-5-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="kt">var</span><span class="w"> </span><span class="n">adSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdSize</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">);</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="n">_adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">adSize</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
+<span class="normal"><a href="#__codelineno-5-2">2</a></span>
+<span class="normal"><a href="#__codelineno-5-3">3</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1"></a><span class="c1">// Create a banner at coordinate (0, 50) on screen.</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2"></a><span class="kt">var</span><span class="w"> </span><span class="n">customPosition</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Custom</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3"></a><span class="n">_adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">AdSize</span><span class="p">.</span><span class="n">Banner</span><span class="p">,</span><span class="w"> </span><span class="n">customPosition</span><span class="p">);</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h4 id="optional-generate-an-adview-with-a-customized-size">(Optional) Generate an AdView with a customized size</h4>
+<p>In addition to utilizing predefined AdSize constants, you can also specify a custom size for your ad:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">GDScript</label><label for="__tabbed_4_2">C#</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
+<span class="normal"><a href="#__codelineno-6-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_size</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdSize</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="n">_ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">ad_size</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
+<span class="normal"><a href="#__codelineno-7-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="kt">var</span><span class="w"> </span><span class="n">adSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdSize</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="w"> </span><span class="mi">200</span><span class="p">);</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="n">_adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">adSize</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <h3 id="load-a-adview-banner">Load a AdView (banner)</h3>
 <p>The second phase in utilizing the AdView involves crafting an AdRequest and then passing it to the <code>load_banner()</code> method.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">GDScript</label><label for="__tabbed_4_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
-<span class="normal"><a href="#__codelineno-6-2">2</a></span>
-<span class="normal"><a href="#__codelineno-6-3">3</a></span>
-<span class="normal"><a href="#__codelineno-6-4">4</a></span>
-<span class="normal"><a href="#__codelineno-6-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_on_load_banner_pressed</span><span class="p">():</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">_ad_view</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">:</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3"></a><span class="w">        </span><span class="n">_create_ad_view</span><span class="p">()</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4"></a><span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ad_request</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdRequest</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
-</span><a id="__codelineno-6-5" name="__codelineno-6-5"></a><span class="hll"><span class="w">    </span><span class="n">_ad_view</span><span class="o">.</span><span class="n">load_ad</span><span class="p">(</span><span class="n">ad_request</span><span class="p">)</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1">1</a></span>
+<span class="normal"><a href="#__codelineno-8-2">2</a></span>
+<span class="normal"><a href="#__codelineno-8-3">3</a></span>
+<span class="normal"><a href="#__codelineno-8-4">4</a></span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_on_load_banner_pressed</span><span class="p">():</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">_ad_view</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="w">        </span><span class="n">_create_ad_view</span><span class="p">()</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="hll"><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ad_request</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdRequest</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+</span><a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="hll"><span class="w">    </span><span class="n">_ad_view</span><span class="o">.</span><span class="n">load_ad</span><span class="p">(</span><span class="n">ad_request</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-7-1">1</a></span>
-<span class="normal"><a href="#__codelineno-7-2">2</a></span>
-<span class="normal"><a href="#__codelineno-7-3">3</a></span>
-<span class="normal"><a href="#__codelineno-7-4">4</a></span>
-<span class="normal"><a href="#__codelineno-7-5">5</a></span>
-<span class="normal"><a href="#__codelineno-7-6">6</a></span>
-<span class="normal"><a href="#__codelineno-7-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1"></a><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnLoadBannerPressed</span><span class="p">()</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2"></a><span class="p">{</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_adView</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4"></a><span class="w">        </span><span class="n">CreateAdView</span><span class="p">();</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5"></a><span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">adRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdRequest</span><span class="p">();</span>
-</span><a id="__codelineno-7-6" name="__codelineno-7-6"></a><span class="hll"><span class="w">    </span><span class="n">_adView</span><span class="p">.</span><span class="n">LoadAd</span><span class="p">(</span><span class="n">adRequest</span><span class="p">);</span>
-</span><a id="__codelineno-7-7" name="__codelineno-7-7"></a><span class="p">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1">1</a></span>
+<span class="normal"><a href="#__codelineno-9-2">2</a></span>
+<span class="normal"><a href="#__codelineno-9-3">3</a></span>
+<span class="normal"><a href="#__codelineno-9-4">4</a></span>
+<span class="normal"><a href="#__codelineno-9-5">5</a></span>
+<span class="normal"><a href="#__codelineno-9-6">6</a></span>
+<span class="normal"><a href="#__codelineno-9-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnLoadBannerPressed</span><span class="p">()</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_adView</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">        </span><span class="n">CreateAdView</span><span class="p">();</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">adRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdRequest</span><span class="p">();</span>
+</span><a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="hll"><span class="w">    </span><span class="n">_adView</span><span class="p">.</span><span class="n">LoadAd</span><span class="p">(</span><span class="n">adRequest</span><span class="p">);</span>
+</span><a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <h3 id="listen-to-adview-signals">Listen to AdView signals</h3>
 <p>To tailor the behavior of your ad, you can connect to various events in the ad's lifecycle, such as loading, opening, closing, and more. To monitor these events, you can register a <code>AdListener</code>:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">GDScript</label><label for="__tabbed_6_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-8-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-8-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-8-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-8-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-8-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-8-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-8-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-8-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-8-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-8-10">10</a></span>
-<span class="normal"><a href="#__codelineno-8-11">11</a></span>
-<span class="normal"><a href="#__codelineno-8-12">12</a></span>
-<span class="normal"><a href="#__codelineno-8-13">13</a></span>
-<span class="normal"><a href="#__codelineno-8-14">14</a></span>
-<span class="normal"><a href="#__codelineno-8-15">15</a></span>
-<span class="normal"><a href="#__codelineno-8-16">16</a></span>
-<span class="normal"><a href="#__codelineno-8-17">17</a></span>
-<span class="normal"><a href="#__codelineno-8-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">func</span><span class="w"> </span><span class="n">register_ad_listener</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">_ad_view</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">:</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3"></a><span class="hll"><span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">ad_listener</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdListener</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
-</span><a id="__codelineno-8-4" name="__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">        </span><span class="n">ad_listener</span><span class="o">.</span><span class="n">on_ad_failed_to_load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">(</span><span class="n">load_ad_error</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">LoadAdError</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6"></a><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_on_ad_failed_to_load: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">load_ad_error</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="w">        </span><span class="n">ad_listener</span><span class="o">.</span><span class="n">on_ad_clicked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_on_ad_clicked&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="w">        </span><span class="n">ad_listener</span><span class="o">.</span><span class="n">on_ad_closed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10"></a><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_on_ad_closed&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11"></a><span class="w">        </span><span class="n">ad_listener</span><span class="o">.</span><span class="n">on_ad_impression</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12"></a><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_on_ad_impression&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13"></a><span class="w">        </span><span class="n">ad_listener</span><span class="o">.</span><span class="n">on_ad_loaded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14"></a><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_on_ad_loaded&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15"></a><span class="w">        </span><span class="n">ad_listener</span><span class="o">.</span><span class="n">on_ad_opened</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16"></a><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_on_ad_opened&quot;</span><span class="p">)</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17"></a>
-<a id="__codelineno-8-18" name="__codelineno-8-18"></a><span class="hll"><span class="w">        </span><span class="n">_ad_view</span><span class="o">.</span><span class="n">ad_listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ad_listener</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-10-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-10-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-10-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-10-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-10-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-10-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-10-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-10-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-10-10">10</a></span>
+<span class="normal"><a href="#__codelineno-10-11">11</a></span>
+<span class="normal"><a href="#__codelineno-10-12">12</a></span>
+<span class="normal"><a href="#__codelineno-10-13">13</a></span>
+<span class="normal"><a href="#__codelineno-10-14">14</a></span>
+<span class="normal"><a href="#__codelineno-10-15">15</a></span>
+<span class="normal"><a href="#__codelineno-10-16">16</a></span>
+<span class="normal"><a href="#__codelineno-10-17">17</a></span>
+<span class="normal"><a href="#__codelineno-10-18">18</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="k">func</span><span class="w"> </span><span class="n">register_ad_listener</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">_ad_view</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">:</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="hll"><span class="w">        </span><span class="k">var</span><span class="w"> </span><span class="n">ad_listener</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdListener</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+</span><a id="__codelineno-10-4" name="__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">        </span><span class="n">ad_listener</span><span class="o">.</span><span class="n">on_ad_failed_to_load</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">(</span><span class="n">load_ad_error</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">LoadAdError</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_on_ad_failed_to_load: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">load_ad_error</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="w">        </span><span class="n">ad_listener</span><span class="o">.</span><span class="n">on_ad_clicked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_on_ad_clicked&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="w">        </span><span class="n">ad_listener</span><span class="o">.</span><span class="n">on_ad_closed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10"></a><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_on_ad_closed&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11"></a><span class="w">        </span><span class="n">ad_listener</span><span class="o">.</span><span class="n">on_ad_impression</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12"></a><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_on_ad_impression&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-13" name="__codelineno-10-13"></a><span class="w">        </span><span class="n">ad_listener</span><span class="o">.</span><span class="n">on_ad_loaded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14"></a><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_on_ad_loaded&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15"></a><span class="w">        </span><span class="n">ad_listener</span><span class="o">.</span><span class="n">on_ad_opened</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-10-16" name="__codelineno-10-16"></a><span class="w">            </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;_on_ad_opened&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17"></a>
+<a id="__codelineno-10-18" name="__codelineno-10-18"></a><span class="hll"><span class="w">        </span><span class="n">_ad_view</span><span class="o">.</span><span class="n">ad_listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ad_listener</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-9-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-9-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-9-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-9-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-9-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-9-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-9-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-9-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-9-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-9-10">10</a></span>
-<span class="normal"><a href="#__codelineno-9-11">11</a></span>
-<span class="normal"><a href="#__codelineno-9-12">12</a></span>
-<span class="normal"><a href="#__codelineno-9-13">13</a></span>
-<span class="normal"><a href="#__codelineno-9-14">14</a></span>
-<span class="normal"><a href="#__codelineno-9-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">RegisterAdListener</span><span class="p">()</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="p">{</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_adView</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="hll"><span class="w">        </span><span class="n">_adView</span><span class="p">.</span><span class="n">AdListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdListener</span>
-</span><a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">        </span><span class="p">{</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">            </span><span class="n">OnAdFailedToLoad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">LoadAdError</span><span class="w"> </span><span class="n">loadAdError</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;_on_ad_failed_to_load: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">loadAdError</span><span class="p">.</span><span class="n">Message</span><span class="p">),</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">            </span><span class="n">OnAdClicked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;_on_ad_clicked&quot;</span><span class="p">),</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="w">            </span><span class="n">OnAdClosed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;_on_ad_closed&quot;</span><span class="p">),</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10"></a><span class="w">            </span><span class="n">OnAdImpression</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;_on_ad_impression&quot;</span><span class="p">),</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11"></a><span class="w">            </span><span class="n">OnAdLoaded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;_on_ad_loaded&quot;</span><span class="p">),</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12"></a><span class="w">            </span><span class="n">OnAdOpened</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;_on_ad_opened&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13"></a><span class="w">        </span><span class="p">};</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15"></a><span class="p">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-11-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-11-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-11-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-11-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-11-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-11-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-11-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-11-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-11-10">10</a></span>
+<span class="normal"><a href="#__codelineno-11-11">11</a></span>
+<span class="normal"><a href="#__codelineno-11-12">12</a></span>
+<span class="normal"><a href="#__codelineno-11-13">13</a></span>
+<span class="normal"><a href="#__codelineno-11-14">14</a></span>
+<span class="normal"><a href="#__codelineno-11-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">RegisterAdListener</span><span class="p">()</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_adView</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="hll"><span class="w">        </span><span class="n">_adView</span><span class="p">.</span><span class="n">AdListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdListener</span>
+</span><a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">            </span><span class="n">OnAdFailedToLoad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">LoadAdError</span><span class="w"> </span><span class="n">loadAdError</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;_on_ad_failed_to_load: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">loadAdError</span><span class="p">.</span><span class="n">Message</span><span class="p">),</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">            </span><span class="n">OnAdClicked</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;_on_ad_clicked&quot;</span><span class="p">),</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="w">            </span><span class="n">OnAdClosed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;_on_ad_closed&quot;</span><span class="p">),</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10"></a><span class="w">            </span><span class="n">OnAdImpression</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;_on_ad_impression&quot;</span><span class="p">),</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11"></a><span class="w">            </span><span class="n">OnAdLoaded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;_on_ad_loaded&quot;</span><span class="p">),</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12"></a><span class="w">            </span><span class="n">OnAdOpened</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;_on_ad_opened&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13"></a><span class="w">        </span><span class="p">};</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
 <h3 id="destroy-the-adview-banner">Destroy the AdView (banner)</h3>
 <p>Upon completion of using the AdView, remember to call Destroy() to release allocated resources and free up memory.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">GDScript</label><label for="__tabbed_6_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">GDScript</label><label for="__tabbed_7_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
-<span class="normal"><a href="#__codelineno-10-2">2</a></span>
-<span class="normal"><a href="#__codelineno-10-3">3</a></span>
-<span class="normal"><a href="#__codelineno-10-4">4</a></span>
-<span class="normal"><a href="#__codelineno-10-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="k">func</span><span class="w"> </span><span class="n">destroy_ad_view</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">_ad_view</span><span class="p">:</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3"></a><span class="w">        </span><span class="c1">#always call this method on all AdFormats to free memory on Android/iOS</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="hll"><span class="w">        </span><span class="n">_ad_view</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
-</span><a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="w">        </span><span class="n">_ad_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">null</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-12-1">1</a></span>
+<span class="normal"><a href="#__codelineno-12-2">2</a></span>
+<span class="normal"><a href="#__codelineno-12-3">3</a></span>
+<span class="normal"><a href="#__codelineno-12-4">4</a></span>
+<span class="normal"><a href="#__codelineno-12-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1"></a><span class="k">func</span><span class="w"> </span><span class="n">destroy_ad_view</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">_ad_view</span><span class="p">:</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3"></a><span class="w">        </span><span class="c1">#always call this method on all AdFormats to free memory on Android/iOS</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4"></a><span class="hll"><span class="w">        </span><span class="n">_ad_view</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+</span><a id="__codelineno-12-5" name="__codelineno-12-5"></a><span class="w">        </span><span class="n">_ad_view</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">null</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
-<span class="normal"><a href="#__codelineno-11-2">2</a></span>
-<span class="normal"><a href="#__codelineno-11-3">3</a></span>
-<span class="normal"><a href="#__codelineno-11-4">4</a></span>
-<span class="normal"><a href="#__codelineno-11-5">5</a></span>
-<span class="normal"><a href="#__codelineno-11-6">6</a></span>
-<span class="normal"><a href="#__codelineno-11-7">7</a></span>
-<span class="normal"><a href="#__codelineno-11-8">8</a></span>
-<span class="normal"><a href="#__codelineno-11-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">DestroyAdView</span><span class="p">()</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="p">{</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_adView</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="w">        </span><span class="c1">//always call this method on all AdFormats to free memory on Android/iOS</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6"></a><span class="hll"><span class="w">        </span><span class="n">_adView</span><span class="p">.</span><span class="n">Destroy</span><span class="p">();</span>
-</span><a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="w">        </span><span class="n">_adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="p">}</span>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-13-1">1</a></span>
+<span class="normal"><a href="#__codelineno-13-2">2</a></span>
+<span class="normal"><a href="#__codelineno-13-3">3</a></span>
+<span class="normal"><a href="#__codelineno-13-4">4</a></span>
+<span class="normal"><a href="#__codelineno-13-5">5</a></span>
+<span class="normal"><a href="#__codelineno-13-6">6</a></span>
+<span class="normal"><a href="#__codelineno-13-7">7</a></span>
+<span class="normal"><a href="#__codelineno-13-8">8</a></span>
+<span class="normal"><a href="#__codelineno-13-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1"></a><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">DestroyAdView</span><span class="p">()</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2"></a><span class="p">{</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3"></a><span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">_adView</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5"></a><span class="w">        </span><span class="c1">//always call this method on all AdFormats to free memory on Android/iOS</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6"></a><span class="hll"><span class="w">        </span><span class="n">_adView</span><span class="p">.</span><span class="n">Destroy</span><span class="p">();</span>
+</span><a id="__codelineno-13-7" name="__codelineno-13-7"></a><span class="w">        </span><span class="n">_adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
