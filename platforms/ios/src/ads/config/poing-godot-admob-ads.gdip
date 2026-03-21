@@ -12,9 +12,12 @@ system=["AppTrackingTransparency.framework"]
 capabilities=[]
 files=[]
 linker_flags=["-ObjC"]
-admob_packages=[
-  "https://github.com/googleads/swift-package-manager-google-mobile-ads.git@exact:12.14.0|GoogleMobileAds",
-	"https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git@exact:3.1.0|GoogleUserMessagingPlatform"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
+    "version": "12.14.0",
+    "products": ["GoogleMobileAds"]
+  }
 ]
 
 [plist]

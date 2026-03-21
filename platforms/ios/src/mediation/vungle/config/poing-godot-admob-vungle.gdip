@@ -12,8 +12,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-liftoffmonetize.git@exact:7.5.300|LiftoffMonetizeAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-liftoffmonetize.git",
+    "version": "7.5.300",
+    "products": ["LiftoffMonetizeAdapterTarget"]
+  }
 ]
 
 [plist]

@@ -2,59 +2,71 @@
 import PackageDescription
 import Foundation
 
-struct DependencyInfo {
+struct SPMPackageInfo {
     let url: String
     let version: String
-    let mode: String
-    let product: String
+    let products: [String]
 }
 
-func parseGDIPFile(at path: String) -> [DependencyInfo] {
+func parseGDIPFile(at path: String) -> [SPMPackageInfo] {
     let fileURL = URL(fileURLWithPath: path)
     guard let content = try? String(contentsOf: fileURL, encoding: .utf8) else {
         return []
     }
-    
-    // Regex to find admob_packages array content
-    let pattern = #"admob_packages\s*=\s*\[\s*([\s\S]*?)\s*\]"#
-    guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
-    
-    let range = NSRange(content.startIndex..., in: content)
-    guard let match = regex.firstMatch(in: content, options: [], range: range) else { return [] }
-    
-    let arrayContent = String(content[Range(match.range(at: 1), in: content)!])
-    
-    // Parse each line in the array: "url@mode:version|product"
-    let lines = arrayContent.components(separatedBy: ",")
-    var dependencies: [DependencyInfo] = []
-    
-    for line in lines {
-        let trimmedLine = line.trimmingCharacters(in: .whitespacesAndNewlines)
-            .trimmingCharacters(in: CharacterSet(charactersIn: "\""))
-        
-        if trimmedLine.isEmpty { continue }
-        
-        // Split by @ and |
-        let mainParts = trimmedLine.components(separatedBy: "|")
-        let product = mainParts.count > 1 ? mainParts[1] : ""
-        
-        let urlAndRules = mainParts[0].components(separatedBy: "@")
-        let url = urlAndRules[0]
-        
-        if urlAndRules.count > 1 {
-            let rules = urlAndRules[1].components(separatedBy: ":")
-            if rules.count > 1 {
-                dependencies.append(DependencyInfo(
-                    url: url,
-                    version: rules[1],
-                    mode: rules[0],
-                    product: product
-                ))
-            }
+
+    guard let spmStart = content.range(of: "spm_packages") else { return [] }
+    let afterSpm = String(content[spmStart.upperBound...])
+
+    let sectionPattern = #"\n\s*\[[a-zA-Z]"#
+    let nextSection: String
+    if let sectionRegex = try? NSRegularExpression(pattern: sectionPattern),
+       let sectionMatch = sectionRegex.firstMatch(in: afterSpm, range: NSRange(afterSpm.startIndex..., in: afterSpm)) {
+        nextSection = String(afterSpm[afterSpm.startIndex..<Range(sectionMatch.range, in: afterSpm)!.lowerBound])
+    } else {
+        nextSection = afterSpm
+    }
+
+    let dictPattern = #"\{([^}]+)\}"#
+    guard let dictRegex = try? NSRegularExpression(pattern: dictPattern) else { return [] }
+
+    let dictRange = NSRange(nextSection.startIndex..., in: nextSection)
+    let dictMatches = dictRegex.matches(in: nextSection, options: [], range: dictRange)
+
+    var packages: [SPMPackageInfo] = []
+
+    for dictMatch in dictMatches {
+        let dictContent = String(nextSection[Range(dictMatch.range(at: 1), in: nextSection)!])
+
+        let url = extractValue(from: dictContent, key: "url")
+        let version = extractValue(from: dictContent, key: "version")
+        let products = extractArray(from: dictContent, key: "products")
+
+        if !url.isEmpty && !version.isEmpty {
+            packages.append(SPMPackageInfo(url: url, version: version, products: products))
         }
     }
-    
-    return dependencies
+
+    return packages
+}
+
+func extractValue(from text: String, key: String) -> String {
+    let pattern = #""\#(key)"\s*:\s*"([^"]+)""#
+    guard let regex = try? NSRegularExpression(pattern: pattern) else { return "" }
+    let range = NSRange(text.startIndex..., in: text)
+    guard let match = regex.firstMatch(in: text, options: [], range: range) else { return "" }
+    return String(text[Range(match.range(at: 1), in: text)!])
+}
+
+func extractArray(from text: String, key: String) -> [String] {
+    let pattern = #""\#(key)"\s*:\s*\[([^\]]*)\]"#
+    guard let regex = try? NSRegularExpression(pattern: pattern) else { return [] }
+    let range = NSRange(text.startIndex..., in: text)
+    guard let match = regex.firstMatch(in: text, options: [], range: range) else { return [] }
+
+    let arrayContent = String(text[Range(match.range(at: 1), in: text)!])
+    return arrayContent.components(separatedBy: ",")
+        .map { $0.trimmingCharacters(in: .whitespacesAndNewlines).trimmingCharacters(in: CharacterSet(charactersIn: "\"")) }
+        .filter { !$0.isEmpty }
 }
 
 var packageDependencies: [Package.Dependency] = []
@@ -88,25 +100,21 @@ if gdipFiles.isEmpty {
 
 for gdipFile in gdipFiles {
     print("PoingAdMob: Parsing \(gdipFile)")
-    let deps = parseGDIPFile(at: gdipFile)
-    for dep in deps {
-        print("PoingAdMob: Found dependency \(dep.product) from \(dep.url)")
-        if !seenURLs.contains(dep.url) {
-            if dep.mode == "exact" {
-                packageDependencies.append(.package(url: dep.url, exact: Version(stringLiteral: dep.version)))
-            } else if dep.mode == "from" {
-                packageDependencies.append(.package(url: dep.url, from: Version(stringLiteral: dep.version)))
-            } else if dep.mode == "branch" {
-                packageDependencies.append(.package(url: dep.url, branch: dep.version))
-            }
-            seenURLs.insert(dep.url)
+    let spmPackages = parseGDIPFile(at: gdipFile)
+    for package in spmPackages {
+        print("PoingAdMob: Found package \(package.url) v\(package.version) → \(package.products)")
+        if !seenURLs.contains(package.url) {
+            packageDependencies.append(.package(url: package.url, exact: Version(stringLiteral: package.version)))
+            seenURLs.insert(package.url)
         }
-        
-        if !seenProducts.contains(dep.product) && !dep.product.isEmpty {
-            let packageName = dep.url.components(separatedBy: "/").last?
-                .replacingOccurrences(of: ".git", with: "") ?? ""
-            targetDependencies.append(.product(name: dep.product, package: packageName))
-            seenProducts.insert(dep.product)
+
+        let packageName = package.url.components(separatedBy: "/").last?
+            .replacingOccurrences(of: ".git", with: "") ?? ""
+        for product in package.products {
+            if !seenProducts.contains(product) {
+                targetDependencies.append(.product(name: product, package: packageName))
+                seenProducts.insert(product)
+            }
         }
     }
 }
