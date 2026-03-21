@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace = "com.poingstudios.godot.admob.core"
+
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    def fullModuleName = rootProject.ext.buildFullModuleName(project)
+
+    libraryVariants.configureEach { variant ->
+        variant.outputs.all {
+            outputFileName = "${fullModuleName}-${variant.name}.aar"
+            println "Output file will be: $outputFileName"
+        }
+    }
+}
+
+dependencies {
+    def libs = rootProject.ext.readDependencyLibrary(
+            file("../ads/config/poing_godot_admob_ads.gd")
+    )
+
+    libs.each { item ->
+        println "api item: $item"
+        project.dependencies.add("api", item.toString())
+    }
+
+    def godotVersion    = project.findProperty("godotVersion") ?: "4.6.0"
+    def releaseType     = project.findProperty("releaseType") ?: "stable"
+
+    def fullVersion = "$godotVersion.$releaseType"
+    println "Using remote godot-lib on version $fullVersion"
+
+    api "org.godotengine:godot:$fullVersion"
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'com.google.android.material:material:1.13.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
+}
+
+tasks.register('copyAar', Copy) {
+    dependsOn 'assemble'
+
+    from(layout.buildDirectory.dir("outputs/aar"))
+    include '*.aar'
+
+    into project(':src:ads').layout.buildDirectory.dir("outputs/aar")
+}
+
+tasks.build.dependsOn copyAar

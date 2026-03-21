@@ -52,43 +52,102 @@ Follow these steps to implement a simple adaptive anchor banner in Godot:
 ## Sample Code Illustration
 
 Below is a script example that loads and refreshes an adaptive banner:
-```gdscript linenums="1" hl_lines="25 29"
-extends Node2D
+=== "GDScript"
 
-var _ad_view : AdView
-var _ad_listener := AdListener.new()
+    ```gdscript linenums="1" hl_lines="25 29"
+    extends Node2D
+    
+    var _ad_view : AdView
+    var _ad_listener := AdListener.new()
+    
+    func _ready() -> void:
+    	var on_initialization_complete_listener := OnInitializationCompleteListener.new()
+    	on_initialization_complete_listener.on_initialization_complete = func(initialization_status : InitializationStatus) -> void:
+    		_request_ad_view()
+    	MobileAds.initialize(on_initialization_complete_listener)
+    	
+    	_ad_listener.on_ad_failed_to_load = _on_ad_failed_to_load
+    	_ad_listener.on_ad_loaded = _on_ad_loaded
+    
+    func _request_ad_view() -> void:
+    	var unit_id : String
+    	if OS.get_name() == "Android":
+    		unit_id = "ca-app-pub-3940256099942544/6300978111"
+    	elif OS.get_name() == "iOS":
+    		unit_id = "ca-app-pub-3940256099942544/6300978111"
+    	
+    	if (_ad_view != null):
+    		_ad_view.destroy()
+    		
+    	var adaptive_size := AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)	
+    	_ad_view = AdView.new(unit_id, adaptive_size, AdPosition.Values.TOP)
+    	_ad_view.ad_listener = _ad_listener
+    	
+    	_ad_view.load_ad(AdRequest.new())
+    
+    func _on_ad_failed_to_load(load_ad_error : LoadAdError) -> void:
+    	print("_on_ad_failed_to_load: " + load_ad_error.message)
+    
+    func _on_ad_loaded() -> void:
+    	print("_on_ad_loaded")
+    ```
 
-func _ready() -> void:
-	var on_initialization_complete_listener := OnInitializationCompleteListener.new()
-	on_initialization_complete_listener.on_initialization_complete = func(initialization_status : InitializationStatus) -> void:
-		_request_ad_view()
-	MobileAds.initialize(on_initialization_complete_listener)
-	
-	_ad_listener.on_ad_failed_to_load = _on_ad_failed_to_load
-	_ad_listener.on_ad_loaded = _on_ad_loaded
+=== "C#"
 
-func _request_ad_view() -> void:
-	var unit_id : String
-	if OS.get_name() == "Android":
-		unit_id = "ca-app-pub-3940256099942544/6300978111"
-	elif OS.get_name() == "iOS":
-		unit_id = "ca-app-pub-3940256099942544/6300978111"
-	
-	if (_ad_view != null):
-		_ad_view.destroy()
-		
-	var adaptive_size := AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)	
-	_ad_view = AdView.new(unit_id, adaptive_size, AdPosition.Values.TOP)
-	_ad_view.ad_listener = _ad_listener
-	
-	_ad_view.load_ad(AdRequest.new())
-
-func _on_ad_failed_to_load(load_ad_error : LoadAdError) -> void:
-	print("_on_ad_failed_to_load: " + load_ad_error.message)
-
-func _on_ad_loaded() -> void:
-	print("_on_ad_loaded")
-
-```
+    ```csharp linenums="1" hl_lines="37 41"
+    using Godot;
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Api.Listeners;
+    using PoingStudios.AdMob.Api.Core;
+    
+    public partial class AnchoredAdaptiveExample : Node2D
+    {
+        private AdView _adView;
+        private AdListener _adListener;
+    
+        public override void _Ready()
+        {
+            var onInitializationCompleteListener = new OnInitializationCompleteListener
+            {
+                OnInitializationComplete = (InitializationStatus status) => RequestAdView()
+            };
+            MobileAds.Initialize(onInitializationCompleteListener);
+            
+            _adListener = new AdListener
+            {
+                OnAdFailedToLoad = OnAdFailedToLoad,
+                OnAdLoaded = OnAdLoaded
+            };
+        }
+    
+        private void RequestAdView()
+        {
+            string unitId = null;
+            if (OS.GetName() == "Android")
+                unitId = "ca-app-pub-3940256099942544/6300978111";
+            else if (OS.GetName() == "iOS")
+                unitId = "ca-app-pub-3940256099942544/6300978111";
+    
+            if (_adView != null)
+                _adView.Destroy();
+    
+            var adaptiveSize = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(AdSize.FullWidth);
+            _adView = new AdView(unitId, adaptiveSize, AdPosition.Top);
+            _adView.AdListener = _adListener;
+    
+            _adView.LoadAd(new AdRequest());
+        }
+    
+        private void OnAdFailedToLoad(LoadAdError loadAdError)
+        {
+            GD.Print("_on_ad_failed_to_load: " + loadAdError.Message);
+        }
+    
+        private void OnAdLoaded()
+        {
+            GD.Print("_on_ad_loaded");
+        }
+    }
+    ```
 
 In this context, we use functions like `AdSize.get_current_orientation_anchored_adaptive_banner_ad_size` to retrieve the size for a banner in an anchored position, aligning with the current interface orientation. To pre-load an anchored banner for a specific orientation, you can make use of the appropriate function, either `AdSize.get_portrait_anchored_adaptive_banner_ad_size` or `AdSize.get_landscape_anchored_adaptive_banner_ad_size`.

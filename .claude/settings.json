@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(./**/*)",
+      "Run(./gradlew *)",
+      "Run(scons *)",
+      "Run(./scripts/*)",
+      "Run(gemini *)"
+    ],
+    "deny": [
+      "Read(./.env*)",
+      "Read(./**/build/**)",
+      "Read(./**/.gradle/**)",
+      "Read(./platforms/godot_editor/.godot/**)",
+      "Read(./**/*.import)",
+      "Read(./**/*.uid)",
+      "Read(./platforms/godot_editor/addons/admob/android/bin/**)",
+      "Read(./platforms/ios/.build/**)",
+      "Read(./.gemini/**)"
+    ]
+  }
+}

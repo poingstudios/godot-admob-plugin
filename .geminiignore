@@ -1,0 +1,34 @@
+# Gemini CLI: Ignore list to save context tokens
+
+# Godot Internal
+.godot/
+*.import
+*.tmp
+
+# Android Build & Gradle
+.gradle/
+platforms/android/.gradle/
+platforms/android/build/
+platforms/android/.output/
+platforms/android/gradlew
+platforms/android/gradlew.bat
+
+# iOS Build & SCons
+platforms/ios/.build/
+platforms/ios/bin/
+platforms/ios/build/
+platforms/ios/PoingGodotAdMob.xcodeproj/
+platforms/ios/Package.resolved
+
+# Assets & Docs (High token usage, low signal)
+docs/assets/*.png
+docs/assets/*.webp
+docs/assets/*.ico
+
+# General Caches & OS
+.DS_Store
+.vscode/
+node_modules/
+dist/
+target/
+*.skill

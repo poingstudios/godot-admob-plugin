@@ -29,24 +29,57 @@ Use the information stored in the consentInformation object when you [present th
 
 Here is an example of how to check the status on app start:
 
-```gdscript
-extends Node
+=== "GDScript"
 
-func _ready():
-	var request := ConsentRequestParameters.new()
-    # Set tag for underage of consent. false means users are not underage.
-	request.tag_for_under_age_of_consent = false
-	UserMessagingPlatform.consent_information.update(request, _on_consent_info_updated_success, _on_consent_info_updated_failure)
+    ```gdscript
+    extends Node
+    
+    func _ready():
+    	var request := ConsentRequestParameters.new()
+        # Set tag for underage of consent. false means users are not underage.
+    	request.tag_for_under_age_of_consent = false
+    	UserMessagingPlatform.consent_information.update(request, _on_consent_info_updated_success, _on_consent_info_updated_failure)
+    
+    func _on_consent_info_updated_success():
+    	# The consent information state was updated.
+    	# You are now ready to check if a form is available.
+    	pass
+    
+    func _on_consent_info_updated_failure(form_error : FormError):
+    	# Handle the error.
+    	pass
+    ```
 
-func _on_consent_info_updated_success():
-	# The consent information state was updated.
-	# You are now ready to check if a form is available.
-	pass
+=== "C#"
 
-func _on_consent_info_updated_failure(form_error : FormError):
-	# Handle the error.
-	pass
-```
+    ```csharp
+    using Godot;
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Ump.Api;
+    using PoingStudios.AdMob.Ump.Core;
+    
+    public partial class UmpExample : Node
+    {
+        public override void _Ready()
+        {
+            var request = new ConsentRequestParameters();
+            // Set tag for underage of consent. false means users are not underage.
+            request.TagForUnderAgeOfConsent = false;
+            UserMessagingPlatform.ConsentInformation.Update(request, OnConsentInfoUpdatedSuccess, OnConsentInfoUpdatedFailure);
+        }
+    
+        private void OnConsentInfoUpdatedSuccess()
+        {
+            // The consent information state was updated.
+            // You are now ready to check if a form is available.
+        }
+    
+        private void OnConsentInfoUpdatedFailure(FormError formError)
+        {
+            // Handle the error.
+        }
+    }
+    ```
 
 ## Load a form if available
 
@@ -56,65 +89,147 @@ To check the availability of a form, use the `get_is_consent_form_available()` f
 
 Then, add a wrapper function to load the form:
 
-```gdscript
-#...
-func _on_consent_info_updated_success():
-	# The consent information state was updated.
-	# You are now ready to check if a form is available.
-	if UserMessagingPlatform.consent_information.get_is_consent_form_available():
-		load_form()
+=== "GDScript"
 
-func _on_consent_info_updated_failure(form_error : FormError):
-	# Handle the error.
-	pass
+    ```gdscript
+    #...
+    func _on_consent_info_updated_success():
+    	# The consent information state was updated.
+    	# You are now ready to check if a form is available.
+    	if UserMessagingPlatform.consent_information.get_is_consent_form_available():
+    		load_form()
+    
+    func _on_consent_info_updated_failure(form_error : FormError):
+    	# Handle the error.
+    	pass
+    
+    func load_form():
+    	pass
+    ```
 
-func load_form():
-	pass
-```
+=== "C#"
+
+    ```csharp
+    //...
+    private void OnConsentInfoUpdatedSuccess()
+    {
+        // The consent information state was updated.
+        // You are now ready to check if a form is available.
+        if (UserMessagingPlatform.ConsentInformation.GetIsConsentFormAvailable())
+            LoadForm();
+    }
+    
+    private void OnConsentInfoUpdatedFailure(FormError formError)
+    {
+        // Handle the error.
+    }
+    
+    private void LoadForm()
+    {
+    }
+    ```
 
 To load the form, use the static `load_consent_form()` function on the `UserMessagingPlatform` class.
 
-```gdscript
-var _consent_form : ConsentForm
+=== "GDScript"
 
-func load_form():
-	UserMessagingPlatform.load_consent_form(_on_consent_form_load_success, _on_consent_form_load_failure)
+    ```gdscript
+    var _consent_form : ConsentForm
+    
+    func load_form():
+    	UserMessagingPlatform.load_consent_form(_on_consent_form_load_success, _on_consent_form_load_failure)
+    
+    func _on_consent_form_load_success(consent_form : ConsentForm):
+    	_consent_form = consent_form
+    
+    func _on_consent_form_load_failure(form_error : FormError):
+    	# Handle the error.
+    	pass
+    ```
 
-func _on_consent_form_load_success(consent_form : ConsentForm):
-	_consent_form = consent_form
+=== "C#"
 
-func _on_consent_form_load_failure(form_error : FormError):
-	# Handle the error.
-	pass
-```
+    ```csharp
+    private ConsentForm _consentForm;
+    
+    private void LoadForm()
+    {
+        UserMessagingPlatform.LoadConsentForm(OnConsentFormLoadSuccess, OnConsentFormLoadFailure);
+    }
+    
+    private void OnConsentFormLoadSuccess(ConsentForm consentForm)
+    {
+        _consentForm = consentForm;
+    }
+    
+    private void OnConsentFormLoadFailure(FormError formError)
+    {
+        // Handle the error.
+    }
+    ```
 
 ## Present the form if required
 After you’ve determined the form's availability and loaded it, use the `show()` function on the ConsentForm instance to present the form.
 
 Use the static `consent_information` instance of `UserMessagingPlatform` class to check the consent status and update your `load_form()` function:
 
-```gdscript
-var _consent_form : ConsentForm
+=== "GDScript"
 
-func load_form():
-	UserMessagingPlatform.load_consent_form(_on_consent_form_load_success, _on_consent_form_load_failure)
+    ```gdscript
+    var _consent_form : ConsentForm
+    
+    func load_form():
+    	UserMessagingPlatform.load_consent_form(_on_consent_form_load_success, _on_consent_form_load_failure)
+    
+    func _on_consent_form_load_success(consent_form : ConsentForm):
+    	_consent_form = consent_form
+    	if UserMessagingPlatform.consent_information.get_consent_status() == UserMessagingPlatform.consent_information.ConsentStatus.REQUIRED:
+    		consent_form.show(_on_consent_form_dismissed)
+    
+    func _on_consent_form_load_failure(form_error : FormError):
+    	# Handle the error.
+    	pass
+    
+    func _on_consent_form_dismissed(form_error : FormError):
+    	if UserMessagingPlatform.consent_information.get_consent_status() == UserMessagingPlatform.consent_information.ConsentStatus.OBTAINED:
+    		# App can start requesting ads.
+    		pass
+    	# Handle dismissal by reloading form
+    	load_form()
+    ```
 
-func _on_consent_form_load_success(consent_form : ConsentForm):
-	_consent_form = consent_form
-	if UserMessagingPlatform.consent_information.get_consent_status() == UserMessagingPlatform.consent_information.ConsentStatus.REQUIRED:
-		consent_form.show(_on_consent_form_dismissed)
+=== "C#"
 
-func _on_consent_form_load_failure(form_error : FormError):
-	# Handle the error.
-	pass
-
-func _on_consent_form_dismissed(form_error : FormError):
-	if UserMessagingPlatform.consent_information.get_consent_status() == UserMessagingPlatform.consent_information.ConsentStatus.OBTAINED:
-		# App can start requesting ads.
-		pass
-	# Handle dismissal by reloading form
-	load_form()
-```
+    ```csharp
+    private ConsentForm _consentForm;
+    
+    private void LoadForm()
+    {
+        UserMessagingPlatform.LoadConsentForm(OnConsentFormLoadSuccess, OnConsentFormLoadFailure);
+    }
+    
+    private void OnConsentFormLoadSuccess(ConsentForm consentForm)
+    {
+        _consentForm = consentForm;
+        if (UserMessagingPlatform.ConsentInformation.GetConsentStatus() == ConsentStatus.Values.Required)
+            consentForm.Show(OnConsentFormDismissed);
+    }
+    
+    private void OnConsentFormLoadFailure(FormError formError)
+    {
+        // Handle the error.
+    }
+    
+    private void OnConsentFormDismissed(FormError formError)
+    {
+        if (UserMessagingPlatform.ConsentInformation.GetConsentStatus() == ConsentStatus.Values.Obtained)
+        {
+            // App can start requesting ads.
+        }
+        // Handle dismissal by reloading form
+        LoadForm();
+    }
+    ```
 
 If you need to perform any actions after the user has made a choice or dismissed the form, place that logic in the completion handler or callback for your form.
 
@@ -126,27 +241,63 @@ The UMP SDK provides a way to test your app's behavior as though the device was 
 
 You must provide your test device's hashed ID in your app's debug settings to use the debug functionality. If you call `UserMessagingPlatform.consent_information.update()` without setting this value, your app logs the required ID hash when run.
 
-```gdscript
-extends Node
+=== "GDScript"
 
-func _ready():
-	var request := ConsentRequestParameters.new()
-	var consent_debug_settings := ConsentDebugSettings.new()
-	consent_debug_settings.debug_geography = DebugGeography.Values.EEA
-	consent_debug_settings.test_device_hashed_ids.append("test_device_hashed_id")
-	request.consent_debug_settings = consent_debug_settings
-	
-	UserMessagingPlatform.consent_information.update(request, _on_consent_info_updated_success, _on_consent_info_updated_failure)
+    ```gdscript
+    extends Node
+    
+    func _ready():
+    	var request := ConsentRequestParameters.new()
+    	var consent_debug_settings := ConsentDebugSettings.new()
+    	consent_debug_settings.debug_geography = DebugGeography.Values.EEA
+    	consent_debug_settings.test_device_hashed_ids.append("test_device_hashed_id")
+    	request.consent_debug_settings = consent_debug_settings
+    	
+    	UserMessagingPlatform.consent_information.update(request, _on_consent_info_updated_success, _on_consent_info_updated_failure)
+    
+    func _on_consent_info_updated_success():
+    	# The consent information state was updated.
+    	# You are now ready to check if a form is available.
+    	pass
+    
+    func _on_consent_info_updated_failure(form_error : FormError):
+    	# Handle the error.
+    	pass
+    ```
 
-func _on_consent_info_updated_success():
-	# The consent information state was updated.
-	# You are now ready to check if a form is available.
-	pass
+=== "C#"
 
-func _on_consent_info_updated_failure(form_error : FormError):
-	# Handle the error.
-	pass
-```
+    ```csharp
+    using Godot;
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Ump.Api;
+    using PoingStudios.AdMob.Ump.Core;
+    
+    public partial class UmpExample : Node
+    {
+        public override void _Ready()
+        {
+            var request = new ConsentRequestParameters();
+            var consentDebugSettings = new ConsentDebugSettings();
+            consentDebugSettings.DebugGeography = DebugGeography.Eea;
+            consentDebugSettings.TestDeviceHashedIds.Add("test_device_hashed_id");
+            request.ConsentDebugSettings = consentDebugSettings;
+            
+            UserMessagingPlatform.ConsentInformation.Update(request, OnConsentInfoUpdatedSuccess, OnConsentInfoUpdatedFailure);
+        }
+    
+        private void OnConsentInfoUpdatedSuccess()
+        {
+            // The consent information state was updated.
+            // You are now ready to check if a form is available.
+        }
+    
+        private void OnConsentInfoUpdatedFailure(FormError formError)
+        {
+            // Handle the error.
+        }
+    }
+    ```
 
 With the `DebugGeography.Values` enum, you have the option to force the geography to one of these options:
 
@@ -163,9 +314,17 @@ Note that debug settings only work on test devices. Emulators don't need to be a
 
 In testing your app with the UMP SDK, you might find it helpful to reset the state of the SDK so that you can simulate a user's first install experience. The SDK provides the `reset()` function to do this.
 
-```gdscript
-UserMessagingPlatform.consent_information.reset()
-```
+=== "GDScript"
+
+    ```gdscript
+    UserMessagingPlatform.consent_information.reset()
+    ```
+
+=== "C#"
+
+    ```csharp
+    UserMessagingPlatform.ConsentInformation.Reset();
+    ```
 
 You should also call `reset()` if you decide to remove the UMP SDK completely from your project.
 

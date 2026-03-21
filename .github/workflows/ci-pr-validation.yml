@@ -1,0 +1,476 @@
+name: "[CI] PR Validation"
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  # Job to detect if code changes occurred
+  changes:
+    name: Check for code changes
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.filter.outputs.code }}
+    steps:
+    - uses: actions/checkout@v6
+    - uses: dorny/paths-filter@v3
+      id: filter
+      with:
+        filters: |
+          code:
+            - 'platforms/**'
+            - 'scripts/**'
+            - '.github/workflows/**'
+            - '!**.md'
+
+  detect-latest:
+    name: Check latest Godot version
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      godot_version: ${{ steps.detect.outputs.godot_version }}
+    steps:
+    - name: Detect latest Godot version
+      id: detect
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        LATEST=$(gh api repos/godotengine/godot/releases \
+          --jq '[.[] | select(.tag_name | test("^4\\.[0-9]+(\\.[0-9]+)?-stable$")) | .tag_name][0]' \
+          | sed 's/-stable//' \
+          | awk -F. '{if(NF==2) print $0".0"; else print $0}')
+        echo "godot_version=$LATEST" >> $GITHUB_OUTPUT
+
+  build-android:
+    name: "Build: Android Plugin"
+    needs: [changes, detect-latest]
+    if: needs.changes.outputs.code == 'true'
+    runs-on: "ubuntu-latest"
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Cache Gradle
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: android-gradle-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
+        restore-keys: android-gradle-
+
+    - name: Build Plugins
+      working-directory: platforms/android
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Compress the artifact output
+      working-directory: platforms/android
+      run: |
+        ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}"
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip
+        retention-days: 14
+
+  build-ios:
+    name: "Build: iOS Plugin"
+    needs: [changes, detect-latest]
+    if: needs.changes.outputs.code == 'true'
+    runs-on: "macos-latest"
+    steps:
+    - uses: actions/checkout@v6
+      with:
+        ref: ${{ github.event.pull_request.head.sha }}
+
+    - name: Load .scons_cache directory
+      uses: actions/cache@v5
+      with:
+        path: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
+        key: scons-ios-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/scripts/**') }}
+        restore-keys: |
+          scons-ios-${{ needs.detect-latest.outputs.godot_version }}-
+          scons-ios-
+
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.x'
+        architecture: 'x64'
+
+    - name: Configuring Python packages
+      run: |
+        python -m pip install scons
+
+    - name: Cache SPM dependencies
+      uses: actions/cache@v5
+      with:
+        path: platforms/ios/.build
+        key: spm-${{ hashFiles('platforms/ios/Package.swift', 'platforms/ios/Package.resolved') }}
+        restore-keys: |
+          spm-
+
+    - name: Compiles the Source Code
+      working-directory: platforms/ios
+      env:
+        SCONS_CACHE: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
+      run: |
+        ./scripts/build.sh ${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v6
+      with:
+        name: poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/ios/bin/release/*.zip
+        if-no-files-found: ignore
+        retention-days: 14
+
+  build-apk:
+    name: "Build: Test Project (Android APK)"
+    needs: [changes, detect-latest, build-android]
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Cache Godot Editor
+      id: cache-godot
+      uses: actions/cache@v4
+      with:
+        path: /usr/local/bin/godot
+        key: godot-linux-${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Download Godot
+      if: steps.cache-godot.outputs.cache-hit != 'true'
+      run: |
+        GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
+        wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip" -O godot.zip
+        unzip -q godot.zip
+        mv Godot_v${GODOT_VERSION}-stable_linux.x86_64 /usr/local/bin/godot
+        chmod +x /usr/local/bin/godot
+
+    - name: Cache Export Templates
+      id: cache-templates
+      uses: actions/cache@v4
+      with:
+        path: ~/.local/share/godot/export_templates
+        key: godot-templates-${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Download Export Templates
+      if: steps.cache-templates.outputs.cache-hit != 'true'
+      run: |
+        GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
+        wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz" -O templates.tpz
+        mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+        unzip -q templates.tpz
+        mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Download Android Plugin Binaries
+      uses: actions/download-artifact@v4
+      with:
+        name: poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/android/.output/
+
+    - name: Extract Plugin Binaries to Addon
+      working-directory: platforms/godot_editor
+      run: |
+        mkdir -p addons/admob/android/bin
+        unzip -o ../android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/android/bin/
+
+    - name: Set Android SDK Path for Godot
+      run: |
+        mkdir -p ~/.config/godot
+        cat > ~/.config/godot/editor_settings-4.tres <<EOF
+        [gd_resource type="EditorSettings" format=3]
+        [resource]
+        export/android/android_sdk_path = "$ANDROID_HOME"
+        export/android/java_sdk_path = "$JAVA_HOME"
+        EOF
+
+    - name: Generate Export Presets
+      working-directory: platforms/godot_editor
+      run: |
+        cat > export_presets.cfg <<'EOF'
+        [preset.0]
+
+        name="Android"
+        platform="Android"
+        runnable=true
+        dedicated_server=false
+        custom_features=""
+        export_filter="all_resources"
+        include_filter=""
+        exclude_filter=""
+        export_path=""
+        encryption_include_filters=""
+        encryption_exclude_filters=""
+        seed=0
+        encrypt_pck=false
+        encrypt_directory=false
+        script_export_mode=2
+
+        [preset.0.options]
+
+        custom_template/debug=""
+        custom_template/release=""
+        gradle_build/use_gradle_build=true
+        gradle_build/gradle_build_directory=""
+        gradle_build/android_source_template=""
+        gradle_build/compress_native_libraries=false
+        gradle_build/export_format=0
+        gradle_build/min_sdk=""
+        gradle_build/target_sdk=""
+        architectures/armeabi-v7a=false
+        architectures/arm64-v8a=true
+        architectures/x86=false
+        architectures/x86_64=false
+        version/code=1
+        version/name=""
+        package/unique_name="com.poingstudios.admob.sample"
+        package/name="AdMob Sample"
+        package/signed=true
+        package/app_category=2
+        package/retain_data_on_uninstall=false
+        package/exclude_from_recents=false
+        package/show_in_android_tv=false
+        package/show_in_app_library=true
+        package/show_as_launcher_app=false
+        graphics/opengl_debug=false
+        xr_features/xr_mode=0
+        screen/immersive_mode=true
+        screen/support_small=true
+        screen/support_normal=true
+        screen/support_large=true
+        screen/support_xlarge=true
+        EOF
+
+    - name: Import Project Resources
+      working-directory: platforms/godot_editor
+      run: |
+        timeout 120 godot --headless --import --quit || true
+
+    - name: Install Android Build Template
+      working-directory: platforms/godot_editor
+      run: |
+        GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
+        mkdir -p android/build
+        unzip ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/android_source.zip -d android/build
+        echo "${GODOT_VERSION}.stable" > android/.build_version
+
+    - name: Export APK
+      working-directory: platforms/godot_editor
+      run: |
+        mkdir -p .output
+        godot --headless --export-debug "Android" .output/AdMobAddon.apk
+
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: AdMobAddon-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/godot_editor/.output/AdMobAddon.apk
+        retention-days: 14
+
+  build-apk-csharp:
+    name: "Build: Test Project (Android APK C#)"
+    needs: [changes, detect-latest, build-android]
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Cache Godot Editor (.NET)
+      id: cache-godot-dotnet
+      uses: actions/cache@v4
+      with:
+        path: |
+          /usr/local/bin/godot
+          /usr/local/bin/GodotSharp
+        key: godot-linux-mono-${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Download Godot (.NET)
+      if: steps.cache-godot-dotnet.outputs.cache-hit != 'true'
+      run: |
+        GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
+        wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_mono_linux_x86_64.zip" -O godot.zip
+        unzip -q godot.zip
+        # Robustly find and move the binary and GodotSharp folder
+        find . -name "Godot_v${GODOT_VERSION}-stable_mono_linux.x86_64" -exec cp {} /usr/local/bin/godot \;
+        find . -name "GodotSharp" -type d -exec cp -r {} /usr/local/bin/ \;
+        chmod +x /usr/local/bin/godot
+
+    - name: Cache Export Templates
+      id: cache-templates
+      uses: actions/cache@v4
+      with:
+        path: ~/.local/share/godot/export_templates
+        key: godot-templates-${{ needs.detect-latest.outputs.godot_version }}
+
+    - name: Download Export Templates
+      if: steps.cache-templates.outputs.cache-hit != 'true'
+      run: |
+        GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
+        wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz" -O templates.tpz
+        mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+        unzip -q templates.tpz
+        mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Download Android Plugin Binaries
+      uses: actions/download-artifact@v4
+      with:
+        name: poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/android/.output/
+
+    - name: Extract Plugin Binaries to Addon
+      working-directory: platforms/godot_editor
+      run: |
+        mkdir -p addons/admob/android/bin
+        unzip -o ../android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/android/bin/
+
+    - name: Set Android SDK Path for Godot
+      run: |
+        mkdir -p ~/.config/godot
+        cat > ~/.config/godot/editor_settings-4.tres <<EOF
+        [gd_resource type="EditorSettings" format=3]
+        [resource]
+        export/android/android_sdk_path = "$ANDROID_HOME"
+        export/android/java_sdk_path = "$JAVA_HOME"
+        EOF
+
+    - name: Generate Export Presets
+      working-directory: platforms/godot_editor
+      run: |
+        cat > export_presets.cfg <<'EOF'
+        [preset.0]
+
+        name="Android"
+        platform="Android"
+        runnable=true
+        dedicated_server=false
+        custom_features=""
+        export_filter="all_resources"
+        include_filter=""
+        exclude_filter=""
+        export_path=""
+        encryption_include_filters=""
+        encryption_exclude_filters=""
+        seed=0
+        encrypt_pck=false
+        encrypt_directory=false
+        script_export_mode=2
+
+        [preset.0.options]
+
+        custom_template/debug=""
+        custom_template/release=""
+        gradle_build/use_gradle_build=true
+        gradle_build/gradle_build_directory=""
+        gradle_build/android_source_template=""
+        gradle_build/compress_native_libraries=false
+        gradle_build/export_format=0
+        gradle_build/min_sdk=""
+        gradle_build/target_sdk=""
+        architectures/armeabi-v7a=false
+        architectures/arm64-v8a=true
+        architectures/x86=false
+        architectures/x86_64=false
+        version/code=1
+        version/name=""
+        package/unique_name="com.poingstudios.admob.sample"
+        package/name="AdMob Sample"
+        package/signed=true
+        package/app_category=2
+        package/retain_data_on_uninstall=false
+        package/exclude_from_recents=false
+        package/show_in_android_tv=false
+        package/show_in_app_library=true
+        package/show_as_launcher_app=false
+        graphics/opengl_debug=false
+        xr_features/xr_mode=0
+        screen/immersive_mode=true
+        screen/support_small=true
+        screen/support_normal=true
+        screen/support_large=true
+        screen/support_xlarge=true
+        EOF
+
+    - name: Import Project Resources
+      working-directory: platforms/godot_editor
+      run: |
+        # Set main scene to C# sample for this build
+        sed -i 's|run/main_scene="res://addons/admob/gdscript/sample/Main.tscn"|run/main_scene="res://addons/admob/csharp/sample/MainCSharpExample.tscn"|' project.godot
+        timeout 120 godot --headless --import --quit || true
+
+    - name: Build C# Solution
+      working-directory: platforms/godot_editor
+      run: dotnet build
+
+    - name: Install Android Build Template
+      working-directory: platforms/godot_editor
+      run: |
+        GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
+        mkdir -p android/build
+        unzip ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/android_source.zip -d android/build
+        echo "${GODOT_VERSION}.stable.mono" > android/.build_version
+
+    - name: Export APK
+      working-directory: platforms/godot_editor
+      run: |
+        mkdir -p .output
+        godot --headless --export-debug "Android" .output/AdMobAddon-CSharp.apk
+
+    - name: Upload APK artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: AdMobAddon-CSharp-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/godot_editor/.output/AdMobAddon-CSharp.apk
+        retention-days: 14
+
+  # FINAL STATUS JOB: This is what you should set as mandatory in GitHub
+  pr-validation-status:
+    name: "PR Validation Status"
+    needs: [changes, build-apk, build-apk-csharp, build-ios]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check build results
+        run: |
+          # If code changes occurred, we MUST have successful builds
+          if [[ "${{ needs.changes.outputs.code }}" == "true" ]]; then
+            if [[ "${{ needs.build-apk.result }}" == "success" && "${{ needs.build-apk-csharp.result }}" == "success" && "${{ needs.build-ios.result }}" == "success" ]]; then
+              echo "All code builds passed."
+              exit 0
+            else
+              echo "Code builds failed."
+              exit 1
+            fi
+          else
+            echo "No code changes detected, skipping builds and marking as success."
+            exit 0
+          fi

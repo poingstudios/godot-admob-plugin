@@ -22,10 +22,19 @@ This document is based on:
 
 To notify Google that RDP should be enabled using Google's signal, insert the key rdp as an extra parameter with a value of `1`.
 
-```gdscript
-var ad_request := AdRequest.new()
-ad_request.extras["rdp"] = 1
-```
+=== "GDScript"
+
+    ```gdscript
+    var ad_request := AdRequest.new()
+    ad_request.extras["rdp"] = 1
+    ```
+
+=== "C#"
+
+    ```csharp
+    var adRequest = new AdRequest();
+    adRequest.Extras.Add("rdp", "1");
+    ```
 
 !!! note
     **Tip:** You can use network tracing or a proxy tool such as [Charles](https://www.charlesproxy.com/) to capture your app's HTTPS traffic and inspect the ad requests for a **&rdp=** parameter.
@@ -34,10 +43,19 @@ ad_request.extras["rdp"] = 1
 
 To notify Google that RDP should be enabled using IAB's signal, insert the key `IABUSPrivacy_String` as an extra parameter. Make sure that the string value you use is compliant with the [IAB specification](https://iabtechlab.com/wp-content/uploads/2019/11/Technical-Specifications-FAQ-US-Privacy-IAB-Tech-Lab.pdf).
 
-```gdscript
-var ad_request := AdRequest.new()
-ad_request.extras["IABUSPrivacy_String"] = "IAB_STRING"
-```
+=== "GDScript"
+
+    ```gdscript
+    var ad_request := AdRequest.new()
+    ad_request.extras["IABUSPrivacy_String"] = "IAB_STRING"
+    ```
+
+=== "C#"
+
+    ```csharp
+    var adRequest = new AdRequest();
+    adRequest.Extras.Add("IABUSPrivacy_String", "IAB_STRING");
+    ```
 
 !!! note
     **Tip:** You can use network tracing or a proxy tool such as [Charles](https://www.charlesproxy.com/) to capture your app's HTTPS traffic and inspect the ad requests for a **&us_privacy=** parameter.

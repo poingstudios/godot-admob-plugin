@@ -1,0 +1,163 @@
+name: "[Manual] Release All Platforms"
+
+on: workflow_dispatch
+
+jobs:
+  check-release:
+    name: Check if release already exists
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set plugin version
+      run: |
+        RAW_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_TAG=v${RAW_VERSION#v}" >> $GITHUB_ENV
+
+    - name: Fail if release already exists
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        if gh api "repos/${{ github.repository }}/releases/tags/${{ env.PLUGIN_TAG }}" > /dev/null 2>&1; then
+          echo "::error::Release ${{ env.PLUGIN_TAG }} already exists. Bump the version before releasing."
+          exit 1
+        fi
+        echo "No existing release found for ${{ env.PLUGIN_TAG }}. Proceeding..."
+
+  android-template:
+    name: Compiling Android (Godot ${{matrix.GODOT_VERSIONS}})
+    needs: check-release
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        GODOT_VERSIONS: ["4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.5.2", "4.6.0", "4.6.1"]
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set plugin version
+      run: |
+        RAW_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_TAG=v${RAW_VERSION#v}" >> $GITHUB_ENV
+
+    - name: Build Plugins
+      working-directory: platforms/android
+      run: |
+        chmod +x ./gradlew
+        ./gradlew build -PgodotVersion=${{matrix.GODOT_VERSIONS}}
+
+    - name: Compress the artifact output
+      working-directory: platforms/android
+      run: |
+        ./gradlew zipPlugins -PgodotVersion="${{matrix.GODOT_VERSIONS}}"
+
+    - name: Upload binaries to artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-${{matrix.GODOT_VERSIONS}}
+        path: platforms/android/.output/poing-godot-admob-android-v${{matrix.GODOT_VERSIONS}}.zip
+        if-no-files-found: error
+        retention-days: 1
+
+  ios-template:
+    name: Compiling iOS (Godot ${{matrix.GODOT_VERSIONS}})
+    needs: check-release
+    runs-on: "macos-latest"
+    strategy:
+      matrix:
+        GODOT_VERSIONS: ["4.1.0", "4.1.1", "4.1.2", "4.1.3", "4.1.4", "4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.5.2", "4.6.0", "4.6.1"]
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set plugin version
+      run: |
+        RAW_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_TAG=v${RAW_VERSION#v}" >> $GITHUB_ENV
+
+    - name: Verify matrix
+      run: |
+        CV=${{matrix.GODOT_VERSIONS}}
+        if [ ${#CV} -eq 1 ]; then CV="${CV}.0"; fi
+        echo "CURRENT_GODOT_VERSION=${CV}" >> $GITHUB_ENV
+
+    - name: Cache & Load Python/SPM
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.x'
+
+    - name: Install scons
+      run: python -m pip install scons
+
+    - name: Compiles the Source Code
+      working-directory: platforms/ios
+      run: |
+        ./scripts/build.sh ${{env.CURRENT_GODOT_VERSION}}
+
+    - name: Upload binaries to artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-${{matrix.GODOT_VERSIONS}}
+        path: platforms/ios/bin/release/*.zip
+        if-no-files-found: error
+        retention-days: 1
+
+  godot_editor:
+    name: Compiling Godot Editor Plugin
+    needs: check-release
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Compress Godot Editor Plugin
+      run: ./.github/scripts/compress_editor_plugin.sh
+
+    - name: Upload zip to artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: godot-editor
+        path: platforms/godot_editor/${{ env.ZIP_NAME }}
+        if-no-files-found: error
+        retention-days: 1
+
+  release-finalize:
+    name: "🚀 Finalize and Publish Release"
+    needs: [android-template, ios-template, godot_editor]
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set plugin version
+      run: |
+        RAW_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        echo "PLUGIN_TAG=v${RAW_VERSION#v}" >> $GITHUB_ENV
+
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: release-artifacts
+        merge-multiple: true
+
+    - name: Finalize and Generate Release Notes
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        gh release create ${{ env.PLUGIN_TAG }} release-artifacts/* --title "${{ env.PLUGIN_TAG }}" --generate-notes
+
+    - name: Set up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.8'
+
+    - name: Install requests
+      run: pip install requests
+      
+    - name: Upload to Godot Asset Library
+      env:
+        ASSET_LIB_USER: ${{ secrets.ASSET_LIBRARY_USERNAME }}
+        ASSET_LIB_PASS: ${{ secrets.ASSET_LIBRARY_PASSWORD }}
+        VERSION: ${{ env.PLUGIN_TAG }}
+        COMMIT_HASH: ${{ github.sha }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+      run: |
+        python3 .github/scripts/push.py

@@ -1,18 +1,22 @@
 site_name: Godot AdMob Plugin - Poing Studios
+extra_css:
+  - stylesheets/extra.css
+extra_javascript:
+  - javascripts/extra.js
 theme:
   features:
     - content.tabs.link
     - navigation.instant
-    - navigation.indexes 
     - navigation.instant.prefetch
+    - navigation.indexes
     - navigation.sections
     - navigation.top
     - search.suggest
     - search.highlight
-    - content.tabs.link
     - content.code.annotation
     - content.code.copy
   name: material
+  custom_dir: docs/overrides
   favicon: assets/icon.ico
   logo: assets/icon.ico
   language: en
@@ -21,14 +25,14 @@ theme:
       toggle:
         icon: material/toggle-switch-off-outline 
         name: Switch to dark mode
-      primary: teal
-      accent: purple 
+      primary: blue
+      accent: blue 
     - scheme: slate 
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode    
-      primary: teal
-      accent: lime
+      primary: blue
+      accent: blue
 markdown_extensions:
   - toc:
       title: On this page
@@ -60,4 +64,11 @@ extra:
     - icon: fontawesome/brands/github
       link: https://github.com/poingstudios
 copyright: |
-  &copy; 2023-present <a href="https://github.com/poingstudios/godot-admob-plugin"  target="_blank" rel="noopener">Poing Studios</a> | Portions of this page are modifications based on work created and <a href="https://developers.google.com/terms/site-policies"  target="_blank" rel="noopener">shared by Google</a> and used according to terms described in the <a href="https://creativecommons.org/licenses/by/4.0/"  target="_blank" rel="noopener">Creative Commons 4.0 Attribution License</a>.
+  &copy; 2023-{current_year} <a href="https://github.com/poingstudios/godot-admob-plugin"  target="_blank" rel="noopener">Poing Studios</a> | Portions of this page are modifications based on work created and <a href="https://developers.google.com/terms/site-policies"  target="_blank" rel="noopener">shared by Google</a> and used according to terms described in the <a href="https://creativecommons.org/licenses/by/4.0/"  target="_blank" rel="noopener">Creative Commons 4.0 Attribution License</a>.
+
+plugins:
+  - search
+  - awesome-pages
+
+hooks:
+  - docs/hooks.py

@@ -37,93 +37,191 @@ The code sample below demonstrates how to utilize the AdView. In this example, y
 
 
 ### Create a AdView (banner)
-The initial step in utilizing a banner ad is to create an instance of an AdView within a GDScript attached to a Node.
+The initial step in utilizing a banner ad is to create an instance of an AdView within a GDScript or C# script attached to a Node.
 
-```gdscript linenums="1" hl_lines="20"
-extends Node2D
+=== "GDScript"
 
-var _ad_view : AdView
+    ```gdscript linenums="1" hl_lines="20"
+    extends Node2D
+    
+    var _ad_view : AdView
+    
+    func _ready():
+    	#The initializate needs to be done only once, ideally at app launch.
+    	MobileAds.initialize()
+    
+    func _create_ad_view() -> void:
+    	#free memory
+    	if _ad_view:
+    		destroy_ad_view()
+    
+    	var unit_id : String
+    	if OS.get_name() == "Android":
+    		unit_id = "ca-app-pub-3940256099942544/6300978111"
+    	elif OS.get_name() == "iOS":
+    		unit_id = "ca-app-pub-3940256099942544/2934735716"
+    
+    	_ad_view = AdView.new(unit_id, AdSize.BANNER, AdPosition.Values.TOP)
+    ```
 
-func _ready():
-	#The initializate needs to be done only once, ideally at app launch.
-	MobileAds.initialize()
+=== "C#"
 
-func _create_ad_view() -> void:
-	#free memory
-	if _ad_view:
-		destroy_ad_view()
-
-	var unit_id : String
-	if OS.get_name() == "Android":
-		unit_id = "ca-app-pub-3940256099942544/6300978111"
-	elif OS.get_name() == "iOS":
-		unit_id = "ca-app-pub-3940256099942544/2934735716"
-
-	_ad_view = AdView.new(unit_id, AdSize.BANNER, AdPosition.Values.TOP)
-```
+    ```csharp linenums="1" hl_lines="28"
+    using Godot;
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Api.Core;
+    using PoingStudios.AdMob.Api.Listeners;
+    
+    public partial class BannerAd : Node2D
+    {
+        private AdView _adView;
+    
+        public override void _Ready()
+        {
+            //The initializate needs to be done only once, ideally at app launch.
+            MobileAds.Initialize();
+        }
+    
+        private void CreateAdView()
+        {
+            //free memory
+            if (_adView != null)
+                DestroyAdView();
+    
+            string unitId = null;
+            if (OS.GetName() == "Android")
+                unitId = "ca-app-pub-3940256099942544/6300978111";
+            else if (OS.GetName() == "iOS")
+                unitId = "ca-app-pub-3940256099942544/2934735716";
+    
+            _adView = new AdView(unitId, AdSize.Banner, AdPosition.Top);
+        }
+    }
+    ```
 
 The constructor for an AdView in Godot has the following parameters:
 
 - `unit_id`: The AdMob ad unit ID from which the AdView should load ads.
 - `AdSize`: The AdMob ad size you wish to utilize (refer to [AdView sizes](#adview-sizes) for specifics).
-- `AdPosition`: The position at which the banner ad should be positioned. The `AdPosition.Values` enum enumerates the valid ad position values.
+- `AdPosition`: The position at which the banner ad should be positioned. The `AdPosition.Values` (GDScript) or `AdPosition` (C#) enum enumerates the valid ad position values.
 
 Take note of the distinct ad units used based on the platform. When making ad requests on iOS, you should utilize an iOS ad unit, while for Android, you must use an Android ad unit.
 
 #### (Optional) Generate an AdView with a customized size
 In addition to utilizing predefined AdSize constants, you can also specify a custom size for your ad:
 
-```gdscript linenums="1"
-var ad_size := AdSize.new(200, 200)
-_ad_view := AdView.new(unit_id, ad_size, AdPosition.Values.TOP)
-```
+=== "GDScript"
+
+    ```gdscript linenums="1"
+    var ad_size := AdSize.new(200, 200)
+    _ad_view := AdView.new(unit_id, ad_size, AdPosition.Values.TOP)
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1"
+    var adSize = new AdSize(200, 200);
+    _adView = new AdView(unitId, adSize, AdPosition.Top);
+    ```
 
 ### Load a AdView (banner)
 The second phase in utilizing the AdView involves crafting an AdRequest and then passing it to the `load_banner()` method.
 
-```gdscript linenums="1" hl_lines="4 5"
-func _on_load_banner_pressed():
-	if _ad_view == null:
-		_create_ad_view()
-	var ad_request := AdRequest.new()
-	_ad_view.load_ad(ad_request)
-```
+=== "GDScript"
+
+    ```gdscript linenums="1" hl_lines="4 5"
+    func _on_load_banner_pressed():
+    	if _ad_view == null:
+    		_create_ad_view()
+    	var ad_request := AdRequest.new()
+    	_ad_view.load_ad(ad_request)
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1" hl_lines="5 6"
+    private void OnLoadBannerPressed()
+    {
+        if (_adView == null)
+            CreateAdView();
+        var adRequest = new AdRequest();
+        _adView.LoadAd(adRequest);
+    }
+    ```
 
 
 ### Listen to AdView signals
 To tailor the behavior of your ad, you can connect to various events in the ad's lifecycle, such as loading, opening, closing, and more. To monitor these events, you can register a `AdListener`:
 
-```gdscript linenums="1" hl_lines="3 18"
-func register_ad_listener() -> void:
-	if _ad_view != null:
-		var ad_listener := AdListener.new()
-		
-		ad_listener.on_ad_failed_to_load = func(load_ad_error : LoadAdError) -> void:
-			print("_on_ad_failed_to_load: " + load_ad_error.message)
-		ad_listener.on_ad_clicked = func() -> void:
-			print("_on_ad_clicked")
-		ad_listener.on_ad_closed = func() -> void:
-			print("_on_ad_closed")
-		ad_listener.on_ad_impression = func() -> void:
-			print("_on_ad_impression")
-		ad_listener.on_ad_loaded = func() -> void:
-			print("_on_ad_loaded")
-		ad_listener.on_ad_opened = func() -> void:
-			print("_on_ad_opened")
-			
-		_ad_view.ad_listener = ad_listener
-```
+=== "GDScript"
+
+    ```gdscript linenums="1" hl_lines="3 18"
+    func register_ad_listener() -> void:
+    	if _ad_view != null:
+    		var ad_listener := AdListener.new()
+    		
+    		ad_listener.on_ad_failed_to_load = func(load_ad_error : LoadAdError) -> void:
+    			print("_on_ad_failed_to_load: " + load_ad_error.message)
+    		ad_listener.on_ad_clicked = func() -> void:
+    			print("_on_ad_clicked")
+    		ad_listener.on_ad_closed = func() -> void:
+    			print("_on_ad_closed")
+    		ad_listener.on_ad_impression = func() -> void:
+    			print("_on_ad_impression")
+    		ad_listener.on_ad_loaded = func() -> void:
+    			print("_on_ad_loaded")
+    		ad_listener.on_ad_opened = func() -> void:
+    			print("_on_ad_opened")
+    			
+    		_ad_view.ad_listener = ad_listener
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1" hl_lines="5"
+    private void RegisterAdListener()
+    {
+        if (_adView != null)
+        {
+            _adView.AdListener = new AdListener
+            {
+                OnAdFailedToLoad = (LoadAdError loadAdError) => GD.Print("_on_ad_failed_to_load: " + loadAdError.Message),
+                OnAdClicked = () => GD.Print("_on_ad_clicked"),
+                OnAdClosed = () => GD.Print("_on_ad_closed"),
+                OnAdImpression = () => GD.Print("_on_ad_impression"),
+                OnAdLoaded = () => GD.Print("_on_ad_loaded"),
+                OnAdOpened = () => GD.Print("_on_ad_opened")
+            };
+        }
+    }
+    ```
 
 ### Destroy the AdView (banner)
 Upon completion of using the AdView, remember to call Destroy() to release allocated resources and free up memory.
 
-```gdscript linenums="1" hl_lines="4"
-func destroy_ad_view() -> void:
-	if _ad_view:
-		#always call this method on all AdFormats to free memory on Android/iOS
-		_ad_view.destroy()
-		_ad_view = null
-```
+=== "GDScript"
+
+    ```gdscript linenums="1" hl_lines="4"
+    func destroy_ad_view() -> void:
+    	if _ad_view:
+    		#always call this method on all AdFormats to free memory on Android/iOS
+    		_ad_view.destroy()
+    		_ad_view = null
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1" hl_lines="6"
+    private void DestroyAdView()
+    {
+        if (_adView != null)
+        {
+            //always call this method on all AdFormats to free memory on Android/iOS
+            _adView.Destroy();
+            _adView = null;
+        }
+    }
+    ```
 
 That's all there is to it! Your app is now fully prepared to showcase banner ads from AdMob.
 

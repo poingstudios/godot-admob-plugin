@@ -39,38 +39,89 @@ The code sample below demonstrates how to utilize the Rewarded interstitial. In 
 ### Load an ad
 To load an rewarded interstitial ad, utilize the `RewardedInterstitialAdLoader` class. Pass in an `RewardedInterstitialAdLoadCallback` to receive the loaded ad or any potential errors. It's worth noting that, similar to other format load callbacks, the `RewardedInterstitialAdLoadCallback` leverages `LoadAdError` to provide comprehensive error details.
 
-```gdscript linenums="1" hl_lines="30"
-extends Node2D
+=== "GDScript"
 
-var _rewarded_interstitial_ad : RewardedInterstitialAd
+    ```gdscript linenums="1" hl_lines="30"
+    extends Node2D
+    
+    var _rewarded_interstitial_ad : RewardedInterstitialAd
+    
+    func _ready() -> void:
+    	#The initializate needs to be done only once, ideally at app launch.
+    	MobileAds.initialize()
+    
+    func _on_load_pressed():
+    	#free memory
+    	if _rewarded_interstitial_ad:
+    		#always call this method on all AdFormats to free memory on Android/iOS
+    		_rewarded_interstitial_ad.destroy()
+    		_rewarded_interstitial_ad = null
+    
+    	var unit_id : String
+    	if OS.get_name() == "Android":
+    		unit_id = "ca-app-pub-3940256099942544/5354046379"
+    	elif OS.get_name() == "iOS":
+    		unit_id = "ca-app-pub-3940256099942544/6978759866"
+    
+    	var rewarded_interstitial_ad_load_callback := RewardedInterstitialAdLoadCallback.new()
+    	rewarded_interstitial_ad_load_callback.on_ad_failed_to_load = func(adError : LoadAdError) -> void:
+    		print(adError.message)
+    
+    	rewarded_interstitial_ad_load_callback.on_ad_loaded = func(rewarded_interstitial_ad : RewardedInterstitialAd) -> void:
+    		print("rewarded interstitial ad loaded" + str(rewarded_interstitial_ad._uid))
+    		_rewarded_interstitial_ad = rewarded_interstitial_ad
+    
+    	RewardedInterstitialAdLoader.new().load(unit_id, AdRequest.new(), rewarded_interstitial_ad_load_callback)
+    ```
 
-func _ready() -> void:
-	#The initializate needs to be done only once, ideally at app launch.
-	MobileAds.initialize()
+=== "C#"
 
-func _on_load_pressed():
-	#free memory
-	if _rewarded_interstitial_ad:
-		#always call this method on all AdFormats to free memory on Android/iOS
-		_rewarded_interstitial_ad.destroy()
-		_rewarded_interstitial_ad = null
-
-	var unit_id : String
-	if OS.get_name() == "Android":
-		unit_id = "ca-app-pub-3940256099942544/5354046379"
-	elif OS.get_name() == "iOS":
-		unit_id = "ca-app-pub-3940256099942544/6978759866"
-
-	var rewarded_interstitial_ad_load_callback := RewardedInterstitialAdLoadCallback.new()
-	rewarded_interstitial_ad_load_callback.on_ad_failed_to_load = func(adError : LoadAdError) -> void:
-		print(adError.message)
-
-	rewarded_interstitial_ad_load_callback.on_ad_loaded = func(rewarded_interstitial_ad : RewardedInterstitialAd) -> void:
-		print("rewarded interstitial ad loaded" + str(rewarded_interstitial_ad._uid))
-		_rewarded_interstitial_ad = rewarded_interstitial_ad
-
-	RewardedInterstitialAdLoader.new().load(unit_id, AdRequest.new(), rewarded_interstitial_ad_load_callback)
-```
+    ```csharp linenums="1" hl_lines="42"
+    using Godot;
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Api.Core;
+    using PoingStudios.AdMob.Api.Listeners;
+    
+    public partial class RewardedInterstitialAdExample : Node2D
+    {
+        private RewardedInterstitialAd _rewardedInterstitialAd;
+    
+        public override void _Ready()
+        {
+            //The initializate needs to be done only once, ideally at app launch.
+            MobileAds.Initialize();
+        }
+    
+        private void OnLoadPressed()
+        {
+            //free memory
+            if (_rewardedInterstitialAd != null)
+            {
+                //always call this method on all AdFormats to free memory on Android/iOS
+                _rewardedInterstitialAd.Destroy();
+                _rewardedInterstitialAd = null;
+            }
+    
+            string unitId = null;
+            if (OS.GetName() == "Android")
+                unitId = "ca-app-pub-3940256099942544/5354046379";
+            else if (OS.GetName() == "iOS")
+                unitId = "ca-app-pub-3940256099942544/6978759866";
+    
+            var rewardedInterstitialAdLoadCallback = new RewardedInterstitialAdLoadCallback
+            {
+                OnAdFailedToLoad = (LoadAdError adError) => GD.Print(adError.Message),
+                OnAdLoaded = (RewardedInterstitialAd rewardedInterstitialAd) => 
+                {
+                    GD.Print("rewarded interstitial ad loaded");
+                    _rewardedInterstitialAd = rewardedInterstitialAd;
+                }
+            };
+    
+            new RewardedInterstitialAdLoader().Load(unitId, new AdRequest(), rewardedInterstitialAdLoadCallback);
+        }
+    }
+    ```
 
 
 ### [Optional] Validate server-side verification (SSV) callbacks
@@ -78,17 +129,35 @@ For apps that necessitate additional data in server-side verification [Android](
 
 The following code snippet illustrates how to establish custom data on a rewarded interstitial ad object before soliciting an ad:
 
-```gdscript linenums="1" hl_lines="4 5 6 7"
-rewarded_interstitial_ad_load_callback.on_ad_loaded = func(rewarded_interstitial_ad : RewardedInterstitialAd) -> void:
-    print("rewarded interstitial ad loaded" + str(rewarded_interstitial_ad._uid))
+=== "GDScript"
 
-    var server_side_verification_options := ServerSideVerificationOptions.new()
-    server_side_verification_options.custom_data = "TEST PURPOSE"
-    server_side_verification_options.user_id = "user_id_test"
-    rewarded_interstitial_ad.set_server_side_verification_options(server_side_verification_options)
+    ```gdscript linenums="1" hl_lines="4 5 6 7"
+    rewarded_interstitial_ad_load_callback.on_ad_loaded = func(rewarded_interstitial_ad : RewardedInterstitialAd) -> void:
+        print("rewarded interstitial ad loaded" + str(rewarded_interstitial_ad._uid))
+    
+        var server_side_verification_options := ServerSideVerificationOptions.new()
+        server_side_verification_options.custom_data = "TEST PURPOSE"
+        server_side_verification_options.user_id = "user_id_test"
+        rewarded_interstitial_ad.set_server_side_verification_options(server_side_verification_options)
+    
+        _rewarded_interstitial_ad = rewarded_interstitial_ad
+    ```
 
-    _rewarded_interstitial_ad = rewarded_interstitial_ad
-```
+=== "C#"
+
+    ```csharp linenums="1" hl_lines="5 6 7 8"
+    rewardedInterstitialAdLoadCallback.OnAdLoaded = (RewardedInterstitialAd rewardedInterstitialAd) => 
+    {
+        GD.Print("rewarded interstitial ad loaded");
+        
+        var serverSideVerificationOptions = new ServerSideVerificationOptions();
+        serverSideVerificationOptions.CustomData = "TEST PURPOSE";
+        serverSideVerificationOptions.UserId = "user_id_test";
+        rewardedInterstitialAd.SetServerSideVerificationOptions(serverSideVerificationOptions);
+        
+        _rewardedInterstitialAd = rewardedInterstitialAd;
+    };
+    ```
 !!! note
 
     The custom reward string is [percent escaped](https://en.wikipedia.org/wiki/Percent-encoding) and might require decoding when parsed from the SSV callback.
@@ -96,70 +165,163 @@ rewarded_interstitial_ad_load_callback.on_ad_loaded = func(rewarded_interstitial
 ### Configure the FullScreenContentCallback
 The `FullScreenContentCallback` manages events associated with the display of your `RewardedInterstitialAd`. Before presenting the `RewardedInterstitialAd`, ensure that you configure the callback:
 
-```gdscript linenums="1" hl_lines="28"
-extends Node2D
+=== "GDScript"
 
-var _rewarded_interstitial_ad : RewardedInterstitialAd
-var _full_screen_content_callback := FullScreenContentCallback.new()
+    ```gdscript linenums="1" hl_lines="28"
+    extends Node2D
+    
+    var _rewarded_interstitial_ad : RewardedInterstitialAd
+    var _full_screen_content_callback := FullScreenContentCallback.new()
+    
+    func _ready() -> void:
+    	#...
+    	_full_screen_content_callback.on_ad_clicked = func() -> void:
+    		print("on_ad_clicked")
+    	_full_screen_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
+    		print("on_ad_dismissed_full_screen_content")
+    	_full_screen_content_callback.on_ad_failed_to_show_full_screen_content = func(ad_error : AdError) -> void:
+    		print("on_ad_failed_to_show_full_screen_content")
+    	_full_screen_content_callback.on_ad_impression = func() -> void:
+    		print("on_ad_impression")
+    	_full_screen_content_callback.on_ad_showed_full_screen_content = func() -> void:
+    		print("on_ad_showed_full_screen_content")
+    
+    func _on_load_pressed():
+    	#...
+    	var rewarded_interstitial_ad_load_callback := RewardedInterstitialAdLoadCallback.new()
+    
+    	#...
+    
+    	rewarded_interstitial_ad_load_callback.on_ad_loaded = func(rewarded_interstitial_ad : RewardedInterstitialAd) -> void:
+    		print("rewarded interstitial ad loaded" + str(rewarded_interstitial_ad._uid))
+    		_rewarded_interstitial_ad = rewarded_interstitial_ad
+    		_rewarded_interstitial_ad.full_screen_content_callback = _full_screen_content_callback
+    
+    	#...
+    ```
 
-func _ready() -> void:
-	#...
-	_full_screen_content_callback.on_ad_clicked = func() -> void:
-		print("on_ad_clicked")
-	_full_screen_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
-		print("on_ad_dismissed_full_screen_content")
-	_full_screen_content_callback.on_ad_failed_to_show_full_screen_content = func(ad_error : AdError) -> void:
-		print("on_ad_failed_to_show_full_screen_content")
-	_full_screen_content_callback.on_ad_impression = func() -> void:
-		print("on_ad_impression")
-	_full_screen_content_callback.on_ad_showed_full_screen_content = func() -> void:
-		print("on_ad_showed_full_screen_content")
+=== "C#"
 
-func _on_load_pressed():
-	#...
-	var rewarded_interstitial_ad_load_callback := RewardedInterstitialAdLoadCallback.new()
-
-	#...
-
-	rewarded_interstitial_ad_load_callback.on_ad_loaded = func(rewarded_interstitial_ad : RewardedInterstitialAd) -> void:
-		print("rewarded interstitial ad loaded" + str(rewarded_interstitial_ad._uid))
-		_rewarded_interstitial_ad = rewarded_interstitial_ad
-		_rewarded_interstitial_ad.full_screen_content_callback = _full_screen_content_callback
-
-	#...
-
-```
+    ```csharp linenums="1" hl_lines="34"
+    using Godot;
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Api.Core;
+    using PoingStudios.AdMob.Api.Listeners;
+    
+    public partial class RewardedInterstitialAdExample : Node2D
+    {
+        private RewardedInterstitialAd _rewardedInterstitialAd;
+        private FullScreenContentCallback _fullScreenContentCallback;
+    
+        public override void _Ready()
+        {
+            //...
+            _fullScreenContentCallback = new FullScreenContentCallback
+            {
+                OnAdClicked = () => GD.Print("on_ad_clicked"),
+                OnAdDismissedFullScreenContent = () => GD.Print("on_ad_dismissed_full_screen_content"),
+                OnAdFailedToShowFullScreenContent = (AdError adError) => GD.Print("on_ad_failed_to_show_full_screen_content"),
+                OnAdImpression = () => GD.Print("on_ad_impression"),
+                OnAdShowedFullScreenContent = () => GD.Print("on_ad_showed_full_screen_content")
+            };
+        }
+    
+        private void OnLoadPressed()
+        {
+            //...
+            var rewardedInterstitialAdLoadCallback = new RewardedInterstitialAdLoadCallback
+            {
+                //...
+                OnAdLoaded = (RewardedInterstitialAd rewardedInterstitialAd) => 
+                {
+                    GD.Print("rewarded interstitial ad loaded");
+                    _rewardedInterstitialAd = rewardedInterstitialAd;
+                    _rewardedInterstitialAd.FullScreenContentCallback = _fullScreenContentCallback;
+                }
+            };
+            //...
+        }
+    }
+    ```
 
 ### Show the ad
 
 When presenting a rewarded interstitial ad, you'll employ an `OnUserEarnedRewardListener` object to manage reward-related events.
 
-```gdscript linenums="1" hl_lines="14"
-extends Node2D
+=== "GDScript"
 
-var _rewarded_interstitial_ad : RewardedInterstitialAd
-var on_user_earned_reward_listener := OnUserEarnedRewardListener.new()
+    ```gdscript linenums="1" hl_lines="14"
+    extends Node2D
+    
+    var _rewarded_interstitial_ad : RewardedInterstitialAd
+    var on_user_earned_reward_listener := OnUserEarnedRewardListener.new()
+    
+    func _ready() -> void:
+    	#...
+    	on_user_earned_reward_listener.on_user_earned_reward = func(rewarded_item : RewardedItem):
+    		print("on_user_earned_reward, rewarded_item: rewarded", rewarded_item.amount, rewarded_item.type)
+    
+    #...
+    func _on_show_pressed():
+    	if _rewarded_interstitial_ad:
+    		_rewarded_interstitial_ad.show(on_user_earned_reward_listener)
+    ```
 
-func _ready() -> void:
-	#...
-	on_user_earned_reward_listener.on_user_earned_reward = func(rewarded_item : RewardedItem):
-		print("on_user_earned_reward, rewarded_item: rewarded", rewarded_item.amount, rewarded_item.type)
+=== "C#"
 
-#...
-func _on_show_pressed():
-	if _rewarded_interstitial_ad:
-		_rewarded_interstitial_ad.show(on_user_earned_reward_listener)
-```
+    ```csharp linenums="1" hl_lines="27"
+    using Godot;
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Api.Core;
+    using PoingStudios.AdMob.Api.Listeners;
+    
+    public partial class RewardedInterstitialAdExample : Node2D
+    {
+        private RewardedInterstitialAd _rewardedInterstitialAd;
+        private OnUserEarnedRewardListener _onUserEarnedRewardListener;
+    
+        public override void _Ready()
+        {
+            //...
+            _onUserEarnedRewardListener = new OnUserEarnedRewardListener
+            {
+                OnUserEarnedReward = (RewardedItem rewardedItem) =>
+                {
+                    GD.Print($"on_user_earned_reward, rewarded_item: rewarded {rewardedItem.Amount} {rewardedItem.Type}");
+                }
+            };
+        }
+    
+        //...
+        private void OnShowPressed()
+        {
+            if (_rewardedInterstitialAd != null)
+                _rewardedInterstitialAd.Show(_onUserEarnedRewardListener);
+        }
+    }
+    ```
 
 ### Clean up memory
 
 Upon completion of an `RewardedInterstitialAd`, it's important to invoke the `destroy()` function before releasing your reference to it:
 
-```gdscript linenums="1"
-if _rewarded_interstitial_ad:
-    _rewarded_interstitial_ad.destroy()
-    _rewarded_interstitial_ad = null
-```
+=== "GDScript"
+
+    ```gdscript linenums="1"
+    if _rewarded_interstitial_ad:
+        _rewarded_interstitial_ad.destroy()
+        _rewarded_interstitial_ad = null
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1"
+    if (_rewardedInterstitialAd != null)
+    {
+        _rewardedInterstitialAd.Destroy();
+        _rewardedInterstitialAd = null;
+    }
+    ```
 
 
 This action signals to the plugin that the object is no longer in use and that the memory it occupies can be reclaimed. Neglecting to call this method can lead to memory leaks.

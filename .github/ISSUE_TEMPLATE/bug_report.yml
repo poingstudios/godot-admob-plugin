@@ -14,6 +14,19 @@ body:
     placeholder: '4.0.0'
   validations:
     required: true
+- type: dropdown
+  id: platform
+  attributes:
+    label: Platform / Component
+    description: In which environment did you find this bug?
+    options:
+      - All
+      - Godot (Addon / Editor)
+      - Android
+      - iOS
+    default: 0
+  validations:
+    required: true
 - type: input
   attributes:
     label: System information

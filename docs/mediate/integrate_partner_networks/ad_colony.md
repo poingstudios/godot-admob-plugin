@@ -100,34 +100,66 @@ The AdColony mediation package supports additional configuration and request par
 
 Here's a code example of how to set these configurations and ad request parameters:
 
-```gdscript
-# Using AdColonyAppOptions
-var adcolony_app_options := AdColonyAppOptions.new()
-adcolony_app_options.set_user_id("your_user_id")
-adcolony_app_options.set_test_mode(true)
+=== "GDScript"
 
-# Using AdColonyMediationExtras
-var ad_request := AdRequest.new()
+    ```gdscript
+    # Using AdColonyAppOptions
+    var adcolony_app_options := AdColonyAppOptions.new()
+    adcolony_app_options.set_user_id("your_user_id")
+    adcolony_app_options.set_test_mode(true)
+    
+    # Using AdColonyMediationExtras
+    var ad_request := AdRequest.new()
+    
+    var ad_colony_mediation_extras := AdColonyMediationExtras.new()
+    ad_colony_mediation_extras.show_post_popup = false
+    ad_colony_mediation_extras.show_pre_popup = true
+    
+    ad_request.mediation_extras.append(ad_colony_mediation_extras)
+    ```
 
-var ad_colony_mediation_extras := AdColonyMediationExtras.new()
-ad_colony_mediation_extras.show_post_popup = false
-ad_colony_mediation_extras.show_pre_popup = true
+=== "C#"
 
-ad_request.mediation_extras.append(ad_colony_mediation_extras)
-```
+    ```csharp
+    // Using AdColonyAppOptions
+    var adColonyAppOptions = new AdColonyAppOptions();
+    adColonyAppOptions.SetUserId("your_user_id");
+    adColonyAppOptions.SetTestMode(true);
+    
+    // Using AdColonyMediationExtras
+    var adRequest = new AdRequest();
+    
+    var adColonyMediationExtras = new AdColonyMediationExtras();
+    adColonyMediationExtras.ShowPostPopup = false;
+    adColonyMediationExtras.ShowPrePopup = true;
+    
+    adRequest.MediationExtras.Add(adColonyMediationExtras);
+    ```
 
 ### EU consent and GDPR
 Under the Google [EU User Consent Policy](https://www.google.com/about/company/consentstaging.html), it's mandatory to provide certain disclosures and obtain consents from users within the European Economic Area (EEA) regarding the utilization of device identifiers and personal data. This policy aligns with the EU ePrivacy Directive and the General Data Protection Regulation (GDPR). When seeking consent, you must explicitly identify each ad network within your mediation chain that may collect, receive, or utilize personal data. Additionally, you should furnish information about how each network intends to use this data. Importantly, Google currently cannot automatically transmit the user's consent choice to these networks.
 
 The AdColony plugin offers the `AdColonyAppOptions` class, enabling you to customize parameters sent to AdColony's SDK. Among these options, two are pertinent to GDPR compliance: `set_privacy_framework_required()` and `set_privacy_consent_string()`. Below is a sample code snippet illustrating how to convey consent information to the AdColony adapter. These settings must be configured before [initializing the Google Mobile Ads SDK](../../README.md#initialize-the-google-mobile-ads-sdk) to ensure seamless forwarding to AdColony's SDK.
 
-```gdscript
-var adcolony_app_options := AdColonyAppOptions.new()
+=== "GDScript"
 
-# Set GDPR consent parameters
-adcolony_app_options.set_privacy_framework_required(AdColonyAppOptions.GDPR, true)
-adcolony_app_options.set_privacy_consent_string(AdColonyAppOptions.GDPR, "myPrivacyConsentString")
-```
+    ```gdscript
+    var adcolony_app_options := AdColonyAppOptions.new()
+    
+    # Set GDPR consent parameters
+    adcolony_app_options.set_privacy_framework_required(AdColonyAppOptions.GDPR, true)
+    adcolony_app_options.set_privacy_consent_string(AdColonyAppOptions.GDPR, "myPrivacyConsentString")
+    ```
+
+=== "C#"
+
+    ```csharp
+    var adColonyAppOptions = new AdColonyAppOptions();
+    
+    // Set GDPR consent parameters
+    adColonyAppOptions.SetPrivacyFrameworkRequired(AdColonyAppOptions.Gdpr, true);
+    adColonyAppOptions.SetPrivacyConsentString(AdColonyAppOptions.Gdpr, "myPrivacyConsentString");
+    ```
 
 Check the detailed information about AdColony's [consumer privacy policies](https://www.adcolony.com/consumer-privacy/) and implementation [guidelines related to privacy laws](https://github.com/AdColony/AdColony-Android-SDK/wiki/Privacy-Laws#gdpr).
 
@@ -143,13 +175,25 @@ The [CCPA preparation](../../privacy/regulatory_solutions/us_states_privacy_laws
 
 The AdColony plugin offers the `AdColonyAppOptions` class, enabling you to customize parameters sent to AdColony's SDK. Among these options, two are pertinent to CCPA compliance: `set_privacy_framework_required()` and `set_privacy_consent_string()`. Below is a sample code snippet illustrating how to convey consent information to the AdColony adapter. These settings must be configured before [initializing the Google Mobile Ads SDK](../../README.md#initialize-the-google-mobile-ads-sdk) to ensure seamless forwarding to AdColony's SDK.
 
-```gdscript
-var adcolony_app_options := AdColonyAppOptions.new()
+=== "GDScript"
 
-# Set CCPA consent parameters
-adcolony_app_options.set_privacy_framework_required(AdColonyAppOptions.CCPA, true)
-adcolony_app_options.set_privacy_consent_string(AdColonyAppOptions.CCPA, "myPrivacyConsentString")
-```
+    ```gdscript
+    var adcolony_app_options := AdColonyAppOptions.new()
+    
+    # Set CCPA consent parameters
+    adcolony_app_options.set_privacy_framework_required(AdColonyAppOptions.CCPA, true)
+    adcolony_app_options.set_privacy_consent_string(AdColonyAppOptions.CCPA, "myPrivacyConsentString")
+    ```
+
+=== "C#"
+
+    ```csharp
+    var adColonyAppOptions = new AdColonyAppOptions();
+    
+    // Set CCPA consent parameters
+    adColonyAppOptions.SetPrivacyFrameworkRequired(AdColonyAppOptions.Ccpa, true);
+    adColonyAppOptions.SetPrivacyConsentString(AdColonyAppOptions.Ccpa, "myPrivacyConsentString");
+    ```
 
 Check the detailed information about AdColony's [consumer privacy policies](https://www.adcolony.com/consumer-privacy/) and implementation [guidelines related to privacy laws](https://github.com/AdColony/AdColony-Android-SDK/wiki/Privacy-Laws#ccpa).
 

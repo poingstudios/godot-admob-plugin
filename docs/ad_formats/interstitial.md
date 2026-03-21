@@ -38,97 +38,216 @@ The code sample below demonstrates how to utilize the Interstitial. In this exam
 ### Load an ad
 To load an interstitial ad, utilize the `InterstitialAdLoader` class. Pass in an `InterstitialAdLoadCallback` to receive the loaded ad or any potential errors. It's worth noting that, similar to other format load callbacks, the `InterstitialAdLoadCallback` leverages `LoadAdError` to provide comprehensive error details.
 
-```gdscript linenums="1" hl_lines="30"
-extends Node2D
+=== "GDScript"
 
-var _interstitial_ad : InterstitialAd
+    ```gdscript linenums="1" hl_lines="30"
+    extends Node2D
+    
+    var _interstitial_ad : InterstitialAd
+    
+    func _ready() -> void:
+        #The initializate needs to be done only once, ideally at app launch.
+    	MobileAds.initialize()
+    
+    func _on_load_pressed():
+    	#free memory
+    	if _interstitial_ad:
+    		#always call this method on all AdFormats to free memory on Android/iOS
+    		_interstitial_ad.destroy()
+    		_interstitial_ad = null
+    
+    	var unit_id : String
+    	if OS.get_name() == "Android":
+    		unit_id = "ca-app-pub-3940256099942544/1033173712"
+    	elif OS.get_name() == "iOS":
+    		unit_id = "ca-app-pub-3940256099942544/4411468910"
+    
+    	var interstitial_ad_load_callback := InterstitialAdLoadCallback.new()
+    	interstitial_ad_load_callback.on_ad_failed_to_load = func(adError : LoadAdError) -> void:
+    		print(adError.message)
+    
+    	interstitial_ad_load_callback.on_ad_loaded = func(interstitial_ad : InterstitialAd) -> void:
+    		print("interstitial ad loaded" + str(interstitial_ad._uid))
+    		_interstitial_ad = interstitial_ad
+    
+    	InterstitialAdLoader.new().load(unit_id, AdRequest.new(), interstitial_ad_load_callback)
+    ```
 
-func _ready() -> void:
-    #The initializate needs to be done only once, ideally at app launch.
-	MobileAds.initialize()
+=== "C#"
 
-func _on_load_pressed():
-	#free memory
-	if _interstitial_ad:
-		#always call this method on all AdFormats to free memory on Android/iOS
-		_interstitial_ad.destroy()
-		_interstitial_ad = null
-
-	var unit_id : String
-	if OS.get_name() == "Android":
-		unit_id = "ca-app-pub-3940256099942544/1033173712"
-	elif OS.get_name() == "iOS":
-		unit_id = "ca-app-pub-3940256099942544/4411468910"
-
-	var interstitial_ad_load_callback := InterstitialAdLoadCallback.new()
-	interstitial_ad_load_callback.on_ad_failed_to_load = func(adError : LoadAdError) -> void:
-		print(adError.message)
-
-	interstitial_ad_load_callback.on_ad_loaded = func(interstitial_ad : InterstitialAd) -> void:
-		print("interstitial ad loaded" + str(interstitial_ad._uid))
-		_interstitial_ad = interstitial_ad
-
-	InterstitialAdLoader.new().load(unit_id, AdRequest.new(), interstitial_ad_load_callback)
-
-```
+    ```csharp linenums="1" hl_lines="42"
+    using Godot;
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Api.Core;
+    using PoingStudios.AdMob.Api.Listeners;
+    
+    public partial class InterstitialAdExample : Node2D
+    {
+        private InterstitialAd _interstitialAd;
+    
+        public override void _Ready()
+        {
+            //The initializate needs to be done only once, ideally at app launch.
+            MobileAds.Initialize();
+        }
+    
+        private void OnLoadPressed()
+        {
+            //free memory
+            if (_interstitialAd != null)
+            {
+                //always call this method on all AdFormats to free memory on Android/iOS
+                _interstitialAd.Destroy();
+                _interstitialAd = null;
+            }
+    
+            string unitId = null;
+            if (OS.GetName() == "Android")
+                unitId = "ca-app-pub-3940256099942544/1033173712";
+            else if (OS.GetName() == "iOS")
+                unitId = "ca-app-pub-3940256099942544/4411468910";
+    
+            var interstitialAdLoadCallback = new InterstitialAdLoadCallback
+            {
+                OnAdFailedToLoad = (LoadAdError adError) => GD.Print(adError.Message),
+                OnAdLoaded = (InterstitialAd interstitialAd) => 
+                {
+                    GD.Print("interstitial ad loaded");
+                    _interstitialAd = interstitialAd;
+                }
+            };
+    
+            new InterstitialAdLoader().Load(unitId, new AdRequest(), interstitialAdLoadCallback);
+        }
+    }
+    ```
 
 ### Configure the FullScreenContentCallback
 The `FullScreenContentCallback` manages events associated with the display of your `InterstitialAd`. Before presenting the `InterstitialAd`, ensure that you configure the callback:
 
-```gdscript linenums="1" hl_lines="28"
-extends Node2D
+=== "GDScript"
 
-var _interstitial_ad : InterstitialAd
-var _full_screen_content_callback := FullScreenContentCallback.new()
+    ```gdscript linenums="1" hl_lines="28"
+    extends Node2D
+    
+    var _interstitial_ad : InterstitialAd
+    var _full_screen_content_callback := FullScreenContentCallback.new()
+    
+    func _ready() -> void:
+    	#...
+    	_full_screen_content_callback.on_ad_clicked = func() -> void:
+    		print("on_ad_clicked")
+    	_full_screen_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
+    		print("on_ad_dismissed_full_screen_content")
+    	_full_screen_content_callback.on_ad_failed_to_show_full_screen_content = func(ad_error : AdError) -> void:
+    		print("on_ad_failed_to_show_full_screen_content")
+    	_full_screen_content_callback.on_ad_impression = func() -> void:
+    		print("on_ad_impression")
+    	_full_screen_content_callback.on_ad_showed_full_screen_content = func() -> void:
+    		print("on_ad_showed_full_screen_content")
+    
+    func _on_load_pressed():
+    	#...
+    	var interstitial_ad_load_callback := InterstitialAdLoadCallback.new()
+    
+    	#...
+    
+    	interstitial_ad_load_callback.on_ad_loaded = func(interstitial_ad : InterstitialAd) -> void:
+    		print("interstitial ad loaded" + str(interstitial_ad._uid))
+    		_interstitial_ad = interstitial_ad
+    		_interstitial_ad.full_screen_content_callback = _full_screen_content_callback
+    
+    	#...
+    ```
 
-func _ready() -> void:
-	#...
-	_full_screen_content_callback.on_ad_clicked = func() -> void:
-		print("on_ad_clicked")
-	_full_screen_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
-		print("on_ad_dismissed_full_screen_content")
-	_full_screen_content_callback.on_ad_failed_to_show_full_screen_content = func(ad_error : AdError) -> void:
-		print("on_ad_failed_to_show_full_screen_content")
-	_full_screen_content_callback.on_ad_impression = func() -> void:
-		print("on_ad_impression")
-	_full_screen_content_callback.on_ad_showed_full_screen_content = func() -> void:
-		print("on_ad_showed_full_screen_content")
+=== "C#"
 
-func _on_load_pressed():
-	#...
-	var interstitial_ad_load_callback := InterstitialAdLoadCallback.new()
-
-	#...
-
-	interstitial_ad_load_callback.on_ad_loaded = func(interstitial_ad : InterstitialAd) -> void:
-		print("interstitial ad loaded" + str(interstitial_ad._uid))
-		_interstitial_ad = interstitial_ad
-		_interstitial_ad.full_screen_content_callback = _full_screen_content_callback
-
-	#...
-
-```
+    ```csharp linenums="1" hl_lines="34"
+    using Godot;
+    using PoingStudios.AdMob.Api;
+    using PoingStudios.AdMob.Api.Core;
+    using PoingStudios.AdMob.Api.Listeners;
+    
+    public partial class InterstitialAdExample : Node2D
+    {
+        private InterstitialAd _interstitialAd;
+        private FullScreenContentCallback _fullScreenContentCallback;
+    
+        public override void _Ready()
+        {
+            //...
+            _fullScreenContentCallback = new FullScreenContentCallback
+            {
+                OnAdClicked = () => GD.Print("on_ad_clicked"),
+                OnAdDismissedFullScreenContent = () => GD.Print("on_ad_dismissed_full_screen_content"),
+                OnAdFailedToShowFullScreenContent = (AdError adError) => GD.Print("on_ad_failed_to_show_full_screen_content"),
+                OnAdImpression = () => GD.Print("on_ad_impression"),
+                OnAdShowedFullScreenContent = () => GD.Print("on_ad_showed_full_screen_content")
+            };
+        }
+    
+        private void OnLoadPressed()
+        {
+            //...
+            var interstitialAdLoadCallback = new InterstitialAdLoadCallback
+            {
+                //...
+                OnAdLoaded = (InterstitialAd interstitialAd) => 
+                {
+                    GD.Print("interstitial ad loaded");
+                    _interstitialAd = interstitialAd;
+                    _interstitialAd.FullScreenContentCallback = _fullScreenContentCallback;
+                }
+            };
+            //...
+        }
+    }
+    ```
 
 ### Show the ad
 
 Interstitial ads are ideally displayed during organic breaks in the app's progression. Examples include between game levels or after a user accomplishes a task. To present an interstitial ad, employ the `show()` function.
 
 
-```gdscript linenums="1" hl_lines="3"
-func _on_show_pressed():
-	if _interstitial_ad:
-		_interstitial_ad.show()
-```
+=== "GDScript"
+
+    ```gdscript linenums="1" hl_lines="3"
+    func _on_show_pressed():
+    	if _interstitial_ad:
+    		_interstitial_ad.show()
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1" hl_lines="4"
+    private void OnShowPressed()
+    {
+        if (_interstitialAd != null)
+            _interstitialAd.Show();
+    }
+    ```
 
 ### Clean up memory
 
 Upon completion of an `InterstitialAd`, it's important to invoke the `destroy()` function before releasing your reference to it:
 
-```gdscript 
-if _interstitial_ad:
-	_interstitial_ad.destroy()
-	_interstitial_ad = null
-```
+=== "GDScript"
+
+    ```gdscript 
+    if _interstitial_ad:
+    	_interstitial_ad.destroy()
+    	_interstitial_ad = null
+    ```
+
+=== "C#"
+
+    ```csharp
+    if (_interstitialAd != null)
+    {
+        _interstitialAd.Destroy();
+        _interstitialAd = null;
+    }
+    ```
 
 
 This action signals to the plugin that the object is no longer in use and that the memory it occupies can be reclaimed. Neglecting to call this method can lead to memory leaks.

@@ -1,15 +1,37 @@
 # Godot 4+ specific ignores
 .godot/
-
-# Ignore test files
-.DS_STORE
-
-!addons/admob/icon.png
-
-# Godot-specific ignores
 .import/
 export.cfg
 export_presets.cfg
+
+# OS-specific ignores
+.DS_Store
+.DS_STORE
+Thumbs.db
+
+# Editor and Tool specific ignores
+.vscode/
+.vs/
+*.swp
+*.swo
+*~
+
+# Build and Backup ignores
+*.old
+*.bak
+*.tmp
+*.log
+__pycache__/
+.cache/
+.venv/
+
+# Project-specific ignores
+/site/
+/platforms/godot_editor/android/
+/platforms/godot_editor/ios/
+
+# Exceptions
+!platforms/godot_editor/addons/admob/icon.png
 
 # Mono-specific ignores
 .mono/
@@ -17,17 +39,4 @@ mono_crash*.json
 data_*/
 AdMobAddon.csproj
 AdMobAddon.sln
-
-# VSCode specific ignores
-.vscode/
-
-# Python specific ignores
-.cache/
-.venv/
-
-# Documentation specific ignores
-/site/
-
-# Android & iOS specific ignores
-/android/
-/ios/
+*.skill
