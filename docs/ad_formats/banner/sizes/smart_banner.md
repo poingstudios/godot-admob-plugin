@@ -16,7 +16,7 @@ To use Smart Banners, use the `AdSize.get_smart_banner_ad_size()` function for t
 
     ```gdscript linenums="1"
     # Create a Smart Banner at the top of the screen.
-    var ad_view := AdView.new(unit_id, AdSize.get_smart_banner_ad_size(), AdPosition.Values.TOP)
+    var ad_view := AdView.new(unit_id, AdSize.get_smart_banner_ad_size(), AdPosition.TOP)
     ```
 
 === "C#"

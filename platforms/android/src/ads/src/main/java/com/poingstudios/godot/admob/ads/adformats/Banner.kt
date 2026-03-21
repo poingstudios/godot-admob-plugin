@@ -1,17 +1,17 @@
 // MIT License
-//
+
 // Copyright (c) 2023-present Poing Studios
-//
+
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
+
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-//
+
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -24,16 +24,15 @@ package com.poingstudios.godot.admob.ads.adformats
 
 import android.app.Activity
 import android.graphics.Rect
-import android.os.Build
-import android.view.DisplayCutout
 import android.view.Gravity
-import android.view.View
 import android.view.View.OnLayoutChangeListener
 import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowInsets
 import android.widget.FrameLayout
-import com.google.android.gms.ads.*
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.LoadAdError
 import com.poingstudios.godot.admob.ads.converters.convertToAdSize
 import com.poingstudios.godot.admob.ads.converters.convertToGodotDictionary
 import com.poingstudios.godot.admob.core.utils.Logger
@@ -43,240 +42,257 @@ import org.godotengine.godot.Godot
 import org.godotengine.godot.plugin.GodotPlugin.emitSignal
 import org.godotengine.godot.plugin.SignalInfo
 
-@Suppress("PLATFORM_CLASS_MAPPED_TO_KOTLIN") // Godot expects Java types, not Kotlin ones (e.g. Integer)
 class Banner(
-    uid: Int,
-    activity: Activity,
-    godotLayout: FrameLayout,
-    godot: Godot,
-    pluginName: String,
-    adViewDictionary: Dictionary
+        uid: Int,
+        activity: Activity,
+        godotLayout: FrameLayout,
+        godot: Godot,
+        private val pluginName: String,
+        adViewDictionary: Dictionary
 ) : AdFormatsBase(uid, activity, godot) {
-    private var safeArea = getSafeArea()
-    private val adPosition: Int = adViewDictionary.getInt("ad_position")
+    private var safeArea: Rect = getSafeArea()
+    private var mPosition: Position = extractPosition(adViewDictionary)
     private lateinit var mAdView: AdView
-    private lateinit var mAdSize: AdSize
-    private var isHidden : Boolean = false
+    private var mAdSize: AdSize = (adViewDictionary["ad_size"] as Dictionary).convertToAdSize()
+    private var isHidden: Boolean = false
 
-    private val mLayoutChangeListener =
-        OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-            Logger.debug("OnLayoutChanged")
-            val newSafeArea = getSafeArea()
-            if (newSafeArea == safeArea){
-                return@OnLayoutChangeListener
-            }
-            safeArea = newSafeArea
-            Logger.debug("safeArea changed")
-            if (!isHidden) { //only update if is not hidden to improve performance
-                updatePosition()
-            }
+    data class Position(var value: Int?, var customX: Int, var customY: Int)
+
+    private fun extractPosition(dict: Dictionary): Position {
+        val value =
+                if (dict.getInt("ad_position") == AdPosition.CUSTOM.value) null
+                else dict.getInt("ad_position")
+        val customPos = dict["custom_position"] as Dictionary
+        return Position(value, customPos.getInt("x"), customPos.getInt("y"))
+    }
+
+    private val mLayoutChangeListener = OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+        Logger.debug("OnLayoutChanged")
+        val newSafeArea = getSafeArea()
+        if (newSafeArea == safeArea) {
+            return@OnLayoutChangeListener
         }
+        safeArea = newSafeArea
+        Logger.debug("safeArea changed")
+        if (!isHidden) { // only update if is not hidden to improve performance
+            activity.runOnUiThread { updatePosition() }
+        }
+    }
 
-    enum class AdPosition {
-        TOP,
-        BOTTOM,
-        LEFT,
-        RIGHT,
-        TOP_LEFT,
-        TOP_RIGHT,
-        BOTTOM_LEFT,
-        BOTTOM_RIGHT,
-        CENTER
+    enum class AdPosition(val value: Int) {
+        TOP(0),
+        BOTTOM(1),
+        LEFT(2),
+        RIGHT(3),
+        TOP_LEFT(4),
+        TOP_RIGHT(5),
+        BOTTOM_LEFT(6),
+        BOTTOM_RIGHT(7),
+        CENTER(8),
+        CUSTOM(-1)
     }
 
     object SignalInfos {
         val onAdClicked = SignalInfo("on_ad_clicked", Integer::class.java)
         val onAdClosed = SignalInfo("on_ad_closed", Integer::class.java)
-        val onAdFailedToLoad = SignalInfo("on_ad_failed_to_load", Integer::class.java, Dictionary::class.java)
+        val onAdFailedToLoad =
+                SignalInfo("on_ad_failed_to_load", Integer::class.java, Dictionary::class.java)
         val onAdImpression = SignalInfo("on_ad_impression", Integer::class.java)
         val onAdLoaded = SignalInfo("on_ad_loaded", Integer::class.java)
         val onAdOpened = SignalInfo("on_ad_opened", Integer::class.java)
     }
 
     init {
-        val adSizeDictionary = adViewDictionary["ad_size"] as Dictionary
         val adUnitId = adViewDictionary["ad_unit_id"] as String
-        val adSize = adSizeDictionary.convertToAdSize()
         activity.runOnUiThread {
             mAdView = AdView(activity)
-            mAdView.setAdSize(adSize)
-            mAdSize = mAdView.adSize!!
             mAdView.adUnitId = adUnitId
-            val layoutParams = getLayoutParams()
+            mAdView.setAdSize(mAdSize)
+            mAdView.adListener =
+                    object : AdListener() {
+                        override fun onAdClicked() {
+                            emitSignal(godot, pluginName, SignalInfos.onAdClicked, uid)
+                        }
 
-            godotLayout.addView(mAdView, layoutParams)
+                        override fun onAdClosed() {
+                            emitSignal(godot, pluginName, SignalInfos.onAdClosed, uid)
+                        }
 
-            mAdView.adListener = object : AdListener() {
-                override fun onAdClicked() {
-                    emitSignal(godot, pluginName, SignalInfos.onAdClicked, uid)
-                }
+                        override fun onAdFailedToLoad(loadAdError: LoadAdError) {
+                            emitSignal(
+                                    godot,
+                                    pluginName,
+                                    SignalInfos.onAdFailedToLoad,
+                                    uid,
+                                    loadAdError.convertToGodotDictionary()
+                            )
+                        }
 
-                override fun onAdClosed() {
-                    emitSignal(godot, pluginName, SignalInfos.onAdClosed, uid)
-                }
+                        override fun onAdImpression() {
+                            emitSignal(godot, pluginName, SignalInfos.onAdImpression, uid)
+                        }
 
-                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                    val loadAdErrorDictionary = loadAdError.convertToGodotDictionary()
-                    emitSignal(godot, pluginName, SignalInfos.onAdFailedToLoad, uid, loadAdErrorDictionary)
-                }
+                        override fun onAdLoaded() {
+                            emitSignal(godot, pluginName, SignalInfos.onAdLoaded, uid)
+                        }
 
-                override fun onAdImpression() {
-                    emitSignal(godot, pluginName, SignalInfos.onAdImpression, uid)
-                }
-
-                override fun onAdLoaded() {
-                    if (!isHidden) {
-                        show()
+                        override fun onAdOpened() {
+                            emitSignal(godot, pluginName, SignalInfos.onAdOpened, uid)
+                        }
                     }
-                    emitSignal(godot, pluginName, SignalInfos.onAdLoaded, uid)
-                }
 
-                override fun onAdOpened() {
-                    emitSignal(godot, pluginName, SignalInfos.onAdOpened, uid)
-                }
-            }
-            activity.window.decorView.rootView.addOnLayoutChangeListener(mLayoutChangeListener)
+            godotLayout.addView(mAdView)
+            godotLayout.addOnLayoutChangeListener(mLayoutChangeListener)
+            updatePosition()
         }
+    }
+
+    private fun getGravity(adPosition: Int?): Int {
+        val gravity =
+                when (adPosition) {
+                    AdPosition.TOP.value -> Gravity.TOP or Gravity.CENTER_HORIZONTAL
+                    AdPosition.BOTTOM.value -> Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
+                    AdPosition.LEFT.value -> Gravity.START or Gravity.CENTER_VERTICAL
+                    AdPosition.RIGHT.value -> Gravity.END or Gravity.CENTER_VERTICAL
+                    AdPosition.TOP_LEFT.value -> Gravity.TOP or Gravity.START
+                    AdPosition.TOP_RIGHT.value -> Gravity.TOP or Gravity.END
+                    AdPosition.BOTTOM_LEFT.value -> Gravity.BOTTOM or Gravity.START
+                    AdPosition.BOTTOM_RIGHT.value -> Gravity.BOTTOM or Gravity.END
+                    AdPosition.CENTER.value -> Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
+                    else ->
+                            Gravity.TOP or
+                                    Gravity.START // Default base for custom coordinates (adPosition
+                // == null)
+                }
+        return gravity
+    }
+
+    private fun getLayoutParams(): FrameLayout.LayoutParams {
+        val layoutParams =
+                FrameLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+
+        layoutParams.gravity = getGravity(mPosition.value)
+        val safeArea = getSafeArea() // Refresh to ensure we have valid bounds
+
+        // Calculate insets from coordinates
+        val leftInset = safeArea.left
+        val topInset = safeArea.top
+        val rightInset = activity.window.decorView.width - safeArea.right
+        val bottomInset = activity.window.decorView.height - safeArea.bottom
+
+        if (mPosition.value == null) {
+            val density = activity.resources.displayMetrics.density
+            layoutParams.leftMargin = (mPosition.customX * density).toInt()
+            layoutParams.topMargin = (mPosition.customY * density).toInt()
+            layoutParams.rightMargin = 0
+            layoutParams.bottomMargin = 0
+        } else {
+            layoutParams.bottomMargin = bottomInset
+            layoutParams.rightMargin = rightInset
+            layoutParams.leftMargin = leftInset
+            layoutParams.topMargin = topInset
+        }
+
+        return layoutParams
+    }
+
+    private fun updatePosition() {
+        val layoutParams = getLayoutParams()
+        mAdView.layoutParams = layoutParams
+    }
+
+    fun updatePosition(newPosition: Int) {
+        mPosition = Position(newPosition, 0, 0)
+        activity.runOnUiThread { updatePosition() }
+    }
+
+    fun updateCustomPosition(x: Int, y: Int) {
+        mPosition = Position(null, x, y)
+        activity.runOnUiThread { updatePosition() }
+    }
+
+    fun loadAd(adRequest: AdRequest) {
+        activity.runOnUiThread { mAdView.loadAd(adRequest) }
+    }
+    fun destroy() {
+        activity.runOnUiThread {
+            (mAdView.parent as? ViewGroup)?.removeView(mAdView)
+            mAdView.destroy()
+        }
+    }
+
+    fun hide() {
+        activity.runOnUiThread {
+            mAdView.visibility = FrameLayout.GONE
+            mAdView.pause()
+            isHidden = true
+        }
+    }
+
+    fun show() {
+        activity.runOnUiThread {
+            mAdView.visibility = FrameLayout.VISIBLE
+            mAdView.resume()
+            isHidden = false
+            updatePosition()
+        }
+    }
+
+    fun getWidth(): Int {
+        return mAdSize.width
+    }
+
+    fun getHeight(): Int {
+        return mAdSize.height
+    }
+
+    fun getWidthInPixels(): Int {
+        return mAdSize.getWidthInPixels(activity)
+    }
+
+    fun getHeightInPixels(): Int {
+        return mAdSize.getHeightInPixels(activity)
     }
 
     private fun getSafeArea(): Rect {
-        val safeInsetRect = Rect()
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
-            return safeInsetRect
-        }
-        val window: Window = activity.window?: return safeInsetRect
+        val safeArea = Rect()
+        val window = activity.window
+        val decorView = window.decorView
+        decorView.getWindowVisibleDisplayFrame(safeArea)
 
-        val windowInsets : WindowInsets = window.decorView.rootWindowInsets ?: return safeInsetRect
-        val displayCutout : DisplayCutout = windowInsets.displayCutout ?: return safeInsetRect
-
-        safeInsetRect.left = displayCutout.safeInsetLeft
-        safeInsetRect.top = displayCutout.safeInsetTop
-        safeInsetRect.right = displayCutout.safeInsetRight
-        safeInsetRect.bottom = displayCutout.safeInsetBottom
-        Logger.debug("safeInsetRect: $safeInsetRect")
-        return safeInsetRect
-    }
-
-    private fun getGravity(adPosition: Int?) : Int{
-        val gravity = when (adPosition) {
-            AdPosition.TOP.ordinal -> Gravity.TOP or Gravity.CENTER_HORIZONTAL
-            AdPosition.BOTTOM.ordinal -> Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL
-            AdPosition.LEFT.ordinal -> Gravity.START or Gravity.CENTER_VERTICAL
-            AdPosition.RIGHT.ordinal -> Gravity.END or Gravity.CENTER_VERTICAL
-            AdPosition.TOP_LEFT.ordinal -> Gravity.TOP or Gravity.START
-            AdPosition.TOP_RIGHT.ordinal -> Gravity.TOP or Gravity.END
-            AdPosition.BOTTOM_LEFT.ordinal -> Gravity.BOTTOM or Gravity.START
-            AdPosition.BOTTOM_RIGHT.ordinal -> Gravity.BOTTOM or Gravity.END
-            AdPosition.CENTER.ordinal -> Gravity.CENTER_HORIZONTAL or Gravity.CENTER_VERTICAL
-            else -> throw IllegalArgumentException("Value of ad_position invalid")
-        }
-
-        return gravity
-    }
-    private fun getLayoutParams() : FrameLayout.LayoutParams {
-        Logger.debug("Safe Area of screen: $safeArea.")
-
-        val adParams : FrameLayout.LayoutParams = FrameLayout.LayoutParams(
-            FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT
-        )
-
-        adParams.gravity = getGravity(adPosition)
-        adParams.bottomMargin = safeArea.bottom
-        adParams.rightMargin = safeArea.right
-        adParams.leftMargin = safeArea.left
-        adParams.topMargin = calculateTopMargin(adParams.topMargin)
-
-        return adParams
-    }
-
-    private fun calculateTopMargin(topMargin : Int) : Int{
-        var returnValue = topMargin
-        when (adPosition) {
-            AdPosition.TOP.ordinal, AdPosition.TOP_LEFT.ordinal, AdPosition.TOP_RIGHT.ordinal -> {
-                val windowInsets = activity.window?.decorView?.rootWindowInsets
-                if (windowInsets != null) {
-                    val statusBarHeight = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                            windowInsets.getInsets(WindowInsets.Type.statusBars()).top
-                        } else {
-                            @Suppress("DEPRECATION")
-                            windowInsets.systemWindowInsetTop
-                        }
-                    returnValue = 0.coerceAtLeast(safeArea.top - statusBarHeight)
-                } else {
-                    returnValue = safeArea.top
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+            val insets = decorView.rootWindowInsets
+            if (insets != null) {
+                val displayCutout = insets.displayCutout
+                if (displayCutout != null) {
+                    safeArea.left = kotlin.math.max(safeArea.left, displayCutout.safeInsetLeft)
+                    safeArea.top = kotlin.math.max(safeArea.top, displayCutout.safeInsetTop)
+                    safeArea.right =
+                            kotlin.math.min(
+                                    safeArea.right,
+                                    decorView.width - displayCutout.safeInsetRight
+                            )
+                    safeArea.bottom =
+                            kotlin.math.min(
+                                    safeArea.bottom,
+                                    decorView.height - displayCutout.safeInsetBottom
+                            )
+                }
+                // Handle transparent status/navigation bars in edge-to-edge mode
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+                    val systemInsets = insets.getInsets(android.view.WindowInsets.Type.systemBars())
+                    safeArea.top = kotlin.math.max(safeArea.top, systemInsets.top)
+                    safeArea.bottom =
+                            kotlin.math.min(safeArea.bottom, decorView.height - systemInsets.bottom)
+                    safeArea.left = kotlin.math.max(safeArea.left, systemInsets.left)
+                    safeArea.right =
+                            kotlin.math.min(safeArea.right, decorView.width - systemInsets.right)
                 }
             }
         }
-        Logger.debug("marginTop: $returnValue")
-        return returnValue
+        return safeArea
     }
-
-
-    private fun updatePosition(){
-        activity.runOnUiThread{
-            val layoutParams = getLayoutParams()
-            mAdView.layoutParams = layoutParams
-        }
-    }
-
-    fun loadAd(adRequest: AdRequest){
-        activity.runOnUiThread {
-            mAdView.loadAd(adRequest)
-        }
-    }
-    fun destroy(){
-        activity.runOnUiThread {
-            mAdView.destroy()
-            if (mAdView.parent != null){
-                (mAdView.parent as ViewGroup).removeView(mAdView)
-            }
-        }
-        activity.window.decorView.rootView.removeOnLayoutChangeListener(mLayoutChangeListener)
-    }
-
-    fun hide(){
-        activity.runOnUiThread{
-            isHidden = true
-            mAdView.visibility = View.GONE
-            mAdView.pause()
-        }
-    }
-
-    fun show(){
-        activity.runOnUiThread{
-            isHidden = false
-            mAdView.visibility = View.VISIBLE
-            updatePosition()
-            mAdView.resume()
-        }
-    }
-
-    fun getWidth() : Int {
-        if (this::mAdSize.isInitialized) {
-            return mAdSize.width
-        }
-        return 0
-    }
-
-    fun getHeight() : Int{
-        if (this::mAdSize.isInitialized) {
-            return mAdSize.height
-        }
-        return 0
-    }
-
-    fun getWidthInPixels() : Int{
-        if (this::mAdSize.isInitialized) {
-            return mAdSize.getWidthInPixels(activity)
-        }
-        return 0
-    }
-
-    fun getHeightInPixels() : Int {
-        if (this::mAdSize.isInitialized) {
-            return mAdSize.getHeightInPixels(activity)
-        }
-        return 0
-    }
-
 }

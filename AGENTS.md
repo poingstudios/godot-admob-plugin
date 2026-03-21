@@ -11,10 +11,15 @@ This file is the authoritative source of truth for ALL AI agents (Gemini, Claude
   - Mirrors GDScript API. Managed by `CSharpService.gd` (auto-hides via `.gdignore`).
 - **Native Bridges:** Android (Kotlin/JNI) in `platforms/android/`, iOS (Swift/Obj-C) in `platforms/ios/`.
 
+## 📦 Current Environment
+- **Godot Version:** 4.6.1 (Current target for builds and testing).
+
 ## 🛠️ Critical Commands
-- **Build Android:** `cd platforms/android && ./gradlew assembleDebug`
-- **Build iOS:** `cd platforms/ios && scons platform=ios`
-- **Build All:** `./scripts/build_local.sh`
+- **Build All/Specific Platforms:** Use the central script for all compilation needs. 
+  - ` ./scripts/build_local.sh [android|ios|all] <godot_version>`
+  - *Example (All):* `./scripts/build_local.sh all 4.6.1`
+  - *Example (iOS):* `./scripts/build_local.sh ios 4.6.1`
+  - *Example (Android):* `./scripts/build_local.sh android 4.6.1`
 
 ## 📝 Coding Standards
 - **License Header:** EVERY new file MUST start with the project's MIT License header.

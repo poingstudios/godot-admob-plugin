@@ -30,13 +30,27 @@ const Registry = preload("res://addons/admob/internal/sample_registry.gd")
 @onready var _ad_volume_slider: HSlider = $AdVolumeContainer/AdVolumeSlider
 @onready var _ad_muted_check: CheckButton = $AdMuted
 
-func _on_set_ios_app_pause_on_background_button_pressed() -> void:
-	var is_enabled := _ios_pause_check.button_pressed
+func _on_get_initialization_status_pressed() -> void:
+	var status := MobileAds.get_initialization_status()
+	if status:
+		_log_adapter_status(status)
+
+func _log_adapter_status(status: InitializationStatus) -> void:
+	for adapter_name in status.adapter_status_map:
+		var adapter_status: AdapterStatus = status.adapter_status_map[adapter_name]
+		var info := "[%s] State: %d | Latency: %dms | Desc: %s" % [
+			adapter_name,
+			adapter_status.initialization_state,
+			adapter_status.latency,
+			adapter_status.description
+		]
+		_log(info)
+
+func _on_set_ios_app_pause_on_background_button_pressed(is_enabled: bool) -> void:
 	_log("Setting iOS App Pause on Background: " + str(is_enabled))
 	MobileAds.set_ios_app_pause_on_background(is_enabled)
 
-func _on_mute_music_pressed() -> void:
-	var is_muted := _mute_music_check.button_pressed
+func _on_mute_music_pressed(is_muted: bool) -> void:
 	_log("Muting music: " + str(is_muted))
 	_music_player.stream_paused = is_muted
 
@@ -44,8 +58,7 @@ func _on_ad_volume_changed(value: float) -> void:
 	_log("Setting ad volume: " + str(value))
 	MobileAds.set_app_volume(value)
 
-func _on_ad_muted_pressed() -> void:
-	var is_muted := _ad_muted_check.button_pressed
+func _on_ad_muted_pressed(is_muted: bool) -> void:
 	_log("Muting ads: " + str(is_muted))
 	MobileAds.set_app_muted(is_muted)
 

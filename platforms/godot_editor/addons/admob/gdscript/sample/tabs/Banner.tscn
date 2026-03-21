@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://c6u6s82p5d6qs"]
+[gd_scene load_steps=12 format=3 uid="uid://c6u6s82p5d6qs"]
 
 [ext_resource type="Script" uid="uid://d023ltbxjofyr" path="res://addons/admob/gdscript/sample/tabs/Banner.gd" id="1_5pjv8"]
 [ext_resource type="Texture2D" uid="uid://c6d7aye5nwtvi" path="res://addons/admob/assets/pos_top_left.svg" id="2_tl"]
@@ -11,54 +11,155 @@
 [ext_resource type="Texture2D" uid="uid://5v6slm2g7ad0" path="res://addons/admob/assets/pos_bottom.svg" id="9_b"]
 [ext_resource type="Texture2D" uid="uid://e3dqlgeny8lx" path="res://addons/admob/assets/pos_bottom_right.svg" id="10_br"]
 
-[node name="Banner" type="VBoxContainer"]
+[node name="Banner" type="VBoxContainer" unique_id=844789355]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
 script = ExtResource("1_5pjv8")
 
-[node name="BannerActions" type="VBoxContainer" parent="."]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="LoadBanner" type="Button" parent="BannerActions"]
-layout_mode = 2
-text = "Load Banner"
-
-[node name="DestroyBanner" type="Button" parent="BannerActions"]
-layout_mode = 2
-disabled = true
-text = "Destroy Banner"
-
-[node name="ShowBanner" type="Button" parent="BannerActions"]
-layout_mode = 2
-disabled = true
-text = "Show Banner"
-
-[node name="HideBanner" type="Button" parent="BannerActions"]
-layout_mode = 2
-disabled = true
-text = "Hide Banner"
-
-[node name="GetSize" type="Button" parent="BannerActions"]
-layout_mode = 2
-disabled = true
-text = "Get Size"
-
-[node name="HSeparator" type="HSeparator" parent="."]
-layout_mode = 2
-theme_override_constants/separation = 20
-
-[node name="PositionCard" type="PanelContainer" parent="."]
+[node name="ActionsCard" type="PanelContainer" parent="." unique_id=1334541260]
 layout_mode = 2
 theme_type_variation = &"SectionCard"
 
-[node name="VBox" type="VBoxContainer" parent="PositionCard"]
+[node name="VBox" type="VBoxContainer" parent="ActionsCard" unique_id=145261303]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="ActionsCard/VBox"]
+layout_mode = 2
+text = "BANNER CONTROLS"
+horizontal_alignment = 1
+
+[node name="BannerActions" type="GridContainer" parent="ActionsCard/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="LoadBanner" type="Button" parent="ActionsCard/VBox/BannerActions" unique_id=2125535567]
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.25, 0.75, 0.25, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.35, 0.1, 1)
+theme_override_colors/font_color = Color(0.15, 0.45, 0.15, 1)
+text = "Load"
+
+[node name="LoadBannerBackground" type="Button" parent="ActionsCard/VBox/BannerActions" unique_id=2125535568]
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.25, 0.75, 0.25, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.35, 0.1, 1)
+theme_override_colors/font_color = Color(0.15, 0.45, 0.15, 1)
+text = "Load Background"
+
+[node name="ShowBanner" type="Button" parent="ActionsCard/VBox/BannerActions" unique_id=1859048598]
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.1, 0.25, 0.5, 0.4)
+theme_override_colors/font_hover_color = Color(0.25, 0.5, 0.9, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.15, 0.3, 1)
+theme_override_colors/font_color = Color(0.1, 0.25, 0.5, 1)
+disabled = true
+text = "Show"
+
+[node name="HideBanner" type="Button" parent="ActionsCard/VBox/BannerActions" unique_id=290648941]
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.5, 0.4, 0.1, 0.4)
+theme_override_colors/font_hover_color = Color(0.8, 0.7, 0.2, 1)
+theme_override_colors/font_pressed_color = Color(0.3, 0.2, 0.05, 1)
+theme_override_colors/font_color = Color(0.5, 0.4, 0.1, 1)
+disabled = true
+text = "Hide"
+
+[node name="GetSize" type="Button" parent="ActionsCard/VBox/BannerActions" unique_id=1684977602]
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.3, 0.3, 0.3, 0.4)
+theme_override_colors/font_hover_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
+disabled = true
+text = "Get Size"
+
+[node name="DestroyBanner" type="Button" parent="ActionsCard/VBox/BannerActions" unique_id=2032311922]
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.6, 0.15, 0.15, 0.4)
+theme_override_colors/font_hover_color = Color(0.9, 0.3, 0.3, 1)
+theme_override_colors/font_pressed_color = Color(0.4, 0.05, 0.05, 1)
+theme_override_colors/font_color = Color(0.6, 0.15, 0.15, 1)
+disabled = true
+text = "Destroy"
+
+[node name="CustomCard" type="PanelContainer" parent="." unique_id=1288863104]
+layout_mode = 2
+theme_type_variation = &"SectionCard"
+
+[node name="VBox" type="VBoxContainer" parent="CustomCard" unique_id=1130310246]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CustomCard/VBox"]
+layout_mode = 2
+text = "CUSTOM POSITION (XY)"
+horizontal_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="CustomCard/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="XLabel" type="Label" parent="CustomCard/VBox/HBox"]
+layout_mode = 2
+text = "X:"
+
+[node name="XValue" type="LineEdit" parent="CustomCard/VBox/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "50"
+placeholder_text = "0"
+alignment = 1
+select_all_on_focus = true
+virtual_keyboard_type = 2
+
+[node name="YLabel" type="Label" parent="CustomCard/VBox/HBox"]
+layout_mode = 2
+text = "Y:"
+
+[node name="YValue" type="LineEdit" parent="CustomCard/VBox/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "500"
+placeholder_text = "0"
+alignment = 1
+select_all_on_focus = true
+virtual_keyboard_type = 2
+
+[node name="ApplyCustom" type="Button" parent="CustomCard/VBox/HBox"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Update"
+
+[node name="PositionCard" type="PanelContainer" parent="." unique_id=208169234]
+layout_mode = 2
+theme_type_variation = &"SectionCard"
+
+[node name="VBox" type="VBoxContainer" parent="PositionCard" unique_id=1840825310]
 layout_mode = 2
 theme_override_constants/separation = 15
 
 [node name="Label" type="Label" parent="PositionCard/VBox"]
 layout_mode = 2
-text = "AD POSITIONS"
+text = "PRESET POSITIONS"
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="PositionGrid" type="GridContainer" parent="PositionCard/VBox"]
 layout_mode = 2
@@ -68,73 +169,75 @@ theme_override_constants/v_separation = 15
 columns = 3
 
 [node name="TOP_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 tooltip_text = "Top Left"
 icon = ExtResource("2_tl")
 expand_icon = true
 
 [node name="TOP" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 tooltip_text = "Top"
 icon = ExtResource("3_t")
 expand_icon = true
 
 [node name="TOP_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 tooltip_text = "Top Right"
 icon = ExtResource("4_tr")
 expand_icon = true
 
 [node name="LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 tooltip_text = "Left"
 icon = ExtResource("5_l")
 expand_icon = true
 
 [node name="CENTER" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 tooltip_text = "Center"
 icon = ExtResource("6_c")
 expand_icon = true
 
 [node name="RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 tooltip_text = "Right"
 icon = ExtResource("7_r")
 expand_icon = true
 
 [node name="BOTTOM_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 tooltip_text = "Bottom Left"
 icon = ExtResource("8_bl")
 expand_icon = true
 
 [node name="BOTTOM" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 tooltip_text = "Bottom"
 icon = ExtResource("9_b")
 expand_icon = true
 
 [node name="BOTTOM_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(120, 120)
+custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 tooltip_text = "Bottom Right"
 icon = ExtResource("10_br")
 expand_icon = true
 
-[connection signal="pressed" from="BannerActions/LoadBanner" to="." method="_on_load_banner_pressed"]
-[connection signal="pressed" from="BannerActions/DestroyBanner" to="." method="_on_destroy_banner_pressed"]
-[connection signal="pressed" from="BannerActions/ShowBanner" to="." method="_on_show_banner_pressed"]
-[connection signal="pressed" from="BannerActions/HideBanner" to="." method="_on_hide_banner_pressed"]
-[connection signal="pressed" from="BannerActions/GetSize" to="." method="_on_get_size_pressed"]
+[connection signal="pressed" from="CustomCard/VBox/HBox/ApplyCustom" to="." method="_on_apply_custom_pressed"]
+[connection signal="pressed" from="ActionsCard/VBox/BannerActions/LoadBanner" to="." method="_on_load_banner_pressed"]
+[connection signal="pressed" from="ActionsCard/VBox/BannerActions/LoadBannerBackground" to="." method="_on_load_banner_background_pressed"]
+[connection signal="pressed" from="ActionsCard/VBox/BannerActions/DestroyBanner" to="." method="_on_destroy_banner_pressed"]
+[connection signal="pressed" from="ActionsCard/VBox/BannerActions/ShowBanner" to="." method="_on_show_banner_pressed"]
+[connection signal="pressed" from="ActionsCard/VBox/BannerActions/HideBanner" to="." method="_on_hide_banner_pressed"]
+[connection signal="pressed" from="ActionsCard/VBox/BannerActions/GetSize" to="." method="_on_get_size_pressed"]
 [connection signal="pressed" from="PositionCard/VBox/PositionGrid/TOP_LEFT" to="." method="_on_top_left_pressed"]
 [connection signal="pressed" from="PositionCard/VBox/PositionGrid/TOP" to="." method="_on_top_pressed"]
 [connection signal="pressed" from="PositionCard/VBox/PositionGrid/TOP_RIGHT" to="." method="_on_top_right_pressed"]

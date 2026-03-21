@@ -1,17 +1,17 @@
 // MIT License
-
+//
 // Copyright (c) 2023-present Poing Studios
-
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -40,22 +40,41 @@ public partial class MobileAds : VBoxContainer
 		_adVolumeSlider = GetNode<HSlider>("AdVolumeContainer/AdVolumeSlider");
 		_adMutedCheck = GetNode<CheckButton>("AdMuted");
 
-		_iosPauseCheck.Pressed += OnSetIosAppPausePressed;
-		_muteMusicCheck.Pressed += OnMuteMusicPressed;
+		_iosPauseCheck.Toggled += OnSetIosAppPausePressed;
+		_muteMusicCheck.Toggled += OnMuteMusicPressed;
 		_adVolumeSlider.ValueChanged += OnAdVolumeChanged;
-		_adMutedCheck.Pressed += OnAdMutedPressed;
+		_adMutedCheck.Toggled += OnAdMutedPressed;
+
+		var initBtn = GetNode<Button>("GetInitStatus");
+		initBtn.Pressed += OnGetInitializationStatusPressed;
 	}
 
-	private void OnSetIosAppPausePressed()
+	private void OnGetInitializationStatusPressed()
 	{
-		var isEnabled = _iosPauseCheck.ButtonPressed;
+		var status = PoingStudios.AdMob.Api.MobileAds.GetInitializationStatus();
+		if (status != null)
+		{
+			LogAdapterStatus(status);
+		}
+	}
+
+	private void LogAdapterStatus(InitializationStatus status)
+	{
+		foreach (var adapterName in status.AdapterStatusMap.Keys)
+		{
+			var adapterStatus = status.AdapterStatusMap[adapterName];
+			Log($"[{adapterName}] State: {adapterStatus.State} | Latency: {adapterStatus.Latency}ms | Desc: {adapterStatus.Description}");
+		}
+	}
+
+	private void OnSetIosAppPausePressed(bool isEnabled)
+	{
 		Log("Setting iOS App Pause on Background: " + isEnabled);
 		PoingStudios.AdMob.Api.MobileAds.SetIosAppPauseOnBackground(isEnabled);
 	}
 
-	private void OnMuteMusicPressed()
+	private void OnMuteMusicPressed(bool isMuted)
 	{
-		var isMuted = _muteMusicCheck.ButtonPressed;
 		Log("Muting music: " + isMuted);
 		_musicPlayer.StreamPaused = isMuted;
 	}
@@ -66,9 +85,8 @@ public partial class MobileAds : VBoxContainer
 		PoingStudios.AdMob.Api.MobileAds.SetAppVolume((float)value);
 	}
 
-	private void OnAdMutedPressed()
+	private void OnAdMutedPressed(bool isMuted)
 	{
-		var isMuted = _adMutedCheck.ButtonPressed;
 		Log("Muting ads: " + isMuted);
 		PoingStudios.AdMob.Api.MobileAds.SetAppMuted(isMuted);
 	}

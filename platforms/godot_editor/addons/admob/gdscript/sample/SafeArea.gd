@@ -42,9 +42,9 @@ func update_ad_overlap(ad_view: AdView) -> void:
 	var height := float(ad_view.get_height_in_pixels())
 	
 	# Mapping AdPosition enum values to top/bottom margins
-	if pos in [AdPosition.Values.TOP, AdPosition.Values.TOP_LEFT, AdPosition.Values.TOP_RIGHT]:
+	if pos.value in [AdPosition.Values.TOP, AdPosition.Values.TOP_LEFT, AdPosition.Values.TOP_RIGHT]:
 		_ad_margin_top = height
-	elif pos in [AdPosition.Values.BOTTOM, AdPosition.Values.BOTTOM_LEFT, AdPosition.Values.BOTTOM_RIGHT]:
+	elif pos.value in [AdPosition.Values.BOTTOM, AdPosition.Values.BOTTOM_LEFT, AdPosition.Values.BOTTOM_RIGHT]:
 		_ad_margin_bottom = height
 		
 	_update_safe_area()

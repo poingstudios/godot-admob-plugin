@@ -84,6 +84,20 @@ void PoingGodotAdMobAdView::show(int uid) {
     }
 }
 
+void PoingGodotAdMobAdView::update_position(int uid, int position) {
+    BannerAd* bannerAd = getObject(uid);
+    if (bannerAd) {
+        [bannerAd updateBannerPositionForAdPosition:(AdPosition)position];
+    }
+}
+
+void PoingGodotAdMobAdView::update_custom_position(int uid, int x, int y) {
+    BannerAd* bannerAd = getObject(uid);
+    if (bannerAd) {
+        [bannerAd updateBannerPositionForCustomPositionX:x y:y];
+    }
+}
+
 int PoingGodotAdMobAdView::get_width(int uid) {
     NSLog(@"get_width banner");
 
@@ -129,6 +143,8 @@ void PoingGodotAdMobAdView::_bind_methods() {
     ClassDB::bind_method(D_METHOD("destroy"),               &PoingGodotAdMobAdView::destroy);
     ClassDB::bind_method(D_METHOD("hide"),                  &PoingGodotAdMobAdView::hide);
     ClassDB::bind_method(D_METHOD("show"),                  &PoingGodotAdMobAdView::show);
+    ClassDB::bind_method(D_METHOD("update_position", "uid", "position"), &PoingGodotAdMobAdView::update_position);
+    ClassDB::bind_method(D_METHOD("update_custom_position", "uid", "x", "y"), &PoingGodotAdMobAdView::update_custom_position);
     ClassDB::bind_method(D_METHOD("get_width"),             &PoingGodotAdMobAdView::get_width);
     ClassDB::bind_method(D_METHOD("get_height"),            &PoingGodotAdMobAdView::get_height);
     ClassDB::bind_method(D_METHOD("get_width_in_pixels"),   &PoingGodotAdMobAdView::get_width_in_pixels);
@@ -141,4 +157,3 @@ void PoingGodotAdMobAdView::_bind_methods() {
     ADD_SIGNAL(MethodInfo("on_ad_loaded",           PropertyInfo(Variant::INT, "UID")));
     ADD_SIGNAL(MethodInfo("on_ad_opened",           PropertyInfo(Variant::INT, "UID")));
 };
-

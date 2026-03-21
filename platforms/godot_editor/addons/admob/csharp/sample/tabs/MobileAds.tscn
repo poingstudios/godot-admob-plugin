@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://df7xan3v87p5"]
+
+[ext_resource type="Script" path="res://addons/admob/csharp/sample/tabs/MobileAds.cs" id="1_mads"]
+[ext_resource type="AudioStream" uid="uid://f3f176vu6pfo" path="res://addons/admob/assets/music.ogg" id="2_music"]
+
+[node name="MobileAds" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+script = ExtResource("1_mads")
+
+[node name="GetInitStatus" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Get Initialization Status"
+
+[node name="iOSAppPause" type="CheckButton" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Set iOS App Pause On Background"
+alignment = 1
+
+[node name="MuteMusic" type="CheckButton" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Mute Music"
+alignment = 1
+
+[node name="AdVolumeContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="AdVolumeLabel" type="Label" parent="AdVolumeContainer"]
+layout_mode = 2
+text = "Ad Volume"
+
+[node name="AdVolumeSlider" type="HSlider" parent="AdVolumeContainer"]
+custom_minimum_size = Vector2(200, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="AdMuted" type="CheckButton" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Mute Ads"
+alignment = 1
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_music")
+volume_db = -10.0
+autoplay = true

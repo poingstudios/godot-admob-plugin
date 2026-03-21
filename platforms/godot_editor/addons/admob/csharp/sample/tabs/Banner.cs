@@ -1,17 +1,17 @@
 // MIT License
-
+//
 // Copyright (c) 2023-present Poing Studios
-
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -34,71 +34,117 @@ public partial class Banner : VBoxContainer
 	private string AdUnitId => OS.GetName() == "iOS" ? AdUnitIdIos : AdUnitIdAndroid;
 
 	private AdView _adView;
-	private AdPosition _currentPosition = AdPosition.Bottom;
+	private AdPosition _adPosition = AdPosition.Top;
+	private bool _isHidden = false;
 
 	private Button _loadBtn;
+	private Button _loadBackgroundBtn;
 	private Button _destroyBtn;
 	private Button _showBtn;
 	private Button _hideBtn;
 	private Button _getSizeBtn;
 
+	private LineEdit _xValue;
+	private LineEdit _yValue;
+
 	public override void _Ready()
 	{
-		_loadBtn = GetNode<Button>("LoadBanner");
-		_destroyBtn = GetNode<Button>("DestroyBanner");
-		_showBtn = GetNode<Button>("ShowBanner");
-		_hideBtn = GetNode<Button>("HideBanner");
-		_getSizeBtn = GetNode<Button>("GetSize");
+		_loadBtn = GetNode<Button>("%BannerActions/LoadBanner");
+		_loadBackgroundBtn = GetNode<Button>("%BannerActions/LoadBannerBackground");
+		_destroyBtn = GetNode<Button>("%BannerActions/DestroyBanner");
+		_showBtn = GetNode<Button>("%BannerActions/ShowBanner");
+		_hideBtn = GetNode<Button>("%BannerActions/HideBanner");
+		_getSizeBtn = GetNode<Button>("%BannerActions/GetSize");
 
 		_loadBtn.Pressed += OnLoadPressed;
+		_loadBackgroundBtn.Pressed += OnLoadBackgroundPressed;
 		_destroyBtn.Pressed += OnDestroyPressed;
 		_showBtn.Pressed += OnShowPressed;
 		_hideBtn.Pressed += OnHidePressed;
 		_getSizeBtn.Pressed += OnGetSizePressed;
 
+		_xValue = GetNode<LineEdit>("%XValue");
+		_yValue = GetNode<LineEdit>("%YValue");
+		
+		_xValue.TextSubmitted += _ => OnApplyCustomPressed();
+		_yValue.TextSubmitted += _ => OnApplyCustomPressed();
+
+		var applyCustomBtn = GetNode<Button>("CustomCard/VBox/HBox/ApplyCustom");
+		applyCustomBtn.Pressed += OnApplyCustomPressed;
+
 		var grid = GetNode<GridContainer>("PositionCard/VBox/PositionGrid");
-		grid.GetNode<Button>("TOP_LEFT").Pressed += () => SetPosition(AdPosition.TopLeft);
-		grid.GetNode<Button>("TOP").Pressed += () => SetPosition(AdPosition.Top);
-		grid.GetNode<Button>("TOP_RIGHT").Pressed += () => SetPosition(AdPosition.TopRight);
-		grid.GetNode<Button>("LEFT").Pressed += () => SetPosition(AdPosition.Left);
-		grid.GetNode<Button>("CENTER").Pressed += () => SetPosition(AdPosition.Center);
-		grid.GetNode<Button>("RIGHT").Pressed += () => SetPosition(AdPosition.Right);
-		grid.GetNode<Button>("BOTTOM_LEFT").Pressed += () => SetPosition(AdPosition.BottomLeft);
-		grid.GetNode<Button>("BOTTOM").Pressed += () => SetPosition(AdPosition.Bottom);
-		grid.GetNode<Button>("BOTTOM_RIGHT").Pressed += () => SetPosition(AdPosition.BottomRight);
+		grid.GetNode<Button>("TOP_LEFT").Pressed += () => UpdatePosition(AdPosition.TopLeft);
+		grid.GetNode<Button>("TOP").Pressed += () => UpdatePosition(AdPosition.Top);
+		grid.GetNode<Button>("TOP_RIGHT").Pressed += () => UpdatePosition(AdPosition.TopRight);
+		grid.GetNode<Button>("LEFT").Pressed += () => UpdatePosition(AdPosition.Left);
+		grid.GetNode<Button>("CENTER").Pressed += () => UpdatePosition(AdPosition.Center);
+		grid.GetNode<Button>("RIGHT").Pressed += () => UpdatePosition(AdPosition.Right);
+		grid.GetNode<Button>("BOTTOM_LEFT").Pressed += () => UpdatePosition(AdPosition.BottomLeft);
+		grid.GetNode<Button>("BOTTOM").Pressed += () => UpdatePosition(AdPosition.Bottom);
+		grid.GetNode<Button>("BOTTOM_RIGHT").Pressed += () => UpdatePosition(AdPosition.BottomRight);
+
+		UpdateUI(false);
 	}
 
 	private void UpdateUI(bool isLoaded)
 	{
 		_loadBtn.Disabled = isLoaded;
+		_loadBackgroundBtn.Disabled = isLoaded;
 		_destroyBtn.Disabled = !isLoaded;
 		_showBtn.Disabled = !isLoaded;
 		_hideBtn.Disabled = !isLoaded;
 		_getSizeBtn.Disabled = !isLoaded;
 	}
 
-	private void SetPosition(AdPosition pos)
+	private void UpdatePosition(AdPosition pos)
 	{
-		_currentPosition = pos;
-		Log($"Position updated to: {pos}");
-		if (_adView != null) OnLoadPressed();
+		_adPosition = pos;
+		Log("Position updated");
+		if (_adView != null) 
+		{
+			_adView.SetPosition(pos);
+			if (!_isHidden)
+			{
+				SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
+			}
+		}
 	}
 
-	private void OnLoadPressed()
+	private void OnApplyCustomPressed()
+	{
+		if (int.TryParse(_xValue.Text, out int x) && int.TryParse(_yValue.Text, out int y))
+		{
+			Log($"Applying custom position: ({x}, {y})");
+			UpdatePosition(AdPosition.Custom(x, y));
+			DisplayServer.VirtualKeyboardHide();
+		}
+	}
+
+	private void LoadBanner(bool hideImmediately)
 	{
 		DestroyAd();
 		UpdateUI(false);
-		Log("Loading adaptive banner...");
+		Log($"Loading adaptive banner{(hideImmediately ? " in background" : string.Empty)}...");
 
 		var size = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(AdSize.FullWidth);
-		_adView = new AdView(AdUnitId, size, _currentPosition);
+		_adView = new AdView(AdUnitId, size, _adPosition);
+		_isHidden = hideImmediately;
+
+		if (_isHidden)
+		{
+			_adView.Hide();
+		}
+
 		_adView.AdListener = new AdListener
 		{
 			OnAdLoaded = () =>
 			{
 				Log("Ad loaded successfully");
 				UpdateUI(true);
-				SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
+				if (!_isHidden)
+				{
+					SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
+				}
 			},
 			OnAdFailedToLoad = err => 
 			{ 
@@ -118,18 +164,29 @@ public partial class Banner : VBoxContainer
 		_adView.LoadAd(new AdRequest());
 	}
 
+	private void OnLoadPressed() => LoadBanner(false);
+	private void OnLoadBackgroundPressed() => LoadBanner(true);
+
 	private void OnShowPressed() 
 	{ 
-		_adView?.Show(); 
-		Log("Banner shown"); 
-		SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
+		if (_adView != null)
+		{
+			_isHidden = false;
+			_adView.Show(); 
+			Log("Banner shown"); 
+			SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
+		}
 	}
 
 	private void OnHidePressed() 
 	{ 
-		_adView?.Hide(); 
-		Log("Banner hidden"); 
-		SampleRegistry.SafeArea?.ResetAdOverlap();
+		if (_adView != null)
+		{
+			_isHidden = true;
+			_adView.Hide(); 
+			Log("Banner hidden"); 
+			SampleRegistry.SafeArea?.ResetAdOverlap();
+		}
 	}
 
 	private void OnDestroyPressed()

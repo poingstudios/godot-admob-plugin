@@ -80,7 +80,7 @@ Below is a script example that loads and refreshes an adaptive banner:
     		_ad_view.destroy()
     		
     	var adaptive_size := AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)	
-    	_ad_view = AdView.new(unit_id, adaptive_size, AdPosition.Values.TOP)
+    	_ad_view = AdView.new(unit_id, adaptive_size, AdPosition.TOP)
     	_ad_view.ad_listener = _ad_listener
     	
     	_ad_view.load_ad(AdRequest.new())

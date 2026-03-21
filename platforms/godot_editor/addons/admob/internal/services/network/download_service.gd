@@ -59,8 +59,7 @@ func _on_request_completed(_result: int, response_code: int, _headers: PackedStr
 		print_rich("[color=GREEN]Downloaded[/color] at: [color=CORNFLOWER_BLUE][url]" + download_path + "[/url][/color]")
 	else:
 		var platform_str := _platform if not _platform.is_empty() else "Android/iOS"
-		printerr("ERR_002: It is not possible to download the %s plugin. \n" % platform_str +
-				"Read more about on: res://addons/admob/docs/errors/ERR_002.md")
+		_push_err_002(platform_str)
 	
 	download_completed.emit(is_success)
 
@@ -72,3 +71,13 @@ func _on_progress_timer_timeout() -> void:
 		var percent = int(downloaded_bytes * 100 / body_size)
 		print("Download percent: " + str(percent) + "%")
 		download_progress.emit(percent)
+
+func _push_err_002(platform_str: String) -> void:
+	var PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
+	var error_id := "ERR_002"
+	var error_path := "addons/admob/docs/errors/%s.md" % error_id
+	var error_msg := "%s: It is not possible to download the %s plugin." % [error_id, platform_str]
+	var github_url := "https://github.com/poingstudios/godot-admob-plugin/blob/%s/platforms/godot_editor/%s" % [PluginVersion.current, error_path]
+	
+	printerr(error_msg)
+	print_rich("[color=RED]Read more about on: [/color][color=CORNFLOWER_BLUE][url=%s]res://%s[/url][/color]" % [github_url, error_path])

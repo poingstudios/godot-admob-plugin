@@ -60,7 +60,13 @@ namespace PoingStudios.AdMob.Api
 				var adViewDict = new Dictionary
 				{
 					{ "ad_unit_id", adUnitId },
-					{ "ad_position", (int)adPosition },
+					{ "ad_position", (int)adPosition.Value },
+					{ "custom_position", new Dictionary
+						{
+							{ "x", adPosition.Offset.X },
+							{ "y", adPosition.Offset.Y }
+						}
+					},
 					{ "ad_size", new Dictionary
 						{
 							{ "width", adSize.Width },
@@ -98,6 +104,22 @@ namespace PoingStudios.AdMob.Api
 		public void Show()
 		{
 			_plugin?.Call("show", _uid);
+		}
+
+		public void SetPosition(AdPosition adPosition)
+		{
+			Position = adPosition;
+			if (_plugin != null)
+			{
+				if (adPosition.Value == AdPosition.Values.Custom)
+				{
+					_plugin.Call("update_custom_position", _uid, adPosition.Offset.X, adPosition.Offset.Y);
+				}
+				else
+				{
+					_plugin.Call("update_position", _uid, (int)adPosition.Value);
+				}
+			}
 		}
 
 		public int GetWidth()

@@ -26,25 +26,6 @@
 #import "../PoingGodotAdMobAdView.h"
 #import "AdFormatBase.h"
 
-@interface BannerAd : AdFormatBase <GADBannerViewDelegate>
-
-@property (nonatomic, strong) GADBannerView *bannerView;
-@property (nonatomic, strong) NSNumber *adPosition;
-@property (nonatomic) BOOL isHidden;
-
-- (instancetype)initWithUID:(int)UID adViewDictionary:(Dictionary)adViewDictionary;
-- (void)loadAd:(GADRequest *)request;
-- (void)destroy;
-- (void)hide;
-- (void)show;
-- (int)getWidth;
-- (int)getHeight;
-- (int)getWidthInPixels;
-- (int)getHeightInPixels;
-
-@end
-
-
 enum class AdPosition {
     Top,
     Bottom,
@@ -55,7 +36,30 @@ enum class AdPosition {
     BottomLeft,
     BottomRight,
     Center,
-    Custom = -1 //NOT USED YET
+    Custom = -1
 };
+
+@interface BannerAd : AdFormatBase <GADBannerViewDelegate>
+
+@property (nonatomic, strong) GADBannerView *bannerView;
+@property (nonatomic, strong) NSNumber *adPosition;
+@property (nonatomic) int customX;
+@property (nonatomic) int customY;
+@property (nonatomic) BOOL isHidden;
+@property (nonatomic, strong) NSMutableArray<NSLayoutConstraint *> *activeConstraints;
+
+- (instancetype)initWithUID:(int)UID adViewDictionary:(Dictionary)adViewDictionary;
+- (void)loadAd:(GADRequest *)request;
+- (void)destroy;
+- (void)hide;
+- (void)show;
+- (int)getWidth;
+- (int)getHeight;
+- (int)getWidthInPixels;
+- (int)getHeightInPixels;
+- (void)updateBannerPositionForAdPosition:(AdPosition)adPosition;
+- (void)updateBannerPositionForCustomPositionX:(int)x y:(int)y;
+
+@end
 
 #endif /* BannerAd_h */

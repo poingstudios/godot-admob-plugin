@@ -9,11 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://jksg4sbkq0p7" path="res://addons/admob/assets/donate/PayPal.svg" id="7_paypal"]
 [ext_resource type="PackedScene" uid="uid://b2qsjw7krh5ik" path="res://addons/admob/csharp/sample/tabs/Banner.tscn" id="8_banner"]
 [ext_resource type="PackedScene" uid="uid://3ry3keuwu2vs" path="res://addons/admob/csharp/sample/tabs/Interstitial.tscn" id="9_interstitial"]
-[ext_resource type="PackedScene" uid="uid://cls55u84vu6i5" path="res://addons/admob/csharp/sample/tabs/Rewarded.tscn" id="10_rewarded"]
-[ext_resource type="PackedScene" uid="uid://dg1gu024jnqfn" path="res://addons/admob/csharp/sample/tabs/RewardedInterstitial.tscn" id="11_rewarded_interstitial"]
-[ext_resource type="PackedScene" uid="uid://d0eei7hg75w2c" path="res://addons/admob/csharp/sample/tabs/Ump.tscn" id="12_ump"]
+[ext_resource type="PackedScene" path="res://addons/admob/csharp/sample/tabs/Rewarded.tscn" id="10_rewarded"]
+[ext_resource type="PackedScene" path="res://addons/admob/csharp/sample/tabs/RewardedInterstitial.tscn" id="11_rewarded_interstitial"]
+[ext_resource type="PackedScene" path="res://addons/admob/csharp/sample/tabs/Ump.tscn" id="12_ump"]
 [ext_resource type="AudioStream" uid="uid://f3f176vu6pfo" path="res://addons/admob/assets/music.ogg" id="13_music"]
-[ext_resource type="Script" uid="uid://bc31ek6bxsufk" path="res://addons/admob/csharp/sample/tabs/MobileAds.cs" id="14_mobile_ads_script"]
+[ext_resource type="PackedScene" path="res://addons/admob/csharp/sample/tabs/MobileAds.tscn" id="14_mobile_ads_scene"]
 [ext_resource type="Theme" uid="uid://cax2scu7f6q4k" path="res://addons/admob/assets/theme_modern.tres" id="15_theme"]
 
 [sub_resource type="GDScript" id="GDScript_1vvio"]
@@ -176,53 +176,17 @@ metadata/_tab_index = 3
 
 [node name="UMP" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=1016787023 instance=ExtResource("12_ump")]
 visible = false
+anchors_preset = 15
+anchor_right = 1.0
+offset_left = -20.0
+offset_right = 20.0
 layout_mode = 2
 metadata/_tab_index = 4
 
-[node name="MobileAds" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=263308449]
+[node name="MobileAds" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=263308449 instance=ExtResource("14_mobile_ads_scene")]
 visible = false
 layout_mode = 2
-script = ExtResource("14_mobile_ads_script")
 metadata/_tab_index = 5
-
-[node name="GetInitStatus" type="Button" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=1492895597]
-layout_mode = 2
-text = "Get Initialization Status"
-
-[node name="iOSAppPause" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=1076488873]
-layout_mode = 2
-text = "Set iOS App Pause On Background"
-alignment = 1
-
-[node name="MuteMusic" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=1547600864]
-layout_mode = 2
-text = "Mute Music"
-alignment = 1
-
-[node name="AdVolumeContainer" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=1790532417]
-layout_mode = 2
-
-[node name="AdVolumeLabel" type="Label" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/AdVolumeContainer" unique_id=58588389]
-layout_mode = 2
-text = "Ad Volume"
-
-[node name="AdVolumeSlider" type="HSlider" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/AdVolumeContainer" unique_id=1004044714]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-value = 1.0
-
-[node name="AdMuted" type="CheckButton" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=444697915]
-layout_mode = 2
-text = "Mute Ads"
-alignment = 1
-
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=779537731]
-stream = ExtResource("13_music")
-volume_db = -10.0
-autoplay = true
 
 [node name="ConsolePanel" type="PanelContainer" parent="Background/SafeArea/LayoutContainer" unique_id=405248162]
 custom_minimum_size = Vector2(0, 250)
@@ -239,4 +203,3 @@ scroll_following = true
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" method="_on_pressed"]
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Ko-fi" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Ko-fi" method="_on_pressed"]
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/PayPal" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/PayPal" method="_on_pressed"]
-[connection signal="pressed" from="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds/GetInitStatus" to="." method="_OnGetInitializationStatusPressed"]
