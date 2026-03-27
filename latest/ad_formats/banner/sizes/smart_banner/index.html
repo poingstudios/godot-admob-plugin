@@ -23,7 +23,7 @@
     
     
       
-        <title>Smart Banner ⚠️ (deprecated) - Godot AdMob Plugin - Poing Studios</title>
+        <title>Smart banners 🚫 - Godot AdMob Plugin - Poing Studios</title>
       
     
     
@@ -141,7 +141,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Smart Banner ⚠️ (deprecated)
+              Smart banners <span class="modern-icon" title="Deprecated">🚫</span>
             
           </span>
         </div>
@@ -447,7 +447,7 @@
   <span class="md-ellipsis">
     
   
-    App Open Ads
+    App Open
   
 
     
@@ -471,6 +471,8 @@
   
     
     
+      
+        
       
         
       
@@ -532,7 +534,35 @@
   <span class="md-ellipsis">
     
   
-    Get Started
+    Set up banner ads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../collapsible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use collapsible banners
   
 
     
@@ -571,10 +601,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_2" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2_3" checked>
         
           
-          <label class="md-nav__link" for="__nav_5_2_2" id="__nav_5_2_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_5_2_3" id="__nav_5_2_3_label" tabindex="0">
             
   
   
@@ -592,8 +622,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_2_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_5_2_2">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_2_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -617,7 +647,7 @@
   <span class="md-ellipsis">
     
   
-    Anchored adaptive
+    Anchored adaptive banners
   
 
     
@@ -654,7 +684,7 @@
   <span class="md-ellipsis">
     
   
-    Smart Banner ⚠️ (deprecated)
+    Smart banners <span class="modern-icon" title="Deprecated">🚫</span>
   
 
     
@@ -727,7 +757,7 @@
   <span class="md-ellipsis">
     
   
-    Native Overlay Ads
+    Native Overlay
   
 
     
@@ -783,7 +813,7 @@
   <span class="md-ellipsis">
     
   
-    Rewarded interstitial
+    Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>
   
 
     
@@ -1547,13 +1577,13 @@
 <p class="admonition-title">Note</p>
 <p>Try the newer <a href="../anchored_adaptive/">adaptive banners</a> instead.</p>
 </div>
-<p>To use Smart Banners, use the <code>AdSize.get_smart_banner_ad_size()</code> function for the ad size when creating a AdView. For example:</p>
+<p>To use Smart Banners, use the <code>AdSize.SMART_BANNER</code> property (or <code>AdSize.SmartBanner</code> in C#) for the ad size when creating a AdView. For example:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">GDScript</label><label for="__tabbed_1_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
 <span class="normal"><a href="#__codelineno-0-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a><span class="c1"># Create a Smart Banner at the top of the screen.</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">AdSize</span><span class="o">.</span><span class="n">get_smart_banner_ad_size</span><span class="p">(),</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">AdSize</span><span class="o">.</span><span class="n">SMART_BANNER</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -1565,7 +1595,7 @@
 <a id="__codelineno-1-2" name="__codelineno-1-2"></a><span class="k">using</span><span class="w"> </span><span class="nn">PoingStudios.AdMob.Api.Core</span><span class="p">;</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3"></a>
 <a id="__codelineno-1-4" name="__codelineno-1-4"></a><span class="c1">// Create a Smart Banner at the top of the screen.</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="kt">var</span><span class="w"> </span><span class="n">adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">AdSize</span><span class="p">.</span><span class="n">GetSmartBannerAdSize</span><span class="p">(),</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5"></a><span class="kt">var</span><span class="w"> </span><span class="n">adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">AdSize</span><span class="p">.</span><span class="n">SmartBanner</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
