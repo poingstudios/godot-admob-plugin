@@ -26,7 +26,8 @@ const ExportService := preload("res://addons/admob/internal/services/export_serv
 const PbxprojService := preload("res://addons/admob/internal/services/pbxproj_service.gd")
 const PLUGIN_CONFIG_DIR := "res://ios/plugins/"
 
-var _export_path: String = ""
+var _export_path := ""
+var _is_ios := false
 var _spm_dependencies: Array[Dictionary] = []
 
 func _get_name() -> String:
@@ -37,9 +38,10 @@ func _supports_platform(platform: EditorExportPlatform) -> bool:
 
 func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
 	_export_path = path
+	_is_ios = features.has("ios")
 
 func _export_end() -> void:
-	if _export_path.is_empty():
+	if not _is_ios or _export_path.is_empty():
 		return
 		
 	var activated_plugins := ExportService.get_activated_plugins("iOS")

@@ -48,14 +48,17 @@ namespace PoingStudios.AdMob.Api.Core
             Height = height;
         }
 
-        public static AdSize GetSmartBannerAdSize()
+        public static AdSize SmartBanner
         {
-            if (_plugin != null)
+            get
             {
-                var dict = (Dictionary)_plugin.Call("getSmartBannerAdSize");
-                return CreateFromDictionary(dict);
+                if (_plugin != null)
+                {
+                    var dict = (Dictionary)_plugin.Call("getSmartBannerAdSize");
+                    return CreateFromDictionary(dict);
+                }
+                return new AdSize(0, 0);
             }
-            return new AdSize(0, 0);
         }
 
         public static AdSize GetCurrentOrientationAnchoredAdaptiveBannerAdSize(int width)

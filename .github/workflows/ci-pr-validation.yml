@@ -306,7 +306,9 @@ jobs:
       id: cache-godot-dotnet
       uses: actions/cache@v4
       with:
-        path: /usr/local/bin/godot
+        path: |
+          /usr/local/bin/godot
+          /usr/local/bin/GodotSharp
         key: godot-linux-mono-${{ needs.detect-latest.outputs.godot_version }}
 
     - name: Download Godot (.NET)
@@ -315,11 +317,9 @@ jobs:
         GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
         wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_mono_linux_x86_64.zip" -O godot.zip
         unzip -q godot.zip
-        # The Zip contains a directory: Godot_v${GODOT_VERSION}-stable_mono_linux_x86_64/
-        # Inside it there is the binary AND the GodotSharp directory.
-        # Both must stay together.
-        cp -r Godot_v${GODOT_VERSION}-stable_mono_linux_x86_64/Godot_v${GODOT_VERSION}-stable_mono_linux.x86_64 /usr/local/bin/godot
-        cp -r Godot_v${GODOT_VERSION}-stable_mono_linux_x86_64/GodotSharp /usr/local/bin/
+        # Robustly find and move the binary and GodotSharp folder
+        find . -name "Godot_v${GODOT_VERSION}-stable_mono_linux.x86_64" -exec cp {} /usr/local/bin/godot \;
+        find . -name "GodotSharp" -type d -exec cp -r {} /usr/local/bin/ \;
         chmod +x /usr/local/bin/godot
 
     - name: Cache Export Templates

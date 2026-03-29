@@ -26,7 +26,7 @@ using PoingStudios.AdMob.Api.Core;
 using PoingStudios.AdMob.Api.Listeners;
 using PoingStudios.AdMob.Sample;
 
-public partial class Interstitial : VBoxContainer
+public partial class Interstitial : BaseTab
 {
 	private const string AdUnitIdAndroid = "ca-app-pub-3940256099942544/1033173712";
 	private const string AdUnitIdIos = "ca-app-pub-3940256099942544/4411468910";
@@ -41,6 +41,7 @@ public partial class Interstitial : VBoxContainer
 
 	public override void _Ready()
 	{
+		base._Ready();
 		_loadBtn = GetNode<Button>("Load");
 		_showBtn = GetNode<Button>("Show");
 		_destroyBtn = GetNode<Button>("Destroy");
@@ -68,6 +69,11 @@ public partial class Interstitial : VBoxContainer
 			{
 				Log("Ad loaded successfully");
 				_interstitialAd = ad;
+				_interstitialAd.OnAdPaid = adValue =>
+		{
+			string adSourceName = _interstitialAd?.GetResponseInfo()?.LoadedAdapterResponseInfo?.AdSourceName ?? "N/A";
+			Log(string.Format("Ad paid: {0:F} {1} (precision: {2}, source: {3})", adValue.ValueMicros / 1000000.0, adValue.CurrencyCode, adValue.Precision, adSourceName));
+		};
 				_interstitialAd.FullScreenContentCallback = new FullScreenContentCallback
 				{
 					OnAdShowedFullScreenContent = () => Log("Ad showed"),

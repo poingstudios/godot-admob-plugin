@@ -148,6 +148,7 @@ if env['plugin'] == 'ads':
     sources = Glob(build_dir + '/' + env['plugin'] + '/*.mm')
     sources.append(Glob(build_dir + '/' + env['plugin'] + '/adformats/*.mm'))
     sources.append(Glob(build_dir + '/' + env['plugin'] + '/helpers/*.mm'))
+    sources.append(Glob(build_dir + '/' + env['plugin'] + '/helpers/NativeTemplates/*.mm'))
     sources.append(Glob(build_dir + '/' + env['plugin'] + '/converters/*.mm'))
     sources.append(Glob(build_dir + '/' + env['plugin'] + '/ump/*.mm'))
 else:

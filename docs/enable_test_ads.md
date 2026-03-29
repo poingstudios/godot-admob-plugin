@@ -30,18 +30,30 @@ Below are sample ad units for each format available on both Android and iOS:
     | Ad format             | Sample ad unit ID                      |
     |-----------------------|----------------------------------------|
     | Banner                | ca-app-pub-3940256099942544/6300978111 |
+    | App Open              | ca-app-pub-3940256099942544/9257395921 |
     | Interstitial          | ca-app-pub-3940256099942544/1033173712 |
     | Rewarded              | ca-app-pub-3940256099942544/5224354917 |
     | Rewarded Interstitial | ca-app-pub-3940256099942544/5354046379 |
+    | Native                | ca-app-pub-3940256099942544/2247696110 |
 
 === "iOS"
 
     | Ad format             | Sample ad unit ID                      |
     |-----------------------|----------------------------------------|
     | Banner                | ca-app-pub-3940256099942544/2934735716 |
+    | App Open              | ca-app-pub-3940256099942544/5575463023 |
     | Interstitial          | ca-app-pub-3940256099942544/4411468910 |
     | Rewarded              | ca-app-pub-3940256099942544/1712485313 |
     | Rewarded Interstitial | ca-app-pub-3940256099942544/6978759866 |
+    | Native                | ca-app-pub-3940256099942544/3986624511 |
+
+### Specialized Test Identifiers
+While the standard ad units above can be used by adding extra parameters (like `collapsible`), the following specialized ad unit IDs **guarantee** that specific features are returned for testing your UI/UX:
+
+| Feature | Android | iOS |
+| :--- | :--- | :--- |
+| **Collapsible Banners** | `ca-app-pub-3940256099942544/2014213617` | `ca-app-pub-3940256099942544/8388050270` |
+
 
 
 ## Enable test devices

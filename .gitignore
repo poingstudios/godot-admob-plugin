@@ -40,3 +40,6 @@ data_*/
 AdMobAddon.csproj
 AdMobAddon.sln
 *.skill
+
+# Temporary folder for clones
+tmp/

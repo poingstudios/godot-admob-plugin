@@ -11,7 +11,23 @@ on:
         required: true
 
 jobs:
-  android-template:
+  check-release:
+    name: Check if release exists
+    runs-on: ubuntu-latest
+    steps:
+    - name: Fail if release does not exist
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TAG: ${{ github.event.inputs.tag }}
+      run: |
+        if ! gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+          echo "::error::Release $TAG does not exist. This workflow only adds files to existing releases."
+          exit 1
+        fi
+        echo "Release $TAG found. Proceeding with build..."
+
+  android-template: 
+    needs: check-release
     runs-on: "ubuntu-latest"
     steps:
     - uses: actions/checkout@v6
@@ -33,15 +49,15 @@ jobs:
       run: |
         ./gradlew zipPlugins -PgodotVersion="${{env.CURRENT_GODOT_VERSION}}"
       
-    - name: Upload binary
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: platforms/android/.output/poing-godot-admob-android-v${{env.CURRENT_GODOT_VERSION}}.zip
-        tag: ${{ github.event.inputs.tag }}
-        overwrite: true
+    - name: Upload binary to GitHub Release
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TAG: ${{ github.event.inputs.tag }}
+      run: |
+        gh release upload "$TAG" platforms/android/.output/poing-godot-admob-android-v${{env.CURRENT_GODOT_VERSION}}.zip --clobber --repo "${{ github.repository }}"
 
   ios-template:
+    needs: check-release
     runs-on: "macos-latest"
     steps:
     - uses: actions/checkout@v6
@@ -61,11 +77,9 @@ jobs:
       working-directory: platforms/ios
       run: ./scripts/build.sh ${{env.CURRENT_GODOT_VERSION}}
 
-    - name: Upload binary
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: platforms/ios/bin/release/*.zip
-        file_glob: true
-        tag: ${{ github.event.inputs.tag }}
-        overwrite: true
+    - name: Upload binary to GitHub Release
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TAG: ${{ github.event.inputs.tag }}
+      run: |
+        gh release upload "$TAG" platforms/ios/bin/release/*.zip --clobber --repo "${{ github.repository }}"

@@ -46,15 +46,15 @@ public partial class SafeArea : MarginContainer
 			return;
 		}
 
-		var pos = adView.Position;
+		var pos = adView.Position.Value;
 		var height = (float)adView.GetHeightInPixels();
 
 		// Mapping AdPosition enum values to top/bottom margins
-		if (pos == AdPosition.Top || pos == AdPosition.TopLeft || pos == AdPosition.TopRight)
+		if (pos == AdPosition.Values.Top || pos == AdPosition.Values.TopLeft || pos == AdPosition.Values.TopRight)
 		{
 			_ad_margin_top = height;
 		}
-		else if (pos == AdPosition.Bottom || pos == AdPosition.BottomLeft || pos == AdPosition.BottomRight)
+		else if (pos == AdPosition.Values.Bottom || pos == AdPosition.Values.BottomLeft || pos == AdPosition.Values.BottomRight)
 		{
 			_ad_margin_bottom = height;
 		}

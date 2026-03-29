@@ -25,6 +25,7 @@ package com.poingstudios.godot.admob.ads.converters
 import android.os.Bundle
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdValue
 import com.google.android.gms.ads.AdapterResponseInfo
 import com.google.android.gms.ads.LoadAdError
 import com.google.android.gms.ads.ResponseInfo
@@ -34,7 +35,7 @@ import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.ump.FormError
 import org.godotengine.godot.Dictionary
 
-fun InitializationStatus.convertToGodotDictionary() : Dictionary {
+fun InitializationStatus.convertToGodotDictionary(): Dictionary {
     val statusMap = adapterStatusMap
     val dictionary = Dictionary()
 
@@ -45,7 +46,7 @@ fun InitializationStatus.convertToGodotDictionary() : Dictionary {
     return dictionary
 }
 
-fun AdapterStatus.convertToGodotDictionary() : Dictionary {
+fun AdapterStatus.convertToGodotDictionary(): Dictionary {
     val dictionary = Dictionary()
     dictionary["latency"] = latency
     dictionary["initializationState"] = initializationState.ordinal
@@ -54,26 +55,27 @@ fun AdapterStatus.convertToGodotDictionary() : Dictionary {
     return dictionary
 }
 
-fun AdError.convertToGodotDictionary() : Dictionary {
+fun AdError.convertToGodotDictionary(): Dictionary {
     val dictionary = Dictionary()
     dictionary["code"] = code
     dictionary["domain"] = domain
     dictionary["message"] = message
-    dictionary["cause"] = cause?.convertToGodotDictionary()?: Dictionary()
+    dictionary["cause"] = cause?.convertToGodotDictionary() ?: Dictionary()
 
     return dictionary
 }
 
-fun LoadAdError.convertToGodotDictionary() : Dictionary {
+fun LoadAdError.convertToGodotDictionary(): Dictionary {
     val dictionary = Dictionary()
-    dictionary["response_info"] = responseInfo?.convertToGodotDictionary()?: Dictionary()
+    dictionary["response_info"] = responseInfo?.convertToGodotDictionary() ?: Dictionary()
     dictionary += (this as AdError).convertToGodotDictionary()
     return dictionary
 }
 
-fun ResponseInfo.convertToGodotDictionary() : Dictionary {
+fun ResponseInfo.convertToGodotDictionary(): Dictionary {
     val dictionary = Dictionary()
-    dictionary["loaded_adapter_response_info"] = loadedAdapterResponseInfo?.convertToGodotDictionary()?: Dictionary()
+    dictionary["loaded_adapter_response_info"] =
+            loadedAdapterResponseInfo?.convertToGodotDictionary() ?: Dictionary()
     dictionary["adapter_responses"] = adapterResponses.convertToGodotDictionary()
     dictionary["response_extras"] = responseExtras.convertToGodotDictionary()
     dictionary["mediation_adapter_class_name"] = mediationAdapterClassName ?: ""
@@ -82,10 +84,10 @@ fun ResponseInfo.convertToGodotDictionary() : Dictionary {
     return dictionary
 }
 
-fun List<AdapterResponseInfo>.convertToGodotDictionary() : Dictionary {
+fun List<AdapterResponseInfo>.convertToGodotDictionary(): Dictionary {
     val dictionary = Dictionary()
 
-    for (index in this.indices){
+    for (index in this.indices) {
         val value = this[index].convertToGodotDictionary()
         dictionary[index.toString()] = value
     }
@@ -93,7 +95,7 @@ fun List<AdapterResponseInfo>.convertToGodotDictionary() : Dictionary {
     return dictionary
 }
 
-fun AdapterResponseInfo.convertToGodotDictionary() : Dictionary {
+fun AdapterResponseInfo.convertToGodotDictionary(): Dictionary {
     val dictionary = Dictionary()
     dictionary["adapter_class_name"] = adapterClassName
     dictionary["ad_source_id"] = adSourceId
@@ -101,7 +103,7 @@ fun AdapterResponseInfo.convertToGodotDictionary() : Dictionary {
     dictionary["ad_source_instance_id"] = adSourceInstanceId
     dictionary["ad_source_instance_name"] = adSourceInstanceName
     dictionary["ad_unit_mapping"] = credentials.convertToGodotDictionary()
-    dictionary["ad_error"] = adError?.convertToGodotDictionary()?: Dictionary()
+    dictionary["ad_error"] = adError?.convertToGodotDictionary() ?: Dictionary()
     dictionary["latency_millis"] = latencyMillis
 
     return dictionary
@@ -117,7 +119,7 @@ fun Bundle.convertToGodotDictionary(): Dictionary {
     return dictionary
 }
 
-fun AdSize.convertToGodotDictionary() : Dictionary{
+fun AdSize.convertToGodotDictionary(): Dictionary {
     val dictionary = Dictionary()
 
     dictionary["width"] = width
@@ -126,7 +128,7 @@ fun AdSize.convertToGodotDictionary() : Dictionary{
     return dictionary
 }
 
-fun FormError.convertToGodotDictionary() : Dictionary{
+fun FormError.convertToGodotDictionary(): Dictionary {
     val dictionary = Dictionary()
 
     dictionary["error_code"] = errorCode
@@ -135,11 +137,21 @@ fun FormError.convertToGodotDictionary() : Dictionary{
     return dictionary
 }
 
-fun RewardItem.convertToGodotDictionary() : Dictionary{
+fun RewardItem.convertToGodotDictionary(): Dictionary {
     val dictionary = Dictionary()
 
     dictionary["amount"] = amount
     dictionary["type"] = type
+
+    return dictionary
+}
+
+fun AdValue.convertToGodotDictionary(): Dictionary {
+    val dictionary = Dictionary()
+
+    dictionary["value_micros"] = valueMicros
+    dictionary["currency_code"] = currencyCode
+    dictionary["precision_type"] = precisionType
 
     return dictionary
 }

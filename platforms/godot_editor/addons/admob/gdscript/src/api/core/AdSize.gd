@@ -34,39 +34,40 @@ static var LEADERBOARD := new(728, 90)
 static var MEDIUM_RECTANGLE := new(300, 250)
 static var WIDE_SKYSCRAPER := new(160, 600)
 
-var width : int
-var height : int
+var width: int
+var height: int
 
-func _init(width : int, height : int):
+func _init(width: int, height: int):
 	self.width = width
 	self.height = height
 
-static func get_smart_banner_ad_size() -> AdSize:
+static var SMART_BANNER : AdSize :
+	get:
+		if _plugin:
+			var ad_size_dictionary: Dictionary = _plugin.getSmartBannerAdSize()
+			return _create(ad_size_dictionary)
+		return AdSize.new(0, 0)
+
+static func get_current_orientation_anchored_adaptive_banner_ad_size(width: int) -> AdSize:
 	if _plugin:
-		var ad_size_dictionary : Dictionary = _plugin.getSmartBannerAdSize()
+		var ad_size_dictionary: Dictionary = _plugin.getCurrentOrientationAnchoredAdaptiveBannerAdSize(width)
 		return _create(ad_size_dictionary)
 	return AdSize.new(0, 0)
 
-static func get_current_orientation_anchored_adaptive_banner_ad_size(width : int) -> AdSize:
+static func get_portrait_anchored_adaptive_banner_ad_size(width: int) -> AdSize:
 	if _plugin:
-		var ad_size_dictionary : Dictionary = _plugin.getCurrentOrientationAnchoredAdaptiveBannerAdSize(width)
+		var ad_size_dictionary: Dictionary = _plugin.getPortraitAnchoredAdaptiveBannerAdSize(width)
 		return _create(ad_size_dictionary)
 	return AdSize.new(0, 0)
 
-static func get_portrait_anchored_adaptive_banner_ad_size(width : int) -> AdSize:
+static func get_landscape_anchored_adaptive_banner_ad_size(width: int) -> AdSize:
 	if _plugin:
-		var ad_size_dictionary : Dictionary = _plugin.getPortraitAnchoredAdaptiveBannerAdSize(width)
-		return _create(ad_size_dictionary)
-	return AdSize.new(0, 0)
-
-static func get_landscape_anchored_adaptive_banner_ad_size(width : int) -> AdSize:
-	if _plugin:
-		var ad_size_dictionary : Dictionary = _plugin.getLandscapeAnchoredAdaptiveBannerAdSize(width)
+		var ad_size_dictionary: Dictionary = _plugin.getLandscapeAnchoredAdaptiveBannerAdSize(width)
 		return _create(ad_size_dictionary)
 	return AdSize.new(0, 0)
 
 
-static func _create(ad_size_dictionary : Dictionary) -> AdSize:
+static func _create(ad_size_dictionary: Dictionary) -> AdSize:
 	var width = ad_size_dictionary["width"]
 	var height = ad_size_dictionary["height"]
 	return AdSize.new(width, height)

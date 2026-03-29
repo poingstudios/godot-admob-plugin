@@ -6,7 +6,7 @@ on:
     tags:
       - '*'
   workflow_run:
-    workflows: ["[Manual] Release All Platforms"]
+    workflows: ['\[Manual\] Release All Platforms']
     types:
       - completed
 

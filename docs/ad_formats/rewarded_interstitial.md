@@ -1,4 +1,4 @@
-# Rewarded interstitial
+# Rewarded interstitial ads (beta)
 
 A [Rewarded Interstitial](https://support.google.com/admob/answer/9884467) is a specific form of incentivized ad format that allows you to provide rewards in exchange for ads that appear automatically during natural app transitions. Unlike regular rewarded ads, users are not obligated to actively opt in to view a Rewarded Interstitial; they are seamlessly integrated into the app experience.
 

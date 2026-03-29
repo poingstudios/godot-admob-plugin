@@ -58,6 +58,7 @@ class PoingGodotAdMobAdView(godot: Godot?) : org.godotengine.godot.plugin.GodotP
         signals.add(Banner.SignalInfos.onAdImpression)
         signals.add(Banner.SignalInfos.onAdLoaded)
         signals.add(Banner.SignalInfos.onAdOpened)
+        signals.add(Banner.SignalInfos.onAdPaid)
         return signals
     }
 
@@ -96,6 +97,16 @@ class PoingGodotAdMobAdView(godot: Godot?) : org.godotengine.godot.plugin.GodotP
     }
 
     @UsedByGodot
+    fun update_position(uid: Int, position: Int) {
+        banners[uid]?.updatePosition(position)
+    }
+
+    @UsedByGodot
+    fun update_custom_position(uid: Int, x: Int, y: Int) {
+        banners[uid]?.updateCustomPosition(x, y)
+    }
+
+    @UsedByGodot
     fun get_width(uid : Int) : Int{
         return banners[uid]?.getWidth() ?: -1
     }
@@ -115,5 +126,14 @@ class PoingGodotAdMobAdView(godot: Godot?) : org.godotengine.godot.plugin.GodotP
         return banners[uid]?.getHeightInPixels() ?: -1
     }
 
+    @UsedByGodot
+    fun get_response_info(uid: Int) : Dictionary {
+        return banners[uid]?.getResponseInfo() ?: Dictionary()
+    }
+
+    @UsedByGodot
+    fun is_collapsible(uid: Int): Boolean {
+        return banners[uid]?.isCollapsible() ?: false
+    }
 }
 

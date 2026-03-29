@@ -7,8 +7,9 @@
 
 # Android Build & Gradle
 .gradle/
+.kotlin/
+build/
 platforms/android/.gradle/
-platforms/android/build/
 platforms/android/.output/
 platforms/android/gradlew
 platforms/android/gradlew.bat

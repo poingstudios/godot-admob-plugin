@@ -2,7 +2,7 @@ name: "[CI] PR Feedback"
 
 on:
   workflow_run:
-    workflows: ["[CI] PR Validation"]
+    workflows: ['\[CI\] PR Validation']
     types: [completed]
 
 jobs:

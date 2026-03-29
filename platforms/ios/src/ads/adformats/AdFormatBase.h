@@ -28,9 +28,13 @@
 
 @import GoogleMobileAds;
 
+#import <UIKit/UIKit.h>
+
 @interface AdFormatBase : NSObject 
 
 @property (nonatomic, strong) NSNumber *UID;
+
+- (UIViewController *)getRootViewController;
 
 @end
 

@@ -25,10 +25,11 @@ using PoingStudios.AdMob.Ump.Api;
 using PoingStudios.AdMob.Ump.Core;
 using PoingStudios.AdMob.Sample;
 
-public partial class Ump : VBoxContainer
+public partial class Ump : BaseTab
 {
 	public override void _Ready()
 	{
+		base._Ready();
 		GetNode<Button>("GetConsentStatus").Pressed += OnGetConsentStatusPressed;
 		GetNode<Button>("ResetConsentInformation").Pressed += OnResetConsentPressed;
 	}

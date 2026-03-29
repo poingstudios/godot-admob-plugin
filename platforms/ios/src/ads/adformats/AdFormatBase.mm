@@ -24,4 +24,16 @@
 
 @implementation AdFormatBase
 
+- (UIViewController *)getRootViewController {
+    UIWindow *window = nil;
+    if (window == nil) {
+        window = [[UIApplication sharedApplication] keyWindow];
+    }
+    if (window == nil) {
+        window = [[[UIApplication sharedApplication] delegate] window];
+    }
+    
+    return [window rootViewController];
+}
+
 @end

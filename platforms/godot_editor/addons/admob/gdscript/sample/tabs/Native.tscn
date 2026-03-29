@@ -1,0 +1,411 @@
+[gd_scene load_steps=13 format=3 uid="uid://c6u6s82p5d6xr"]
+
+[ext_resource type="Script" path="res://addons/admob/gdscript/sample/tabs/Native.gd" id="1_native_script"]
+[ext_resource type="Texture2D" uid="uid://c6d7aye5nwtvi" path="res://addons/admob/assets/pos_top_left.svg" id="2_tl"]
+[ext_resource type="Texture2D" uid="uid://kakk2nrappoc" path="res://addons/admob/assets/pos_top.svg" id="3_t"]
+[ext_resource type="Texture2D" uid="uid://ba3m3mh4pn8of" path="res://addons/admob/assets/pos_top_right.svg" id="4_tr"]
+[ext_resource type="Texture2D" uid="uid://cr4ao6vsp5736" path="res://addons/admob/assets/pos_left.svg" id="5_l"]
+[ext_resource type="Texture2D" uid="uid://b41mioah3scis" path="res://addons/admob/assets/pos_center.svg" id="6_c"]
+[ext_resource type="Texture2D" uid="uid://ceou56162w5po" path="res://addons/admob/assets/pos_right.svg" id="7_r"]
+[ext_resource type="Texture2D" uid="uid://bp0dyr8cp5ye0" path="res://addons/admob/assets/pos_bottom_left.svg" id="8_bl"]
+[ext_resource type="Texture2D" uid="uid://5v6slm2g7ad0" path="res://addons/admob/assets/pos_bottom.svg" id="9_b"]
+[ext_resource type="Texture2D" uid="uid://e3dqlgeny8lx" path="res://addons/admob/assets/pos_bottom_right.svg" id="10_br"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main_bg"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.3)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_color = Color(0, 0, 0, 0.15)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cta_bg"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.258824, 0.521569, 0.956863, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.3)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_color = Color(0, 0, 0, 0.15)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cta_text"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.3)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_color = Color(0, 0, 0, 0.15)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p1r38"]
+
+[node name="Native" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+script = ExtResource("1_native_script")
+
+[node name="ActionsCard" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"SectionCard"
+
+[node name="VBox" type="VBoxContainer" parent="ActionsCard"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="ActionsCard/VBox"]
+layout_mode = 2
+text = "NATIVE OVERLAY CONTROLS"
+horizontal_alignment = 1
+
+[node name="NativeActions" type="GridContainer" parent="ActionsCard/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="LoadNative" type="Button" parent="ActionsCard/VBox/NativeActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.25, 0.75, 0.25, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.35, 0.1, 1)
+theme_override_colors/font_color = Color(0.15, 0.45, 0.15, 1)
+text = "Load"
+
+[node name="LoadNativeBackground" type="Button" parent="ActionsCard/VBox/NativeActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.25, 0.75, 0.25, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.35, 0.1, 1)
+theme_override_colors/font_color = Color(0.15, 0.45, 0.15, 1)
+text = "Load Background"
+
+[node name="ShowNative" type="Button" parent="ActionsCard/VBox/NativeActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.1, 0.25, 0.5, 0.4)
+theme_override_colors/font_hover_color = Color(0.25, 0.5, 0.9, 1)
+theme_override_colors/font_pressed_color = Color(0.05, 0.15, 0.3, 1)
+theme_override_colors/font_color = Color(0.1, 0.25, 0.5, 1)
+disabled = true
+text = "Show"
+
+[node name="HideNative" type="Button" parent="ActionsCard/VBox/NativeActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.5, 0.4, 0.1, 0.4)
+theme_override_colors/font_hover_color = Color(0.8, 0.7, 0.2, 1)
+theme_override_colors/font_pressed_color = Color(0.3, 0.2, 0.05, 1)
+theme_override_colors/font_color = Color(0.5, 0.4, 0.1, 1)
+disabled = true
+text = "Hide"
+
+[node name="GetSize" type="Button" parent="ActionsCard/VBox/NativeActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.3, 0.3, 0.3, 0.4)
+theme_override_colors/font_hover_color = Color(0.6, 0.6, 0.6, 1)
+theme_override_colors/font_pressed_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
+disabled = true
+text = "Get Size"
+
+[node name="DestroyNative" type="Button" parent="ActionsCard/VBox/NativeActions"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(160, 50)
+layout_mode = 2
+theme_override_colors/font_disabled_color = Color(0.6, 0.15, 0.15, 0.4)
+theme_override_colors/font_hover_color = Color(0.9, 0.3, 0.3, 1)
+theme_override_colors/font_pressed_color = Color(0.4, 0.05, 0.05, 1)
+theme_override_colors/font_color = Color(0.6, 0.15, 0.15, 1)
+disabled = true
+text = "Destroy"
+
+[node name="StyleCard" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"SectionCard"
+
+[node name="VBox" type="VBoxContainer" parent="StyleCard"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="StyleCard/VBox"]
+layout_mode = 2
+text = "TEMPLATE STYLE"
+horizontal_alignment = 1
+
+[node name="TemplateGrid" type="GridContainer" parent="StyleCard/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 20
+columns = 2
+
+[node name="TemplateLabel" type="Label" parent="StyleCard/VBox/TemplateGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Template:"
+
+[node name="TemplateType" type="OptionButton" parent="StyleCard/VBox/TemplateGrid"]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "Small"
+popup/item_0/id = 0
+popup/item_1/text = "Medium"
+popup/item_1/id = 1
+
+[node name="HSeparator" type="HSeparator" parent="StyleCard/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ColorSectionTitle" type="Label" parent="StyleCard/VBox"]
+layout_mode = 2
+text = "COLOR CUSTOMIZATION"
+horizontal_alignment = 1
+
+[node name="ColorGrid" type="GridContainer" parent="StyleCard/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 30
+theme_override_constants/v_separation = 15
+columns = 2
+
+[node name="MainBGLabel" type="Label" parent="StyleCard/VBox/ColorGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Background:"
+
+[node name="MainBGButton" type="Button" parent="StyleCard/VBox/ColorGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 45)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_main_bg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_main_bg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_main_bg")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p1r38")
+
+[node name="CTABGLabel" type="Label" parent="StyleCard/VBox/ColorGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Button BG:"
+
+[node name="CTABGButton" type="Button" parent="StyleCard/VBox/ColorGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 45)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cta_bg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cta_bg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cta_bg")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p1r38")
+
+[node name="CTATextLabel" type="Label" parent="StyleCard/VBox/ColorGrid"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "Button Text:"
+
+[node name="CTATextButton" type="Button" parent="StyleCard/VBox/ColorGrid"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 45)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cta_text")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cta_text")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cta_text")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_p1r38")
+
+[node name="CustomCard" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"SectionCard"
+
+[node name="VBox" type="VBoxContainer" parent="CustomCard"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CustomCard/VBox"]
+layout_mode = 2
+text = "CUSTOM POSITION (XY)"
+horizontal_alignment = 1
+
+[node name="HBox" type="HBoxContainer" parent="CustomCard/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="XLabel" type="Label" parent="CustomCard/VBox/HBox"]
+layout_mode = 2
+text = "X:"
+
+[node name="XValue" type="LineEdit" parent="CustomCard/VBox/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "50"
+placeholder_text = "0"
+alignment = 1
+select_all_on_focus = true
+virtual_keyboard_type = 2
+
+[node name="YLabel" type="Label" parent="CustomCard/VBox/HBox"]
+layout_mode = 2
+text = "Y:"
+
+[node name="YValue" type="LineEdit" parent="CustomCard/VBox/HBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "500"
+placeholder_text = "0"
+alignment = 1
+select_all_on_focus = true
+virtual_keyboard_type = 2
+
+[node name="ApplyCustom" type="Button" parent="CustomCard/VBox/HBox"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Update"
+
+[node name="PositionCard" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"SectionCard"
+
+[node name="VBox" type="VBoxContainer" parent="PositionCard"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="PositionCard/VBox"]
+layout_mode = 2
+text = "PRESET POSITIONS"
+horizontal_alignment = 1
+
+[node name="PositionGrid" type="GridContainer" parent="PositionCard/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 15
+theme_override_constants/v_separation = 15
+columns = 3
+
+[node name="TOP_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+tooltip_text = "Top Left"
+icon = ExtResource("2_tl")
+expand_icon = true
+
+[node name="TOP" type="Button" parent="PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+tooltip_text = "Top"
+icon = ExtResource("3_t")
+expand_icon = true
+
+[node name="TOP_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+tooltip_text = "Top Right"
+icon = ExtResource("4_tr")
+expand_icon = true
+
+[node name="LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+tooltip_text = "Left"
+icon = ExtResource("5_l")
+expand_icon = true
+
+[node name="CENTER" type="Button" parent="PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+tooltip_text = "Center"
+icon = ExtResource("6_c")
+expand_icon = true
+
+[node name="RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+tooltip_text = "Right"
+icon = ExtResource("7_r")
+expand_icon = true
+
+[node name="BOTTOM_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+tooltip_text = "Bottom Left"
+icon = ExtResource("8_bl")
+expand_icon = true
+
+[node name="BOTTOM" type="Button" parent="PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+tooltip_text = "Bottom"
+icon = ExtResource("9_b")
+expand_icon = true
+
+[node name="BOTTOM_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+tooltip_text = "Bottom Right"
+icon = ExtResource("10_br")
+expand_icon = true
+
+[connection signal="pressed" from="CustomCard/VBox/HBox/ApplyCustom" to="." method="_on_apply_custom_pressed"]
+[connection signal="pressed" from="ActionsCard/VBox/NativeActions/LoadNative" to="." method="_on_load_native_pressed"]
+[connection signal="pressed" from="ActionsCard/VBox/NativeActions/LoadNativeBackground" to="." method="_on_load_native_background_pressed"]
+[connection signal="pressed" from="ActionsCard/VBox/NativeActions/DestroyNative" to="." method="_on_destroy_native_pressed"]
+[connection signal="pressed" from="ActionsCard/VBox/NativeActions/ShowNative" to="." method="_on_show_native_pressed"]
+[connection signal="pressed" from="ActionsCard/VBox/NativeActions/HideNative" to="." method="_on_hide_native_pressed"]
+[connection signal="pressed" from="ActionsCard/VBox/NativeActions/GetSize" to="." method="_on_get_size_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/TOP_LEFT" to="." method="_on_top_left_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/TOP" to="." method="_on_top_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/TOP_RIGHT" to="." method="_on_top_right_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/LEFT" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/CENTER" to="." method="_on_center_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/RIGHT" to="." method="_on_right_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/BOTTOM_LEFT" to="." method="_on_bottom_left_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/BOTTOM" to="." method="_on_bottom_pressed"]
+[connection signal="pressed" from="PositionCard/VBox/PositionGrid/BOTTOM_RIGHT" to="." method="_on_bottom_right_pressed"]

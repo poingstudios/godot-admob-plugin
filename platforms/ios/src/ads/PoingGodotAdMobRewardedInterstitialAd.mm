@@ -84,12 +84,21 @@ void PoingGodotAdMobRewardedInterstitialAd::set_server_side_verification_options
     }
 }
 
+Dictionary PoingGodotAdMobRewardedInterstitialAd::get_response_info(int uid) {
+    RewardedInterstitialAd* adObj = this->getObject(uid);
+    if (adObj && adObj.rewarded && adObj.rewarded.responseInfo) {
+        return [ObjectToGodotDictionary convertResponseInfoToDictionary:adObj.rewarded.responseInfo];
+    }
+    return Dictionary();
+}
+
 
 void PoingGodotAdMobRewardedInterstitialAd::_bind_methods() {
     ClassDB::bind_method(D_METHOD("create"),    &PoingGodotAdMobRewardedInterstitialAd::create);
     ClassDB::bind_method(D_METHOD("load"),      &PoingGodotAdMobRewardedInterstitialAd::load);
     ClassDB::bind_method(D_METHOD("show"),      &PoingGodotAdMobRewardedInterstitialAd::show);
     ClassDB::bind_method(D_METHOD("destroy"),   &PoingGodotAdMobRewardedInterstitialAd::destroy);
+    ClassDB::bind_method(D_METHOD("get_response_info"), &PoingGodotAdMobRewardedInterstitialAd::get_response_info);
     ClassDB::bind_method(D_METHOD("set_server_side_verification_options"),   &PoingGodotAdMobRewardedInterstitialAd::set_server_side_verification_options);
 
     ADD_SIGNAL(MethodInfo("on_rewarded_interstitial_ad_failed_to_load",                      PropertyInfo(Variant::INT, "UID"), PropertyInfo(Variant::DICTIONARY, "loadAdErrorDictionary")));
@@ -102,4 +111,5 @@ void PoingGodotAdMobRewardedInterstitialAd::_bind_methods() {
     ADD_SIGNAL(MethodInfo("on_rewarded_interstitial_ad_showed_full_screen_content",          PropertyInfo(Variant::INT, "UID")));
 
     ADD_SIGNAL(MethodInfo("on_rewarded_interstitial_ad_user_earned_reward",          PropertyInfo(Variant::INT, "UID"), PropertyInfo(Variant::DICTIONARY, "rewardedItemDictionary")));
+    ADD_SIGNAL(MethodInfo("on_rewarded_interstitial_ad_paid",                        PropertyInfo(Variant::INT, "UID"), PropertyInfo(Variant::DICTIONARY, "adValueDictionary")));
 };

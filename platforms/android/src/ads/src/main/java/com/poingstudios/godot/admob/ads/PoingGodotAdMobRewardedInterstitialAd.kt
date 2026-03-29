@@ -66,6 +66,7 @@ class PoingGodotAdMobRewardedInterstitialAd(godot: Godot?) : org.godotengine.god
         signals.add(SignalInfo("on_rewarded_interstitial_ad_showed_full_screen_content", Integer::class.java))
 
         signals.add(SignalInfo("on_rewarded_interstitial_ad_user_earned_reward", Integer::class.java, Dictionary::class.java))
+        signals.add(SignalInfo("on_rewarded_interstitial_ad_paid", Integer::class.java, Dictionary::class.java))
         return signals
     }
 
@@ -89,6 +90,10 @@ class PoingGodotAdMobRewardedInterstitialAd(godot: Godot?) : org.godotengine.god
                     }
                     override fun onAdLoaded(rewardedInterstitialAd: RewardedInterstitialAd) {
                         rewardedInterstitialAds[uid] = rewardedInterstitialAd
+                        rewardedInterstitialAd.setOnPaidEventListener { adValue ->
+                            val adValueDictionary = adValue.convertToGodotDictionary()
+                emitSignal("on_rewarded_interstitial_ad_paid", uid, adValueDictionary)
+                        }
                         rewardedInterstitialAd.fullScreenContentCallback = object: FullScreenContentCallback() {
                             override fun onAdClicked() {
                                 Logger.debug("Ad was clicked.")
@@ -148,4 +153,10 @@ class PoingGodotAdMobRewardedInterstitialAd(godot: Godot?) : org.godotengine.god
             rewardedInterstitialAds[uid]?.setServerSideVerificationOptions(serverSideVerificationOptionsDictionary.convertToServerSideVerificationOptions())
         }
     }
+
+    @UsedByGodot
+    fun get_response_info(uid: Int) : Dictionary {
+        return rewardedInterstitialAds[uid]?.responseInfo?.convertToGodotDictionary() ?: Dictionary()
+    }
+
 }

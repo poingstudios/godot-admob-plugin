@@ -17,7 +17,8 @@ download_url = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/releases/d
 asset_data = {
     "token": token,
     "version_string": os.environ["VERSION"],
-    "download_commit": download_url
+    "download_commit": download_url,
+    "download_provider": "Custom"
 }
 
 print(f"Attempting to update asset {get_asset_id()}...")

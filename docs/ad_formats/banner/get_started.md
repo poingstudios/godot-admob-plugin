@@ -61,7 +61,7 @@ The initial step in utilizing a banner ad is to create an instance of an AdView 
     	elif OS.get_name() == "iOS":
     		unit_id = "ca-app-pub-3940256099942544/2934735716"
     
-    	_ad_view = AdView.new(unit_id, AdSize.BANNER, AdPosition.Values.TOP)
+    	_ad_view = AdView.new(unit_id, AdSize.BANNER, AdPosition.TOP)
     ```
 
 === "C#"
@@ -103,9 +103,28 @@ The constructor for an AdView in Godot has the following parameters:
 
 - `unit_id`: The AdMob ad unit ID from which the AdView should load ads.
 - `AdSize`: The AdMob ad size you wish to utilize (refer to [AdView sizes](#adview-sizes) for specifics).
-- `AdPosition`: The position at which the banner ad should be positioned. The `AdPosition.Values` (GDScript) or `AdPosition` (C#) enum enumerates the valid ad position values.
+- `AdPosition`: The position at which the banner ad should be positioned. The `AdPosition` (GDScript) or `AdPosition` (C#) class exposes static instances for valid ad position values (e.g., `AdPosition.TOP`).
 
 Take note of the distinct ad units used based on the platform. When making ad requests on iOS, you should utilize an iOS ad unit, while for Android, you must use an Android ad unit.
+
+#### (Optional) Generate an AdView with a customized position
+Instead of using standard anchors (like `Top` or `Bottom`), you can define specific `x` and `y` coordinates to place the banner at a custom point. The coordinates determine where the top-left corner of the banner view will be placed.
+
+=== "GDScript"
+
+    ```gdscript linenums="1"
+    # Create a banner at coordinate (0, 50) on screen.
+    var custom_position := AdPosition.custom(0, 50)
+    _ad_view := AdView.new(unit_id, AdSize.BANNER, custom_position)
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1"
+    // Create a banner at coordinate (0, 50) on screen.
+    var customPosition = AdPosition.Custom(0, 50);
+    _adView = new AdView(unitId, AdSize.Banner, customPosition);
+    ```
 
 #### (Optional) Generate an AdView with a customized size
 In addition to utilizing predefined AdSize constants, you can also specify a custom size for your ad:
@@ -114,7 +133,7 @@ In addition to utilizing predefined AdSize constants, you can also specify a cus
 
     ```gdscript linenums="1"
     var ad_size := AdSize.new(200, 200)
-    _ad_view := AdView.new(unit_id, ad_size, AdPosition.Values.TOP)
+    _ad_view := AdView.new(unit_id, ad_size, AdPosition.TOP)
     ```
 
 === "C#"

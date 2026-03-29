@@ -127,6 +127,14 @@ If you are utilizing mediation, it's essential to wait for the completion handle
 ## Select an ad format
 The Google Mobile Ads SDK is now successfully imported, and you are prepared to integrate an ad into your app. AdMob provides a variety of ad formats, allowing you to select the one that aligns best with your app's user experience.
 
+### App Open
+<div class="image-text-container">
+  <img src="https://developers.google.com/static/admob/images/format-app-open.svg" alt="app_open">
+  <p>App open is an ad format that appears when users open or switch back to your app. The ad overlays the loading screen.</p>
+</div>
+
+[Implement app open ads](ad_formats/app_open.md){ .md-button .md-button--primary }
+
 ### Banner
 <div class="image-text-container">
   <img src="assets/ad_formats/banner.png" alt="banner">
@@ -166,7 +174,7 @@ The Google Mobile Ads SDK is now successfully imported, and you are prepared to 
   }
   .image-text-container img {
     margin-right: 20px;
-    max-width: 200px;
+    max-width: 130px;
     height: auto;
   }
 </style>

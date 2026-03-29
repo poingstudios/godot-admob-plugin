@@ -42,12 +42,16 @@ public:
     int create(Dictionary adViewDictionary);
     void load_ad(int uid, Dictionary adRequestDictionary, PackedStringArray keywords);
     void destroy(int uid);
+    Dictionary get_response_info(int uid);
     void hide(int uid);
     void show(int uid);
+    void update_position(int uid, int position);
+    void update_custom_position(int uid, int x, int y);
     int get_width(int uid);
     int get_height(int uid);
     int get_width_in_pixels(int uid);
     int get_height_in_pixels(int uid);
+    bool is_collapsible(int uid);
 
     static PoingGodotAdMobAdView *get_singleton();
 

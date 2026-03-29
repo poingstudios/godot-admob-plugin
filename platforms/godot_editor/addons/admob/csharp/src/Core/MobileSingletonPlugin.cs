@@ -64,5 +64,13 @@ namespace PoingStudios.AdMob.Core
 				plugin.Connect(signalName, callable, flags);
 			}
 		}
+
+		protected static void SafeDisconnect(GodotObject plugin, string signalName, Callable callable)
+		{
+			if (plugin != null && plugin.IsConnected(signalName, callable))
+			{
+				plugin.Disconnect(signalName, callable);
+			}
+		}
 	}
 }

@@ -62,6 +62,7 @@ class PoingGodotAdMobInterstitialAd(godot: Godot?) : org.godotengine.godot.plugi
         signals.add(SignalInfo("on_interstitial_ad_failed_to_show_full_screen_content", Integer::class.java, Dictionary::class.java))
         signals.add(SignalInfo("on_interstitial_ad_impression", Integer::class.java))
         signals.add(SignalInfo("on_interstitial_ad_showed_full_screen_content", Integer::class.java))
+        signals.add(SignalInfo("on_interstitial_ad_paid", Integer::class.java, Dictionary::class.java))
         return signals
     }
 
@@ -85,6 +86,10 @@ class PoingGodotAdMobInterstitialAd(godot: Godot?) : org.godotengine.godot.plugi
                     }
                     override fun onAdLoaded(interstitialAd: InterstitialAd) {
                         interstitials[uid] = interstitialAd
+                        interstitialAd.setOnPaidEventListener { adValue ->
+                            val adValueDictionary = adValue.convertToGodotDictionary()
+                            emitSignal("on_interstitial_ad_paid", uid, adValueDictionary)
+                        }
                         interstitialAd.fullScreenContentCallback = object: FullScreenContentCallback() {
                             override fun onAdClicked() {
                                 Logger.debug("Ad was clicked.")
@@ -131,6 +136,12 @@ class PoingGodotAdMobInterstitialAd(godot: Godot?) : org.godotengine.godot.plugi
     fun destroy(uid : Int){
         Logger.debug("DESTROYING ${javaClass.simpleName}")
         interstitials[uid] = null //just set to null in order to try to clean up memory
+    }
+
+
+    @UsedByGodot
+    fun get_response_info(uid: Int) : Dictionary {
+        return interstitials[uid]?.responseInfo?.convertToGodotDictionary() ?: Dictionary()
     }
 
 }

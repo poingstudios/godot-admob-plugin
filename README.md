@@ -16,7 +16,7 @@
 
   ---
 
-  [📦 Installation](#-installation) • [📋 Examples](#-examples) • [🙏 Support](#-support--community)
+  [📦 Installation](#-installation) • [📋 Examples](#-examples) • [🙏 Support](#-support)
 
 </div>
 
@@ -74,6 +74,92 @@ public override void _Ready()
 {
 	//just need to call once
 	MobileAds.Initialize();
+}
+```
+
+</details>
+
+## 📱App Open Ads
+<details>
+<summary>GDScript</summary>
+
+### Load
+```gdscript
+var app_open_ad : AppOpenAd
+var app_open_ad_load_callback := AppOpenAdLoadCallback.new()
+
+func _ready():
+	app_open_ad_load_callback.on_ad_failed_to_load = on_app_open_ad_failed_to_load
+	app_open_ad_load_callback.on_ad_loaded = on_app_open_ad_loaded
+
+# button signal on scene
+func _on_load_app_open_pressed() -> void:
+	var unit_id : String
+	if OS.get_name() == "Android":
+		unit_id = "ca-app-pub-3940256099942544/9257395921"
+		unit_id = "ca-app-pub-3940256099942544/5575463023"
+	
+	AppOpenAdLoader.new().load(unit_id, AdRequest.new(), app_open_ad_load_callback)
+
+func on_app_open_ad_failed_to_load(adError : LoadAdError) -> void:
+	print(adError.message)
+	
+func on_app_open_ad_loaded(app_open_ad : AppOpenAd) -> void:
+	self.app_open_ad = app_open_ad
+```
+
+### Show
+```gdscript
+# button signal on scene
+func _on_show_pressed():
+	if app_open_ad:
+		app_open_ad.show()
+```
+
+</details>
+
+<details>
+<summary>C#</summary>
+
+### Load
+```csharp
+using Godot;
+using PoingStudios.AdMob.Api;
+using PoingStudios.AdMob.Api.Core;
+using PoingStudios.AdMob.Api.Listeners;
+
+private AppOpenAd _appOpenAd;
+
+// button signal on scene
+private void OnLoadAppOpenPressed()
+{
+	string unitId = "";
+	if (OS.GetName() == "Android")
+	{
+		unitId = "ca-app-pub-3940256099942544/9257395921";
+	}
+	else if (OS.GetName() == "iOS")
+	{
+		unitId = "ca-app-pub-3940256099942544/5575463023";
+	}
+	
+	new AppOpenAdLoader().Load(unitId, new AdRequest(), new AppOpenAdLoadCallback
+	{
+		OnAdLoaded = ad => _appOpenAd = ad,
+		OnAdFailedToLoad = err => GD.Print(err.Message)
+	});
+}
+```
+
+### Show
+```csharp
+// button signal on scene
+private void OnShowPressed()
+{
+	if (_appOpenAd != null)
+	{
+		_appOpenAd.Show();
+	}
 }
 ```
 

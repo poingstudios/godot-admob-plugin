@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using Godot;
 using Godot.Collections;
 using PoingStudios.AdMob.Api.Core;
@@ -34,6 +35,7 @@ namespace PoingStudios.AdMob.Api
 
 		public AdListener AdListener { get; set; } = new AdListener();
 		public AdPosition Position { get; private set; }
+		public Action<AdValue> OnAdPaid { get; set; }
 
 		private readonly int _uid;
 
@@ -43,6 +45,7 @@ namespace PoingStudios.AdMob.Api
 		private readonly Callable _onAdImpressionCallable;
 		private readonly Callable _onAdLoadedCallable;
 		private readonly Callable _onAdOpenedCallable;
+		private readonly Callable _onAdPaidCallable;
 
 		public AdView(string adUnitId, AdSize adSize, AdPosition adPosition)
 		{
@@ -54,13 +57,20 @@ namespace PoingStudios.AdMob.Api
 			_onAdImpressionCallable = Callable.From<int>(OnAdImpression);
 			_onAdLoadedCallable = Callable.From<int>(OnAdLoaded);
 			_onAdOpenedCallable = Callable.From<int>(OnAdOpened);
+			_onAdPaidCallable = Callable.From<int, Dictionary>(OnAdViewPaid);
 
 			if (_plugin != null)
 			{
 				var adViewDict = new Dictionary
 				{
 					{ "ad_unit_id", adUnitId },
-					{ "ad_position", (int)adPosition },
+					{ "ad_position", (int)adPosition.Value },
+					{ "custom_position", new Dictionary
+						{
+							{ "x", adPosition.Offset.X },
+							{ "y", adPosition.Offset.Y }
+						}
+					},
 					{ "ad_size", new Dictionary
 						{
 							{ "width", adSize.Width },
@@ -76,6 +86,7 @@ namespace PoingStudios.AdMob.Api
 				SafeConnect(_plugin, "on_ad_impression", _onAdImpressionCallable);
 				SafeConnect(_plugin, "on_ad_loaded", _onAdLoadedCallable);
 				SafeConnect(_plugin, "on_ad_opened", _onAdOpenedCallable);
+				SafeConnect(_plugin, "on_ad_view_paid", _onAdPaidCallable);
 			}
 		}
 
@@ -90,6 +101,12 @@ namespace PoingStudios.AdMob.Api
 			_plugin?.Call("destroy", _uid);
 		}
 
+		public ResponseInfo GetResponseInfo()
+		{
+			var responseInfoDictionary = (Dictionary)_plugin.Call("get_response_info", _uid);
+			return ResponseInfo.Create(responseInfoDictionary);
+		}
+
 		public void Hide()
 		{
 			_plugin?.Call("hide", _uid);
@@ -98,6 +115,22 @@ namespace PoingStudios.AdMob.Api
 		public void Show()
 		{
 			_plugin?.Call("show", _uid);
+		}
+
+		public void SetPosition(AdPosition adPosition)
+		{
+			Position = adPosition;
+			if (_plugin != null)
+			{
+				if (adPosition.Value == AdPosition.Values.Custom)
+				{
+					_plugin.Call("update_custom_position", _uid, adPosition.Offset.X, adPosition.Offset.Y);
+				}
+				else
+				{
+					_plugin.Call("update_position", _uid, (int)adPosition.Value);
+				}
+			}
 		}
 
 		public int GetWidth()
@@ -126,6 +159,13 @@ namespace PoingStudios.AdMob.Api
 			if (_plugin != null)
 				return (int)_plugin.Call("get_height_in_pixels", _uid);
 			return -1;
+		}
+
+		public bool IsCollapsible()
+		{
+			if (_plugin != null)
+				return (bool)_plugin.Call("is_collapsible", _uid);
+			return false;
 		}
 
 		private void OnAdClicked(int uid)
@@ -163,6 +203,13 @@ namespace PoingStudios.AdMob.Api
 		{
 			if (uid != _uid) return;
 			Callable.From(() => AdListener.OnAdOpened?.Invoke()).CallDeferred();
+		}
+
+		private void OnAdViewPaid(int uid, Dictionary adValueDictionary)
+		{
+			if (uid != _uid) return;
+			var adValue = AdValue.Create(adValueDictionary);
+			Callable.From(() => OnAdPaid?.Invoke(adValue)).CallDeferred();
 		}
 	}
 }

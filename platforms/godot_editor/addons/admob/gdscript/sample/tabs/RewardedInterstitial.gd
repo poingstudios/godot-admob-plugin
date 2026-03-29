@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-extends VBoxContainer
+extends "res://addons/admob/gdscript/sample/tabs/BaseTab.gd"
 
 const Registry = preload("res://addons/admob/internal/sample_registry.gd")
 
@@ -34,6 +34,7 @@ var _content_callback := FullScreenContentCallback.new()
 @onready var _destroy_button: Button = $Destroy
 
 func _ready() -> void:
+	super()
 	_reward_listener.on_user_earned_reward = _on_user_earned_reward
 	
 	_load_callback.on_ad_failed_to_load = _on_ad_failed_to_load
@@ -58,7 +59,8 @@ func _update_ui_state(is_loaded: bool) -> void:
 
 func _on_load_pressed() -> void:
 	_log("Loading rewarded interstitial...")
-	RewardedInterstitialAdLoader.new().load("ca-app-pub-3940256099942544/5354046379", AdRequest.new(), _load_callback)
+	var unit_id := "ca-app-pub-3940256099942544/5354046379" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/6978759866"
+	RewardedInterstitialAdLoader.new().load(unit_id, AdRequest.new(), _load_callback)
 
 func _on_show_pressed() -> void:
 	if _rewarded_interstitial_ad:
@@ -86,6 +88,15 @@ func _on_ad_failed_to_load(error: LoadAdError) -> void:
 func _on_ad_loaded(ad: RewardedInterstitialAd) -> void:
 	_log("Ad loaded successfully (UID: %s)" % str(ad._uid))
 	ad.full_screen_content_callback = _content_callback
+	ad.on_ad_paid = func(ad_value: AdValue) -> void:
+		var ad_source_name := "N/A"
+		var response_info := ad.get_response_info()
+		if response_info:
+			if response_info.loaded_adapter_response_info:
+				ad_source_name = response_info.loaded_adapter_response_info.ad_source_name
+			else:
+				ad_source_name = "None"
+		_log("Ad paid: %f %s (precision: %d, source: %s)" % [ad_value.value_micros / 1000000.0, ad_value.currency_code, ad_value.precision, ad_source_name])
 	
 	var ssv_options := ServerSideVerificationOptions.new()
 	ssv_options.custom_data = "TEST_DATA"
