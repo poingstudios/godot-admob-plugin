@@ -40,6 +40,13 @@ namespace PoingStudios.AdMob.Ump.Api
             Obtained = 3
         }
 
+        public enum PrivacyOptionsRequirementStatus
+        {
+            Unknown = 0,
+            NotRequired = 1,
+            Required = 2,
+        }
+
         private Action _onSuccessCallback;
         private Action<FormError> _onFailureCallback;
 
@@ -64,6 +71,13 @@ namespace PoingStudios.AdMob.Ump.Api
             if (_plugin != null)
                 return (bool)_plugin.Call("get_is_consent_form_available");
             return false;
+        }
+
+        public PrivacyOptionsRequirementStatus GetPrivacyOptionsRequirementStatus()
+        {
+            if (_plugin != null)
+                return (PrivacyOptionsRequirementStatus)(int)_plugin.Call("get_privacy_options_requirement_status");
+            return PrivacyOptionsRequirementStatus.Unknown;
         }
 
         public void Update(

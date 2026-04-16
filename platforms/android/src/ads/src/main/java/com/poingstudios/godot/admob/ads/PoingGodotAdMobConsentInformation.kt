@@ -63,6 +63,11 @@ class PoingGodotAdMobConsentInformation(godot: Godot?) : org.godotengine.godot.p
     }
 
     @UsedByGodot
+    fun get_privacy_options_requirement_status() : Int{
+        return UserMessagingPlatform.getConsentInformation(aActivity).privacyOptionsRequirementStatus.ordinal
+    }
+
+    @UsedByGodot
     fun update(consentRequestParametersDictionary: Dictionary){
         val consentRequestParameters = consentRequestParametersDictionary.convertToConsentRequestParameters(aActivity)
 

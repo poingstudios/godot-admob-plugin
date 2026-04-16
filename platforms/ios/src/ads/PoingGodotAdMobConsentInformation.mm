@@ -60,6 +60,10 @@ bool PoingGodotAdMobConsentInformation::get_is_consent_form_available() {
     return [UMPConsentInformation.sharedInstance formStatus] == UMPFormStatusAvailable;
 }
 
+int PoingGodotAdMobConsentInformation::get_privacy_options_requirement_status() {
+    return (int)[UMPConsentInformation.sharedInstance privacyOptionsRequirementStatus];
+}
+
 void PoingGodotAdMobConsentInformation::update(Dictionary consentRequestParametersDictionary) {
     UMPRequestParameters* parameters = [GodotDictionaryToObject convertDictionaryToUMPRequestParameters:consentRequestParametersDictionary];
     [UMPConsentInformation.sharedInstance
@@ -83,6 +87,7 @@ void PoingGodotAdMobConsentInformation::_bind_methods() {
 
     ClassDB::bind_method(D_METHOD("get_consent_status"), &PoingGodotAdMobConsentInformation::get_consent_status);
     ClassDB::bind_method(D_METHOD("get_is_consent_form_available"), &PoingGodotAdMobConsentInformation::get_is_consent_form_available);
+    ClassDB::bind_method(D_METHOD("get_privacy_options_requirement_status"), &PoingGodotAdMobConsentInformation::get_privacy_options_requirement_status);
     ClassDB::bind_method(D_METHOD("update"), &PoingGodotAdMobConsentInformation::update);
     ClassDB::bind_method(D_METHOD("reset"), &PoingGodotAdMobConsentInformation::reset);
 };

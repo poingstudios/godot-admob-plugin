@@ -63,12 +63,27 @@ void PoingGodotAdMobUserMessagingPlatform::show(int uid) {
     }
 }
 
+void PoingGodotAdMobUserMessagingPlatform::show_privacy_options_form() {
+    UIViewController *rootController = [UIApplication sharedApplication].delegate.window.rootViewController;
+
+    [UMPConsentForm presentPrivacyOptionsFormFromViewController:rootController
+                                              completionHandler:^(NSError * _Nullable formError) {
+        Dictionary errorDictionary;
+        if (formError) {
+            errorDictionary = [ObjectToGodotDictionary convertNSErrorToDictionaryAsFormError:formError];
+        }
+        emit_signal("on_privacy_options_form_dismissed_listener", errorDictionary);
+    }];
+}
+
 void PoingGodotAdMobUserMessagingPlatform::_bind_methods() {
     ADD_SIGNAL(MethodInfo("on_consent_form_dismissed", PropertyInfo(Variant::INT, "UID"), PropertyInfo(Variant::DICTIONARY, "formErrorDictionary")));
+    ADD_SIGNAL(MethodInfo("on_privacy_options_form_dismissed_listener", PropertyInfo(Variant::DICTIONARY, "formErrorDictionary")));
     
     ADD_SIGNAL(MethodInfo("on_consent_form_load_success_listener", PropertyInfo(Variant::INT, "UID")));
     ADD_SIGNAL(MethodInfo("on_consent_form_load_failure_listener", PropertyInfo(Variant::DICTIONARY, "formErrorDictionary")));
     
     ClassDB::bind_method(D_METHOD("load_consent_form"), &PoingGodotAdMobUserMessagingPlatform::load_consent_form);
     ClassDB::bind_method(D_METHOD("show"), &PoingGodotAdMobUserMessagingPlatform::show);
+    ClassDB::bind_method(D_METHOD("show_privacy_options_form"), &PoingGodotAdMobUserMessagingPlatform::show_privacy_options_form);
 };
