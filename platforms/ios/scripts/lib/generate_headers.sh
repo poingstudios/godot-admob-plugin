@@ -63,9 +63,14 @@ fi
 TARGETS=(
     "core/version_generated.gen.h"
     "core/disabled_classes.gen.h"
-    "core/object/gdvirtual.gen.inc"
     "modules/modules_enabled.gen.h"
 )
+
+if [ -f ".version" ] && [[ "$(cat .version)" =~ ^4\.[4-9] ]]; then
+    TARGETS+=("core/object/gdvirtual.gen.h")
+else
+    TARGETS+=("core/object/gdvirtual.gen.inc")
+fi
 
 # GDExtension interface header (added in Godot 4.2/4.4+)
 # We check if the directory exists instead of parsing the version string.

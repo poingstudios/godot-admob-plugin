@@ -40,7 +40,17 @@ if [ $# -eq 0 ]; then
 fi
 
 CURRENT_GODOT_VERSION="${1%.0}"
-GODOT_FOLDER="godot-${CURRENT_GODOT_VERSION}-stable"
+
+# Determine if this is a stable release or a pre-release (beta, rc, dev)
+if [[ "$CURRENT_GODOT_VERSION" =~ (beta|rc|dev) ]]; then
+    GODOT_TAG="$CURRENT_GODOT_VERSION"
+    GODOT_REPO="godotengine/godot-builds"
+else
+    GODOT_TAG="${CURRENT_GODOT_VERSION}-stable"
+    GODOT_REPO="godotengine/godot"
+fi
+
+GODOT_FOLDER="godot-${GODOT_TAG}"
 
 # Optimization: Check if Godot is already present and matches the requested version
 if [ -d "godot" ]; then
@@ -57,7 +67,7 @@ fi
 
 
 DOWNLOAD_FILE="${GODOT_FOLDER}.tar.xz"
-FULL_PATHNAME_DOWNLOAD_GODOT_EXTRACTED_HEADERS="https://github.com/godotengine/godot/releases/download/${CURRENT_GODOT_VERSION}-stable/${DOWNLOAD_FILE}"
+FULL_PATHNAME_DOWNLOAD_GODOT_EXTRACTED_HEADERS="https://github.com/${GODOT_REPO}/releases/download/${GODOT_TAG}/${DOWNLOAD_FILE}"
 
 log_info "Downloading Godot ${CURRENT_GODOT_VERSION} from: $FULL_PATHNAME_DOWNLOAD_GODOT_EXTRACTED_HEADERS"
 

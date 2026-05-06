@@ -48,11 +48,12 @@ show_help() {
     echo "  --help        Show this help message"
     echo ""
     echo "Arguments:"
-    echo "  [godot_version]  Optional. The Godot version (e.g., 4.6.1). Auto-detected if omitted."
+    echo "  [godot_version]  Optional. The Godot version (e.g., 4.6.1 or 4.7-beta1). Auto-detected if omitted."
     echo ""
     echo "Examples:"
     echo "  ./scripts/build.sh                   # Incremental build using detected version"
     echo "  ./scripts/build.sh 4.6.1             # Incremental build for specific version"
+    echo "  ./scripts/build.sh 4.7-beta1         # Incremental build for pre-release version"
     echo "  ./scripts/build.sh --clean           # Clean build using detected version"
     echo "  ./scripts/build.sh --sdk             # Build plugin and generate SDK dependencies"
 }
@@ -75,7 +76,7 @@ while [[ "$#" -gt 0 ]]; do
         *) 
             if [ -z "$GODOT_VERSION" ]; then
                 # Check if it looks like a version number
-                if [[ "$1" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?$ ]]; then
+                if [[ "$1" =~ ^[0-9]+\.[0-9]+(\.[0-9]+)?(-[a-zA-Z0-9\.]+)?$ ]]; then
                     GODOT_VERSION="$1"
                 else
                     log_error "Unknown argument: $1"
