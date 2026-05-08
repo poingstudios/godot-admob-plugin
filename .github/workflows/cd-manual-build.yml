@@ -29,13 +29,17 @@ jobs:
   android-template: 
     needs: check-release
     runs-on: "ubuntu-latest"
+    if: |
+      !(contains(github.event.inputs.godot_version, 'beta') || 
+        contains(github.event.inputs.godot_version, 'rc') || 
+        contains(github.event.inputs.godot_version, 'dev'))
     steps:
     - uses: actions/checkout@v6
     
     - name: Verify godot_version
       run: |
         CV=${{ github.event.inputs.godot_version }}
-        if [ ${#CV} -eq 1 ]; then CV="${CV}.0"; fi
+        if [[ ! "$CV" =~ \. ]]; then CV="${CV}.0"; fi
         echo "CURRENT_GODOT_VERSION=${CV}" >> $GITHUB_ENV
 
     - name: Build Plugins
