@@ -66,10 +66,12 @@ TARGETS=(
     "modules/modules_enabled.gen.h"
 )
 
+# In Godot 4.4+, gdvirtual.gen.h was introduced, but some files might still reference .gen.inc
+# or the generation logic might require specifically asking for one. 
+# Based on the error log, 4.6.2 still requires .gen.inc
+TARGETS+=("core/object/gdvirtual.gen.inc")
 if [ -f ".version" ] && [[ "$(cat .version)" =~ ^4\.[4-9] ]]; then
     TARGETS+=("core/object/gdvirtual.gen.h")
-else
-    TARGETS+=("core/object/gdvirtual.gen.inc")
 fi
 
 # GDExtension interface header (added in Godot 4.2/4.4+)
