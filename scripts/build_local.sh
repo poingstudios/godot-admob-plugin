@@ -23,12 +23,29 @@
 
 # scripts/build_local.sh
 
+show_help() {
+    echo "Usage: ./scripts/build_local.sh [android|ios|all] <godot_version>"
+    echo ""
+    echo "Arguments:"
+    echo "  [platform]       android, ios, or all (default: all)"
+    echo "  <godot_version>  The Godot version (e.g., 4.6.1 or 4.7-beta1)"
+    echo ""
+    echo "Examples:"
+    echo "  ./scripts/build_local.sh all 4.6.1"
+    echo "  ./scripts/build_local.sh ios 4.7-beta1"
+    echo "  ./scripts/build_local.sh android 4.6.1"
+}
+
+if [[ "$1" == "--help" || "$1" == "-h" ]]; then
+    show_help
+    exit 0
+fi
+
 PLATFORM=${1:-all}
 GODOT_VERSION=${2}
 
 if [ -z "$GODOT_VERSION" ]; then
-    echo "Usage: ./scripts/build_local.sh [android|ios|all] <godot_version>"
-    echo "Example: ./scripts/build_local.sh all 4.6.1"
+    show_help
     exit 1
 fi
 
