@@ -43,3 +43,8 @@ AdMobAddon.sln
 
 # Temporary folder for clones
 tmp/
+
+# Tooling and generated file ignores
+.antigravitycli/
+platforms/godot_editor/addons/admob/csharp/.gdignore
+
