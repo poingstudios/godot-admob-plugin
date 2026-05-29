@@ -94,11 +94,72 @@ jobs:
       run: |
         ./scripts/build.sh ${{env.CURRENT_GODOT_VERSION}}
 
+    - name: Download Godot
+      run: |
+        curl -LO https://github.com/godotengine/godot/releases/download/${{env.CURRENT_GODOT_VERSION}}-stable/Godot_v${{env.CURRENT_GODOT_VERSION}}-stable_macos.universal.zip
+        unzip Godot_v${{env.CURRENT_GODOT_VERSION}}-stable_macos.universal.zip
+        mv Godot.app /Applications/Godot.app
+
+    - name: Prepare Plugin in Sample Project
+      run: |
+        mkdir -p platforms/godot_editor/addons/admob/bin/ios
+        cp -R platforms/ios/bin/xcframeworks/ads/poing-godot-admob-ads.release.xcframework platforms/godot_editor/addons/admob/bin/ios/
+        cp -R platforms/ios/bin/xcframeworks/meta/poing-godot-admob-meta.release.xcframework platforms/godot_editor/addons/admob/bin/ios/
+        cp -R platforms/ios/bin/xcframeworks/vungle/poing-godot-admob-vungle.release.xcframework platforms/godot_editor/addons/admob/bin/ios/
+        cp platforms/ios/src/ads/config/poing-godot-admob-ads.gdip platforms/godot_editor/addons/admob/bin/ios/
+        cp platforms/ios/src/mediation/vungle/config/poing-godot-admob-vungle.gdip platforms/godot_editor/addons/admob/bin/ios/
+        cp platforms/ios/src/mediation/meta/config/poing-godot-admob-meta.gdip platforms/godot_editor/addons/admob/bin/ios/
+
+    - name: Export Godot Sample Project
+      run: |
+        mkdir -p platforms/godot_editor/exports/ios
+        /Applications/Godot.app/Contents/MacOS/Godot --headless --path platforms/godot_editor --export-release "iOS" exports/ios/AdMobSample.xcodeproj
+
+    - name: Patch Xcode Project for SPM
+      run: |
+        cat << 'EOF' > patch_pbxproj.py
+        import sys
+        import os
+        def patch_pbxproj(path):
+            with open(path, "r") as f: content = f.read()
+            if "AD0000000000000000000001" in content: return
+            local_ref_id, product_dep_id, build_file_id = "AD0000000000000000000001", "AD0000000000000000000002", "AD0000000000000000000003"
+            if "/* Begin XCLocalSwiftPackageReference section */" not in content:
+                content = content.replace("/* End PBXGroup section */", "/* End PBXGroup section */\n\n/* Begin XCLocalSwiftPackageReference section */\n/* End XCLocalSwiftPackageReference section */")
+            if "/* Begin XCSwiftPackageProductDependency section */" not in content:
+                content = content.replace("/* End XCLocalSwiftPackageReference section */", "/* End XCLocalSwiftPackageReference section */\n\n/* Begin XCSwiftPackageProductDependency section */\n/* End XCSwiftPackageProductDependency section */")
+            content = content.replace("/* End XCLocalSwiftPackageReference section */", f'\t\t{local_ref_id} /* XCLocalSwiftPackageReference "." */ = {{isa = XCLocalSwiftPackageReference; relativePath = "."; }};\n' + "/* End XCLocalSwiftPackageReference section */")
+            content = content.replace("/* End XCSwiftPackageProductDependency section */", f'\t\t{product_dep_id} /* PoingGodotAdMobDeps */ = {{isa = XCSwiftPackageProductDependency; package = {local_ref_id} /* XCLocalSwiftPackageReference "." */; productName = "PoingGodotAdMobDeps"; }};\n' + "/* End XCSwiftPackageProductDependency section */")
+            content = content.replace("/* Begin PBXBuildFile section */", "/* Begin PBXBuildFile section */\n" + f"\t\t{build_file_id} /* PoingGodotAdMobDeps in Frameworks */ = {{isa = PBXBuildFile; productRef = {product_dep_id} /* PoingGodotAdMobDeps */; }};\n")
+            content = content.replace("productRefGroup =", f"packageReferences = (\n\t\t\t\t{local_ref_id} /* XCLocalSwiftPackageReference \".\" */,\n\t\t\t);\n\t\t\tproductRefGroup =")
+            content = content.replace("buildRules = (", f"packageProductDependencies = (\n\t\t\t\t{product_dep_id} /* PoingGodotAdMobDeps */,\n\t\t\t);\n\t\t\tbuildRules = (")
+            fw_start = content.find("isa = PBXFrameworksBuildPhase;")
+            if fw_start != -1:
+                files_start = content.find("files = (", fw_start)
+                if files_start != -1: content = content[:files_start + 9] + f"\n\t\t\t\t{build_file_id} /* PoingGodotAdMobDeps in Frameworks */," + content[files_start+9:]
+            with open(path, "w") as f: f.write(content)
+        if __name__ == "__main__": patch_pbxproj(sys.argv[1])
+        EOF
+        python3 patch_pbxproj.py platforms/godot_editor/exports/ios/AdMobSample.xcodeproj/project.pbxproj
+
+    - name: Build and Package Test IPA
+      working-directory: platforms/godot_editor/exports/ios
+      run: |
+        xcodebuild build -project AdMobSample.xcodeproj -scheme AdMobSample -configuration Debug -sdk iphoneos -derivedDataPath build_output CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" AD_HOC_CODE_SIGNING_ALLOWED=YES
+        mkdir -p Payload
+        APP_PATH=$(find build_output/Build/Products/Debug-iphoneos -name "*.app" -type d | head -n 1)
+        if [ -n "$APP_PATH" ]; then
+          cp -r "$APP_PATH" Payload/
+          zip -qr "AdMobSample-Test-v${{env.CURRENT_GODOT_VERSION}}.ipa" Payload/
+        fi
+
     - name: Upload binaries to artifact
       uses: actions/upload-artifact@v4
       with:
         name: ios-${{matrix.GODOT_VERSIONS}}
-        path: platforms/ios/bin/release/*.zip
+        path: |
+          platforms/ios/bin/release/*.zip
+          platforms/godot_editor/exports/ios/*.ipa
         if-no-files-found: error
         retention-days: 1
 

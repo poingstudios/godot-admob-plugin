@@ -57,8 +57,9 @@ func _init(host: Node) -> void:
 	_android_handler = AndroidHandler.new(DownloadService.new(host), _dialog_service)
 	_ios_handler = IOSHandler.new(DownloadService.new(host), _dialog_service)
 	
-	_android_handler.check_dependencies()
-	_ios_handler.check_dependencies()
+	if DisplayServer.get_name() != "headless":
+		_android_handler.check_dependencies()
+		_ios_handler.check_dependencies()
 	
 	_setup_menu()
 

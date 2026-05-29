@@ -279,7 +279,7 @@ jobs:
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
-        name: AdMobAddon-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        name: AdMobAddon-Android-GDScript-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/godot_editor/.output/AdMobAddon.apk
         retention-days: 14
 
@@ -424,7 +424,7 @@ jobs:
       working-directory: platforms/godot_editor
       run: |
         # Set main scene to C# sample for this build
-        sed -i 's|run/main_scene="res://addons/admob/gdscript/sample/Main.tscn"|run/main_scene="res://addons/admob/csharp/sample/MainCSharpExample.tscn"|' project.godot
+        sed -i 's|run/main_scene="uid://0esyp38ds6yg"|run/main_scene="res://addons/admob/csharp/sample/MainCSharpExample.tscn"|' project.godot
         timeout 120 godot --headless --import --quit || true
 
     - name: Build C# Solution
@@ -448,14 +448,326 @@ jobs:
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
-        name: AdMobAddon-CSharp-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        name: AdMobAddon-Android-CSharp-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/godot_editor/.output/AdMobAddon-CSharp.apk
+        retention-days: 14
+
+  build-ipa:
+    name: "Build: Test Project (iOS IPA)"
+    needs: [changes, detect-latest, build-ios]
+    if: needs.changes.outputs.code == 'true'
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Download Godot
+      run: |
+        CV="${{ needs.detect-latest.outputs.godot_version }}"
+        if [[ "$CV" =~ (beta|rc|dev) ]]; then
+          URL="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_macos.universal.zip"
+        else
+          URL="https://github.com/godotengine/godot/releases/download/${CV}-stable/Godot_v${CV}-stable_macos.universal.zip"
+        fi
+        curl -LO "$URL"
+        unzip -q *.zip
+        rm -rf /Applications/Godot.app
+        mv Godot.app /Applications/Godot.app
+
+    - name: Download Export Templates
+      run: |
+        CV="${{ needs.detect-latest.outputs.godot_version }}"
+        if [[ "$CV" =~ (beta|rc|dev) ]]; then
+          URL="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_export_templates.tpz"
+        else
+          URL="https://github.com/godotengine/godot/releases/download/${CV}-stable/Godot_v${CV}-stable_export_templates.tpz"
+        fi
+        curl -LO "$URL"
+        mkdir -p ~/Library/Application\ Support/Godot/export_templates/${CV}.stable
+        unzip -q *.tpz
+        mv templates/* ~/Library/Application\ Support/Godot/export_templates/${CV}.stable/
+
+    - name: Download iOS Plugin Binaries
+      uses: actions/download-artifact@v4
+      with:
+        name: poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/ios/bin/release
+
+    - name: Extract and Prepare Plugin
+      working-directory: platforms/godot_editor
+      run: |
+        mkdir -p ios/plugins
+        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d ios/plugins/
+
+    - name: Generate Export Presets
+      working-directory: platforms/godot_editor
+      run: |
+        cat > export_presets.cfg <<'EOF'
+        [preset.0]
+        name="iOS"
+        platform="iOS"
+        runnable=true
+        dedicated_server=false
+        custom_features=""
+        export_filter="all_resources"
+        include_filter=""
+        exclude_filter=""
+        export_path=""
+        encryption_include_filters=""
+        encryption_exclude_filters=""
+        seed=0
+        encrypt_pck=false
+        encrypt_directory=false
+        script_export_mode=2
+
+        [preset.0.options]
+        application/targeted_device_family=2
+        application/min_ios_version="14.0"
+        application/app_store_team_id="123"
+        application/bundle_identifier="com.poingstudios.admob"
+        plugins_plist/GADApplicationIdentifier="ca-app-pub-3940256099942544~1458002511"
+        plugins/AdMob=true
+        EOF
+
+    - name: Import Project Resources
+      working-directory: platforms/godot_editor
+      run: |
+        timeout 120 /Applications/Godot.app/Contents/MacOS/Godot --headless --import --quit || true
+
+    - name: Export Godot Sample Project
+      working-directory: platforms/godot_editor
+      run: |
+        mkdir -p exports/ios
+        /Applications/Godot.app/Contents/MacOS/Godot --headless --export-debug "iOS" exports/ios/AdMobSample.xcodeproj || true
+        test -d exports/ios/AdMobSample.xcodeproj || { echo "::error::Xcode project was not generated"; exit 1; }
+
+    - name: Patch Xcode Project for SPM
+      run: |
+        cat << 'EOF' > patch_pbxproj.py
+        import sys
+        import os
+        def patch_pbxproj(path):
+            with open(path, "r") as f: content = f.read()
+            if "AD0000000000000000000001" in content: return
+            local_ref_id, product_dep_id, build_file_id = "AD0000000000000000000001", "AD0000000000000000000002", "AD0000000000000000000003"
+            if "/* Begin XCLocalSwiftPackageReference section */" not in content:
+                content = content.replace("/* End PBXGroup section */", "/* End PBXGroup section */\n\n/* Begin XCLocalSwiftPackageReference section */\n/* End XCLocalSwiftPackageReference section */")
+            if "/* Begin XCSwiftPackageProductDependency section */" not in content:
+                content = content.replace("/* End XCLocalSwiftPackageReference section */", "/* End XCLocalSwiftPackageReference section */\n\n/* Begin XCSwiftPackageProductDependency section */\n/* End XCSwiftPackageProductDependency section */")
+            content = content.replace("/* End XCLocalSwiftPackageReference section */", f'\t\t{local_ref_id} /* XCLocalSwiftPackageReference "." */ = {{isa = XCLocalSwiftPackageReference; relativePath = "."; }};\n' + "/* End XCLocalSwiftPackageReference section */")
+            content = content.replace("/* End XCSwiftPackageProductDependency section */", f'\t\t{product_dep_id} /* PoingGodotAdMobDeps */ = {{isa = XCSwiftPackageProductDependency; package = {local_ref_id} /* XCLocalSwiftPackageReference "." */; productName = "PoingGodotAdMobDeps"; }};\n' + "/* End XCSwiftPackageProductDependency section */")
+            content = content.replace("/* Begin PBXBuildFile section */", "/* Begin PBXBuildFile section */\n" + f"\t\t{build_file_id} /* PoingGodotAdMobDeps in Frameworks */ = {{isa = PBXBuildFile; productRef = {product_dep_id} /* PoingGodotAdMobDeps */; }};\n")
+            content = content.replace("productRefGroup =", f"packageReferences = (\n\t\t\t\t{local_ref_id} /* XCLocalSwiftPackageReference \".\" */,\n\t\t\t);\n\t\t\tproductRefGroup =")
+            content = content.replace("buildRules = (", f"packageProductDependencies = (\n\t\t\t\t{product_dep_id} /* PoingGodotAdMobDeps */,\n\t\t\t);\n\t\t\tbuildRules = (")
+            fw_start = content.find("isa = PBXFrameworksBuildPhase;")
+            if fw_start != -1:
+                files_start = content.find("files = (", fw_start)
+                if files_start != -1: content = content[:files_start + 9] + f"\n\t\t\t\t{build_file_id} /* PoingGodotAdMobDeps in Frameworks */," + content[files_start+9:]
+            with open(path, "w") as f: f.write(content)
+        if __name__ == "__main__": patch_pbxproj(sys.argv[1])
+        EOF
+        python3 patch_pbxproj.py platforms/godot_editor/exports/ios/AdMobSample.xcodeproj/project.pbxproj
+
+    - name: Build and Package Test Simulator App
+      working-directory: platforms/godot_editor/exports/ios
+      run: |
+        xcodebuild build \
+          -project AdMobSample.xcodeproj \
+          -scheme AdMobSample \
+          -configuration Debug \
+          -sdk iphonesimulator \
+          -derivedDataPath build_output \
+          ARCHS=x86_64 \
+          ONLY_ACTIVE_ARCH=NO \
+          EXCLUDED_ARCHS=arm64 \
+          CODE_SIGNING_ALLOWED=NO \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGN_IDENTITY="" \
+          AD_HOC_CODE_SIGNING_ALLOWED=YES
+        
+        APP_PATH=$(find build_output/Build/Products/Debug-iphonesimulator -name "*.app" -type d | head -n 1)
+        
+        if [ -z "$APP_PATH" ]; then
+          echo "::error::Could not find .app file in build_output. Build might have failed."
+          exit 1
+        fi
+        
+        APP_NAME=$(basename "$APP_PATH")
+        cp -R "$APP_PATH" ./
+        zip -qr "AdMobAddon-iOS-Simulator-GDScript-v${{ needs.detect-latest.outputs.godot_version }}.zip" "$APP_NAME"
+        rm -rf "$APP_NAME"
+
+    - name: Upload Simulator App artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: AdMobAddon-iOS-Simulator-GDScript-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/godot_editor/exports/ios/*.zip
+        retention-days: 14
+
+  build-ipa-csharp:
+    name: "Build: Test Project (iOS IPA C#)"
+    needs: [changes, detect-latest, build-ios]
+    if: needs.changes.outputs.code == 'true'
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Download Godot (.NET)
+      run: |
+        CV="${{ needs.detect-latest.outputs.godot_version }}"
+        if [[ "$CV" =~ (beta|rc|dev) ]]; then
+          URL="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_mono_macos.universal.zip"
+        else
+          URL="https://github.com/godotengine/godot/releases/download/${CV}-stable/Godot_v${CV}-stable_mono_macos.universal.zip"
+        fi
+        curl -LO "$URL"
+        unzip -q *.zip
+        rm -rf /Applications/Godot.app
+        mv Godot_mono.app /Applications/Godot.app
+
+    - name: Download Export Templates
+      run: |
+        CV="${{ needs.detect-latest.outputs.godot_version }}"
+        if [[ "$CV" =~ (beta|rc|dev) ]]; then
+          URL="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_mono_export_templates.tpz"
+        else
+          URL="https://github.com/godotengine/godot/releases/download/${CV}-stable/Godot_v${CV}-stable_mono_export_templates.tpz"
+        fi
+        curl -LO "$URL"
+        mkdir -p ~/Library/Application\ Support/Godot/export_templates/${CV}.stable.mono
+        unzip -q *.tpz
+        mv templates/* ~/Library/Application\ Support/Godot/export_templates/${CV}.stable.mono/
+
+    - name: Download iOS Plugin Binaries
+      uses: actions/download-artifact@v4
+      with:
+        name: poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/ios/bin/release
+
+    - name: Extract and Prepare Plugin
+      working-directory: platforms/godot_editor
+      run: |
+        mkdir -p ios/plugins
+        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d ios/plugins/
+
+    - name: Generate Export Presets
+      working-directory: platforms/godot_editor
+      run: |
+        cat > export_presets.cfg <<'EOF'
+        [preset.0]
+        name="iOS"
+        platform="iOS"
+        runnable=true
+        dedicated_server=false
+        custom_features=""
+        export_filter="all_resources"
+        include_filter=""
+        exclude_filter=""
+        export_path=""
+        encryption_include_filters=""
+        encryption_exclude_filters=""
+        seed=0
+        encrypt_pck=false
+        encrypt_directory=false
+        script_export_mode=2
+
+        [preset.0.options]
+        application/targeted_device_family=2
+        application/min_ios_version="14.0"
+        application/app_store_team_id="123"
+        application/bundle_identifier="com.poingstudios.admob"
+        plugins_plist/GADApplicationIdentifier="ca-app-pub-3940256099942544~1458002511"
+        plugins/AdMob=true
+        EOF
+
+    - name: Import Project Resources
+      working-directory: platforms/godot_editor
+      run: |
+        sed -i '' 's|run/main_scene="uid://0esyp38ds6yg"|run/main_scene="res://addons/admob/csharp/sample/MainCSharpExample.tscn"|' project.godot
+        timeout 120 /Applications/Godot.app/Contents/MacOS/Godot --headless --import --quit || true
+
+    - name: Build C# Solution
+      working-directory: platforms/godot_editor
+      run: dotnet build
+
+    - name: Export Godot Sample Project
+      working-directory: platforms/godot_editor
+      run: |
+        mkdir -p exports/ios
+        /Applications/Godot.app/Contents/MacOS/Godot --headless --export-debug "iOS" exports/ios/AdMobSample.xcodeproj || true
+        test -d exports/ios/AdMobSample.xcodeproj || { echo "::error::Xcode project was not generated"; exit 1; }
+
+    - name: Patch Xcode Project for SPM
+      run: |
+        cat << 'EOF' > patch_pbxproj.py
+        import sys
+        import os
+        def patch_pbxproj(path):
+            with open(path, "r") as f: content = f.read()
+            if "AD0000000000000000000001" in content: return
+            local_ref_id, product_dep_id, build_file_id = "AD0000000000000000000001", "AD0000000000000000000002", "AD0000000000000000000003"
+            if "/* Begin XCLocalSwiftPackageReference section */" not in content:
+                content = content.replace("/* End PBXGroup section */", "/* End PBXGroup section */\n\n/* Begin XCLocalSwiftPackageReference section */\n/* End XCLocalSwiftPackageReference section */")
+            if "/* Begin XCSwiftPackageProductDependency section */" not in content:
+                content = content.replace("/* End XCLocalSwiftPackageReference section */", "/* End XCLocalSwiftPackageReference section */\n\n/* Begin XCSwiftPackageProductDependency section */\n/* End XCSwiftPackageProductDependency section */")
+            content = content.replace("/* End XCLocalSwiftPackageReference section */", f'\t\t{local_ref_id} /* XCLocalSwiftPackageReference "." */ = {{isa = XCLocalSwiftPackageReference; relativePath = "."; }};\n' + "/* End XCLocalSwiftPackageReference section */")
+            content = content.replace("/* End XCSwiftPackageProductDependency section */", f'\t\t{product_dep_id} /* PoingGodotAdMobDeps */ = {{isa = XCSwiftPackageProductDependency; package = {local_ref_id} /* XCLocalSwiftPackageReference "." */; productName = "PoingGodotAdMobDeps"; }};\n' + "/* End XCSwiftPackageProductDependency section */")
+            content = content.replace("/* Begin PBXBuildFile section */", "/* Begin PBXBuildFile section */\n" + f"\t\t{build_file_id} /* PoingGodotAdMobDeps in Frameworks */ = {{isa = PBXBuildFile; productRef = {product_dep_id} /* PoingGodotAdMobDeps */; }};\n")
+            content = content.replace("productRefGroup =", f"packageReferences = (\n\t\t\t\t{local_ref_id} /* XCLocalSwiftPackageReference \".\" */,\n\t\t\t);\n\t\t\tproductRefGroup =")
+            content = content.replace("buildRules = (", f"packageProductDependencies = (\n\t\t\t\t{product_dep_id} /* PoingGodotAdMobDeps */,\n\t\t\t);\n\t\t\tbuildRules = (")
+            fw_start = content.find("isa = PBXFrameworksBuildPhase;")
+            if fw_start != -1:
+                files_start = content.find("files = (", fw_start)
+                if files_start != -1: content = content[:files_start + 9] + f"\n\t\t\t\t{build_file_id} /* PoingGodotAdMobDeps in Frameworks */," + content[files_start+9:]
+            with open(path, "w") as f: f.write(content)
+        if __name__ == "__main__": patch_pbxproj(sys.argv[1])
+        EOF
+        python3 patch_pbxproj.py platforms/godot_editor/exports/ios/AdMobSample.xcodeproj/project.pbxproj
+
+    - name: Build and Package Test Simulator App
+      working-directory: platforms/godot_editor/exports/ios
+      run: |
+        xcodebuild build \
+          -project AdMobSample.xcodeproj \
+          -scheme AdMobSample \
+          -configuration Debug \
+          -sdk iphonesimulator \
+          -derivedDataPath build_output \
+          ARCHS=x86_64 \
+          ONLY_ACTIVE_ARCH=NO \
+          EXCLUDED_ARCHS=arm64 \
+          CODE_SIGNING_ALLOWED=NO \
+          CODE_SIGNING_REQUIRED=NO \
+          CODE_SIGN_IDENTITY="" \
+          AD_HOC_CODE_SIGNING_ALLOWED=YES
+        
+        APP_PATH=$(find build_output/Build/Products/Debug-iphonesimulator -name "*.app" -type d | head -n 1)
+        
+        if [ -z "$APP_PATH" ]; then
+          echo "::error::Could not find .app file in build_output. Build might have failed."
+          exit 1
+        fi
+        
+        APP_NAME=$(basename "$APP_PATH")
+        cp -R "$APP_PATH" ./
+        zip -qr "AdMobAddon-iOS-Simulator-CSharp-v${{ needs.detect-latest.outputs.godot_version }}.zip" "$APP_NAME"
+        rm -rf "$APP_NAME"
+
+    - name: Upload Simulator App artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: AdMobAddon-iOS-Simulator-CSharp-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/godot_editor/exports/ios/*.zip
         retention-days: 14
 
   # FINAL STATUS JOB: This is what you should set as mandatory in GitHub
   pr-validation-status:
     name: "PR Validation Status"
-    needs: [changes, build-apk, build-apk-csharp, build-ios]
+    needs: [changes, build-apk, build-apk-csharp, build-ios, build-ipa, build-ipa-csharp]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -463,7 +775,7 @@ jobs:
         run: |
           # If code changes occurred, we MUST have successful builds
           if [[ "${{ needs.changes.outputs.code }}" == "true" ]]; then
-            if [[ "${{ needs.build-apk.result }}" == "success" && "${{ needs.build-apk-csharp.result }}" == "success" && "${{ needs.build-ios.result }}" == "success" ]]; then
+            if [[ "${{ needs.build-apk.result }}" == "success" && "${{ needs.build-apk-csharp.result }}" == "success" && "${{ needs.build-ios.result }}" == "success" && "${{ needs.build-ipa.result }}" == "success" && "${{ needs.build-ipa-csharp.result }}" == "success" ]]; then
               echo "All code builds passed."
               exit 0
             else
