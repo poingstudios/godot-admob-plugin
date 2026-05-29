@@ -32,14 +32,14 @@ This file is the authoritative source of truth for ALL AI agents (Gemini, Claude
 
 ## 🔄 Specialized Protocols (Skills)
 When performing these specific tasks, you **MUST** read and follow the specialized guides:
-- **Cross-Platform Sync:** [.github/ai/skills/sync/SKILL.md](.github/ai/skills/sync/SKILL.md)
-- **API Parity Check:** [.github/ai/skills/parity-checker/SKILL.md](.github/ai/skills/parity-checker/SKILL.md)
-- **Release Management:** [.github/ai/skills/release-manager/SKILL.md](.github/ai/skills/release-manager/SKILL.md)
-- **Documentation Sync:** [.github/ai/skills/doc-master/SKILL.md](.github/ai/skills/doc-master/SKILL.md)
+- **Cross-Platform Sync:** [.agents/skills/sync/SKILL.md](.agents/skills/sync/SKILL.md)
+- **API Parity Check:** [.agents/skills/parity-checker/SKILL.md](.agents/skills/parity-checker/SKILL.md)
+- **Release Management:** [.agents/skills/release-manager/SKILL.md](.agents/skills/release-manager/SKILL.md)
+- **Documentation Sync:** [.agents/skills/doc-master/SKILL.md](.agents/skills/doc-master/SKILL.md)
 
 ## 🚫 Constraints & Security
 - **Security:** Never log/commit API Keys or `.env` files.
-- **Claude:** Exclusion is managed via `permissions.deny` in `.claude/settings.json`.
+- **All Agents:** Permissions and context are managed via `.agents/settings.json`.
 - **Gemini:** Respect `.geminiignore` patterns.
 - **Workflow:** Reproduce bugs with a script before implementing a fix. Never stage/commit unless asked.
 

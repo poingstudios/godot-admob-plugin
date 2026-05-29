@@ -16,7 +16,10 @@
       "Read(./**/*.uid)",
       "Read(./platforms/godot_editor/addons/admob/android/bin/**)",
       "Read(./platforms/ios/.build/**)",
-      "Read(./.gemini/**)"
+      "Read(./.agents/**)"
     ]
+  },
+  "context": {
+    "fileName": ["AGENTS.md", "CONTEXT.md", "GEMINI.md"]
   }
 }
