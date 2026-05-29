@@ -495,12 +495,8 @@ jobs:
     - name: Extract and Prepare Plugin
       working-directory: platforms/godot_editor
       run: |
-        mkdir -p tmp_extract
-        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d tmp_extract/
-        
-        mkdir -p addons/admob/bin/ios
-        cp -R tmp_extract/poing-godot-admob/bin/*.xcframework addons/admob/bin/ios/
-        cp tmp_extract/*.gdip addons/admob/bin/ios/
+        mkdir -p ios/plugins
+        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d ios/plugins/
 
     - name: Generate Export Presets
       working-directory: platforms/godot_editor
@@ -529,6 +525,7 @@ jobs:
         application/app_store_team_id="123"
         application/bundle_identifier="com.poingstudios.admob"
         plugins_plist/GADApplicationIdentifier="ca-app-pub-3940256099942544~1458002511"
+        plugins/AdMob=true
         EOF
 
     - name: Import Project Resources
@@ -651,12 +648,8 @@ jobs:
     - name: Extract and Prepare Plugin
       working-directory: platforms/godot_editor
       run: |
-        mkdir -p tmp_extract
-        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d tmp_extract/
-        
-        mkdir -p addons/admob/bin/ios
-        cp -R tmp_extract/poing-godot-admob/bin/*.xcframework addons/admob/bin/ios/
-        cp tmp_extract/*.gdip addons/admob/bin/ios/
+        mkdir -p ios/plugins
+        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d ios/plugins/
 
     - name: Generate Export Presets
       working-directory: platforms/godot_editor
@@ -685,6 +678,7 @@ jobs:
         application/app_store_team_id="123"
         application/bundle_identifier="com.poingstudios.admob"
         plugins_plist/GADApplicationIdentifier="ca-app-pub-3940256099942544~1458002511"
+        plugins/AdMob=true
         EOF
 
     - name: Import Project Resources
