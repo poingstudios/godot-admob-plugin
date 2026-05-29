@@ -473,6 +473,19 @@ jobs:
         rm -rf /Applications/Godot.app
         mv Godot.app /Applications/Godot.app
 
+    - name: Download Export Templates
+      run: |
+        CV="${{ needs.detect-latest.outputs.godot_version }}"
+        if [[ "$CV" =~ (beta|rc|dev) ]]; then
+          URL="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_export_templates.tpz"
+        else
+          URL="https://github.com/godotengine/godot/releases/download/${CV}-stable/Godot_v${CV}-stable_export_templates.tpz"
+        fi
+        curl -LO "$URL"
+        mkdir -p ~/Library/Application\ Support/Godot/export_templates/${CV}.stable
+        unzip -q *.tpz
+        mv templates/* ~/Library/Application\ Support/Godot/export_templates/${CV}.stable/
+
     - name: Download iOS Plugin Binaries
       uses: actions/download-artifact@v4
       with:
@@ -488,6 +501,32 @@ jobs:
         mkdir -p addons/admob/bin/ios
         cp -R tmp_extract/poing-godot-admob/bin/*.xcframework addons/admob/bin/ios/
         cp tmp_extract/*.gdip addons/admob/bin/ios/
+
+    - name: Generate Export Presets
+      working-directory: platforms/godot_editor
+      run: |
+        cat > export_presets.cfg <<'EOF'
+        [preset.0]
+        name="iOS"
+        platform="iOS"
+        runnable=true
+        dedicated_server=false
+        custom_features=""
+        export_filter="all_resources"
+        include_filter=""
+        exclude_filter=""
+        export_path=""
+        encryption_include_filters=""
+        encryption_exclude_filters=""
+        seed=0
+        encrypt_pck=false
+        encrypt_directory=false
+        script_export_mode=2
+
+        [preset.0.options]
+        application/targeted_device_family=2
+        application/min_ios_version="14.0"
+        EOF
 
     - name: Import Project Resources
       working-directory: platforms/godot_editor
@@ -586,6 +625,19 @@ jobs:
         find . -maxdepth 2 -name "Godot.app" -exec mv {} /Applications/Godot.app \;
         find . -maxdepth 2 -name "GodotSharp" -type d -exec mv {} /Applications/GodotSharp \;
 
+    - name: Download Export Templates
+      run: |
+        CV="${{ needs.detect-latest.outputs.godot_version }}"
+        if [[ "$CV" =~ (beta|rc|dev) ]]; then
+          URL="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_mono_export_templates.tpz"
+        else
+          URL="https://github.com/godotengine/godot/releases/download/${CV}-stable/Godot_v${CV}-stable_mono_export_templates.tpz"
+        fi
+        curl -LO "$URL"
+        mkdir -p ~/Library/Application\ Support/Godot/export_templates/${CV}.stable.mono
+        unzip -q *.tpz
+        mv templates/* ~/Library/Application\ Support/Godot/export_templates/${CV}.stable.mono/
+
     - name: Download iOS Plugin Binaries
       uses: actions/download-artifact@v4
       with:
@@ -601,6 +653,32 @@ jobs:
         mkdir -p addons/admob/bin/ios
         cp -R tmp_extract/poing-godot-admob/bin/*.xcframework addons/admob/bin/ios/
         cp tmp_extract/*.gdip addons/admob/bin/ios/
+
+    - name: Generate Export Presets
+      working-directory: platforms/godot_editor
+      run: |
+        cat > export_presets.cfg <<'EOF'
+        [preset.0]
+        name="iOS"
+        platform="iOS"
+        runnable=true
+        dedicated_server=false
+        custom_features=""
+        export_filter="all_resources"
+        include_filter=""
+        exclude_filter=""
+        export_path=""
+        encryption_include_filters=""
+        encryption_exclude_filters=""
+        seed=0
+        encrypt_pck=false
+        encrypt_directory=false
+        script_export_mode=2
+
+        [preset.0.options]
+        application/targeted_device_family=2
+        application/min_ios_version="14.0"
+        EOF
 
     - name: Import Project Resources
       working-directory: platforms/godot_editor
