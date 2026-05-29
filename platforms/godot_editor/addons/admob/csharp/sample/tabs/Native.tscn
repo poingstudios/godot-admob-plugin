@@ -272,6 +272,41 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Update"
 
+[node name="SizeCard" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"SectionCard"
+
+[node name="VBox" type="VBoxContainer" parent="SizeCard"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="SizeCard/VBox"]
+layout_mode = 2
+text = "AD SIZE"
+horizontal_alignment = 1
+
+[node name="SizeOption" type="OptionButton" parent="SizeCard/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 8
+selected = 0
+popup/item_0/text = "Anchored Adaptive"
+popup/item_0/id = 0
+popup/item_1/text = "BANNER (320x50)"
+popup/item_1/id = 1
+popup/item_2/text = "FULL_BANNER (468x60)"
+popup/item_2/id = 2
+popup/item_3/text = "LARGE_BANNER (320x100)"
+popup/item_3/id = 3
+popup/item_4/text = "LEADERBOARD (728x90)"
+popup/item_4/id = 4
+popup/item_5/text = "MEDIUM_RECTANGLE (300x250)"
+popup/item_5/id = 5
+popup/item_6/text = "WIDE_SKYSCRAPER (160x600)"
+popup/item_6/id = 6
+popup/item_7/text = "SMART_BANNER"
+popup/item_7/id = 7
+
 [node name="PositionCard" type="PanelContainer" parent="."]
 layout_mode = 2
 theme_type_variation = &"SectionCard"

@@ -47,6 +47,7 @@ public partial class Banner : BaseTab
 
 	private LineEdit _xValue;
 	private LineEdit _yValue;
+	private OptionButton _sizeOption;
 
 	public override void _Ready()
 	{
@@ -58,6 +59,7 @@ public partial class Banner : BaseTab
 		_hideBtn = GetNode<Button>("%BannerActions/HideBanner");
 		_getSizeBtn = GetNode<Button>("%BannerActions/GetSize");
 		_collapsibleToggle = GetNode<CheckButton>("%Collapsible");
+		_sizeOption = GetNode<OptionButton>("%SizeOption");
 
 		_loadBtn.Pressed += OnLoadPressed;
 		_loadBackgroundBtn.Pressed += OnLoadBackgroundPressed;
@@ -132,14 +134,31 @@ public partial class Banner : BaseTab
 		return OS.GetName() == "iOS" ? AdUnitIdIos : AdUnitIdAndroid;
 	}
 
+	private AdSize GetSelectedAdSize()
+	{
+		switch (_sizeOption.Selected)
+		{
+			case 0: return AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(AdSize.FullWidth);
+			case 1: return AdSize.Banner;
+			case 2: return AdSize.FullBanner;
+			case 3: return AdSize.LargeBanner;
+			case 4: return AdSize.Leaderboard;
+			case 5: return AdSize.MediumRectangle;
+			case 6: return AdSize.WideSkyscraper;
+			case 7: return AdSize.SmartBanner;
+			default: return AdSize.Banner;
+		}
+	}
+
 	private void LoadBanner(bool hideImmediately)
 	{
 		DestroyAd();
 		UpdateUI(false);
 		bool isCollapsibleRequest = _collapsibleToggle.ButtonPressed;
-		Log($"Loading adaptive banner{(hideImmediately ? " in background" : string.Empty)}{(isCollapsibleRequest ? " (collapsible)" : string.Empty)}...");
+		AdSize size = GetSelectedAdSize();
 
-		var size = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(AdSize.FullWidth);
+		Log($"Loading banner ({_sizeOption.GetItemText(_sizeOption.Selected)}){(hideImmediately ? " in background" : string.Empty)}{(isCollapsibleRequest ? " (collapsible)" : string.Empty)}...");
+
 		_adView = new AdView(GetAdUnitId(isCollapsibleRequest), size, _adPosition);
 		_isHidden = hideImmediately;
 

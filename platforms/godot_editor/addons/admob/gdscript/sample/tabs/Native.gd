@@ -36,6 +36,7 @@ var _is_hidden := false
 @onready var _get_size_button: Button = %GetSize
 @onready var _x_value: LineEdit = %XValue
 @onready var _y_value: LineEdit = %YValue
+@onready var _size_option: OptionButton = %SizeOption
 
 @onready var _template_type: OptionButton = %TemplateType
 @onready var _main_bg_button: Button = %MainBGButton
@@ -154,12 +155,24 @@ func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
 	
 	style.call_to_action_text = cta_style
 	
-	_native_overlay_ad.render_template(style, _ad_position)
+	_native_overlay_ad.render_template(style, _ad_position, _get_selected_ad_size())
 	
 	if _is_hidden:
 		_native_overlay_ad.hide()
 		
 	_update_ui_state(true)
+
+func _get_selected_ad_size() -> AdSize:
+	match _size_option.selected:
+		0: return AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
+		1: return AdSize.BANNER
+		2: return AdSize.FULL_BANNER
+		3: return AdSize.LARGE_BANNER
+		4: return AdSize.LEADERBOARD
+		5: return AdSize.MEDIUM_RECTANGLE
+		6: return AdSize.WIDE_SKYSCRAPER
+		7: return AdSize.SMART_BANNER
+	return null
 
 func _on_load_native_pressed() -> void:
 	_load_native(false)

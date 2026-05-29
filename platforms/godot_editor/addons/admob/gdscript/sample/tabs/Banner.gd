@@ -38,6 +38,7 @@ var _is_hidden := false
 @onready var _collapsible_toggle: CheckButton = %Collapsible
 @onready var _x_value: LineEdit = %XValue
 @onready var _y_value: LineEdit = %YValue
+@onready var _size_option: OptionButton = %SizeOption
 
 func _ready() -> void:
 	super()
@@ -63,18 +64,32 @@ func _get_ad_unit_id(is_collapsible: bool = false) -> String:
 		return "ca-app-pub-3940256099942544/2014213617" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/8388050270"
 	return "ca-app-pub-3940256099942544/6300978111" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/2934735716"
 
+func _get_selected_ad_size() -> AdSize:
+	match _size_option.selected:
+		0: return AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
+		1: return AdSize.BANNER
+		2: return AdSize.FULL_BANNER
+		3: return AdSize.LARGE_BANNER
+		4: return AdSize.LEADERBOARD
+		5: return AdSize.MEDIUM_RECTANGLE
+		6: return AdSize.WIDE_SKYSCRAPER
+		7: return AdSize.SMART_BANNER
+	return AdSize.BANNER
+
 func _load_banner(hide_immediately: bool = false) -> void:
 	if _ad_view:
 		_ad_view.destroy()
 	
 	_update_ui_state(false)
 	var is_collapsible_request := _collapsible_toggle.button_pressed
-	_log("Loading adaptive banner%s%s..." % [
+	var ad_size := _get_selected_ad_size()
+	
+	_log("Loading banner (%s)%s%s..." % [
+		_size_option.get_item_text(_size_option.selected),
 		" in background" if hide_immediately else "",
 		" (collapsible)" if is_collapsible_request else ""
 	])
 	
-	var ad_size := AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
 	_ad_view = AdView.new(_get_ad_unit_id(is_collapsible_request), ad_size, _ad_position)
 	_ad_view.ad_listener = _ad_listener
 	_ad_view.on_ad_paid = func(ad_value: AdValue) -> void:

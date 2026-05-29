@@ -19,6 +19,7 @@ namespace PoingStudios.AdMob.Sample
         private Button _getSizeButton;
         private LineEdit _xValue;
         private LineEdit _yValue;
+        private OptionButton _sizeOption;
 
         private OptionButton _templateType;
         private Button _mainBgButton;
@@ -41,6 +42,7 @@ namespace PoingStudios.AdMob.Sample
             _getSizeButton = GetNode<Button>("%GetSize");
             _xValue = GetNode<LineEdit>("%XValue");
             _yValue = GetNode<LineEdit>("%YValue");
+            _sizeOption = GetNode<OptionButton>("%SizeOption");
 
             _templateType = GetNode<OptionButton>("%TemplateType");
             _mainBgButton = GetNode<Button>("%MainBGButton");
@@ -178,7 +180,7 @@ namespace PoingStudios.AdMob.Sample
                 }
             };
 
-            _nativeOverlayAd.RenderTemplate(style, _adPosition);
+            _nativeOverlayAd.RenderTemplate(style, _adPosition, GetSelectedAdSize());
 
             if (_isHidden)
             {
@@ -186,6 +188,22 @@ namespace PoingStudios.AdMob.Sample
             }
 
             UpdateUiState(true);
+        }
+
+        private AdSize GetSelectedAdSize()
+        {
+            switch (_sizeOption.Selected)
+            {
+                case 0: return AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(AdSize.FullWidth);
+                case 1: return AdSize.Banner;
+                case 2: return AdSize.FullBanner;
+                case 3: return AdSize.LargeBanner;
+                case 4: return AdSize.Leaderboard;
+                case 5: return AdSize.MediumRectangle;
+                case 6: return AdSize.WideSkyscraper;
+                case 7: return AdSize.SmartBanner;
+                default: return null;
+            }
         }
 
         public void _on_load_native_pressed() => LoadNative(false);
