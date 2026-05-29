@@ -3,15 +3,27 @@
 This file is the authoritative source of truth for ALL AI agents (Gemini, Claude, Cursor). 
 **Read this first** to minimize token usage and ensure architectural consistency.
 
-## 🏗️ Repository Architecture
-- **Primary Branch:** `master`
-- **GDScript (Core):** `platforms/godot_editor/addons/admob/`
-  - `admob.gd`: Main entry point.
-  - `internal/`: Logic. **Rule: No `class_name` here, use `preload`.**
-- **C# Bridge:** `platforms/godot_editor/addons/admob/csharp/`
-  - Mirrors GDScript API. Managed by `CSharpService.gd` (auto-hides via `.gdignore`).
-- **Native Bridges:** Android (Kotlin/JNI) in `platforms/android/`, iOS (Swift/Obj-C) in `platforms/ios/`.
-- **Reference Source Code:** `tmp/`. Contains reference implementations for logic and architecture.
+## 🏗️ Repository Overview & Architecture
+
+### What is this repository?
+This repository is a Godot plugin that integrates the Google AdMob SDK into Godot Engine projects. It supports both GDScript and C#, and uses native plugins (Android and iOS) to interact with the official Google Mobile Ads SDKs.
+
+### Folder Structure
+- **`platforms/godot_editor/`**: The core Godot plugin and sample project.
+  - `addons/admob/`: The actual plugin distributed to users.
+    - `admob.gd`: Main entry point and public API.
+    - `internal/`: Internal GDScript logic. **Rule: No `class_name` here, use `preload`.**
+    - `csharp/`: C# wrappers and bridge, mirroring the GDScript API. Managed by `CSharpService.gd` (auto-hides via `.gdignore`).
+- **`platforms/android/`**: Android native plugin source code (Kotlin/JNI).
+- **`platforms/ios/`**: iOS native plugin source code (Swift/Obj-C).
+- **`docs/`**: Official documentation built with MkDocs.
+- **`scripts/`**: Automation scripts (e.g., building native plugins).
+- **`tmp/`**: Reference implementations and external source code.
+
+### Cross-Platform Communication
+1. **Godot ➡️ Native**: The Godot scripts (GDScript/C#) use Godot's `Engine.get_singleton()` to access native plugins registered by the Android or iOS code. Method calls to these singletons trigger the native Google Mobile Ads SDK functions.
+2. **Native ➡️ Godot**: The Android and iOS plugins emit signals back to Godot to communicate asynchronous events (e.g., ad loaded, ad failed to load, user rewarded). The Godot side connects to these signals and forwards them to the game developer's code.
+3. **C# ↔️ GDScript**: The C# API acts as a wrapper around the GDScript implementation or Engine singletons to guarantee 1:1 API parity.
 
 ## 📦 Current Environment
 - **Godot Version:** 4.6.1 (Current target for builds and testing).
