@@ -483,7 +483,7 @@ jobs:
       working-directory: platforms/godot_editor
       run: |
         mkdir -p tmp_extract
-        unzip -o ../ios/bin/release/poing-godot-admob-ios-plugin-v${{ needs.detect-latest.outputs.godot_version }}.zip -d tmp_extract/
+        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d tmp_extract/
         
         mkdir -p addons/admob/bin/ios
         cp -R tmp_extract/poing-godot-admob/bin/*.xcframework addons/admob/bin/ios/
@@ -595,7 +595,7 @@ jobs:
       working-directory: platforms/godot_editor
       run: |
         mkdir -p tmp_extract
-        unzip -o ../ios/bin/release/poing-godot-admob-ios-plugin-v${{ needs.detect-latest.outputs.godot_version }}.zip -d tmp_extract/
+        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d tmp_extract/
         
         mkdir -p addons/admob/bin/ios
         cp -R tmp_extract/poing-godot-admob/bin/*.xcframework addons/admob/bin/ios/
