@@ -44,12 +44,14 @@ jobs:
 
           const androidArtifact = artifacts.artifacts.find(a => a.name.startsWith('poing-godot-admob-android-'));
           const iosArtifact = artifacts.artifacts.find(a => a.name.startsWith('poing-godot-admob-ios-'));
-          const apkArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-') && !a.name.includes('CSharp'));
-          const csharpArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-CSharp-'));
+          const apkArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-') && !a.name.includes('CSharp') && !a.name.includes('iOS'));
+          const csharpArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-CSharp-') && !a.name.includes('iOS'));
+          const ipaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-iOS-'));
+          const csharpIpaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-CSharp-iOS-'));
 
           const getUrl = (artifact) => artifact ? `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}/artifacts/${artifact.id}` : `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}`;
 
-          const body = `✅ **PR Checks Passed!** (Commit: \`${commitSha}\`)\n\n⬇️ **Download Artifacts**\n- 📦 [Android Plugin (\`.aar\` / \`.zip\`)](${getUrl(androidArtifact)})\n- 🍎 [iOS Plugin (\`.xcframework\` / \`.zip\`)](${getUrl(iosArtifact)})\n- 📱 [Test Godot Project APK (GDScript)](${getUrl(apkArtifact)})\n- 🔷 [Test Godot Project APK (C#)](${getUrl(csharpArtifact)})`;
+          const body = `✅ **PR Checks Passed!** (Commit: \`${commitSha}\`)\n\n⬇️ **Download Artifacts**\n- 📦 [Android Plugin (\`.aar\` / \`.zip\`)](${getUrl(androidArtifact)})\n- 🍎 [iOS Plugin (\`.xcframework\` / \`.zip\`)](${getUrl(iosArtifact)})\n- 📱 [Test Godot Project APK (GDScript)](${getUrl(apkArtifact)})\n- 🔷 [Test Godot Project APK (C#)](${getUrl(csharpArtifact)})\n- 🍏 [Test Godot Project IPA (GDScript)](${getUrl(ipaArtifact)})\n- 🔷 [Test Godot Project IPA (C#)](${getUrl(csharpIpaArtifact)})`;
 
           const { data: comments } = await github.rest.issues.listComments({
             owner: context.repo.owner, repo: context.repo.repo, issue_number: prNumber,
