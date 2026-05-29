@@ -27,6 +27,18 @@ body:
     default: 0
   validations:
     required: true
+- type: dropdown
+  id: language
+  attributes:
+    label: Language
+    description: Are you using GDScript, C#, or both?
+    options:
+      - Both
+      - GDScript
+      - C#
+    default: 0
+  validations:
+    required: true
 - type: input
   attributes:
     label: System information
