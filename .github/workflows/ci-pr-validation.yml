@@ -576,6 +576,9 @@ jobs:
           -configuration Debug \
           -sdk iphonesimulator \
           -derivedDataPath build_output \
+          ARCHS=x86_64 \
+          ONLY_ACTIVE_ARCH=NO \
+          EXCLUDED_ARCHS=arm64 \
           CODE_SIGNING_ALLOWED=NO \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGN_IDENTITY="" \
@@ -734,6 +737,9 @@ jobs:
           -configuration Debug \
           -sdk iphonesimulator \
           -derivedDataPath build_output \
+          ARCHS=x86_64 \
+          ONLY_ACTIVE_ARCH=NO \
+          EXCLUDED_ARCHS=arm64 \
           CODE_SIGNING_ALLOWED=NO \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGN_IDENTITY="" \
