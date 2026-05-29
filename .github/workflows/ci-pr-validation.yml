@@ -327,16 +327,16 @@ jobs:
       uses: actions/cache@v4
       with:
         path: ~/.local/share/godot/export_templates
-        key: godot-templates-${{ needs.detect-latest.outputs.godot_version }}
+        key: godot-templates-mono-${{ needs.detect-latest.outputs.godot_version }}
 
     - name: Download Export Templates
       if: steps.cache-templates.outputs.cache-hit != 'true'
       run: |
         GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
-        wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz" -O templates.tpz
-        mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+        wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_mono_export_templates.tpz" -O templates.tpz
+        mkdir -p ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
         unzip -q templates.tpz
-        mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/
+        mv templates/* ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono/
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v3
@@ -436,7 +436,7 @@ jobs:
       run: |
         GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
         mkdir -p android/build
-        unzip ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable/android_source.zip -d android/build
+        unzip ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono/android_source.zip -d android/build
         echo "${GODOT_VERSION}.stable.mono" > android/.build_version
 
     - name: Export APK
