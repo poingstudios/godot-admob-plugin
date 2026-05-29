@@ -47,7 +47,7 @@ The **purpose** of this plugin is to always keep **up to date with Godot**, supp
 - Supports nearly all Ad Formats: **Banner**, **Interstitial**, **Rewarded**, **Rewarded Interstitial**. 📺
 - GDPR Compliance with UMP Support. ✉️
 - Targeting Capabilities. 🎯
-- Seamless integration with Mediation partners: **AdColony**, **Meta**, **Vungle**. 💰
+- Seamless integration with Mediation partners: **Meta**, **Vungle**. 💰
 - CI/CD for streamlined development and deployment. 🔄🚀
 - Features a dedicated [Godot Plugin](https://github.com/poingstudios/godot-admob-plugin), reducing the need for extensive coding. 🔌
 - There is also an [iOS plugin](https://github.com/poingstudios/godot-admob-ios) available, which has the same behavior. 🍎

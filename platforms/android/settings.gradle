@@ -16,6 +16,5 @@ dependencyResolutionManagement {
 rootProject.name = "admob"
 include ':src:core'
 include ':src:ads'
-include ':src:mediation:adcolony'
 include ':src:mediation:vungle'
 include ':src:mediation:meta'

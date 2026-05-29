@@ -60,12 +60,6 @@ func _on_initialization_complete(status: InitializationStatus) -> void:
 		FBAdSettings.set_advertiser_tracking_enabled(true)
 
 func _setup_mediation_adapters() -> void:
-	# AdColony setup example
-	var ad_colony_options := AdColonyAppOptions.new()
-	ad_colony_options.set_privacy_consent_string(AdColonyAppOptions.CCPA, "OPTED_OUT")
-	ad_colony_options.set_privacy_framework_required(AdColonyAppOptions.CCPA, false)
-	ad_colony_options.set_test_mode(false)
-	
 	# Vungle setup example
 	Vungle.update_ccpa_status(Vungle.Consent.OPTED_OUT)
 	Vungle.update_consent_status(Vungle.Consent.OPTED_IN, "consent_message")
