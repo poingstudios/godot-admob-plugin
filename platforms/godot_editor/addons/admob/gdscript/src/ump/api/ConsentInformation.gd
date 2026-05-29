@@ -32,6 +32,12 @@ enum ConsentStatus {
 	OBTAINED
 }
 
+enum PrivacyOptionsRequirementStatus {
+	UNKNOWN,
+	NOT_REQUIRED,
+	REQUIRED,
+}
+
 func get_consent_status() -> ConsentStatus:
 	if _plugin:
 		return _plugin.get_consent_status()
@@ -41,6 +47,11 @@ func get_is_consent_form_available() -> bool:
 	if _plugin:
 		return _plugin.get_is_consent_form_available()
 	return false
+
+func get_privacy_options_requirement_status() -> PrivacyOptionsRequirementStatus:
+	if _plugin:
+		return _plugin.get_privacy_options_requirement_status()
+	return PrivacyOptionsRequirementStatus.UNKNOWN
 
 var _on_consent_info_updated_success_callback
 var _on_consent_info_updated_failure_callback

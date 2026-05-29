@@ -36,6 +36,7 @@ class PoingGodotAdMobConsentInformation : public Object {
 public:
     int get_consent_status();
     bool get_is_consent_form_available();
+    int get_privacy_options_requirement_status();
     void update(Dictionary consentRequestParametersDictionary);
     void reset();
 
