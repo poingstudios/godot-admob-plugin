@@ -5,6 +5,9 @@ on:
     workflows: ['\[CI\] PR Validation']
     types: [completed]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   comment:
     name: Comment PR with results
