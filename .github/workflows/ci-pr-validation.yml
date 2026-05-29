@@ -623,8 +623,7 @@ jobs:
         curl -LO "$URL"
         unzip -q *.zip
         rm -rf /Applications/Godot.app
-        find . -maxdepth 2 -name "Godot.app" -exec mv {} /Applications/Godot.app \;
-        find . -maxdepth 2 -name "GodotSharp" -type d -exec mv {} /Applications/GodotSharp \;
+        mv Godot_mono.app /Applications/Godot.app
 
     - name: Download Export Templates
       run: |
