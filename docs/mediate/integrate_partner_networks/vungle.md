@@ -12,7 +12,7 @@ This document is based on:
 
 ## Supported integrations and ad formats
 
-The AdMob mediation adapter for AdColony has the following capabilities:
+The AdMob mediation adapter for Vungle has the following capabilities:
 
 | Integration |   |
 |-------------|---|

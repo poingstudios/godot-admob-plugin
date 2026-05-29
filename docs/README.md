@@ -75,14 +75,14 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 	        - **App ID** (contains `~`): Used for app registration and internal configuration.
 	        - **Ad Unit ID** (contains `/`): Used to load specific ad formats in your code.
 	
-	1. If you have Mediation, set true the libraries at `res://addons/admob/android/config.gd`, such as: `adcolony`, `meta`, `vungle`, etc...
+	1. If you have Mediation, set true the libraries at `res://addons/admob/android/config.gd`, such as: `meta`, `vungle`, etc...
 	1. When exporting your project, select `Use Gradle Build`.
 	
 	    ![export](assets/android/export.png)
 
 === "iOS"
     
-    1. When exporting your project, update the `GADApplicationIdentifier` with your [AdMob App ID](https://support.google.com/admob/answer/7356431) and ensure that `Ad Mob` is enabled in the Plugins section of the Export dialog. If you have Mediation, also mark `Ad Mob Meta`, `Ad Mob AdColony`, etc...
+    1. When exporting your project, update the `GADApplicationIdentifier` with your [AdMob App ID](https://support.google.com/admob/answer/7356431) and ensure that `Ad Mob` is enabled in the Plugins section of the Export dialog. If you have Mediation, also mark `Ad Mob Meta`, etc...
     
         ![gadapplicationidentifier](assets/ios/gadapplicationidentifier.png)
     

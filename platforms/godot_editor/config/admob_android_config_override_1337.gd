@@ -27,7 +27,6 @@ func _init() -> void:
 	libraries = [
 		Library.new("ads", true),
 
-		Library.new("adcolony", false),
 		Library.new("meta", false),
 		Library.new("vungle", false)
 	]
