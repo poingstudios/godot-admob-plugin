@@ -61,7 +61,17 @@ bool PoingGodotAdMobConsentInformation::get_is_consent_form_available() {
 }
 
 int PoingGodotAdMobConsentInformation::get_privacy_options_requirement_status() {
-    return (int)[UMPConsentInformation.sharedInstance privacyOptionsRequirementStatus];
+    UMPPrivacyOptionsRequirementStatus status = [UMPConsentInformation.sharedInstance privacyOptionsRequirementStatus];
+    switch (status) {
+        case UMPPrivacyOptionsRequirementStatusUnknown:
+            return 0;
+        case UMPPrivacyOptionsRequirementStatusRequired:
+            return 2;
+        case UMPPrivacyOptionsRequirementStatusNotRequired:
+            return 1;
+        default:
+            return 0;
+    }
 }
 
 void PoingGodotAdMobConsentInformation::update(Dictionary consentRequestParametersDictionary) {
