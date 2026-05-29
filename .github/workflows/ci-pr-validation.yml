@@ -540,7 +540,8 @@ jobs:
       working-directory: platforms/godot_editor
       run: |
         mkdir -p exports/ios
-        /Applications/Godot.app/Contents/MacOS/Godot --headless --export-debug "iOS" exports/ios/AdMobSample.xcodeproj
+        /Applications/Godot.app/Contents/MacOS/Godot --headless --export-debug "iOS" exports/ios/AdMobSample.xcodeproj || true
+        test -d exports/ios/AdMobSample.xcodeproj || { echo "::error::Xcode project was not generated"; exit 1; }
 
     - name: Patch Xcode Project for SPM
       run: |
@@ -700,7 +701,8 @@ jobs:
       working-directory: platforms/godot_editor
       run: |
         mkdir -p exports/ios
-        /Applications/Godot.app/Contents/MacOS/Godot --headless --export-debug "iOS" exports/ios/AdMobSample.xcodeproj
+        /Applications/Godot.app/Contents/MacOS/Godot --headless --export-debug "iOS" exports/ios/AdMobSample.xcodeproj || true
+        test -d exports/ios/AdMobSample.xcodeproj || { echo "::error::Xcode project was not generated"; exit 1; }
 
     - name: Patch Xcode Project for SPM
       run: |
