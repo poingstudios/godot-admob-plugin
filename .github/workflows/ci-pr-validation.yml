@@ -495,9 +495,10 @@ jobs:
         timeout 120 /Applications/Godot.app/Contents/MacOS/Godot --headless --import --quit || true
 
     - name: Export Godot Sample Project
+      working-directory: platforms/godot_editor
       run: |
-        mkdir -p platforms/godot_editor/exports/ios
-        /Applications/Godot.app/Contents/MacOS/Godot --headless --path platforms/godot_editor --export-release "iOS" exports/ios/AdMobSample.xcodeproj
+        mkdir -p exports/ios
+        /Applications/Godot.app/Contents/MacOS/Godot --headless --export-release "iOS" exports/ios/AdMobSample.xcodeproj
 
     - name: Patch Xcode Project for SPM
       run: |
@@ -612,9 +613,10 @@ jobs:
       run: dotnet build
 
     - name: Export Godot Sample Project
+      working-directory: platforms/godot_editor
       run: |
-        mkdir -p platforms/godot_editor/exports/ios
-        /Applications/Godot.app/Contents/MacOS/Godot --headless --path platforms/godot_editor --export-release "iOS" exports/ios/AdMobSample.xcodeproj
+        mkdir -p exports/ios
+        /Applications/Godot.app/Contents/MacOS/Godot --headless --export-release "iOS" exports/ios/AdMobSample.xcodeproj
 
     - name: Patch Xcode Project for SPM
       run: |
