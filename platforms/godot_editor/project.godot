@@ -77,6 +77,7 @@ config/name="AdMobAddon"
 run/main_scene="uid://0esyp38ds6yg"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://addons/admob/assets/icon-1024.png"
+config/tags=PackedStringArray("admob", "mobile", "plugin", "sample")
 
 [display]
 
