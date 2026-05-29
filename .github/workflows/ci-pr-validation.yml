@@ -4,9 +4,6 @@ on:
   pull_request:
     types: [opened, synchronize]
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   # Job to detect if code changes occurred
   changes:
@@ -427,7 +424,7 @@ jobs:
       working-directory: platforms/godot_editor
       run: |
         # Set main scene to C# sample for this build
-        sed -i 's|run/main_scene="res://addons/admob/gdscript/sample/Main.tscn"|run/main_scene="res://addons/admob/csharp/sample/MainCSharpExample.tscn"|' project.godot
+        sed -i 's|run/main_scene="uid://0esyp38ds6yg"|run/main_scene="res://addons/admob/csharp/sample/MainCSharpExample.tscn"|' project.godot
         timeout 120 godot --headless --import --quit || true
 
     - name: Build C# Solution
@@ -570,36 +567,37 @@ jobs:
         EOF
         python3 patch_pbxproj.py platforms/godot_editor/exports/ios/AdMobSample.xcodeproj/project.pbxproj
 
-    - name: Build and Package Test IPA
+    - name: Build and Package Test Simulator App
       working-directory: platforms/godot_editor/exports/ios
       run: |
         xcodebuild build \
           -project AdMobSample.xcodeproj \
           -scheme AdMobSample \
           -configuration Debug \
-          -sdk iphoneos \
+          -sdk iphonesimulator \
           -derivedDataPath build_output \
           CODE_SIGNING_ALLOWED=NO \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGN_IDENTITY="" \
           AD_HOC_CODE_SIGNING_ALLOWED=YES
         
-        mkdir -p Payload
-        APP_PATH=$(find build_output/Build/Products/Debug-iphoneos -name "*.app" -type d | head -n 1)
+        APP_PATH=$(find build_output/Build/Products/Debug-iphonesimulator -name "*.app" -type d | head -n 1)
         
         if [ -z "$APP_PATH" ]; then
           echo "::error::Could not find .app file in build_output. Build might have failed."
           exit 1
         fi
         
-        cp -r "$APP_PATH" Payload/
-        zip -qr "AdMobAddon-iOS-GDScript-v${{ needs.detect-latest.outputs.godot_version }}.ipa" Payload/
+        APP_NAME=$(basename "$APP_PATH")
+        cp -R "$APP_PATH" ./
+        zip -qr "AdMobAddon-iOS-Simulator-GDScript-v${{ needs.detect-latest.outputs.godot_version }}.zip" "$APP_NAME"
+        rm -rf "$APP_NAME"
 
-    - name: Upload IPA artifact
+    - name: Upload Simulator App artifact
       uses: actions/upload-artifact@v4
       with:
-        name: AdMobAddon-iOS-GDScript-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
-        path: platforms/godot_editor/exports/ios/*.ipa
+        name: AdMobAddon-iOS-Simulator-GDScript-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/godot_editor/exports/ios/*.zip
         retention-days: 14
 
   build-ipa-csharp:
@@ -686,7 +684,7 @@ jobs:
     - name: Import Project Resources
       working-directory: platforms/godot_editor
       run: |
-        sed -i '' 's|run/main_scene="res://addons/admob/gdscript/sample/Main.tscn"|run/main_scene="res://addons/admob/csharp/sample/MainCSharpExample.tscn"|' project.godot
+        sed -i '' 's|run/main_scene="uid://0esyp38ds6yg"|run/main_scene="res://addons/admob/csharp/sample/MainCSharpExample.tscn"|' project.godot
         timeout 120 /Applications/Godot.app/Contents/MacOS/Godot --headless --import --quit || true
 
     - name: Build C# Solution
@@ -727,36 +725,37 @@ jobs:
         EOF
         python3 patch_pbxproj.py platforms/godot_editor/exports/ios/AdMobSample.xcodeproj/project.pbxproj
 
-    - name: Build and Package Test IPA
+    - name: Build and Package Test Simulator App
       working-directory: platforms/godot_editor/exports/ios
       run: |
         xcodebuild build \
           -project AdMobSample.xcodeproj \
           -scheme AdMobSample \
           -configuration Debug \
-          -sdk iphoneos \
+          -sdk iphonesimulator \
           -derivedDataPath build_output \
           CODE_SIGNING_ALLOWED=NO \
           CODE_SIGNING_REQUIRED=NO \
           CODE_SIGN_IDENTITY="" \
           AD_HOC_CODE_SIGNING_ALLOWED=YES
         
-        mkdir -p Payload
-        APP_PATH=$(find build_output/Build/Products/Debug-iphoneos -name "*.app" -type d | head -n 1)
+        APP_PATH=$(find build_output/Build/Products/Debug-iphonesimulator -name "*.app" -type d | head -n 1)
         
         if [ -z "$APP_PATH" ]; then
           echo "::error::Could not find .app file in build_output. Build might have failed."
           exit 1
         fi
         
-        cp -r "$APP_PATH" Payload/
-        zip -qr "AdMobAddon-iOS-CSharp-v${{ needs.detect-latest.outputs.godot_version }}.ipa" Payload/
+        APP_NAME=$(basename "$APP_PATH")
+        cp -R "$APP_PATH" ./
+        zip -qr "AdMobAddon-iOS-Simulator-CSharp-v${{ needs.detect-latest.outputs.godot_version }}.zip" "$APP_NAME"
+        rm -rf "$APP_NAME"
 
-    - name: Upload IPA artifact
+    - name: Upload Simulator App artifact
       uses: actions/upload-artifact@v4
       with:
-        name: AdMobAddon-iOS-CSharp-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
-        path: platforms/godot_editor/exports/ios/*.ipa
+        name: AdMobAddon-iOS-Simulator-CSharp-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/godot_editor/exports/ios/*.zip
         retention-days: 14
 
   # FINAL STATUS JOB: This is what you should set as mandatory in GitHub

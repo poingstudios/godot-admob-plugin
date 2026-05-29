@@ -4,10 +4,6 @@ on:
   workflow_run:
     workflows: ['\[CI\] PR Validation']
     types: [completed]
-
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   comment:
     name: Comment PR with results
@@ -49,12 +45,12 @@ jobs:
           const iosArtifact = artifacts.artifacts.find(a => a.name.startsWith('poing-godot-admob-ios-'));
           const apkArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-Android-GDScript-'));
           const csharpArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-Android-CSharp-'));
-          const ipaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-iOS-GDScript-'));
-          const csharpIpaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-iOS-CSharp-'));
+          const ipaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-iOS-Simulator-GDScript-'));
+          const csharpIpaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-iOS-Simulator-CSharp-'));
 
           const getUrl = (artifact) => artifact ? `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}/artifacts/${artifact.id}` : `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}`;
 
-          const body = `✅ **PR Checks Passed!** (Commit: \`${commitSha}\`)\n\n⬇️ **Download Artifacts**\n- 📦 [Android Plugin (\`.aar\` / \`.zip\`)](${getUrl(androidArtifact)})\n- 🍎 [iOS Plugin (\`.xcframework\` / \`.zip\`)](${getUrl(iosArtifact)})\n- 📱 [Test Godot Project APK (GDScript)](${getUrl(apkArtifact)})\n- 🔷 [Test Godot Project APK (C#)](${getUrl(csharpArtifact)})\n- 🍏 [Test Godot Project IPA (GDScript)](${getUrl(ipaArtifact)})\n- 🔷 [Test Godot Project IPA (C#)](${getUrl(csharpIpaArtifact)})`;
+          const body = `✅ **PR Checks Passed!** (Commit: \`${commitSha}\`)\n\n⬇️ **Download Artifacts**\n- 📦 [Android Plugin (\`.aar\` / \`.zip\`)](${getUrl(androidArtifact)})\n- 🍎 [iOS Plugin (\`.xcframework\` / \`.zip\`)](${getUrl(iosArtifact)})\n- 📱 [Test Godot Project APK (GDScript)](${getUrl(apkArtifact)})\n- 🔷 [Test Godot Project APK (C#)](${getUrl(csharpArtifact)})\n- 🍏 [Test Godot Project iOS Simulator App (GDScript)](${getUrl(ipaArtifact)})\n- 🔷 [Test Godot Project iOS Simulator App (C#)](${getUrl(csharpIpaArtifact)})`;
 
           const { data: comments } = await github.rest.issues.listComments({
             owner: context.repo.owner, repo: context.repo.repo, issue_number: prNumber,
