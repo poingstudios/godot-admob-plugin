@@ -45,7 +45,7 @@ func check_dependencies() -> void:
 		install()
 
 func install() -> void:
-	var file_name := _get_zip_file_name()
+	var file_name := get_zip_file_name()
 	var url := BASE_URL % [PluginVersion.current, file_name]
 	var destination := DOWNLOAD_DIR.path_join(file_name)
 	
@@ -55,7 +55,7 @@ func _on_download_completed(success: bool) -> void:
 	if not success:
 		return
 	
-	var file_name := _get_zip_file_name()
+	var file_name := get_zip_file_name()
 	var zip_path := DOWNLOAD_DIR.path_join(file_name)
 	
 	var extract_success := ZipService.extract_zip(zip_path, EXTRACT_PATH, false, ZipService.StripMode.NONE)
@@ -79,5 +79,5 @@ const VERSION := "%s"
 		file.store_string(content)
 		file.close()
 
-func _get_zip_file_name() -> String:
+static func get_zip_file_name() -> String:
 	return "poing-godot-admob-ios-" + PluginVersion.godot + ".zip"

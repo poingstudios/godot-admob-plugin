@@ -24,6 +24,7 @@ extends EditorExportPlugin
 
 const Library := preload("res://addons/admob/internal/exporters/android/library.gd")
 const Config := preload("res://addons/admob/android/config.gd")
+const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 
 func _get_plugins() -> Array[EditorExportPlugin]:
 	var plugins: Array[EditorExportPlugin]
@@ -37,6 +38,9 @@ func _get_plugins() -> Array[EditorExportPlugin]:
 
 	for lib in config.libraries:
 		if not lib.is_enabled:
+			continue
+		if not FileAccess.file_exists(lib.get_full_path()):
+			push_error("AdMob: Android library not found at " + lib.get_full_path())
 			continue
 		plugins.append(lib.get_plugin())
 	return plugins
