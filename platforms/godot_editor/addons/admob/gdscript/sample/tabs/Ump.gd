@@ -33,7 +33,7 @@ func _update_consent_info() -> void:
 	var debug_settings := ConsentDebugSettings.new()
 	
 	debug_settings.debug_geography = DebugGeography.Values.EEA
-	# Add test device IDs here if needed
+	debug_settings.test_device_hashed_ids.append("test_device_hashed_id")
 	request.consent_debug_settings = debug_settings
 	
 	UserMessagingPlatform.consent_information.update(
@@ -83,6 +83,17 @@ func _on_reset_consent_information_pressed() -> void:
 
 func _on_get_consent_status_pressed() -> void:
 	_log("Current Consent Status: " + ConsentInformation.ConsentStatus.keys()[UserMessagingPlatform.consent_information.get_consent_status()])
+	_log("Privacy Options Requirement Status: " + ConsentInformation.PrivacyOptionsRequirementStatus.keys()[UserMessagingPlatform.consent_information.get_privacy_options_requirement_status()])
+
+func _on_show_privacy_options_form_pressed() -> void:
+	_log("Showing privacy options form...")
+	UserMessagingPlatform.show_privacy_options_form(_on_privacy_options_form_dismissed)
+
+func _on_privacy_options_form_dismissed(error: FormError) -> void:
+	if error:
+		_log("Privacy options form dismissal error: " + error.message)
+	else:
+		_log("Privacy options form dismissed successfully")
 
 func _log(message: String) -> void:
 	if Registry.logger:

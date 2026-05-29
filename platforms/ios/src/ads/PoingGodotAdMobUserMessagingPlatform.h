@@ -40,6 +40,7 @@ class PoingGodotAdMobUserMessagingPlatform : public ObjectController<PoingGodotA
 public:
     void load_consent_form();
     void show(int uid);
+    void show_privacy_options_form();
 
     static PoingGodotAdMobUserMessagingPlatform *get_singleton();
 

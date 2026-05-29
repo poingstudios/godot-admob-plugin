@@ -22,3 +22,9 @@ text = "GetConsentStatus"
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "ResetConsentInformation"
+
+[node name="ShowPrivacyOptionsForm" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "ShowPrivacyOptionsForm"
+
