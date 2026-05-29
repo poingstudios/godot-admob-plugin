@@ -526,6 +526,9 @@ jobs:
         [preset.0.options]
         application/targeted_device_family=2
         application/min_ios_version="14.0"
+        application/app_store_team_id="123"
+        application/bundle_identifier="com.poingstudios.admob"
+        plugins_plist/GADApplicationIdentifier="ca-app-pub-3940256099942544~1458002511"
         EOF
 
     - name: Import Project Resources
@@ -678,6 +681,9 @@ jobs:
         [preset.0.options]
         application/targeted_device_family=2
         application/min_ios_version="14.0"
+        application/app_store_team_id="123"
+        application/bundle_identifier="com.poingstudios.admob"
+        plugins_plist/GADApplicationIdentifier="ca-app-pub-3940256099942544~1458002511"
         EOF
 
     - name: Import Project Resources
