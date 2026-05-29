@@ -44,10 +44,10 @@ jobs:
 
           const androidArtifact = artifacts.artifacts.find(a => a.name.startsWith('poing-godot-admob-android-'));
           const iosArtifact = artifacts.artifacts.find(a => a.name.startsWith('poing-godot-admob-ios-'));
-          const apkArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-') && !a.name.includes('CSharp') && !a.name.includes('iOS'));
-          const csharpArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-CSharp-') && !a.name.includes('iOS'));
-          const ipaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-iOS-'));
-          const csharpIpaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-CSharp-iOS-'));
+          const apkArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-Android-GDScript-'));
+          const csharpArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-Android-CSharp-'));
+          const ipaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-iOS-GDScript-'));
+          const csharpIpaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-iOS-CSharp-'));
 
           const getUrl = (artifact) => artifact ? `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}/artifacts/${artifact.id}` : `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}`;
 

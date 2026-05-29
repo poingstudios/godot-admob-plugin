@@ -279,7 +279,7 @@ jobs:
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
-        name: AdMobAddon-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        name: AdMobAddon-Android-GDScript-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/godot_editor/.output/AdMobAddon.apk
         retention-days: 14
 
@@ -448,7 +448,7 @@ jobs:
     - name: Upload APK artifact
       uses: actions/upload-artifact@v4
       with:
-        name: AdMobAddon-CSharp-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        name: AdMobAddon-Android-CSharp-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/godot_editor/.output/AdMobAddon-CSharp.apk
         retention-days: 14
 
@@ -590,12 +590,12 @@ jobs:
         fi
         
         cp -r "$APP_PATH" Payload/
-        zip -qr "AdMobAddon-iOS-v${{ needs.detect-latest.outputs.godot_version }}.ipa" Payload/
+        zip -qr "AdMobAddon-iOS-GDScript-v${{ needs.detect-latest.outputs.godot_version }}.ipa" Payload/
 
     - name: Upload IPA artifact
       uses: actions/upload-artifact@v4
       with:
-        name: AdMobAddon-iOS-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        name: AdMobAddon-iOS-GDScript-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/godot_editor/exports/ios/*.ipa
         retention-days: 14
 
@@ -747,12 +747,12 @@ jobs:
         fi
         
         cp -r "$APP_PATH" Payload/
-        zip -qr "AdMobAddon-CSharp-iOS-v${{ needs.detect-latest.outputs.godot_version }}.ipa" Payload/
+        zip -qr "AdMobAddon-iOS-CSharp-v${{ needs.detect-latest.outputs.godot_version }}.ipa" Payload/
 
     - name: Upload IPA artifact
       uses: actions/upload-artifact@v4
       with:
-        name: AdMobAddon-CSharp-iOS-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        name: AdMobAddon-iOS-CSharp-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/godot_editor/exports/ios/*.ipa
         retention-days: 14
 
