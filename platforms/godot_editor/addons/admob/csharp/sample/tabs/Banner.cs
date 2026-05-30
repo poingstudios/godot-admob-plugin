@@ -48,6 +48,22 @@ public partial class Banner : BaseTab
 	private LineEdit _xValue;
 	private LineEdit _yValue;
 	private OptionButton _sizeOption;
+	private HBoxContainer _customSize;
+	private LineEdit _widthValue;
+	private LineEdit _heightValue;
+
+	private enum Preset
+	{
+		Adaptive,
+		Banner,
+		FullBanner,
+		LargeBanner,
+		Leaderboard,
+		MediumRectangle,
+		WideSkyscraper,
+		SmartBanner,
+		Custom
+	}
 
 	public override void _Ready()
 	{
@@ -60,6 +76,14 @@ public partial class Banner : BaseTab
 		_getSizeBtn = GetNode<Button>("%BannerActions/GetSize");
 		_collapsibleToggle = GetNode<CheckButton>("%Collapsible");
 		_sizeOption = GetNode<OptionButton>("%SizeOption");
+		_customSize = GetNode<HBoxContainer>("%CustomSize");
+		_widthValue = GetNode<LineEdit>("%WidthValue");
+		_heightValue = GetNode<LineEdit>("%HeightValue");
+
+		_sizeOption.ItemSelected += (index) =>
+		{
+			_customSize.Visible = index == (int)Preset.Custom;
+		};
 
 		_loadBtn.Pressed += OnLoadPressed;
 		_loadBackgroundBtn.Pressed += OnLoadBackgroundPressed;
@@ -96,9 +120,10 @@ public partial class Banner : BaseTab
 		_loadBtn.Disabled = isLoaded;
 		_loadBackgroundBtn.Disabled = isLoaded;
 		_destroyBtn.Disabled = !isLoaded;
-		_showBtn.Disabled = !isLoaded;
-		_hideBtn.Disabled = !isLoaded;
 		_getSizeBtn.Disabled = !isLoaded;
+
+		_showBtn.Disabled = !(isLoaded && _isHidden);
+		_hideBtn.Disabled = !(isLoaded && !_isHidden);
 	}
 
 	private void UpdatePosition(AdPosition pos)
@@ -136,16 +161,22 @@ public partial class Banner : BaseTab
 
 	private AdSize GetSelectedAdSize()
 	{
-		switch (_sizeOption.Selected)
+		switch ((Preset)_sizeOption.Selected)
 		{
-			case 0: return AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(AdSize.FullWidth);
-			case 1: return AdSize.Banner;
-			case 2: return AdSize.FullBanner;
-			case 3: return AdSize.LargeBanner;
-			case 4: return AdSize.Leaderboard;
-			case 5: return AdSize.MediumRectangle;
-			case 6: return AdSize.WideSkyscraper;
-			case 7: return AdSize.SmartBanner;
+			case Preset.Adaptive: return AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(AdSize.FullWidth);
+			case Preset.Banner: return AdSize.Banner;
+			case Preset.FullBanner: return AdSize.FullBanner;
+			case Preset.LargeBanner: return AdSize.LargeBanner;
+			case Preset.Leaderboard: return AdSize.Leaderboard;
+			case Preset.MediumRectangle: return AdSize.MediumRectangle;
+			case Preset.WideSkyscraper: return AdSize.WideSkyscraper;
+			case Preset.SmartBanner: return AdSize.SmartBanner;
+			case Preset.Custom:
+				if (int.TryParse(_widthValue.Text, out int w) && int.TryParse(_heightValue.Text, out int h))
+				{
+					return new AdSize(w, h);
+				}
+				return AdSize.Banner;
 			default: return AdSize.Banner;
 		}
 	}
@@ -161,6 +192,7 @@ public partial class Banner : BaseTab
 
 		_adView = new AdView(GetAdUnitId(isCollapsibleRequest), size, _adPosition);
 		_isHidden = hideImmediately;
+		UpdateUI(false);
 
 		if (_isHidden)
 		{
@@ -231,6 +263,7 @@ public partial class Banner : BaseTab
 			_isHidden = false;
 			_adView.Show(); 
 			Log("Banner shown"); 
+			UpdateUI(true);
 			SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
 		}
 	}
@@ -242,6 +275,7 @@ public partial class Banner : BaseTab
 			_isHidden = true;
 			_adView.Hide(); 
 			Log("Banner hidden"); 
+			UpdateUI(true);
 			SampleRegistry.SafeArea?.ResetAdOverlap();
 		}
 	}

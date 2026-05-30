@@ -27,7 +27,7 @@ const Registry = preload("res://addons/admob/internal/sample_registry.gd")
 @onready var _ios_pause_check: CheckButton = $iOSAppPause
 @onready var _mute_music_check: CheckButton = $MuteMusic
 @onready var _music_player: AudioStreamPlayer = $MusicPlayer
-@onready var _ad_volume_slider: HSlider = $AdVolumeContainer/AdVolumeSlider
+@onready var _ad_volume_slider: HSlider = $AdVolumeCard/AdVolumeContainer/AdVolumeSlider
 @onready var _ad_muted_check: CheckButton = $AdMuted
 
 func _on_get_initialization_status_pressed() -> void:

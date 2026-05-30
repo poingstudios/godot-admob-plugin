@@ -39,6 +39,22 @@ var _is_hidden := false
 @onready var _x_value: LineEdit = %XValue
 @onready var _y_value: LineEdit = %YValue
 @onready var _size_option: OptionButton = %SizeOption
+@onready var _custom_size := %CustomSize as HBoxContainer
+@onready var _width_value: LineEdit = %WidthValue
+@onready var _height_value: LineEdit = %HeightValue
+
+
+enum Preset {
+	ADAPTIVE,
+	BANNER,
+	FULL_BANNER,
+	LARGE_BANNER,
+	LEADERBOARD,
+	MEDIUM_RECTANGLE,
+	WIDE_SKYSCRAPER,
+	SMART_BANNER,
+	CUSTOM
+}
 
 func _ready() -> void:
 	super()
@@ -49,15 +65,20 @@ func _ready() -> void:
 	_ad_listener.on_ad_loaded = _on_ad_loaded
 	_ad_listener.on_ad_opened = _on_ad_opened
 	
+	_size_option.item_selected.connect(func(index: int) -> void:
+		_custom_size.visible = index == Preset.CUSTOM
+	)
+	
 	_update_ui_state(false)
 
 func _update_ui_state(is_loaded: bool) -> void:
 	_load_button.disabled = is_loaded
 	_load_background_button.disabled = is_loaded
-	_show_button.disabled = !is_loaded
-	_hide_button.disabled = !is_loaded
 	_destroy_button.disabled = !is_loaded
 	_get_size_button.disabled = !is_loaded
+	
+	_show_button.disabled = not (is_loaded and _is_hidden)
+	_hide_button.disabled = not (is_loaded and not _is_hidden)
 
 func _get_ad_unit_id(is_collapsible: bool = false) -> String:
 	if is_collapsible:
@@ -66,14 +87,15 @@ func _get_ad_unit_id(is_collapsible: bool = false) -> String:
 
 func _get_selected_ad_size() -> AdSize:
 	match _size_option.selected:
-		0: return AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
-		1: return AdSize.BANNER
-		2: return AdSize.FULL_BANNER
-		3: return AdSize.LARGE_BANNER
-		4: return AdSize.LEADERBOARD
-		5: return AdSize.MEDIUM_RECTANGLE
-		6: return AdSize.WIDE_SKYSCRAPER
-		7: return AdSize.SMART_BANNER
+		Preset.ADAPTIVE: return AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
+		Preset.BANNER: return AdSize.BANNER
+		Preset.FULL_BANNER: return AdSize.FULL_BANNER
+		Preset.LARGE_BANNER: return AdSize.LARGE_BANNER
+		Preset.LEADERBOARD: return AdSize.LEADERBOARD
+		Preset.MEDIUM_RECTANGLE: return AdSize.MEDIUM_RECTANGLE
+		Preset.WIDE_SKYSCRAPER: return AdSize.WIDE_SKYSCRAPER
+		Preset.SMART_BANNER: return AdSize.SMART_BANNER
+		Preset.CUSTOM: return AdSize.new(int(_width_value.text), int(_height_value.text))
 	return AdSize.BANNER
 
 func _load_banner(hide_immediately: bool = false) -> void:
@@ -103,6 +125,7 @@ func _load_banner(hide_immediately: bool = false) -> void:
 		_log("Ad paid: %f %s (precision: %d, source: %s)" % [ad_value.value_micros / 1000000.0, ad_value.currency_code, ad_value.precision, ad_source_name])
 	
 	_is_hidden = hide_immediately
+	_update_ui_state(false)
 	if _is_hidden:
 		_ad_view.hide()
 	
@@ -134,6 +157,7 @@ func _on_show_banner_pressed() -> void:
 		_is_hidden = false
 		_ad_view.show()
 		_log("Banner shown")
+		_update_ui_state(true)
 		if Registry.safe_area:
 			Registry.safe_area.update_ad_overlap(_ad_view)
 
@@ -142,6 +166,7 @@ func _on_hide_banner_pressed() -> void:
 		_is_hidden = true
 		_ad_view.hide()
 		_log("Banner hidden")
+		_update_ui_state(true)
 		if Registry.safe_area:
 			Registry.safe_area.reset_ad_overlap()
 
