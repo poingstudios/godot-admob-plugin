@@ -36,6 +36,10 @@ var _is_hidden := false
 @onready var _get_size_button: Button = %GetSize
 @onready var _x_value: LineEdit = %XValue
 @onready var _y_value: LineEdit = %YValue
+@onready var _size_option: OptionButton = %SizeOption
+@onready var _custom_size := %CustomSize as HBoxContainer
+@onready var _width_value: LineEdit = %WidthValue
+@onready var _height_value: LineEdit = %HeightValue
 
 @onready var _template_type: OptionButton = %TemplateType
 @onready var _main_bg_button: Button = %MainBGButton
@@ -46,11 +50,30 @@ var _main_bg_color := Color(1, 1, 1, 1)
 var _cta_bg_color := Color(0.258824, 0.521569, 0.956863, 1)
 var _cta_text_color := Color(1, 1, 1, 1)
 
+
+enum Preset {
+	NONE,
+	ADAPTIVE,
+	BANNER,
+	FULL_BANNER,
+	LARGE_BANNER,
+	LEADERBOARD,
+	MEDIUM_RECTANGLE,
+	WIDE_SKYSCRAPER,
+	SMART_BANNER,
+	CUSTOM
+}
+
 func _ready() -> void:
 	super()
 	_main_bg_button.pressed.connect(_on_main_bg_button_pressed)
 	_cta_bg_button.pressed.connect(_on_cta_bg_button_pressed)
 	_cta_text_button.pressed.connect(_on_cta_text_button_pressed)
+	
+	_size_option.item_selected.connect(func(index: int) -> void:
+		_custom_size.visible = index == Preset.CUSTOM
+	)
+	
 	_update_ui_state(false)
 
 func _update_button_color(button: Button, color: Color) -> void:
@@ -92,10 +115,11 @@ func _on_cta_text_button_pressed() -> void:
 func _update_ui_state(is_loaded: bool) -> void:
 	_load_button.disabled = is_loaded
 	_load_background_button.disabled = is_loaded
-	_show_button.disabled = !is_loaded
-	_hide_button.disabled = !is_loaded
 	_destroy_button.disabled = !is_loaded
 	_get_size_button.disabled = !is_loaded
+	
+	_show_button.disabled = not (is_loaded and _is_hidden)
+	_hide_button.disabled = not (is_loaded and not _is_hidden)
 
 func _get_ad_unit_id() -> String:
 	return "ca-app-pub-3940256099942544/2247696110" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/3986624511"
@@ -109,6 +133,7 @@ func _load_native(hide_immediately: bool = false) -> void:
 	_log("Loading native ad%s..." % (" in background" if hide_immediately else ""))
 	
 	_is_hidden = hide_immediately
+	_update_ui_state(false)
 	
 	var options := NativeAdOptions.new()
 	options.ad_choices_placement = AdChoicesPlacement.Values.TOP_RIGHT
@@ -154,12 +179,26 @@ func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
 	
 	style.call_to_action_text = cta_style
 	
-	_native_overlay_ad.render_template(style, _ad_position)
+	_native_overlay_ad.render_template(style, _ad_position, _get_selected_ad_size())
 	
 	if _is_hidden:
 		_native_overlay_ad.hide()
 		
 	_update_ui_state(true)
+
+func _get_selected_ad_size() -> AdSize:
+	match _size_option.selected:
+		Preset.NONE: return null
+		Preset.ADAPTIVE: return AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
+		Preset.BANNER: return AdSize.BANNER
+		Preset.FULL_BANNER: return AdSize.FULL_BANNER
+		Preset.LARGE_BANNER: return AdSize.LARGE_BANNER
+		Preset.LEADERBOARD: return AdSize.LEADERBOARD
+		Preset.MEDIUM_RECTANGLE: return AdSize.MEDIUM_RECTANGLE
+		Preset.WIDE_SKYSCRAPER: return AdSize.WIDE_SKYSCRAPER
+		Preset.SMART_BANNER: return AdSize.SMART_BANNER
+		Preset.CUSTOM: return AdSize.new(int(_width_value.text), int(_height_value.text))
+	return null
 
 func _on_load_native_pressed() -> void:
 	_load_native(false)
@@ -179,12 +218,14 @@ func _on_show_native_pressed() -> void:
 		_is_hidden = false
 		_native_overlay_ad.show()
 		_log("Native shown")
+		_update_ui_state(true)
 
 func _on_hide_native_pressed() -> void:
 	if _native_overlay_ad:
 		_is_hidden = true
 		_native_overlay_ad.hide()
 		_log("Native hidden")
+		_update_ui_state(true)
 
 func _on_get_size_pressed() -> void:
 	if _native_overlay_ad:

@@ -19,6 +19,10 @@ namespace PoingStudios.AdMob.Sample
         private Button _getSizeButton;
         private LineEdit _xValue;
         private LineEdit _yValue;
+        private OptionButton _sizeOption;
+        private HBoxContainer _customSize;
+        private LineEdit _widthValue;
+        private LineEdit _heightValue;
 
         private OptionButton _templateType;
         private Button _mainBgButton;
@@ -28,6 +32,20 @@ namespace PoingStudios.AdMob.Sample
         private Color _mainBgColor = new Color(1, 1, 1, 1);
         private Color _ctaBgColor = new Color(0.258824f, 0.521569f, 0.956863f, 1);
         private Color _ctaTextColor = new Color(1, 1, 1, 1);
+
+        private enum Preset
+        {
+            None,
+            Adaptive,
+            Banner,
+            FullBanner,
+            LargeBanner,
+            Leaderboard,
+            MediumRectangle,
+            WideSkyscraper,
+            SmartBanner,
+            Custom
+        }
 
         public override void _Ready()
         {
@@ -41,6 +59,15 @@ namespace PoingStudios.AdMob.Sample
             _getSizeButton = GetNode<Button>("%GetSize");
             _xValue = GetNode<LineEdit>("%XValue");
             _yValue = GetNode<LineEdit>("%YValue");
+            _sizeOption = GetNode<OptionButton>("%SizeOption");
+            _customSize = GetNode<HBoxContainer>("%CustomSize");
+            _widthValue = GetNode<LineEdit>("%WidthValue");
+            _heightValue = GetNode<LineEdit>("%HeightValue");
+
+            _sizeOption.ItemSelected += (index) =>
+            {
+                _customSize.Visible = index == (int)Preset.Custom;
+            };
 
             _templateType = GetNode<OptionButton>("%TemplateType");
             _mainBgButton = GetNode<Button>("%MainBGButton");
@@ -110,10 +137,11 @@ namespace PoingStudios.AdMob.Sample
         {
             _loadButton.Disabled = isLoaded;
             _loadBackgroundButton.Disabled = isLoaded;
-            _showButton.Disabled = !isLoaded;
-            _hideButton.Disabled = !isLoaded;
             _destroyButton.Disabled = !isLoaded;
             _getSizeButton.Disabled = !isLoaded;
+
+            _showButton.Disabled = !(isLoaded && _isHidden);
+            _hideButton.Disabled = !(isLoaded && !_isHidden);
         }
 
         private string GetAdUnitId()
@@ -133,6 +161,7 @@ namespace PoingStudios.AdMob.Sample
             Log($"Loading native ad{(hideImmediately ? " in background" : string.Empty)}...");
 
             _isHidden = hideImmediately;
+            UpdateUiState(false);
 
             var options = new NativeAdOptions
             {
@@ -178,7 +207,7 @@ namespace PoingStudios.AdMob.Sample
                 }
             };
 
-            _nativeOverlayAd.RenderTemplate(style, _adPosition);
+            _nativeOverlayAd.RenderTemplate(style, _adPosition, GetSelectedAdSize());
 
             if (_isHidden)
             {
@@ -186,6 +215,29 @@ namespace PoingStudios.AdMob.Sample
             }
 
             UpdateUiState(true);
+        }
+
+        private AdSize GetSelectedAdSize()
+        {
+            switch ((Preset)_sizeOption.Selected)
+            {
+                case Preset.None: return null;
+                case Preset.Adaptive: return AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(AdSize.FullWidth);
+                case Preset.Banner: return AdSize.Banner;
+                case Preset.FullBanner: return AdSize.FullBanner;
+                case Preset.LargeBanner: return AdSize.LargeBanner;
+                case Preset.Leaderboard: return AdSize.Leaderboard;
+                case Preset.MediumRectangle: return AdSize.MediumRectangle;
+                case Preset.WideSkyscraper: return AdSize.WideSkyscraper;
+                case Preset.SmartBanner: return AdSize.SmartBanner;
+                case Preset.Custom:
+                    if (int.TryParse(_widthValue.Text, out int w) && int.TryParse(_heightValue.Text, out int h))
+                    {
+                        return new AdSize(w, h);
+                    }
+                    return null;
+                default: return null;
+            }
         }
 
         public void _on_load_native_pressed() => LoadNative(false);
@@ -209,6 +261,7 @@ namespace PoingStudios.AdMob.Sample
                 _isHidden = false;
                 _nativeOverlayAd.Show();
                 Log("Native shown");
+                UpdateUiState(true);
             }
         }
 
@@ -219,6 +272,7 @@ namespace PoingStudios.AdMob.Sample
                 _isHidden = true;
                 _nativeOverlayAd.Hide();
                 Log("Native hidden");
+                UpdateUiState(true);
             }
         }
 

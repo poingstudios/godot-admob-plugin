@@ -38,7 +38,7 @@ public partial class MobileAds : BaseTab
 		_iosPauseCheck = GetNode<CheckButton>("iOSAppPause");
 		_muteMusicCheck = GetNode<CheckButton>("MuteMusic");
 		_musicPlayer = GetNode<AudioStreamPlayer>("MusicPlayer");
-		_adVolumeSlider = GetNode<HSlider>("AdVolumeContainer/AdVolumeSlider");
+		_adVolumeSlider = GetNode<HSlider>("AdVolumeCard/AdVolumeContainer/AdVolumeSlider");
 		_adMutedCheck = GetNode<CheckButton>("AdMuted");
 
 		_iosPauseCheck.Toggled += OnSetIosAppPausePressed;

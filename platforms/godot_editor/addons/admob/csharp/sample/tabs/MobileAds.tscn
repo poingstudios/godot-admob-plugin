@@ -1,7 +1,21 @@
-[gd_scene format=3 uid="uid://df7xan3v87p5"]
+[gd_scene load_steps=4 format=3 uid="uid://df7xan3v87p5"]
 
 [ext_resource type="Script" path="res://addons/admob/csharp/sample/tabs/MobileAds.cs" id="1_mads"]
 [ext_resource type="AudioStream" uid="uid://f3f176vu6pfo" path="res://addons/admob/assets/music.ogg" id="2_music"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]
+content_margin_left = 30.0
+content_margin_top = 10.0
+content_margin_right = 30.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+shadow_color = Color(0, 0, 0, 0.1)
+shadow_size = 4
+shadow_offset = Vector2(0, 2)
 
 [node name="MobileAds" type="VBoxContainer"]
 anchors_preset = 15
@@ -31,15 +45,21 @@ layout_mode = 2
 text = "Mute Music"
 alignment = 1
 
-[node name="AdVolumeContainer" type="HBoxContainer" parent="."]
+[node name="AdVolumeCard" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="AdVolumeContainer" type="HBoxContainer" parent="AdVolumeCard"]
 layout_mode = 2
 alignment = 1
 
-[node name="AdVolumeLabel" type="Label" parent="AdVolumeContainer"]
+[node name="AdVolumeLabel" type="Label" parent="AdVolumeCard/AdVolumeContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Ad Volume"
 
-[node name="AdVolumeSlider" type="HSlider" parent="AdVolumeContainer"]
+[node name="AdVolumeSlider" type="HSlider" parent="AdVolumeCard/AdVolumeContainer"]
 custom_minimum_size = Vector2(200, 30)
 layout_mode = 2
 size_flags_horizontal = 3
