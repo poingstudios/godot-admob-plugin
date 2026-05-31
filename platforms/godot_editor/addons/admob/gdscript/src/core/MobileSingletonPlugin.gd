@@ -29,6 +29,10 @@ static func _get_plugin(plugin_name: String, is_required := true) -> Object:
 
 	var os_name := OS.get_name()
 	if os_name != "Android" and os_name != "iOS":
+		if OS.has_feature("editor"):
+			var MockFactory = load("res://addons/admob/internal/mock/mock_admob_factory.gd")
+			if MockFactory:
+				return MockFactory.get_mock_plugin(plugin_name)
 		return null
 
 	var location := (

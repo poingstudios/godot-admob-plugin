@@ -36,6 +36,10 @@ namespace PoingStudios.AdMob.Core
 			string osName = OS.GetName();
 			if (osName != "Android" && osName != "iOS")
 			{
+				if (OS.HasFeature("editor"))
+				{
+					return MockAdMobFactory.GetMockPlugin(pluginName);
+				}
 				return null;
 			}
 
