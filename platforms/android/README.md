@@ -57,7 +57,7 @@ The **purpose** of this plugin is to always keep **up to date with Godot**, supp
 - Video tutorial: https://youtu.be/TB7WhP8mieo
 - Download [AdMob Plugin](https://github.com/poingstudios/godot-admob-plugin), you can download directly from [Godot Assets](https://godotengine.org/asset-library/asset/2063).
 - After download, we recommend you to read the [README.md](https://github.com/poingstudios/godot-admob-plugin/blob/master/README.md) of the Plugin to know how to use.
-- Add your [AdMob App ID](https://support.google.com/admob/answer/7356431) to your app's ```res://addons/admob/android/config.gd``` script by changing  `APPLICATION_ID` const.
+- Add your [AdMob App ID](https://support.google.com/admob/answer/7356431) in `Project -> Project Settings -> General -> Admob -> Android`.
 
 ## 📦 Manual Installation:
 

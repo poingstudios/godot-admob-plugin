@@ -23,22 +23,59 @@
 extends EditorExportPlugin
 
 const Library := preload("res://addons/admob/internal/exporters/android/library.gd")
-const Config := preload("res://addons/admob/android/config.gd")
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
+const ProjectSettingsService := preload(
+	"res://addons/admob/internal/services/project_settings_service.gd"
+)
+
+func _get_name() -> String:
+	return "PoingAdMobAndroid"
+
+func _supports_platform(platform: EditorExportPlatform) -> bool:
+	var ads_enabled := _get_setting(ProjectSettingsService.ANDROID_ENABLED, true) as bool
+	return platform is EditorExportPlatformAndroid and ads_enabled
+
+func _get_setting(setting_name: String, default_value):
+	if ProjectSettings.has_setting(setting_name):
+		return ProjectSettings.get_setting(setting_name)
+	return default_value
 
 func _get_plugins() -> Array[EditorExportPlugin]:
-	var plugins: Array[EditorExportPlugin]
-	var config := _create_config()
+	var plugins: Array[EditorExportPlugin] = []
 	var root_bin_path := Library.ROOT_BIN_PATH
-	var dir_access := DirAccess.open(root_bin_path)
 
-	if not dir_access:
-		push_error("Failed to open AdMob directory: " + root_bin_path)
+	var ads_enabled := _get_setting(ProjectSettingsService.ANDROID_ENABLED, true) as bool
+	if not ads_enabled:
 		return plugins
 
-	for lib in config.libraries:
-		if not lib.is_enabled:
-			continue
+	var known_libs: Array[String] = ["ads", "meta", "vungle"]
+	var libs: Array[Library] = []
+
+	libs.append(Library.new("ads", true))
+
+	var mediation_libs: Array[String] = ["meta", "vungle"]
+	for lib_name in mediation_libs:
+		var setting_name := ProjectSettingsService.ANDROID_MEDIATION_PREFIX + lib_name
+		var is_enabled := _get_setting(setting_name, false) as bool
+		if is_enabled:
+			libs.append(Library.new(lib_name, true))
+
+	var dir_access := DirAccess.open(root_bin_path)
+	if dir_access:
+		dir_access.list_dir_begin()
+		var dir_name := dir_access.get_next()
+		while dir_name != "":
+			if dir_access.current_is_dir() and not dir_name.begins_with("."):
+				if not dir_name in known_libs:
+					var gd_path := root_bin_path.path_join(dir_name).path_join("poing_godot_admob_" + dir_name + ".gd")
+					if FileAccess.file_exists(gd_path):
+						var setting_name := ProjectSettingsService.ANDROID_MEDIATION_PREFIX + dir_name
+						var is_enabled := _get_setting(setting_name, false) as bool
+						if is_enabled:
+							libs.append(Library.new(dir_name, true))
+			dir_name = dir_access.get_next()
+
+	for lib in libs:
 		if not FileAccess.file_exists(lib.get_full_path()):
 			push_error("AdMob: Android library not found at " + lib.get_full_path())
 			continue
@@ -61,50 +98,56 @@ func _get_android_dependencies(platform: EditorExportPlatform, debug: bool) -> P
 
 	return dependencies
 
-func _get_android_manifest_application_element_contents(platform: EditorExportPlatform, debug: bool) -> String:
+func _get_android_manifest_application_element_contents(_platform: EditorExportPlatform, _debug: bool) -> String:
+	var ads_enabled := _get_setting(ProjectSettingsService.ANDROID_ENABLED, true) as bool
+	if not ads_enabled:
+		return ""
+
 	var content := PackedStringArray()
-	var config := _create_config()
-	
-	for lib in config.libraries:
-		if not lib.is_enabled:
-			continue
-			
+	var known_libs: Array[String] = ["ads", "meta", "vungle"]
+	var enabled_libs: Array[String] = []
+
+	enabled_libs.append("ads")
+
+	var mediation_libs: Array[String] = ["meta", "vungle"]
+	for lib_name in mediation_libs:
+		var setting_name := ProjectSettingsService.ANDROID_MEDIATION_PREFIX + lib_name
+		var is_enabled := _get_setting(setting_name, false) as bool
+		if is_enabled:
+			enabled_libs.append(lib_name)
+
+	var root_bin_path := Library.ROOT_BIN_PATH
+	var dir_access := DirAccess.open(root_bin_path)
+	if dir_access:
+		dir_access.list_dir_begin()
+		var dir_name := dir_access.get_next()
+		while dir_name != "":
+			if dir_access.current_is_dir() and not dir_name.begins_with("."):
+				if not dir_name in known_libs:
+					var gd_path := root_bin_path.path_join(dir_name).path_join("poing_godot_admob_" + dir_name + ".gd")
+					if FileAccess.file_exists(gd_path):
+						var setting_name := ProjectSettingsService.ANDROID_MEDIATION_PREFIX + dir_name
+						var is_enabled := _get_setting(setting_name, false) as bool
+						if is_enabled:
+							enabled_libs.append(dir_name)
+			dir_name = dir_access.get_next()
+
+	for lib_name in enabled_libs:
+		var lib := Library.new(lib_name, true)
 		if FileAccess.file_exists(lib.get_full_path()):
 			continue
 
 		content.append("""
 		<meta-data
 			android:name="%s_CONFIGURATION_ERROR"
-			android:enabled="%s doesn't exists, please check your addons/admob/android/bin folder or disable in addons/admob/android/config.gd"/>
-		""" % [lib.path, lib.get_full_path()])
-		
+			android:value="%s doesn't exists, please check your addons/admob/android/bin folder or disable in Project Settings"/>
+		""" % [lib_name, lib.get_full_path()])
+
+	var app_id := _get_setting(ProjectSettingsService.ANDROID_APP_ID, "ca-app-pub-3940256099942544~3347511713") as String
 	content.append("""
 	<meta-data
 		android:name="com.google.android.gms.ads.APPLICATION_ID"
 		android:value="%s"/>
-	""" % config.APPLICATION_ID)
-	
+	""" % app_id)
+
 	return "\n".join(content)
-
-func _is_ads_enabled() -> bool:
-	var config := _create_config()
-	for lib in config.libraries:
-		if lib.path == "ads":
-			return lib.is_enabled
-	return false
-
-func _supports_platform(platform: EditorExportPlatform) -> bool:
-	return platform is EditorExportPlatformAndroid and _is_ads_enabled()
-
-func _get_name() -> String:
-	return "PoingAdMobAndroid"
-
-# Development override config
-func _create_config() -> Config:
-	const OVERRIDE_CONFIG_PATH := "res://config/admob_android_config_override_1337.gd" # Development override config
-
-	if FileAccess.file_exists(OVERRIDE_CONFIG_PATH):
-		var script = load(OVERRIDE_CONFIG_PATH)
-		if script:
-			return script.new()
-	return Config.new()
