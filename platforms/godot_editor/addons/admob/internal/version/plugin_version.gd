@@ -40,10 +40,12 @@ static var current: String:
 	get:
 		if not _cached_version.is_empty():
 			return _cached_version
-		
+
 		var plugin_config_file := ConfigFile.new()
 		if plugin_config_file.load(PLUGIN_CONFIG_PATH) == OK:
-			_cached_version = plugin_config_file.get_value("plugin", "version", FALLBACK_PLUGIN_VERSION)
+			_cached_version = plugin_config_file.get_value(
+				"plugin", "version", FALLBACK_PLUGIN_VERSION
+			)
 		else:
 			push_error("AdMob: Failed to load plugin.cfg at " + PLUGIN_CONFIG_PATH)
 			_cached_version = FALLBACK_PLUGIN_VERSION

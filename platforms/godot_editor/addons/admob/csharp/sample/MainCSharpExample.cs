@@ -37,7 +37,7 @@ public partial class MainCSharpExample : Control, ISampleLogger
 		_consoleOutput = GetNode<RichTextLabel>("Background/SafeArea/LayoutContainer/ConsolePanel/ConsoleOutput");
 
 		var mainTabs = GetNode<TabContainer>("Background/SafeArea/LayoutContainer/TabContent/MainTabs");
-		
+
 		SampleRegistry.Logger = this;
 		LogMessage("Main initialized");
 

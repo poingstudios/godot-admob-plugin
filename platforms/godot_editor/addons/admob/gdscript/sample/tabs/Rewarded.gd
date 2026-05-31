@@ -33,10 +33,11 @@ var _content_callback := FullScreenContentCallback.new()
 @onready var _show_button: Button = $Show
 @onready var _destroy_button: Button = $Destroy
 
+
 func _ready() -> void:
 	super()
 	_reward_listener.on_user_earned_reward = _on_user_earned_reward
-	
+
 	_load_callback.on_ad_failed_to_load = _on_ad_failed_to_load
 	_load_callback.on_ad_loaded = _on_ad_loaded
 
@@ -44,31 +45,40 @@ func _ready() -> void:
 	_content_callback.on_ad_dismissed_full_screen_content = func() -> void:
 		_log("Ad dismissed")
 		_destroy_ad()
-		
+
 	_content_callback.on_ad_failed_to_show_full_screen_content = func(err: AdError) -> void:
 		_log("Failed to show: " + err.message)
 	_content_callback.on_ad_impression = func() -> void: _log("Impression recorded")
 	_content_callback.on_ad_showed_full_screen_content = func() -> void: _log("Ad showed")
-	
+
 	_update_ui_state(false)
+
 
 func _update_ui_state(is_loaded: bool) -> void:
 	_load_button.disabled = is_loaded
 	_show_button.disabled = !is_loaded
 	_destroy_button.disabled = !is_loaded
 
+
 func _on_load_pressed() -> void:
 	_log("Loading rewarded ad...")
-	var unit_id := "ca-app-pub-3940256099942544/5224354917" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/1712485313"
+	var unit_id := (
+		"ca-app-pub-3940256099942544/5224354917"
+		if OS.get_name() == "Android"
+		else "ca-app-pub-3940256099942544/1712485313"
+	)
 	RewardedAdLoader.new().load(unit_id, AdRequest.new(), _load_callback)
+
 
 func _on_show_pressed() -> void:
 	if _rewarded_ad:
 		_log("Showing rewarded ad...")
 		_rewarded_ad.show(_reward_listener)
 
+
 func _on_destroy_pressed() -> void:
 	_destroy_ad()
+
 
 func _destroy_ad() -> void:
 	if _rewarded_ad:
@@ -77,14 +87,17 @@ func _destroy_ad() -> void:
 		_log("Ad destroyed")
 		_update_ui_state(false)
 
+
 #region Callbacks
 func _on_user_earned_reward(item: RewardedItem) -> void:
 	_log("Reward earned: %d %s" % [item.amount, item.type])
 
+
 func _on_ad_failed_to_load(error: LoadAdError) -> void:
 	_log("Failed to load: " + error.message)
 	_update_ui_state(false)
-	
+
+
 func _on_ad_loaded(ad: RewardedAd) -> void:
 	_log("Ad loaded successfully (UID: %s)" % str(ad._uid))
 	ad.full_screen_content_callback = _content_callback
@@ -96,17 +109,30 @@ func _on_ad_loaded(ad: RewardedAd) -> void:
 				ad_source_name = response_info.loaded_adapter_response_info.ad_source_name
 			else:
 				ad_source_name = "None"
-		_log("Ad paid: %f %s (precision: %d, source: %s)" % [ad_value.value_micros / 1000000.0, ad_value.currency_code, ad_value.precision, ad_source_name])
-	
+		_log(
+			(
+				"Ad paid: %f %s (precision: %d, source: %s)"
+				% [
+					ad_value.value_micros / 1000000.0,
+					ad_value.currency_code,
+					ad_value.precision,
+					ad_source_name
+				]
+			)
+		)
+
 	# Optional: Server-side verification
 	var ssv_options := ServerSideVerificationOptions.new()
 	ssv_options.custom_data = "TEST_DATA"
 	ssv_options.user_id = "test_user"
 	ad.set_server_side_verification_options(ssv_options)
-	
+
 	_rewarded_ad = ad
 	_update_ui_state(true)
+
+
 #endregion
+
 
 func _log(message: String) -> void:
 	if Registry.logger:

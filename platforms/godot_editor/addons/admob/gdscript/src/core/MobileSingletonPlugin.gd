@@ -22,8 +22,9 @@
 
 class_name MobileSingletonPlugin
 
+
 static func _get_plugin(plugin_name: String, is_required := true) -> Object:
-	if (Engine.has_singleton(plugin_name)):
+	if Engine.has_singleton(plugin_name):
 		return Engine.get_singleton(plugin_name)
 
 	var os_name := OS.get_name()
@@ -44,11 +45,13 @@ static func _get_plugin(plugin_name: String, is_required := true) -> Object:
 
 	return null
 
+
 static func safe_connect(
 	plugin: Object, signal_name: String, callable: Callable, flags := 0
 ) -> void:
 	if plugin and not plugin.is_connected(signal_name, callable):
 		plugin.connect(signal_name, callable, flags)
+
 
 static func safe_disconnect(plugin: Object, signal_name: String, callable: Callable) -> void:
 	if plugin and plugin.is_connected(signal_name, callable):

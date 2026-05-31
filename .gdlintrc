@@ -1,0 +1,8 @@
+disable:
+  - class-variable-name
+  - function-variable-name
+  - function-argument-name
+  - unused-argument
+  - class-definitions-order
+  - max-line-length
+  - max-returns

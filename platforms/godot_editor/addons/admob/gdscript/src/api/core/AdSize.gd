@@ -37,28 +37,35 @@ static var WIDE_SKYSCRAPER := new(160, 600)
 var width: int
 var height: int
 
+
 func _init(width: int, height: int):
 	self.width = width
 	self.height = height
 
-static var SMART_BANNER : AdSize :
+
+static var SMART_BANNER: AdSize:
 	get:
 		if _plugin:
 			var ad_size_dictionary: Dictionary = _plugin.getSmartBannerAdSize()
 			return _create(ad_size_dictionary)
 		return AdSize.new(0, 0)
 
+
 static func get_current_orientation_anchored_adaptive_banner_ad_size(width: int) -> AdSize:
 	if _plugin:
-		var ad_size_dictionary: Dictionary = _plugin.getCurrentOrientationAnchoredAdaptiveBannerAdSize(width)
+		var ad_size_dictionary: Dictionary = (
+			_plugin.getCurrentOrientationAnchoredAdaptiveBannerAdSize(width)
+		)
 		return _create(ad_size_dictionary)
 	return AdSize.new(0, 0)
+
 
 static func get_portrait_anchored_adaptive_banner_ad_size(width: int) -> AdSize:
 	if _plugin:
 		var ad_size_dictionary: Dictionary = _plugin.getPortraitAnchoredAdaptiveBannerAdSize(width)
 		return _create(ad_size_dictionary)
 	return AdSize.new(0, 0)
+
 
 static func get_landscape_anchored_adaptive_banner_ad_size(width: int) -> AdSize:
 	if _plugin:

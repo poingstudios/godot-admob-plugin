@@ -29,187 +29,187 @@ using PoingStudios.AdMob.Core;
 
 namespace PoingStudios.AdMob.Api
 {
-	public class AdView : MobileSingletonPlugin
-	{
-		private static readonly GodotObject _plugin = GetPlugin("PoingGodotAdMobAdView");
+    public class AdView : MobileSingletonPlugin
+    {
+        private static readonly GodotObject _plugin = GetPlugin("PoingGodotAdMobAdView");
 
-		public AdListener AdListener { get; set; } = new AdListener();
-		public AdPosition Position { get; private set; }
-		public Action<AdValue> OnAdPaid { get; set; }
+        public AdListener AdListener { get; set; } = new AdListener();
+        public AdPosition Position { get; private set; }
+        public Action<AdValue> OnAdPaid { get; set; }
 
-		private readonly int _uid;
+        private readonly int _uid;
 
-		private readonly Callable _onAdClickedCallable;
-		private readonly Callable _onAdClosedCallable;
-		private readonly Callable _onAdFailedToLoadCallable;
-		private readonly Callable _onAdImpressionCallable;
-		private readonly Callable _onAdLoadedCallable;
-		private readonly Callable _onAdOpenedCallable;
-		private readonly Callable _onAdPaidCallable;
+        private readonly Callable _onAdClickedCallable;
+        private readonly Callable _onAdClosedCallable;
+        private readonly Callable _onAdFailedToLoadCallable;
+        private readonly Callable _onAdImpressionCallable;
+        private readonly Callable _onAdLoadedCallable;
+        private readonly Callable _onAdOpenedCallable;
+        private readonly Callable _onAdPaidCallable;
 
-		public AdView(string adUnitId, AdSize adSize, AdPosition adPosition)
-		{
-			Position = adPosition;
+        public AdView(string adUnitId, AdSize adSize, AdPosition adPosition)
+        {
+            Position = adPosition;
 
-			_onAdClickedCallable = Callable.From<int>(OnAdClicked);
-			_onAdClosedCallable = Callable.From<int>(OnAdClosed);
-			_onAdFailedToLoadCallable = Callable.From<int, Dictionary>(OnAdFailedToLoad);
-			_onAdImpressionCallable = Callable.From<int>(OnAdImpression);
-			_onAdLoadedCallable = Callable.From<int>(OnAdLoaded);
-			_onAdOpenedCallable = Callable.From<int>(OnAdOpened);
-			_onAdPaidCallable = Callable.From<int, Dictionary>(OnAdViewPaid);
+            _onAdClickedCallable = Callable.From<int>(OnAdClicked);
+            _onAdClosedCallable = Callable.From<int>(OnAdClosed);
+            _onAdFailedToLoadCallable = Callable.From<int, Dictionary>(OnAdFailedToLoad);
+            _onAdImpressionCallable = Callable.From<int>(OnAdImpression);
+            _onAdLoadedCallable = Callable.From<int>(OnAdLoaded);
+            _onAdOpenedCallable = Callable.From<int>(OnAdOpened);
+            _onAdPaidCallable = Callable.From<int, Dictionary>(OnAdViewPaid);
 
-			if (_plugin != null)
-			{
-				var adViewDict = new Dictionary
-				{
-					{ "ad_unit_id", adUnitId },
-					{ "ad_position", (int)adPosition.Value },
-					{ "custom_position", new Dictionary
-						{
-							{ "x", adPosition.Offset.X },
-							{ "y", adPosition.Offset.Y }
-						}
-					},
-					{ "ad_size", new Dictionary
-						{
-							{ "width", adSize.Width },
-							{ "height", adSize.Height }
-						}
-					}
-				};
+            if (_plugin != null)
+            {
+                var adViewDict = new Dictionary
+                {
+                    { "ad_unit_id", adUnitId },
+                    { "ad_position", (int)adPosition.Value },
+                    { "custom_position", new Dictionary
+                        {
+                            { "x", adPosition.Offset.X },
+                            { "y", adPosition.Offset.Y }
+                        }
+                    },
+                    { "ad_size", new Dictionary
+                        {
+                            { "width", adSize.Width },
+                            { "height", adSize.Height }
+                        }
+                    }
+                };
 
-				_uid = (int)_plugin.Call("create", adViewDict);
-				SafeConnect(_plugin, "on_ad_clicked", _onAdClickedCallable);
-				SafeConnect(_plugin, "on_ad_closed", _onAdClosedCallable);
-				SafeConnect(_plugin, "on_ad_failed_to_load", _onAdFailedToLoadCallable);
-				SafeConnect(_plugin, "on_ad_impression", _onAdImpressionCallable);
-				SafeConnect(_plugin, "on_ad_loaded", _onAdLoadedCallable);
-				SafeConnect(_plugin, "on_ad_opened", _onAdOpenedCallable);
-				SafeConnect(_plugin, "on_ad_view_paid", _onAdPaidCallable);
-			}
-		}
+                _uid = (int)_plugin.Call("create", adViewDict);
+                SafeConnect(_plugin, "on_ad_clicked", _onAdClickedCallable);
+                SafeConnect(_plugin, "on_ad_closed", _onAdClosedCallable);
+                SafeConnect(_plugin, "on_ad_failed_to_load", _onAdFailedToLoadCallable);
+                SafeConnect(_plugin, "on_ad_impression", _onAdImpressionCallable);
+                SafeConnect(_plugin, "on_ad_loaded", _onAdLoadedCallable);
+                SafeConnect(_plugin, "on_ad_opened", _onAdOpenedCallable);
+                SafeConnect(_plugin, "on_ad_view_paid", _onAdPaidCallable);
+            }
+        }
 
-		public void LoadAd(AdRequest adRequest)
-		{
-			_plugin?.Call("load_ad", _uid, adRequest.ConvertToDictionary(),
-				new Array<string>(adRequest.Keywords));
-		}
+        public void LoadAd(AdRequest adRequest)
+        {
+            _plugin?.Call("load_ad", _uid, adRequest.ConvertToDictionary(),
+                new Array<string>(adRequest.Keywords));
+        }
 
-		public void Destroy()
-		{
-			_plugin?.Call("destroy", _uid);
-		}
+        public void Destroy()
+        {
+            _plugin?.Call("destroy", _uid);
+        }
 
-		public ResponseInfo GetResponseInfo()
-		{
-			var responseInfoDictionary = (Dictionary)_plugin.Call("get_response_info", _uid);
-			return ResponseInfo.Create(responseInfoDictionary);
-		}
+        public ResponseInfo GetResponseInfo()
+        {
+            var responseInfoDictionary = (Dictionary)_plugin.Call("get_response_info", _uid);
+            return ResponseInfo.Create(responseInfoDictionary);
+        }
 
-		public void Hide()
-		{
-			_plugin?.Call("hide", _uid);
-		}
+        public void Hide()
+        {
+            _plugin?.Call("hide", _uid);
+        }
 
-		public void Show()
-		{
-			_plugin?.Call("show", _uid);
-		}
+        public void Show()
+        {
+            _plugin?.Call("show", _uid);
+        }
 
-		public void SetPosition(AdPosition adPosition)
-		{
-			Position = adPosition;
-			if (_plugin != null)
-			{
-				if (adPosition.Value == AdPosition.Values.Custom)
-				{
-					_plugin.Call("update_custom_position", _uid, adPosition.Offset.X, adPosition.Offset.Y);
-				}
-				else
-				{
-					_plugin.Call("update_position", _uid, (int)adPosition.Value);
-				}
-			}
-		}
+        public void SetPosition(AdPosition adPosition)
+        {
+            Position = adPosition;
+            if (_plugin != null)
+            {
+                if (adPosition.Value == AdPosition.Values.Custom)
+                {
+                    _plugin.Call("update_custom_position", _uid, adPosition.Offset.X, adPosition.Offset.Y);
+                }
+                else
+                {
+                    _plugin.Call("update_position", _uid, (int)adPosition.Value);
+                }
+            }
+        }
 
-		public int GetWidth()
-		{
-			if (_plugin != null)
-				return (int)_plugin.Call("get_width", _uid);
-			return -1;
-		}
+        public int GetWidth()
+        {
+            if (_plugin != null)
+                return (int)_plugin.Call("get_width", _uid);
+            return -1;
+        }
 
-		public int GetHeight()
-		{
-			if (_plugin != null)
-				return (int)_plugin.Call("get_height", _uid);
-			return -1;
-		}
+        public int GetHeight()
+        {
+            if (_plugin != null)
+                return (int)_plugin.Call("get_height", _uid);
+            return -1;
+        }
 
-		public int GetWidthInPixels()
-		{
-			if (_plugin != null)
-				return (int)_plugin.Call("get_width_in_pixels", _uid);
-			return -1;
-		}
+        public int GetWidthInPixels()
+        {
+            if (_plugin != null)
+                return (int)_plugin.Call("get_width_in_pixels", _uid);
+            return -1;
+        }
 
-		public int GetHeightInPixels()
-		{
-			if (_plugin != null)
-				return (int)_plugin.Call("get_height_in_pixels", _uid);
-			return -1;
-		}
+        public int GetHeightInPixels()
+        {
+            if (_plugin != null)
+                return (int)_plugin.Call("get_height_in_pixels", _uid);
+            return -1;
+        }
 
-		public bool IsCollapsible()
-		{
-			if (_plugin != null)
-				return (bool)_plugin.Call("is_collapsible", _uid);
-			return false;
-		}
+        public bool IsCollapsible()
+        {
+            if (_plugin != null)
+                return (bool)_plugin.Call("is_collapsible", _uid);
+            return false;
+        }
 
-		private void OnAdClicked(int uid)
-		{
-			if (uid != _uid) return;
-			Callable.From(() => AdListener.OnAdClicked?.Invoke()).CallDeferred();
-		}
+        private void OnAdClicked(int uid)
+        {
+            if (uid != _uid) return;
+            Callable.From(() => AdListener.OnAdClicked?.Invoke()).CallDeferred();
+        }
 
-		private void OnAdClosed(int uid)
-		{
-			if (uid != _uid) return;
-			Callable.From(() => AdListener.OnAdClosed?.Invoke()).CallDeferred();
-		}
+        private void OnAdClosed(int uid)
+        {
+            if (uid != _uid) return;
+            Callable.From(() => AdListener.OnAdClosed?.Invoke()).CallDeferred();
+        }
 
-		private void OnAdFailedToLoad(int uid, Dictionary errorDict)
-		{
-			if (uid != _uid) return;
-			var error = LoadAdError.Create(errorDict);
-			Callable.From(() => AdListener.OnAdFailedToLoad?.Invoke(error)).CallDeferred();
-		}
+        private void OnAdFailedToLoad(int uid, Dictionary errorDict)
+        {
+            if (uid != _uid) return;
+            var error = LoadAdError.Create(errorDict);
+            Callable.From(() => AdListener.OnAdFailedToLoad?.Invoke(error)).CallDeferred();
+        }
 
-		private void OnAdImpression(int uid)
-		{
-			if (uid != _uid) return;
-			Callable.From(() => AdListener.OnAdImpression?.Invoke()).CallDeferred();
-		}
+        private void OnAdImpression(int uid)
+        {
+            if (uid != _uid) return;
+            Callable.From(() => AdListener.OnAdImpression?.Invoke()).CallDeferred();
+        }
 
-		private void OnAdLoaded(int uid)
-		{
-			if (uid != _uid) return;
-			Callable.From(() => AdListener.OnAdLoaded?.Invoke()).CallDeferred();
-		}
+        private void OnAdLoaded(int uid)
+        {
+            if (uid != _uid) return;
+            Callable.From(() => AdListener.OnAdLoaded?.Invoke()).CallDeferred();
+        }
 
-		private void OnAdOpened(int uid)
-		{
-			if (uid != _uid) return;
-			Callable.From(() => AdListener.OnAdOpened?.Invoke()).CallDeferred();
-		}
+        private void OnAdOpened(int uid)
+        {
+            if (uid != _uid) return;
+            Callable.From(() => AdListener.OnAdOpened?.Invoke()).CallDeferred();
+        }
 
-		private void OnAdViewPaid(int uid, Dictionary adValueDictionary)
-		{
-			if (uid != _uid) return;
-			var adValue = AdValue.Create(adValueDictionary);
-			Callable.From(() => OnAdPaid?.Invoke(adValue)).CallDeferred();
-		}
-	}
+        private void OnAdViewPaid(int uid, Dictionary adValueDictionary)
+        {
+            if (uid != _uid) return;
+            var adValue = AdValue.Create(adValueDictionary);
+            Callable.From(() => OnAdPaid?.Invoke(adValue)).CallDeferred();
+        }
+    }
 }

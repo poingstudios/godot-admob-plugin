@@ -24,14 +24,14 @@ using Godot;
 
 namespace PoingStudios.AdMob.Sample
 {
-	public interface ISampleLogger
-	{
-		void LogMessage(string message);
-	}
+    public interface ISampleLogger
+    {
+        void LogMessage(string message);
+    }
 
-	public static class SampleRegistry
-	{
-		public static ISampleLogger Logger { get; set; }
-		public static SafeArea SafeArea { get; set; }
-	}
+    public static class SampleRegistry
+    {
+        public static ISampleLogger Logger { get; set; }
+        public static SafeArea SafeArea { get; set; }
+    }
 }

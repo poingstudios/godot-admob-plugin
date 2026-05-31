@@ -27,6 +27,7 @@ const ANDROID_APP_ID := "admob/android/app_id"
 const ANDROID_MEDIATION_PREFIX := "admob/android/mediation/"
 const DEFAULT_APP_ID := "ca-app-pub-3940256099942544~3347511713"
 
+
 static func register_settings() -> void:
 	var settings := [
 		{"name": ANDROID_ENABLED, "type": TYPE_BOOL, "default": true},
@@ -53,6 +54,7 @@ static func register_settings() -> void:
 		if err != OK:
 			push_error("AdMob: Failed to save project settings")
 
+
 static func _cleanup_obsolete_settings(active_names: Array[String]) -> bool:
 	var modified := false
 	for prop in ProjectSettings.get_property_list():
@@ -61,6 +63,7 @@ static func _cleanup_obsolete_settings(active_names: Array[String]) -> bool:
 			ProjectSettings.set_setting(prop_name, null)
 			modified = true
 	return modified
+
 
 static func _add_setting(setting_name: String, type: int, default_value, order: int) -> bool:
 	var is_new := false

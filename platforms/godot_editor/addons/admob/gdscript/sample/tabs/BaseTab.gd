@@ -22,24 +22,26 @@
 
 extends VBoxContainer
 
+
 func _ready() -> void:
 	_optimize_for_scrolling(self)
+
 
 func _optimize_for_scrolling(node: Node) -> void:
 	if node is Control:
 		var is_interactive := (
-			node is Button or 
-			node is LineEdit or 
-			node is TextEdit or 
-			node is Slider or 
-			node is OptionButton or 
-			node is CheckButton or
-			node is CheckBox or
-			node is ColorPickerButton or
-			node is MenuButton
+			node is Button
+			or node is LineEdit
+			or node is TextEdit
+			or node is Slider
+			or node is OptionButton
+			or node is CheckButton
+			or node is CheckBox
+			or node is ColorPickerButton
+			or node is MenuButton
 		)
 		if not is_interactive:
 			node.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
+
 	for child in node.get_children():
 		_optimize_for_scrolling(child)

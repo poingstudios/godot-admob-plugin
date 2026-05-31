@@ -764,10 +764,32 @@ jobs:
         path: platforms/godot_editor/exports/ios/*.zip
         retention-days: 14
 
+
+  gdlint:
+    name: "Lint: GDScript"
+    needs: [changes]
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Set up Python 3.x
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.x'
+
+    - name: Install gdlint
+      run: |
+        python -m pip install --upgrade pip
+        pip install gdtoolkit
+
+    - name: Run gdlint
+      run: |
+        gdlint platforms/godot_editor/addons/
   # FINAL STATUS JOB: This is what you should set as mandatory in GitHub
   pr-validation-status:
     name: "PR Validation Status"
-    needs: [changes, build-apk, build-apk-csharp, build-ios, build-ipa, build-ipa-csharp]
+    needs: [changes, gdlint, build-apk, build-apk-csharp, build-ios, build-ipa, build-ipa-csharp]
     if: always()
     runs-on: ubuntu-latest
     steps:

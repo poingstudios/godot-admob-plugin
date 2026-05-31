@@ -27,70 +27,70 @@ using PoingStudios.AdMob.Sample;
 
 public partial class Ump : BaseTab
 {
-	public override void _Ready()
-	{
-		base._Ready();
-		GetNode<Button>("GetConsentStatus").Pressed += OnGetConsentStatusPressed;
-		GetNode<Button>("ResetConsentInformation").Pressed += OnResetConsentPressed;
-		GetNode<Button>("ShowPrivacyOptionsForm").Pressed += OnShowPrivacyOptionsFormPressed;
-	}
+    public override void _Ready()
+    {
+        base._Ready();
+        GetNode<Button>("GetConsentStatus").Pressed += OnGetConsentStatusPressed;
+        GetNode<Button>("ResetConsentInformation").Pressed += OnResetConsentPressed;
+        GetNode<Button>("ShowPrivacyOptionsForm").Pressed += OnShowPrivacyOptionsFormPressed;
+    }
 
-	private void OnGetConsentStatusPressed()
-	{
-		var info = UserMessagingPlatform.ConsentInformation;
-		Log($"Current Consent Status: {info.GetConsentStatus()}");
-		Log($"Privacy Options Requirement Status: {info.GetPrivacyOptionsRequirementStatus()}");
-	}
+    private void OnGetConsentStatusPressed()
+    {
+        var info = UserMessagingPlatform.ConsentInformation;
+        Log($"Current Consent Status: {info.GetConsentStatus()}");
+        Log($"Privacy Options Requirement Status: {info.GetPrivacyOptionsRequirementStatus()}");
+    }
 
-	private void OnShowPrivacyOptionsFormPressed()
-	{
-		Log("Showing privacy options form...");
-		UserMessagingPlatform.ShowPrivacyOptionsForm(err =>
-			Log(err == null ? "Privacy options form dismissed successfully." : $"Privacy options form error: {err.Message}"));
-	}
+    private void OnShowPrivacyOptionsFormPressed()
+    {
+        Log("Showing privacy options form...");
+        UserMessagingPlatform.ShowPrivacyOptionsForm(err =>
+            Log(err == null ? "Privacy options form dismissed successfully." : $"Privacy options form error: {err.Message}"));
+    }
 
-	private void OnResetConsentPressed()
-	{
-		Log("Resetting consent information...");
-		var info = UserMessagingPlatform.ConsentInformation;
-		info.Reset();
+    private void OnResetConsentPressed()
+    {
+        Log("Resetting consent information...");
+        var info = UserMessagingPlatform.ConsentInformation;
+        info.Reset();
 
-		var parameters = new ConsentRequestParameters
-		{
-			ConsentDebugSettings = new ConsentDebugSettings
-			{
-				DebugGeography = DebugGeography.Eea,
-				TestDeviceHashedIds = new System.Collections.Generic.List<string> { "test_device_hashed_id" },
-			},
-		};
+        var parameters = new ConsentRequestParameters
+        {
+            ConsentDebugSettings = new ConsentDebugSettings
+            {
+                DebugGeography = DebugGeography.Eea,
+                TestDeviceHashedIds = new System.Collections.Generic.List<string> { "test_device_hashed_id" },
+            },
+        };
 
-		info.Update(parameters,
-			onSuccess: () =>
-			{
-				Log($"Consent info updated. Status: {info.GetConsentStatus()}");
-				if (info.GetIsConsentFormAvailable())
-				{
-					Log("Consent form available, loading...");
-					UserMessagingPlatform.LoadConsentForm(
-						onSuccess: form =>
-						{
-							Log("Form loaded. Showing...");
-							form.Show(err =>
-								Log(err == null ? "Form dismissed." : $"Form error: {err.Message}"));
-						},
-						onFailure: err => Log($"Form load error: {err.Message}")
-					);
-				}
-			},
-			onFailure: err => Log($"Consent update error: {err.Message}")
-		);
-	}
+        info.Update(parameters,
+            onSuccess: () =>
+            {
+                Log($"Consent info updated. Status: {info.GetConsentStatus()}");
+                if (info.GetIsConsentFormAvailable())
+                {
+                    Log("Consent form available, loading...");
+                    UserMessagingPlatform.LoadConsentForm(
+                        onSuccess: form =>
+                        {
+                            Log("Form loaded. Showing...");
+                            form.Show(err =>
+                                Log(err == null ? "Form dismissed." : $"Form error: {err.Message}"));
+                        },
+                        onFailure: err => Log($"Form load error: {err.Message}")
+                    );
+                }
+            },
+            onFailure: err => Log($"Consent update error: {err.Message}")
+        );
+    }
 
-	private void Log(string message)
-	{
-		if (SampleRegistry.Logger != null)
-			SampleRegistry.Logger.LogMessage("[UMP] " + message);
-		else
-			GD.Print("[UMP] " + message);
-	}
+    private void Log(string message)
+    {
+        if (SampleRegistry.Logger != null)
+            SampleRegistry.Logger.LogMessage("[UMP] " + message);
+        else
+            GD.Print("[UMP] " + message);
+    }
 }
