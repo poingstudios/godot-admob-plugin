@@ -69,13 +69,15 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 === "Android"
 
 	1. Install the [Android Build Template](https://docs.godotengine.org/en/stable/tutorials/export/android_gradle_build.html) by navigating to `Project → Install Android Build Template`.
-	1. Add your [AdMob App ID](https://support.google.com/admob/answer/7356431) to your app's `res://addons/admob/android/config.gd` file by changing the variable `APPLICATION_ID`.
+	1. Configure the Android preset options in `Project → Project Settings... → General`:
+	    - In the left sidebar, locate the **Admob** section and click on **Android**.
+	    - Add your [AdMob App ID](https://support.google.com/admob/answer/7356431) to the `App Id` field.
+	    - Enable or disable `Enabled` and Mediation plugins (`Mediation/Meta`, `Mediation/Vungle`) by toggling the respective checkboxes.
 	
 	    !!! tip "App ID vs Ad Unit ID"
 	        - **App ID** (contains `~`): Used for app registration and internal configuration.
 	        - **Ad Unit ID** (contains `/`): Used to load specific ad formats in your code.
 	
-	1. If you have Mediation, set true the libraries at `res://addons/admob/android/config.gd`, such as: `meta`, `vungle`, etc...
 	1. When exporting your project, select `Use Gradle Build`.
 	
 	    ![export](assets/android/export.png)
