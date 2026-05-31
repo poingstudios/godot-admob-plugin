@@ -44,16 +44,22 @@ static func register_settings() -> void:
 			modified = true
 		order += 1
 	
+	if _cleanup_obsolete_settings(active_names):
+		modified = true
+	
+	if modified:
+		var err := ProjectSettings.save()
+		if err != OK:
+			push_error("AdMob: Failed to save project settings")
+
+static func _cleanup_obsolete_settings(active_names: Array[String]) -> bool:
+	var modified := false
 	for prop in ProjectSettings.get_property_list():
 		var prop_name: String = prop.name
 		if prop_name.begins_with("admob/") and not prop_name in active_names:
 			ProjectSettings.set_setting(prop_name, null)
 			modified = true
-			
-	if modified:
-		var err := ProjectSettings.save()
-		if err != OK:
-			push_error("AdMob: Failed to save project settings")
+	return modified
 
 static func _add_setting(setting_name: String, type: int, default_value, order: int) -> bool:
 	var is_new := false
