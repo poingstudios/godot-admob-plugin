@@ -30,7 +30,11 @@ static func _get_plugin(plugin_name: String, is_required := true) -> Object:
 	if os_name != "Android" and os_name != "iOS":
 		return null
 
-	var location := "the Project Settings and 'Use Gradle Build' is enabled" if os_name == "Android" else "the 'Plugins' section of the Export tab"
+	var location := (
+		"the Project Settings and 'Use Gradle Build' is enabled"
+		if os_name == "Android"
+		else "the 'Plugins' section of the Export tab"
+	)
 	var message := plugin_name + " not found, make sure it is enabled in " + location
 
 	if is_required:
@@ -40,7 +44,9 @@ static func _get_plugin(plugin_name: String, is_required := true) -> Object:
 
 	return null
 
-static func safe_connect(plugin: Object, signal_name: String, callable: Callable, flags := 0) -> void:
+static func safe_connect(
+	plugin: Object, signal_name: String, callable: Callable, flags := 0
+) -> void:
 	if plugin and not plugin.is_connected(signal_name, callable):
 		plugin.connect(signal_name, callable, flags)
 

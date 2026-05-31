@@ -25,28 +25,29 @@ extends RefCounted
 const ANDROID_ENABLED := "admob/android/enabled"
 const ANDROID_APP_ID := "admob/android/app_id"
 const ANDROID_MEDIATION_PREFIX := "admob/android/mediation/"
+const DEFAULT_APP_ID := "ca-app-pub-3940256099942544~3347511713"
 
 static func register_settings() -> void:
 	var settings := [
 		{"name": ANDROID_ENABLED, "type": TYPE_BOOL, "default": true},
-		{"name": ANDROID_APP_ID, "type": TYPE_STRING, "default": "ca-app-pub-3940256099942544~3347511713"},
+		{"name": ANDROID_APP_ID, "type": TYPE_STRING, "default": DEFAULT_APP_ID},
 		{"name": ANDROID_MEDIATION_PREFIX + "meta", "type": TYPE_BOOL, "default": false},
 		{"name": ANDROID_MEDIATION_PREFIX + "vungle", "type": TYPE_BOOL, "default": false}
 	]
-	
+
 	var active_names: Array[String] = []
 	var modified := false
 	var order := 0
-	
+
 	for s in settings:
 		active_names.append(s.name)
 		if _add_setting(s.name, s.type, s.default, order):
 			modified = true
 		order += 1
-	
+
 	if _cleanup_obsolete_settings(active_names):
 		modified = true
-	
+
 	if modified:
 		var err := ProjectSettings.save()
 		if err != OK:
@@ -66,7 +67,7 @@ static func _add_setting(setting_name: String, type: int, default_value, order: 
 	if not ProjectSettings.has_setting(setting_name):
 		ProjectSettings.set_setting(setting_name, default_value)
 		is_new = true
-		
+
 	ProjectSettings.set_initial_value(setting_name, default_value)
 	var info := {
 		"name": setting_name,

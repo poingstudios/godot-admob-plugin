@@ -24,7 +24,9 @@ extends EditorExportPlugin
 
 const Library := preload("res://addons/admob/internal/exporters/android/library.gd")
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
-const ProjectSettingsService := preload("res://addons/admob/internal/services/project_settings_service.gd")
+const ProjectSettingsService := preload(
+	"res://addons/admob/internal/services/project_settings_service.gd"
+)
 
 func _get_name() -> String:
 	return "PoingAdMobAndroid"
@@ -41,23 +43,23 @@ func _get_setting(setting_name: String, default_value):
 func _get_plugins() -> Array[EditorExportPlugin]:
 	var plugins: Array[EditorExportPlugin] = []
 	var root_bin_path := Library.ROOT_BIN_PATH
-	
+
 	var ads_enabled := _get_setting(ProjectSettingsService.ANDROID_ENABLED, true) as bool
 	if not ads_enabled:
 		return plugins
-		
+
 	var known_libs: Array[String] = ["ads", "meta", "vungle"]
 	var libs: Array[Library] = []
-	
+
 	libs.append(Library.new("ads", true))
-	
+
 	var mediation_libs: Array[String] = ["meta", "vungle"]
 	for lib_name in mediation_libs:
 		var setting_name := ProjectSettingsService.ANDROID_MEDIATION_PREFIX + lib_name
 		var is_enabled := _get_setting(setting_name, false) as bool
 		if is_enabled:
 			libs.append(Library.new(lib_name, true))
-			
+
 	var dir_access := DirAccess.open(root_bin_path)
 	if dir_access:
 		dir_access.list_dir_begin()
@@ -104,16 +106,16 @@ func _get_android_manifest_application_element_contents(_platform: EditorExportP
 	var content := PackedStringArray()
 	var known_libs: Array[String] = ["ads", "meta", "vungle"]
 	var enabled_libs: Array[String] = []
-	
+
 	enabled_libs.append("ads")
-	
+
 	var mediation_libs: Array[String] = ["meta", "vungle"]
 	for lib_name in mediation_libs:
 		var setting_name := ProjectSettingsService.ANDROID_MEDIATION_PREFIX + lib_name
 		var is_enabled := _get_setting(setting_name, false) as bool
 		if is_enabled:
 			enabled_libs.append(lib_name)
-			
+
 	var root_bin_path := Library.ROOT_BIN_PATH
 	var dir_access := DirAccess.open(root_bin_path)
 	if dir_access:
@@ -134,18 +136,18 @@ func _get_android_manifest_application_element_contents(_platform: EditorExportP
 		var lib := Library.new(lib_name, true)
 		if FileAccess.file_exists(lib.get_full_path()):
 			continue
-			
+
 		content.append("""
 		<meta-data
 			android:name="%s_CONFIGURATION_ERROR"
 			android:value="%s doesn't exists, please check your addons/admob/android/bin folder or disable in Project Settings"/>
 		""" % [lib_name, lib.get_full_path()])
-		
+
 	var app_id := _get_setting(ProjectSettingsService.ANDROID_APP_ID, "ca-app-pub-3940256099942544~3347511713") as String
 	content.append("""
 	<meta-data
 		android:name="com.google.android.gms.ads.APPLICATION_ID"
 		android:value="%s"/>
 	""" % app_id)
-	
+
 	return "\n".join(content)

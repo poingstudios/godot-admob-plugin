@@ -48,16 +48,16 @@ func install() -> void:
 	var file_name := get_zip_file_name()
 	var url := BASE_URL % [PluginVersion.current, file_name]
 	var destination := DOWNLOAD_DIR.path_join(file_name)
-	
+
 	_download_service.download_file(url, destination, "Android")
 
 func _on_download_completed(success: bool) -> void:
 	if not success:
 		return
-	
+
 	var file_name := get_zip_file_name()
 	var zip_path := DOWNLOAD_DIR.path_join(file_name)
-	
+
 	var extract_success := ZipService.extract_zip(zip_path, EXTRACT_PATH, true)
 	if extract_success:
 		_create_local_package(PACKAGE_PATH)
