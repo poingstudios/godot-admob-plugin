@@ -28,90 +28,90 @@ using PoingStudios.AdMob.Sample;
 
 public partial class Interstitial : BaseTab
 {
-    private const string AdUnitIdAndroid = "ca-app-pub-3940256099942544/1033173712";
-    private const string AdUnitIdIos = "ca-app-pub-3940256099942544/4411468910";
+	private const string AdUnitIdAndroid = "ca-app-pub-3940256099942544/1033173712";
+	private const string AdUnitIdIos = "ca-app-pub-3940256099942544/4411468910";
 
-    private string AdUnitId => OS.GetName() == "iOS" ? AdUnitIdIos : AdUnitIdAndroid;
+	private string AdUnitId => OS.GetName() == "iOS" ? AdUnitIdIos : AdUnitIdAndroid;
 
-    private InterstitialAd _interstitialAd;
+	private InterstitialAd _interstitialAd;
 
-    private Button _loadBtn;
-    private Button _showBtn;
-    private Button _destroyBtn;
+	private Button _loadBtn;
+	private Button _showBtn;
+	private Button _destroyBtn;
 
-    public override void _Ready()
-    {
-        base._Ready();
-        _loadBtn = GetNode<Button>("Load");
-        _showBtn = GetNode<Button>("Show");
-        _destroyBtn = GetNode<Button>("Destroy");
+	public override void _Ready()
+	{
+		base._Ready();
+		_loadBtn = GetNode<Button>("Load");
+		_showBtn = GetNode<Button>("Show");
+		_destroyBtn = GetNode<Button>("Destroy");
 
-        _loadBtn.Pressed += OnLoadPressed;
-        _showBtn.Pressed += OnShowPressed;
-        _destroyBtn.Pressed += OnDestroyPressed;
-    }
+		_loadBtn.Pressed += OnLoadPressed;
+		_showBtn.Pressed += OnShowPressed;
+		_destroyBtn.Pressed += OnDestroyPressed;
+	}
 
-    private void UpdateUI(bool isLoaded)
-    {
-        _loadBtn.Disabled = isLoaded;
-        _showBtn.Disabled = !isLoaded;
-        _destroyBtn.Disabled = !isLoaded;
-    }
+	private void UpdateUI(bool isLoaded)
+	{
+		_loadBtn.Disabled = isLoaded;
+		_showBtn.Disabled = !isLoaded;
+		_destroyBtn.Disabled = !isLoaded;
+	}
 
-    private void OnLoadPressed()
-    {
-        Log("Loading...");
-        UpdateUI(false);
+	private void OnLoadPressed()
+	{
+		Log("Loading...");
+		UpdateUI(false);
 
-        new InterstitialAdLoader().Load(AdUnitId, new AdRequest(), new InterstitialAdLoadCallback
-        {
-            OnAdLoaded = ad =>
-            {
-                Log("Ad loaded successfully");
-                _interstitialAd = ad;
-                _interstitialAd.OnAdPaid = adValue =>
-        {
-            string adSourceName = _interstitialAd?.GetResponseInfo()?.LoadedAdapterResponseInfo?.AdSourceName ?? "N/A";
-            Log(string.Format("Ad paid: {0:F} {1} (precision: {2}, source: {3})", adValue.ValueMicros / 1000000.0, adValue.CurrencyCode, adValue.Precision, adSourceName));
-        };
-                _interstitialAd.FullScreenContentCallback = new FullScreenContentCallback
-                {
-                    OnAdShowedFullScreenContent = () => Log("Ad showed"),
-                    OnAdDismissedFullScreenContent = () =>
-                    {
-                        Log("Ad dismissed");
-                        DestroyAd();
-                    },
-                    OnAdFailedToShowFullScreenContent = err => Log($"Failed to show: {err.Message}"),
-                    OnAdClicked = () => Log("Ad clicked"),
-                    OnAdImpression = () => Log("Impression recorded"),
-                };
-                UpdateUI(true);
-            },
-            OnAdFailedToLoad = err => { Log($"Failed to load: {err.Message}"); UpdateUI(false); },
-        });
-    }
+		new InterstitialAdLoader().Load(AdUnitId, new AdRequest(), new InterstitialAdLoadCallback
+		{
+			OnAdLoaded = ad =>
+			{
+				Log("Ad loaded successfully");
+				_interstitialAd = ad;
+				_interstitialAd.OnAdPaid = adValue =>
+		{
+			string adSourceName = _interstitialAd?.GetResponseInfo()?.LoadedAdapterResponseInfo?.AdSourceName ?? "N/A";
+			Log(string.Format("Ad paid: {0:F} {1} (precision: {2}, source: {3})", adValue.ValueMicros / 1000000.0, adValue.CurrencyCode, adValue.Precision, adSourceName));
+		};
+				_interstitialAd.FullScreenContentCallback = new FullScreenContentCallback
+				{
+					OnAdShowedFullScreenContent = () => Log("Ad showed"),
+					OnAdDismissedFullScreenContent = () =>
+					{
+						Log("Ad dismissed");
+						DestroyAd();
+					},
+					OnAdFailedToShowFullScreenContent = err => Log($"Failed to show: {err.Message}"),
+					OnAdClicked = () => Log("Ad clicked"),
+					OnAdImpression = () => Log("Impression recorded"),
+				};
+				UpdateUI(true);
+			},
+			OnAdFailedToLoad = err => { Log($"Failed to load: {err.Message}"); UpdateUI(false); },
+		});
+	}
 
-    private void OnShowPressed() => _interstitialAd?.Show();
+	private void OnShowPressed() => _interstitialAd?.Show();
 
-    private void OnDestroyPressed() => DestroyAd();
+	private void OnDestroyPressed() => DestroyAd();
 
-    private void DestroyAd()
-    {
-        if (_interstitialAd != null)
-        {
-            _interstitialAd.Destroy();
-            _interstitialAd = null;
-            Log("Ad destroyed");
-            UpdateUI(false);
-        }
-    }
+	private void DestroyAd()
+	{
+		if (_interstitialAd != null)
+		{
+			_interstitialAd.Destroy();
+			_interstitialAd = null;
+			Log("Ad destroyed");
+			UpdateUI(false);
+		}
+	}
 
-    private void Log(string message)
-    {
-        if (SampleRegistry.Logger != null)
-            SampleRegistry.Logger.LogMessage("[Interstitial] " + message);
-        else
-            GD.Print("[Interstitial] " + message);
-    }
+	private void Log(string message)
+	{
+		if (SampleRegistry.Logger != null)
+			SampleRegistry.Logger.LogMessage("[Interstitial] " + message);
+		else
+			GD.Print("[Interstitial] " + message);
+	}
 }

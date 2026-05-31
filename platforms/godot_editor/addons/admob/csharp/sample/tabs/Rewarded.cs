@@ -28,102 +28,102 @@ using PoingStudios.AdMob.Sample;
 
 public partial class Rewarded : BaseTab
 {
-    private const string AdUnitIdAndroid = "ca-app-pub-3940256099942544/5224354917";
-    private const string AdUnitIdIos = "ca-app-pub-3940256099942544/1712485313";
+	private const string AdUnitIdAndroid = "ca-app-pub-3940256099942544/5224354917";
+	private const string AdUnitIdIos = "ca-app-pub-3940256099942544/1712485313";
 
-    private string AdUnitId => OS.GetName() == "iOS" ? AdUnitIdIos : AdUnitIdAndroid;
+	private string AdUnitId => OS.GetName() == "iOS" ? AdUnitIdIos : AdUnitIdAndroid;
 
-    private RewardedAd _rewardedAd;
+	private RewardedAd _rewardedAd;
 
-    private Button _loadBtn;
-    private Button _showBtn;
-    private Button _destroyBtn;
+	private Button _loadBtn;
+	private Button _showBtn;
+	private Button _destroyBtn;
 
-    public override void _Ready()
-    {
-        base._Ready();
-        _loadBtn = GetNode<Button>("Load");
-        _showBtn = GetNode<Button>("Show");
-        _destroyBtn = GetNode<Button>("Destroy");
+	public override void _Ready()
+	{
+		base._Ready();
+		_loadBtn = GetNode<Button>("Load");
+		_showBtn = GetNode<Button>("Show");
+		_destroyBtn = GetNode<Button>("Destroy");
 
-        _loadBtn.Pressed += OnLoadPressed;
-        _showBtn.Pressed += OnShowPressed;
-        _destroyBtn.Pressed += OnDestroyPressed;
-    }
+		_loadBtn.Pressed += OnLoadPressed;
+		_showBtn.Pressed += OnShowPressed;
+		_destroyBtn.Pressed += OnDestroyPressed;
+	}
 
-    private void UpdateUI(bool isLoaded)
-    {
-        _loadBtn.Disabled = isLoaded;
-        _showBtn.Disabled = !isLoaded;
-        _destroyBtn.Disabled = !isLoaded;
-    }
+	private void UpdateUI(bool isLoaded)
+	{
+		_loadBtn.Disabled = isLoaded;
+		_showBtn.Disabled = !isLoaded;
+		_destroyBtn.Disabled = !isLoaded;
+	}
 
-    private void OnLoadPressed()
-    {
-        Log("Loading...");
-        UpdateUI(false);
+	private void OnLoadPressed()
+	{
+		Log("Loading...");
+		UpdateUI(false);
 
-        new RewardedAdLoader().Load(AdUnitId, new AdRequest(), new RewardedAdLoadCallback
-        {
-            OnAdLoaded = ad =>
-            {
-                Log("Ad loaded successfully");
-                _rewardedAd = ad;
-                _rewardedAd.OnAdPaid = adValue =>
-                {
-                    string adSourceName = _rewardedAd?.GetResponseInfo()?.LoadedAdapterResponseInfo?.AdSourceName ?? "N/A";
-                    Log(string.Format("Ad paid: {0:F} {1} (precision: {2}, source: {3})", adValue.ValueMicros / 1000000.0, adValue.CurrencyCode, adValue.Precision, adSourceName));
-                };
-                _rewardedAd.FullScreenContentCallback = new FullScreenContentCallback
-                {
-                    OnAdShowedFullScreenContent = () => Log("Ad showed"),
-                    OnAdDismissedFullScreenContent = () =>
-                    {
-                        Log("Ad dismissed");
-                        DestroyAd();
-                    },
-                    OnAdFailedToShowFullScreenContent = err => Log($"Failed to show: {err.Message}"),
-                };
+		new RewardedAdLoader().Load(AdUnitId, new AdRequest(), new RewardedAdLoadCallback
+		{
+			OnAdLoaded = ad =>
+			{
+				Log("Ad loaded successfully");
+				_rewardedAd = ad;
+				_rewardedAd.OnAdPaid = adValue =>
+				{
+					string adSourceName = _rewardedAd?.GetResponseInfo()?.LoadedAdapterResponseInfo?.AdSourceName ?? "N/A";
+					Log(string.Format("Ad paid: {0:F} {1} (precision: {2}, source: {3})", adValue.ValueMicros / 1000000.0, adValue.CurrencyCode, adValue.Precision, adSourceName));
+				};
+				_rewardedAd.FullScreenContentCallback = new FullScreenContentCallback
+				{
+					OnAdShowedFullScreenContent = () => Log("Ad showed"),
+					OnAdDismissedFullScreenContent = () =>
+					{
+						Log("Ad dismissed");
+						DestroyAd();
+					},
+					OnAdFailedToShowFullScreenContent = err => Log($"Failed to show: {err.Message}"),
+				};
 
-                var ssv = new ServerSideVerificationOptions
-                {
-                    CustomData = "TEST_DATA",
-                    UserId = "test_user",
-                };
-                _rewardedAd.SetServerSideVerificationOptions(ssv);
+				var ssv = new ServerSideVerificationOptions
+				{
+					CustomData = "TEST_DATA",
+					UserId = "test_user",
+				};
+				_rewardedAd.SetServerSideVerificationOptions(ssv);
 
-                UpdateUI(true);
-            },
-            OnAdFailedToLoad = err => { Log($"Failed to load: {err.Message}"); UpdateUI(false); },
-        });
-    }
+				UpdateUI(true);
+			},
+			OnAdFailedToLoad = err => { Log($"Failed to load: {err.Message}"); UpdateUI(false); },
+		});
+	}
 
-    private void OnShowPressed()
-    {
-        _rewardedAd?.Show(new OnUserEarnedRewardListener
-        {
-            OnUserEarnedReward = reward => Log($"Reward earned: {reward.Amount} {reward.Type}"),
-        });
-    }
+	private void OnShowPressed()
+	{
+		_rewardedAd?.Show(new OnUserEarnedRewardListener
+		{
+			OnUserEarnedReward = reward => Log($"Reward earned: {reward.Amount} {reward.Type}"),
+		});
+	}
 
-    private void OnDestroyPressed() => DestroyAd();
+	private void OnDestroyPressed() => DestroyAd();
 
-    private void DestroyAd()
-    {
-        if (_rewardedAd != null)
-        {
-            _rewardedAd.Destroy();
-            _rewardedAd = null;
-            Log("Ad destroyed");
-            UpdateUI(false);
-        }
-    }
+	private void DestroyAd()
+	{
+		if (_rewardedAd != null)
+		{
+			_rewardedAd.Destroy();
+			_rewardedAd = null;
+			Log("Ad destroyed");
+			UpdateUI(false);
+		}
+	}
 
-    private void Log(string message)
-    {
-        if (SampleRegistry.Logger != null)
-            SampleRegistry.Logger.LogMessage("[Rewarded] " + message);
-        else
-            GD.Print("[Rewarded] " + message);
-    }
+	private void Log(string message)
+	{
+		if (SampleRegistry.Logger != null)
+			SampleRegistry.Logger.LogMessage("[Rewarded] " + message);
+		else
+			GD.Print("[Rewarded] " + message);
+	}
 }
