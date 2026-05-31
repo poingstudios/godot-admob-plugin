@@ -24,58 +24,71 @@ extends Control
 
 const Registry = preload("res://addons/admob/internal/sample_registry.gd")
 
-@onready var _console_output: RichTextLabel = $Background/SafeArea/LayoutContainer/ConsolePanel/ConsoleOutput
+@onready
+var _console_output: RichTextLabel = $Background/SafeArea/LayoutContainer/ConsolePanel/ConsoleOutput
+
 
 func _ready() -> void:
 	Registry.logger = self
 	log_message("Main initialized")
-	
+
 	_initialize_mobile_ads()
+
 
 func log_message(message: String) -> void:
 	print(message)
 	if _console_output:
 		_console_output.text += "\n" + message
 
+
 func _initialize_mobile_ads() -> void:
 	var on_init_listener := OnInitializationCompleteListener.new()
 	on_init_listener.on_initialization_complete = _on_initialization_complete
-	
+
 	var request_config := RequestConfiguration.new()
-	request_config.tag_for_child_directed_treatment = RequestConfiguration.TagForChildDirectedTreatment.TRUE
+	request_config.tag_for_child_directed_treatment = (
+		RequestConfiguration.TagForChildDirectedTreatment.TRUE
+	)
 	request_config.tag_for_under_age_of_consent = RequestConfiguration.TagForUnderAgeOfConsent.TRUE
 	request_config.max_ad_content_rating = RequestConfiguration.MAX_AD_CONTENT_RATING_G
-	request_config.test_device_ids = [] # Production ready
-	
+	request_config.test_device_ids = []  # Production ready
+
 	MobileAds.set_request_configuration(request_config)
 	MobileAds.initialize(on_init_listener)
+
 
 func _on_initialization_complete(status: InitializationStatus) -> void:
 	log_message("MobileAds initialization complete")
 	_log_adapter_status(status)
-	
+
 	_setup_mediation_adapters()
-	
+
 	if OS.get_name() == "iOS":
 		FBAdSettings.set_advertiser_tracking_enabled(true)
+
 
 func _setup_mediation_adapters() -> void:
 	# Vungle setup example
 	Vungle.update_ccpa_status(Vungle.Consent.OPTED_OUT)
 	Vungle.update_consent_status(Vungle.Consent.OPTED_IN, "consent_message")
 
+
 func _on_get_initialization_status_pressed() -> void:
 	var status := MobileAds.get_initialization_status()
 	if status:
 		_log_adapter_status(status)
 
+
 func _log_adapter_status(status: InitializationStatus) -> void:
 	for adapter_name in status.adapter_status_map:
 		var adapter_status: AdapterStatus = status.adapter_status_map[adapter_name]
-		var info := "[%s] State: %d | Latency: %dms | Desc: %s" % [
-			adapter_name,
-			adapter_status.initialization_state,
-			adapter_status.latency,
-			adapter_status.description
-		]
+		var info := (
+			"[%s] State: %d | Latency: %dms | Desc: %s"
+			% [
+				adapter_name,
+				adapter_status.initialization_state,
+				adapter_status.latency,
+				adapter_status.description
+			]
+		)
 		log_message(info)

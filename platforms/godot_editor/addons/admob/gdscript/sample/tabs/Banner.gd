@@ -43,7 +43,6 @@ var _is_hidden := false
 @onready var _width_value: LineEdit = %WidthValue
 @onready var _height_value: LineEdit = %HeightValue
 
-
 enum Preset {
 	ADAPTIVE,
 	BANNER,
@@ -56,6 +55,7 @@ enum Preset {
 	CUSTOM
 }
 
+
 func _ready() -> void:
 	super()
 	_ad_listener.on_ad_clicked = _on_ad_clicked
@@ -64,54 +64,82 @@ func _ready() -> void:
 	_ad_listener.on_ad_impression = _on_ad_impression
 	_ad_listener.on_ad_loaded = _on_ad_loaded
 	_ad_listener.on_ad_opened = _on_ad_opened
-	
-	_size_option.item_selected.connect(func(index: int) -> void:
-		_custom_size.visible = index == Preset.CUSTOM
+
+	_size_option.item_selected.connect(
+		func(index: int) -> void: _custom_size.visible = index == Preset.CUSTOM
 	)
-	
+
 	_update_ui_state(false)
+
 
 func _update_ui_state(is_loaded: bool) -> void:
 	_load_button.disabled = is_loaded
 	_load_background_button.disabled = is_loaded
 	_destroy_button.disabled = !is_loaded
 	_get_size_button.disabled = !is_loaded
-	
+
 	_show_button.disabled = not (is_loaded and _is_hidden)
 	_hide_button.disabled = not (is_loaded and not _is_hidden)
 
+
 func _get_ad_unit_id(is_collapsible: bool = false) -> String:
 	if is_collapsible:
-		return "ca-app-pub-3940256099942544/2014213617" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/8388050270"
-	return "ca-app-pub-3940256099942544/6300978111" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/2934735716"
+		return (
+			"ca-app-pub-3940256099942544/2014213617"
+			if OS.get_name() == "Android"
+			else "ca-app-pub-3940256099942544/8388050270"
+		)
+	return (
+		"ca-app-pub-3940256099942544/6300978111"
+		if OS.get_name() == "Android"
+		else "ca-app-pub-3940256099942544/2934735716"
+	)
+
 
 func _get_selected_ad_size() -> AdSize:
 	match _size_option.selected:
-		Preset.ADAPTIVE: return AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(AdSize.FULL_WIDTH)
-		Preset.BANNER: return AdSize.BANNER
-		Preset.FULL_BANNER: return AdSize.FULL_BANNER
-		Preset.LARGE_BANNER: return AdSize.LARGE_BANNER
-		Preset.LEADERBOARD: return AdSize.LEADERBOARD
-		Preset.MEDIUM_RECTANGLE: return AdSize.MEDIUM_RECTANGLE
-		Preset.WIDE_SKYSCRAPER: return AdSize.WIDE_SKYSCRAPER
-		Preset.SMART_BANNER: return AdSize.SMART_BANNER
-		Preset.CUSTOM: return AdSize.new(int(_width_value.text), int(_height_value.text))
+		Preset.ADAPTIVE:
+			return AdSize.get_current_orientation_anchored_adaptive_banner_ad_size(
+				AdSize.FULL_WIDTH
+			)
+		Preset.BANNER:
+			return AdSize.BANNER
+		Preset.FULL_BANNER:
+			return AdSize.FULL_BANNER
+		Preset.LARGE_BANNER:
+			return AdSize.LARGE_BANNER
+		Preset.LEADERBOARD:
+			return AdSize.LEADERBOARD
+		Preset.MEDIUM_RECTANGLE:
+			return AdSize.MEDIUM_RECTANGLE
+		Preset.WIDE_SKYSCRAPER:
+			return AdSize.WIDE_SKYSCRAPER
+		Preset.SMART_BANNER:
+			return AdSize.SMART_BANNER
+		Preset.CUSTOM:
+			return AdSize.new(int(_width_value.text), int(_height_value.text))
 	return AdSize.BANNER
+
 
 func _load_banner(hide_immediately: bool = false) -> void:
 	if _ad_view:
 		_ad_view.destroy()
-	
+
 	_update_ui_state(false)
 	var is_collapsible_request := _collapsible_toggle.button_pressed
 	var ad_size := _get_selected_ad_size()
-	
-	_log("Loading banner (%s)%s%s..." % [
-		_size_option.get_item_text(_size_option.selected),
-		" in background" if hide_immediately else "",
-		" (collapsible)" if is_collapsible_request else ""
-	])
-	
+
+	_log(
+		(
+			"Loading banner (%s)%s%s..."
+			% [
+				_size_option.get_item_text(_size_option.selected),
+				" in background" if hide_immediately else "",
+				" (collapsible)" if is_collapsible_request else ""
+			]
+		)
+	)
+
 	_ad_view = AdView.new(_get_ad_unit_id(is_collapsible_request), ad_size, _ad_position)
 	_ad_view.ad_listener = _ad_listener
 	_ad_view.on_ad_paid = func(ad_value: AdValue) -> void:
@@ -122,26 +150,39 @@ func _load_banner(hide_immediately: bool = false) -> void:
 				ad_source_name = response_info.loaded_adapter_response_info.ad_source_name
 			else:
 				ad_source_name = "None"
-		_log("Ad paid: %f %s (precision: %d, source: %s)" % [ad_value.value_micros / 1000000.0, ad_value.currency_code, ad_value.precision, ad_source_name])
-	
+		_log(
+			(
+				"Ad paid: %f %s (precision: %d, source: %s)"
+				% [
+					ad_value.value_micros / 1000000.0,
+					ad_value.currency_code,
+					ad_value.precision,
+					ad_source_name
+				]
+			)
+		)
+
 	_is_hidden = hide_immediately
 	_update_ui_state(false)
 	if _is_hidden:
 		_ad_view.hide()
-	
+
 	var ad_request := AdRequest.new()
 	if is_collapsible_request:
 		var collapsible_pos := "top" if _ad_position == AdPosition.TOP else "bottom"
 		ad_request.extras["collapsible"] = collapsible_pos
 		_log("Requesting collapsible banner (%s)" % collapsible_pos)
-			
+
 	_ad_view.load_ad(ad_request)
+
 
 func _on_load_banner_pressed() -> void:
 	_load_banner(false)
 
+
 func _on_load_banner_background_pressed() -> void:
 	_load_banner(true)
+
 
 func _on_destroy_banner_pressed() -> void:
 	if _ad_view:
@@ -152,6 +193,7 @@ func _on_destroy_banner_pressed() -> void:
 		if Registry.safe_area:
 			Registry.safe_area.reset_ad_overlap()
 
+
 func _on_show_banner_pressed() -> void:
 	if _ad_view:
 		_is_hidden = false
@@ -160,6 +202,7 @@ func _on_show_banner_pressed() -> void:
 		_update_ui_state(true)
 		if Registry.safe_area:
 			Registry.safe_area.update_ad_overlap(_ad_view)
+
 
 func _on_hide_banner_pressed() -> void:
 	if _ad_view:
@@ -170,15 +213,20 @@ func _on_hide_banner_pressed() -> void:
 		if Registry.safe_area:
 			Registry.safe_area.reset_ad_overlap()
 
+
 func _on_get_size_pressed() -> void:
 	if _ad_view:
-		var info := "W: %d, H: %d | Pixels: %dx%d" % [
-			_ad_view.get_width(),
-			_ad_view.get_height(),
-			_ad_view.get_width_in_pixels(),
-			_ad_view.get_height_in_pixels()
-		]
+		var info := (
+			"W: %d, H: %d | Pixels: %dx%d"
+			% [
+				_ad_view.get_width(),
+				_ad_view.get_height(),
+				_ad_view.get_width_in_pixels(),
+				_ad_view.get_height_in_pixels()
+			]
+		)
 		_log(info)
+
 
 func _on_apply_custom_pressed() -> void:
 	var x := int(_x_value.text)
@@ -187,6 +235,8 @@ func _on_apply_custom_pressed() -> void:
 	_update_position(AdPosition.custom(x, y))
 
 	DisplayServer.virtual_keyboard_hide()
+
+
 #region Callbacks
 func _on_ad_failed_to_load(error: LoadAdError) -> void:
 	_log("Failed to load: " + error.message)
@@ -194,16 +244,20 @@ func _on_ad_failed_to_load(error: LoadAdError) -> void:
 	if Registry.safe_area:
 		Registry.safe_area.reset_ad_overlap()
 
+
 func _on_ad_clicked() -> void:
 	_log("Ad clicked")
+
 
 func _on_ad_closed() -> void:
 	_log("Ad closed")
 	if Registry.safe_area:
 		Registry.safe_area.update_ad_overlap(_ad_view)
 
+
 func _on_ad_impression() -> void:
 	_log("Ad impression recorded")
+
 
 func _on_ad_loaded() -> void:
 	var is_collapsible := _ad_view.is_collapsible()
@@ -215,11 +269,15 @@ func _on_ad_loaded() -> void:
 	if Registry.safe_area and not _is_hidden:
 		Registry.safe_area.update_ad_overlap(_ad_view)
 
+
 func _on_ad_opened() -> void:
 	_log("Ad opened")
 	if Registry.safe_area:
 		Registry.safe_area.update_ad_overlap(_ad_view)
+
+
 #endregion
+
 
 func _update_position(new_position: AdPosition) -> void:
 	_ad_position = new_position
@@ -229,17 +287,46 @@ func _update_position(new_position: AdPosition) -> void:
 		if Registry.safe_area and not _is_hidden:
 			Registry.safe_area.update_ad_overlap(_ad_view)
 
+
 #region Position Signals
-func _on_top_pressed() -> void: _update_position(AdPosition.TOP)
-func _on_bottom_pressed() -> void: _update_position(AdPosition.BOTTOM)
-func _on_left_pressed() -> void: _update_position(AdPosition.LEFT)
-func _on_right_pressed() -> void: _update_position(AdPosition.RIGHT)
-func _on_top_left_pressed() -> void: _update_position(AdPosition.TOP_LEFT)
-func _on_top_right_pressed() -> void: _update_position(AdPosition.TOP_RIGHT)
-func _on_bottom_left_pressed() -> void: _update_position(AdPosition.BOTTOM_LEFT)
-func _on_bottom_right_pressed() -> void: _update_position(AdPosition.BOTTOM_RIGHT)
-func _on_center_pressed() -> void: _update_position(AdPosition.CENTER)
+func _on_top_pressed() -> void:
+	_update_position(AdPosition.TOP)
+
+
+func _on_bottom_pressed() -> void:
+	_update_position(AdPosition.BOTTOM)
+
+
+func _on_left_pressed() -> void:
+	_update_position(AdPosition.LEFT)
+
+
+func _on_right_pressed() -> void:
+	_update_position(AdPosition.RIGHT)
+
+
+func _on_top_left_pressed() -> void:
+	_update_position(AdPosition.TOP_LEFT)
+
+
+func _on_top_right_pressed() -> void:
+	_update_position(AdPosition.TOP_RIGHT)
+
+
+func _on_bottom_left_pressed() -> void:
+	_update_position(AdPosition.BOTTOM_LEFT)
+
+
+func _on_bottom_right_pressed() -> void:
+	_update_position(AdPosition.BOTTOM_RIGHT)
+
+
+func _on_center_pressed() -> void:
+	_update_position(AdPosition.CENTER)
+
+
 #endregion
+
 
 func _log(message: String) -> void:
 	if Registry.logger:

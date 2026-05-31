@@ -28,17 +28,21 @@ const ProjectSettingsService := preload(
 	"res://addons/admob/internal/services/project_settings_service.gd"
 )
 
+
 func _get_name() -> String:
 	return "PoingAdMobAndroid"
+
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
 	var ads_enabled := _get_setting(ProjectSettingsService.ANDROID_ENABLED, true) as bool
 	return platform is EditorExportPlatformAndroid and ads_enabled
 
+
 func _get_setting(setting_name: String, default_value):
 	if ProjectSettings.has_setting(setting_name):
 		return ProjectSettings.get_setting(setting_name)
 	return default_value
+
 
 func _get_plugins() -> Array[EditorExportPlugin]:
 	var plugins: Array[EditorExportPlugin] = []
@@ -67,9 +71,13 @@ func _get_plugins() -> Array[EditorExportPlugin]:
 		while dir_name != "":
 			if dir_access.current_is_dir() and not dir_name.begins_with("."):
 				if not dir_name in known_libs:
-					var gd_path := root_bin_path.path_join(dir_name).path_join("poing_godot_admob_" + dir_name + ".gd")
+					var gd_path := root_bin_path.path_join(dir_name).path_join(
+						"poing_godot_admob_" + dir_name + ".gd"
+					)
 					if FileAccess.file_exists(gd_path):
-						var setting_name := ProjectSettingsService.ANDROID_MEDIATION_PREFIX + dir_name
+						var setting_name := (
+							ProjectSettingsService.ANDROID_MEDIATION_PREFIX + dir_name
+						)
 						var is_enabled := _get_setting(setting_name, false) as bool
 						if is_enabled:
 							libs.append(Library.new(dir_name, true))
@@ -82,6 +90,7 @@ func _get_plugins() -> Array[EditorExportPlugin]:
 		plugins.append(lib.get_plugin())
 	return plugins
 
+
 func _get_android_libraries(platform: EditorExportPlatform, debug: bool) -> PackedStringArray:
 	var libraries := PackedStringArray()
 
@@ -89,6 +98,7 @@ func _get_android_libraries(platform: EditorExportPlatform, debug: bool) -> Pack
 		libraries.append_array(plugin._get_android_libraries(platform, debug))
 
 	return libraries
+
 
 func _get_android_dependencies(platform: EditorExportPlatform, debug: bool) -> PackedStringArray:
 	var dependencies := PackedStringArray()
@@ -98,7 +108,10 @@ func _get_android_dependencies(platform: EditorExportPlatform, debug: bool) -> P
 
 	return dependencies
 
-func _get_android_manifest_application_element_contents(_platform: EditorExportPlatform, _debug: bool) -> String:
+
+func _get_android_manifest_application_element_contents(
+	_platform: EditorExportPlatform, _debug: bool
+) -> String:
 	var ads_enabled := _get_setting(ProjectSettingsService.ANDROID_ENABLED, true) as bool
 	if not ads_enabled:
 		return ""
@@ -124,9 +137,13 @@ func _get_android_manifest_application_element_contents(_platform: EditorExportP
 		while dir_name != "":
 			if dir_access.current_is_dir() and not dir_name.begins_with("."):
 				if not dir_name in known_libs:
-					var gd_path := root_bin_path.path_join(dir_name).path_join("poing_godot_admob_" + dir_name + ".gd")
+					var gd_path := root_bin_path.path_join(dir_name).path_join(
+						"poing_godot_admob_" + dir_name + ".gd"
+					)
 					if FileAccess.file_exists(gd_path):
-						var setting_name := ProjectSettingsService.ANDROID_MEDIATION_PREFIX + dir_name
+						var setting_name := (
+							ProjectSettingsService.ANDROID_MEDIATION_PREFIX + dir_name
+						)
 						var is_enabled := _get_setting(setting_name, false) as bool
 						if is_enabled:
 							enabled_libs.append(dir_name)
@@ -137,17 +154,38 @@ func _get_android_manifest_application_element_contents(_platform: EditorExportP
 		if FileAccess.file_exists(lib.get_full_path()):
 			continue
 
-		content.append("""
+		(
+			content
+			. append(
+				(
+					"""
 		<meta-data
 			android:name="%s_CONFIGURATION_ERROR"
 			android:value="%s doesn't exists, please check your addons/admob/android/bin folder or disable in Project Settings"/>
-		""" % [lib_name, lib.get_full_path()])
+		"""
+					% [lib_name, lib.get_full_path()]
+				)
+			)
+		)
 
-	var app_id := _get_setting(ProjectSettingsService.ANDROID_APP_ID, "ca-app-pub-3940256099942544~3347511713") as String
-	content.append("""
+	var app_id := (
+		_get_setting(
+			ProjectSettingsService.ANDROID_APP_ID, "ca-app-pub-3940256099942544~3347511713"
+		)
+		as String
+	)
+	(
+		content
+		. append(
+			(
+				"""
 	<meta-data
 		android:name="com.google.android.gms.ads.APPLICATION_ID"
 		android:value="%s"/>
-	""" % app_id)
+	"""
+				% app_id
+			)
+		)
+	)
 
 	return "\n".join(content)

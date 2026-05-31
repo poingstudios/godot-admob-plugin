@@ -39,6 +39,7 @@ This repository is a Godot plugin that integrates the Google AdMob SDK into Godo
 ## 📝 Coding Standards
 - **License Header:** EVERY new file MUST start with the project's MIT License header.
 - **GDScript:** Always use `:=` for type inference. Prefix bridge signals with `_on_admob_`.
+- **Linting:** Always run `gdlint platforms/godot_editor/addons/` and verify/fix errors before proposing changes.
 - **C#:** Use PascalCase. Maintain 1:1 parity with the GDScript API.
 - **Samples:** Always use platform-specific test Ad Unit IDs with ternary operators (GDScript) or properties (C#). Verify IDs against `docs/enable_test_ads.md`.
 

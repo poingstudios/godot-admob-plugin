@@ -30,20 +30,24 @@ var _export_path := ""
 var _is_ios := false
 var _spm_dependencies: Array[Dictionary] = []
 
+
 func _get_name() -> String:
 	return "PoingAdMobIOS"
 
+
 func _supports_platform(platform: EditorExportPlatform) -> bool:
 	return platform.get_os_name() == "iOS"
+
 
 func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
 	_export_path = path
 	_is_ios = features.has("ios")
 
+
 func _export_end() -> void:
 	if not _is_ios or _export_path.is_empty():
 		return
-		
+
 	var activated_plugins := ExportService.get_activated_plugins("iOS")
 	if activated_plugins.is_empty():
 		return
@@ -61,23 +65,25 @@ func _export_end() -> void:
 	# after save_pack finishes). We must defer the pbxproj patching.
 	_defer_pbxproj_patch.call_deferred(export_dir)
 
+
 func _defer_pbxproj_patch(export_dir: String) -> void:
 	_patch_xcodeproj(export_dir)
 	_spm_dependencies.clear()
 
+
 func _patch_xcodeproj(export_dir: String) -> void:
 	var project_name := _export_path.get_file().get_basename()
 	var pbxproj_path := export_dir.path_join(project_name + ".xcodeproj/project.pbxproj")
-	
+
 	if FileAccess.file_exists(pbxproj_path):
 		PbxprojService.patch(pbxproj_path)
 		return
-	
+
 	var dir := DirAccess.open(export_dir)
 	if not dir:
 		push_warning("AdMob: Could not open export directory: %s" % export_dir)
 		return
-	
+
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
 	while file_name != "":
@@ -90,12 +96,13 @@ func _patch_xcodeproj(export_dir: String) -> void:
 			break
 		file_name = dir.get_next()
 
+
 func _collect_spm_dependencies(activated_plugins: Array[String]) -> Array[Dictionary]:
 	var deps: Array[Dictionary] = []
 	var dir := DirAccess.open(PLUGIN_CONFIG_DIR)
 	if not dir:
 		return deps
-		
+
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
 	while file_name != "":
@@ -111,10 +118,10 @@ func _collect_spm_dependencies(activated_plugins: Array[String]) -> Array[Dictio
 							# url@mode:version|product
 							var main_parts := pkg_str.split("|")
 							var product := main_parts[1] if main_parts.size() > 1 else ""
-							
+
 							var url_and_rules := main_parts[0].split("@")
 							var url := url_and_rules[0]
-							
+
 							if url_and_rules.size() > 1:
 								var rules := url_and_rules[1].split(":")
 								if rules.size() > 1:
@@ -128,12 +135,13 @@ func _collect_spm_dependencies(activated_plugins: Array[String]) -> Array[Dictio
 		file_name = dir.get_next()
 	return deps
 
+
 func _generate_package_swift(export_dir: String, dependencies: Array[Dictionary]) -> void:
 	var package_deps_str := ""
 	var target_deps_str := ""
 	var processed_urls := []
 	var processed_products := []
-	
+
 	for dep in dependencies:
 		var url: String = dep.url
 		var product: String = dep.product
@@ -141,14 +149,24 @@ func _generate_package_swift(export_dir: String, dependencies: Array[Dictionary]
 
 		if not processed_urls.has(url):
 			processed_urls.append(url)
-			var version_rule := 'exact: "%s"' % dep.version if dep.kind == "exact" else 'from: "%s"' % dep.version
+			var version_rule := (
+				'exact: "%s"' % dep.version if dep.kind == "exact" else 'from: "%s"' % dep.version
+			)
 			package_deps_str += '        .package(url: "%s", %s),\n' % [url, version_rule]
-			
+
 		if not processed_products.has(product):
 			processed_products.append(product)
-			target_deps_str += '                .product(name: "%s", package: "%s"),\n' % [product, package_name]
+			target_deps_str += (
+				'                .product(name: "%s", package: "%s"),\n' % [product, package_name]
+			)
 
-	var content := "// swift-tools-version:5.9\nimport PackageDescription\n\nlet package = Package(\n    name: \"PoingGodotAdMobDeps\",\n    platforms: [.iOS(.v13)],\n    products: [\n        .library(\n            name: \"PoingGodotAdMobDeps\",\n            targets: [\"PoingGodotAdMobDeps\"]),\n    ],\n    dependencies: [\n" + package_deps_str + "    ],\n    targets: [\n        .target(\n            name: \"PoingGodotAdMobDeps\",\n            dependencies: [\n" + target_deps_str + "            ],\n            path: \"PoingGodotAdMobDeps\"\n        )\n    ]\n)\n"
+	var content := (
+		'// swift-tools-version:5.9\nimport PackageDescription\n\nlet package = Package(\n    name: "PoingGodotAdMobDeps",\n    platforms: [.iOS(.v13)],\n    products: [\n        .library(\n            name: "PoingGodotAdMobDeps",\n            targets: ["PoingGodotAdMobDeps"]),\n    ],\n    dependencies: [\n'
+		+ package_deps_str
+		+ '    ],\n    targets: [\n        .target(\n            name: "PoingGodotAdMobDeps",\n            dependencies: [\n'
+		+ target_deps_str
+		+ '            ],\n            path: "PoingGodotAdMobDeps"\n        )\n    ]\n)\n'
+	)
 
 	var file := FileAccess.open(export_dir.path_join("Package.swift"), FileAccess.WRITE)
 	if file:
@@ -156,11 +174,12 @@ func _generate_package_swift(export_dir: String, dependencies: Array[Dictionary]
 		file.close()
 		print("AdMob: Generated Package.swift at %s" % export_dir)
 
+
 func _generate_dummy_source(export_dir: String) -> void:
 	var source_dir := export_dir.path_join("PoingGodotAdMobDeps")
 	if not DirAccess.dir_exists_absolute(source_dir):
 		DirAccess.make_dir_recursive_absolute(source_dir)
-			
+
 	var content := "// Dummy\nimport Foundation\n\npublic struct PoingGodotAdMobDeps {\n    public init() {}\n}\n"
 	var file := FileAccess.open(source_dir.path_join("Dummy.swift"), FileAccess.WRITE)
 	if file:

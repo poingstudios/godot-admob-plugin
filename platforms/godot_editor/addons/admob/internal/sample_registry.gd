@@ -23,5 +23,5 @@
 # This static registry allows for decoupled communication between sample components.
 # It avoids the use of global groups and complex node path dependencies.
 
-static var logger: Node = null # Expects a node with a 'log_message(String)' method
-static var safe_area: Node = null # Expects a SafeArea node instance
+static var logger: Node = null  # Expects a node with a 'log_message(String)' method
+static var safe_area: Node = null  # Expects a SafeArea node instance

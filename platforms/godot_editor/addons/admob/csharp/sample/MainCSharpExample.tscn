@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bshvjiqlgngc8"]
 
-[ext_resource type="Script" uid="uid://c5ru3ymgh15wp" path="res://addons/admob/csharp/sample/MainCSharpExample.cs" id="1_csharp"]
-[ext_resource type="Script" uid="uid://cd6xc0seutptq" path="res://addons/admob/csharp/sample/SafeArea.cs" id="2_safe"]
+[ext_resource type="Script" uid="uid://crsq604yi2nck" path="res://addons/admob/csharp/sample/MainCSharpExample.cs" id="1_csharp"]
+[ext_resource type="Script" uid="uid://cvbn0gnkvgbiq" path="res://addons/admob/csharp/sample/SafeArea.cs" id="2_safe"]
 [ext_resource type="Texture2D" uid="uid://to8hnfn5fmrl" path="res://addons/admob/assets/icon-76.png" id="3_icon"]
 [ext_resource type="FontFile" uid="uid://ctd0my3oi3sl7" path="res://addons/admob/assets/fonts/arial.ttf" id="4_arial"]
 [ext_resource type="Texture2D" uid="uid://b04npsmf70fhr" path="res://addons/admob/assets/donate/Patreon_logo_with_wordmark.svg" id="5_patreon"]

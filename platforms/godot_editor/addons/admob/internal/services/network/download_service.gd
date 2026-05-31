@@ -27,57 +27,80 @@ var _http_request: HTTPRequest
 var _progress_timer: Timer
 var _platform: String = ""
 
+
 func _init(host: Node) -> void:
 	_http_request = HTTPRequest.new()
 	host.add_child(_http_request)
 	_http_request.request_completed.connect(_on_request_completed)
-	
+
 	_progress_timer = Timer.new()
 	host.add_child(_progress_timer)
 	_progress_timer.timeout.connect(_on_progress_timer_timeout)
+
 
 func download_file(url: String, destination_path: String, platform: String = "") -> void:
 	if _http_request.get_http_client_status() != HTTPClient.STATUS_DISCONNECTED:
 		push_error("AdMob: Download already in progress")
 		return
-	
+
 	_platform = platform
 	DirAccess.make_dir_recursive_absolute(destination_path.get_base_dir())
-	
+
 	print("Downloading " + url)
 	_http_request.download_file = destination_path
 	_http_request.request(url)
 	_progress_timer.start(3.0)
 
-func _on_request_completed(_result: int, response_code: int, _headers: PackedStringArray, _body: PackedByteArray) -> void:
+
+func _on_request_completed(
+	_result: int, response_code: int, _headers: PackedStringArray, _body: PackedByteArray
+) -> void:
 	_progress_timer.stop()
-	
+
 	var is_success := response_code == 200
 
 	if is_success:
-		var download_path := ProjectSettings.globalize_path(_http_request.download_file.get_base_dir())
-		print_rich("[color=GREEN]Downloaded[/color] at: [color=CORNFLOWER_BLUE][url]" + download_path + "[/url][/color]")
+		var download_path := ProjectSettings.globalize_path(
+			_http_request.download_file.get_base_dir()
+		)
+		print_rich(
+			(
+				"[color=GREEN]Downloaded[/color] at: [color=CORNFLOWER_BLUE][url]"
+				+ download_path
+				+ "[/url][/color]"
+			)
+		)
 	else:
 		var platform_str := _platform if not _platform.is_empty() else "Android/iOS"
 		_push_err_002(platform_str)
-	
+
 	download_completed.emit(is_success)
+
 
 func _on_progress_timer_timeout() -> void:
 	var body_size = _http_request.get_body_size()
 	var downloaded_bytes = _http_request.get_downloaded_bytes()
-	
+
 	if body_size > 0:
 		var percent = int(downloaded_bytes * 100 / body_size)
 		print("Download percent: " + str(percent) + "%")
 		download_progress.emit(percent)
+
 
 func _push_err_002(platform_str: String) -> void:
 	var PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 	var error_id := "ERR_002"
 	var error_path := "addons/admob/docs/errors/%s.md" % error_id
 	var error_msg := "%s: It is not possible to download the %s plugin." % [error_id, platform_str]
-	var github_url := "https://github.com/poingstudios/godot-admob-plugin/blob/%s/platforms/godot_editor/%s" % [PluginVersion.current, error_path]
-	
+	var github_url := (
+		"https://github.com/poingstudios/godot-admob-plugin/blob/%s/platforms/godot_editor/%s"
+		% [PluginVersion.current, error_path]
+	)
+
 	printerr(error_msg)
-	print_rich("[color=RED]Read more about on: [/color][color=CORNFLOWER_BLUE][url=%s]res://%s[/url][/color]" % [github_url, error_path])
+	print_rich(
+		(
+			"[color=RED]Read more about on: [/color][color=CORNFLOWER_BLUE][url=%s]res://%s[/url][/color]"
+			% [github_url, error_path]
+		)
+	)

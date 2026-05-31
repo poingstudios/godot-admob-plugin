@@ -21,7 +21,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="AdMobAddon"
 config/tags=PackedStringArray("admob", "mobile", "plugin", "sample")
-run/main_scene="uid://0esyp38ds6yg"
+run/main_scene="uid://bshvjiqlgngc8"
 config/features=PackedStringArray("4.6", "C#", "GL Compatibility")
 config/icon="res://addons/admob/assets/icon-1024.png"
 
