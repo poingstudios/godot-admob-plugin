@@ -126,13 +126,13 @@ public partial class Banner : BaseTab
 		};
 		_dismissBtn.Hide();
 
-		_dismissBtn.AnchorLeft = 1f;
-		_dismissBtn.AnchorRight = 1f;
+		_dismissBtn.AnchorLeft = 0f;
+		_dismissBtn.AnchorRight = 0f;
 		_dismissBtn.AnchorTop = 0f;
 		_dismissBtn.AnchorBottom = 0f;
-		_dismissBtn.OffsetLeft = -160f;
+		_dismissBtn.OffsetLeft = 10f;
 		_dismissBtn.OffsetTop = 10f;
-		_dismissBtn.OffsetRight = -10f;
+		_dismissBtn.OffsetRight = 160f;
 		_dismissBtn.OffsetBottom = 45f;
 
 		var styleNormal = new StyleBoxFlat

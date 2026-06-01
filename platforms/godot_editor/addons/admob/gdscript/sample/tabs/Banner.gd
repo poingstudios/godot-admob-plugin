@@ -79,14 +79,14 @@ func _ready() -> void:
 	_dismiss_btn.text = "× Destroy Mock Ad"
 	_dismiss_btn.hide()
 
-	_dismiss_btn.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	_dismiss_btn.anchor_left = 1.0
-	_dismiss_btn.anchor_right = 1.0
+	_dismiss_btn.set_anchors_preset(Control.PRESET_TOP_LEFT)
+	_dismiss_btn.anchor_left = 0.0
+	_dismiss_btn.anchor_right = 0.0
 	_dismiss_btn.anchor_top = 0.0
 	_dismiss_btn.anchor_bottom = 0.0
-	_dismiss_btn.offset_left = -160
+	_dismiss_btn.offset_left = 10
 	_dismiss_btn.offset_top = 10
-	_dismiss_btn.offset_right = -10
+	_dismiss_btn.offset_right = 160
 	_dismiss_btn.offset_bottom = 45
 
 	var style_normal := StyleBoxFlat.new()
