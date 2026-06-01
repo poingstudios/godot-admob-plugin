@@ -65,11 +65,9 @@ func reset_ad_overlap() -> void:
 
 
 func _update_safe_area() -> void:
-	# Only apply safe area on mobile platforms
+	# Apply safe area and ad margins
 	var platform := OS.get_name()
-	if platform != "iOS" and platform != "Android":
-		_apply_margins(0, 0, 0, 0)
-		return
+	var is_mobile := platform == "iOS" or platform == "Android"
 
 	var safe_area := DisplayServer.get_display_safe_area()
 	var window_size := DisplayServer.window_get_size()
@@ -82,10 +80,10 @@ func _update_safe_area() -> void:
 	var scale_factor := viewport_size.y / float(window_size.y)
 
 	# DisplayServer returns physical screen coordinates for the safe area
-	var safe_top := float(safe_area.position.y)
-	var safe_left := float(safe_area.position.x)
-	var safe_bottom := float(window_size.y - (safe_area.position.y + safe_area.size.y))
-	var safe_right := float(window_size.x - (safe_area.position.x + safe_area.size.x))
+	var safe_top := float(safe_area.position.y) if is_mobile else 0.0
+	var safe_left := float(safe_area.position.x) if is_mobile else 0.0
+	var safe_bottom := float(window_size.y - (safe_area.position.y + safe_area.size.y)) if is_mobile else 0.0
+	var safe_right := float(window_size.x - (safe_area.position.x + safe_area.size.x)) if is_mobile else 0.0
 
 	# Apply final margins scaled to the viewport
 	_apply_margins(

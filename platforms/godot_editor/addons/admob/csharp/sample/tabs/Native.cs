@@ -303,7 +303,10 @@ namespace PoingStudios.AdMob.Sample
             int y = _yValue.Text.ToInt();
             Log($"Applying custom position: ({x}, {y})");
             UpdatePosition(AdPosition.Custom(x, y));
-            DisplayServer.VirtualKeyboardHide();
+            if (DisplayServer.HasFeature(DisplayServer.Feature.VirtualKeyboard))
+            {
+                DisplayServer.VirtualKeyboardHide();
+            }
         }
 
         private void Log(string message)

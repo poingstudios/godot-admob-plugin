@@ -301,7 +301,8 @@ func _on_apply_custom_pressed() -> void:
 	_log("Applying custom position: (%d, %d)" % [x, y])
 	_update_position(AdPosition.custom(x, y))
 
-	DisplayServer.virtual_keyboard_hide()
+	if DisplayServer.has_feature(DisplayServer.FEATURE_VIRTUAL_KEYBOARD):
+		DisplayServer.virtual_keyboard_hide()
 
 
 #region Callbacks

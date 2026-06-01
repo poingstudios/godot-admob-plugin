@@ -146,7 +146,10 @@ public partial class Banner : BaseTab
 		{
 			Log($"Applying custom position: ({x}, {y})");
 			UpdatePosition(AdPosition.Custom(x, y));
-			DisplayServer.VirtualKeyboardHide();
+			if (DisplayServer.HasFeature(DisplayServer.Feature.VirtualKeyboard))
+			{
+				DisplayServer.VirtualKeyboardHide();
+			}
 		}
 	}
 

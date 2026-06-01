@@ -71,13 +71,9 @@ public partial class SafeArea : MarginContainer
 
 	private void UpdateSafeArea()
 	{
-		// Only apply safe area on mobile platforms
+		// Apply safe area and ad margins
 		var platform = OS.GetName();
-		if (platform != "iOS" && platform != "Android")
-		{
-			ApplyMargins(0, 0, 0, 0);
-			return;
-		}
+		bool isMobile = platform == "iOS" || platform == "Android";
 
 		var safeArea = DisplayServer.GetDisplaySafeArea();
 		var windowSize = DisplayServer.WindowGetSize();
@@ -92,10 +88,10 @@ public partial class SafeArea : MarginContainer
 		var scaleFactor = viewportSize.Y / (float)windowSize.Y;
 
 		// DisplayServer returns physical screen coordinates for the safe area
-		var safeTop = (float)safeArea.Position.Y;
-		var safeLeft = (float)safeArea.Position.X;
-		var safeBottom = (float)(windowSize.Y - (safeArea.Position.Y + safeArea.Size.Y));
-		var safeRight = (float)(windowSize.X - (safeArea.Position.X + safeArea.Size.X));
+		var safeTop = isMobile ? (float)safeArea.Position.Y : 0f;
+		var safeLeft = isMobile ? (float)safeArea.Position.X : 0f;
+		var safeBottom = isMobile ? (float)(windowSize.Y - (safeArea.Position.Y + safeArea.Size.Y)) : 0f;
+		var safeRight = isMobile ? (float)(windowSize.X - (safeArea.Position.X + safeArea.Size.X)) : 0f;
 
 		// Apply final margins scaled to the viewport
 		ApplyMargins(
