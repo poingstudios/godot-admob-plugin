@@ -88,10 +88,18 @@ public partial class SafeArea : MarginContainer
 		var scaleFactor = viewportSize.Y / (float)windowSize.Y;
 
 		// DisplayServer returns physical screen coordinates for the safe area
-		var safeTop = isMobile ? (float)safeArea.Position.Y : 0f;
-		var safeLeft = isMobile ? (float)safeArea.Position.X : 0f;
-		var safeBottom = isMobile ? (float)(windowSize.Y - (safeArea.Position.Y + safeArea.Size.Y)) : 0f;
-		var safeRight = isMobile ? (float)(windowSize.X - (safeArea.Position.X + safeArea.Size.X)) : 0f;
+		var safeTop = 0f;
+		var safeLeft = 0f;
+		var safeBottom = 0f;
+		var safeRight = 0f;
+
+		if (isMobile)
+		{
+			safeTop = (float)safeArea.Position.Y;
+			safeLeft = (float)safeArea.Position.X;
+			safeBottom = (float)(windowSize.Y - (safeArea.Position.Y + safeArea.Size.Y));
+			safeRight = (float)(windowSize.X - (safeArea.Position.X + safeArea.Size.X));
+		}
 
 		// Apply final margins scaled to the viewport
 		ApplyMargins(

@@ -28,8 +28,6 @@ var _ad_view: AdView
 var _ad_listener := AdListener.new()
 var _ad_position := AdPosition.TOP
 var _is_hidden := false
-var _dismiss_canvas: CanvasLayer
-var _dismiss_btn: Button
 
 @onready var _load_button: Button = $ActionsCard/VBox/BannerActions/LoadBanner
 @onready var _load_background_button: Button = $ActionsCard/VBox/BannerActions/LoadBannerBackground
@@ -71,51 +69,6 @@ func _ready() -> void:
 		func(index: int) -> void: _custom_size.visible = index == Preset.CUSTOM
 	)
 
-	_dismiss_canvas = CanvasLayer.new()
-	_dismiss_canvas.layer = 105
-	add_child(_dismiss_canvas)
-
-	_dismiss_btn = Button.new()
-	_dismiss_btn.text = "× Destroy Mock Ad"
-	_dismiss_btn.hide()
-
-	_dismiss_btn.set_anchors_preset(Control.PRESET_TOP_LEFT)
-	_dismiss_btn.anchor_left = 0.0
-	_dismiss_btn.anchor_right = 0.0
-	_dismiss_btn.anchor_top = 0.0
-	_dismiss_btn.anchor_bottom = 0.0
-	_dismiss_btn.offset_left = 10
-	_dismiss_btn.offset_top = 10
-	_dismiss_btn.offset_right = 160
-	_dismiss_btn.offset_bottom = 45
-
-	var style_normal := StyleBoxFlat.new()
-	style_normal.bg_color = Color(0.75, 0.15, 0.15, 0.9)
-	style_normal.corner_radius_top_left = 5
-	style_normal.corner_radius_top_right = 5
-	style_normal.corner_radius_bottom_left = 5
-	style_normal.corner_radius_bottom_right = 5
-	style_normal.content_margin_left = 10
-	style_normal.content_margin_right = 10
-
-	var style_hover := style_normal.duplicate() as StyleBoxFlat
-	style_hover.bg_color = Color(0.9, 0.2, 0.2, 0.95)
-
-	var style_pressed := style_normal.duplicate() as StyleBoxFlat
-	style_pressed.bg_color = Color(0.6, 0.1, 0.1, 0.95)
-
-	_dismiss_btn.add_theme_stylebox_override("normal", style_normal)
-	_dismiss_btn.add_theme_stylebox_override("hover", style_hover)
-	_dismiss_btn.add_theme_stylebox_override("pressed", style_pressed)
-	_dismiss_btn.add_theme_color_override("font_color", Color.WHITE)
-	_dismiss_btn.add_theme_color_override("font_hover_color", Color.WHITE)
-	_dismiss_btn.add_theme_color_override("font_pressed_color", Color.WHITE)
-
-	_dismiss_btn.pressed.connect(func():
-		_on_destroy_banner_pressed()
-	)
-
-	_dismiss_canvas.add_child(_dismiss_btn)
 
 	_update_ui_state(false)
 
@@ -129,11 +82,6 @@ func _update_ui_state(is_loaded: bool) -> void:
 	_show_button.disabled = not (is_loaded and _is_hidden)
 	_hide_button.disabled = not (is_loaded and not _is_hidden)
 
-	if is_instance_valid(_dismiss_btn):
-		if is_loaded and not _is_hidden:
-			_dismiss_btn.show()
-		else:
-			_dismiss_btn.hide()
 
 
 func _get_ad_unit_id(is_collapsible: bool = false) -> String:
@@ -306,6 +254,10 @@ func _on_ad_clicked() -> void:
 
 func _on_ad_closed() -> void:
 	_log("Ad closed")
+	var height := _ad_view.get_height_in_pixels() if _ad_view else 0
+	if height == 0:
+		_is_hidden = true
+		_update_ui_state(true)
 	if Registry.safe_area:
 		Registry.safe_area.update_ad_overlap(_ad_view)
 

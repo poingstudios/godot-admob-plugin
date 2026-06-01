@@ -53,12 +53,16 @@ namespace PoingStudios.AdMob.Core
 					mockInstance = new MockAdSizePlugin();
 					break;
 				case "PoingGodotAdMobInterstitialAd":
+					mockInstance = new MockInterstitialAdPlugin();
+					break;
 				case "PoingGodotAdMobRewardedAd":
+					mockInstance = new MockRewardedAdPlugin();
+					break;
 				case "PoingGodotAdMobRewardedInterstitialAd":
+					mockInstance = new MockRewardedInterstitialAdPlugin();
+					break;
 				case "PoingGodotAdMobAppOpenAd":
-					var fullScreenPlugin = new MockFullScreenAdPlugin();
-					fullScreenPlugin.Initialize(pluginName);
-					mockInstance = fullScreenPlugin;
+					mockInstance = new MockAppOpenAdPlugin();
 					break;
 			}
 

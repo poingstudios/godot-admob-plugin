@@ -80,10 +80,16 @@ func _update_safe_area() -> void:
 	var scale_factor := viewport_size.y / float(window_size.y)
 
 	# DisplayServer returns physical screen coordinates for the safe area
-	var safe_top := float(safe_area.position.y) if is_mobile else 0.0
-	var safe_left := float(safe_area.position.x) if is_mobile else 0.0
-	var safe_bottom := float(window_size.y - (safe_area.position.y + safe_area.size.y)) if is_mobile else 0.0
-	var safe_right := float(window_size.x - (safe_area.position.x + safe_area.size.x)) if is_mobile else 0.0
+	var safe_top := 0.0
+	var safe_left := 0.0
+	var safe_bottom := 0.0
+	var safe_right := 0.0
+
+	if is_mobile:
+		safe_top = float(safe_area.position.y)
+		safe_left = float(safe_area.position.x)
+		safe_bottom = float(window_size.y - (safe_area.position.y + safe_area.size.y))
+		safe_right = float(window_size.x - (safe_area.position.x + safe_area.size.x))
 
 	# Apply final margins scaled to the viewport
 	_apply_margins(

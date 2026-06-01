@@ -43,9 +43,18 @@ static func get_mock_plugin(plugin_name: String) -> Object:
 		"PoingGodotAdMobAdSize":
 			var PluginScript = preload("res://addons/admob/internal/mock/mock_ad_size_plugin.gd")
 			mock_instance = PluginScript.new()
-		"PoingGodotAdMobInterstitialAd", "PoingGodotAdMobRewardedAd", "PoingGodotAdMobRewardedInterstitialAd", "PoingGodotAdMobAppOpenAd":
-			var PluginScript = preload("res://addons/admob/internal/mock/mock_full_screen_ad_plugin.gd")
-			mock_instance = PluginScript.new(plugin_name)
+		"PoingGodotAdMobInterstitialAd":
+			var PluginScript = preload("res://addons/admob/internal/mock/mock_interstitial_ad_plugin.gd")
+			mock_instance = PluginScript.new()
+		"PoingGodotAdMobRewardedAd":
+			var PluginScript = preload("res://addons/admob/internal/mock/mock_rewarded_ad_plugin.gd")
+			mock_instance = PluginScript.new()
+		"PoingGodotAdMobRewardedInterstitialAd":
+			var PluginScript = preload("res://addons/admob/internal/mock/mock_rewarded_interstitial_ad_plugin.gd")
+			mock_instance = PluginScript.new()
+		"PoingGodotAdMobAppOpenAd":
+			var PluginScript = preload("res://addons/admob/internal/mock/mock_app_open_ad_plugin.gd")
+			mock_instance = PluginScript.new()
 
 	if mock_instance:
 		_mocks[plugin_name] = mock_instance

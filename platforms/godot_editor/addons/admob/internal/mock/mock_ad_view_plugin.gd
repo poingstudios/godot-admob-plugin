@@ -88,6 +88,22 @@ func create(ad_view_dictionary: Dictionary) -> int:
 			on_ad_closed.emit(uid)
 	)
 
+	var close_btn := Button.new()
+	close_btn.text = "×"
+	close_btn.set_anchors_preset(Control.PRESET_TOP_RIGHT)
+	close_btn.anchor_bottom = 0.0
+	close_btn.anchor_left = 1.0
+	close_btn.offset_left = -30
+	close_btn.offset_bottom = 30
+	ui.add_child(close_btn)
+
+	close_btn.pressed.connect(func() -> void:
+		if _ads.has(uid):
+			_ads[uid]["is_hidden"] = true
+			_ads[uid]["ui"].hide()
+			on_ad_closed.emit(uid)
+	)
+
 	_ads[uid] = {
 		"ui": ui,
 		"position": position,
@@ -97,6 +113,7 @@ func create(ad_view_dictionary: Dictionary) -> int:
 		"current_width": width,
 		"current_height": height,
 		"toggle_btn": toggle_btn,
+		"close_btn": close_btn,
 		"is_collapsible": false,
 		"is_collapsed": false,
 		"is_adaptive": is_adaptive
@@ -217,6 +234,60 @@ func _update_size(uid: int) -> void:
 	ad["ui"].custom_minimum_size = Vector2(ad["current_width"] * scale_factor_x, ad["current_height"] * scale_factor_y)
 	ad["ui"].size = ad["ui"].custom_minimum_size
 
+	var btn_width := 28.0 * scale_factor_x
+	var btn_height := 28.0 * scale_factor_y
+
+	var local_visible_rect := Rect2(Vector2.ZERO, ui.size).intersection(Rect2(-ui.position, viewport_size))
+	var target_top := 10.0 * scale_factor_y
+	var close_target_left := ui.size.x - 38 * scale_factor_x
+	var toggle_target_left := ui.size.x - 71 * scale_factor_x
+
+	if local_visible_rect.size.x > 0 and local_visible_rect.size.y > 0:
+		target_top = clamp(local_visible_rect.position.y + 10 * scale_factor_y, local_visible_rect.position.y, local_visible_rect.position.y + local_visible_rect.size.y - btn_height)
+		close_target_left = local_visible_rect.position.x + local_visible_rect.size.x - btn_width - 10 * scale_factor_x
+		close_target_left = clamp(close_target_left, local_visible_rect.position.x, local_visible_rect.position.x + local_visible_rect.size.x - btn_width)
+		toggle_target_left = close_target_left - btn_width - 5 * scale_factor_x
+		toggle_target_left = clamp(toggle_target_left, local_visible_rect.position.x, local_visible_rect.position.x + local_visible_rect.size.x - btn_width)
+
+	if is_instance_valid(ad.get("close_btn")):
+		var btn: Button = ad["close_btn"]
+		btn.anchor_left = 0.0
+		btn.anchor_right = 0.0
+		btn.anchor_top = 0.0
+		btn.anchor_bottom = 0.0
+		btn.offset_left = close_target_left
+		btn.offset_top = target_top
+		btn.offset_right = close_target_left + btn_width
+		btn.offset_bottom = target_top + btn_height
+
+		var style_normal := StyleBoxFlat.new()
+		style_normal.bg_color = Color.WHITE
+		style_normal.corner_radius_top_left = 999
+		style_normal.corner_radius_top_right = 999
+		style_normal.corner_radius_bottom_left = 999
+		style_normal.corner_radius_bottom_right = 999
+		style_normal.shadow_color = Color(0, 0, 0, 0.15)
+		style_normal.shadow_size = int(round(2 * scale_factor_y))
+		style_normal.shadow_offset = Vector2(0, int(round(1 * scale_factor_y)))
+		style_normal.content_margin_top = 0
+		style_normal.content_margin_bottom = 0
+
+		var style_hover := style_normal.duplicate() as StyleBoxFlat
+		style_hover.bg_color = Color(0.95, 0.95, 0.95)
+
+		var style_pressed := style_normal.duplicate() as StyleBoxFlat
+		style_pressed.bg_color = Color(0.9, 0.9, 0.9)
+
+		btn.add_theme_stylebox_override("normal", style_normal)
+		btn.add_theme_stylebox_override("hover", style_hover)
+		btn.add_theme_stylebox_override("pressed", style_pressed)
+		btn.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+
+		btn.add_theme_color_override("font_color", Color(0.85, 0.15, 0.15))
+		btn.add_theme_color_override("font_hover_color", Color(0.95, 0.2, 0.2))
+		btn.add_theme_color_override("font_pressed_color", Color(0.65, 0.1, 0.1))
+		btn.add_theme_font_size_override("font_size", max(1, int(round(18 * scale_factor_y))))
+
 	if is_instance_valid(ad.get("toggle_btn")):
 		var btn: Button = ad["toggle_btn"]
 		if is_expanded:
@@ -225,31 +296,14 @@ func _update_size(uid: int) -> void:
 		else:
 			btn.hide()
 
-		var btn_width := 28.0 * scale_factor_x
-		var btn_height := 28.0 * scale_factor_y
-
 		btn.anchor_left = 0.0
 		btn.anchor_right = 0.0
 		btn.anchor_top = 0.0
 		btn.anchor_bottom = 0.0
-
-		var local_visible_rect := Rect2(Vector2.ZERO, ui.size).intersection(Rect2(-ui.position, viewport_size))
-		if local_visible_rect.size.x > 0 and local_visible_rect.size.y > 0:
-			var target_left := local_visible_rect.position.x + local_visible_rect.size.x - btn_width - 10 * scale_factor_x
-			var target_top := local_visible_rect.position.y + 10 * scale_factor_y
-
-			target_left = clamp(target_left, local_visible_rect.position.x, local_visible_rect.position.x + local_visible_rect.size.x - btn_width)
-			target_top = clamp(target_top, local_visible_rect.position.y, local_visible_rect.position.y + local_visible_rect.size.y - btn_height)
-
-			btn.offset_left = target_left
-			btn.offset_top = target_top
-			btn.offset_right = target_left + btn_width
-			btn.offset_bottom = target_top + btn_height
-		else:
-			btn.offset_left = ui.size.x - 38 * scale_factor_x
-			btn.offset_top = 10 * scale_factor_y
-			btn.offset_right = ui.size.x - 10 * scale_factor_x
-			btn.offset_bottom = (10 + 28) * scale_factor_y
+		btn.offset_left = toggle_target_left
+		btn.offset_top = target_top
+		btn.offset_right = toggle_target_left + btn_width
+		btn.offset_bottom = target_top + btn_height
 
 		var style_normal := StyleBoxFlat.new()
 		style_normal.bg_color = Color.WHITE
@@ -280,7 +334,7 @@ func _update_size(uid: int) -> void:
 		btn.add_theme_font_size_override("font_size", max(1, int(round(14 * scale_factor_y))))
 
 	for child in ad["ui"].get_children():
-		if child is ColorRect or child == ad.get("toggle_btn"): continue
+		if child is ColorRect or child == ad.get("toggle_btn") or child == ad.get("close_btn"): continue
 		child.queue_free()
 
 
@@ -407,6 +461,8 @@ func _update_size(uid: int) -> void:
 
 	if is_instance_valid(ad.get("toggle_btn")):
 		ad["toggle_btn"].move_to_front()
+	if is_instance_valid(ad.get("close_btn")):
+		ad["close_btn"].move_to_front()
 
 	_update_ui_position(uid)
 

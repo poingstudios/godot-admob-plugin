@@ -36,8 +36,6 @@ public partial class Banner : BaseTab
 	private AdView _adView;
 	private AdPosition _adPosition = AdPosition.Top;
 	private bool _isHidden = false;
-	private CanvasLayer _dismissCanvas;
-	private Button _dismissBtn;
 
 	private Button _loadBtn;
 	private Button _loadBackgroundBtn;
@@ -114,53 +112,7 @@ public partial class Banner : BaseTab
 		grid.GetNode<Button>("BOTTOM").Pressed += () => UpdatePosition(AdPosition.Bottom);
 		grid.GetNode<Button>("BOTTOM_RIGHT").Pressed += () => UpdatePosition(AdPosition.BottomRight);
 
-		_dismissCanvas = new CanvasLayer
-		{
-			Layer = 105
-		};
-		AddChild(_dismissCanvas);
 
-		_dismissBtn = new Button
-		{
-			Text = "× Destroy Mock Ad"
-		};
-		_dismissBtn.Hide();
-
-		_dismissBtn.AnchorLeft = 0f;
-		_dismissBtn.AnchorRight = 0f;
-		_dismissBtn.AnchorTop = 0f;
-		_dismissBtn.AnchorBottom = 0f;
-		_dismissBtn.OffsetLeft = 10f;
-		_dismissBtn.OffsetTop = 10f;
-		_dismissBtn.OffsetRight = 160f;
-		_dismissBtn.OffsetBottom = 45f;
-
-		var styleNormal = new StyleBoxFlat
-		{
-			BgColor = new Color(0.75f, 0.15f, 0.15f, 0.9f),
-			CornerRadiusTopLeft = 5,
-			CornerRadiusTopRight = 5,
-			CornerRadiusBottomLeft = 5,
-			CornerRadiusBottomRight = 5,
-			ContentMarginLeft = 10f,
-			ContentMarginRight = 10f
-		};
-
-		var styleHover = (StyleBoxFlat)styleNormal.Duplicate();
-		styleHover.BgColor = new Color(0.9f, 0.2f, 0.2f, 0.95f);
-
-		var stylePressed = (StyleBoxFlat)styleNormal.Duplicate();
-		stylePressed.BgColor = new Color(0.6f, 0.1f, 0.1f, 0.95f);
-
-		_dismissBtn.AddThemeStyleboxOverride("normal", styleNormal);
-		_dismissBtn.AddThemeStyleboxOverride("hover", styleHover);
-		_dismissBtn.AddThemeStyleboxOverride("pressed", stylePressed);
-		_dismissBtn.AddThemeColorOverride("font_color", Colors.White);
-		_dismissBtn.AddThemeColorOverride("font_hover_color", Colors.White);
-		_dismissBtn.AddThemeColorOverride("font_pressed_color", Colors.White);
-
-		_dismissBtn.Pressed += OnDestroyPressed;
-		_dismissCanvas.AddChild(_dismissBtn);
 
 		UpdateUI(false);
 	}
@@ -175,17 +127,6 @@ public partial class Banner : BaseTab
 		_showBtn.Disabled = !(isLoaded && _isHidden);
 		_hideBtn.Disabled = !(isLoaded && !_isHidden);
 
-		if (_dismissBtn != null && IsInstanceValid(_dismissBtn))
-		{
-			if (isLoaded && !_isHidden)
-			{
-				_dismissBtn.Show();
-			}
-			else
-			{
-				_dismissBtn.Hide();
-			}
-		}
 	}
 
 	private void UpdatePosition(AdPosition pos)
@@ -298,6 +239,12 @@ public partial class Banner : BaseTab
 			OnAdClosed = () => 
 			{ 
 				Log("Ad closed"); 
+				var height = _adView != null ? _adView.GetHeightInPixels() : 0;
+				if (height == 0)
+				{
+					_isHidden = true;
+					UpdateUI(true);
+				}
 				SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
 			},
 			OnAdImpression = () => Log("Impression recorded"),

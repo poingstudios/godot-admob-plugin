@@ -49,6 +49,7 @@ namespace PoingStudios.AdMob.Core
 			public bool IsCollapsible = false;
 			public bool IsCollapsed = false;
 			public Button ToggleBtn;
+			public Button CloseBtn;
 			public bool IsAdaptive = false;
 		}
 
@@ -138,6 +139,28 @@ namespace PoingStudios.AdMob.Core
 				}
 			}));
 
+			var closeBtn = new Button
+			{
+				Text = "×",
+				AnchorLeft = 1,
+				AnchorRight = 1,
+				AnchorTop = 0,
+				AnchorBottom = 0,
+				OffsetLeft = -30,
+				OffsetBottom = 30
+			};
+			ui.AddChild(closeBtn);
+
+			closeBtn.Connect(Button.SignalName.Pressed, Callable.From(() =>
+			{
+				if (_ads.TryGetValue(uid, out AdData a))
+				{
+					a.IsHidden = true;
+					a.Ui.Hide();
+					EmitSignal(SignalName.on_ad_closed, uid);
+				}
+			}));
+
 			_ads[uid] = new AdData
 			{
 				Ui = ui,
@@ -148,6 +171,7 @@ namespace PoingStudios.AdMob.Core
 				CurrentWidth = width,
 				CurrentHeight = height,
 				ToggleBtn = toggleBtn,
+				CloseBtn = closeBtn,
 				IsAdaptive = isAdaptive
 			};
 
@@ -221,6 +245,65 @@ namespace PoingStudios.AdMob.Core
 			ad.Ui.CustomMinimumSize = new Vector2(ad.CurrentWidth * scaleFactorX, ad.CurrentHeight * scaleFactorY);
 			ad.Ui.Size = ad.Ui.CustomMinimumSize;
 
+			float btnWidth = 28f * scaleFactorX;
+			float btnHeight = 28f * scaleFactorY;
+
+			var localVisibleRect = new Rect2(Vector2.Zero, ad.Ui.Size).Intersection(new Rect2(-ad.Ui.Position, viewportSize));
+			float targetTop = 10f * scaleFactorY;
+			float closeTargetLeft = ad.Ui.Size.X - 38f * scaleFactorX;
+			float toggleTargetLeft = ad.Ui.Size.X - 71f * scaleFactorX;
+
+			if (localVisibleRect.Size.X > 0f && localVisibleRect.Size.Y > 0f)
+			{
+				targetTop = Mathf.Clamp(localVisibleRect.Position.Y + 10f * scaleFactorY, localVisibleRect.Position.Y, localVisibleRect.Position.Y + localVisibleRect.Size.Y - btnHeight);
+				closeTargetLeft = localVisibleRect.Position.X + localVisibleRect.Size.X - btnWidth - 10f * scaleFactorX;
+				closeTargetLeft = Mathf.Clamp(closeTargetLeft, localVisibleRect.Position.X, localVisibleRect.Position.X + localVisibleRect.Size.X - btnWidth);
+				toggleTargetLeft = closeTargetLeft - btnWidth - 5f * scaleFactorX;
+				toggleTargetLeft = Mathf.Clamp(toggleTargetLeft, localVisibleRect.Position.X, localVisibleRect.Position.X + localVisibleRect.Size.X - btnWidth);
+			}
+
+			if (ad.CloseBtn != null && IsInstanceValid(ad.CloseBtn))
+			{
+				ad.CloseBtn.AnchorLeft = 0f;
+				ad.CloseBtn.AnchorRight = 0f;
+				ad.CloseBtn.AnchorTop = 0f;
+				ad.CloseBtn.AnchorBottom = 0f;
+				ad.CloseBtn.OffsetLeft = closeTargetLeft;
+				ad.CloseBtn.OffsetTop = targetTop;
+				ad.CloseBtn.OffsetRight = closeTargetLeft + btnWidth;
+				ad.CloseBtn.OffsetBottom = targetTop + btnHeight;
+
+				var styleNormal = new StyleBoxFlat
+				{
+					BgColor = Colors.White,
+					CornerRadiusTopLeft = 999,
+					CornerRadiusTopRight = 999,
+					CornerRadiusBottomLeft = 999,
+					CornerRadiusBottomRight = 999,
+					ShadowColor = new Color(0f, 0f, 0f, 0.15f),
+					ShadowSize = Mathf.Max(0, (int)Mathf.Round(2f * scaleFactorY)),
+					ShadowOffset = new Vector2(0f, Mathf.Max(0, (int)Mathf.Round(1f * scaleFactorY))),
+					ContentMarginTop = 0f,
+					ContentMarginBottom = 0f
+				};
+
+				var styleHover = (StyleBoxFlat)styleNormal.Duplicate();
+				styleHover.BgColor = new Color(0.95f, 0.95f, 0.95f);
+
+				var stylePressed = (StyleBoxFlat)styleNormal.Duplicate();
+				stylePressed.BgColor = new Color(0.90f, 0.90f, 0.90f);
+
+				ad.CloseBtn.AddThemeStyleboxOverride("normal", styleNormal);
+				ad.CloseBtn.AddThemeStyleboxOverride("hover", styleHover);
+				ad.CloseBtn.AddThemeStyleboxOverride("pressed", stylePressed);
+				ad.CloseBtn.AddThemeStyleboxOverride("focus", new StyleBoxEmpty());
+
+				ad.CloseBtn.AddThemeColorOverride("font_color", new Color(0.85f, 0.15f, 0.15f));
+				ad.CloseBtn.AddThemeColorOverride("font_hover_color", new Color(0.95f, 0.2f, 0.2f));
+				ad.CloseBtn.AddThemeColorOverride("font_pressed_color", new Color(0.65f, 0.1f, 0.1f));
+				ad.CloseBtn.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(18f * scaleFactorY)));
+			}
+
 			if (ad.ToggleBtn != null && IsInstanceValid(ad.ToggleBtn))
 			{
 				if (isExpanded)
@@ -232,36 +315,15 @@ namespace PoingStudios.AdMob.Core
 				{
 					ad.ToggleBtn.Hide();
 				}
-				
-				float btnWidth = 28f * scaleFactorX;
-				float btnHeight = 28f * scaleFactorY;
 
 				ad.ToggleBtn.AnchorLeft = 0f;
 				ad.ToggleBtn.AnchorRight = 0f;
 				ad.ToggleBtn.AnchorTop = 0f;
 				ad.ToggleBtn.AnchorBottom = 0f;
-
-				var localVisibleRect = new Rect2(Vector2.Zero, ad.Ui.Size).Intersection(new Rect2(-ad.Ui.Position, viewportSize));
-				if (localVisibleRect.Size.X > 0f && localVisibleRect.Size.Y > 0f)
-				{
-					float targetLeft = localVisibleRect.Position.X + localVisibleRect.Size.X - btnWidth - 10f * scaleFactorX;
-					float targetTop = localVisibleRect.Position.Y + 10f * scaleFactorY;
-
-					targetLeft = Mathf.Clamp(targetLeft, localVisibleRect.Position.X, localVisibleRect.Position.X + localVisibleRect.Size.X - btnWidth);
-					targetTop = Mathf.Clamp(targetTop, localVisibleRect.Position.Y, localVisibleRect.Position.Y + localVisibleRect.Size.Y - btnHeight);
-
-					ad.ToggleBtn.OffsetLeft = targetLeft;
-					ad.ToggleBtn.OffsetTop = targetTop;
-					ad.ToggleBtn.OffsetRight = targetLeft + btnWidth;
-					ad.ToggleBtn.OffsetBottom = targetTop + btnHeight;
-				}
-				else
-				{
-					ad.ToggleBtn.OffsetLeft = ad.Ui.Size.X - 38f * scaleFactorX;
-					ad.ToggleBtn.OffsetTop = 10f * scaleFactorY;
-					ad.ToggleBtn.OffsetRight = ad.Ui.Size.X - 10f * scaleFactorX;
-					ad.ToggleBtn.OffsetBottom = (10f + 28f) * scaleFactorY;
-				}
+				ad.ToggleBtn.OffsetLeft = toggleTargetLeft;
+				ad.ToggleBtn.OffsetTop = targetTop;
+				ad.ToggleBtn.OffsetRight = toggleTargetLeft + btnWidth;
+				ad.ToggleBtn.OffsetBottom = targetTop + btnHeight;
 
 				var styleNormal = new StyleBoxFlat
 				{
@@ -298,7 +360,7 @@ namespace PoingStudios.AdMob.Core
 			var children = ad.Ui.GetChildren();
 			foreach (var child in children)
 			{
-				if (child is ColorRect || child == ad.ToggleBtn) continue;
+				if (child is ColorRect || child == ad.ToggleBtn || child == ad.CloseBtn) continue;
 				child.QueueFree();
 			}
 
@@ -399,6 +461,10 @@ namespace PoingStudios.AdMob.Core
 			if (ad.ToggleBtn != null && IsInstanceValid(ad.ToggleBtn))
 			{
 				ad.ToggleBtn.MoveToFront();
+			}
+			if (ad.CloseBtn != null && IsInstanceValid(ad.CloseBtn))
+			{
+				ad.CloseBtn.MoveToFront();
 			}
 
 			_updateUiPosition(uid);
