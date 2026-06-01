@@ -52,7 +52,7 @@ func create(ad_view_dictionary: Dictionary) -> int:
 	var width: int = ad_size.get("width", 320)
 	var height: int = ad_size.get("height", 50)
 	if width <= 0:
-		var viewport_size := Engine.get_main_loop().root.get_visible_rect().size
+		var viewport_size: Vector2 = Engine.get_main_loop().root.get_visible_rect().size
 		width = int(viewport_size.x)
 	if height <= 0: height = 50
 
@@ -161,13 +161,13 @@ func get_height(uid: int) -> int:
 
 func get_width_in_pixels(uid: int) -> int:
 	var window_size := DisplayServer.window_get_size()
-	var viewport_size := Engine.get_main_loop().root.get_visible_rect().size
+	var viewport_size: Vector2 = Engine.get_main_loop().root.get_visible_rect().size
 	var scale_factor := window_size.x / float(viewport_size.x)
 	return int(get_width(uid) * scale_factor)
 
 func get_height_in_pixels(uid: int) -> int:
 	var window_size := DisplayServer.window_get_size()
-	var viewport_size := Engine.get_main_loop().root.get_visible_rect().size
+	var viewport_size: Vector2 = Engine.get_main_loop().root.get_visible_rect().size
 	var scale_factor := window_size.y / float(viewport_size.y)
 	return int(get_height(uid) * scale_factor)
 
@@ -317,7 +317,7 @@ func _update_ui_position(uid: int) -> void:
 	if not _ads.has(uid) or not is_instance_valid(_ads[uid]["ui"]): return
 	var ad: Dictionary = _ads[uid]
 	var ui: ColorRect = ad["ui"]
-	var viewport_size := get_viewport().get_visible_rect().size
+	var viewport_size: Vector2 = get_viewport().get_visible_rect().size
 
 	match ad["position"]:
 		-1: # CUSTOM
