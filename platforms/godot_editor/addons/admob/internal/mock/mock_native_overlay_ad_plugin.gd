@@ -33,6 +33,13 @@ signal on_native_overlay_ad_paid(uid: int, ad_value: Dictionary)
 var _uid_counter := 0
 var _ads: Dictionary = {}
 
+func _ready() -> void:
+	Engine.get_main_loop().root.size_changed.connect(_on_window_size_changed)
+
+func _on_window_size_changed() -> void:
+	for uid in _ads.keys():
+		_update_ui_position(uid)
+
 func create() -> int:
 	_uid_counter += 1
 	var uid := _uid_counter
@@ -111,6 +118,15 @@ func _update_ui_position(uid: int) -> void:
 	if not viewport: return
 	var viewport_size := viewport.get_visible_rect().size
 
+	var window_size := DisplayServer.window_get_size()
+	var screen_scale := DisplayServer.screen_get_scale(DisplayServer.window_get_current_screen())
+
+	var scale_x := window_size.x / float(viewport_size.x)
+	var scale_y := window_size.y / float(viewport_size.y)
+
+	var scale_factor_x := screen_scale / scale_x if scale_x > 0 else 1.0
+	var scale_factor_y := screen_scale / scale_y if scale_y > 0 else 1.0
+
 	var width := 320
 	var height := 50
 
@@ -122,15 +138,16 @@ func _update_ui_position(uid: int) -> void:
 	if width <= 0: width = 320
 	if height <= 0: height = 50
 
-	ui.custom_minimum_size = Vector2(width, height)
+	ui.custom_minimum_size = Vector2(width * scale_factor_x, height * scale_factor_y)
 	ui.size = ui.custom_minimum_size
 
+	var label: Label = ui.get_child(0) as Label
+	if label:
+		label.add_theme_font_size_override("font_size", max(1, int(round(16 * scale_factor_y))))
+
 	if ad["position"] == 2: # CUSTOM
-		var x := 0.0
-		var y := 0.0
-		if ad["custom_position"] != null:
-			x = ad["custom_position"].get("x", 0.0)
-			y = ad["custom_position"].get("y", 0.0)
+		var x: float = ad["custom_position"].get("x", 0.0) * scale_factor_x if ad["custom_position"] != null else 0.0
+		var y: float = ad["custom_position"].get("y", 0.0) * scale_factor_y if ad["custom_position"] != null else 0.0
 		ui.position = Vector2(x, y)
 	elif ad["position"] == 1: # BOTTOM
 		ui.position = Vector2((viewport_size.x - ui.size.x) / 2.0, viewport_size.y - ui.size.y)
@@ -157,12 +174,24 @@ func destroy(uid: int) -> void:
 
 func get_width_in_pixels(uid: int) -> float:
 	if _ads.has(uid) and is_instance_valid(_ads[uid]["ui"]):
-		return _ads[uid]["ui"].size.x
+		var screen_scale := DisplayServer.screen_get_scale(DisplayServer.window_get_current_screen())
+		var width := 320
+		if _ads[uid]["ad_size"] != null:
+			var size_dict: Dictionary = _ads[uid]["ad_size"]
+			if size_dict.has("width"): width = size_dict["width"]
+		if width <= 0: width = 320
+		return float(width * screen_scale)
 	return 0.0
 
 func get_height_in_pixels(uid: int) -> float:
 	if _ads.has(uid) and is_instance_valid(_ads[uid]["ui"]):
-		return _ads[uid]["ui"].size.y
+		var screen_scale := DisplayServer.screen_get_scale(DisplayServer.window_get_current_screen())
+		var height := 50
+		if _ads[uid]["ad_size"] != null:
+			var size_dict: Dictionary = _ads[uid]["ad_size"]
+			if size_dict.has("height"): height = size_dict["height"]
+		if height <= 0: height = 50
+		return float(height * screen_scale)
 	return 0.0
 
 func get_response_info(_uid: int) -> Dictionary:

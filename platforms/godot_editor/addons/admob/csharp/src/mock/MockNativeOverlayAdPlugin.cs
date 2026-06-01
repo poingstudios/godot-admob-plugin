@@ -46,6 +46,17 @@ namespace PoingStudios.AdMob.Core
 		private int _uidCounter = 0;
 		private System.Collections.Generic.Dictionary<int, AdData> _ads = new System.Collections.Generic.Dictionary<int, AdData>();
 
+		public override void _Ready()
+		{
+			((SceneTree)Engine.GetMainLoop()).Root.Connect(Window.SignalName.SizeChanged, Callable.From(() =>
+			{
+				foreach (var uid in _ads.Keys)
+				{
+					_updateUiPosition(uid);
+				}
+			}));
+		}
+
 		public int create()
 		{
 			_uidCounter++;
@@ -151,6 +162,15 @@ namespace PoingStudios.AdMob.Core
 			if (viewport == null) return;
 			var viewportSize = viewport.GetVisibleRect().Size;
 
+			var windowSize = DisplayServer.WindowGetSize();
+			float screenScale = DisplayServer.ScreenGetScale(DisplayServer.WindowGetCurrentScreen());
+
+			float scaleX = windowSize.X / (float)viewportSize.X;
+			float scaleY = windowSize.Y / (float)viewportSize.Y;
+
+			float scaleFactorX = scaleX > 0f ? (screenScale / scaleX) : 1.0f;
+			float scaleFactorY = scaleY > 0f ? (screenScale / scaleY) : 1.0f;
+
 			int width = 320;
 			int height = 50;
 
@@ -163,14 +183,20 @@ namespace PoingStudios.AdMob.Core
 			if (width <= 0) width = 320;
 			if (height <= 0) height = 50;
 
-			ad.Ui.CustomMinimumSize = new Vector2(width, height);
+			ad.Ui.CustomMinimumSize = new Vector2(width * scaleFactorX, height * scaleFactorY);
 			ad.Ui.Size = ad.Ui.CustomMinimumSize;
+
+			var label = ad.Ui.GetChildOrNull<Label>(0);
+			if (label != null)
+			{
+				label.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(16 * scaleFactorY)));
+			}
 
 			if (ad.Position == 2) // CUSTOM
 			{
-				float x = ad.CustomPosition.TryGetValue("x", out var xVar) ? xVar.AsSingle() : 0f;
-				float y = ad.CustomPosition.TryGetValue("y", out var yVar) ? yVar.AsSingle() : 0f;
-				ad.Ui.Position = new Vector2(x, y);
+				float x = ad.CustomPosition != null && ad.CustomPosition.TryGetValue("x", out var xVar) ? xVar.AsSingle() : 0f;
+				float y = ad.CustomPosition != null && ad.CustomPosition.TryGetValue("y", out var yVar) ? yVar.AsSingle() : 0f;
+				ad.Ui.Position = new Vector2(x * scaleFactorX, y * scaleFactorY);
 			}
 			else if (ad.Position == 1) // BOTTOM
 			{
@@ -216,18 +242,32 @@ namespace PoingStudios.AdMob.Core
 
 		public float get_width_in_pixels(int uid)
 		{
-			if (_ads.TryGetValue(uid, out AdData ad) && ad.Ui != null && IsInstanceValid(ad.Ui))
+			if (_ads.TryGetValue(uid, out AdData ad))
 			{
-				return ad.Ui.Size.X;
+				float screenScale = DisplayServer.ScreenGetScale(DisplayServer.WindowGetCurrentScreen());
+				int width = 320;
+				if (ad.AdSize != null)
+				{
+					width = ad.AdSize.TryGetValue("width", out var wVar) ? wVar.AsInt32() : 320;
+				}
+				if (width <= 0) width = 320;
+				return width * screenScale;
 			}
 			return 0f;
 		}
 
 		public float get_height_in_pixels(int uid)
 		{
-			if (_ads.TryGetValue(uid, out AdData ad) && ad.Ui != null && IsInstanceValid(ad.Ui))
+			if (_ads.TryGetValue(uid, out AdData ad))
 			{
-				return ad.Ui.Size.Y;
+				float screenScale = DisplayServer.ScreenGetScale(DisplayServer.WindowGetCurrentScreen());
+				int height = 50;
+				if (ad.AdSize != null)
+				{
+					height = ad.AdSize.TryGetValue("height", out var hVar) ? hVar.AsInt32() : 50;
+				}
+				if (height <= 0) height = 50;
+				return height * screenScale;
 			}
 			return 0f;
 		}
