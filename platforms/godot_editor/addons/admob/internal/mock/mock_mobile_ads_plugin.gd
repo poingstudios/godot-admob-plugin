@@ -46,12 +46,10 @@ func initialize() -> void:
 
 func get_initialization_status() -> Dictionary:
 	return {
-		"adapter_status_map": {
-			"com.google.android.gms.ads.MobileAds": {
-				"initializationState": 1, # READY
-				"description": "Mock Ads Ready",
-				"latency": 500
-			}
+		"com.google.android.gms.ads.MobileAds": {
+			"initializationState": 1, # READY
+			"description": "Mock Ads Ready",
+			"latency": 500
 		}
 	}
 

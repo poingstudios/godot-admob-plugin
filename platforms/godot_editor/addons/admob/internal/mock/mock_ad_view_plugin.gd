@@ -158,7 +158,7 @@ func get_response_info(uid: int) -> Dictionary:
 	return {
 		"response_id": "mock_response_id",
 		"mediation_adapter_class_name": "MockAdapter",
-		"adapter_responses": [], "loaded_adapter_response_info": {}, "response_extras": {}
+		"adapter_responses": {}, "loaded_adapter_response_info": {}, "response_extras": {}
 	}
 
 func hide(uid: int) -> void:

@@ -56,7 +56,7 @@ namespace PoingStudios.AdMob.Core
 
 		public Dictionary get_initialization_status()
 		{
-			var statusMap = new Dictionary
+			return new Dictionary
 			{
 				{
 					"com.google.android.gms.ads.MobileAds", new Dictionary
@@ -66,11 +66,6 @@ namespace PoingStudios.AdMob.Core
 						{ "latency", 500 }
 					}
 				}
-			};
-
-			return new Dictionary
-			{
-				{ "adapter_status_map", statusMap }
 			};
 		}
 

@@ -270,7 +270,7 @@ func get_response_info(_uid: int) -> Dictionary:
 	return {
 		"response_id": "mock_response_id",
 		"mediation_adapter_class_name": "MockAdapter",
-		"adapter_responses": [],
+		"adapter_responses": {},
 		"loaded_adapter_response_info": {},
 		"response_extras": {}
 	}

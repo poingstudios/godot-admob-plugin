@@ -490,7 +490,7 @@ namespace PoingStudios.AdMob.Core
 			{
 				{ "response_id", "mock_response_id" },
 				{ "mediation_adapter_class_name", "MockAdapter" },
-				{ "adapter_responses", new Godot.Collections.Array() }, { "loaded_adapter_response_info", new Godot.Collections.Dictionary() }, { "response_extras", new Godot.Collections.Dictionary() }
+				{ "adapter_responses", new Godot.Collections.Dictionary() }, { "loaded_adapter_response_info", new Godot.Collections.Dictionary() }, { "response_extras", new Godot.Collections.Dictionary() }
 			};
 		}
 
