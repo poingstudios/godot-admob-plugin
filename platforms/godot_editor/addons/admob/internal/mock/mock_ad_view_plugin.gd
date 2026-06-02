@@ -363,7 +363,7 @@ func _update_size(uid: int) -> void:
 	var flood_it_tex := load("res://addons/admob/assets/flood_it_icon.svg") as Texture2D
 	var play_tex := load("res://addons/admob/assets/google_play_icon.svg") as Texture2D
 
-	var use_tall_layout: bool = is_expanded or ui.custom_minimum_size.y >= 100 * scale_factor
+	var use_tall_layout: bool = is_expanded or ui.custom_minimum_size.y > 100 * scale_factor
 
 	if use_tall_layout:
 		var spacer_top := Control.new()

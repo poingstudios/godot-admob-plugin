@@ -386,7 +386,7 @@ namespace PoingStudios.AdMob.Core
 			var floodItTex = ResourceLoader.Load<Texture2D>("res://addons/admob/assets/flood_it_icon.svg");
 			var playTex = ResourceLoader.Load<Texture2D>("res://addons/admob/assets/google_play_icon.svg");
 
-			bool useTallLayout = isExpanded || ad.Ui.CustomMinimumSize.Y >= 100 * scaleFactor;
+			bool useTallLayout = isExpanded || ad.Ui.CustomMinimumSize.Y > 100 * scaleFactor;
 
 			if (useTallLayout)
 			{
