@@ -216,49 +216,49 @@ namespace PoingStudios.AdMob.Core
 			if (!_ads.TryGetValue(uid, out AdData ad) || ad.Ui == null || !IsInstanceValid(ad.Ui)) return;
 
 			var viewportSize = GetViewport().GetVisibleRect().Size;
-			var windowSize = DisplayServer.WindowGetSize();
-			float screenScale = DisplayServer.ScreenGetScale(DisplayServer.WindowGetCurrentScreen());
-
-			float scaleX = windowSize.X / (float)viewportSize.X;
-			float scaleY = windowSize.Y / (float)viewportSize.Y;
-
-			float scaleFactorX = scaleX > 0f ? (screenScale / scaleX) : 1.0f;
-			float scaleFactorY = scaleY > 0f ? (screenScale / scaleY) : 1.0f;
-
-			if (ad.IsAdaptive)
+			float scaleFactor = Mathf.Min(viewportSize.X, viewportSize.Y) / 360f;
+			if (scaleFactor <= 0.0f)
 			{
-				ad.Width = (int)(windowSize.X / screenScale);
+				scaleFactor = 1.0f;
 			}
 
 			bool isExpanded = ad.IsCollapsible && !ad.IsCollapsed;
 
-			if (isExpanded)
+			float widthInViewport;
+			float heightInViewport;
+
+			if (ad.IsAdaptive)
 			{
-				ad.CurrentHeight = 250;
+				widthInViewport = viewportSize.X;
+				ad.CurrentWidth = (int)Mathf.Round(viewportSize.X / scaleFactor);
 			}
 			else
 			{
-				ad.CurrentHeight = ad.Height;
+				widthInViewport = ad.Width * scaleFactor;
+				ad.CurrentWidth = ad.Width;
 			}
-			ad.CurrentWidth = ad.Width;
 
-			ad.Ui.CustomMinimumSize = new Vector2(ad.CurrentWidth * scaleFactorX, ad.CurrentHeight * scaleFactorY);
+			int heightDp = isExpanded ? 250 : ad.Height;
+			heightInViewport = heightDp * scaleFactor;
+			ad.CurrentHeight = heightDp;
+
+			ad.Ui.CustomMinimumSize = new Vector2(widthInViewport, heightInViewport);
 			ad.Ui.Size = ad.Ui.CustomMinimumSize;
 
-			float btnWidth = 28f * scaleFactorX;
-			float btnHeight = 28f * scaleFactorY;
+			float btnWidth = 28f * scaleFactor;
+			float btnHeight = 28f * scaleFactor;
 
 			var localVisibleRect = new Rect2(Vector2.Zero, ad.Ui.Size).Intersection(new Rect2(-ad.Ui.Position, viewportSize));
-			float targetTop = 10f * scaleFactorY;
-			float closeTargetLeft = ad.Ui.Size.X - 38f * scaleFactorX;
-			float toggleTargetLeft = ad.Ui.Size.X - 71f * scaleFactorX;
+			float targetTop = 10f * scaleFactor;
+			float closeTargetLeft = ad.Ui.Size.X - 38f * scaleFactor;
+			float toggleTargetLeft = ad.Ui.Size.X - 71f * scaleFactor;
 
 			if (localVisibleRect.Size.X > 0f && localVisibleRect.Size.Y > 0f)
 			{
-				targetTop = Mathf.Clamp(localVisibleRect.Position.Y + 10f * scaleFactorY, localVisibleRect.Position.Y, localVisibleRect.Position.Y + localVisibleRect.Size.Y - btnHeight);
-				closeTargetLeft = localVisibleRect.Position.X + localVisibleRect.Size.X - btnWidth - 10f * scaleFactorX;
+				targetTop = Mathf.Clamp(localVisibleRect.Position.Y + 10f * scaleFactor, localVisibleRect.Position.Y, localVisibleRect.Position.Y + localVisibleRect.Size.Y - btnHeight);
+				closeTargetLeft = localVisibleRect.Position.X + localVisibleRect.Size.X - btnWidth - 10f * scaleFactor;
 				closeTargetLeft = Mathf.Clamp(closeTargetLeft, localVisibleRect.Position.X, localVisibleRect.Position.X + localVisibleRect.Size.X - btnWidth);
-				toggleTargetLeft = closeTargetLeft - btnWidth - 5f * scaleFactorX;
+				toggleTargetLeft = closeTargetLeft - btnWidth - 5f * scaleFactor;
 				toggleTargetLeft = Mathf.Clamp(toggleTargetLeft, localVisibleRect.Position.X, localVisibleRect.Position.X + localVisibleRect.Size.X - btnWidth);
 			}
 
@@ -281,8 +281,8 @@ namespace PoingStudios.AdMob.Core
 					CornerRadiusBottomLeft = 999,
 					CornerRadiusBottomRight = 999,
 					ShadowColor = new Color(0f, 0f, 0f, 0.15f),
-					ShadowSize = Mathf.Max(0, (int)Mathf.Round(2f * scaleFactorY)),
-					ShadowOffset = new Vector2(0f, Mathf.Max(0, (int)Mathf.Round(1f * scaleFactorY))),
+					ShadowSize = (int)Mathf.Round(2 * scaleFactor),
+					ShadowOffset = new Vector2(0f, (int)Mathf.Round(1 * scaleFactor)),
 					ContentMarginTop = 0f,
 					ContentMarginBottom = 0f
 				};
@@ -301,7 +301,7 @@ namespace PoingStudios.AdMob.Core
 				ad.CloseBtn.AddThemeColorOverride("font_color", new Color(0.85f, 0.15f, 0.15f));
 				ad.CloseBtn.AddThemeColorOverride("font_hover_color", new Color(0.95f, 0.2f, 0.2f));
 				ad.CloseBtn.AddThemeColorOverride("font_pressed_color", new Color(0.65f, 0.1f, 0.1f));
-				ad.CloseBtn.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(18f * scaleFactorY)));
+				ad.CloseBtn.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(18 * scaleFactor)));
 			}
 
 			if (ad.ToggleBtn != null && IsInstanceValid(ad.ToggleBtn))
@@ -333,9 +333,9 @@ namespace PoingStudios.AdMob.Core
 					CornerRadiusBottomLeft = 999,
 					CornerRadiusBottomRight = 999,
 					ShadowColor = new Color(0f, 0f, 0f, 0.15f),
-					ShadowSize = Mathf.Max(0, (int)Mathf.Round(2f * scaleFactorY)),
-					ShadowOffset = new Vector2(0f, Mathf.Max(0, (int)Mathf.Round(1f * scaleFactorY))),
-					ContentMarginTop = Mathf.Max(0, (int)Mathf.Round(4f * scaleFactorY)),
+					ShadowSize = (int)Mathf.Round(2 * scaleFactor),
+					ShadowOffset = new Vector2(0f, (int)Mathf.Round(1 * scaleFactor)),
+					ContentMarginTop = (int)Mathf.Round(4 * scaleFactor),
 					ContentMarginBottom = 0f
 				};
 
@@ -353,7 +353,7 @@ namespace PoingStudios.AdMob.Core
 				ad.ToggleBtn.AddThemeColorOverride("font_color", new Color(0.2f, 0.2f, 0.2f));
 				ad.ToggleBtn.AddThemeColorOverride("font_hover_color", new Color(0.1f, 0.1f, 0.1f));
 				ad.ToggleBtn.AddThemeColorOverride("font_pressed_color", new Color(0f, 0f, 0f));
-				ad.ToggleBtn.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(14f * scaleFactorY)));
+				ad.ToggleBtn.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(14 * scaleFactor)));
 			}
 
 			// Clear old rich UI
@@ -367,9 +367,9 @@ namespace PoingStudios.AdMob.Core
 			// Add floating Test Ad badge
 			var testAdLabel = new Label { Text = "Mock Ad", HorizontalAlignment = HorizontalAlignment.Center };
 			testAdLabel.AddThemeColorOverride("font_color", Colors.White);
-			testAdLabel.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(10 * scaleFactorY)));
+			testAdLabel.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(10 * scaleFactor)));
 			
-			var testAdBg = new ColorRect { Color = new Color(0.2f, 0.2f, 0.2f, 0.8f), CustomMinimumSize = new Vector2(45 * scaleFactorX, 14 * scaleFactorY) };
+			var testAdBg = new ColorRect { Color = new Color(0.2f, 0.2f, 0.2f, 0.8f), CustomMinimumSize = new Vector2(45 * scaleFactor, 14 * scaleFactor) };
 			testAdBg.SetAnchorsPreset(Control.LayoutPreset.CenterTop);
 			testAdBg.GrowHorizontal = Control.GrowDirection.Both;
 			testAdBg.AddChild(testAdLabel);
@@ -378,48 +378,48 @@ namespace PoingStudios.AdMob.Core
 
 			var vbox = new VBoxContainer();
 			vbox.SetAnchorsPreset(Control.LayoutPreset.FullRect);
-			vbox.AddThemeConstantOverride("separation", Mathf.Max(0, (int)Mathf.Round(5 * scaleFactorY)));
+			vbox.AddThemeConstantOverride("separation", (int)Mathf.Round(5 * scaleFactor));
 			ad.Ui.AddChild(vbox);
 
 			var floodItTex = ResourceLoader.Load<Texture2D>("res://addons/admob/assets/flood_it_icon.svg");
 			var playTex = ResourceLoader.Load<Texture2D>("res://addons/admob/assets/google_play_icon.svg");
 
-			bool useTallLayout = isExpanded || ad.Ui.CustomMinimumSize.Y >= 100 * scaleFactorY;
+			bool useTallLayout = isExpanded || ad.Ui.CustomMinimumSize.Y >= 100 * scaleFactor;
 
 			if (useTallLayout)
 			{
-				var spacerTop = new Control { CustomMinimumSize = new Vector2(0, 20 * scaleFactorY) };
+				var spacerTop = new Control { CustomMinimumSize = new Vector2(0, 20 * scaleFactor) };
 				vbox.AddChild(spacerTop);
 				
-				var icon = new TextureRect { Texture = floodItTex, ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize, StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered, CustomMinimumSize = new Vector2(64 * scaleFactorX, 64 * scaleFactorY), SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter };
+				var icon = new TextureRect { Texture = floodItTex, ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize, StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered, CustomMinimumSize = new Vector2(64 * scaleFactor, 64 * scaleFactor), SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter };
 				vbox.AddChild(icon);
 
 				var title = new Label { Text = "Flood-It!", HorizontalAlignment = HorizontalAlignment.Center };
 				title.AddThemeColorOverride("font_color", Colors.Black);
-				title.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(24 * scaleFactorY)));
+				title.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(24 * scaleFactor)));
 				vbox.AddChild(title);
 
 				var subtitle = new Label { Text = "Can you flood it?", HorizontalAlignment = HorizontalAlignment.Center };
 				subtitle.AddThemeColorOverride("font_color", Colors.DarkGray);
-				subtitle.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(14 * scaleFactorY)));
+				subtitle.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(14 * scaleFactor)));
 				vbox.AddChild(subtitle);
 
 				var playHbox = new HBoxContainer { Alignment = BoxContainer.AlignmentMode.Center };
-				var playIcon = new TextureRect { Texture = playTex, CustomMinimumSize = new Vector2(24 * scaleFactorX, 24 * scaleFactorY), ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize, StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered };
+				var playIcon = new TextureRect { Texture = playTex, CustomMinimumSize = new Vector2(24 * scaleFactor, 24 * scaleFactor), ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize, StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered };
 				var playLabel = new Label { Text = "Google Play" };
 				playLabel.AddThemeColorOverride("font_color", Colors.DarkGray);
-				playLabel.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(12 * scaleFactorY)));
+				playLabel.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(12 * scaleFactor)));
 				playHbox.AddChild(playIcon);
 				playHbox.AddChild(playLabel);
 				vbox.AddChild(playHbox);
 
 				var btnMargin = new MarginContainer();
-				btnMargin.AddThemeConstantOverride("margin_left", Mathf.Max(0, (int)Mathf.Round(20 * scaleFactorX)));
-				btnMargin.AddThemeConstantOverride("margin_right", Mathf.Max(0, (int)Mathf.Round(20 * scaleFactorX)));
-				btnMargin.AddThemeConstantOverride("margin_top", Mathf.Max(0, (int)Mathf.Round(10 * scaleFactorY)));
+				btnMargin.AddThemeConstantOverride("margin_left", (int)Mathf.Round(20 * scaleFactor));
+				btnMargin.AddThemeConstantOverride("margin_right", (int)Mathf.Round(20 * scaleFactor));
+				btnMargin.AddThemeConstantOverride("margin_top", (int)Mathf.Round(10 * scaleFactor));
 				
-				var installBtn = new Button { Text = "Install", CustomMinimumSize = new Vector2(0, 40 * scaleFactorY) };
-				installBtn.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(14 * scaleFactorY)));
+				var installBtn = new Button { Text = "Install", CustomMinimumSize = new Vector2(0, 40 * scaleFactor) };
+				installBtn.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(14 * scaleFactor)));
 				btnMargin.AddChild(installBtn);
 				vbox.AddChild(btnMargin);
 			}
@@ -429,10 +429,10 @@ namespace PoingStudios.AdMob.Core
 				vbox.AddChild(hbox);
 
 				var leftMargin = new MarginContainer();
-				leftMargin.AddThemeConstantOverride("margin_left", Mathf.Max(0, (int)Mathf.Round(15 * scaleFactorX)));
+				leftMargin.AddThemeConstantOverride("margin_left", (int)Mathf.Round(15 * scaleFactor));
 				var niceJob = new Label { Text = "Nice job!" };
 				niceJob.AddThemeColorOverride("font_color", new Color(0.26f, 0.52f, 0.96f));
-				niceJob.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(16 * scaleFactorY)));
+				niceJob.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(16 * scaleFactor)));
 				niceJob.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
 				leftMargin.AddChild(niceJob);
 				hbox.AddChild(leftMargin);
@@ -442,18 +442,18 @@ namespace PoingStudios.AdMob.Core
 
 				var centerLabel = new Label { Text = $"This is a {ad.Width}x{ad.Height} mock ad." };
 				centerLabel.AddThemeColorOverride("font_color", Colors.Black);
-				centerLabel.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(16 * scaleFactorY)));
+				centerLabel.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(16 * scaleFactor)));
 				centerLabel.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
 				hbox.AddChild(centerLabel);
 
 				var spacer2 = new Control { SizeFlagsHorizontal = Control.SizeFlags.ExpandFill };
 				hbox.AddChild(spacer2);
 
-				var admobLogo = new TextureRect { Texture = ResourceLoader.Load<Texture2D>("res://addons/admob/assets/icon-120.png"), ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize, StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered, CustomMinimumSize = new Vector2(30 * scaleFactorX, 30 * scaleFactorY) };
+				var admobLogo = new TextureRect { Texture = ResourceLoader.Load<Texture2D>("res://addons/admob/assets/icon-120.png"), ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize, StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered, CustomMinimumSize = new Vector2(30 * scaleFactor, 30 * scaleFactor) };
 				admobLogo.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
 				
 				var rightMargin = new MarginContainer();
-				rightMargin.AddThemeConstantOverride("margin_right", Mathf.Max(0, (int)Mathf.Round(15 * scaleFactorX)));
+				rightMargin.AddThemeConstantOverride("margin_right", (int)Mathf.Round(15 * scaleFactor));
 				rightMargin.AddChild(admobLogo);
 				hbox.AddChild(rightMargin);
 			}
@@ -570,11 +570,6 @@ namespace PoingStudios.AdMob.Core
 			if (!_ads.TryGetValue(uid, out AdData ad) || ad.Ui == null || !IsInstanceValid(ad.Ui)) return;
 
 			var viewportSize = GetViewport().GetVisibleRect().Size;
-			var windowSize = DisplayServer.WindowGetSize();
-			float screenScale = DisplayServer.ScreenGetScale(DisplayServer.WindowGetCurrentScreen());
-
-			float scaleX = windowSize.X / (float)viewportSize.X;
-			float scaleY = windowSize.Y / (float)viewportSize.Y;
 
 			ad.Ui.Scale = Vector2.One;
 			var scaledSize = ad.Ui.Size;
@@ -589,9 +584,7 @@ namespace PoingStudios.AdMob.Core
 						x = ad.CustomPosition.TryGetValue("x", out var xVar) ? (float)xVar.AsDouble() : 0;
 						y = ad.CustomPosition.TryGetValue("y", out var yVar) ? (float)yVar.AsDouble() : 0;
 					}
-					float scaleFactorX = scaleX > 0f ? (screenScale / scaleX) : 1.0f;
-					float scaleFactorY = scaleY > 0f ? (screenScale / scaleY) : 1.0f;
-					ad.Ui.Position = new Vector2(x * scaleFactorX, y * scaleFactorY);
+					ad.Ui.Position = new Vector2(x, y);
 					break;
 				case 0: // TOP
 					ad.Ui.Position = new Vector2((viewportSize.X - scaledSize.X) / 2f, 0);

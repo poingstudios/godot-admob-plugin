@@ -211,42 +211,42 @@ func _update_size(uid: int) -> void:
 	var ui: Control = ad["ui"]
 
 	var viewport_size := get_viewport().get_visible_rect().size
-	var window_size := DisplayServer.window_get_size()
-	var screen_scale := DisplayServer.screen_get_scale(DisplayServer.window_get_current_screen())
-
-	var scale_x := window_size.x / float(viewport_size.x)
-	var scale_y := window_size.y / float(viewport_size.y)
-
-	var scale_factor_x := screen_scale / scale_x if scale_x > 0 else 1.0
-	var scale_factor_y := screen_scale / scale_y if scale_y > 0 else 1.0
-
-	if ad.get("is_adaptive", false):
-		ad["width"] = int(window_size.x / screen_scale)
+	var scale_factor: float = min(viewport_size.x, viewport_size.y) / 360.0
+	if scale_factor <= 0.0:
+		scale_factor = 1.0
 
 	var is_expanded: bool = ad.get("is_collapsible", false) and not ad.get("is_collapsed", false)
 
-	if is_expanded:
-		ad["current_height"] = 250
-	else:
-		ad["current_height"] = ad["height"]
-	ad["current_width"] = ad["width"]
+	var width_in_viewport: float
+	var height_in_viewport: float
 
-	ad["ui"].custom_minimum_size = Vector2(ad["current_width"] * scale_factor_x, ad["current_height"] * scale_factor_y)
+	if ad.get("is_adaptive", false):
+		width_in_viewport = viewport_size.x
+		ad["current_width"] = int(round(viewport_size.x / scale_factor))
+	else:
+		width_in_viewport = ad["width"] * scale_factor
+		ad["current_width"] = ad["width"]
+
+	var height_dp: int = 250 if is_expanded else ad["height"]
+	height_in_viewport = height_dp * scale_factor
+	ad["current_height"] = height_dp
+
+	ad["ui"].custom_minimum_size = Vector2(width_in_viewport, height_in_viewport)
 	ad["ui"].size = ad["ui"].custom_minimum_size
 
-	var btn_width := 28.0 * scale_factor_x
-	var btn_height := 28.0 * scale_factor_y
+	var btn_width := 28.0 * scale_factor
+	var btn_height := 28.0 * scale_factor
 
 	var local_visible_rect := Rect2(Vector2.ZERO, ui.size).intersection(Rect2(-ui.position, viewport_size))
-	var target_top := 10.0 * scale_factor_y
-	var close_target_left := ui.size.x - 38 * scale_factor_x
-	var toggle_target_left := ui.size.x - 71 * scale_factor_x
+	var target_top := 10.0 * scale_factor
+	var close_target_left := ui.size.x - 38.0 * scale_factor
+	var toggle_target_left := ui.size.x - 71.0 * scale_factor
 
 	if local_visible_rect.size.x > 0 and local_visible_rect.size.y > 0:
-		target_top = clamp(local_visible_rect.position.y + 10 * scale_factor_y, local_visible_rect.position.y, local_visible_rect.position.y + local_visible_rect.size.y - btn_height)
-		close_target_left = local_visible_rect.position.x + local_visible_rect.size.x - btn_width - 10 * scale_factor_x
+		target_top = clamp(local_visible_rect.position.y + 10.0 * scale_factor, local_visible_rect.position.y, local_visible_rect.position.y + local_visible_rect.size.y - btn_height)
+		close_target_left = local_visible_rect.position.x + local_visible_rect.size.x - btn_width - 10.0 * scale_factor
 		close_target_left = clamp(close_target_left, local_visible_rect.position.x, local_visible_rect.position.x + local_visible_rect.size.x - btn_width)
-		toggle_target_left = close_target_left - btn_width - 5 * scale_factor_x
+		toggle_target_left = close_target_left - btn_width - 5.0 * scale_factor
 		toggle_target_left = clamp(toggle_target_left, local_visible_rect.position.x, local_visible_rect.position.x + local_visible_rect.size.x - btn_width)
 
 	if is_instance_valid(ad.get("close_btn")):
@@ -267,8 +267,8 @@ func _update_size(uid: int) -> void:
 		style_normal.corner_radius_bottom_left = 999
 		style_normal.corner_radius_bottom_right = 999
 		style_normal.shadow_color = Color(0, 0, 0, 0.15)
-		style_normal.shadow_size = int(round(2 * scale_factor_y))
-		style_normal.shadow_offset = Vector2(0, int(round(1 * scale_factor_y)))
+		style_normal.shadow_size = int(round(2 * scale_factor))
+		style_normal.shadow_offset = Vector2(0, int(round(1 * scale_factor)))
 		style_normal.content_margin_top = 0
 		style_normal.content_margin_bottom = 0
 
@@ -286,7 +286,7 @@ func _update_size(uid: int) -> void:
 		btn.add_theme_color_override("font_color", Color(0.85, 0.15, 0.15))
 		btn.add_theme_color_override("font_hover_color", Color(0.95, 0.2, 0.2))
 		btn.add_theme_color_override("font_pressed_color", Color(0.65, 0.1, 0.1))
-		btn.add_theme_font_size_override("font_size", max(1, int(round(18 * scale_factor_y))))
+		btn.add_theme_font_size_override("font_size", max(1, int(round(18 * scale_factor))))
 
 	if is_instance_valid(ad.get("toggle_btn")):
 		var btn: Button = ad["toggle_btn"]
@@ -312,9 +312,9 @@ func _update_size(uid: int) -> void:
 		style_normal.corner_radius_bottom_left = 999
 		style_normal.corner_radius_bottom_right = 999
 		style_normal.shadow_color = Color(0, 0, 0, 0.15)
-		style_normal.shadow_size = int(round(2 * scale_factor_y))
-		style_normal.shadow_offset = Vector2(0, int(round(1 * scale_factor_y)))
-		style_normal.content_margin_top = int(round(4 * scale_factor_y))
+		style_normal.shadow_size = int(round(2 * scale_factor))
+		style_normal.shadow_offset = Vector2(0, int(round(1 * scale_factor)))
+		style_normal.content_margin_top = int(round(4 * scale_factor))
 		style_normal.content_margin_bottom = 0
 
 		var style_hover := style_normal.duplicate() as StyleBoxFlat
@@ -331,7 +331,7 @@ func _update_size(uid: int) -> void:
 		btn.add_theme_color_override("font_color", Color(0.2, 0.2, 0.2))
 		btn.add_theme_color_override("font_hover_color", Color(0.1, 0.1, 0.1))
 		btn.add_theme_color_override("font_pressed_color", Color(0.0, 0.0, 0.0))
-		btn.add_theme_font_size_override("font_size", max(1, int(round(14 * scale_factor_y))))
+		btn.add_theme_font_size_override("font_size", max(1, int(round(14 * scale_factor))))
 
 	for child in ad["ui"].get_children():
 		if child is ColorRect or child == ad.get("toggle_btn") or child == ad.get("close_btn"): continue
@@ -342,11 +342,11 @@ func _update_size(uid: int) -> void:
 	test_ad_label.text = "Mock Ad"
 	test_ad_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	test_ad_label.add_theme_color_override("font_color", Color.WHITE)
-	test_ad_label.add_theme_font_size_override("font_size", max(1, int(round(10 * scale_factor_y))))
+	test_ad_label.add_theme_font_size_override("font_size", max(1, int(round(10 * scale_factor))))
 
 	var test_ad_bg := ColorRect.new()
 	test_ad_bg.color = Color(0.2, 0.2, 0.2, 0.8)
-	test_ad_bg.custom_minimum_size = Vector2(45 * scale_factor_x, 14 * scale_factor_y)
+	test_ad_bg.custom_minimum_size = Vector2(45 * scale_factor, 14 * scale_factor)
 	test_ad_bg.set_anchors_preset(Control.PRESET_CENTER_TOP)
 	test_ad_bg.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	test_ad_bg.add_child(test_ad_label)
@@ -355,24 +355,24 @@ func _update_size(uid: int) -> void:
 
 	var vbox := VBoxContainer.new()
 	vbox.set_anchors_preset(Control.PRESET_FULL_RECT)
-	vbox.add_theme_constant_override("separation", max(0, int(round(5 * scale_factor_y))))
+	vbox.add_theme_constant_override("separation", int(round(5 * scale_factor)))
 	ui.add_child(vbox)
 
 	var flood_it_tex := load("res://addons/admob/assets/flood_it_icon.svg") as Texture2D
 	var play_tex := load("res://addons/admob/assets/google_play_icon.svg") as Texture2D
 
-	var use_tall_layout: bool = is_expanded or ui.custom_minimum_size.y >= 100 * scale_factor_y
+	var use_tall_layout: bool = is_expanded or ui.custom_minimum_size.y >= 100 * scale_factor
 
 	if use_tall_layout:
 		var spacer_top := Control.new()
-		spacer_top.custom_minimum_size = Vector2(0, 20 * scale_factor_y)
+		spacer_top.custom_minimum_size = Vector2(0, 20 * scale_factor)
 		vbox.add_child(spacer_top)
 
 		var icon := TextureRect.new()
 		icon.texture = flood_it_tex
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		icon.custom_minimum_size = Vector2(64 * scale_factor_x, 64 * scale_factor_y)
+		icon.custom_minimum_size = Vector2(64 * scale_factor, 64 * scale_factor)
 		icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		vbox.add_child(icon)
 
@@ -380,41 +380,41 @@ func _update_size(uid: int) -> void:
 		title.text = "Flood-It!"
 		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		title.add_theme_color_override("font_color", Color.BLACK)
-		title.add_theme_font_size_override("font_size", max(1, int(round(24 * scale_factor_y))))
+		title.add_theme_font_size_override("font_size", max(1, int(round(24 * scale_factor))))
 		vbox.add_child(title)
 
 		var subtitle := Label.new()
 		subtitle.text = "Can you flood it?"
 		subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		subtitle.add_theme_color_override("font_color", Color.DARK_GRAY)
-		subtitle.add_theme_font_size_override("font_size", max(1, int(round(14 * scale_factor_y))))
+		subtitle.add_theme_font_size_override("font_size", max(1, int(round(14 * scale_factor))))
 		vbox.add_child(subtitle)
 
 		var play_hbox := HBoxContainer.new()
 		play_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
 		var play_icon := TextureRect.new()
 		play_icon.texture = play_tex
-		play_icon.custom_minimum_size = Vector2(24 * scale_factor_x, 24 * scale_factor_y)
+		play_icon.custom_minimum_size = Vector2(24 * scale_factor, 24 * scale_factor)
 		play_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		play_icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 
 		var play_label := Label.new()
 		play_label.text = "Google Play"
 		play_label.add_theme_color_override("font_color", Color.DARK_GRAY)
-		play_label.add_theme_font_size_override("font_size", max(1, int(round(12 * scale_factor_y))))
+		play_label.add_theme_font_size_override("font_size", max(1, int(round(12 * scale_factor))))
 		play_hbox.add_child(play_icon)
 		play_hbox.add_child(play_label)
 		vbox.add_child(play_hbox)
 
 		var btn_margin := MarginContainer.new()
-		btn_margin.add_theme_constant_override("margin_left", max(0, int(round(20 * scale_factor_x))))
-		btn_margin.add_theme_constant_override("margin_right", max(0, int(round(20 * scale_factor_x))))
-		btn_margin.add_theme_constant_override("margin_top", max(0, int(round(10 * scale_factor_y))))
+		btn_margin.add_theme_constant_override("margin_left", int(round(20 * scale_factor)))
+		btn_margin.add_theme_constant_override("margin_right", int(round(20 * scale_factor)))
+		btn_margin.add_theme_constant_override("margin_top", int(round(10 * scale_factor)))
 
 		var install_btn := Button.new()
 		install_btn.text = "Install"
-		install_btn.custom_minimum_size = Vector2(0, 40 * scale_factor_y)
-		install_btn.add_theme_font_size_override("font_size", max(1, int(round(14 * scale_factor_y))))
+		install_btn.custom_minimum_size = Vector2(0, 40 * scale_factor)
+		install_btn.add_theme_font_size_override("font_size", max(1, int(round(14 * scale_factor))))
 		btn_margin.add_child(install_btn)
 		vbox.add_child(btn_margin)
 	else:
@@ -423,11 +423,11 @@ func _update_size(uid: int) -> void:
 		vbox.add_child(hbox)
 
 		var left_margin := MarginContainer.new()
-		left_margin.add_theme_constant_override("margin_left", max(0, int(round(15 * scale_factor_x))))
+		left_margin.add_theme_constant_override("margin_left", int(round(15 * scale_factor)))
 		var nice_job := Label.new()
 		nice_job.text = "Nice job!"
 		nice_job.add_theme_color_override("font_color", Color(0.26, 0.52, 0.96))
-		nice_job.add_theme_font_size_override("font_size", max(1, int(round(16 * scale_factor_y))))
+		nice_job.add_theme_font_size_override("font_size", max(1, int(round(16 * scale_factor))))
 		nice_job.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		left_margin.add_child(nice_job)
 		hbox.add_child(left_margin)
@@ -439,7 +439,7 @@ func _update_size(uid: int) -> void:
 		var center_label := Label.new()
 		center_label.text = "This is a %dx%d mock ad." % [ad["width"], ad["height"]]
 		center_label.add_theme_color_override("font_color", Color.BLACK)
-		center_label.add_theme_font_size_override("font_size", max(1, int(round(16 * scale_factor_y))))
+		center_label.add_theme_font_size_override("font_size", max(1, int(round(16 * scale_factor))))
 		center_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		hbox.add_child(center_label)
 
@@ -451,11 +451,11 @@ func _update_size(uid: int) -> void:
 		admob_logo.texture = load("res://addons/admob/assets/icon-120.png") as Texture2D
 		admob_logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		admob_logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		admob_logo.custom_minimum_size = Vector2(30 * scale_factor_x, 30 * scale_factor_y)
+		admob_logo.custom_minimum_size = Vector2(30 * scale_factor, 30 * scale_factor)
 		admob_logo.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 
 		var right_margin := MarginContainer.new()
-		right_margin.add_theme_constant_override("margin_right", max(0, int(round(15 * scale_factor_x))))
+		right_margin.add_theme_constant_override("margin_right", int(round(15 * scale_factor)))
 		right_margin.add_child(admob_logo)
 		hbox.add_child(right_margin)
 
@@ -472,21 +472,13 @@ func _update_ui_position(uid: int) -> void:
 	var ui: ColorRect = ad["ui"]
 	var viewport_size := get_viewport().get_visible_rect().size
 
-	var window_size := DisplayServer.window_get_size()
-	var screen_scale := DisplayServer.screen_get_scale(DisplayServer.window_get_current_screen())
-
-	var scale_x := window_size.x / float(viewport_size.x)
-	var scale_y := window_size.y / float(viewport_size.y)
-
 	ui.scale = Vector2.ONE
 	var scaled_size := ui.size
 
 	match ad["position"]:
 		-1: # CUSTOM
-			var scale_factor_x := screen_scale / scale_x if scale_x > 0 else 1.0
-			var scale_factor_y := screen_scale / scale_y if scale_y > 0 else 1.0
-			var x: float = ad["custom_position"]["x"] * scale_factor_x
-			var y: float = ad["custom_position"]["y"] * scale_factor_y
+			var x: float = ad["custom_position"]["x"]
+			var y: float = ad["custom_position"]["y"]
 			ui.position = Vector2(x, y)
 		0: # TOP
 			ui.position = Vector2((viewport_size.x - scaled_size.x) / 2.0, 0)

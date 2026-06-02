@@ -311,7 +311,9 @@ func _on_ad_clicked() -> void:
 
 
 func _on_ad_closed() -> void:
-	_log("Ad closed")
+	_log("Ad closed (destroyed)")
+	_native_overlay_ad = null
+	_update_ui_state(false)
 
 
 func _on_ad_impression() -> void:
