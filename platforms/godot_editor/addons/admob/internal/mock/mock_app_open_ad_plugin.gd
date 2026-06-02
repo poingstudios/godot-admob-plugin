@@ -96,7 +96,7 @@ func _update_ui(uid: int) -> void:
 		return
 	var viewport_size := viewport.get_visible_rect().size
 
-	var scale_factor := min(viewport_size.x, viewport_size.y) / 360.0
+	var scale_factor: float = min(viewport_size.x, viewport_size.y) / 360.0
 	if scale_factor <= 0.0:
 		scale_factor = 1.0
 

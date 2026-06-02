@@ -295,8 +295,8 @@ func _update_ui_position(uid: int) -> void:
 		vbox_text.add_child(sub_hbox)
 
 		var ad_badge := Panel.new()
-		var badge_height := clamp(height_dp * 0.2, 8, 14)
-		var badge_width := badge_height * 1.6
+		var badge_height: float = clamp(height_dp * 0.2, 8, 14)
+		var badge_width: float = badge_height * 1.6
 		ad_badge.custom_minimum_size = Vector2(badge_width * scale_factor_x, badge_height * scale_factor_y)
 		ad_badge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		var badge_bg := Color(0.0, 0.53, 0.28)
