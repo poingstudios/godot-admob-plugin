@@ -44,6 +44,19 @@ namespace PoingStudios.AdMob.Core
 		private int _uidCounter = 0;
 		private System.Collections.Generic.Dictionary<int, AdData> _ads = new System.Collections.Generic.Dictionary<int, AdData>();
 
+		public override void _Ready()
+		{
+			((SceneTree)Engine.GetMainLoop()).Root.Connect(Window.SignalName.SizeChanged, new Callable(this, MethodName.OnWindowSizeChanged));
+		}
+
+		private void OnWindowSizeChanged()
+		{
+			foreach (var uid in _ads.Keys)
+			{
+				UpdateUi(uid);
+			}
+		}
+
 		public int create()
 		{
 			_uidCounter++;
@@ -51,33 +64,10 @@ namespace PoingStudios.AdMob.Core
 
 			var ui = new ColorRect
 			{
-				Color = new Color(0.1f, 0.1f, 0.1f, 0.9f)
+				Color = Colors.Black
 			};
 			ui.SetAnchorsPreset(Control.LayoutPreset.FullRect);
 			ui.Hide();
-
-			var label = new Label
-			{
-				Text = "AdMob Mock\nInterstitial",
-				HorizontalAlignment = HorizontalAlignment.Center,
-				VerticalAlignment = VerticalAlignment.Center
-			};
-			label.SetAnchorsPreset(Control.LayoutPreset.FullRect);
-			ui.AddChild(label);
-
-			var closeBtn = new Button
-			{
-				Text = "Close Ad"
-			};
-			closeBtn.SetAnchorsPreset(Control.LayoutPreset.TopRight);
-			closeBtn.Position = new Vector2(-100, 20);
-			ui.AddChild(closeBtn);
-
-			closeBtn.Connect(Button.SignalName.Pressed, Callable.From(() =>
-			{
-				ui.Hide();
-				EmitSignal(SignalName.on_interstitial_ad_dismissed_full_screen_content, uid);
-			}));
 
 			_ads[uid] = new AdData
 			{
@@ -115,10 +105,196 @@ namespace PoingStudios.AdMob.Core
 			return "";
 		}
 
+		private void UpdateUi(int uid)
+		{
+			if (!_ads.TryGetValue(uid, out AdData ad)) return;
+			var ui = ad.Ui as ColorRect;
+			if (ui == null || !IsInstanceValid(ui)) return;
+
+			var viewport = GetViewport();
+			if (viewport == null) return;
+			var viewportSize = viewport.GetVisibleRect().Size;
+
+			float scaleFactor = Mathf.Min(viewportSize.X, viewportSize.Y) / 360.0f;
+			if (scaleFactor <= 0.0f)
+			{
+				scaleFactor = 1.0f;
+			}
+
+			foreach (Node child in ui.GetChildren())
+			{
+				child.QueueFree();
+			}
+
+			ui.Color = Colors.Black;
+
+			var mainVbox = new VBoxContainer();
+			mainVbox.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+			mainVbox.AddThemeConstantOverride("separation", 0);
+			ui.AddChild(mainVbox);
+
+			// 1. Top Bar (sits on the black background)
+			var topMargin = new MarginContainer();
+			topMargin.AddThemeConstantOverride("margin_left", (int)Mathf.Round(16 * scaleFactor));
+			topMargin.AddThemeConstantOverride("margin_right", (int)Mathf.Round(16 * scaleFactor));
+			topMargin.AddThemeConstantOverride("margin_top", (int)Mathf.Round(16 * scaleFactor));
+			topMargin.AddThemeConstantOverride("margin_bottom", (int)Mathf.Round(8 * scaleFactor));
+			mainVbox.AddChild(topMargin);
+
+			var topControl = new Control();
+			topControl.CustomMinimumSize = new Vector2(0, 40 * scaleFactor);
+			topMargin.AddChild(topControl);
+
+			var testAdPill = new Panel();
+			testAdPill.CustomMinimumSize = new Vector2((int)Mathf.Round(65 * scaleFactor), (int)Mathf.Round(22 * scaleFactor));
+			testAdPill.SetAnchorsPreset(Control.LayoutPreset.Center);
+			testAdPill.GrowHorizontal = Control.GrowDirection.Both;
+			testAdPill.GrowVertical = Control.GrowDirection.Both;
+			var testAdPillStyle = new StyleBoxFlat
+			{
+				BgColor = new Color(0.2f, 0.2f, 0.2f, 0.8f),
+				CornerRadiusTopLeft = (int)Mathf.Round(4 * scaleFactor),
+				CornerRadiusTopRight = (int)Mathf.Round(4 * scaleFactor),
+				CornerRadiusBottomLeft = (int)Mathf.Round(4 * scaleFactor),
+				CornerRadiusBottomRight = (int)Mathf.Round(4 * scaleFactor)
+			};
+			testAdPill.AddThemeStyleboxOverride("panel", testAdPillStyle);
+			topControl.AddChild(testAdPill);
+
+			var testAdLbl = new Label
+			{
+				Text = "Test Ad",
+				HorizontalAlignment = HorizontalAlignment.Center,
+				VerticalAlignment = VerticalAlignment.Center
+			};
+			testAdLbl.AddThemeColorOverride("font_color", Colors.White);
+			testAdLbl.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(11 * scaleFactor)));
+			testAdLbl.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+			testAdPill.AddChild(testAdLbl);
+
+			var closeBtn = new Button();
+			closeBtn.CustomMinimumSize = new Vector2((int)Mathf.Round(32 * scaleFactor), (int)Mathf.Round(32 * scaleFactor));
+			closeBtn.SetAnchorsPreset(Control.LayoutPreset.CenterRight);
+			closeBtn.GrowHorizontal = Control.GrowDirection.Begin;
+			closeBtn.GrowVertical = Control.GrowDirection.Both;
+
+			var closeStyle = new StyleBoxFlat
+			{
+				BgColor = new Color(0.9f, 0.9f, 0.9f, 0.95f),
+				CornerRadiusTopLeft = (int)Mathf.Round(16 * scaleFactor),
+				CornerRadiusTopRight = (int)Mathf.Round(16 * scaleFactor),
+				CornerRadiusBottomLeft = (int)Mathf.Round(16 * scaleFactor),
+				CornerRadiusBottomRight = (int)Mathf.Round(16 * scaleFactor)
+			};
+
+			closeBtn.AddThemeStyleboxOverride("normal", closeStyle);
+			closeBtn.AddThemeStyleboxOverride("hover", closeStyle);
+			closeBtn.AddThemeStyleboxOverride("pressed", closeStyle);
+			closeBtn.AddThemeStyleboxOverride("focus", new StyleBoxEmpty());
+			topControl.AddChild(closeBtn);
+
+			var closeIcon = new Label
+			{
+				Text = "X",
+				HorizontalAlignment = HorizontalAlignment.Center,
+				VerticalAlignment = VerticalAlignment.Center
+			};
+			closeIcon.AddThemeColorOverride("font_color", new Color(0.1f, 0.1f, 0.1f));
+			closeIcon.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(16 * scaleFactor)));
+			closeIcon.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+			closeBtn.AddChild(closeIcon);
+
+			closeBtn.Connect(Button.SignalName.Pressed, Callable.From(() =>
+			{
+				ui.Hide();
+				EmitSignal(SignalName.on_interstitial_ad_dismissed_full_screen_content, uid);
+			}));
+
+			// Spacer above the card to center it vertically
+			var spacerTop = new Control();
+			spacerTop.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
+			mainVbox.AddChild(spacerTop);
+
+			// 2. Central White Card (full width, flat white, centered vertically)
+			var cardRect = new ColorRect
+			{
+				Color = Colors.White,
+				SizeFlagsHorizontal = Control.SizeFlags.ExpandFill
+			};
+			float cardHeight = Mathf.Min(420 * scaleFactor, viewportSize.Y - (140 * scaleFactor));
+			cardRect.CustomMinimumSize = new Vector2(0, cardHeight);
+			mainVbox.AddChild(cardRect);
+
+			var cardMargin = new MarginContainer();
+			cardMargin.SetAnchorsPreset(Control.LayoutPreset.FullRect);
+			cardMargin.AddThemeConstantOverride("margin_left", (int)Mathf.Round(24 * scaleFactor));
+			cardMargin.AddThemeConstantOverride("margin_right", (int)Mathf.Round(24 * scaleFactor));
+			cardMargin.AddThemeConstantOverride("margin_top", (int)Mathf.Round(24 * scaleFactor));
+			cardMargin.AddThemeConstantOverride("margin_bottom", (int)Mathf.Round(24 * scaleFactor));
+			cardRect.AddChild(cardMargin);
+
+			var contentVbox = new VBoxContainer();
+			contentVbox.Alignment = BoxContainer.AlignmentMode.Center;
+			contentVbox.AddThemeConstantOverride("separation", (int)Mathf.Round(24 * scaleFactor));
+			cardMargin.AddChild(contentVbox);
+
+			var adImage = new TextureRect
+			{
+				Texture = ResourceLoader.Load<Texture2D>("res://addons/admob/assets/format-interstitial.svg"),
+				ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+				StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
+				CustomMinimumSize = new Vector2(0, (int)Mathf.Round(160 * scaleFactor)),
+				SizeFlagsVertical = Control.SizeFlags.ExpandFill
+			};
+			contentVbox.AddChild(adImage);
+
+			var titleLbl = new Label
+			{
+				Text = "This is an\ninterstitial test ad.",
+				HorizontalAlignment = HorizontalAlignment.Center
+			};
+			titleLbl.AddThemeColorOverride("font_color", new Color(0.12f, 0.12f, 0.12f));
+			titleLbl.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(22 * scaleFactor)));
+			contentVbox.AddChild(titleLbl);
+
+			var spacer = new Control();
+			spacer.CustomMinimumSize = new Vector2(0, (int)Mathf.Round(16 * scaleFactor));
+			contentVbox.AddChild(spacer);
+
+			var logoHbox = new HBoxContainer();
+			logoHbox.Alignment = BoxContainer.AlignmentMode.Center;
+			logoHbox.AddThemeConstantOverride("separation", (int)Mathf.Round(8 * scaleFactor));
+			contentVbox.AddChild(logoHbox);
+
+			var admobLogo = new TextureRect
+			{
+				Texture = ResourceLoader.Load<Texture2D>("res://addons/admob/assets/icon-120.png"),
+				ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
+				StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
+				CustomMinimumSize = new Vector2((int)Mathf.Round(24 * scaleFactor), (int)Mathf.Round(24 * scaleFactor)),
+				SizeFlagsVertical = Control.SizeFlags.ShrinkCenter
+			};
+			logoHbox.AddChild(admobLogo);
+
+			var admobLbl = new Label
+			{
+				Text = "Google AdMob"
+			};
+			admobLbl.AddThemeColorOverride("font_color", new Color(0.35f, 0.35f, 0.35f));
+			admobLbl.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(16 * scaleFactor)));
+			logoHbox.AddChild(admobLbl);
+
+			// Spacer below the card to center it vertically
+			var spacerBottom = new Control();
+			spacerBottom.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
+			mainVbox.AddChild(spacerBottom);
+		}
+
 		public void show(int uid)
 		{
 			if (_ads.TryGetValue(uid, out AdData ad) && ad.Ui != null && IsInstanceValid(ad.Ui))
 			{
+				UpdateUi(uid);
 				ad.Ui.Show();
 				EmitSignal(SignalName.on_interstitial_ad_showed_full_screen_content, uid);
 				EmitSignal(SignalName.on_interstitial_ad_impression, uid);
@@ -150,3 +326,4 @@ namespace PoingStudios.AdMob.Core
 		}
 	}
 }
+
