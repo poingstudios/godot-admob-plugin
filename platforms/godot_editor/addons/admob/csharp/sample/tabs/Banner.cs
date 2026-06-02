@@ -238,14 +238,24 @@ public partial class Banner : BaseTab
 			},
 			OnAdClosed = () => 
 			{ 
-				Log("Ad closed"); 
+				Log("Ad closed callback triggered"); 
 				var height = _adView != null ? _adView.GetHeightInPixels() : 0;
+				Log($"Ad closed height: {height}");
 				if (height == 0)
 				{
-					_isHidden = true;
-					UpdateUI(true);
+					if (_adView != null)
+					{
+						_adView.Destroy();
+						_adView = null;
+					}
+					_isHidden = false;
+					UpdateUI(false);
+					SampleRegistry.SafeArea?.ResetAdOverlap();
 				}
-				SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
+				else
+				{
+					SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
+				}
 			},
 			OnAdImpression = () => Log("Impression recorded"),
 		};

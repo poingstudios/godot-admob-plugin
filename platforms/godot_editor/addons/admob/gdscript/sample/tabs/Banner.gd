@@ -253,13 +253,20 @@ func _on_ad_clicked() -> void:
 
 
 func _on_ad_closed() -> void:
-	_log("Ad closed")
+	_log("Ad closed callback triggered")
 	var height := _ad_view.get_height_in_pixels() if _ad_view else 0
+	_log("Ad closed height: %d" % height)
 	if height == 0:
-		_is_hidden = true
-		_update_ui_state(true)
-	if Registry.safe_area:
-		Registry.safe_area.update_ad_overlap(_ad_view)
+		if _ad_view:
+			_ad_view.destroy()
+			_ad_view = null
+		_is_hidden = false
+		_update_ui_state(false)
+		if Registry.safe_area:
+			Registry.safe_area.reset_ad_overlap()
+	else:
+		if Registry.safe_area:
+			Registry.safe_area.update_ad_overlap(_ad_view)
 
 
 func _on_ad_impression() -> void:
