@@ -98,11 +98,9 @@ func create(ad_view_dictionary: Dictionary) -> int:
 	ui.add_child(close_btn)
 
 	close_btn.pressed.connect(func() -> void:
-		print("[mock_ad_view_plugin] Close button pressed for uid: ", uid)
 		if _ads.has(uid):
 			_ads[uid]["is_hidden"] = true
 			_ads[uid]["ui"].hide()
-			print("[mock_ad_view_plugin] Emitting on_ad_closed for uid: ", uid)
 			on_ad_closed.emit(uid)
 	)
 

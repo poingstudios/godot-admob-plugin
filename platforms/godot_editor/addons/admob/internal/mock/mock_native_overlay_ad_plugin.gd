@@ -174,8 +174,6 @@ func _update_ui_position(uid: int) -> void:
 	var scale_factor_x := scale_factor
 	var scale_factor_y := scale_factor
 
-	print("DEBUG SCALING: viewport_size=", viewport_size, " scale_factor=", scale_factor)
-
 	var style: Dictionary = ad.get("style", {})
 	var template_id: String = style.get("template_id", "small")
 

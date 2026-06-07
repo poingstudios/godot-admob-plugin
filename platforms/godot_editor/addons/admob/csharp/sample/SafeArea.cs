@@ -74,7 +74,6 @@ public partial class SafeArea : MarginContainer
 		var safeArea = DisplayServer.GetDisplaySafeArea();
 		var windowSize = DisplayServer.WindowGetSize();
 		var viewportSize = GetViewport().GetVisibleRect().Size;
-		GD.Print($"UpdateSafeArea called: windowSize={windowSize}, viewportSize={viewportSize}");
 
 		// Apply safe area and ad margins
 		var platform = OS.GetName();
@@ -118,7 +117,6 @@ public partial class SafeArea : MarginContainer
 
 	private void ApplyMargins(float top, float left, float bottom, float right)
 	{
-		GD.Print($"SafeArea margins: top={top}, left={left}, bottom={bottom}, right={right}");
 		AddThemeConstantOverride("margin_top", (int)top);
 		AddThemeConstantOverride("margin_left", (int)left);
 		AddThemeConstantOverride("margin_bottom", (int)bottom);

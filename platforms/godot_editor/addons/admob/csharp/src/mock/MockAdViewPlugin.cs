@@ -153,12 +153,10 @@ namespace PoingStudios.AdMob.Core
 
 			closeBtn.Connect(Button.SignalName.Pressed, Callable.From(() =>
 			{
-				GD.Print($"[MockAdViewPlugin] Close button pressed for uid: {uid}");
 				if (_ads.TryGetValue(uid, out AdData a))
 				{
 					a.IsHidden = true;
 					a.Ui.Hide();
-					GD.Print($"[MockAdViewPlugin] Emitting on_ad_closed for uid: {uid}, IsHidden: {a.IsHidden}");
 					EmitSignal(SignalName.on_ad_closed, uid);
 				}
 			}));
