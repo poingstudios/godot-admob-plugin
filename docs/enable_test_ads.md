@@ -1,10 +1,11 @@
 # Enable test ads
 This guide provides instructions on enabling test ads in your ad integration. It's crucial to enable test ads during the development phase to allow clicking on them without incurring charges to Google advertisers. Clicking on too many ads without being in test mode may lead to your account being flagged for invalid activity.
 
-To obtain test ads, you have two options:
+To test your ads during development, you can:
 
-1. Use Google's [Sample Ad Units](#sample-ad-units).
-2. Utilize Your Own Ad Unit and [Enable Test Devices](#enable-test-devices).
+1. **Preview Mock Ads in Editor**: Test your ad integration and visual layouts directly inside the Godot Editor without deploying to a device. See [Preview Mock Ads in Editor](editor_mock_ads.md).
+2. **Use Google's Sample Ad Units**: Load test ads on physical devices or simulators/emulators. See [Sample Ad Units](#sample-ad-units).
+3. **Enable Test Devices**: Test with your own production ad units by registering your test devices. See [Enable Test Devices](#enable-test-devices).
 
 This document is based on:
 
