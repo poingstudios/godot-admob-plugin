@@ -114,6 +114,8 @@ namespace PoingStudios.AdMob.Core
 			var viewport = GetViewport();
 			if (viewport == null) return;
 			var viewportSize = viewport.GetVisibleRect().Size;
+			viewportSize.X = Mathf.Max(1f, viewportSize.X);
+			viewportSize.Y = Mathf.Max(1f, viewportSize.Y);
 
 			float scaleFactor = Mathf.Min(viewportSize.X, viewportSize.Y) / 360.0f;
 			if (scaleFactor <= 0.0f)
@@ -142,7 +144,7 @@ namespace PoingStudios.AdMob.Core
 			mainVbox.AddChild(topMargin);
 
 			var topControl = new Control();
-			topControl.CustomMinimumSize = new Vector2(0, 40 * scaleFactor);
+			topControl.CustomMinimumSize = new Vector2(1, 40 * scaleFactor);
 			topMargin.AddChild(topControl);
 
 			var testAdPill = new Panel();
@@ -222,7 +224,7 @@ namespace PoingStudios.AdMob.Core
 				SizeFlagsHorizontal = Control.SizeFlags.ExpandFill
 			};
 			float cardHeight = Mathf.Min(420 * scaleFactor, viewportSize.Y - (140 * scaleFactor));
-			cardRect.CustomMinimumSize = new Vector2(0, cardHeight);
+			cardRect.CustomMinimumSize = new Vector2(1, cardHeight);
 			mainVbox.AddChild(cardRect);
 
 			var cardMargin = new MarginContainer();
@@ -243,7 +245,7 @@ namespace PoingStudios.AdMob.Core
 				Texture = ResourceLoader.Load<Texture2D>("res://addons/admob/assets/format-interstitial.svg"),
 				ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize,
 				StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered,
-				CustomMinimumSize = new Vector2(0, (int)Mathf.Round(160 * scaleFactor)),
+				CustomMinimumSize = new Vector2(1, (int)Mathf.Round(160 * scaleFactor)),
 				SizeFlagsVertical = Control.SizeFlags.ExpandFill
 			};
 			contentVbox.AddChild(adImage);
@@ -258,7 +260,7 @@ namespace PoingStudios.AdMob.Core
 			contentVbox.AddChild(titleLbl);
 
 			var spacer = new Control();
-			spacer.CustomMinimumSize = new Vector2(0, (int)Mathf.Round(16 * scaleFactor));
+			spacer.CustomMinimumSize = new Vector2(1, (int)Mathf.Round(16 * scaleFactor));
 			contentVbox.AddChild(spacer);
 
 			var logoHbox = new HBoxContainer();

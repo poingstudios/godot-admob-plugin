@@ -110,6 +110,8 @@ namespace PoingStudios.AdMob.Core
 			var viewport = GetViewport();
 			if (viewport == null) return;
 			var viewportSize = viewport.GetVisibleRect().Size;
+			viewportSize.X = Mathf.Max(1f, viewportSize.X);
+			viewportSize.Y = Mathf.Max(1f, viewportSize.Y);
 
 			float scaleFactor = Mathf.Min(viewportSize.X, viewportSize.Y) / 360f;
 			if (scaleFactor <= 0.0f)
@@ -471,7 +473,7 @@ namespace PoingStudios.AdMob.Core
 			var installBtn = new Button
 			{
 				Text = "Install",
-				CustomMinimumSize = new Vector2(0, 48 * scaleFactor)
+				CustomMinimumSize = new Vector2(1, 48 * scaleFactor)
 			};
 			installBtn.AddThemeColorOverride("font_color", Colors.White);
 			installBtn.AddThemeColorOverride("font_hover_color", Colors.White);

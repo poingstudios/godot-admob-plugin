@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://b2qsjw7krh5ik"]
 
-[ext_resource type="Script" path="res://addons/admob/csharp/sample/tabs/Banner.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://dqjqelx1jd0au" path="res://addons/admob/csharp/sample/tabs/Banner.cs" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://c6d7aye5nwtvi" path="res://addons/admob/assets/pos_top_left.svg" id="2_tl"]
 [ext_resource type="Texture2D" uid="uid://kakk2nrappoc" path="res://addons/admob/assets/pos_top.svg" id="3_t"]
 [ext_resource type="Texture2D" uid="uid://ba3m3mh4pn8of" path="res://addons/admob/assets/pos_top_right.svg" id="4_tr"]

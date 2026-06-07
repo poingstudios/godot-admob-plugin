@@ -216,6 +216,8 @@ namespace PoingStudios.AdMob.Core
 			var viewport = GetViewport();
 			if (viewport == null) return;
 			var viewportSize = viewport.GetVisibleRect().Size;
+			viewportSize.X = Mathf.Max(1f, viewportSize.X);
+			viewportSize.Y = Mathf.Max(1f, viewportSize.Y);
 
 			float scaleFactor = Mathf.Min(viewportSize.X, viewportSize.Y) / 360f;
 			if (scaleFactor <= 0.0f)
@@ -417,7 +419,7 @@ namespace PoingStudios.AdMob.Core
 				var ctaBtn = new Button
 				{
 					Text = "INSTALL",
-					CustomMinimumSize = new Vector2(0, btnHeightDp * scaleFactor),
+					CustomMinimumSize = new Vector2(1, btnHeightDp * scaleFactor),
 					SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
 					SizeFlagsVertical = Control.SizeFlags.ShrinkCenter
 				};
@@ -627,7 +629,7 @@ namespace PoingStudios.AdMob.Core
 				var ctaBtn = new Button
 				{
 					Text = "INSTALL",
-					CustomMinimumSize = new Vector2(0, (int)Mathf.Round(36 * scaleFactor)),
+					CustomMinimumSize = new Vector2(1, (int)Mathf.Round(36 * scaleFactor)),
 					SizeFlagsHorizontal = Control.SizeFlags.ExpandFill,
 					SizeFlagsVertical = Control.SizeFlags.ShrinkCenter
 				};

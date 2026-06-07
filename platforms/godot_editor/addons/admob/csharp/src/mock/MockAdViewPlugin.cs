@@ -218,6 +218,8 @@ namespace PoingStudios.AdMob.Core
 			if (!_ads.TryGetValue(uid, out AdData ad) || ad.Ui == null || !IsInstanceValid(ad.Ui)) return;
 
 			var viewportSize = GetViewport().GetVisibleRect().Size;
+			viewportSize.X = Mathf.Max(1f, viewportSize.X);
+			viewportSize.Y = Mathf.Max(1f, viewportSize.Y);
 			float scaleFactor = Mathf.Min(viewportSize.X, viewportSize.Y) / 360f;
 			if (scaleFactor <= 0.0f)
 			{
@@ -390,7 +392,7 @@ namespace PoingStudios.AdMob.Core
 
 			if (useTallLayout)
 			{
-				var spacerTop = new Control { CustomMinimumSize = new Vector2(0, 20 * scaleFactor) };
+				var spacerTop = new Control { CustomMinimumSize = new Vector2(1, 20 * scaleFactor) };
 				vbox.AddChild(spacerTop);
 				
 				var icon = new TextureRect { Texture = floodItTex, ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize, StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered, CustomMinimumSize = new Vector2(64 * scaleFactor, 64 * scaleFactor), SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter };
@@ -420,7 +422,7 @@ namespace PoingStudios.AdMob.Core
 				btnMargin.AddThemeConstantOverride("margin_right", (int)Mathf.Round(20 * scaleFactor));
 				btnMargin.AddThemeConstantOverride("margin_top", (int)Mathf.Round(10 * scaleFactor));
 				
-				var installBtn = new Button { Text = "Install", CustomMinimumSize = new Vector2(0, 40 * scaleFactor) };
+				var installBtn = new Button { Text = "Install", CustomMinimumSize = new Vector2(1, 40 * scaleFactor) };
 				installBtn.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(14 * scaleFactor)));
 				btnMargin.AddChild(installBtn);
 				vbox.AddChild(btnMargin);
@@ -572,6 +574,8 @@ namespace PoingStudios.AdMob.Core
 			if (!_ads.TryGetValue(uid, out AdData ad) || ad.Ui == null || !IsInstanceValid(ad.Ui)) return;
 
 			var viewportSize = GetViewport().GetVisibleRect().Size;
+			viewportSize.X = Mathf.Max(1f, viewportSize.X);
+			viewportSize.Y = Mathf.Max(1f, viewportSize.Y);
 
 			ad.Ui.Scale = Vector2.One;
 			var scaledSize = ad.Ui.Size;

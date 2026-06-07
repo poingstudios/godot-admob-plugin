@@ -177,6 +177,8 @@ func _update_ui(uid: int) -> void:
 	if not viewport:
 		return
 	var viewport_size := viewport.get_visible_rect().size
+	viewport_size.x = max(1.0, viewport_size.x)
+	viewport_size.y = max(1.0, viewport_size.y)
 
 	var scale_factor: float = min(viewport_size.x, viewport_size.y) / 360.0
 	if scale_factor <= 0.0:
@@ -204,7 +206,7 @@ func _update_ui(uid: int) -> void:
 	main_vbox.add_child(top_margin)
 
 	var top_control := Control.new()
-	top_control.custom_minimum_size = Vector2(0, 40 * scale_factor_y)
+	top_control.custom_minimum_size = Vector2(1, 40 * scale_factor_y)
 	top_margin.add_child(top_control)
 
 	var test_ad_pill := Panel.new()
@@ -410,7 +412,7 @@ func _update_ui(uid: int) -> void:
 	stats_hbox.add_child(dev_vbox)
 
 	var video_panel := Panel.new()
-	video_panel.custom_minimum_size = Vector2(0, 180 * scale_factor_y)
+	video_panel.custom_minimum_size = Vector2(1, 180 * scale_factor_y)
 	video_panel.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	var video_style := StyleBoxFlat.new()
 	video_style.bg_color = Color(0.1, 0.1, 0.1)
@@ -464,7 +466,7 @@ func _update_ui(uid: int) -> void:
 	btn_style.corner_radius_bottom_right = int(18 * scale_factor_y)
 
 	var install_btn := Button.new()
-	install_btn.custom_minimum_size = Vector2(0, 36 * scale_factor_y)
+	install_btn.custom_minimum_size = Vector2(1, 36 * scale_factor_y)
 	install_btn.add_theme_stylebox_override("normal", btn_style)
 	install_btn.add_theme_stylebox_override("hover", btn_style)
 	install_btn.add_theme_stylebox_override("pressed", btn_style)

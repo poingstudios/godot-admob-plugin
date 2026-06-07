@@ -213,6 +213,8 @@ func _update_size(uid: int) -> void:
 	var ui: Control = ad["ui"]
 
 	var viewport_size := get_viewport().get_visible_rect().size
+	viewport_size.x = max(1.0, viewport_size.x)
+	viewport_size.y = max(1.0, viewport_size.y)
 	var scale_factor: float = min(viewport_size.x, viewport_size.y) / 360.0
 	if scale_factor <= 0.0:
 		scale_factor = 1.0
@@ -367,7 +369,7 @@ func _update_size(uid: int) -> void:
 
 	if use_tall_layout:
 		var spacer_top := Control.new()
-		spacer_top.custom_minimum_size = Vector2(0, 20 * scale_factor)
+		spacer_top.custom_minimum_size = Vector2(1, 20 * scale_factor)
 		vbox.add_child(spacer_top)
 
 		var icon := TextureRect.new()
@@ -415,7 +417,7 @@ func _update_size(uid: int) -> void:
 
 		var install_btn := Button.new()
 		install_btn.text = "Install"
-		install_btn.custom_minimum_size = Vector2(0, 40 * scale_factor)
+		install_btn.custom_minimum_size = Vector2(1, 40 * scale_factor)
 		install_btn.add_theme_font_size_override("font_size", max(1, int(round(14 * scale_factor))))
 		btn_margin.add_child(install_btn)
 		vbox.add_child(btn_margin)
@@ -473,6 +475,8 @@ func _update_ui_position(uid: int) -> void:
 	var ad: Dictionary = _ads[uid]
 	var ui: ColorRect = ad["ui"]
 	var viewport_size := get_viewport().get_visible_rect().size
+	viewport_size.x = max(1.0, viewport_size.x)
+	viewport_size.y = max(1.0, viewport_size.y)
 
 	ui.scale = Vector2.ONE
 	var scaled_size := ui.size

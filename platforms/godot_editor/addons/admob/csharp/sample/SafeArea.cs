@@ -71,12 +71,14 @@ public partial class SafeArea : MarginContainer
 
 	private void UpdateSafeArea()
 	{
+		var safeArea = DisplayServer.GetDisplaySafeArea();
+		var windowSize = DisplayServer.WindowGetSize();
+		var viewportSize = GetViewport().GetVisibleRect().Size;
+		GD.Print($"UpdateSafeArea called: windowSize={windowSize}, viewportSize={viewportSize}");
+
 		// Apply safe area and ad margins
 		var platform = OS.GetName();
 		bool isMobile = platform == "iOS" || platform == "Android";
-
-		var safeArea = DisplayServer.GetDisplaySafeArea();
-		var windowSize = DisplayServer.WindowGetSize();
 
 		if (windowSize.X == 0 || windowSize.Y == 0)
 		{
@@ -84,8 +86,12 @@ public partial class SafeArea : MarginContainer
 		}
 
 		// Scale factor calculation to convert physical pixels to logical UI pixels
-		var viewportSize = GetViewport().GetVisibleRect().Size;
 		var scaleFactor = viewportSize.Y / (float)windowSize.Y;
+
+		if (float.IsNaN(scaleFactor) || float.IsInfinity(scaleFactor) || scaleFactor <= 0.0f)
+		{
+			scaleFactor = 1.0f;
+		}
 
 		// DisplayServer returns physical screen coordinates for the safe area
 		var safeTop = 0f;
@@ -103,15 +109,16 @@ public partial class SafeArea : MarginContainer
 
 		// Apply final margins scaled to the viewport
 		ApplyMargins(
-			(safeTop + _ad_margin_top) * scaleFactor,
-			safeLeft * scaleFactor,
-			(safeBottom + _ad_margin_bottom) * scaleFactor,
-			safeRight * scaleFactor
+			Mathf.Max(0f, (safeTop + _ad_margin_top) * scaleFactor),
+			Mathf.Max(0f, safeLeft * scaleFactor),
+			Mathf.Max(0f, (safeBottom + _ad_margin_bottom) * scaleFactor),
+			Mathf.Max(0f, safeRight * scaleFactor)
 		);
 	}
 
 	private void ApplyMargins(float top, float left, float bottom, float right)
 	{
+		GD.Print($"SafeArea margins: top={top}, left={left}, bottom={bottom}, right={right}");
 		AddThemeConstantOverride("margin_top", (int)top);
 		AddThemeConstantOverride("margin_left", (int)left);
 		AddThemeConstantOverride("margin_bottom", (int)bottom);

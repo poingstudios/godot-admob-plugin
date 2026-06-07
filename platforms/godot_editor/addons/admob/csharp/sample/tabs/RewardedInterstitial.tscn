@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cx4x6vghgh2y"]
 
-[ext_resource type="Script" path="res://addons/admob/csharp/sample/tabs/RewardedInterstitial.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://dy1qd88vfr8ry" path="res://addons/admob/csharp/sample/tabs/RewardedInterstitial.cs" id="1_script"]
 
 [node name="RewardedInterstitial" type="VBoxContainer"]
 anchors_preset = 15

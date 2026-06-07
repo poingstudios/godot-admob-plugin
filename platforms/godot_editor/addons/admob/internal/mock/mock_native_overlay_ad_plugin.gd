@@ -164,6 +164,8 @@ func _update_ui_position(uid: int) -> void:
 	if not viewport:
 		return
 	var viewport_size := viewport.get_visible_rect().size
+	viewport_size.x = max(1.0, viewport_size.x)
+	viewport_size.y = max(1.0, viewport_size.y)
 
 	var scale_factor: float = min(viewport_size.x, viewport_size.y) / 360.0
 	if scale_factor <= 0.0:
@@ -330,7 +332,7 @@ func _update_ui_position(uid: int) -> void:
 		var cta_btn := Button.new()
 		cta_btn.text = "INSTALL"
 		var btn_height_dp := clamp(height_dp - 32, 14, 28)
-		cta_btn.custom_minimum_size = Vector2(0, btn_height_dp * scale_factor_y)
+		cta_btn.custom_minimum_size = Vector2(1, btn_height_dp * scale_factor_y)
 		cta_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		cta_btn.add_theme_color_override("font_color", cta_text)
 		cta_btn.add_theme_color_override("font_hover_color", cta_text)
@@ -498,7 +500,7 @@ func _update_ui_position(uid: int) -> void:
 		# 4. CTA Button (INSTALL) - Full Width
 		var cta_btn := Button.new()
 		cta_btn.text = "INSTALL"
-		cta_btn.custom_minimum_size = Vector2(0, 36 * scale_factor_y)
+		cta_btn.custom_minimum_size = Vector2(1, 36 * scale_factor_y)
 		cta_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		cta_btn.add_theme_color_override("font_color", cta_text)
 		cta_btn.add_theme_color_override("font_hover_color", cta_text)

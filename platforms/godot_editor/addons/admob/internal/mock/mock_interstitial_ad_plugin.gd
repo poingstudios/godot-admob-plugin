@@ -95,6 +95,8 @@ func _update_ui(uid: int) -> void:
 	if not viewport:
 		return
 	var viewport_size := viewport.get_visible_rect().size
+	viewport_size.x = max(1.0, viewport_size.x)
+	viewport_size.y = max(1.0, viewport_size.y)
 
 	var scale_factor: float = min(viewport_size.x, viewport_size.y) / 360.0
 	if scale_factor <= 0.0:
@@ -122,7 +124,7 @@ func _update_ui(uid: int) -> void:
 	main_vbox.add_child(top_margin)
 
 	var top_control := Control.new()
-	top_control.custom_minimum_size = Vector2(0, 40 * scale_factor_y)
+	top_control.custom_minimum_size = Vector2(1, 40 * scale_factor_y)
 	top_margin.add_child(top_control)
 
 	var test_ad_pill := Panel.new()
@@ -191,7 +193,7 @@ func _update_ui(uid: int) -> void:
 	card_rect.color = Color.WHITE
 	card_rect.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	var card_height := min(420 * scale_factor_y, viewport_size.y - (140 * scale_factor_y))
-	card_rect.custom_minimum_size = Vector2(0, card_height)
+	card_rect.custom_minimum_size = Vector2(1, card_height)
 	main_vbox.add_child(card_rect)
 
 	var card_margin := MarginContainer.new()
@@ -211,7 +213,7 @@ func _update_ui(uid: int) -> void:
 	ad_image.texture = _FORMAT_INTERSTITIAL
 	ad_image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	ad_image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	ad_image.custom_minimum_size = Vector2(0, 160 * scale_factor_y)
+	ad_image.custom_minimum_size = Vector2(1, 160 * scale_factor_y)
 	ad_image.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	content_vbox.add_child(ad_image)
 
@@ -223,7 +225,7 @@ func _update_ui(uid: int) -> void:
 	content_vbox.add_child(title_lbl)
 
 	var spacer := Control.new()
-	spacer.custom_minimum_size = Vector2(0, 16 * scale_factor_y)
+	spacer.custom_minimum_size = Vector2(1, 16 * scale_factor_y)
 	content_vbox.add_child(spacer)
 
 	var logo_hbox := HBoxContainer.new()

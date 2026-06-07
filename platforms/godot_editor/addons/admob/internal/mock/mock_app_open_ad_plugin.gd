@@ -95,6 +95,8 @@ func _update_ui(uid: int) -> void:
 	if not viewport:
 		return
 	var viewport_size := viewport.get_visible_rect().size
+	viewport_size.x = max(1.0, viewport_size.x)
+	viewport_size.y = max(1.0, viewport_size.y)
 
 	var scale_factor: float = min(viewport_size.x, viewport_size.y) / 360.0
 	if scale_factor <= 0.0:
@@ -396,7 +398,7 @@ func _update_ui(uid: int) -> void:
 
 	var install_btn := Button.new()
 	install_btn.text = "Install"
-	install_btn.custom_minimum_size = Vector2(0, 48 * scale_factor_y)
+	install_btn.custom_minimum_size = Vector2(1, 48 * scale_factor_y)
 	install_btn.add_theme_color_override("font_color", Color.WHITE)
 	install_btn.add_theme_color_override("font_hover_color", Color.WHITE)
 	install_btn.add_theme_color_override("font_pressed_color", Color.WHITE)

@@ -236,6 +236,8 @@ namespace PoingStudios.AdMob.Core
 			var viewport = GetViewport();
 			if (viewport == null) return;
 			var viewportSize = viewport.GetVisibleRect().Size;
+			viewportSize.X = Mathf.Max(1f, viewportSize.X);
+			viewportSize.Y = Mathf.Max(1f, viewportSize.Y);
 
 			float scaleFactor = Mathf.Min(viewportSize.X, viewportSize.Y) / 360.0f;
 			if (scaleFactor <= 0.0f)
@@ -264,7 +266,7 @@ namespace PoingStudios.AdMob.Core
 			mainVbox.AddChild(topMargin);
 
 			var topControl = new Control();
-			topControl.CustomMinimumSize = new Vector2(0, 40 * scaleFactor);
+			topControl.CustomMinimumSize = new Vector2(1, 40 * scaleFactor);
 			topMargin.AddChild(topControl);
 
 			var testAdPill = new Panel();
@@ -480,7 +482,7 @@ namespace PoingStudios.AdMob.Core
 			statsHbox.AddChild(devVbox);
 
 			var videoPanel = new Panel();
-			videoPanel.CustomMinimumSize = new Vector2(0, 180 * scaleFactor);
+			videoPanel.CustomMinimumSize = new Vector2(1, 180 * scaleFactor);
 			videoPanel.SizeFlagsVertical = Control.SizeFlags.ExpandFill;
 			var videoStyle = new StyleBoxFlat { BgColor = new Color(0.1f, 0.1f, 0.1f) };
 			videoPanel.AddThemeStyleboxOverride("panel", videoStyle);
@@ -537,7 +539,7 @@ namespace PoingStudios.AdMob.Core
 			};
 
 			var installBtn = new Button();
-			installBtn.CustomMinimumSize = new Vector2(0, 36 * scaleFactor);
+			installBtn.CustomMinimumSize = new Vector2(1, 36 * scaleFactor);
 			installBtn.AddThemeStyleboxOverride("normal", btnStyle);
 			installBtn.AddThemeStyleboxOverride("hover", btnStyle);
 			installBtn.AddThemeStyleboxOverride("pressed", btnStyle);
