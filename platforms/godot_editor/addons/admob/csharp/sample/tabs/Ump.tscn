@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dg7w8n2vfhhu"]
 
-[ext_resource type="Script" path="res://addons/admob/csharp/sample/tabs/Ump.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://qyhxj8xqa885" path="res://addons/admob/csharp/sample/tabs/Ump.cs" id="1_script"]
 
 [node name="UMP" type="VBoxContainer"]
 anchors_preset = 15

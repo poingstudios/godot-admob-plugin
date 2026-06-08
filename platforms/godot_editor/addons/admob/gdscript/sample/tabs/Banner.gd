@@ -69,6 +69,7 @@ func _ready() -> void:
 		func(index: int) -> void: _custom_size.visible = index == Preset.CUSTOM
 	)
 
+
 	_update_ui_state(false)
 
 
@@ -80,6 +81,7 @@ func _update_ui_state(is_loaded: bool) -> void:
 
 	_show_button.disabled = not (is_loaded and _is_hidden)
 	_hide_button.disabled = not (is_loaded and not _is_hidden)
+
 
 
 func _get_ad_unit_id(is_collapsible: bool = false) -> String:
@@ -234,7 +236,8 @@ func _on_apply_custom_pressed() -> void:
 	_log("Applying custom position: (%d, %d)" % [x, y])
 	_update_position(AdPosition.custom(x, y))
 
-	DisplayServer.virtual_keyboard_hide()
+	if DisplayServer.has_feature(DisplayServer.FEATURE_VIRTUAL_KEYBOARD):
+		DisplayServer.virtual_keyboard_hide()
 
 
 #region Callbacks
@@ -250,9 +253,20 @@ func _on_ad_clicked() -> void:
 
 
 func _on_ad_closed() -> void:
-	_log("Ad closed")
-	if Registry.safe_area:
-		Registry.safe_area.update_ad_overlap(_ad_view)
+	_log("Ad closed callback triggered")
+	var height := _ad_view.get_height_in_pixels() if _ad_view else 0
+	_log("Ad closed height: %d" % height)
+	if height == 0:
+		if _ad_view:
+			_ad_view.destroy()
+			_ad_view = null
+		_is_hidden = false
+		_update_ui_state(false)
+		if Registry.safe_area:
+			Registry.safe_area.reset_ad_overlap()
+	else:
+		if Registry.safe_area:
+			Registry.safe_area.update_ad_overlap(_ad_view)
 
 
 func _on_ad_impression() -> void:

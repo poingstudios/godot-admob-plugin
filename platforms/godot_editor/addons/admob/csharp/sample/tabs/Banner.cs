@@ -112,6 +112,8 @@ public partial class Banner : BaseTab
 		grid.GetNode<Button>("BOTTOM").Pressed += () => UpdatePosition(AdPosition.Bottom);
 		grid.GetNode<Button>("BOTTOM_RIGHT").Pressed += () => UpdatePosition(AdPosition.BottomRight);
 
+
+
 		UpdateUI(false);
 	}
 
@@ -124,6 +126,7 @@ public partial class Banner : BaseTab
 
 		_showBtn.Disabled = !(isLoaded && _isHidden);
 		_hideBtn.Disabled = !(isLoaded && !_isHidden);
+
 	}
 
 	private void UpdatePosition(AdPosition pos)
@@ -146,7 +149,10 @@ public partial class Banner : BaseTab
 		{
 			Log($"Applying custom position: ({x}, {y})");
 			UpdatePosition(AdPosition.Custom(x, y));
-			DisplayServer.VirtualKeyboardHide();
+			if (DisplayServer.HasFeature(DisplayServer.Feature.VirtualKeyboard))
+			{
+				DisplayServer.VirtualKeyboardHide();
+			}
 		}
 	}
 
@@ -232,8 +238,24 @@ public partial class Banner : BaseTab
 			},
 			OnAdClosed = () => 
 			{ 
-				Log("Ad closed"); 
-				SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
+				Log("Ad closed callback triggered"); 
+				var height = _adView != null ? _adView.GetHeightInPixels() : 0;
+				Log($"Ad closed height: {height}");
+				if (height == 0)
+				{
+					if (_adView != null)
+					{
+						_adView.Destroy();
+						_adView = null;
+					}
+					_isHidden = false;
+					UpdateUI(false);
+					SampleRegistry.SafeArea?.ResetAdOverlap();
+				}
+				else
+				{
+					SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
+				}
 			},
 			OnAdImpression = () => Log("Impression recorded"),
 		};

@@ -11,16 +11,16 @@
 
 <p align="center">
   <a href="https://github.com/poingstudios/godot-admob-android/releases">
-    <img src="https://img.shields.io/github/v/tag/poingstudios/godot-admob-android?label=Version">
+    <img src="https://img.shields.io/github/v/tag/poingstudios/godot-admob-android?style=flat&label=Version">
   </a>
   <a href="https://github.com/poingstudios/godot-admob-android/actions/workflows/release_android.yml">
     <img src="https://github.com/poingstudios/godot-admob-android/actions/workflows/release_android.yml/badge.svg">
   </a>
   <a href="https://github.com/poingstudios/godot-admob-plugin/releases">
-    <img src="https://img.shields.io/github/downloads/poingstudios/godot-admob-plugin/total?style=social">
+    <img src="https://img.shields.io/github/downloads/poingstudios/godot-admob-plugin/total?style=flat">
   </a>
-  <img src="https://img.shields.io/github/stars/poingstudios/godot-admob-android?style=social">
-  <img src="https://img.shields.io/github/license/poingstudios/godot-admob-android?style=plastic">
+  <img src="https://img.shields.io/github/stars/poingstudios/godot-admob-android?style=flat">
+  <img src="https://img.shields.io/github/license/poingstudios/godot-admob-android?style=flat&label=License">
 </p>
 
 <p align="center">

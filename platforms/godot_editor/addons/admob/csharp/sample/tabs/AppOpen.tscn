@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3]
 
-[ext_resource type="Script" path="res://addons/admob/csharp/sample/tabs/AppOpen.cs" id="1_app_open"]
+[ext_resource type="Script" uid="uid://bxhl40ibxh6ah" path="res://addons/admob/csharp/sample/tabs/AppOpen.cs" id="1_app_open"]
 
 [node name="AppOpen" type="VBoxContainer"]
 anchors_preset = 15

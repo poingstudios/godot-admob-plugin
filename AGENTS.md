@@ -42,6 +42,7 @@ This repository is a Godot plugin that integrates the Google AdMob SDK into Godo
 - **Linting:** Always run `gdlint platforms/godot_editor/addons/` and verify/fix errors before proposing changes.
 - **C#:** Use PascalCase. Maintain 1:1 parity with the GDScript API.
 - **Samples:** Always use platform-specific test Ad Unit IDs with ternary operators (GDScript) or properties (C#). Verify IDs against `docs/enable_test_ads.md`.
+- **Mock Ads Parity:** Whenever changes are made to any ad format layout or behavior, the corresponding mock plugins must be updated as well. Maintain 1:1 functional and layout parity between C# and GDScript mock implementations (and vice versa) at all times.
 
 ## 🔄 Specialized Protocols (Skills)
 When performing these specific tasks, you **MUST** read and follow the specialized guides:

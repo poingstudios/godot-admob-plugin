@@ -185,7 +185,12 @@ namespace PoingStudios.AdMob.Sample
             _nativeOverlayAd = ad;
 
             _nativeOverlayAd.AdListener.OnAdClicked = () => Log("Ad clicked");
-            _nativeOverlayAd.AdListener.OnAdClosed = () => Log("Ad closed");
+            _nativeOverlayAd.AdListener.OnAdClosed = () =>
+            {
+                Log("Ad closed (destroyed)");
+                _nativeOverlayAd = null;
+                UpdateUiState(false);
+            };
             _nativeOverlayAd.AdListener.OnAdImpression = () => Log("Ad impression recorded");
             _nativeOverlayAd.AdListener.OnAdOpened = () => Log("Ad opened");
             _nativeOverlayAd.OnAdPaid = adValue =>
@@ -303,7 +308,10 @@ namespace PoingStudios.AdMob.Sample
             int y = _yValue.Text.ToInt();
             Log($"Applying custom position: ({x}, {y})");
             UpdatePosition(AdPosition.Custom(x, y));
-            DisplayServer.VirtualKeyboardHide();
+            if (DisplayServer.HasFeature(DisplayServer.Feature.VirtualKeyboard))
+            {
+                DisplayServer.VirtualKeyboardHide();
+            }
         }
 
         private void Log(string message)

@@ -71,16 +71,13 @@ public partial class SafeArea : MarginContainer
 
 	private void UpdateSafeArea()
 	{
-		// Only apply safe area on mobile platforms
-		var platform = OS.GetName();
-		if (platform != "iOS" && platform != "Android")
-		{
-			ApplyMargins(0, 0, 0, 0);
-			return;
-		}
-
 		var safeArea = DisplayServer.GetDisplaySafeArea();
 		var windowSize = DisplayServer.WindowGetSize();
+		var viewportSize = GetViewport().GetVisibleRect().Size;
+
+		// Apply safe area and ad margins
+		var platform = OS.GetName();
+		bool isMobile = platform == "iOS" || platform == "Android";
 
 		if (windowSize.X == 0 || windowSize.Y == 0)
 		{
@@ -88,21 +85,33 @@ public partial class SafeArea : MarginContainer
 		}
 
 		// Scale factor calculation to convert physical pixels to logical UI pixels
-		var viewportSize = GetViewport().GetVisibleRect().Size;
 		var scaleFactor = viewportSize.Y / (float)windowSize.Y;
 
+		if (float.IsNaN(scaleFactor) || float.IsInfinity(scaleFactor) || scaleFactor <= 0.0f)
+		{
+			scaleFactor = 1.0f;
+		}
+
 		// DisplayServer returns physical screen coordinates for the safe area
-		var safeTop = (float)safeArea.Position.Y;
-		var safeLeft = (float)safeArea.Position.X;
-		var safeBottom = (float)(windowSize.Y - (safeArea.Position.Y + safeArea.Size.Y));
-		var safeRight = (float)(windowSize.X - (safeArea.Position.X + safeArea.Size.X));
+		var safeTop = 0f;
+		var safeLeft = 0f;
+		var safeBottom = 0f;
+		var safeRight = 0f;
+
+		if (isMobile)
+		{
+			safeTop = (float)safeArea.Position.Y;
+			safeLeft = (float)safeArea.Position.X;
+			safeBottom = (float)(windowSize.Y - (safeArea.Position.Y + safeArea.Size.Y));
+			safeRight = (float)(windowSize.X - (safeArea.Position.X + safeArea.Size.X));
+		}
 
 		// Apply final margins scaled to the viewport
 		ApplyMargins(
-			(safeTop + _ad_margin_top) * scaleFactor,
-			safeLeft * scaleFactor,
-			(safeBottom + _ad_margin_bottom) * scaleFactor,
-			safeRight * scaleFactor
+			Mathf.Max(0f, (safeTop + _ad_margin_top) * scaleFactor),
+			Mathf.Max(0f, safeLeft * scaleFactor),
+			Mathf.Max(0f, (safeBottom + _ad_margin_bottom) * scaleFactor),
+			Mathf.Max(0f, safeRight * scaleFactor)
 		);
 	}
 

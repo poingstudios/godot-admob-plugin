@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://df7xan3v87p5"]
 
-[ext_resource type="Script" path="res://addons/admob/csharp/sample/tabs/MobileAds.cs" id="1_mads"]
+[ext_resource type="Script" uid="uid://bokkj3kkxuf2s" path="res://addons/admob/csharp/sample/tabs/MobileAds.cs" id="1_mads"]
 [ext_resource type="AudioStream" uid="uid://f3f176vu6pfo" path="res://addons/admob/assets/music.ogg" id="2_music"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_card"]

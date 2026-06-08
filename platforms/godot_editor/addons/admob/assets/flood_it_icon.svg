@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+    <rect width="64" height="64" rx="12" fill="#000000"/>
+    <text x="32" y="22" font-family="Arial" font-size="12" font-weight="bold" fill="white" text-anchor="middle">Flood-It!</text>
+    <rect x="10" y="30" width="8" height="8" fill="#FF5252"/>
+    <rect x="20" y="30" width="8" height="8" fill="#448AFF"/>
+    <rect x="30" y="30" width="8" height="8" fill="#69F0AE"/>
+    <rect x="40" y="30" width="8" height="8" fill="#FFD740"/>
+    <rect x="15" y="40" width="8" height="8" fill="#E040FB"/>
+    <rect x="25" y="40" width="8" height="8" fill="#FF5252"/>
+    <rect x="35" y="40" width="8" height="8" fill="#448AFF"/>
+    <rect x="20" y="50" width="8" height="8" fill="#FFD740"/>
+    <rect x="30" y="50" width="8" height="8" fill="#69F0AE"/>
+</svg>

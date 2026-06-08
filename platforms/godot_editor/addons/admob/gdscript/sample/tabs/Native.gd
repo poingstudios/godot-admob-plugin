@@ -301,7 +301,8 @@ func _on_apply_custom_pressed() -> void:
 	_log("Applying custom position: (%d, %d)" % [x, y])
 	_update_position(AdPosition.custom(x, y))
 
-	DisplayServer.virtual_keyboard_hide()
+	if DisplayServer.has_feature(DisplayServer.FEATURE_VIRTUAL_KEYBOARD):
+		DisplayServer.virtual_keyboard_hide()
 
 
 #region Callbacks
@@ -310,7 +311,9 @@ func _on_ad_clicked() -> void:
 
 
 func _on_ad_closed() -> void:
-	_log("Ad closed")
+	_log("Ad closed (destroyed)")
+	_native_overlay_ad = null
+	_update_ui_state(false)
 
 
 func _on_ad_impression() -> void:

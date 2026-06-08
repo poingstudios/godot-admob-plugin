@@ -65,11 +65,9 @@ func reset_ad_overlap() -> void:
 
 
 func _update_safe_area() -> void:
-	# Only apply safe area on mobile platforms
+	# Apply safe area and ad margins
 	var platform := OS.get_name()
-	if platform != "iOS" and platform != "Android":
-		_apply_margins(0, 0, 0, 0)
-		return
+	var is_mobile := platform == "iOS" or platform == "Android"
 
 	var safe_area := DisplayServer.get_display_safe_area()
 	var window_size := DisplayServer.window_get_size()
@@ -80,19 +78,27 @@ func _update_safe_area() -> void:
 	# Scale factor calculation to convert physical pixels to logical UI pixels
 	var viewport_size := Vector2(get_viewport().get_visible_rect().size)
 	var scale_factor := viewport_size.y / float(window_size.y)
+	if is_nan(scale_factor) or is_inf(scale_factor) or scale_factor <= 0.0:
+		scale_factor = 1.0
 
 	# DisplayServer returns physical screen coordinates for the safe area
-	var safe_top := float(safe_area.position.y)
-	var safe_left := float(safe_area.position.x)
-	var safe_bottom := float(window_size.y - (safe_area.position.y + safe_area.size.y))
-	var safe_right := float(window_size.x - (safe_area.position.x + safe_area.size.x))
+	var safe_top := 0.0
+	var safe_left := 0.0
+	var safe_bottom := 0.0
+	var safe_right := 0.0
+
+	if is_mobile:
+		safe_top = float(safe_area.position.y)
+		safe_left = float(safe_area.position.x)
+		safe_bottom = float(window_size.y - (safe_area.position.y + safe_area.size.y))
+		safe_right = float(window_size.x - (safe_area.position.x + safe_area.size.x))
 
 	# Apply final margins scaled to the viewport
 	_apply_margins(
-		(safe_top + _ad_margin_top) * scale_factor,
-		safe_left * scale_factor,
-		(safe_bottom + _ad_margin_bottom) * scale_factor,
-		safe_right * scale_factor
+		max(0.0, (safe_top + _ad_margin_top) * scale_factor),
+		max(0.0, safe_left * scale_factor),
+		max(0.0, (safe_bottom + _ad_margin_bottom) * scale_factor),
+		max(0.0, safe_right * scale_factor)
 	)
 
 
