@@ -33,7 +33,8 @@ static func register_settings() -> void:
 		{"name": ANDROID_ENABLED, "type": TYPE_BOOL, "default": true},
 		{"name": ANDROID_APP_ID, "type": TYPE_STRING, "default": DEFAULT_APP_ID},
 		{"name": ANDROID_MEDIATION_PREFIX + "meta", "type": TYPE_BOOL, "default": false},
-		{"name": ANDROID_MEDIATION_PREFIX + "vungle", "type": TYPE_BOOL, "default": false}
+		{"name": ANDROID_MEDIATION_PREFIX + "vungle", "type": TYPE_BOOL, "default": false},
+		{"name": ANDROID_MEDIATION_PREFIX + "ironsource", "type": TYPE_BOOL, "default": false}
 	]
 
 	var active_names: Array[String] = []

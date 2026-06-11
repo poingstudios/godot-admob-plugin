@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://android-sdk.is.com/' }
     }
 }
 
@@ -18,3 +19,4 @@ include ':src:core'
 include ':src:ads'
 include ':src:mediation:vungle'
 include ':src:mediation:meta'
+include ':src:mediation:ironsource'

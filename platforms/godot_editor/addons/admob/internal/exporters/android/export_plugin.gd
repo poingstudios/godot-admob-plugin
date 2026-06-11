@@ -52,12 +52,12 @@ func _get_plugins() -> Array[EditorExportPlugin]:
 	if not ads_enabled:
 		return plugins
 
-	var known_libs: Array[String] = ["ads", "meta", "vungle"]
+	var known_libs: Array[String] = ["ads", "meta", "vungle", "ironsource"]
 	var libs: Array[Library] = []
 
 	libs.append(Library.new("ads", true))
 
-	var mediation_libs: Array[String] = ["meta", "vungle"]
+	var mediation_libs: Array[String] = ["meta", "vungle", "ironsource"]
 	for lib_name in mediation_libs:
 		var setting_name := ProjectSettingsService.ANDROID_MEDIATION_PREFIX + lib_name
 		var is_enabled := _get_setting(setting_name, false) as bool
@@ -109,6 +109,15 @@ func _get_android_dependencies(platform: EditorExportPlatform, debug: bool) -> P
 	return dependencies
 
 
+func _get_android_dependencies_maven_repos(platform: EditorExportPlatform, debug: bool) -> PackedStringArray:
+	var maven_repos := PackedStringArray()
+
+	for plugin in _get_plugins():
+		maven_repos.append_array(plugin._get_android_dependencies_maven_repos(platform, debug))
+
+	return maven_repos
+
+
 func _get_android_manifest_application_element_contents(
 	_platform: EditorExportPlatform, _debug: bool
 ) -> String:
@@ -117,12 +126,12 @@ func _get_android_manifest_application_element_contents(
 		return ""
 
 	var content := PackedStringArray()
-	var known_libs: Array[String] = ["ads", "meta", "vungle"]
+	var known_libs: Array[String] = ["ads", "meta", "vungle", "ironsource"]
 	var enabled_libs: Array[String] = []
 
 	enabled_libs.append("ads")
 
-	var mediation_libs: Array[String] = ["meta", "vungle"]
+	var mediation_libs: Array[String] = ["meta", "vungle", "ironsource"]
 	for lib_name in mediation_libs:
 		var setting_name := ProjectSettingsService.ANDROID_MEDIATION_PREFIX + lib_name
 		var is_enabled := _get_setting(setting_name, false) as bool
