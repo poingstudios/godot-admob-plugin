@@ -72,6 +72,11 @@ func _setup_mediation_adapters() -> void:
 	Vungle.update_ccpa_status(Vungle.Consent.OPTED_OUT)
 	Vungle.update_consent_status(Vungle.Consent.OPTED_IN, "consent_message")
 
+	# IronSource setup example
+	IronSource.set_consent(true)
+	IronSource.set_metadata("do_not_sell", "false")
+	IronSource.set_user_id("unique_user_id_123")
+
 
 func _on_get_initialization_status_pressed() -> void:
 	var status := MobileAds.get_initialization_status()

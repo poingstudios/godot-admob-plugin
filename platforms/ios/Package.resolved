@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "googleads-mobile-ios-mediation-ironsource",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-ironsource.git",
+      "state" : {
+        "revision" : "67471480bd1f65fba34fa77bcea562f851e40d75",
+        "version" : "9.4.10001"
+      }
+    },
+    {
       "identity" : "googleads-mobile-ios-mediation-liftoffmonetize",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-liftoffmonetize.git",
@@ -23,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
       "state" : {
-        "revision" : "4458cfaeb502801c779dbb7fbd0121d198628f52",
-        "version" : "13.1.0"
+        "revision" : "e2b1c31cdf11cb4b57b4e70ae4c313d4e48c444a",
+        "version" : "13.3.0"
       }
     },
     {
@@ -34,6 +43,24 @@
       "state" : {
         "revision" : "13b248eaa73b7826f0efb1bcf455e251d65ecb1b",
         "version" : "3.1.0"
+      }
+    },
+    {
+      "identity" : "unity-ad-quality-swift-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ironsource-mobile/Unity-Ad-Quality-Swift-Package",
+      "state" : {
+        "revision" : "222b15d9d5123f0c1de1a807293df137b4b5ceb9",
+        "version" : "9.5.1"
+      }
+    },
+    {
+      "identity" : "unity-mediation-iads-swift-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ironsource-mobile/Unity-Mediation-iAds-Swift-Package.git",
+      "state" : {
+        "revision" : "70afee750c111d98c15d72d95fb61c72f67d4b79",
+        "version" : "9.4.1"
       }
     },
     {

@@ -26,6 +26,7 @@ using PoingStudios.AdMob.Api.Core;
 using PoingStudios.AdMob.Api.Listeners;
 using PoingStudios.AdMob.Mediation.Extras.Meta;
 using PoingStudios.AdMob.Mediation.Extras.Vungle;
+using PoingStudios.AdMob.Mediation.Extras.IronSource;
 using PoingStudios.AdMob.Sample;
 
 public partial class MainCSharpExample : Control, ISampleLogger
@@ -94,6 +95,11 @@ public partial class MainCSharpExample : Control, ISampleLogger
 		// Vungle setup example
 		Vungle.UpdateCcpaStatus(Vungle.Consent.OptedOut);
 		Vungle.UpdateConsentStatus(Vungle.Consent.OptedIn, "consent_message");
+
+		// IronSource setup example
+		IronSource.SetConsent(true);
+		IronSource.SetMetaData("do_not_sell", "false");
+		IronSource.SetUserId("unique_user_id_123");
 	}
 
 	private void _OnGetInitializationStatusPressed()

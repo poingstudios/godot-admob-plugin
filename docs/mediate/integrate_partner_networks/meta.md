@@ -48,15 +48,17 @@ We recommend following the tutorial for [Android](https://developers.google.com/
 === "iOS"
     The Meta Audience Network adapter is **already included** in the standard iOS plugin download. If you followed the [iOS Installation guide](../../README.md#download-install), you should already have the necessary files (`poing-godot-admob-meta.gdip` and related frameworks) in your `res://ios/plugins/` directory.
 
-4. When exporting, make sure to mark `Ad Mob` and `Ad Mob Meta`.
+## Step 4: Enable the plugin
 
-    === "Android"
-        ![android-meta-export](../../assets/android/meta-export.png)
+=== "Android"
+    Make sure to enable **Meta** in **Project Settings** (under `Admob > Android > Mediation > Meta`).
 
-    === "iOS"
-        ![ios-meta-export](../../assets/ios/meta-export.png)
+=== "iOS"
+    Make sure to check both `Ad Mob` and `Ad Mob Meta` under the Plugins list in your **iOS Export Presets** (as well as entering your AdMob App ID in the Plists config).
 
-## Step 4: Additional code required
+    ![ios-meta-export](../../assets/ios/meta-export.png)
+
+## Step 5: Additional code required
 
 === "Android"
     No additional code is required for Meta Audience Network integration.
@@ -112,7 +114,7 @@ We recommend following the tutorial for [Android](https://developers.google.com/
     }
     ```
 
-## Step 5: Test your implementation
+## Step 6: Test your implementation
 We recommend following the tutorial for [Android](https://developers.google.com/admob/android/mediation/meta#step_5_test_your_implementation) or [iOS](https://developers.google.com/admob/ios/mediation/meta#step_5_test_your_implementation), as it will be the same for both.
 
 

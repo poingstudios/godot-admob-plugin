@@ -28,12 +28,24 @@ const ANDROID_MEDIATION_PREFIX := "admob/android/mediation/"
 const DEFAULT_APP_ID := "ca-app-pub-3940256099942544~3347511713"
 
 
+class SettingDefinition:
+	var name := ""
+	var type := TYPE_NIL
+	var default_value
+
+	func _init(p_name: String, p_type: int, p_default) -> void:
+		name = p_name
+		type = p_type
+		default_value = p_default
+
+
 static func register_settings() -> void:
-	var settings := [
-		{"name": ANDROID_ENABLED, "type": TYPE_BOOL, "default": true},
-		{"name": ANDROID_APP_ID, "type": TYPE_STRING, "default": DEFAULT_APP_ID},
-		{"name": ANDROID_MEDIATION_PREFIX + "meta", "type": TYPE_BOOL, "default": false},
-		{"name": ANDROID_MEDIATION_PREFIX + "vungle", "type": TYPE_BOOL, "default": false}
+	var settings: Array[SettingDefinition] = [
+		SettingDefinition.new(ANDROID_ENABLED, TYPE_BOOL, true),
+		SettingDefinition.new(ANDROID_APP_ID, TYPE_STRING, DEFAULT_APP_ID),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "meta", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "vungle", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "ironsource", TYPE_BOOL, false)
 	]
 
 	var active_names: Array[String] = []
@@ -42,7 +54,7 @@ static func register_settings() -> void:
 
 	for s in settings:
 		active_names.append(s.name)
-		if _add_setting(s.name, s.type, s.default, order):
+		if _add_setting(s.name, s.type, s.default_value, order):
 			modified = true
 		order += 1
 

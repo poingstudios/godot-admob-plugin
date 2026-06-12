@@ -58,15 +58,17 @@ We recommend following the tutorial for [Android](https://developers.google.com/
 === "iOS"
     The Liftoff Monetize (Vungle) adapter is **already included** in the standard iOS plugin download. If you followed the [iOS Installation guide](../../README.md#download-install), you should already have the necessary files (`poing-godot-admob-vungle.gdip` and related frameworks) in your `res://ios/plugins/` directory.
 
-4. When export make sure to mark `Ad Mob` and `Ad Mob vungle`
+## Step 4: Enable the plugin
 
-    === "Android"
-        ![android-vungle-export](../../assets/android/vungle-export.png)
+=== "Android"
+    Make sure to enable **Vungle** in **Project Settings** (under `Admob > Android > Mediation > Vungle`).
 
-    === "iOS"
-        ![ios-vungle-export](../../assets/ios/vungle-export.png)
+=== "iOS"
+    Make sure to check both `Ad Mob` and `Ad Mob vungle` under the Plugins list in your **iOS Export Presets** (as well as entering your AdMob App ID in the Plists config).
 
-## Step 4: Additional code required
+    ![ios-vungle-export](../../assets/ios/vungle-export.png)
+
+## Step 5: Additional code required
 
 Liftoff Monetize necessitates a list of all placements that will be employed in your Godot app to be conveyed to their SDK. You can furnish this list of placements to the adapter using the `VungleInterstitialMediationExtras` and `VungleRewardedVideoMediationExtras` classes. The subsequent code examples illustrate how to employ these classes.
 
@@ -147,7 +149,7 @@ Liftoff Monetize necessitates a list of all placements that will be employed in 
 
     Follow [Liftoff Monetize's documentation](https://support.vungle.com/hc/en-us/articles/360002925791-Integrate-Vungle-SDK-for-iOS#h_01EM0AZYJ84W7CWZHW4KRHQHXF) to add the SKAdNetwork identifiers to your project's `Info.plist` file.
 
-## Step 5: Test your implementation
+## Step 6: Test your implementation
 We recommend following the tutorial for [Android](https://developers.google.com/admob/android/mediation/liftoff-monetize#step_5_test_your_implementation) or [iOS](https://developers.google.com/admob/ios/mediation/liftoff-monetize#step_5_test_your_implementation), as it will be the same for both.
 
 ## Optional steps

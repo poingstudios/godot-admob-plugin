@@ -1,0 +1,19 @@
+[config]
+name="AdMob IronSource"
+binary="poing-godot-admob/bin/poing-godot-admob-ironsource.xcframework"
+
+initialization="register_poing_godot_admob_ironsource_types"
+deinitialization="unregister_poing_godot_admob_ironsource_types"
+
+[dependencies]
+linked=[]
+embedded=[]
+system=[]
+capabilities=[]
+files=[]
+linker_flags=[]
+admob_packages=[
+    "https://github.com/googleads/googleads-mobile-ios-mediation-ironsource.git@exact:9.4.10001|IronSourceAdapterTarget"
+]
+
+[plist]
