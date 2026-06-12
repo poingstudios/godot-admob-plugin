@@ -1,3 +1,7 @@
+# WARNING: This script uses the legacy Godot Asset Library REST API.
+# The legacy library is transitioning to the new Godot Asset Store (https://store.godotengine.org/).
+# TODO: Migrate this release step to the official Godot Asset Store API/CLI once it is fully supported.
+
 import requests
 import json
 import os
