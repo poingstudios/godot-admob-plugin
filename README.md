@@ -24,7 +24,7 @@
 
 ### 📥 Godot Asset Store (recommended)
 
-1. Find the AdMob plugin by `Poing Studios` \
+1. Find the [AdMob plugin](https://store.godotengine.org/asset/poingstudios/admob/) by `Poing Studios` \
    <img height=120 src="docs/assets/asset_store.png">
 2. Click **Download** and **Install**.
 

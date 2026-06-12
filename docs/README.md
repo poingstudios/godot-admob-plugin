@@ -32,7 +32,7 @@ To access the plugin, you can either download the Godot package provided or expl
 The AdMob plugin for Godot is conveniently available via the Godot Asset Store. To import this plugin into your Godot project, follow these steps:
 
 1. Open your Godot project.
-2. Navigate to the Asset Store (AssetLib) within the Godot editor.
+2. Navigate to the Asset Store within the Godot editor.
 3. In the search bar, enter `AdMob` and ensure that the publisher is set to `Poing Studios`.
 ![activate_plugin](assets/asset_store.png)
 4. Locate the AdMob plugin and click the `Download` button.
