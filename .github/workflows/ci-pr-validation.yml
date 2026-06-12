@@ -18,11 +18,11 @@ jobs:
       with:
         filters: |
           code:
+            - '!**/*.md'
+            - '!*.md'
             - 'platforms/**'
             - 'scripts/**'
             - '.github/workflows/**'
-            - '!**/*.md'
-            - '!*.md'
 
   detect-latest:
     name: Check latest Godot version
