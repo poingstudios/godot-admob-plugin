@@ -518,21 +518,21 @@ If you appreciate our work, don't forget to give us a star on GitHub! ⭐
 
 ![Star History Chart](https://api.star-history.com/svg?repos=poingstudios/godot-admob-plugin&type=Date)
 
-[VersionBadge]: https://img.shields.io/github/v/tag/poingstudios/godot-admob-plugin?style=flat&label=Version
-[StarsBadge]: https://img.shields.io/github/stars/poingstudios/godot-admob-plugin?style=flat
-[DiscordBadge]: https://img.shields.io/badge/Discord-7289DA?style=flat&logo=discord&logoColor=white
-[LicenseBadge]: https://img.shields.io/github/license/poingstudios/godot-admob-plugin?style=flat&label=License
-[DownloadsBadge]: https://img.shields.io/github/downloads/poingstudios/godot-admob-plugin/total?style=flat&label=Downloads&color=darkgreen
-[AssetLibraryBadge]: https://img.shields.io/badge/Download-Asset%20Library-darkgreen?style=flat
-[AndroidBadge]: https://img.shields.io/badge/Android-3DDC84?style=flat&logo=android&logoColor=white
-[iOSBadge]: https://img.shields.io/badge/iOS-000000?style=flat&logo=ios&logoColor=white
-[GDScriptBadge]: https://img.shields.io/badge/GDScript-478CBF?style=flat&logo=godot-engine&logoColor=white
-[CSharpBadge]: https://img.shields.io/badge/C%23-239120?style=flat&logo=csharp&logoColor=white
-[PatreonBadge]: https://img.shields.io/badge/Support%20us%20on-Patreon-orange?style=for-the-badge&logo=patreon
-[KofiBadge]: https://img.shields.io/badge/Buy%20us%20a-coffee-yellow?style=for-the-badge&logo=ko-fi
-[PaypalBadge]: https://img.shields.io/badge/Donate-via%20Paypal-blue?style=for-the-badge&logo=paypal
-[DiscussionsBadge]: https://img.shields.io/badge/Discussions-green?style=for-the-badge
-[DiscordHelpBadge]: https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white
+[VersionBadge]: https://badgen.net/github/release/poingstudios/godot-admob-plugin?label=Version
+[StarsBadge]: https://badgen.net/github/stars/poingstudios/godot-admob-plugin
+[DiscordBadge]: https://badgen.net/badge/Discord/join/7289DA?icon=discord
+[LicenseBadge]: https://badgen.net/github/license/poingstudios/godot-admob-plugin?label=License
+[DownloadsBadge]: https://badgen.net/github/assets-dl/poingstudios/godot-admob-plugin?label=Downloads&color=green
+[AssetLibraryBadge]: https://badgen.net/badge/Download/Asset%20Library/green
+[AndroidBadge]: https://badgen.net/badge/_/Android/3DDC84?label=&icon=android
+[iOSBadge]: https://badgen.net/badge/_/iOS/000000?label=&icon=apple
+[GDScriptBadge]: https://badgen.net/badge/_/GDScript/478CBF?label=&icon=godotengine
+[CSharpBadge]: https://badgen.net/badge/_/C%23/239120?label=&icon=csharp
+[PatreonBadge]: https://badgen.net/badge/Support%20us%20on/Patreon/orange?icon=patreon
+[KofiBadge]: https://badgen.net/badge/Buy%20us%20a/coffee/yellow?icon=kofi
+[PaypalBadge]: https://badgen.net/badge/Donate/via%20Paypal/blue?icon=paypal
+[DiscussionsBadge]: https://badgen.net/badge/Discussions/green/green
+[DiscordHelpBadge]: https://badgen.net/badge/Discord/join/7289DA?icon=discord
 
 [DocumentationLink]: https://poingstudios.github.io/godot-admob-plugin/latest/
 [Releases]: https://github.com/poingstudios/godot-admob-plugin/releases
