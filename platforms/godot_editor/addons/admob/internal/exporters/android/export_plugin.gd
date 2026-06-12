@@ -95,7 +95,8 @@ func _get_android_libraries(platform: EditorExportPlatform, debug: bool) -> Pack
 	var libraries := PackedStringArray()
 
 	for plugin in _get_plugins():
-		libraries.append_array(plugin._get_android_libraries(platform, debug))
+		if plugin.has_method("_get_android_libraries"):
+			libraries.append_array(plugin._get_android_libraries(platform, debug))
 
 	return libraries
 
@@ -104,7 +105,8 @@ func _get_android_dependencies(platform: EditorExportPlatform, debug: bool) -> P
 	var dependencies := PackedStringArray()
 
 	for plugin in _get_plugins():
-		dependencies.append_array(plugin._get_android_dependencies(platform, debug))
+		if plugin.has_method("_get_android_dependencies"):
+			dependencies.append_array(plugin._get_android_dependencies(platform, debug))
 
 	return dependencies
 
@@ -113,7 +115,8 @@ func _get_android_dependencies_maven_repos(platform: EditorExportPlatform, debug
 	var maven_repos := PackedStringArray()
 
 	for plugin in _get_plugins():
-		maven_repos.append_array(plugin._get_android_dependencies_maven_repos(platform, debug))
+		if plugin.has_method("_get_android_dependencies_maven_repos"):
+			maven_repos.append_array(plugin._get_android_dependencies_maven_repos(platform, debug))
 
 	return maven_repos
 
