@@ -25,16 +25,16 @@ The Godot AdMob Plugin from Poing Studios simplifies the process for Godot devel
 
 To access the plugin, you can either download the Godot package provided or explore its source code on GitHub through the links below.
 
-[Download from GitHub](https://github.com/poingstudios/godot-admob-plugin/releases/latest){ .md-button .md-button--primary } [Download from AssetLibrary](https://godotengine.org/asset-library/asset/2063){ .md-button .md-button--primary } [Source Code](https://github.com/poingstudios/godot-admob-plugin){ .md-button .md-button--primary }
+[Download from GitHub](https://github.com/poingstudios/godot-admob-plugin/releases/latest){ .md-button .md-button--primary } [Download from Asset Store](https://store.godotengine.org/asset/poingstudios/admob/){ .md-button .md-button--primary } [Source Code](https://github.com/poingstudios/godot-admob-plugin){ .md-button .md-button--primary }
 
 ### Importing the Godot AdMob Plugin on Project
 
-The AdMob plugin for Godot is conveniently available via AssetLib. To import this plugin into your Godot project, follow these steps:
+The AdMob plugin for Godot is conveniently available via the Godot Asset Store. To import this plugin into your Godot project, follow these steps:
 
 1. Open your Godot project.
-2. Navigate to AssetLib within the Godot editor.
-3. In the search bar, enter `AdMob` and ensure that the publisher is set to `poing.studios`.
-![activate_plugin](assets/asset_library.png)
+2. Navigate to the Asset Store within the Godot editor.
+3. In the search bar, enter `AdMob` and ensure that the publisher is set to `Poing Studios`.
+![activate_plugin](assets/asset_store.png)
 4. Locate the AdMob plugin and click the `Download` button.
 5. Once the download is complete, go to `Project → Project Settings` within the Godot editor.
 6. In the `Plugins` section, find the `AdMob` plugin and activate it.

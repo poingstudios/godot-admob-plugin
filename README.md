@@ -4,7 +4,7 @@
   </h1>
 
   [![VersionBadge]][Releases] [![StarsBadge]][Stargazers] [![DiscordBadge]][DiscordLink] [![LicenseBadge]][LicenseLink] <br>
-  [![DownloadsBadge]][Releases] [![AssetLibraryBadge]][AssetLib] <br>
+  [![DownloadsBadge]][Releases] [![AssetStoreBadge]][AssetStore] <br>
   [![AndroidBadge]][AndroidPlatform] [![iOSBadge]][iOSPlatform] [![GDScriptBadge]][Examples] [![CSharpBadge]][Examples]
 
   **The complete solution for AdMob integration in Godot using GDScript or C#.**  
@@ -22,10 +22,10 @@
 
 ## 📦 Installation
 
-### 📥 Godot Asset Library (recommended)
+### 📥 Godot Asset Store (recommended)
 
-1. Find the AdMob plugin by `poing.studios` \
-   <img height=120 src="docs/assets/asset_library.png">
+1. Find the [AdMob plugin](https://store.godotengine.org/asset/poingstudios/admob/) by `Poing Studios` \
+   <img height=120 src="docs/assets/asset_store.png">
 2. Click **Download** and **Install**.
 
 <details>
@@ -607,7 +607,7 @@ If you appreciate our work, don't forget to give us a star on GitHub! ⭐
 [DiscordBadge]: https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord
 [LicenseBadge]: https://badgen.net/github/license/poingstudios/godot-admob-plugin?label=License
 [DownloadsBadge]: https://badgen.net/github/assets-dl/poingstudios/godot-admob-plugin?label=Downloads&color=green
-[AssetLibraryBadge]: https://badgen.net/badge/Download/Asset%20Library/green
+[AssetStoreBadge]: https://badgen.net/badge/Download/Asset%20Store/green
 [AndroidBadge]: https://badgen.net/badge/_/Android/3DDC84?label=&icon=android
 [iOSBadge]: https://badgen.net/badge/_/iOS/000000?label=&icon=apple
 [GDScriptBadge]: https://badgen.net/badge/_/GDScript/478CBF?label=&icon=godotengine
@@ -623,7 +623,7 @@ If you appreciate our work, don't forget to give us a star on GitHub! ⭐
 [Stargazers]: https://github.com/poingstudios/godot-admob-plugin/stargazers
 [DiscordLink]: https://discord.com/invite/YEPvYjSSMk
 [LicenseLink]: https://github.com/poingstudios/godot-admob-plugin/blob/master/LICENSE
-[AssetLib]: https://godotengine.org/asset-library/asset/2063
+[AssetStore]: https://store.godotengine.org/asset/poingstudios/admob/
 [AndroidPlatform]: https://github.com/poingstudios/godot-admob-plugin/tree/master/platforms/android
 [iOSPlatform]: https://github.com/poingstudios/godot-admob-plugin/tree/master/platforms/ios
 [Examples]: #-examples

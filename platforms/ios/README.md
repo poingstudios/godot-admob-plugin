@@ -53,7 +53,7 @@ The **purpose** of this plugin is to always keep **up to date with Godot**, supp
 - There is also an [Android Plugin](https://github.com/poingstudios/godot-admob-android) available, which has the same behavior. 🤖
 
 ## 🙋‍♂️How to use 
-- We recommend you to use the [AdMob Plugin](https://github.com/poingstudios/godot-admob-plugin), you can download direcly from [Godot Assets](https://godotengine.org/asset-library/asset/2063).
+- We recommend you to use the [AdMob Plugin](https://github.com/poingstudios/godot-admob-plugin), you can download direcly from [Godot Asset Store](https://store.godotengine.org/asset/poingstudios/admob/).
 - After download, we recommend you to read the [README.md](https://github.com/poingstudios/godot-admob-plugin/blob/master/README.md) of the Plugin to know how to use.
 
 ## 📦Installing:
