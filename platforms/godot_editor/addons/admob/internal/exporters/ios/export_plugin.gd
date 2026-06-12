@@ -149,13 +149,9 @@ func _generate_package_swift(export_dir: String, dependencies: Array[Dictionary]
 
 		if not processed_urls.has(url):
 			processed_urls.append(url)
-			var version_rule := ""
-			if dep.kind == "exact":
-				version_rule = 'exact: "%s"' % dep.version
-			elif dep.kind == "branch":
-				version_rule = 'branch: "%s"' % dep.version
-			else:
-				version_rule = 'from: "%s"' % dep.version
+			var version_rule := (
+				'exact: "%s"' % dep.version if dep.kind == "exact" else 'from: "%s"' % dep.version
+			)
 			package_deps_str += '        .package(url: "%s", %s),\n' % [url, version_rule]
 
 		if not processed_products.has(product):

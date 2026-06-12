@@ -28,6 +28,9 @@ const ProjectSettingsService := preload(
 	"res://addons/admob/internal/services/project_settings_service.gd"
 )
 
+const KNOWN_LIBS: Array[String] = ["ads", "meta", "vungle", "ironsource"]
+const MEDIATION_LIBS: Array[String] = ["meta", "vungle", "ironsource"]
+
 
 func _get_name() -> String:
 	return "PoingAdMobAndroid"
@@ -44,33 +47,23 @@ func _get_setting(setting_name: String, default_value):
 	return default_value
 
 
-func _get_plugins() -> Array[EditorExportPlugin]:
-	var plugins: Array[EditorExportPlugin] = []
-	var root_bin_path := Library.ROOT_BIN_PATH
+func _get_enabled_libs() -> Array[String]:
+	var enabled_libs: Array[String] = ["ads"]
 
-	var ads_enabled := _get_setting(ProjectSettingsService.ANDROID_ENABLED, true) as bool
-	if not ads_enabled:
-		return plugins
-
-	var known_libs: Array[String] = ["ads", "meta", "vungle", "ironsource"]
-	var libs: Array[Library] = []
-
-	libs.append(Library.new("ads", true))
-
-	var mediation_libs: Array[String] = ["meta", "vungle", "ironsource"]
-	for lib_name in mediation_libs:
+	for lib_name in MEDIATION_LIBS:
 		var setting_name := ProjectSettingsService.ANDROID_MEDIATION_PREFIX + lib_name
 		var is_enabled := _get_setting(setting_name, false) as bool
 		if is_enabled:
-			libs.append(Library.new(lib_name, true))
+			enabled_libs.append(lib_name)
 
+	var root_bin_path := Library.ROOT_BIN_PATH
 	var dir_access := DirAccess.open(root_bin_path)
 	if dir_access:
 		dir_access.list_dir_begin()
 		var dir_name := dir_access.get_next()
 		while dir_name != "":
 			if dir_access.current_is_dir() and not dir_name.begins_with("."):
-				if not dir_name in known_libs:
+				if not dir_name in KNOWN_LIBS:
 					var gd_path := root_bin_path.path_join(dir_name).path_join(
 						"poing_godot_admob_" + dir_name + ".gd"
 					)
@@ -80,10 +73,21 @@ func _get_plugins() -> Array[EditorExportPlugin]:
 						)
 						var is_enabled := _get_setting(setting_name, false) as bool
 						if is_enabled:
-							libs.append(Library.new(dir_name, true))
+							enabled_libs.append(dir_name)
 			dir_name = dir_access.get_next()
 
-	for lib in libs:
+	return enabled_libs
+
+
+func _get_plugins() -> Array[EditorExportPlugin]:
+	var plugins: Array[EditorExportPlugin] = []
+
+	var ads_enabled := _get_setting(ProjectSettingsService.ANDROID_ENABLED, true) as bool
+	if not ads_enabled:
+		return plugins
+
+	for lib_name in _get_enabled_libs():
+		var lib := Library.new(lib_name, true)
 		if not FileAccess.file_exists(lib.get_full_path()):
 			push_error("AdMob: Android library not found at " + lib.get_full_path())
 			continue
@@ -129,55 +133,20 @@ func _get_android_manifest_application_element_contents(
 		return ""
 
 	var content := PackedStringArray()
-	var known_libs: Array[String] = ["ads", "meta", "vungle", "ironsource"]
-	var enabled_libs: Array[String] = []
-
-	enabled_libs.append("ads")
-
-	var mediation_libs: Array[String] = ["meta", "vungle", "ironsource"]
-	for lib_name in mediation_libs:
-		var setting_name := ProjectSettingsService.ANDROID_MEDIATION_PREFIX + lib_name
-		var is_enabled := _get_setting(setting_name, false) as bool
-		if is_enabled:
-			enabled_libs.append(lib_name)
-
-	var root_bin_path := Library.ROOT_BIN_PATH
-	var dir_access := DirAccess.open(root_bin_path)
-	if dir_access:
-		dir_access.list_dir_begin()
-		var dir_name := dir_access.get_next()
-		while dir_name != "":
-			if dir_access.current_is_dir() and not dir_name.begins_with("."):
-				if not dir_name in known_libs:
-					var gd_path := root_bin_path.path_join(dir_name).path_join(
-						"poing_godot_admob_" + dir_name + ".gd"
-					)
-					if FileAccess.file_exists(gd_path):
-						var setting_name := (
-							ProjectSettingsService.ANDROID_MEDIATION_PREFIX + dir_name
-						)
-						var is_enabled := _get_setting(setting_name, false) as bool
-						if is_enabled:
-							enabled_libs.append(dir_name)
-			dir_name = dir_access.get_next()
+	var enabled_libs := _get_enabled_libs()
 
 	for lib_name in enabled_libs:
 		var lib := Library.new(lib_name, true)
 		if FileAccess.file_exists(lib.get_full_path()):
 			continue
 
-		(
-			content
-			. append(
-				(
-					"""
+		content.append(
+			"""
 		<meta-data
 			android:name="%s_CONFIGURATION_ERROR"
 			android:value="%s doesn't exists, please check your addons/admob/android/bin folder or disable in Project Settings"/>
 		"""
-					% [lib_name, lib.get_full_path()]
-				)
-			)
+			% [lib_name, lib.get_full_path()]
 		)
 
 	var app_id := (
@@ -186,18 +155,13 @@ func _get_android_manifest_application_element_contents(
 		)
 		as String
 	)
-	(
-		content
-		. append(
-			(
-				"""
+	content.append(
+		"""
 	<meta-data
 		android:name="com.google.android.gms.ads.APPLICATION_ID"
 		android:value="%s"/>
 	"""
-				% app_id
-			)
-		)
+		% app_id
 	)
 
 	return "\n".join(content)
