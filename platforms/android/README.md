@@ -92,8 +92,8 @@ Your support helps us continue to improve and maintain this plugin. Thank you fo
 
 
 ## 🆘Getting help
-[![DISCUSSIONS](https://badgen.net/badge/Discussions/green/green)](https://github.com/poingstudios/godot-admob-android/discussions)
-[![DISCORD](https://badgen.net/badge/Discord/join/7289DA?icon=discord)](https://discord.com/invite/YEPvYjSSMk)
+[![DISCUSSIONS](https://badgen.net/badge/_/Discussions/green?label=)](https://github.com/poingstudios/godot-admob-android/discussions)
+[![DISCORD](https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord)](https://discord.com/invite/YEPvYjSSMk)
 
 
 ## Development

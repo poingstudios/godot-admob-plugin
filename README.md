@@ -301,6 +301,91 @@ private void OnShowPressed()
 
 </details>
 
+## 🖼️Native Overlay Ads
+<details>
+<summary>GDScript</summary>
+
+### Load
+```gdscript
+var native_overlay_ad: NativeOverlayAd
+
+# button signal on scene
+func _on_load_native_pressed() -> void:
+	var unit_id := "ca-app-pub-3940256099942544/2247696110" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/3986624511"
+	
+	var ad_request := AdRequest.new()
+	var options := NativeAdOptions.new()
+
+	NativeOverlayAd.load(unit_id, ad_request, options, _on_ad_load_finished)
+
+func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
+	if error:
+		print("Native ad failed to load: ", error.message)
+		return
+	
+	native_overlay_ad = ad
+	_render_native_ad()
+```
+
+### Render
+```gdscript
+func _render_native_ad() -> void:
+	var style := NativeTemplateStyle.new()
+	style.template_id = NativeTemplateStyle.MEDIUM
+	native_overlay_ad.render_template(style, AdPosition.BOTTOM)
+```
+
+</details>
+
+<details>
+<summary>C#</summary>
+
+### Load
+```csharp
+using Godot;
+using PoingStudios.AdMob.Api;
+using PoingStudios.AdMob.Api.Core;
+
+private NativeOverlayAd _nativeOverlayAd;
+
+// button signal on scene
+private void OnLoadNativePressed()
+{
+	string unitId = OS.GetName() == "Android" 
+		? "ca-app-pub-3940256099942544/2247696110" 
+		: "ca-app-pub-3940256099942544/3986624511";
+
+	var adRequest = new AdRequest();
+	var options = new NativeAdOptions();
+
+	NativeOverlayAd.Load(unitId, adRequest, options, OnAdLoadFinished);
+}
+
+private void OnAdLoadFinished(NativeOverlayAd ad, LoadAdError error)
+{
+	if (error != null)
+	{
+		GD.Print("Native ad failed to load: " + error.Message);
+		return;
+	}
+
+	_nativeOverlayAd = ad;
+	RenderNativeAd();
+}
+```
+
+### Render
+```csharp
+private void RenderNativeAd()
+{
+	var style = new NativeTemplateStyle();
+	style.TemplateId = NativeTemplateStyle.Medium;
+	_nativeOverlayAd.RenderTemplate(style, AdPosition.Bottom);
+}
+```
+
+</details>
+
 ## 🎁Rewarded Ads
 
 <details>
@@ -480,7 +565,6 @@ private void OnShowPressed()
 }
 ```
 
-
 </details>
 
 ## 📎 Useful links
@@ -520,7 +604,7 @@ If you appreciate our work, don't forget to give us a star on GitHub! ⭐
 
 [VersionBadge]: https://badgen.net/github/release/poingstudios/godot-admob-plugin?label=Version
 [StarsBadge]: https://badgen.net/github/stars/poingstudios/godot-admob-plugin
-[DiscordBadge]: https://badgen.net/badge/Discord/join/7289DA?icon=discord
+[DiscordBadge]: https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord
 [LicenseBadge]: https://badgen.net/github/license/poingstudios/godot-admob-plugin?label=License
 [DownloadsBadge]: https://badgen.net/github/assets-dl/poingstudios/godot-admob-plugin?label=Downloads&color=green
 [AssetLibraryBadge]: https://badgen.net/badge/Download/Asset%20Library/green
@@ -531,8 +615,8 @@ If you appreciate our work, don't forget to give us a star on GitHub! ⭐
 [PatreonBadge]: https://badgen.net/badge/Support%20us%20on/Patreon/orange?icon=patreon
 [KofiBadge]: https://badgen.net/badge/Buy%20us%20a/coffee/yellow?icon=kofi
 [PaypalBadge]: https://badgen.net/badge/Donate/via%20Paypal/blue?icon=paypal
-[DiscussionsBadge]: https://badgen.net/badge/Discussions/green/green
-[DiscordHelpBadge]: https://badgen.net/badge/Discord/join/7289DA?icon=discord
+[DiscussionsBadge]: https://badgen.net/badge/_/Discussions/green?label=
+[DiscordHelpBadge]: https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord
 
 [DocumentationLink]: https://poingstudios.github.io/godot-admob-plugin/latest/
 [Releases]: https://github.com/poingstudios/godot-admob-plugin/releases
