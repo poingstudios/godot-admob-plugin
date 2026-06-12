@@ -21,7 +21,8 @@ jobs:
             - 'platforms/**'
             - 'scripts/**'
             - '.github/workflows/**'
-            - '!**.md'
+            - '!**/*.md'
+            - '!*.md'
 
   detect-latest:
     name: Check latest Godot version
