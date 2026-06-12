@@ -153,6 +153,14 @@ The Google Mobile Ads SDK is now successfully imported, and you are prepared to 
 
 [Implement interstitial ads](ad_formats/interstitial.md){ .md-button .md-button--primary }
 
+### Native Overlay
+<div class="image-text-container">
+  <img src="https://developers.google.com/static/admob/images/format-native.svg" alt="native_overlay">
+  <p>Native Overlay ads allow you to display ads that are styled to fit your app's look and feel, using pre-designed templates on top of your app content. They support customization for colors, fonts, and layout options while keeping integration simple.</p>
+</div>
+
+[Implement native overlay ads](ad_formats/native_overlay.md){ .md-button .md-button--primary }
+
 ### Rewarded
 <div class="image-text-container">
   <img src="assets/ad_formats/rewarded.png" alt="rewarded">
