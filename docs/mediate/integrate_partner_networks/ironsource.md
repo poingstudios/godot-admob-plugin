@@ -46,9 +46,15 @@ We recommend following the tutorial for [Android](https://developers.google.com/
 === "iOS"
     The IronSource adapter is **already included** in the standard iOS plugin download. If you followed the [iOS Installation guide](../../README.md#download-install), you should already have the necessary files (`poing-godot-admob-ironsource.gdip` and related frameworks) in your `res://ios/plugins/` directory.
 
-4. When exporting, make sure to enable `Ad Mob` and `Ad Mob IronSource` under your export presets.
+## Step 4: Enable the plugin
 
-## Step 4: Optional steps (Regulatory Settings)
+=== "Android"
+    Make sure to enable **IronSource** in **Project Settings** (under `Admob > Android > Mediation > Ironsource`).
+
+=== "iOS"
+    Make sure to check both `Ad Mob` and `Ad Mob Iron Source` under the Plugins list in your **iOS Export Presets** (as well as entering your AdMob App ID in the Plists config).
+
+## Step 5: Optional steps (Regulatory Settings)
 
 ### EU consent and GDPR
 Under the Google [EU User Consent Policy](https://www.google.com/about/company/consentstaging.html), you must make certain disclosures to users in the European Economic Area (EEA) and obtain their consent for the use of cookies or other local storage, and for the use of personal data.
