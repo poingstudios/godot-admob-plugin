@@ -137,6 +137,10 @@ func _collect_spm_dependencies(activated_plugins: Array[String]) -> Array[Dictio
 
 
 func _generate_package_swift(export_dir: String, dependencies: Array[Dictionary]) -> void:
+	var package_dir := export_dir.path_join("admob_spm")
+	if not DirAccess.dir_exists_absolute(package_dir):
+		DirAccess.make_dir_recursive_absolute(package_dir)
+
 	var package_deps_str := ""
 	var target_deps_str := ""
 	var processed_urls := []
@@ -168,15 +172,15 @@ func _generate_package_swift(export_dir: String, dependencies: Array[Dictionary]
 		+ '            ],\n            path: "PoingGodotAdMobDeps"\n        )\n    ]\n)\n'
 	)
 
-	var file := FileAccess.open(export_dir.path_join("Package.swift"), FileAccess.WRITE)
+	var file := FileAccess.open(package_dir.path_join("Package.swift"), FileAccess.WRITE)
 	if file:
 		file.store_string(content)
 		file.close()
-		print("AdMob: Generated Package.swift at %s" % export_dir)
+		print("AdMob: Generated Package.swift at %s" % package_dir)
 
 
 func _generate_dummy_source(export_dir: String) -> void:
-	var source_dir := export_dir.path_join("PoingGodotAdMobDeps")
+	var source_dir := export_dir.path_join("admob_spm/PoingGodotAdMobDeps")
 	if not DirAccess.dir_exists_absolute(source_dir):
 		DirAccess.make_dir_recursive_absolute(source_dir)
 

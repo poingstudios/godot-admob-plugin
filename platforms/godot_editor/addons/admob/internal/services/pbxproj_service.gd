@@ -53,7 +53,7 @@ static func patch(path: String) -> void:
 	var local_ref_def := (
 		"		"
 		+ local_ref_id
-		+ ' /* XCLocalSwiftPackageReference "." */ = {\n			isa = XCLocalSwiftPackageReference;\n			relativePath = ".";\n		};\n'
+		+ ' /* XCLocalSwiftPackageReference "admob_spm" */ = {\n			isa = XCLocalSwiftPackageReference;\n			relativePath = "admob_spm";\n		};\n'
 	)
 	content = content.replace(
 		"/* End XCLocalSwiftPackageReference section */",
@@ -65,7 +65,7 @@ static func patch(path: String) -> void:
 		+ product_dep_id
 		+ " /* PoingGodotAdMobDeps */ = {\n			isa = XCSwiftPackageProductDependency;\n			package = "
 		+ local_ref_id
-		+ ' /* XCLocalSwiftPackageReference "." */;\n			productName = "PoingGodotAdMobDeps";\n		};\n'
+		+ ' /* XCLocalSwiftPackageReference "admob_spm" */;\n			productName = "PoingGodotAdMobDeps";\n		};\n'
 	)
 	content = content.replace(
 		"/* End XCSwiftPackageProductDependency section */",
@@ -89,7 +89,7 @@ static func patch(path: String) -> void:
 			(
 				"packageReferences = (\n				"
 				+ local_ref_id
-				+ ' /* XCLocalSwiftPackageReference "." */,'
+				+ ' /* XCLocalSwiftPackageReference "admob_spm" */,'
 			)
 		)
 	else:
@@ -100,7 +100,7 @@ static func patch(path: String) -> void:
 				(
 					"packageReferences = (\n				"
 					+ local_ref_id
-					+ ' /* XCLocalSwiftPackageReference "." */,\n			);\n			productRefGroup ='
+					+ ' /* XCLocalSwiftPackageReference "admob_spm" */,\n			);\n			productRefGroup ='
 				)
 			)
 		)
