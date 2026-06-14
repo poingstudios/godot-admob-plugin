@@ -97,6 +97,11 @@ theme_override_colors/font_color = Color(0.6, 0.15, 0.15, 1)
 disabled = true
 text = "Destroy"
 
+[node name="Collapsible" type="CheckButton" parent="ActionsCard/VBox/BannerActions"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Collapsible"
+
 [node name="CustomCard" type="PanelContainer" parent="." unique_id=1288863104]
 layout_mode = 2
 theme_type_variation = &"SectionCard"
@@ -147,6 +152,78 @@ virtual_keyboard_type = 2
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "Update"
+
+[node name="SizeCard" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_type_variation = &"SectionCard"
+
+[node name="VBox" type="VBoxContainer" parent="SizeCard"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="SizeCard/VBox"]
+layout_mode = 2
+text = "AD SIZE"
+horizontal_alignment = 1
+
+[node name="SizeOption" type="OptionButton" parent="SizeCard/VBox"]
+unique_name_in_owner = true
+layout_mode = 2
+item_count = 9
+selected = 0
+popup/item_0/text = "Anchored Adaptive"
+popup/item_0/id = 0
+popup/item_1/text = "BANNER (320x50)"
+popup/item_1/id = 1
+popup/item_2/text = "FULL_BANNER (468x60)"
+popup/item_2/id = 2
+popup/item_3/text = "LARGE_BANNER (320x100)"
+popup/item_3/id = 3
+popup/item_4/text = "LEADERBOARD (728x90)"
+popup/item_4/id = 4
+popup/item_5/text = "MEDIUM_RECTANGLE (300x250)"
+popup/item_5/id = 5
+popup/item_6/text = "WIDE_SKYSCRAPER (160x600)"
+popup/item_6/id = 6
+popup/item_7/text = "SMART_BANNER"
+popup/item_7/id = 7
+popup/item_8/text = "CUSTOM"
+popup/item_8/id = 8
+
+[node name="CustomSize" type="HBoxContainer" parent="SizeCard/VBox"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="WidthLabel" type="Label" parent="SizeCard/VBox/CustomSize"]
+layout_mode = 2
+text = "W:"
+
+[node name="WidthValue" type="LineEdit" parent="SizeCard/VBox/CustomSize"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "320"
+placeholder_text = "320"
+alignment = 1
+select_all_on_focus = true
+virtual_keyboard_type = 2
+
+[node name="HeightLabel" type="Label" parent="SizeCard/VBox/CustomSize"]
+layout_mode = 2
+text = "H:"
+
+[node name="HeightValue" type="LineEdit" parent="SizeCard/VBox/CustomSize"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "50"
+placeholder_text = "50"
+alignment = 1
+select_all_on_focus = true
+virtual_keyboard_type = 2
 
 [node name="PositionCard" type="PanelContainer" parent="." unique_id=208169234]
 layout_mode = 2

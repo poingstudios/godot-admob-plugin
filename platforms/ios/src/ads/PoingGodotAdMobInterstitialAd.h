@@ -43,6 +43,7 @@ public:
     void load(String adUnitId, Dictionary adRequestDictionary, PackedStringArray keywords, int uid);
     void show(int uid);
     void destroy(int uid);
+    Dictionary get_response_info(int uid);
 
     static PoingGodotAdMobInterstitialAd *get_singleton();
 

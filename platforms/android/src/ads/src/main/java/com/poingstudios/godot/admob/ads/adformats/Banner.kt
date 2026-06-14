@@ -28,6 +28,7 @@ import android.view.Gravity
 import android.view.View.OnLayoutChangeListener
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import com.google.ads.mediation.admob.AdMobAdapter
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
@@ -53,10 +54,8 @@ class Banner(
     private var safeArea: Rect = getSafeArea()
     private var mPosition: Position = extractPosition(adViewDictionary)
     private lateinit var mAdView: AdView
-    private var mAdSize: AdSize = (adViewDictionary["ad_size"] as Dictionary).convertToAdSize()
+    private var mAdSize: AdSize = (adViewDictionary["ad_size"] as Dictionary).convertToAdSize(activity)
     private var isHidden: Boolean = false
-
-    data class Position(var value: Int?, var customX: Int, var customY: Int)
 
     private fun extractPosition(dict: Dictionary): Position {
         val value =
@@ -67,29 +66,14 @@ class Banner(
     }
 
     private val mLayoutChangeListener = OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-        Logger.debug("OnLayoutChanged")
         val newSafeArea = getSafeArea()
         if (newSafeArea == safeArea) {
             return@OnLayoutChangeListener
         }
         safeArea = newSafeArea
-        Logger.debug("safeArea changed")
         if (!isHidden) { // only update if is not hidden to improve performance
             activity.runOnUiThread { updatePosition() }
         }
-    }
-
-    enum class AdPosition(val value: Int) {
-        TOP(0),
-        BOTTOM(1),
-        LEFT(2),
-        RIGHT(3),
-        TOP_LEFT(4),
-        TOP_RIGHT(5),
-        BOTTOM_LEFT(6),
-        BOTTOM_RIGHT(7),
-        CENTER(8),
-        CUSTOM(-1)
     }
 
     object SignalInfos {
@@ -100,6 +84,7 @@ class Banner(
         val onAdImpression = SignalInfo("on_ad_impression", Integer::class.java)
         val onAdLoaded = SignalInfo("on_ad_loaded", Integer::class.java)
         val onAdOpened = SignalInfo("on_ad_opened", Integer::class.java)
+        val onAdPaid = SignalInfo("on_ad_view_paid", Integer::class.java, Dictionary::class.java)
     }
 
     init {
@@ -140,6 +125,11 @@ class Banner(
                             emitSignal(godot, pluginName, SignalInfos.onAdOpened, uid)
                         }
                     }
+
+            mAdView.setOnPaidEventListener { adValue ->
+                val adValueDictionary = adValue.convertToGodotDictionary()
+                emitSignal(godot, pluginName, SignalInfos.onAdPaid, uid, adValueDictionary)
+            }
 
             godotLayout.addView(mAdView)
             godotLayout.addOnLayoutChangeListener(mLayoutChangeListener)
@@ -257,42 +247,11 @@ class Banner(
         return mAdSize.getHeightInPixels(activity)
     }
 
-    private fun getSafeArea(): Rect {
-        val safeArea = Rect()
-        val window = activity.window
-        val decorView = window.decorView
-        decorView.getWindowVisibleDisplayFrame(safeArea)
+    fun getResponseInfo(): Dictionary {
+        return mAdView.responseInfo?.convertToGodotDictionary() ?: Dictionary()
+    }
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
-            val insets = decorView.rootWindowInsets
-            if (insets != null) {
-                val displayCutout = insets.displayCutout
-                if (displayCutout != null) {
-                    safeArea.left = kotlin.math.max(safeArea.left, displayCutout.safeInsetLeft)
-                    safeArea.top = kotlin.math.max(safeArea.top, displayCutout.safeInsetTop)
-                    safeArea.right =
-                            kotlin.math.min(
-                                    safeArea.right,
-                                    decorView.width - displayCutout.safeInsetRight
-                            )
-                    safeArea.bottom =
-                            kotlin.math.min(
-                                    safeArea.bottom,
-                                    decorView.height - displayCutout.safeInsetBottom
-                            )
-                }
-                // Handle transparent status/navigation bars in edge-to-edge mode
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-                    val systemInsets = insets.getInsets(android.view.WindowInsets.Type.systemBars())
-                    safeArea.top = kotlin.math.max(safeArea.top, systemInsets.top)
-                    safeArea.bottom =
-                            kotlin.math.min(safeArea.bottom, decorView.height - systemInsets.bottom)
-                    safeArea.left = kotlin.math.max(safeArea.left, systemInsets.left)
-                    safeArea.right =
-                            kotlin.math.min(safeArea.right, decorView.width - systemInsets.right)
-                }
-            }
-        }
-        return safeArea
+    fun isCollapsible(): Boolean {
+        return mAdView.isCollapsible
     }
 }

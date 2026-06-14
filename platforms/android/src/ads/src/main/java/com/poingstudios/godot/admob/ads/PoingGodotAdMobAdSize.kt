@@ -34,7 +34,7 @@ import org.godotengine.godot.Godot
 import org.godotengine.godot.plugin.UsedByGodot
 
 @Suppress("unused") // Instantiated by Android via AndroidManifest (AAR / Godot plugin)
-class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(godot)  {
+class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(godot) {
     private lateinit var aActivity: Activity
 
     override fun getPluginName(): String {
@@ -47,17 +47,18 @@ class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotP
     }
 
     @UsedByGodot
-    fun getCurrentOrientationAnchoredAdaptiveBannerAdSize(width : Int) : Dictionary{
+    fun getCurrentOrientationAnchoredAdaptiveBannerAdSize(width: Int): Dictionary {
         Logger.debug("calling getCurrentOrientationAnchoredAdaptiveBannerAdSize")
         val currentWidth = if (width == AdSize.FULL_WIDTH) getAdWidth() else width
         Logger.debug("currentWidth: $currentWidth")
 
-        val adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(aActivity, currentWidth)
+        val adSize =
+                AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(aActivity, currentWidth)
         return adSize.convertToGodotDictionary()
     }
 
     @UsedByGodot
-    fun getPortraitAnchoredAdaptiveBannerAdSize(width : Int) : Dictionary{
+    fun getPortraitAnchoredAdaptiveBannerAdSize(width: Int): Dictionary {
         Logger.debug("calling getPortraitAnchoredAdaptiveBannerAdSize")
         val currentWidth = if (width == AdSize.FULL_WIDTH) getAdWidth() else width
         Logger.debug("currentWidth: $currentWidth")
@@ -67,7 +68,7 @@ class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotP
     }
 
     @UsedByGodot
-    fun getLandscapeAnchoredAdaptiveBannerAdSize(width : Int) : Dictionary{
+    fun getLandscapeAnchoredAdaptiveBannerAdSize(width: Int): Dictionary {
         Logger.debug("calling getLandscapeAnchoredAdaptiveBannerAdSize")
         val currentWidth = if (width == AdSize.FULL_WIDTH) getAdWidth() else width
         Logger.debug("currentWidth: $currentWidth")
@@ -77,7 +78,7 @@ class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotP
     }
 
     @UsedByGodot
-    fun getSmartBannerAdSize() : Dictionary {
+    fun getSmartBannerAdSize(): Dictionary {
         Logger.debug("calling getSmartBannerAdSize")
 
         return AdSize.SMART_BANNER.convertToGodotDictionary()
@@ -94,6 +95,4 @@ class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotP
 
         return (adWidthPixels / density).toInt()
     }
-
-
 }

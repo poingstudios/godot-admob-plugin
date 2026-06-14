@@ -3,14 +3,27 @@
 This file is the authoritative source of truth for ALL AI agents (Gemini, Claude, Cursor). 
 **Read this first** to minimize token usage and ensure architectural consistency.
 
-## 🏗️ Repository Architecture
-- **Primary Branch:** `master`
-- **GDScript (Core):** `platforms/godot_editor/addons/admob/`
-  - `admob.gd`: Main entry point.
-  - `internal/`: Logic. **Rule: No `class_name` here, use `preload`.**
-- **C# Bridge:** `platforms/godot_editor/addons/admob/csharp/`
-  - Mirrors GDScript API. Managed by `CSharpService.gd` (auto-hides via `.gdignore`).
-- **Native Bridges:** Android (Kotlin/JNI) in `platforms/android/`, iOS (Swift/Obj-C) in `platforms/ios/`.
+## 🏗️ Repository Overview & Architecture
+
+### What is this repository?
+This repository is a Godot plugin that integrates the Google AdMob SDK into Godot Engine projects. It supports both GDScript and C#, and uses native plugins (Android and iOS) to interact with the official Google Mobile Ads SDKs.
+
+### Folder Structure
+- **`platforms/godot_editor/`**: The core Godot plugin and sample project.
+  - `addons/admob/`: The actual plugin distributed to users.
+    - `admob.gd`: Main entry point and public API.
+    - `internal/`: Internal GDScript logic. **Rule: No `class_name` here, use `preload`.**
+    - `csharp/`: C# wrappers and bridge, mirroring the GDScript API. Managed by `CSharpService.gd` (auto-hides via `.gdignore`).
+- **`platforms/android/`**: Android native plugin source code (Kotlin/JNI).
+- **`platforms/ios/`**: iOS native plugin source code (Swift/Obj-C).
+- **`docs/`**: Official documentation built with MkDocs.
+- **`scripts/`**: Automation scripts (e.g., building native plugins).
+- **`tmp/`**: Reference implementations and external source code.
+
+### Cross-Platform Communication
+1. **Godot ➡️ Native**: The Godot scripts (GDScript/C#) use Godot's `Engine.get_singleton()` to access native plugins registered by the Android or iOS code. Method calls to these singletons trigger the native Google Mobile Ads SDK functions.
+2. **Native ➡️ Godot**: The Android and iOS plugins emit signals back to Godot to communicate asynchronous events (e.g., ad loaded, ad failed to load, user rewarded). The Godot side connects to these signals and forwards them to the game developer's code.
+3. **C# ↔️ GDScript**: The C# API acts as a wrapper around the GDScript implementation or Engine singletons to guarantee 1:1 API parity.
 
 ## 📦 Current Environment
 - **Godot Version:** 4.6.1 (Current target for builds and testing).
@@ -26,26 +39,29 @@ This file is the authoritative source of truth for ALL AI agents (Gemini, Claude
 ## 📝 Coding Standards
 - **License Header:** EVERY new file MUST start with the project's MIT License header.
 - **GDScript:** Always use `:=` for type inference. Prefix bridge signals with `_on_admob_`.
+- **Linting:** Always run `gdlint platforms/godot_editor/addons/` and verify/fix errors before proposing changes.
 - **C#:** Use PascalCase. Maintain 1:1 parity with the GDScript API.
+- **Samples:** Always use platform-specific test Ad Unit IDs with ternary operators (GDScript) or properties (C#). Verify IDs against `docs/enable_test_ads.md`.
+- **Mock Ads Parity:** Whenever changes are made to any ad format layout or behavior, the corresponding mock plugins must be updated as well. Maintain 1:1 functional and layout parity between C# and GDScript mock implementations (and vice versa) at all times.
 
 ## 🔄 Specialized Protocols (Skills)
 When performing these specific tasks, you **MUST** read and follow the specialized guides:
-- **Cross-Platform Sync:** [.github/ai/skills/sync/SKILL.md](.github/ai/skills/sync/SKILL.md)
-- **API Parity Check:** [.github/ai/skills/parity-checker/SKILL.md](.github/ai/skills/parity-checker/SKILL.md)
-- **Release Management:** [.github/ai/skills/release-manager/SKILL.md](.github/ai/skills/release-manager/SKILL.md)
-- **Documentation Sync:** [.github/ai/skills/doc-master/SKILL.md](.github/ai/skills/doc-master/SKILL.md)
+- **Cross-Platform Sync:** [.agents/skills/sync/SKILL.md](.agents/skills/sync/SKILL.md)
+- **API Parity Check:** [.agents/skills/parity-checker/SKILL.md](.agents/skills/parity-checker/SKILL.md)
+- **Release Management:** [.agents/skills/release-manager/SKILL.md](.agents/skills/release-manager/SKILL.md)
+- **Documentation Sync:** [.agents/skills/doc-master/SKILL.md](.agents/skills/doc-master/SKILL.md)
 
 ## 🚫 Constraints & Security
 - **Security:** Never log/commit API Keys or `.env` files.
-- **Claude:** Exclusion is managed via `permissions.deny` in `.claude/settings.json`.
+- **All Agents:** Permissions and context are managed via `.agents/settings.json`.
 - **Gemini:** Respect `.geminiignore` patterns.
 - **Workflow:** Reproduce bugs with a script before implementing a fix. Never stage/commit unless asked.
 
 ## 📋 Pending Tasks
-- Verify iOS runtime behavior for the new warning system.
-- Sync new `CSharpService` rules to documentation if needed.
+- Verify iOS runtime behavior for App Open Ads in production environments.
 
 ## 🔗 Key Files
 - `platforms/godot_editor/addons/admob/admob.gd` (Main API)
 - `platforms/android/build.gradle` (Android Deps)
 - `platforms/ios/Package.swift` (iOS Deps)
+- `docs/enable_test_ads.md` (Source of truth for Test IDs)

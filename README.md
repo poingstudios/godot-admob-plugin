@@ -4,7 +4,7 @@
   </h1>
 
   [![VersionBadge]][Releases] [![StarsBadge]][Stargazers] [![DiscordBadge]][DiscordLink] [![LicenseBadge]][LicenseLink] <br>
-  [![DownloadsBadge]][Releases] [![AssetLibraryBadge]][AssetLib] <br>
+  [![DownloadsBadge]][Releases] [![AssetStoreBadge]][AssetStore] <br>
   [![AndroidBadge]][AndroidPlatform] [![iOSBadge]][iOSPlatform] [![GDScriptBadge]][Examples] [![CSharpBadge]][Examples]
 
   **The complete solution for AdMob integration in Godot using GDScript or C#.**  
@@ -16,16 +16,16 @@
 
   ---
 
-  [📦 Installation](#-installation) • [📋 Examples](#-examples) • [🙏 Support](#-support--community)
+  [📦 Installation](#-installation) • [📋 Examples](#-examples) • [🙏 Support](#-support)
 
 </div>
 
 ## 📦 Installation
 
-### 📥 Godot Asset Library (recommended)
+### 📥 Godot Asset Store (recommended)
 
-1. Find the AdMob plugin by `poing.studios` \
-   <img height=120 src="docs/assets/asset_library.png">
+1. Find the [AdMob plugin](https://store.godotengine.org/asset/poingstudios/admob/) by `Poing Studios` \
+   <img height=120 src="docs/assets/asset_store.png">
 2. Click **Download** and **Install**.
 
 <details>
@@ -74,6 +74,92 @@ public override void _Ready()
 {
 	//just need to call once
 	MobileAds.Initialize();
+}
+```
+
+</details>
+
+## 📱App Open Ads
+<details>
+<summary>GDScript</summary>
+
+### Load
+```gdscript
+var app_open_ad : AppOpenAd
+var app_open_ad_load_callback := AppOpenAdLoadCallback.new()
+
+func _ready():
+	app_open_ad_load_callback.on_ad_failed_to_load = on_app_open_ad_failed_to_load
+	app_open_ad_load_callback.on_ad_loaded = on_app_open_ad_loaded
+
+# button signal on scene
+func _on_load_app_open_pressed() -> void:
+	var unit_id : String
+	if OS.get_name() == "Android":
+		unit_id = "ca-app-pub-3940256099942544/9257395921"
+		unit_id = "ca-app-pub-3940256099942544/5575463023"
+	
+	AppOpenAdLoader.new().load(unit_id, AdRequest.new(), app_open_ad_load_callback)
+
+func on_app_open_ad_failed_to_load(adError : LoadAdError) -> void:
+	print(adError.message)
+	
+func on_app_open_ad_loaded(app_open_ad : AppOpenAd) -> void:
+	self.app_open_ad = app_open_ad
+```
+
+### Show
+```gdscript
+# button signal on scene
+func _on_show_pressed():
+	if app_open_ad:
+		app_open_ad.show()
+```
+
+</details>
+
+<details>
+<summary>C#</summary>
+
+### Load
+```csharp
+using Godot;
+using PoingStudios.AdMob.Api;
+using PoingStudios.AdMob.Api.Core;
+using PoingStudios.AdMob.Api.Listeners;
+
+private AppOpenAd _appOpenAd;
+
+// button signal on scene
+private void OnLoadAppOpenPressed()
+{
+	string unitId = "";
+	if (OS.GetName() == "Android")
+	{
+		unitId = "ca-app-pub-3940256099942544/9257395921";
+	}
+	else if (OS.GetName() == "iOS")
+	{
+		unitId = "ca-app-pub-3940256099942544/5575463023";
+	}
+	
+	new AppOpenAdLoader().Load(unitId, new AdRequest(), new AppOpenAdLoadCallback
+	{
+		OnAdLoaded = ad => _appOpenAd = ad,
+		OnAdFailedToLoad = err => GD.Print(err.Message)
+	});
+}
+```
+
+### Show
+```csharp
+// button signal on scene
+private void OnShowPressed()
+{
+	if (_appOpenAd != null)
+	{
+		_appOpenAd.Show();
+	}
 }
 ```
 
@@ -210,6 +296,91 @@ private void OnShowPressed()
 	{
 		_interstitialAd.Show();
 	}
+}
+```
+
+</details>
+
+## 🖼️Native Overlay Ads
+<details>
+<summary>GDScript</summary>
+
+### Load
+```gdscript
+var native_overlay_ad: NativeOverlayAd
+
+# button signal on scene
+func _on_load_native_pressed() -> void:
+	var unit_id := "ca-app-pub-3940256099942544/2247696110" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/3986624511"
+	
+	var ad_request := AdRequest.new()
+	var options := NativeAdOptions.new()
+
+	NativeOverlayAd.load(unit_id, ad_request, options, _on_ad_load_finished)
+
+func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
+	if error:
+		print("Native ad failed to load: ", error.message)
+		return
+	
+	native_overlay_ad = ad
+	_render_native_ad()
+```
+
+### Render
+```gdscript
+func _render_native_ad() -> void:
+	var style := NativeTemplateStyle.new()
+	style.template_id = NativeTemplateStyle.MEDIUM
+	native_overlay_ad.render_template(style, AdPosition.BOTTOM)
+```
+
+</details>
+
+<details>
+<summary>C#</summary>
+
+### Load
+```csharp
+using Godot;
+using PoingStudios.AdMob.Api;
+using PoingStudios.AdMob.Api.Core;
+
+private NativeOverlayAd _nativeOverlayAd;
+
+// button signal on scene
+private void OnLoadNativePressed()
+{
+	string unitId = OS.GetName() == "Android" 
+		? "ca-app-pub-3940256099942544/2247696110" 
+		: "ca-app-pub-3940256099942544/3986624511";
+
+	var adRequest = new AdRequest();
+	var options = new NativeAdOptions();
+
+	NativeOverlayAd.Load(unitId, adRequest, options, OnAdLoadFinished);
+}
+
+private void OnAdLoadFinished(NativeOverlayAd ad, LoadAdError error)
+{
+	if (error != null)
+	{
+		GD.Print("Native ad failed to load: " + error.Message);
+		return;
+	}
+
+	_nativeOverlayAd = ad;
+	RenderNativeAd();
+}
+```
+
+### Render
+```csharp
+private void RenderNativeAd()
+{
+	var style = new NativeTemplateStyle();
+	style.TemplateId = NativeTemplateStyle.Medium;
+	_nativeOverlayAd.RenderTemplate(style, AdPosition.Bottom);
 }
 ```
 
@@ -394,7 +565,6 @@ private void OnShowPressed()
 }
 ```
 
-
 </details>
 
 ## 📎 Useful links
@@ -432,28 +602,28 @@ If you appreciate our work, don't forget to give us a star on GitHub! ⭐
 
 ![Star History Chart](https://api.star-history.com/svg?repos=poingstudios/godot-admob-plugin&type=Date)
 
-[VersionBadge]: https://img.shields.io/github/v/tag/poingstudios/godot-admob-plugin?label=Version&style=flat-square
-[StarsBadge]: https://img.shields.io/github/stars/poingstudios/godot-admob-plugin?style=flat-square
-[DiscordBadge]: https://img.shields.io/badge/Discord-7289DA?style=flat-square&logo=discord&logoColor=white
-[LicenseBadge]: https://img.shields.io/github/license/poingstudios/godot-admob-plugin?style=flat-square
-[DownloadsBadge]: https://img.shields.io/github/downloads/poingstudios/godot-admob-plugin/total?label=Downloads&style=flat-square&color=darkgreen
-[AssetLibraryBadge]: https://img.shields.io/badge/Download-Asset%20Library-darkgreen?style=flat-square
-[AndroidBadge]: https://img.shields.io/badge/Android-3DDC84?style=flat-square&logo=android&logoColor=white
-[iOSBadge]: https://img.shields.io/badge/iOS-000000?style=flat-square&logo=ios&logoColor=white
-[GDScriptBadge]: https://img.shields.io/badge/GDScript-478CBF?style=flat-square&logo=godot-engine&logoColor=white
-[CSharpBadge]: https://img.shields.io/badge/C%23-239120?style=flat-square&logo=csharp&logoColor=white
-[PatreonBadge]: https://img.shields.io/badge/Support%20us%20on-Patreon-orange?style=for-the-badge&logo=patreon
-[KofiBadge]: https://img.shields.io/badge/Buy%20us%20a-coffee-yellow?style=for-the-badge&logo=ko-fi
-[PaypalBadge]: https://img.shields.io/badge/Donate-via%20Paypal-blue?style=for-the-badge&logo=paypal
-[DiscussionsBadge]: https://img.shields.io/badge/Discussions-green?style=for-the-badge
-[DiscordHelpBadge]: https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white
+[VersionBadge]: https://badgen.net/github/release/poingstudios/godot-admob-plugin?label=Version
+[StarsBadge]: https://badgen.net/github/stars/poingstudios/godot-admob-plugin
+[DiscordBadge]: https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord
+[LicenseBadge]: https://badgen.net/github/license/poingstudios/godot-admob-plugin?label=License
+[DownloadsBadge]: https://badgen.net/github/assets-dl/poingstudios/godot-admob-plugin?label=Downloads&color=green
+[AssetStoreBadge]: https://badgen.net/badge/Download/Asset%20Store/green
+[AndroidBadge]: https://badgen.net/badge/_/Android/3DDC84?label=&icon=android
+[iOSBadge]: https://badgen.net/badge/_/iOS/000000?label=&icon=apple
+[GDScriptBadge]: https://badgen.net/badge/_/GDScript/478CBF?label=&icon=godotengine
+[CSharpBadge]: https://badgen.net/badge/_/C%23/239120?label=&icon=csharp
+[PatreonBadge]: https://badgen.net/badge/Support%20us%20on/Patreon/orange?icon=patreon
+[KofiBadge]: https://badgen.net/badge/Buy%20us%20a/coffee/yellow?icon=kofi
+[PaypalBadge]: https://badgen.net/badge/Donate/via%20Paypal/blue?icon=paypal
+[DiscussionsBadge]: https://badgen.net/badge/_/Discussions/green?label=
+[DiscordHelpBadge]: https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord
 
 [DocumentationLink]: https://poingstudios.github.io/godot-admob-plugin/latest/
 [Releases]: https://github.com/poingstudios/godot-admob-plugin/releases
 [Stargazers]: https://github.com/poingstudios/godot-admob-plugin/stargazers
 [DiscordLink]: https://discord.com/invite/YEPvYjSSMk
 [LicenseLink]: https://github.com/poingstudios/godot-admob-plugin/blob/master/LICENSE
-[AssetLib]: https://godotengine.org/asset-library/asset/2063
+[AssetStore]: https://store.godotengine.org/asset/poingstudios/admob/
 [AndroidPlatform]: https://github.com/poingstudios/godot-admob-plugin/tree/master/platforms/android
 [iOSPlatform]: https://github.com/poingstudios/godot-admob-plugin/tree/master/platforms/ios
 [Examples]: #-examples

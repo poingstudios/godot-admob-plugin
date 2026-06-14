@@ -45,6 +45,17 @@
         self.rewarded = ad;
         self.rewarded.fullScreenContentDelegate = self;
         
+        __weak RewardedAd *weakSelf = self;
+        self.rewarded.paidEventHandler = ^(GADAdValue *_Nonnull value) {
+            RewardedAd *strongSelf = weakSelf;
+            if (strongSelf) {
+                Dictionary adValueDictionary = [ObjectToGodotDictionary convertGADAdValueToDictionary:value];
+                PoingGodotAdMobRewardedAd::get_singleton()->emit_signal("on_rewarded_ad_paid",
+                                                                             [strongSelf.UID intValue],
+                                                                             adValueDictionary);
+            }
+        };
+        
         PoingGodotAdMobRewardedAd::get_singleton()->objectVector.at([self.UID intValue]) = self;
         NSLog(@"success to load RewardedAd");
         PoingGodotAdMobRewardedAd::get_singleton()->emit_signal("on_rewarded_ad_loaded", [self.UID intValue]);
@@ -53,17 +64,14 @@
 
 - (void)show {
     if (self.rewarded){
-        UIViewController *rootViewController = [[UIApplication sharedApplication] delegate].window.rootViewController;
-        [self.rewarded presentFromRootViewController:rootViewController
-                               userDidEarnRewardHandler:^{
-             GADAdReward *reward = self.rewarded.adReward;
-             PoingGodotAdMobRewardedAd::get_singleton()->emit_signal("on_rewarded_ad_user_earned_reward",
-                                                                     [self.UID intValue],
-                                                                     [ObjectToGodotDictionary convertGADAdRewardToDictionary:reward]);
-         }];
+        [self.rewarded presentFromRootViewController:[self getRootViewController]
+                                              userDidEarnRewardHandler:^{
+            GADAdReward *reward = self.rewarded.adReward;
+            PoingGodotAdMobRewardedAd::get_singleton()->emit_signal("on_rewarded_ad_user_earned_reward", [self.UID intValue], [ObjectToGodotDictionary convertGADAdRewardToDictionary:reward]);
+        }];
     }
     else{
-        NSLog(@"RewardedAd wasn't ready");
+        NSLog(@"rewarded ad wasn't ready");
     }
 }
 
@@ -77,7 +85,7 @@
 
 - (void)adDidRecordImpression:(nonnull id<GADFullScreenPresentingAd>)ad {
     NSLog(@"RewardedAd adDidRecordImpression.");
-    PoingGodotAdMobRewardedAd::get_singleton()->emit_signal("on_rewarded_ad_mpression", [self.UID intValue]);
+    PoingGodotAdMobRewardedAd::get_singleton()->emit_signal("on_rewarded_ad_impression", [self.UID intValue]);
 }
 - (void)adDidRecordClick:(nonnull id<GADFullScreenPresentingAd>)ad{
     NSLog(@"RewardedAd adDidRecordClick.");

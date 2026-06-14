@@ -24,7 +24,7 @@ using Godot;
 using PoingStudios.AdMob.Api;
 using PoingStudios.AdMob.Sample;
 
-public partial class MobileAds : VBoxContainer
+public partial class MobileAds : BaseTab
 {
 	private CheckButton _iosPauseCheck;
 	private CheckButton _muteMusicCheck;
@@ -34,10 +34,11 @@ public partial class MobileAds : VBoxContainer
 
 	public override void _Ready()
 	{
+		base._Ready();
 		_iosPauseCheck = GetNode<CheckButton>("iOSAppPause");
 		_muteMusicCheck = GetNode<CheckButton>("MuteMusic");
 		_musicPlayer = GetNode<AudioStreamPlayer>("MusicPlayer");
-		_adVolumeSlider = GetNode<HSlider>("AdVolumeContainer/AdVolumeSlider");
+		_adVolumeSlider = GetNode<HSlider>("AdVolumeCard/AdVolumeContainer/AdVolumeSlider");
 		_adMutedCheck = GetNode<CheckButton>("AdMuted");
 
 		_iosPauseCheck.Toggled += OnSetIosAppPausePressed;

@@ -36,11 +36,15 @@ namespace PoingStudios.AdMob.Core
 			string osName = OS.GetName();
 			if (osName != "Android" && osName != "iOS")
 			{
+				if (OS.HasFeature("editor"))
+				{
+					return MockAdMobFactory.GetMockPlugin(pluginName);
+				}
 				return null;
 			}
 
 			string location = osName == "Android" 
-				? "'res://addons/admob/android/config.gd' and 'Use Gradle Build' is enabled" 
+				? "the Project Settings and 'Use Gradle Build' is enabled" 
 				: "the 'Plugins' section of the Export tab";
 			
 			string message = $"{pluginName} not found, make sure it is enabled in {location}";
@@ -62,6 +66,14 @@ namespace PoingStudios.AdMob.Core
 			if (plugin != null && !plugin.IsConnected(signalName, callable))
 			{
 				plugin.Connect(signalName, callable, flags);
+			}
+		}
+
+		protected static void SafeDisconnect(GodotObject plugin, string signalName, Callable callable)
+		{
+			if (plugin != null && plugin.IsConnected(signalName, callable))
+			{
+				plugin.Disconnect(signalName, callable);
 			}
 		}
 	}

@@ -12,9 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://iy12nk8vefwy" path="res://addons/admob/gdscript/sample/tabs/Rewarded.tscn" id="10_rewarded"]
 [ext_resource type="PackedScene" uid="uid://cpxd2i7v6t6b6" path="res://addons/admob/gdscript/sample/tabs/RewardedInterstitial.tscn" id="11_rewarded_interstitial"]
 [ext_resource type="PackedScene" uid="uid://bnptawvmfxhhu" path="res://addons/admob/gdscript/sample/tabs/Ump.tscn" id="12_ump"]
-[ext_resource type="AudioStream" uid="uid://f3f176vu6pfo" path="res://addons/admob/assets/music.ogg" id="13_music"]
-[ext_resource type="PackedScene" path="res://addons/admob/gdscript/sample/tabs/MobileAds.tscn" id="14_mobile_ads_scene"]
+[ext_resource type="PackedScene" uid="uid://df7w8m2v87p5" path="res://addons/admob/gdscript/sample/tabs/MobileAds.tscn" id="14_mobile_ads_scene"]
 [ext_resource type="Theme" uid="uid://cax2scu7f6q4k" path="res://addons/admob/assets/theme_modern.tres" id="15_theme"]
+[ext_resource type="PackedScene" uid="uid://die765hk6b61" path="res://addons/admob/gdscript/sample/tabs/AppOpen.tscn" id="16_app_open"]
+[ext_resource type="PackedScene" uid="uid://c6u6s82p5d6xr" path="res://addons/admob/gdscript/sample/tabs/Native.tscn" id="17_native"]
 
 [sub_resource type="GDScript" id="GDScript_1vvio"]
 script/source = "extends TextureButton
@@ -37,7 +38,7 @@ func _on_pressed():
 	OS.shell_open(\"https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8\") 
 "
 
-[node name="Main" type="Control" unique_id=1832778232]
+[node name="Main" type="Control" unique_id=903752228]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -47,7 +48,7 @@ grow_vertical = 2
 theme = ExtResource("15_theme")
 script = ExtResource("1_xm28w")
 
-[node name="Background" type="ColorRect" parent="." unique_id=1942836878]
+[node name="Background" type="ColorRect" parent="." unique_id=379700207]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,7 +57,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.996094, 0.425781, 0, 1)
 
-[node name="SafeArea" type="MarginContainer" parent="Background" unique_id=1638496235]
+[node name="SafeArea" type="MarginContainer" parent="Background" unique_id=1299762061]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -65,31 +66,31 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_safe")
 
-[node name="LayoutContainer" type="VBoxContainer" parent="Background/SafeArea" unique_id=2057200662]
+[node name="LayoutContainer" type="VBoxContainer" parent="Background/SafeArea" unique_id=1159514097]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="HeaderContainer" type="PanelContainer" parent="Background/SafeArea/LayoutContainer" unique_id=38038062]
+[node name="HeaderContainer" type="PanelContainer" parent="Background/SafeArea/LayoutContainer" unique_id=157819330]
 layout_mode = 2
 theme_type_variation = &"GlassPanel"
 
-[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer" unique_id=789473909]
+[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer" unique_id=1732537915]
 layout_mode = 2
 theme_override_constants/separation = 20
 
-[node name="LogoContainer" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox" unique_id=796450913]
+[node name="LogoContainer" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox" unique_id=1075561299]
 layout_mode = 2
 theme_override_constants/separation = 20
 alignment = 1
 
-[node name="AppIcon" type="TextureRect" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer" unique_id=1323060165]
+[node name="AppIcon" type="TextureRect" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer" unique_id=1345500703]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture = ExtResource("3_icon")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AppTitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer" unique_id=1372599038]
+[node name="AppTitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer" unique_id=573813692]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2)
 theme_override_constants/shadow_offset_x = 1
@@ -99,15 +100,15 @@ theme_override_font_sizes/font_size = 35
 text = "AdMob Plugin (GDScript) - Poing Studios"
 vertical_alignment = 1
 
-[node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox" unique_id=147720098]
+[node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox" unique_id=2017800703]
 layout_mode = 2
 theme_type_variation = &"SupportCard"
 
-[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard" unique_id=1919517316]
+[node name="VBox" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard" unique_id=23290193]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="SupportLabel" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=1292975985]
+[node name="SupportLabel" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=309886958]
 clip_contents = false
 layout_mode = 2
 theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 0.8)
@@ -117,12 +118,12 @@ bbcode_enabled = true
 text = "[center][b]S U P P O R T   T H E   P R O J E C T[/b][/center]"
 fit_content = true
 
-[node name="SupportButtons" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=846813546]
+[node name="SupportButtons" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=1645840664]
 layout_mode = 2
 theme_override_constants/separation = 30
 alignment = 1
 
-[node name="Patreon" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=1602398362]
+[node name="Patreon" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=1664845715]
 custom_minimum_size = Vector2(180, 55)
 layout_mode = 2
 texture_normal = ExtResource("5_patreon")
@@ -130,7 +131,7 @@ ignore_texture_size = true
 stretch_mode = 5
 script = SubResource("GDScript_1vvio")
 
-[node name="Ko-fi" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=231267142]
+[node name="Ko-fi" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=2000320270]
 custom_minimum_size = Vector2(140, 55)
 layout_mode = 2
 texture_normal = ExtResource("6_kofi")
@@ -138,7 +139,7 @@ ignore_texture_size = true
 stretch_mode = 5
 script = SubResource("GDScript_hcar3")
 
-[node name="PayPal" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=324206342]
+[node name="PayPal" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=1116199285]
 custom_minimum_size = Vector2(150, 55)
 layout_mode = 2
 texture_normal = ExtResource("7_paypal")
@@ -146,54 +147,108 @@ ignore_texture_size = true
 stretch_mode = 5
 script = SubResource("GDScript_8xyos")
 
-[node name="TabContent" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer" unique_id=2130940613]
+[node name="TabContent" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer" unique_id=2001621322]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="MainTabs" type="TabContainer" parent="Background/SafeArea/LayoutContainer/TabContent" unique_id=1194212701]
+[node name="MainTabs" type="TabContainer" parent="Background/SafeArea/LayoutContainer/TabContent" unique_id=2107640902]
 layout_mode = 2
 size_flags_vertical = 3
 current_tab = 0
 
-[node name="Banner" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=1384004359 instance=ExtResource("8_banner")]
+[node name="Banner" type="ScrollContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=1606595939]
 layout_mode = 2
+horizontal_scroll_mode = 0
 metadata/_tab_index = 0
 
-[node name="Interstitial" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=252705233 instance=ExtResource("9_interstitial")]
+[node name="BannerContent" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Banner" unique_id=1496237227 instance=ExtResource("8_banner")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Native" type="ScrollContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=895165458]
 visible = false
 layout_mode = 2
+horizontal_scroll_mode = 0
 metadata/_tab_index = 1
 
-[node name="Rewarded" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=1701539580 instance=ExtResource("10_rewarded")]
+[node name="NativeContent" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Native" unique_id=1290577175 instance=ExtResource("17_native")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="AppOpen" type="ScrollContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=1187332724]
 visible = false
 layout_mode = 2
+horizontal_scroll_mode = 0
 metadata/_tab_index = 2
 
-[node name="RewardedInterstitial" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=720146644 instance=ExtResource("11_rewarded_interstitial")]
+[node name="AppOpenContent" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/AppOpen" unique_id=1256739380 instance=ExtResource("16_app_open")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Interstitial" type="ScrollContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=970641483]
 visible = false
 layout_mode = 2
+horizontal_scroll_mode = 0
 metadata/_tab_index = 3
 
-[node name="UMP" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=672142508 instance=ExtResource("12_ump")]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-offset_left = -20.0
-offset_right = 20.0
+[node name="InterstitialContent" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Interstitial" unique_id=204689331 instance=ExtResource("9_interstitial")]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Rewarded" type="ScrollContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=1798821851]
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 0
 metadata/_tab_index = 4
 
-[node name="MobileAds" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=1283119144 instance=ExtResource("14_mobile_ads_scene")]
+[node name="RewardedContent" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/Rewarded" unique_id=1105107750 instance=ExtResource("10_rewarded")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RewardedInterstitial" type="ScrollContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=617278209]
 visible = false
 layout_mode = 2
+horizontal_scroll_mode = 0
 metadata/_tab_index = 5
 
-[node name="ConsolePanel" type="PanelContainer" parent="Background/SafeArea/LayoutContainer" unique_id=35469342]
+[node name="RewardedInterstitialContent" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/RewardedInterstitial" unique_id=1235124601 instance=ExtResource("11_rewarded_interstitial")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UMP" type="ScrollContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=44571402]
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 6
+
+[node name="UMPContent" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/UMP" unique_id=1799572436 instance=ExtResource("12_ump")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MobileAds" type="ScrollContainer" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs" unique_id=388729412]
+visible = false
+layout_mode = 2
+horizontal_scroll_mode = 0
+metadata/_tab_index = 7
+
+[node name="MobileAdsContent" parent="Background/SafeArea/LayoutContainer/TabContent/MainTabs/MobileAds" unique_id=80873570 instance=ExtResource("14_mobile_ads_scene")]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ConsolePanel" type="PanelContainer" parent="Background/SafeArea/LayoutContainer" unique_id=1790076331]
 custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
 theme_type_variation = &"GlassPanel"
 
-[node name="ConsoleOutput" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/ConsolePanel" unique_id=393436169]
+[node name="ConsoleOutput" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/ConsolePanel" unique_id=1343438021]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true

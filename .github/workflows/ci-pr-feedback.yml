@@ -4,7 +4,6 @@ on:
   workflow_run:
     workflows: ['\[CI\] PR Validation']
     types: [completed]
-
 jobs:
   comment:
     name: Comment PR with results
@@ -44,12 +43,25 @@ jobs:
 
           const androidArtifact = artifacts.artifacts.find(a => a.name.startsWith('poing-godot-admob-android-'));
           const iosArtifact = artifacts.artifacts.find(a => a.name.startsWith('poing-godot-admob-ios-'));
-          const apkArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-') && !a.name.includes('CSharp'));
-          const csharpArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-CSharp-'));
+          const apkArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-Android-GDScript-'));
+          const csharpArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-Android-CSharp-'));
+          const ipaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-iOS-Simulator-GDScript-'));
+          const csharpIpaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-iOS-Simulator-CSharp-'));
 
           const getUrl = (artifact) => artifact ? `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}/artifacts/${artifact.id}` : `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${runId}`;
 
-          const body = `✅ **PR Checks Passed!** (Commit: \`${commitSha}\`)\n\n⬇️ **Download Artifacts**\n- 📦 [Android Plugin (\`.aar\` / \`.zip\`)](${getUrl(androidArtifact)})\n- 🍎 [iOS Plugin (\`.xcframework\` / \`.zip\`)](${getUrl(iosArtifact)})\n- 📱 [Test Godot Project APK (GDScript)](${getUrl(apkArtifact)})\n- 🔷 [Test Godot Project APK (C#)](${getUrl(csharpArtifact)})`;
+          let body = `✅ **PR Checks Passed!** (Commit: \`${commitSha}\`)`;
+          
+          const hasArtifacts = androidArtifact || iosArtifact || apkArtifact || csharpArtifact || ipaArtifact || csharpIpaArtifact;
+          if (hasArtifacts) {
+            body += `\n\n⬇️ **Download Artifacts**`;
+            if (androidArtifact) body += `\n- 🧩 [Android Plugin (\`.aar\` / \`.zip\`)](${getUrl(androidArtifact)})`;
+            if (iosArtifact) body += `\n- 🧱 [iOS Plugin (\`.xcframework\` / \`.zip\`)](${getUrl(iosArtifact)})`;
+            if (apkArtifact) body += `\n- 🤖 [Test Godot Project APK (GDScript)](${getUrl(apkArtifact)})`;
+            if (csharpArtifact) body += `\n- 🔷 [Test Godot Project APK (C#)](${getUrl(csharpArtifact)})`;
+            if (ipaArtifact) body += `\n- 🍎 [Test Godot Project iOS Simulator App (GDScript)](${getUrl(ipaArtifact)})`;
+            if (csharpIpaArtifact) body += `\n- 📱 [Test Godot Project iOS Simulator App (C#)](${getUrl(csharpIpaArtifact)})`;
+          }
 
           const { data: comments } = await github.rest.issues.listComments({
             owner: context.repo.owner, repo: context.repo.repo, issue_number: prNumber,

@@ -22,11 +22,13 @@
 
 class_name ConsentRequestParameters
 
-var tag_for_under_age_of_consent : bool
-var consent_debug_settings : ConsentDebugSettings
+var tag_for_under_age_of_consent: bool
+var consent_debug_settings: ConsentDebugSettings
+
 
 func convert_to_dictionary() -> Dictionary:
 	return {
-		"tag_for_under_age_of_consent" : tag_for_under_age_of_consent,
-		"consent_debug_settings" : consent_debug_settings.convert_to_dictionary() if consent_debug_settings else null
+		"tag_for_under_age_of_consent": tag_for_under_age_of_consent,
+		"consent_debug_settings":
+		consent_debug_settings.convert_to_dictionary() if consent_debug_settings else null
 	}

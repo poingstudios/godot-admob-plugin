@@ -10,12 +10,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://android-sdk.is.com/' }
     }
 }
 
 rootProject.name = "admob"
 include ':src:core'
 include ':src:ads'
-include ':src:mediation:adcolony'
 include ':src:mediation:vungle'
 include ':src:mediation:meta'
+include ':src:mediation:ironsource'

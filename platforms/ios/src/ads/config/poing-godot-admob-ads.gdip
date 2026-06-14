@@ -10,13 +10,18 @@ linked=[]
 embedded=[]
 system=["AppTrackingTransparency.framework"]
 capabilities=[]
-files=[]
+files=["poing-godot-admob/res/GADTMediumTemplateView.xib", "poing-godot-admob/res/GADTSmallTemplateView.xib"]
 linker_flags=["-ObjC"]
 spm_packages=[
   {
     "url": "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
-    "version": "13.1.0",
+    "version": "13.3.0",
     "products": ["GoogleMobileAds"]
+  },
+  {
+    "url": "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git",
+    "version": "3.1.0",
+    "products": ["GoogleUserMessagingPlatform"]
   }
 ]
 

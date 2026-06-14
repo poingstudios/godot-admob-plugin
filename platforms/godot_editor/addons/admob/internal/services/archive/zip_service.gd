@@ -22,27 +22,35 @@
 
 const FileService := preload("res://addons/admob/internal/services/ui/file_service.gd")
 
-enum StripMode {NONE, AUTO_DETECT, FORCE}
+enum StripMode { NONE, AUTO_DETECT, FORCE }
 
-static func extract_zip(zip_path: String, destination_path: String, clean_destination: bool, strip_mode: StripMode = StripMode.NONE) -> bool:
+
+static func extract_zip(
+	zip_path: String,
+	destination_path: String,
+	clean_destination: bool,
+	strip_mode: StripMode = StripMode.NONE
+) -> bool:
 	if clean_destination:
 		_delete_dir_recursive(destination_path)
 	return _extract(zip_path, destination_path, strip_mode)
+
 
 static func _extract(zip_path: String, destination_path: String, strip_mode: StripMode) -> bool:
 	var reader := _open_zip(zip_path)
 	if not reader:
 		return false
-	
+
 	var files := reader.get_files()
 	var common_root := _detect_common_root(files) if strip_mode == StripMode.AUTO_DETECT else ""
-	
+
 	_extract_files(reader, files, destination_path, strip_mode, common_root)
 	reader.close()
-	
+
 	FileService.refresh_filesystem()
 	_print_success(destination_path)
 	return true
+
 
 static func _open_zip(zip_path: String) -> ZIPReader:
 	var reader := ZIPReader.new()
@@ -50,43 +58,55 @@ static func _open_zip(zip_path: String) -> ZIPReader:
 		return null
 	return reader
 
+
 static func _detect_common_root(files: PackedStringArray) -> String:
 	if files.is_empty() or not files[0].ends_with("/"):
 		return ""
-	
+
 	var candidate := files[0]
 	for file in files:
 		if not file.begins_with(candidate):
 			return ""
 	return candidate
 
-static func _extract_files(reader: ZIPReader, files: PackedStringArray, destination: String, strip_mode: StripMode, common_root: String) -> void:
+
+static func _extract_files(
+	reader: ZIPReader,
+	files: PackedStringArray,
+	destination: String,
+	strip_mode: StripMode,
+	common_root: String
+) -> void:
 	for file_path in files:
 		var relative_path := _calculate_relative_path(file_path, strip_mode, common_root)
 		if relative_path.is_empty():
 			continue
-		
+
 		var target_path := destination.path_join(relative_path)
-		
+
 		if file_path.ends_with("/"):
 			DirAccess.make_dir_recursive_absolute(target_path)
 		else:
 			_write_file(target_path, reader.read_file(file_path))
 
-static func _calculate_relative_path(file_path: String, strip_mode: StripMode, common_root: String) -> String:
+
+static func _calculate_relative_path(
+	file_path: String, strip_mode: StripMode, common_root: String
+) -> String:
 	if strip_mode == StripMode.FORCE:
 		if not "/" in file_path or (file_path.ends_with("/") and file_path.count("/") == 1):
 			return file_path
 		var parts := file_path.split("/", false)
 		parts.remove_at(0)
 		return "/".join(parts)
-	
+
 	if not common_root.is_empty():
 		if file_path == common_root:
 			return ""
 		return file_path.trim_prefix(common_root)
-		
+
 	return file_path
+
 
 static func _write_file(path: String, content: PackedByteArray) -> void:
 	DirAccess.make_dir_recursive_absolute(path.get_base_dir())
@@ -97,21 +117,25 @@ static func _write_file(path: String, content: PackedByteArray) -> void:
 
 static func _print_success(destination: String) -> void:
 	var path := ProjectSettings.globalize_path(destination)
-	print_rich("[color=GREEN]Extracted[/color] zip to: [color=CORNFLOWER_BLUE][url]%s[/url][/color]" % path)
+	print_rich(
+		"[color=GREEN]Extracted[/color] zip to: [color=CORNFLOWER_BLUE][url]%s[/url][/color]" % path
+	)
+
 
 static func _delete_dir_recursive(path: String) -> void:
 	var dir := DirAccess.open(path)
 	if not dir:
 		return
-	
+
 	for item in _list_directory_contents(dir):
 		var full_path := path.path_join(item)
 		if dir.current_is_dir():
 			_delete_dir_recursive(full_path)
 		else:
 			DirAccess.remove_absolute(full_path)
-	
+
 	DirAccess.remove_absolute(path)
+
 
 static func _list_directory_contents(dir: DirAccess) -> Array[String]:
 	var contents: Array[String] = []

@@ -25,16 +25,16 @@ The Godot AdMob Plugin from Poing Studios simplifies the process for Godot devel
 
 To access the plugin, you can either download the Godot package provided or explore its source code on GitHub through the links below.
 
-[Download from GitHub](https://github.com/poingstudios/godot-admob-plugin/releases/latest){ .md-button .md-button--primary } [Download from AssetLibrary](https://godotengine.org/asset-library/asset/2063){ .md-button .md-button--primary } [Source Code](https://github.com/poingstudios/godot-admob-plugin){ .md-button .md-button--primary }
+[Download from GitHub](https://github.com/poingstudios/godot-admob-plugin/releases/latest){ .md-button .md-button--primary } [Download from Asset Store](https://store.godotengine.org/asset/poingstudios/admob/){ .md-button .md-button--primary } [Source Code](https://github.com/poingstudios/godot-admob-plugin){ .md-button .md-button--primary }
 
 ### Importing the Godot AdMob Plugin on Project
 
-The AdMob plugin for Godot is conveniently available via AssetLib. To import this plugin into your Godot project, follow these steps:
+The AdMob plugin for Godot is conveniently available via the Godot Asset Store. To import this plugin into your Godot project, follow these steps:
 
 1. Open your Godot project.
-2. Navigate to AssetLib within the Godot editor.
-3. In the search bar, enter `AdMob` and ensure that the publisher is set to `poing.studios`.
-![activate_plugin](assets/asset_library.png)
+2. Navigate to the Asset Store within the Godot editor.
+3. In the search bar, enter `AdMob` and ensure that the publisher is set to `Poing Studios`.
+![activate_plugin](assets/asset_store.png)
 4. Locate the AdMob plugin and click the `Download` button.
 5. Once the download is complete, go to `Project → Project Settings` within the Godot editor.
 6. In the `Plugins` section, find the `AdMob` plugin and activate it.
@@ -69,20 +69,22 @@ The AdMob plugin for Godot is conveniently available via AssetLib. To import thi
 === "Android"
 
 	1. Install the [Android Build Template](https://docs.godotengine.org/en/stable/tutorials/export/android_gradle_build.html) by navigating to `Project → Install Android Build Template`.
-	1. Add your [AdMob App ID](https://support.google.com/admob/answer/7356431) to your app's `res://addons/admob/android/config.gd` file by changing the variable `APPLICATION_ID`.
+	1. Configure the Android preset options in `Project → Project Settings... → General`:
+	    - In the left sidebar, locate the **Admob** section and click on **Android**.
+	    - Add your [AdMob App ID](https://support.google.com/admob/answer/7356431) to the `App Id` field.
+	    - Enable or disable `Enabled` and Mediation plugins (`Mediation/Meta`, `Mediation/Vungle`) by toggling the respective checkboxes.
 	
 	    !!! tip "App ID vs Ad Unit ID"
 	        - **App ID** (contains `~`): Used for app registration and internal configuration.
 	        - **Ad Unit ID** (contains `/`): Used to load specific ad formats in your code.
 	
-	1. If you have Mediation, set true the libraries at `res://addons/admob/android/config.gd`, such as: `adcolony`, `meta`, `vungle`, etc...
 	1. When exporting your project, select `Use Gradle Build`.
 	
 	    ![export](assets/android/export.png)
 
 === "iOS"
     
-    1. When exporting your project, update the `GADApplicationIdentifier` with your [AdMob App ID](https://support.google.com/admob/answer/7356431) and ensure that `Ad Mob` is enabled in the Plugins section of the Export dialog. If you have Mediation, also mark `Ad Mob Meta`, `Ad Mob AdColony`, etc...
+    1. When exporting your project, update the `GADApplicationIdentifier` with your [AdMob App ID](https://support.google.com/admob/answer/7356431) and ensure that `Ad Mob` is enabled in the Plugins section of the Export dialog. If you have Mediation, also mark `Ad Mob Meta`, etc...
     
         ![gadapplicationidentifier](assets/ios/gadapplicationidentifier.png)
     
@@ -127,6 +129,14 @@ If you are utilizing mediation, it's essential to wait for the completion handle
 ## Select an ad format
 The Google Mobile Ads SDK is now successfully imported, and you are prepared to integrate an ad into your app. AdMob provides a variety of ad formats, allowing you to select the one that aligns best with your app's user experience.
 
+### App Open
+<div class="image-text-container">
+  <img src="https://developers.google.com/static/admob/images/format-app-open.svg" alt="app_open">
+  <p>App open is an ad format that appears when users open or switch back to your app. The ad overlays the loading screen.</p>
+</div>
+
+[Implement app open ads](ad_formats/app_open.md){ .md-button .md-button--primary }
+
 ### Banner
 <div class="image-text-container">
   <img src="assets/ad_formats/banner.png" alt="banner">
@@ -142,6 +152,14 @@ The Google Mobile Ads SDK is now successfully imported, and you are prepared to 
 </div>
 
 [Implement interstitial ads](ad_formats/interstitial.md){ .md-button .md-button--primary }
+
+### Native Overlay
+<div class="image-text-container">
+  <img src="https://developers.google.com/static/admob/images/format-native.svg" alt="native_overlay">
+  <p>Native Overlay ads allow you to display ads that are styled to fit your app's look and feel, using pre-designed templates on top of your app content. They support customization for colors, fonts, and layout options while keeping integration simple.</p>
+</div>
+
+[Implement native overlay ads](ad_formats/native_overlay.md){ .md-button .md-button--primary }
 
 ### Rewarded
 <div class="image-text-container">
@@ -166,7 +184,7 @@ The Google Mobile Ads SDK is now successfully imported, and you are prepared to 
   }
   .image-text-container img {
     margin-right: 20px;
-    max-width: 200px;
+    max-width: 130px;
     height: auto;
   }
 </style>

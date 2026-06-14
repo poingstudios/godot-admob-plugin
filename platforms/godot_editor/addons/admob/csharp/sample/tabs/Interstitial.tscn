@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://6z1xszqvgh2xw"]
 
-[ext_resource type="Script" path="res://addons/admob/csharp/sample/tabs/Interstitial.cs" id="1_script"]
+[ext_resource type="Script" uid="uid://brk67a7rxhknk" path="res://addons/admob/csharp/sample/tabs/Interstitial.cs" id="1_script"]
 
 [node name="Interstitial" type="VBoxContainer"]
 anchors_preset = 15

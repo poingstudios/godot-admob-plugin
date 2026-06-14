@@ -20,6 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+using System;
 using Godot;
 using Godot.Collections;
 using PoingStudios.AdMob.Api.Core;
@@ -34,6 +35,7 @@ namespace PoingStudios.AdMob.Api
 
 		public AdListener AdListener { get; set; } = new AdListener();
 		public AdPosition Position { get; private set; }
+		public Action<AdValue> OnAdPaid { get; set; }
 
 		private readonly int _uid;
 
@@ -43,6 +45,7 @@ namespace PoingStudios.AdMob.Api
 		private readonly Callable _onAdImpressionCallable;
 		private readonly Callable _onAdLoadedCallable;
 		private readonly Callable _onAdOpenedCallable;
+		private readonly Callable _onAdPaidCallable;
 
 		public AdView(string adUnitId, AdSize adSize, AdPosition adPosition)
 		{
@@ -54,6 +57,7 @@ namespace PoingStudios.AdMob.Api
 			_onAdImpressionCallable = Callable.From<int>(OnAdImpression);
 			_onAdLoadedCallable = Callable.From<int>(OnAdLoaded);
 			_onAdOpenedCallable = Callable.From<int>(OnAdOpened);
+			_onAdPaidCallable = Callable.From<int, Dictionary>(OnAdViewPaid);
 
 			if (_plugin != null)
 			{
@@ -82,6 +86,7 @@ namespace PoingStudios.AdMob.Api
 				SafeConnect(_plugin, "on_ad_impression", _onAdImpressionCallable);
 				SafeConnect(_plugin, "on_ad_loaded", _onAdLoadedCallable);
 				SafeConnect(_plugin, "on_ad_opened", _onAdOpenedCallable);
+				SafeConnect(_plugin, "on_ad_view_paid", _onAdPaidCallable);
 			}
 		}
 
@@ -94,6 +99,12 @@ namespace PoingStudios.AdMob.Api
 		public void Destroy()
 		{
 			_plugin?.Call("destroy", _uid);
+		}
+
+		public ResponseInfo GetResponseInfo()
+		{
+			var responseInfoDictionary = (Dictionary)_plugin.Call("get_response_info", _uid);
+			return ResponseInfo.Create(responseInfoDictionary);
 		}
 
 		public void Hide()
@@ -150,6 +161,13 @@ namespace PoingStudios.AdMob.Api
 			return -1;
 		}
 
+		public bool IsCollapsible()
+		{
+			if (_plugin != null)
+				return (bool)_plugin.Call("is_collapsible", _uid);
+			return false;
+		}
+
 		private void OnAdClicked(int uid)
 		{
 			if (uid != _uid) return;
@@ -185,6 +203,13 @@ namespace PoingStudios.AdMob.Api
 		{
 			if (uid != _uid) return;
 			Callable.From(() => AdListener.OnAdOpened?.Invoke()).CallDeferred();
+		}
+
+		private void OnAdViewPaid(int uid, Dictionary adValueDictionary)
+		{
+			if (uid != _uid) return;
+			var adValue = AdValue.Create(adValueDictionary);
+			Callable.From(() => OnAdPaid?.Invoke(adValue)).CallDeferred();
 		}
 	}
 }

@@ -11,16 +11,16 @@
 
 <p align="center">
   <a href="https://github.com/poingstudios/godot-admob-ios/releases">
-    <img src="https://img.shields.io/github/v/tag/poingstudios/godot-admob-ios?label=Version">
+    <img src="https://badgen.net/github/release/poingstudios/godot-admob-ios?label=Version">
   </a>
   <a href="https://github.com/poingstudios/godot-admob-ios/actions/workflows/release_ios.yml">
     <img src="https://github.com/poingstudios/godot-admob-ios/actions/workflows/release_ios.yml/badge.svg">
   </a>
   <a href="https://github.com/poingstudios/godot-admob-plugin/releases">
-    <img src="https://img.shields.io/github/downloads/poingstudios/godot-admob-plugin/total?style=social">
+    <img src="https://badgen.net/github/assets-dl/poingstudios/godot-admob-plugin?label=Downloads&color=green">
   </a>
-  <img src="https://img.shields.io/github/stars/poingstudios/godot-admob-ios?style=social">
-  <img src="https://img.shields.io/github/license/poingstudios/godot-admob-ios?style=plastic">
+  <img src="https://badgen.net/github/stars/poingstudios/godot-admob-ios">
+  <img src="https://badgen.net/github/license/poingstudios/godot-admob-ios?label=License">
 </p>
 
 <p align="center">
@@ -53,7 +53,7 @@ The **purpose** of this plugin is to always keep **up to date with Godot**, supp
 - There is also an [Android Plugin](https://github.com/poingstudios/godot-admob-android) available, which has the same behavior. 🤖
 
 ## 🙋‍♂️How to use 
-- We recommend you to use the [AdMob Plugin](https://github.com/poingstudios/godot-admob-plugin), you can download direcly from [Godot Assets](https://godotengine.org/asset-library/asset/2063).
+- We recommend you to use the [AdMob Plugin](https://github.com/poingstudios/godot-admob-plugin), you can download direcly from [Godot Asset Store](https://store.godotengine.org/asset/poingstudios/admob/).
 - After download, we recommend you to read the [README.md](https://github.com/poingstudios/godot-admob-plugin/blob/master/README.md) of the Plugin to know how to use.
 
 ## 📦Installing:
@@ -82,18 +82,18 @@ Alternatively, you can check the docs of AdMob itself of [iOS](https://developer
 ## 🙏 Support
 If you find our work valuable and would like to support us, consider contributing via these platforms:
 
-[![Patreon](https://img.shields.io/badge/Support%20us%20on-Patreon-orange?style=for-the-badge&logo=patreon)](https://patreon.com/poingstudios)
+[![Patreon](https://badgen.net/badge/Support%20us%20on/Patreon/orange?icon=patreon)](https://patreon.com/poingstudios)
 
-[![Ko-fi](https://img.shields.io/badge/Buy%20us%20a-coffee-yellow?style=for-the-badge&logo=ko-fi)](https://ko-fi.com/poingstudios)
+[![Ko-fi](https://badgen.net/badge/Buy%20us%20a/coffee/yellow?icon=kofi)](https://ko-fi.com/poingstudios)
 
-[![Paypal](https://img.shields.io/badge/Donate-via%20Paypal-blue?style=for-the-badge&logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8)
+[![Paypal](https://badgen.net/badge/Donate/via%20Paypal/blue?icon=paypal)](https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8)
 
 Your support helps us continue to improve and maintain this plugin. Thank you for being a part of our community!
 
 
 ## 🆘Getting help
-[![DISCUSSIONS](https://img.shields.io/badge/Discussions-green?style=for-the-badge)](https://github.com/poingstudios/godot-admob-ios/discussions)
-[![DISCORD](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge)](https://discord.com/invite/YEPvYjSSMk)
+[![DISCUSSIONS](https://badgen.net/badge/_/Discussions/green?label=)](https://github.com/poingstudios/godot-admob-ios/discussions)
+[![DISCORD](https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord)](https://discord.com/invite/YEPvYjSSMk)
 
 
 ## ⭐ Star History

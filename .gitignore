@@ -40,3 +40,11 @@ data_*/
 AdMobAddon.csproj
 AdMobAddon.sln
 *.skill
+
+# Temporary folder for clones
+tmp/
+
+# Tooling and generated file ignores
+.antigravitycli/
+platforms/godot_editor/addons/admob/csharp/.gdignore
+

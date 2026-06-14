@@ -74,11 +74,21 @@ void PoingGodotAdMobInterstitialAd::show(int uid) {
 }
 
 
+
+Dictionary PoingGodotAdMobInterstitialAd::get_response_info(int uid) {
+    InterstitialAd* adObj = this->getObject(uid);
+    if (adObj && adObj.interstitial && adObj.interstitial.responseInfo) {
+        return [ObjectToGodotDictionary convertResponseInfoToDictionary:adObj.interstitial.responseInfo];
+    }
+    return Dictionary();
+}
+
 void PoingGodotAdMobInterstitialAd::_bind_methods() {
     ClassDB::bind_method(D_METHOD("create"),    &PoingGodotAdMobInterstitialAd::create);
     ClassDB::bind_method(D_METHOD("load"),      &PoingGodotAdMobInterstitialAd::load);
     ClassDB::bind_method(D_METHOD("show"),      &PoingGodotAdMobInterstitialAd::show);
     ClassDB::bind_method(D_METHOD("destroy"),   &PoingGodotAdMobInterstitialAd::destroy);
+    ClassDB::bind_method(D_METHOD("get_response_info"), &PoingGodotAdMobInterstitialAd::get_response_info);
     
     ADD_SIGNAL(MethodInfo("on_interstitial_ad_failed_to_load",                      PropertyInfo(Variant::INT, "UID"), PropertyInfo(Variant::DICTIONARY, "loadAdErrorDictionary")));
     ADD_SIGNAL(MethodInfo("on_interstitial_ad_loaded",                              PropertyInfo(Variant::INT, "UID")));
@@ -88,4 +98,5 @@ void PoingGodotAdMobInterstitialAd::_bind_methods() {
     ADD_SIGNAL(MethodInfo("on_interstitial_ad_failed_to_show_full_screen_content",  PropertyInfo(Variant::INT, "UID"), PropertyInfo(Variant::DICTIONARY, "adErrorDictionary")));
     ADD_SIGNAL(MethodInfo("on_interstitial_ad_impression",                          PropertyInfo(Variant::INT, "UID")));
     ADD_SIGNAL(MethodInfo("on_interstitial_ad_showed_full_screen_content",          PropertyInfo(Variant::INT, "UID")));
+    ADD_SIGNAL(MethodInfo("on_interstitial_ad_paid",                                PropertyInfo(Variant::INT, "UID"), PropertyInfo(Variant::DICTIONARY, "adValueDictionary")));
 };

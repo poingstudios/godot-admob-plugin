@@ -26,7 +26,7 @@ using PoingStudios.AdMob.Api.Core;
 using PoingStudios.AdMob.Api.Listeners;
 using PoingStudios.AdMob.Sample;
 
-public partial class Banner : VBoxContainer
+public partial class Banner : BaseTab
 {
 	private const string AdUnitIdAndroid = "ca-app-pub-3940256099942544/6300978111";
 	private const string AdUnitIdIos = "ca-app-pub-3940256099942544/2934735716";
@@ -43,18 +43,47 @@ public partial class Banner : VBoxContainer
 	private Button _showBtn;
 	private Button _hideBtn;
 	private Button _getSizeBtn;
+	private CheckButton _collapsibleToggle;
 
 	private LineEdit _xValue;
 	private LineEdit _yValue;
+	private OptionButton _sizeOption;
+	private HBoxContainer _customSize;
+	private LineEdit _widthValue;
+	private LineEdit _heightValue;
+
+	private enum Preset
+	{
+		Adaptive,
+		Banner,
+		FullBanner,
+		LargeBanner,
+		Leaderboard,
+		MediumRectangle,
+		WideSkyscraper,
+		SmartBanner,
+		Custom
+	}
 
 	public override void _Ready()
 	{
+		base._Ready();
 		_loadBtn = GetNode<Button>("%BannerActions/LoadBanner");
 		_loadBackgroundBtn = GetNode<Button>("%BannerActions/LoadBannerBackground");
 		_destroyBtn = GetNode<Button>("%BannerActions/DestroyBanner");
 		_showBtn = GetNode<Button>("%BannerActions/ShowBanner");
 		_hideBtn = GetNode<Button>("%BannerActions/HideBanner");
 		_getSizeBtn = GetNode<Button>("%BannerActions/GetSize");
+		_collapsibleToggle = GetNode<CheckButton>("%Collapsible");
+		_sizeOption = GetNode<OptionButton>("%SizeOption");
+		_customSize = GetNode<HBoxContainer>("%CustomSize");
+		_widthValue = GetNode<LineEdit>("%WidthValue");
+		_heightValue = GetNode<LineEdit>("%HeightValue");
+
+		_sizeOption.ItemSelected += (index) =>
+		{
+			_customSize.Visible = index == (int)Preset.Custom;
+		};
 
 		_loadBtn.Pressed += OnLoadPressed;
 		_loadBackgroundBtn.Pressed += OnLoadBackgroundPressed;
@@ -83,6 +112,8 @@ public partial class Banner : VBoxContainer
 		grid.GetNode<Button>("BOTTOM").Pressed += () => UpdatePosition(AdPosition.Bottom);
 		grid.GetNode<Button>("BOTTOM_RIGHT").Pressed += () => UpdatePosition(AdPosition.BottomRight);
 
+
+
 		UpdateUI(false);
 	}
 
@@ -91,9 +122,11 @@ public partial class Banner : VBoxContainer
 		_loadBtn.Disabled = isLoaded;
 		_loadBackgroundBtn.Disabled = isLoaded;
 		_destroyBtn.Disabled = !isLoaded;
-		_showBtn.Disabled = !isLoaded;
-		_hideBtn.Disabled = !isLoaded;
 		_getSizeBtn.Disabled = !isLoaded;
+
+		_showBtn.Disabled = !(isLoaded && _isHidden);
+		_hideBtn.Disabled = !(isLoaded && !_isHidden);
+
 	}
 
 	private void UpdatePosition(AdPosition pos)
@@ -116,7 +149,41 @@ public partial class Banner : VBoxContainer
 		{
 			Log($"Applying custom position: ({x}, {y})");
 			UpdatePosition(AdPosition.Custom(x, y));
-			DisplayServer.VirtualKeyboardHide();
+			if (DisplayServer.HasFeature(DisplayServer.Feature.VirtualKeyboard))
+			{
+				DisplayServer.VirtualKeyboardHide();
+			}
+		}
+	}
+
+	private string GetAdUnitId(bool isCollapsible = false)
+	{
+		if (isCollapsible)
+		{
+			return OS.GetName() == "iOS" ? "ca-app-pub-3940256099942544/8388050270" : "ca-app-pub-3940256099942544/2014213617";
+		}
+		return OS.GetName() == "iOS" ? AdUnitIdIos : AdUnitIdAndroid;
+	}
+
+	private AdSize GetSelectedAdSize()
+	{
+		switch ((Preset)_sizeOption.Selected)
+		{
+			case Preset.Adaptive: return AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(AdSize.FullWidth);
+			case Preset.Banner: return AdSize.Banner;
+			case Preset.FullBanner: return AdSize.FullBanner;
+			case Preset.LargeBanner: return AdSize.LargeBanner;
+			case Preset.Leaderboard: return AdSize.Leaderboard;
+			case Preset.MediumRectangle: return AdSize.MediumRectangle;
+			case Preset.WideSkyscraper: return AdSize.WideSkyscraper;
+			case Preset.SmartBanner: return AdSize.SmartBanner;
+			case Preset.Custom:
+				if (int.TryParse(_widthValue.Text, out int w) && int.TryParse(_heightValue.Text, out int h))
+				{
+					return new AdSize(w, h);
+				}
+				return AdSize.Banner;
+			default: return AdSize.Banner;
 		}
 	}
 
@@ -124,11 +191,14 @@ public partial class Banner : VBoxContainer
 	{
 		DestroyAd();
 		UpdateUI(false);
-		Log($"Loading adaptive banner{(hideImmediately ? " in background" : string.Empty)}...");
+		bool isCollapsibleRequest = _collapsibleToggle.ButtonPressed;
+		AdSize size = GetSelectedAdSize();
 
-		var size = AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize(AdSize.FullWidth);
-		_adView = new AdView(AdUnitId, size, _adPosition);
+		Log($"Loading banner ({_sizeOption.GetItemText(_sizeOption.Selected)}){(hideImmediately ? " in background" : string.Empty)}{(isCollapsibleRequest ? " (collapsible)" : string.Empty)}...");
+
+		_adView = new AdView(GetAdUnitId(isCollapsibleRequest), size, _adPosition);
 		_isHidden = hideImmediately;
+		UpdateUI(false);
 
 		if (_isHidden)
 		{
@@ -139,7 +209,15 @@ public partial class Banner : VBoxContainer
 		{
 			OnAdLoaded = () =>
 			{
-				Log("Ad loaded successfully");
+				bool isCollapsible = _adView.IsCollapsible();
+				if (isCollapsible)
+				{
+					Log("Success: Collapsible banner loaded.");
+				}
+				else
+				{
+					Log("Ad loaded successfully. Collapsible: false");
+				}
 				UpdateUI(true);
 				if (!_isHidden)
 				{
@@ -153,15 +231,48 @@ public partial class Banner : VBoxContainer
 				SampleRegistry.SafeArea?.ResetAdOverlap();
 			},
 			OnAdClicked = () => Log("Ad clicked"),
-			OnAdOpened = () => Log("Ad opened"),
+			OnAdOpened = () => 
+			{
+				Log("Ad opened");
+				SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
+			},
 			OnAdClosed = () => 
 			{ 
-				Log("Ad closed"); 
-				SampleRegistry.SafeArea?.ResetAdOverlap();
+				Log("Ad closed callback triggered"); 
+				var height = _adView != null ? _adView.GetHeightInPixels() : 0;
+				Log($"Ad closed height: {height}");
+				if (height == 0)
+				{
+					if (_adView != null)
+					{
+						_adView.Destroy();
+						_adView = null;
+					}
+					_isHidden = false;
+					UpdateUI(false);
+					SampleRegistry.SafeArea?.ResetAdOverlap();
+				}
+				else
+				{
+					SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
+				}
 			},
 			OnAdImpression = () => Log("Impression recorded"),
 		};
-		_adView.LoadAd(new AdRequest());
+		_adView.OnAdPaid = adValue =>
+		{
+			string adSourceName = _adView?.GetResponseInfo()?.LoadedAdapterResponseInfo?.AdSourceName ?? "N/A";
+			Log(string.Format("Ad paid: {0:F} {1} (precision: {2}, source: {3})", adValue.ValueMicros / 1000000.0, adValue.CurrencyCode, adValue.Precision, adSourceName));
+		};
+
+		var adRequest = new AdRequest();
+		if (isCollapsibleRequest)
+		{
+			string collapsiblePos = _adPosition == AdPosition.Top ? "top" : "bottom";
+			adRequest.Extras["collapsible"] = collapsiblePos;
+			Log($"Requesting collapsible banner ({collapsiblePos})");
+		}
+		_adView.LoadAd(adRequest);
 	}
 
 	private void OnLoadPressed() => LoadBanner(false);
@@ -174,6 +285,7 @@ public partial class Banner : VBoxContainer
 			_isHidden = false;
 			_adView.Show(); 
 			Log("Banner shown"); 
+			UpdateUI(true);
 			SampleRegistry.SafeArea?.UpdateAdOverlap(_adView);
 		}
 	}
@@ -185,6 +297,7 @@ public partial class Banner : VBoxContainer
 			_isHidden = true;
 			_adView.Hide(); 
 			Log("Banner hidden"); 
+			UpdateUI(true);
 			SampleRegistry.SafeArea?.ResetAdOverlap();
 		}
 	}

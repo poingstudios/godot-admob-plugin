@@ -53,6 +53,7 @@ class PoingGodotAdMobUserMessagingPlatform(godot: Godot?) : org.godotengine.godo
         signals.add(SignalInfo("on_consent_form_load_success_listener", Integer::class.java))
         signals.add(SignalInfo("on_consent_form_load_failure_listener", Dictionary::class.java))
         signals.add(PoingGodotAdMobConsentForm.SignalInfos.onConsentFormDismissed)
+        signals.add(SignalInfo("on_privacy_options_form_dismissed_listener", Dictionary::class.java))
         return signals
     }
 
@@ -78,5 +79,14 @@ class PoingGodotAdMobUserMessagingPlatform(godot: Godot?) : org.godotengine.godo
     @UsedByGodot
     fun show(uid : Int){
         consentForms[uid]?.show()
+    }
+
+    @UsedByGodot
+    fun show_privacy_options_form(){
+        aActivity.runOnUiThread {
+            UserMessagingPlatform.showPrivacyOptionsForm(aActivity) {
+                emitSignal("on_privacy_options_form_dismissed_listener", it?.convertToGodotDictionary() ?: Dictionary())
+            }
+        }
     }
 }

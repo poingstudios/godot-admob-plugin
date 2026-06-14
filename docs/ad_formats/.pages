@@ -1,3 +1,7 @@
 nav:
-  - banner
-  - ...
+  - App Open: app_open.md
+  - Banner: banner
+  - Interstitial: interstitial.md
+  - Native Overlay: native_overlay.md
+  - Rewarded: rewarded.md
+  - 'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': rewarded_interstitial.md

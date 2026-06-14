@@ -11,16 +11,16 @@
 
 <p align="center">
   <a href="https://github.com/poingstudios/godot-admob-android/releases">
-    <img src="https://img.shields.io/github/v/tag/poingstudios/godot-admob-android?label=Version">
+    <img src="https://badgen.net/github/release/poingstudios/godot-admob-android?label=Version">
   </a>
   <a href="https://github.com/poingstudios/godot-admob-android/actions/workflows/release_android.yml">
     <img src="https://github.com/poingstudios/godot-admob-android/actions/workflows/release_android.yml/badge.svg">
   </a>
   <a href="https://github.com/poingstudios/godot-admob-plugin/releases">
-    <img src="https://img.shields.io/github/downloads/poingstudios/godot-admob-plugin/total?style=social">
+    <img src="https://badgen.net/github/assets-dl/poingstudios/godot-admob-plugin?label=Downloads&color=green">
   </a>
-  <img src="https://img.shields.io/github/stars/poingstudios/godot-admob-android?style=social">
-  <img src="https://img.shields.io/github/license/poingstudios/godot-admob-android?style=plastic">
+  <img src="https://badgen.net/github/stars/poingstudios/godot-admob-android">
+  <img src="https://badgen.net/github/license/poingstudios/godot-admob-android?label=License">
 </p>
 
 <p align="center">
@@ -47,7 +47,7 @@ The **purpose** of this plugin is to always keep **up to date with Godot**, supp
 - Supports nearly all Ad Formats: **Banner**, **Interstitial**, **Rewarded**, **Rewarded Interstitial**. 📺
 - GDPR Compliance with UMP Support. ✉️
 - Targeting Capabilities. 🎯
-- Seamless integration with Mediation partners: **AdColony**, **Meta**, **Vungle**. 💰
+- Seamless integration with Mediation partners: **Meta**, **Vungle**. 💰
 - CI/CD for streamlined development and deployment. 🔄🚀
 - Features a dedicated [Godot Plugin](https://github.com/poingstudios/godot-admob-plugin), reducing the need for extensive coding. 🔌
 - There is also an [iOS plugin](https://github.com/poingstudios/godot-admob-ios) available, which has the same behavior. 🍎
@@ -55,9 +55,9 @@ The **purpose** of this plugin is to always keep **up to date with Godot**, supp
 
 ## 🙋‍♂️How to use 
 - Video tutorial: https://youtu.be/TB7WhP8mieo
-- Download [AdMob Plugin](https://github.com/poingstudios/godot-admob-plugin), you can download directly from [Godot Assets](https://godotengine.org/asset-library/asset/2063).
+- Download [AdMob Plugin](https://github.com/poingstudios/godot-admob-plugin), you can download directly from [Godot Asset Store](https://store.godotengine.org/asset/poingstudios/admob/).
 - After download, we recommend you to read the [README.md](https://github.com/poingstudios/godot-admob-plugin/blob/master/README.md) of the Plugin to know how to use.
-- Add your [AdMob App ID](https://support.google.com/admob/answer/7356431) to your app's ```res://addons/admob/android/config.gd``` script by changing  `APPLICATION_ID` const.
+- Add your [AdMob App ID](https://support.google.com/admob/answer/7356431) in `Project -> Project Settings -> General -> Admob -> Android`.
 
 ## 📦 Manual Installation:
 
@@ -82,18 +82,18 @@ Alternatively, you can check the docs of AdMob itself of [Android](https://devel
 ## 🙏 Support
 If you find our work valuable and would like to support us, consider contributing via these platforms:
 
-[![Patreon](https://img.shields.io/badge/Support%20us%20on-Patreon-orange?style=for-the-badge&logo=patreon)](https://patreon.com/poingstudios)
+[![Patreon](https://badgen.net/badge/Support%20us%20on/Patreon/orange?icon=patreon)](https://patreon.com/poingstudios)
 
-[![Ko-fi](https://img.shields.io/badge/Buy%20us%20a-coffee-yellow?style=for-the-badge&logo=ko-fi)](https://ko-fi.com/poingstudios)
+[![Ko-fi](https://badgen.net/badge/Buy%20us%20a/coffee/yellow?icon=kofi)](https://ko-fi.com/poingstudios)
 
-[![Paypal](https://img.shields.io/badge/Donate-via%20Paypal-blue?style=for-the-badge&logo=paypal)](https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8)
+[![Paypal](https://badgen.net/badge/Donate/via%20Paypal/blue?icon=paypal)](https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8)
 
 Your support helps us continue to improve and maintain this plugin. Thank you for being a part of our community!
 
 
 ## 🆘Getting help
-[![DISCUSSIONS](https://img.shields.io/badge/Discussions-green?style=for-the-badge)](https://github.com/poingstudios/godot-admob-android/discussions)
-[![DISCORD](https://img.shields.io/badge/Discord-7289DA?style=for-the-badge)](https://discord.com/invite/YEPvYjSSMk)
+[![DISCUSSIONS](https://badgen.net/badge/_/Discussions/green?label=)](https://github.com/poingstudios/godot-admob-android/discussions)
+[![DISCORD](https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord)](https://discord.com/invite/YEPvYjSSMk)
 
 
 ## Development

@@ -25,18 +25,28 @@ using PoingStudios.AdMob.Ump.Api;
 using PoingStudios.AdMob.Ump.Core;
 using PoingStudios.AdMob.Sample;
 
-public partial class Ump : VBoxContainer
+public partial class Ump : BaseTab
 {
 	public override void _Ready()
 	{
+		base._Ready();
 		GetNode<Button>("GetConsentStatus").Pressed += OnGetConsentStatusPressed;
 		GetNode<Button>("ResetConsentInformation").Pressed += OnResetConsentPressed;
+		GetNode<Button>("ShowPrivacyOptionsForm").Pressed += OnShowPrivacyOptionsFormPressed;
 	}
 
 	private void OnGetConsentStatusPressed()
 	{
 		var info = UserMessagingPlatform.ConsentInformation;
 		Log($"Current Consent Status: {info.GetConsentStatus()}");
+		Log($"Privacy Options Requirement Status: {info.GetPrivacyOptionsRequirementStatus()}");
+	}
+
+	private void OnShowPrivacyOptionsFormPressed()
+	{
+		Log("Showing privacy options form...");
+		UserMessagingPlatform.ShowPrivacyOptionsForm(err =>
+			Log(err == null ? "Privacy options form dismissed successfully." : $"Privacy options form error: {err.Message}"));
 	}
 
 	private void OnResetConsentPressed()
@@ -50,6 +60,7 @@ public partial class Ump : VBoxContainer
 			ConsentDebugSettings = new ConsentDebugSettings
 			{
 				DebugGeography = DebugGeography.Eea,
+				TestDeviceHashedIds = new System.Collections.Generic.List<string> { "test_device_hashed_id" },
 			},
 		};
 

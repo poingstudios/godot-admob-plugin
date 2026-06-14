@@ -66,6 +66,7 @@ class PoingGodotAdMobRewardedAd(godot: Godot?) : org.godotengine.godot.plugin.Go
         signals.add(SignalInfo("on_rewarded_ad_showed_full_screen_content", Integer::class.java))
 
         signals.add(SignalInfo("on_rewarded_ad_user_earned_reward", Integer::class.java, Dictionary::class.java))
+        signals.add(SignalInfo("on_rewarded_ad_paid", Integer::class.java, Dictionary::class.java))
         return signals
     }
 
@@ -89,6 +90,10 @@ class PoingGodotAdMobRewardedAd(godot: Godot?) : org.godotengine.godot.plugin.Go
                     }
                     override fun onAdLoaded(rewardedAd: RewardedAd) {
                         rewardedAds[uid] = rewardedAd
+                        rewardedAd.setOnPaidEventListener { adValue ->
+                            val adValueDictionary = adValue.convertToGodotDictionary()
+                            emitSignal("on_rewarded_ad_paid", uid, adValueDictionary)
+                        }
                         rewardedAd.fullScreenContentCallback = object: FullScreenContentCallback() {
                             override fun onAdClicked() {
                                 Logger.debug("Ad was clicked.")
@@ -148,4 +153,10 @@ class PoingGodotAdMobRewardedAd(godot: Godot?) : org.godotengine.godot.plugin.Go
             rewardedAds[uid]?.setServerSideVerificationOptions(serverSideVerificationOptionsDictionary.convertToServerSideVerificationOptions())
         }
     }
+
+    @UsedByGodot
+    fun get_response_info(uid: Int) : Dictionary {
+        return rewardedAds[uid]?.responseInfo?.convertToGodotDictionary() ?: Dictionary()
+    }
+
 }

@@ -9,8 +9,8 @@
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 //
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
 //
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -20,142 +20,190 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#import "../helpers/WindowHelper.h"
 #import "GodotDictionaryToObject.h"
 
 @implementation GodotDictionaryToObject
 
-+ (GADAdSize)convertDictionaryToGADAdSize:(Dictionary)adSizeDictionary{
-    int width = (int) adSizeDictionary["width"];
-    int height = (int) adSizeDictionary["height"];
-    if (width == 0 && height == 0) { // as the size of smart banner is (0, 0)
-        CGRect screenBounds = [UIScreen mainScreen].bounds;
-        CGRect safeFrame = [UIApplication sharedApplication].keyWindow.safeAreaLayoutGuide.layoutFrame;
-        if (!CGSizeEqualToSize(safeFrame.size, CGSizeZero)) {
-          screenBounds = safeFrame;
-        }
-        width = (int)CGRectGetWidth(screenBounds);
-        return GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(width);
++ (GADAdSize)convertDictionaryToGADAdSize:(Dictionary)adSizeDictionary {
+  int width = (int)adSizeDictionary["width"];
+  int height = (int)adSizeDictionary["height"];
+
+  if (width <= 0) {
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    UIWindow *window = [WindowHelper getCurrentWindow];
+    if (window) {
+      if (@available(iOS 11.0, *)) {
+        screenBounds =
+            UIEdgeInsetsInsetRect(window.bounds, window.safeAreaInsets);
+      }
+    }
+    width = (int)CGRectGetWidth(screenBounds);
+  }
+
+  if (width == -1 && height == -1) {
+    return kGADAdSizeSmartBannerPortrait;
+  }
+
+  return GADAdSizeFromCGSize(CGSizeMake(width, height));
+}
+
++ (GADRequest *)convertDictionaryToGADRequest:(Dictionary)adRequestDictionary
+                                 withKeywords:(PackedStringArray)keywords {
+  GADRequest *request = [GADRequest request];
+  String googleRequestAgent = adRequestDictionary["google_request_agent"];
+
+  NSString *requestAgentNSString =
+      [NSString stringWithUTF8String:googleRequestAgent.utf8().get_data()];
+
+  request.requestAgent = requestAgentNSString;
+
+  Dictionary mediationExtras = adRequestDictionary["mediation_extras"];
+
+  for (int i = 0; i < mediationExtras.size(); i++) {
+    Dictionary extraDictionary = mediationExtras[i];
+    String className = extraDictionary["class_name"];
+
+    id<AdNetworkExtras> extra = [[NSClassFromString([NSString
+        stringWithUTF8String:className.utf8().get_data()]) alloc] init];
+    if (extra) {
+      Dictionary extras = extraDictionary["extras"];
+      [request registerAdNetworkExtras:[extra buildExtras:extras]];
+      NSLog(@"successful added mediation extras for class_name: %@",
+            [NSString stringWithUTF8String:className.utf8().get_data()]);
     } else {
-        return GADAdSizeFromCGSize(CGSizeMake(width, height));
+      NSLog(@"mediation class_name doesn't exists: %@",
+            [NSString stringWithUTF8String:className.utf8().get_data()]);
     }
+  }
+
+  Dictionary extrasDictionary = adRequestDictionary["extras"];
+  GADExtras *extras = [[GADExtras alloc] init];
+  NSMutableDictionary *additionalParameters = [[NSMutableDictionary alloc] init];
+  
+  if (extrasDictionary.size() > 0) {
+    [additionalParameters addEntriesFromDictionary:[GodotDictionaryToObject convertDictionaryToNSDictionary:extrasDictionary]];
+  }
+
+  extras.additionalParameters = additionalParameters;
+  [request registerAdNetworkExtras:extras];
+
+  NSMutableArray<NSString *> *keywordsNSArray = [NSMutableArray array];
+
+  for (int i = 0; i < keywords.size(); ++i) {
+    String keyword = keywords[i];
+    NSString *nsKeyword = [NSString
+        stringWithUTF8String:keyword.utf8()
+                                 .get_data()]; // Converte para NSString
+    [keywordsNSArray
+        addObject:nsKeyword]; // Adiciona o NSString no NSMutableArray
+  }
+
+  request.keywords = keywordsNSArray;
+
+  return request;
 }
 
-+ (GADRequest *)convertDictionaryToGADRequest:(Dictionary)adRequestDictionary withKeywords:(PackedStringArray)keywords{
-    GADRequest *request = [GADRequest request];
-    String googleRequestAgent = adRequestDictionary["google_request_agent"];
++ (NSDictionary *)convertDictionaryToNSDictionary:(Dictionary)extrasParameters {
+  NSMutableDictionary *nsDictionary = [NSMutableDictionary dictionary];
 
-    NSString *requestAgentNSString = [NSString stringWithUTF8String:googleRequestAgent.utf8().get_data()];
-        
-    request.requestAgent = requestAgentNSString;
-    NSLog(@"requestAgentNSString: %@", requestAgentNSString);
+  Array keys = extrasParameters.keys();
+  int size = keys.size();
+  for (int i = 0; i < size; ++i) {
+    Variant key = keys[i];
+    Variant value = extrasParameters[key];
 
-    Dictionary mediationExtras = adRequestDictionary["mediation_extras"];
+    NSString *nsKey =
+        [NSString stringWithUTF8String:((String)key).utf8().get_data()];
+    id nsValue = nil;
 
-    for (int i = 0; i < mediationExtras.size(); i++) {
-        Dictionary extraDictionary = mediationExtras[i];
-        String className = extraDictionary["class_name"];
-
-        id<AdNetworkExtras> extra = [[NSClassFromString([NSString stringWithUTF8String:className.utf8().get_data()]) alloc] init];
-        if (extra){
-            Dictionary extras = extraDictionary["extras"];
-            [request registerAdNetworkExtras:[extra buildExtras:extras]];
-            NSLog(@"successful added mediation extras for class_name: %@", [NSString stringWithUTF8String:className.utf8().get_data()]);
-        }
-        else{
-            NSLog(@"mediation class_name doesn't exists: %@", [NSString stringWithUTF8String:className.utf8().get_data()]);
-        }
+    if (value.get_type() == Variant::NIL) {
+      nsValue = [NSNull null];
+    } else if (value.get_type() == Variant::DICTIONARY) {
+      nsValue = [GodotDictionaryToObject
+          convertDictionaryToNSDictionary:(Dictionary)value];
+    } else if (value.get_type() == Variant::INT ||
+               value.get_type() == Variant::FLOAT) {
+      nsValue = [NSNumber numberWithDouble:(double)value];
+    } else if (value.get_type() == Variant::BOOL) {
+      nsValue = [NSNumber numberWithBool:(bool)value];
+    } else {
+      nsValue =
+          [NSString stringWithUTF8String:((String)value).utf8().get_data()];
     }
-    
-    Dictionary extrasDictionary = adRequestDictionary["extras"];
 
-    GADExtras *extras = [[GADExtras alloc] init];
-    extras.additionalParameters = [GodotDictionaryToObject convertDictionaryToNSDictionary:extrasDictionary];
-    [request registerAdNetworkExtras:extras];
-    
-    NSMutableArray<NSString *> *keywordsNSArray = [NSMutableArray array];
-
-    for (int i = 0; i < keywords.size(); ++i) {
-        String keyword = keywords[i];
-        NSString *nsKeyword = [NSString stringWithUTF8String:keyword.utf8().get_data()]; // Converte para NSString
-        [keywordsNSArray addObject:nsKeyword]; // Adiciona o NSString no NSMutableArray
+    if (nsValue) {
+      [nsDictionary setValue:nsValue forKey:nsKey];
     }
-    
-    request.keywords = keywordsNSArray;
+  }
 
-    return request;
+  return nsDictionary;
 }
 
-+ (NSDictionary *)convertDictionaryToNSDictionary:(Dictionary)extrasParameters{
-    NSMutableDictionary *nsDictionary = [NSMutableDictionary dictionary];
++ (GADServerSideVerificationOptions *)
+    convertDictionaryToGADServerSideVerificationOptions:
+        (Dictionary)serverSideVerificationOptionsDictionary {
+  GADServerSideVerificationOptions *options =
+      [[GADServerSideVerificationOptions alloc] init];
 
-    Array keys = extrasParameters.keys();
-    int size = keys.size();
-    for (int i = 0; i < size; ++i) {
-        String key = keys[i];
-        String value = extrasParameters[key];
-        NSString *nsKey = [NSString stringWithUTF8String:key.utf8().get_data()];
-        NSString *nsValue = [NSString stringWithUTF8String:value.utf8().get_data()];
+  String custom_data = serverSideVerificationOptionsDictionary["custom_data"];
+  String user_id = serverSideVerificationOptionsDictionary["user_id"];
 
-        [nsDictionary setValue:nsValue forKey:nsKey];
-    }
+  NSString *customData =
+      [NSString stringWithUTF8String:custom_data.utf8().get_data()];
+  NSString *userId = [NSString stringWithUTF8String:user_id.utf8().get_data()];
 
-    return nsDictionary;
-    
+  if (customData && ![customData isEqualToString:@""]) {
+    options.customRewardString = customData;
+  }
+
+  if (userId && ![userId isEqualToString:@""]) {
+    options.userIdentifier = userId;
+  }
+
+  return options;
 }
 
-+ (GADServerSideVerificationOptions *)convertDictionaryToGADServerSideVerificationOptions:(Dictionary)serverSideVerificationOptionsDictionary {
-    GADServerSideVerificationOptions *options = [[GADServerSideVerificationOptions alloc] init];
++ (UMPRequestParameters *)convertDictionaryToUMPRequestParameters:
+    (Dictionary)umpRequestParametersDictionary {
+  UMPRequestParameters *parameters = [[UMPRequestParameters alloc] init];
 
-    String custom_data = serverSideVerificationOptionsDictionary["custom_data"];
-    String user_id = serverSideVerificationOptionsDictionary["user_id"];
+  bool tagForUnderAgeOfConsent =
+      umpRequestParametersDictionary["tag_for_under_age_of_consent"];
+  parameters.tagForUnderAgeOfConsent = tagForUnderAgeOfConsent;
 
-    NSString *customData = [NSString stringWithUTF8String:custom_data.utf8().get_data()];
-    NSString *userId = [NSString stringWithUTF8String:user_id.utf8().get_data()];
+  Dictionary consentDebugSettingsDictionary =
+      umpRequestParametersDictionary["consent_debug_settings"];
 
-    if (customData && ![customData isEqualToString:@""]) {
-        options.customRewardString = customData;
-    }
+  if (!consentDebugSettingsDictionary.is_empty()) {
+    parameters.debugSettings = [GodotDictionaryToObject
+        convertDictionaryToUMPDebugSettings:consentDebugSettingsDictionary];
+  }
 
-    if (userId && ![userId isEqualToString:@""]) {
-        options.userIdentifier = userId;
-    }
-
-    return options;
+  return parameters;
 }
 
-+ (UMPRequestParameters *)convertDictionaryToUMPRequestParameters:(Dictionary)umpRequestParametersDictionary {
-    UMPRequestParameters *parameters = [[UMPRequestParameters alloc] init];
++ (UMPDebugSettings *)convertDictionaryToUMPDebugSettings:
+    (Dictionary)umpDebugSettingsDictionary {
+  UMPDebugSettings *debugSettings = [[UMPDebugSettings alloc] init];
 
-    bool tagForUnderAgeOfConsent = umpRequestParametersDictionary["tag_for_under_age_of_consent"];
-    parameters.tagForUnderAgeOfConsent = tagForUnderAgeOfConsent;
+  int debugGeographyValue = umpDebugSettingsDictionary["debug_geography"];
+  debugSettings.geography = (UMPDebugGeography)debugGeographyValue;
 
-    Dictionary consentDebugSettingsDictionary = umpRequestParametersDictionary["consent_debug_settings"];
+  Dictionary testDeviceHashedIds =
+      umpDebugSettingsDictionary["test_device_hashed_ids"];
+  Array testDeviceIds = testDeviceHashedIds.values();
 
-    if (!consentDebugSettingsDictionary.is_empty()) {
-        parameters.debugSettings = [GodotDictionaryToObject convertDictionaryToUMPDebugSettings:consentDebugSettingsDictionary];
-    }
-    
-    return parameters;
-}
+  NSMutableArray<NSString *> *convertedArray = [NSMutableArray array];
+  for (int i = 0; i < testDeviceIds.size(); i++) {
+    String item = testDeviceIds[i];
+    [convertedArray
+        addObject:[NSString stringWithUTF8String:item.utf8().get_data()]];
+  }
 
-+ (UMPDebugSettings *)convertDictionaryToUMPDebugSettings:(Dictionary)umpDebugSettingsDictionary {
-    UMPDebugSettings *debugSettings = [[UMPDebugSettings alloc] init];
-    
-    int debugGeographyValue = umpDebugSettingsDictionary["debug_geography"];
-    debugSettings.geography = (UMPDebugGeography) debugGeographyValue;
+  debugSettings.testDeviceIdentifiers = convertedArray;
 
-    Dictionary testDeviceHashedIds = umpDebugSettingsDictionary["test_device_hashed_ids"];
-    Array testDeviceIds = testDeviceHashedIds.values();
-
-    NSMutableArray<NSString *> *convertedArray = [NSMutableArray array];
-    for (int i = 0; i < testDeviceIds.size(); i++) {
-        String item = testDeviceIds[i];
-        [convertedArray addObject:[NSString stringWithUTF8String:item.utf8().get_data()]];
-    }
-    
-    debugSettings.testDeviceIdentifiers = convertedArray;
-
-    return debugSettings;
+  return debugSettings;
 }
 
 @end

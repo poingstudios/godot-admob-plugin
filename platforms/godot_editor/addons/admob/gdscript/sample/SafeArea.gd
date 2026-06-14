@@ -27,63 +27,80 @@ const Registry = preload("res://addons/admob/internal/sample_registry.gd")
 var _ad_margin_top := 0.0
 var _ad_margin_bottom := 0.0
 
+
 func _ready() -> void:
 	Registry.safe_area = self
 	_update_safe_area()
 	get_viewport().size_changed.connect(_update_safe_area)
 
+
 func update_ad_overlap(ad_view: AdView) -> void:
 	reset_ad_overlap()
-	
+
 	if not ad_view:
 		return
-		
+
 	var pos := ad_view.ad_position
 	var height := float(ad_view.get_height_in_pixels())
-	
+
 	# Mapping AdPosition enum values to top/bottom margins
-	if pos.value in [AdPosition.Values.TOP, AdPosition.Values.TOP_LEFT, AdPosition.Values.TOP_RIGHT]:
+	if (
+		pos.value
+		in [AdPosition.Values.TOP, AdPosition.Values.TOP_LEFT, AdPosition.Values.TOP_RIGHT]
+	):
 		_ad_margin_top = height
-	elif pos.value in [AdPosition.Values.BOTTOM, AdPosition.Values.BOTTOM_LEFT, AdPosition.Values.BOTTOM_RIGHT]:
+	elif (
+		pos.value
+		in [AdPosition.Values.BOTTOM, AdPosition.Values.BOTTOM_LEFT, AdPosition.Values.BOTTOM_RIGHT]
+	):
 		_ad_margin_bottom = height
-		
+
 	_update_safe_area()
+
 
 func reset_ad_overlap() -> void:
 	_ad_margin_top = 0.0
 	_ad_margin_bottom = 0.0
 	_update_safe_area()
 
+
 func _update_safe_area() -> void:
-	# Only apply safe area on mobile platforms
+	# Apply safe area and ad margins
 	var platform := OS.get_name()
-	if platform != "iOS" and platform != "Android":
-		_apply_margins(0, 0, 0, 0)
-		return
+	var is_mobile := platform == "iOS" or platform == "Android"
 
 	var safe_area := DisplayServer.get_display_safe_area()
 	var window_size := DisplayServer.window_get_size()
-	
+
 	if window_size.x == 0 or window_size.y == 0:
 		return
-		
+
 	# Scale factor calculation to convert physical pixels to logical UI pixels
 	var viewport_size := Vector2(get_viewport().get_visible_rect().size)
 	var scale_factor := viewport_size.y / float(window_size.y)
-	
+	if is_nan(scale_factor) or is_inf(scale_factor) or scale_factor <= 0.0:
+		scale_factor = 1.0
+
 	# DisplayServer returns physical screen coordinates for the safe area
-	var safe_top := float(safe_area.position.y)
-	var safe_left := float(safe_area.position.x)
-	var safe_bottom := float(window_size.y - (safe_area.position.y + safe_area.size.y))
-	var safe_right := float(window_size.x - (safe_area.position.x + safe_area.size.x))
-	
+	var safe_top := 0.0
+	var safe_left := 0.0
+	var safe_bottom := 0.0
+	var safe_right := 0.0
+
+	if is_mobile:
+		safe_top = float(safe_area.position.y)
+		safe_left = float(safe_area.position.x)
+		safe_bottom = float(window_size.y - (safe_area.position.y + safe_area.size.y))
+		safe_right = float(window_size.x - (safe_area.position.x + safe_area.size.x))
+
 	# Apply final margins scaled to the viewport
 	_apply_margins(
-		(safe_top + _ad_margin_top) * scale_factor,
-		safe_left * scale_factor,
-		(safe_bottom + _ad_margin_bottom) * scale_factor,
-		safe_right * scale_factor
+		max(0.0, (safe_top + _ad_margin_top) * scale_factor),
+		max(0.0, safe_left * scale_factor),
+		max(0.0, (safe_bottom + _ad_margin_bottom) * scale_factor),
+		max(0.0, safe_right * scale_factor)
 	)
+
 
 func _apply_margins(top: float, left: float, bottom: float, right: float) -> void:
 	add_theme_constant_override("margin_top", int(top))

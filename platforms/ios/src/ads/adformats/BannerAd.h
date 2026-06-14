@@ -57,6 +57,7 @@ enum class AdPosition {
 - (int)getHeight;
 - (int)getWidthInPixels;
 - (int)getHeightInPixels;
+- (BOOL)isCollapsible;
 - (void)updateBannerPositionForAdPosition:(AdPosition)adPosition;
 - (void)updateBannerPositionForCustomPositionX:(int)x y:(int)y;
 

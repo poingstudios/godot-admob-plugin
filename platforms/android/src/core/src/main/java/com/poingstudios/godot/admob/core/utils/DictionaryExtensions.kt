@@ -39,3 +39,11 @@ fun Dictionary.getFloat(key: String, default: Float = 0f): Float {
 fun Dictionary.getDouble(key: String, default: Double = 0.0): Double {
     return (this[key] as? Number)?.toDouble() ?: default
 }
+
+fun Dictionary.getDictionary(key: String): Dictionary {
+    return this[key] as? Dictionary ?: Dictionary()
+}
+
+fun Dictionary.getBool(key: String, default: Boolean = false): Boolean {
+    return this[key] as? Boolean ?: default
+}

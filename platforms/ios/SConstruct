@@ -24,7 +24,7 @@ opts.Add(EnumVariable('arch', "Compilation Architecture", '', ['', 'arm64', 'arm
 opts.Add(BoolVariable('simulator', "Compilation platform", 'no'))
 opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
 opts.Add(PathVariable('target_path', 'The path where the lib is installed.', 'bin/static_libraries/'))
-opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle']))
+opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource']))
 
 # Updates the environment with the option variables.
 opts.Update(env)
@@ -77,6 +77,12 @@ elif env['plugin'] == 'meta':
 elif env['plugin'] == 'vungle':
     env.Append(FRAMEWORKPATH=[spm_artifacts + '/vungleadssdk-swiftpackagemanager/VungleAdsSDK/VungleAdsSDK.xcframework/' + xcframework_directory])
     env.Append(FRAMEWORKPATH=[spm_artifacts + '/googleads-mobile-ios-mediation-liftoffmonetize/LiftoffMonetizeAdapter/LiftoffMonetizeAdapter.xcframework/' + xcframework_directory])
+elif env['plugin'] == 'ironsource':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-ironsource/IronSourceAdapter/IronSourceAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/unity-mediation-iads-swift-package/IronSourceSDK/IronSource.xcframework/' + xcframework_directory,
+        spm_artifacts + '/unity-ad-quality-swift-package/AdQuality/IronSourceAdQualitySDK.xcframework/' + xcframework_directory
+    ])
 
 try:
     sdk_path = decode_utf8(subprocess.check_output(['xcrun', '--sdk', sdk_name, '--show-sdk-path']).strip())
@@ -148,6 +154,7 @@ if env['plugin'] == 'ads':
     sources = Glob(build_dir + '/' + env['plugin'] + '/*.mm')
     sources.append(Glob(build_dir + '/' + env['plugin'] + '/adformats/*.mm'))
     sources.append(Glob(build_dir + '/' + env['plugin'] + '/helpers/*.mm'))
+    sources.append(Glob(build_dir + '/' + env['plugin'] + '/helpers/NativeTemplates/*.mm'))
     sources.append(Glob(build_dir + '/' + env['plugin'] + '/converters/*.mm'))
     sources.append(Glob(build_dir + '/' + env['plugin'] + '/ump/*.mm'))
 else:
