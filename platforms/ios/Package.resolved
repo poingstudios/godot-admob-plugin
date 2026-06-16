@@ -1,6 +1,24 @@
 {
   "pins" : [
     {
+      "identity" : "applovin-max-swift-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AppLovin/AppLovin-MAX-Swift-Package.git",
+      "state" : {
+        "revision" : "ab755a46ff19a9a578e709aeee49653a9239f225",
+        "version" : "13.6.3"
+      }
+    },
+    {
+      "identity" : "googleads-mobile-ios-mediation-applovin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-applovin.git",
+      "state" : {
+        "revision" : "beec586eda7b4abb177b3fda4ee1e9c9a0663b6e",
+        "version" : "13.6.300"
+      }
+    },
+    {
       "identity" : "googleads-mobile-ios-mediation-ironsource",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-ironsource.git",

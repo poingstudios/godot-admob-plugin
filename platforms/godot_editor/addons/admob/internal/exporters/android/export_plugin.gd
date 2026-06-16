@@ -28,8 +28,8 @@ const ProjectSettingsService := preload(
 	"res://addons/admob/internal/services/project_settings_service.gd"
 )
 
-const KNOWN_LIBS: Array[String] = ["ads", "meta", "vungle", "ironsource"]
-const MEDIATION_LIBS: Array[String] = ["meta", "vungle", "ironsource"]
+const KNOWN_LIBS: Array[String] = ["ads", "meta", "vungle", "ironsource", "applovin"]
+const MEDIATION_LIBS: Array[String] = ["meta", "vungle", "ironsource", "applovin"]
 
 
 func _get_name() -> String:

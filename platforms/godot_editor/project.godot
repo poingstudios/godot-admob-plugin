@@ -13,6 +13,7 @@ config_version=5
 android/mediation/meta=true
 android/mediation/vungle=true
 android/mediation/ironsource=true
+android/mediation/applovin=true
 
 [animation]
 
