@@ -1,0 +1,19 @@
+[config]
+name="AdMob BidMachine"
+binary="poing-godot-admob/bin/poing-godot-admob-bidmachine.xcframework"
+
+initialization="register_poing_godot_admob_bidmachine_types"
+deinitialization="unregister_poing_godot_admob_bidmachine_types"
+
+[dependencies]
+linked=[]
+embedded=[]
+system=[]
+capabilities=[]
+files=[]
+linker_flags=[]
+admob_packages=[
+    "https://github.com/googleads/googleads-mobile-ios-mediation-bidmachine.git@exact:3.7.000|BidMachineAdapterTarget"
+]
+
+[plist]

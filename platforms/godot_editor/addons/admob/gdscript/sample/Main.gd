@@ -82,6 +82,11 @@ func _setup_mediation_adapters() -> void:
 	AppLovin.set_do_not_sell(false)
 	AppLovin.set_muted(true)
 
+	# BidMachine setup example
+	BidMachine.set_subject_to_gdpr(true)
+	BidMachine.set_consent_status(true)
+	BidMachine.set_us_privacy_string("1YNN")
+
 
 func _on_get_initialization_status_pressed() -> void:
 	var status := MobileAds.get_initialization_status()

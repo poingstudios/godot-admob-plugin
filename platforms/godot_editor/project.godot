@@ -14,6 +14,7 @@ android/mediation/meta=true
 android/mediation/vungle=true
 android/mediation/ironsource=true
 android/mediation/applovin=true
+android/mediation/bidmachine=true
 
 [animation]
 

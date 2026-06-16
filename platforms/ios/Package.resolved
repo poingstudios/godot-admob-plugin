@@ -10,12 +10,30 @@
       }
     },
     {
+      "identity" : "bidmachine-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bidmachine/BidMachine-SPM.git",
+      "state" : {
+        "revision" : "1a70c03511541528c5950f214d04bf02e8293f95",
+        "version" : "3.7.0"
+      }
+    },
+    {
       "identity" : "googleads-mobile-ios-mediation-applovin",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-applovin.git",
       "state" : {
         "revision" : "beec586eda7b4abb177b3fda4ee1e9c9a0663b6e",
         "version" : "13.6.300"
+      }
+    },
+    {
+      "identity" : "googleads-mobile-ios-mediation-bidmachine",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-bidmachine.git",
+      "state" : {
+        "revision" : "d9aec35a3e5a3c41e325c53a46c6ebab8678273f",
+        "version" : "3.7.0"
       }
     },
     {
@@ -43,6 +61,15 @@
       "state" : {
         "revision" : "52622d310c2f147684eeab5c07df82b95bd3bf9f",
         "version" : "6.20.100"
+      }
+    },
+    {
+      "identity" : "omsdk-appodeal-ios-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bidmachine/OMSDK-Appodeal-iOS-Package",
+      "state" : {
+        "revision" : "4bf273b11b7e54055272330ee2a2329b0f1d19e9",
+        "version" : "1.6.3"
       }
     },
     {

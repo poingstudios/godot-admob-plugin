@@ -24,7 +24,7 @@ opts.Add(EnumVariable('arch', "Compilation Architecture", '', ['', 'arm64', 'arm
 opts.Add(BoolVariable('simulator', "Compilation platform", 'no'))
 opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
 opts.Add(PathVariable('target_path', 'The path where the lib is installed.', 'bin/static_libraries/'))
-opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource', 'applovin']))
+opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource', 'applovin', 'bidmachine']))
 
 # Updates the environment with the option variables.
 opts.Update(env)
@@ -87,6 +87,12 @@ elif env['plugin'] == 'applovin':
     env.Append(FRAMEWORKPATH=[
         spm_artifacts + '/googleads-mobile-ios-mediation-applovin/AppLovinAdapter/AppLovinAdapter.xcframework/' + xcframework_directory,
         spm_artifacts + '/applovin-max-swift-package/AppLovinSDK/AppLovinSDK.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'bidmachine':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-bidmachine/BidMachineAdapter/GoogleBidMachineAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/bidmachine-spm/BidMachine/BidMachine.xcframework/' + xcframework_directory,
+        spm_artifacts + '/omsdk-appodeal-ios-package/OMSDK_Appodeal/OMSDK_Appodeal.xcframework/' + xcframework_directory
     ])
 
 try:
