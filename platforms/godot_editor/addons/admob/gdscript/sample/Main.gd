@@ -77,6 +77,11 @@ func _setup_mediation_adapters() -> void:
 	IronSource.set_metadata("do_not_sell", "false")
 	IronSource.set_user_id("unique_user_id_123")
 
+	# AppLovin setup example
+	AppLovin.set_has_user_consent(true)
+	AppLovin.set_do_not_sell(false)
+	AppLovin.set_muted(true)
+
 
 func _on_get_initialization_status_pressed() -> void:
 	var status := MobileAds.get_initialization_status()

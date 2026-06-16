@@ -27,6 +27,7 @@ using PoingStudios.AdMob.Api.Listeners;
 using PoingStudios.AdMob.Mediation.Extras.Meta;
 using PoingStudios.AdMob.Mediation.Extras.Vungle;
 using PoingStudios.AdMob.Mediation.Extras.IronSource;
+using PoingStudios.AdMob.Mediation.Extras.AppLovin;
 using PoingStudios.AdMob.Sample;
 
 public partial class MainCSharpExample : Control, ISampleLogger
@@ -100,6 +101,11 @@ public partial class MainCSharpExample : Control, ISampleLogger
 		IronSource.SetConsent(true);
 		IronSource.SetMetaData("do_not_sell", "false");
 		IronSource.SetUserId("unique_user_id_123");
+
+		// AppLovin setup example
+		AppLovin.SetHasUserConsent(true);
+		AppLovin.SetDoNotSell(false);
+		AppLovin.SetMuted(true);
 	}
 
 	private void _OnGetInitializationStatusPressed()
