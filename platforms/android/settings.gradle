@@ -12,6 +12,9 @@ dependencyResolutionManagement {
         mavenCentral()
         maven { url 'https://android-sdk.is.com/' }
         maven { url "https://artifactory.bidmachine.io/bidmachine" }
+        flatDir {
+            dirs 'godot-lib'
+        }
     }
 }
 

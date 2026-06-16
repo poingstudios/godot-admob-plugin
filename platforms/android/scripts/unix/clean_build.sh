@@ -31,6 +31,7 @@ fi
 CURRENT_GODOT_VERSION="$1"
 
 chmod +x ./scripts/unix/download_godot.sh
+./scripts/unix/download_godot.sh "$CURRENT_GODOT_VERSION"
 ./gradlew clean
 ./gradlew build -PgodotVersion="$CURRENT_GODOT_VERSION"
 
