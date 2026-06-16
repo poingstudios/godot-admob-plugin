@@ -23,7 +23,7 @@ This document is based on:
 
 ## Initialize the Mobile Ads SDK
 
-The quick start guide provides instructions on how to [initialize the Mobile Ads SDK](../README.md#initialize-the-google-mobile-ads-sdk). During this initialization process, mediation and bidding adapters are also initialized. It's crucial to wait for this initialization to complete before loading ads to ensure that every ad network fully participates in the first ad request.
+The quick start guide provides instructions on how to [initialize the Mobile Ads SDK](../index.md#initialize-the-google-mobile-ads-sdk). During this initialization process, mediation and bidding adapters are also initialized. It's crucial to wait for this initialization to complete before loading ads to ensure that every ad network fully participates in the first ad request.
 
 The following sample code demonstrates how you can verify the initialization status of each adapter before initiating an ad request.
 

@@ -28,7 +28,7 @@ The AdMob mediation adapter for Meta Audience Network has the following capabili
 [^1]: Meta Audience Network became [bidding only](https://www.facebook.com/audiencenetwork/resources/blog/audience-network-to-become-bidding-only-beginning-with-ios-in-2021) in 2021.
 
 ## Prerequisites
-- Complete the [Get started guide](../../README.md)
+- Complete the [Get started guide](../../index.md)
 - Complete the mediation [Get started guide](../get_started.md)
 
 ## Step 1: Set up Meta Audience Network
@@ -46,7 +46,7 @@ We recommend following the tutorial for [Android](https://developers.google.com/
     ![android-meta](../../assets/android/meta.png)
 
 === "iOS"
-    The Meta Audience Network adapter is **already included** in the standard iOS plugin download. If you followed the [iOS Installation guide](../../README.md#download-install), you should already have the necessary files (`poing-godot-admob-meta.gdip` and related frameworks) in your `res://ios/plugins/` directory.
+    The Meta Audience Network adapter is **already included** in the standard iOS plugin download. If you followed the [iOS Installation guide](../../index.md#download-install), you should already have the necessary files (`poing-godot-admob-meta.gdip` and related frameworks) in your `res://ios/plugins/` directory.
 
 ## Step 4: Enable the plugin
 

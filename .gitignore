@@ -48,3 +48,6 @@ tmp/
 .antigravitycli/
 platforms/godot_editor/addons/admob/csharp/.gdignore
 
+# MkDocs local development version helper
+docs/versions.json
+

@@ -12,7 +12,7 @@ This document is based on:
 
 
 ## Prerequisites
-- Complete the [Get started guide](../../../README.md)
+- Complete the [Get started guide](../../../index.md)
 
 ## Implementation Notes for Adaptive Banners in Godot
 

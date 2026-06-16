@@ -7,7 +7,7 @@ This document is based on:
 - [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/interstitial)
 
 ## Prerequisites
-- Complete the [Get started guide](../README.md)
+- Complete the [Get started guide](../index.md)
 
 ## Always test with test ads
 

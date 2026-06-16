@@ -11,7 +11,7 @@ This document is based on:
 
 ## Prerequisites
 
-- Complete the [Get started guide](../../README.md)
+- Complete the [Get started guide](../../index.md)
 - If you're working on GDPR-related requirements, read [How IAB requirements affect EU consent messages](https://support.google.com/admob/answer/10207733).
 
 ## Create a message type
