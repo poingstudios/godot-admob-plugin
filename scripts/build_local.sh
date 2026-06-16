@@ -31,9 +31,9 @@ show_help() {
     echo "  <godot_version>  The Godot version (e.g., 4.6.1 or 4.7-beta1)"
     echo ""
     echo "Examples:"
-    echo "  ./scripts/build_local.sh all 4.6.1"
-    echo "  ./scripts/build_local.sh ios 4.7-beta1"
-    echo "  ./scripts/build_local.sh android 4.6.1"
+    echo "  ./scripts/build_local.sh all 4.6.3"
+    echo "  ./scripts/build_local.sh ios 4.7-rc3"
+    echo "  ./scripts/build_local.sh android 4.6.3"
 }
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
@@ -54,7 +54,10 @@ DEST="$ROOT_DIR/platforms/godot_editor"
 
 build_android() {
     echo ">>> Building Android ($GODOT_VERSION)..."
-    cd "$ROOT_DIR/platforms/android" && chmod +x gradlew && \
+    cd "$ROOT_DIR/platforms/android" && \
+    chmod +x ./scripts/unix/download_godot.sh && \
+    ./scripts/unix/download_godot.sh "$GODOT_VERSION" && \
+    chmod +x gradlew && \
     ./gradlew build -PgodotVersion="$GODOT_VERSION" && \
     ./gradlew exportFiles -PpluginExportPath="$DEST/addons/admob/android/bin" || exit 1
 }
