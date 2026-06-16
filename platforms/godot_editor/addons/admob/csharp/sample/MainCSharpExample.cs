@@ -28,6 +28,7 @@ using PoingStudios.AdMob.Mediation.Extras.Meta;
 using PoingStudios.AdMob.Mediation.Extras.Vungle;
 using PoingStudios.AdMob.Mediation.Extras.IronSource;
 using PoingStudios.AdMob.Mediation.Extras.AppLovin;
+using PoingStudios.AdMob.Mediation.Extras.BidMachine;
 using PoingStudios.AdMob.Sample;
 
 public partial class MainCSharpExample : Control, ISampleLogger
@@ -106,6 +107,11 @@ public partial class MainCSharpExample : Control, ISampleLogger
 		AppLovin.SetHasUserConsent(true);
 		AppLovin.SetDoNotSell(false);
 		AppLovin.SetMuted(true);
+
+		// BidMachine setup example
+		BidMachine.SetSubjectToGdpr(true);
+		BidMachine.SetConsentStatus(true);
+		BidMachine.SetUsPrivacyString("1YNN");
 	}
 
 	private void _OnGetInitializationStatusPressed()

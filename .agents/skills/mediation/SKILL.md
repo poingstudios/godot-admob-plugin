@@ -130,6 +130,9 @@ Generate and package all binaries into the editor addon directory using the main
 
 ## 🚫 Constraints & Security
 - **No Browser Usage**: Do NOT launch browser subagents to research versions or view documentation. Always use terminal-based commands (such as `curl`, `git ls-remote`, or the native `read_url_content` tool) to inspect packages, repositories, or documentation pages.
-- **Consult Official Documentation**: Before integrating any new mediation network, read the official Google AdMob mediation documentation for Android & iOS to ensure version compatibility.
+- **Consult Official Documentation**: Before integrating any new mediation network, read the official Google AdMob mediation documentation for Android & iOS to ensure version compatibility. The URLs follow this pattern (replace `<network_name>` with the target mediation name in lowercase, e.g., `vungle`, `bidmachine`):
+  - Android: `https://developers.google.com/admob/android/mediation/<network_name>`
+  - iOS: `https://developers.google.com/admob/ios/mediation/<network_name>`
+- **Dependency Coordinates**: Consult the dependency version tables in the official guides to retrieve the correct adapter coordinate (e.g., `com.google.ads.mediation:<network_name>:<version>`).
 - **Never Commit**: Do not commit code or create branches unless explicitly instructed by the user.
 

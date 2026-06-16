@@ -11,6 +11,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url 'https://android-sdk.is.com/' }
+        maven { url "https://artifactory.bidmachine.io/bidmachine" }
     }
 }
 
@@ -21,3 +22,4 @@ include ':src:mediation:vungle'
 include ':src:mediation:meta'
 include ':src:mediation:ironsource'
 include ':src:mediation:applovin'
+include ':src:mediation:bidmachine'
