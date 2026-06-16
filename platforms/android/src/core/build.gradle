@@ -39,13 +39,13 @@ dependencies {
     }
 
     def localGodotLib = rootProject.file("godot-lib/godot-lib.aar")
+    def godotVersion    = project.findProperty("godotVersion") ?: "4.7.0"
+    def releaseType     = project.findProperty("releaseType") ?: "stable"
+
     if (localGodotLib.exists()) {
         println "Using local godot-lib from ${localGodotLib.absolutePath}"
         api(name: 'godot-lib', ext: 'aar')
     } else {
-        def godotVersion    = project.findProperty("godotVersion") ?: "4.7.0"
-        def releaseType     = project.findProperty("releaseType") ?: "stable"
-
         def fullVersion = "$godotVersion.$releaseType"
         println "Using remote godot-lib on version $fullVersion"
 

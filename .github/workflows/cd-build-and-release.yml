@@ -43,6 +43,8 @@ jobs:
     - name: Build Plugins
       working-directory: platforms/android
       run: |
+        chmod +x ./scripts/unix/download_godot.sh
+        ./scripts/unix/download_godot.sh ${{matrix.GODOT_VERSIONS}}
         chmod +x ./gradlew
         ./gradlew build -PgodotVersion=${{matrix.GODOT_VERSIONS}}
 

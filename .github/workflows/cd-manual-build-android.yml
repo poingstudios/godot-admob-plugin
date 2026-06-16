@@ -7,7 +7,7 @@ on:
         description: 'Tag of the existing release (e.g., v4.1.0). Required if uploading to release.'
         required: false
       godot_version:
-        description: 'Godot version to build for (e.g., 4.6.0). Note: Android typically only supports stable versions from Maven.'
+        description: 'Godot version to build for (e.g., 4.6.3 or 4.7-rc3)'
         required: true
       upload_to_release:
         description: 'Upload to GitHub Release? (If false, saves as workflow artifact only)'
@@ -55,6 +55,8 @@ jobs:
     - name: Build Plugins
       working-directory: platforms/android
       run: |
+        chmod +x ./scripts/unix/download_godot.sh
+        ./scripts/unix/download_godot.sh ${{ needs.setup.outputs.godot_version }}
         chmod +x ./gradlew
         ./gradlew build -PgodotVersion=${{ needs.setup.outputs.godot_version }}
 
