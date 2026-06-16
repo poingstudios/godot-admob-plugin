@@ -6,7 +6,7 @@ Use `set_app_volume()` to set the relative volume (0.0 to 1.0) and `set_app_mute
 
 # Prerequisites
 
-- Complete the [Get started guide](README.md)
+- Complete the [Get started guide](index.md)
 - Use Godot v4.2 or higher
 
 # How to use

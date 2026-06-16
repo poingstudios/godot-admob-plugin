@@ -8,13 +8,13 @@ theme:
     - content.tabs.link
     - navigation.instant
     - navigation.instant.prefetch
-    - navigation.indexes
     - navigation.sections
     - navigation.top
     - search.suggest
     - search.highlight
     - content.code.annotation
     - content.code.copy
+    - navigation.tabs
   name: material
   custom_dir: docs/overrides
   favicon: assets/icon.ico

@@ -8,7 +8,7 @@ On iOS, the default value is `false`.
 
 # Prerequisites
 
-- Complete the [Get started guide](README.md)
+- Complete the [Get started guide](index.md)
 - Use Godot v4.2 or higher
 
 # How to use

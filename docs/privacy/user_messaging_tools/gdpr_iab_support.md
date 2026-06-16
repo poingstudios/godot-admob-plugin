@@ -16,7 +16,7 @@ This document is based on:
 
 By default, the Google Mobile Ads SDK initializes app measurement and begins sending user-level event data to Google immediately when the app starts. This initialization behavior ensures that you can enable AdMob user metrics without making additional code changes.
 
-However, if your app requires user consent before these events can be sent, you can delay app measurement until you explicitly [initialize the Mobile Ads SDK](../../README.md) or load an ad.
+However, if your app requires user consent before these events can be sent, you can delay app measurement until you explicitly [initialize the Mobile Ads SDK](../../index.md) or load an ad.
 
 === "Android"
     To delay app measurement, add the following `<meta-data>` tag in your `res://android/build/AndroidManifest.xml`.
