@@ -157,3 +157,6 @@ nav:
     - Classes:
       - AdView: reference/classes/AdView.md
     - Enums: reference/enums.md
+
+hooks:
+  - docs/hooks.py
