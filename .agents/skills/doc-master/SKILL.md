@@ -22,7 +22,10 @@ Keep all project documentation in sync with the codebase.
 - Ensure Android and iOS setup steps are verified when a new dependency is added to `build.gradle` or `Package.swift`.
 
 ### 4. Localization Parity
-- **1:1 Structure**: Any localized/translated documentation page (e.g., `.pt-BR.md`) MUST have the exact same headings, content structure, code blocks, anchors, and internal layout as the default English page.
+- **Primary Source**: English (`en`) is the source of truth. All new pages and layout changes must start in English first before translating.
+- **Supported Locales**: The current target locales are English (`en`), Brazilian Portuguese (`pt-BR`), Spanish (`es`), Simplified Chinese (`zh`), and Japanese (`ja`).
+- **1:1 Structure**: Any localized/translated documentation page (e.g., `.pt-BR.md`, `.es.md`, `.zh.md`, `.ja.md`) MUST have the exact same headings, content structure, code blocks, anchors, and internal layout as the default English page.
+- **Custom Overrides**: When adding support for a new locale, always define the translations for the announcement header banner and footer copyrights in `docs/overrides/partials/translations.html`.
 - **Synchronous Updates**: When adding new features, sections, or correcting code examples in the default `.md` files, also apply the same updates immediately to all translated files of that page.
 
 ## 🛠️ Documentation Tools
@@ -33,3 +36,4 @@ Keep all project documentation in sync with the codebase.
 - Never commit code changes without checking if they impact the documentation.
 - Prioritize updating the `README.md` for any breaking installation changes.
 - Ensure translated documentation files have 1:1 structural parity with their English counterparts.
+- **Continuous Improvement**: When finding any new documentation pattern, improvement, or layout requirement, update this `SKILL.md` immediately with the new findings to keep all developers and AI agents aligned.
