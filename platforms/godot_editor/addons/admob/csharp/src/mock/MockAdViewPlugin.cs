@@ -366,7 +366,7 @@ namespace PoingStudios.AdMob.Core
 				child.QueueFree();
 			}
 
-			// Add floating Test Ad badge
+			// Add floating Mock Ad badge
 			var testAdLabel = new Label { Text = "Mock Ad", HorizontalAlignment = HorizontalAlignment.Center };
 			testAdLabel.AddThemeColorOverride("font_color", Colors.White);
 			testAdLabel.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(10 * scaleFactor)));

@@ -363,7 +363,7 @@ namespace PoingStudios.AdMob.Core
 				vboxText.AddThemeConstantOverride("separation", 0);
 				hboxTop.AddChild(vboxText);
 
-				var title = new Label { Text = "Test Ad : Flood-It!" };
+				var title = new Label { Text = "Mock Ad : Flood-It!" };
 				float titleFontSize = Mathf.Clamp(heightDp * 0.18f, 8f, 14f);
 				_applyTextStyle(title, primaryStyle, new Color(0.1f, 0.1f, 0.1f), titleFontSize, scaleFactor);
 				vboxText.AddChild(title);
@@ -561,7 +561,7 @@ namespace PoingStudios.AdMob.Core
 				metaVbox.AddThemeConstantOverride("separation", (int)Mathf.Round(2 * scaleFactor));
 				metaHbox.AddChild(metaVbox);
 
-				var title = new Label { Text = "Test Ad : Flood-It!" };
+				var title = new Label { Text = "Mock Ad : Flood-It!" };
 				_applyTextStyle(title, primaryStyle, new Color(0.1f, 0.1f, 0.1f), 14.0f, scaleFactor);
 				metaVbox.AddChild(title);
 

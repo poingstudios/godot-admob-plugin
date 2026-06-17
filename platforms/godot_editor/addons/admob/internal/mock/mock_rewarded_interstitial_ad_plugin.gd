@@ -224,7 +224,7 @@ func _update_ui(uid: int) -> void:
 	top_control.add_child(test_ad_pill)
 
 	var test_ad_lbl := Label.new()
-	test_ad_lbl.text = "Test Ad"
+	test_ad_lbl.text = "Mock Ad"
 	test_ad_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	test_ad_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	test_ad_lbl.add_theme_color_override("font_color", Color.WHITE)

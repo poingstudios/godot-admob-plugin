@@ -287,7 +287,7 @@ namespace PoingStudios.AdMob.Core
 
 			var testAdLbl = new Label
 			{
-				Text = "Test Ad",
+				Text = "Mock Ad",
 				HorizontalAlignment = HorizontalAlignment.Center,
 				VerticalAlignment = VerticalAlignment.Center
 			};

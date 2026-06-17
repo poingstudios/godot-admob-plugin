@@ -165,7 +165,7 @@ namespace PoingStudios.AdMob.Core
 
 			var testAdLbl = new Label
 			{
-				Text = "Test Ad",
+				Text = "Mock Ad",
 				HorizontalAlignment = HorizontalAlignment.Center,
 				VerticalAlignment = VerticalAlignment.Center
 			};
@@ -252,7 +252,7 @@ namespace PoingStudios.AdMob.Core
 
 			var titleLbl = new Label
 			{
-				Text = "This is an\ninterstitial test ad.",
+				Text = "This is an\ninterstitial mock ad.",
 				HorizontalAlignment = HorizontalAlignment.Center
 			};
 			titleLbl.AddThemeColorOverride("font_color", new Color(0.12f, 0.12f, 0.12f));
