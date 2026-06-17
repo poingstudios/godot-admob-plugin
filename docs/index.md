@@ -130,49 +130,67 @@ If you are utilizing mediation, it's essential to wait for the completion handle
 The Google Mobile Ads SDK is now successfully imported, and you are prepared to integrate an ad into your app. AdMob provides a variety of ad formats, allowing you to select the one that aligns best with your app's user experience.
 
 ### App Open
-<div class="image-text-container">
-  <img src="https://developers.google.com/static/admob/images/format-app-open.svg" alt="app_open">
-  <p>App open is an ad format that appears when users open or switch back to your app. The ad overlays the loading screen.</p>
+<div class="image-text-container" markdown="1">
+
+![app_open](https://developers.google.com/static/admob/images/format-app-open.svg)
+
+App open is an ad format that appears when users open or switch back to your app. The ad overlays the loading screen.
+
 </div>
 
 [Implement app open ads](ad_formats/app_open.md){ .md-button .md-button--primary }
 
 ### Banner
-<div class="image-text-container">
-  <img src="assets/ad_formats/banner.png" alt="banner">
-  <p>Banner ads are rectangular advertisements, consisting of either images or text, that are integrated into an app's layout. These ads remain on the screen while users engage with the app and can automatically refresh after a designated time interval. If you're new to mobile advertising, banner ads provide an excellent starting point for your ad implementation journey.</p>
+<div class="image-text-container" markdown="1">
+
+![banner](assets/ad_formats/banner.png)
+
+Banner ads are rectangular advertisements, consisting of either images or text, that are integrated into an app's layout. These ads remain on the screen while users engage with the app and can automatically refresh after a designated time interval. If you're new to mobile advertising, banner ads provide an excellent starting point for your ad implementation journey.
+
 </div>
 
 [Implement banner ads](ad_formats/banner/get_started.md){ .md-button .md-button--primary }
 
 ### Interstitial
-<div class="image-text-container">
-  <img src="assets/ad_formats/interstitial.png" alt="interstitial">
-  <p>Interstitial ads are expansive, full-screen advertisements that overlay an app's interface and persist until they are closed by the user. They are most effective when strategically placed during natural pauses in the app's execution, such as between levels of a game or immediately after the completion of a task.</p>
+<div class="image-text-container" markdown="1">
+
+![interstitial](assets/ad_formats/interstitial.png)
+
+Interstitial ads are expansive, full-screen advertisements that overlay an app's interface and persist until they are closed by the user. They are most effective when strategically placed during natural pauses in the app's execution, such as between levels of a game or immediately after the completion of a task.
+
 </div>
 
 [Implement interstitial ads](ad_formats/interstitial.md){ .md-button .md-button--primary }
 
 ### Native Overlay
-<div class="image-text-container">
-  <img src="https://developers.google.com/static/admob/images/format-native.svg" alt="native_overlay">
-  <p>Native Overlay ads allow you to display ads that are styled to fit your app's look and feel, using pre-designed templates on top of your app content. They support customization for colors, fonts, and layout options while keeping integration simple.</p>
+<div class="image-text-container" markdown="1">
+
+![native_overlay](https://developers.google.com/static/admob/images/format-native.svg)
+
+Native Overlay ads allow you to display ads that are styled to fit your app's look and feel, using pre-designed templates on top of your app content. They support customization for colors, fonts, and layout options while keeping integration simple.
+
 </div>
 
 [Implement native overlay ads](ad_formats/native_overlay.md){ .md-button .md-button--primary }
 
 ### Rewarded
-<div class="image-text-container">
-  <img src="assets/ad_formats/rewarded.png" alt="rewarded">
-  <p>Rewarded video ads are immersive, full-screen video advertisements that provide users with the choice to watch them entirely. In return for their time and attention, users receive in-app rewards or benefits.</p>
+<div class="image-text-container" markdown="1">
+
+![rewarded](assets/ad_formats/rewarded.png)
+
+Rewarded video ads are immersive, full-screen video advertisements that provide users with the choice to watch them entirely. In return for their time and attention, users receive in-app rewards or benefits.
+
 </div>
 
 [Implement rewarded ads](ad_formats/rewarded.md){ .md-button .md-button--primary }
 
 ### Rewarded Interstitial
-<div class="image-text-container">
-  <img src="assets/ad_formats/rewarded_interstitial.png" alt="rewarded_interstitial">
-  <p>A Rewarded Interstitial is a specific form of incentivized ad format that allows you to provide rewards in exchange for ads that appear automatically during natural app transitions. Unlike regular rewarded ads, users are not obligated to actively opt in to view a Rewarded Interstitial; they are seamlessly integrated into the app experience.</p>
+<div class="image-text-container" markdown="1">
+
+![rewarded_interstitial](assets/ad_formats/rewarded_interstitial.png)
+
+A Rewarded Interstitial is a specific form of incentivized ad format that allows you to provide rewards in exchange for ads that appear automatically during natural app transitions. Unlike regular rewarded ads, users are not obligated to actively opt in to view a Rewarded Interstitial; they are seamlessly integrated into the app experience.
+
 </div>
 
 [Implement rewarded interstitial ads](ad_formats/rewarded_interstitial.md){ .md-button .md-button--primary }

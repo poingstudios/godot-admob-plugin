@@ -20,6 +20,10 @@ Keep all project documentation in sync with the codebase.
 ### 3. Cross-Platform Docs
 - Ensure Android and iOS setup steps are verified when a new dependency is added to `build.gradle` or `Package.swift`.
 
+### 4. Localization Parity
+- **1:1 Structure**: Any localized/translated documentation page (e.g., `.pt-BR.md`) MUST have the exact same headings, content structure, code blocks, anchors, and internal layout as the default English page.
+- **Synchronous Updates**: When adding new features, sections, or correcting code examples in the default `.md` files, also apply the same updates immediately to all translated files of that page.
+
 ## 🛠️ Documentation Tools
 - **Build Docs**: `mkdocs build`
 - **Serve Docs**: `mkdocs serve` (check for broken links and formatting).
@@ -27,3 +31,4 @@ Keep all project documentation in sync with the codebase.
 ## 🚫 Workflow Rules
 - Never commit code changes without checking if they impact the documentation.
 - Prioritize updating the `README.md` for any breaking installation changes.
+- Ensure translated documentation files have 1:1 structural parity with their English counterparts.

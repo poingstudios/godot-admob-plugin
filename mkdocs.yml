@@ -6,8 +6,6 @@ extra_javascript:
 theme:
   features:
     - content.tabs.link
-    - navigation.instant
-    - navigation.instant.prefetch
     - navigation.sections
     - navigation.top
     - search.suggest
@@ -34,8 +32,8 @@ theme:
       primary: blue
       accent: blue
 markdown_extensions:
-  - toc:
-      title: On this page
+  - md_in_html
+  - toc
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true 
@@ -69,6 +67,24 @@ copyright: |
 plugins:
   - search
   - awesome-pages
+  - i18n:
+      reconfigure_material: true
+      languages:
+        - locale: en
+          name: English
+          default: true
+        - locale: pt-BR
+          name: Português (Brasil)
+          nav_translations:
+            Guides: Guias
+            Reference: Referência
+            Ad formats: Formatos de Anúncios
+            Mediate: Mediação
+            Privacy: Privacidade
+            Advanced topics: Tópicos Avançados
+            Overview: Visão Geral
+            Classes: Classes
+            Enums: Enums
 
 hooks:
   - docs/hooks.py
