@@ -285,7 +285,7 @@ func _update_ui_position(uid: int) -> void:
 		hbox_top.add_child(vbox_text)
 
 		var title := Label.new()
-		title.text = "Test Ad : Flood-It!"
+		title.text = "Mock Ad : Flood-It!"
 		var title_font_size := clamp(height_dp * 0.18, 8, 14)
 		_apply_text_style(title, primary_style, Color(0.1, 0.1, 0.1), title_font_size, scale_factor_y)
 		vbox_text.add_child(title)
@@ -449,7 +449,7 @@ func _update_ui_position(uid: int) -> void:
 		meta_hbox.add_child(meta_vbox)
 
 		var title := Label.new()
-		title.text = "Test Ad : Flood-It!"
+		title.text = "Mock Ad : Flood-It!"
 		_apply_text_style(title, primary_style, Color(0.1, 0.1, 0.1), 14.0, scale_factor_y)
 		meta_vbox.add_child(title)
 
