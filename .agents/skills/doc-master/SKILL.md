@@ -9,8 +9,9 @@ Keep all project documentation in sync with the codebase.
 
 ## 📝 Sync Requirements
 
-### 1. Code to Docs
-- **New Ad Format**: Create a new `.md` file in `docs/ad_formats/` and add it to `mkdocs.yml`.
+### 1. Code to Docs & Navigation
+- **Static Navigation**: All navigation structures must be defined statically in the `nav` block of `mkdocs.yml`. Avoid using `.pages` files to prevent plugin conflicts and 404 routing errors during i18n compilation.
+- **New Ad Format / Page**: Create the new `.md` file in the appropriate directory, add it to the `nav` section in `mkdocs.yml`, and add its translation key to `nav_translations` for each language.
 - **API Change**: Update the code blocks in the relevant `docs/` files for both GDScript and C#.
 - **Requirement Change**: If a plugin becomes mandatory/optional, update `AGENTS.md` and the error description files in `docs/errors/`.
 
