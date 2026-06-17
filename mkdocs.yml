@@ -6,8 +6,6 @@ extra_javascript:
 theme:
   features:
     - content.tabs.link
-    - navigation.instant
-    - navigation.instant.prefetch
     - navigation.sections
     - navigation.top
     - search.suggest
@@ -34,8 +32,8 @@ theme:
       primary: blue
       accent: blue
 markdown_extensions:
-  - toc:
-      title: On this page
+  - md_in_html
+  - toc
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true 
@@ -68,7 +66,93 @@ copyright: |
 
 plugins:
   - search
-  - awesome-pages
+  - i18n:
+      reconfigure_material: true
+      languages:
+        - locale: en
+          name: English
+          default: true
+        - locale: pt-BR
+          name: Português (Brasil)
+          nav_translations:
+            Guides: Guias
+            Reference: Referência
+            Ad formats: Formatos de Anúncios
+            App Open: App Open
+            Banner: Banner
+            Set up banner ads: Configurar anúncios de banner
+            Use collapsible banners: Usar banners colapsáveis
+            Sizes: Tamanhos
+            Anchored adaptive banners: Banners adaptativos ancorados
+            'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': 'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>'
+            Interstitial: Intersticial
+            Native Overlay: Native Overlay
+            Rewarded: Premiado (Rewarded)
+            'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': 'Intersticial Premiado <span class="modern-icon" title="Beta">🧪</span>'
+            Mediate: Mediação
+            First Steps: Primeiros Passos
+            Integrate partner networks: Integrar redes parceiras
+            AppLovin: AppLovin
+            BidMachine: BidMachine
+            IronSource: IronSource
+            Meta: Meta
+            Vungle: Vungle
+            Privacy: Privacidade
+            Regulatory solutions: Soluções regulatórias
+            US states privacy laws: Leis de privacidade dos estados dos EUA
+            User messaging tools: Ferramentas de mensagens de usuários
+            Get Started: Começar
+            GDPR IAB support: Suporte ao GDPR IAB
+            IDFA support: Suporte ao IDFA
+            Advanced topics: Tópicos Avançados
+            Targeting: Segmentação (Targeting)
+            Impression-Level Ad Revenue: Receita de Anúncios a Nível de Impressão
+            Response Info: Informações de Resposta
+            Overview: Visão Geral
+            Classes: Classes
+            AdView: AdView
+            Enums: Enums
 
-hooks:
-  - docs/hooks.py
+nav:
+  - Guides:
+    - index.md
+    - editor_mock_ads.md
+    - enable_test_ads.md
+    - ios_pause_background.md
+    - volume_controls.md
+    - Ad formats:
+      - App Open: ad_formats/app_open.md
+      - Banner:
+        - Set up banner ads: ad_formats/banner/get_started.md
+        - Use collapsible banners: ad_formats/banner/collapsible.md
+        - Sizes:
+          - Anchored adaptive banners: ad_formats/banner/sizes/anchored_adaptive.md
+          - 'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': ad_formats/banner/sizes/smart_banner.md
+      - Interstitial: ad_formats/interstitial.md
+      - Native Overlay: ad_formats/native_overlay.md
+      - Rewarded: ad_formats/rewarded.md
+      - 'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': ad_formats/rewarded_interstitial.md
+    - Mediate:
+      - First Steps: mediate/get_started.md
+      - Integrate partner networks:
+        - AppLovin: mediate/integrate_partner_networks/applovin.md
+        - BidMachine: mediate/integrate_partner_networks/bidmachine.md
+        - IronSource: mediate/integrate_partner_networks/ironsource.md
+        - Meta: mediate/integrate_partner_networks/meta.md
+        - Vungle: mediate/integrate_partner_networks/vungle.md
+    - Privacy:
+      - Regulatory solutions:
+        - US states privacy laws: privacy/regulatory_solutions/us_states_privacy_laws.md
+      - User messaging tools:
+        - Get Started: privacy/user_messaging_tools/get_started.md
+        - GDPR IAB support: privacy/user_messaging_tools/gdpr_iab_support.md
+        - IDFA support: privacy/user_messaging_tools/idfa_support.md
+    - Advanced topics:
+      - Targeting: advanced_topics/targeting.md
+      - Impression-Level Ad Revenue: advanced_topics/impression_level_ad_revenue.md
+      - Response Info: advanced_topics/response_info.md
+  - Reference:
+    - Overview: reference/index.md
+    - Classes:
+      - AdView: reference/classes/AdView.md
+    - Enums: reference/enums.md

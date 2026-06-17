@@ -5,3 +5,4 @@ def on_config(config, **kwargs):
         current_year = str(datetime.date.today().year)
         config['copyright'] = config['copyright'].replace('{current_year}', current_year)
     return config
+
