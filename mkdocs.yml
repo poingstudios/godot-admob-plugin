@@ -1,4 +1,5 @@
 site_name: Godot AdMob Plugin - Poing Studios
+site_url: https://poingstudios.github.io/godot-admob-plugin/
 extra_css:
   - stylesheets/extra.css
 extra_javascript:
