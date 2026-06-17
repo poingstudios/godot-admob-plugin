@@ -1,0 +1,2686 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://poingstudios.github.io/godot-admob-plugin/latest/es/">
+      
+      
+      
+        <link rel="next" href="editor_mock_ads/">
+      
+      
+        
+          <link rel="alternate" href="/godot-admob-plugin/latest/" hreflang="en">
+        
+          <link rel="alternate" href="/godot-admob-plugin/latest/pt-BR/" hreflang="pt-BR">
+        
+          <link rel="alternate" href="/godot-admob-plugin/latest/es/" hreflang="es">
+        
+          <link rel="alternate" href="/godot-admob-plugin/latest/zh/" hreflang="zh">
+        
+          <link rel="alternate" href="/godot-admob-plugin/latest/ja/" hreflang="ja">
+        
+      
+      
+      <link rel="icon" href="../assets/icon.ico">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Empezar - Godot AdMob Plugin - Poing Studios</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#empezar" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  
+    <div class="announcement-wrapper">
+      <script>
+        if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' && !window.location.pathname.includes('/latest/')) {
+          document.currentScript.parentElement.style.display = 'none';
+        }
+      </script>
+      <div class="announcement-content">
+        
+        
+        
+        <div class='announcement-bg-shapes'>
+          <div class='shape shape-1'>⚠️</div>
+          <div class='shape shape-2'>⚠️</div>
+          <div class='shape shape-3'>⚠️</div>
+        </div>
+        <span class='announcement-title'>⚠️ DOCUMENTACIÓN EXPERIMENTAL</span>
+        <div class='announcement-text'>
+          Estás viendo la
+          <a href="https://github.com/poingstudios/godot-admob-plugin/tree/master" target="_blank" rel="noopener" class="announcement-badge">Rama Master</a>
+          (más reciente).<br>Para versiones estables, por favor consulta la
+          <a href="https://poingstudios.github.io/godot-admob-plugin/stable/" class="announcement-link">versión estable</a>.
+        </div>
+      </div>
+    </div>
+  
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="./" title="Godot AdMob Plugin - Poing Studios" class="md-header__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
+      
+  <img src="../assets/icon.ico" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Godot AdMob Plugin - Poing Studios
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Empezar
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+      <div class="md-header__option">
+  <div class="md-select">
+    
+    <button class="md-header__button md-icon" aria-label="Seleccionar idioma">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
+    </button>
+    <div class="md-select__inner">
+      <ul class="md-select__list">
+        
+          <li class="md-select__item">
+            <a href="/godot-admob-plugin/latest/" hreflang="en" class="md-select__link">
+              English
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/godot-admob-plugin/latest/pt-BR/" hreflang="pt-BR" class="md-select__link">
+              Português (Brasil)
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/godot-admob-plugin/latest/es/" hreflang="es" class="md-select__link">
+              Español
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/godot-admob-plugin/latest/zh/" hreflang="zh" class="md-select__link">
+              简体中文
+            </a>
+          </li>
+        
+          <li class="md-select__item">
+            <a href="/godot-admob-plugin/latest/ja/" hreflang="ja" class="md-select__link">
+              日本語
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Pestañas" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Guías
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="reference/" class="md-tabs__link">
+          
+  
+  
+  Referencia
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="./" title="Godot AdMob Plugin - Poing Studios" class="md-nav__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
+      
+  <img src="../assets/icon.ico" alt="logo">
+
+    </a>
+    Godot AdMob Plugin - Poing Studios
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Guías
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Guías
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Empezar
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Empezar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descargue-el-complemento-godot-admob-de-poing-studios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descargue el complemento Godot AdMob de Poing Studios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Descargue el complemento Godot AdMob de Poing Studios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importacion-del-complemento-godot-admob-en-el-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Importación del complemento Godot AdMob en el proyecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descargar e instalar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Descargar e instalar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exportador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exportador
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initialize-the-google-mobile-ads-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inicialice el SDK de anuncios de Google para móviles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seleccione-un-formato-de-anuncio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seleccione un formato de anuncio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Seleccione un formato de anuncio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aplicacion-abierta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicación abierta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bandera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bandera
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersticial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intersticial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#superposicion-nativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Superposición nativa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recompensado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recompensado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersticial-recompensado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intersticial recompensado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="editor_mock_ads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vista previa de anuncios simulados en el editor
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="enable_test_ads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Habilitar anuncios de prueba
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ios_pause_background/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fondo de pausa de iOS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="volume_controls/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Controles de volumen
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_6" id="__nav_1_6_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Formatos de anuncios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Formatos de anuncios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ad_formats/app_open/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    App Open
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_6_2" id="__nav_1_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Banner
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Banner
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ad_formats/banner/get_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configurar anuncios de banner
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ad_formats/banner/collapsible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usar banners colapsables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_6_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_6_2_3" id="__nav_1_6_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tamaños
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_6_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_6_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tamaños
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ad_formats/banner/sizes/anchored_adaptive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Banners adaptativos anclados
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ad_formats/banner/sizes/smart_banner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Smart banners <span class="modern-icon" title="Deprecated">🚫</span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ad_formats/interstitial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intersticial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ad_formats/native_overlay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Native Overlay
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ad_formats/rewarded/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bonificado (Rewarded)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="ad_formats/rewarded_interstitial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Intersticial Bonificado <span class="modern-icon" title="Beta">🧪</span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_7" id="__nav_1_7_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mediación
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mediación
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mediate/get_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Primeros Pasos
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_7_2" id="__nav_1_7_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integrar redes asociadas
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_7_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_7_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Integrar redes asociadas
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mediate/integrate_partner_networks/applovin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AppLovin
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mediate/integrate_partner_networks/bidmachine/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    BidMachine
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mediate/integrate_partner_networks/ironsource/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IronSource
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mediate/integrate_partner_networks/meta/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Meta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mediate/integrate_partner_networks/vungle/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Vungle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_8" id="__nav_1_8_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Privacidad
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Privacidad
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_1" id="__nav_1_8_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soluciones regulatorias
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Soluciones regulatorias
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="privacy/regulatory_solutions/us_states_privacy_laws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Leyes de privacidad de estados de EE. UU.
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_2" id="__nav_1_8_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Herramientas de mensajería de usuarios
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Herramientas de mensajería de usuarios
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="privacy/user_messaging_tools/get_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Empezar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="privacy/user_messaging_tools/gdpr_iab_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soporte GDPR IAB
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="privacy/user_messaging_tools/idfa_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Soporte IDFA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_9" id="__nav_1_9_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Temas avanzados
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Temas avanzados
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="advanced_topics/targeting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Segmentación (Targeting)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="advanced_topics/impression_level_ad_revenue/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ingresos de anuncios a nivel de impresión
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="advanced_topics/response_info/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Información de respuesta
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referencia
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Referencia
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Descripción general
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Clases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/classes/AdView/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AdView
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="reference/enums/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enums
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#requisitos-previos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisitos previos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#descargue-el-complemento-godot-admob-de-poing-studios" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descargue el complemento Godot AdMob de Poing Studios
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Descargue el complemento Godot AdMob de Poing Studios">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#importacion-del-complemento-godot-admob-en-el-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Importación del complemento Godot AdMob en el proyecto
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-install" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Descargar e instalar
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Descargar e instalar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exportador" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exportador
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initialize-the-google-mobile-ads-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inicialice el SDK de anuncios de Google para móviles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#seleccione-un-formato-de-anuncio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Seleccione un formato de anuncio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Seleccione un formato de anuncio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#aplicacion-abierta" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Aplicación abierta
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bandera" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bandera
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersticial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intersticial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#superposicion-nativa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Superposición nativa
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recompensado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recompensado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersticial-recompensado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intersticial recompensado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="empezar">Empezar</h1>
+<p>Integrar el complemento AdMob en su proyecto Godot, específicamente para Godot v4.2+, es el paso inicial y crucial para permitir la visualización de anuncios y la generación de ingresos. Después de incorporar con éxito este complemento, tendrá la flexibilidad de seleccionar entre varios formatos de anuncios, como banner o intersticial, y continuar con los pasos de implementación necesarios.</p>
+<p>Este documento se basa en:</p>
+<ul>
+<li><a href="https://developers.google.com/admob/android/quick-start">Documentación de Android del SDK de anuncios de Google para móviles</a></li>
+<li><a href="https://developers.google.com/admob/ios/quick-start">Documentación de iOS del SDK de anuncios de Google para móviles</a></li>
+</ul>
+<h2 id="requisitos-previos">Requisitos previos</h2>
+<ul>
+<li>Implementar Android:<ul>
+<li>Utilice Godot v4.2 o superior</li>
+<li><code>minSdkVersion</code> de 24 o superior</li>
+<li><code>compileSdkVersion</code> de 36 o superior</li>
+</ul>
+</li>
+<li>Implementar iOS:<ul>
+<li>Utilice Godot v4.1 o superior</li>
+<li>Utilice Xcode 26.2 o superior</li>
+<li>Apunte a iOS 16.0 o superior</li>
+</ul>
+</li>
+<li>Recomendado:<a href="https://support.google.com/admob/answer/7356219?visit_id=638286911958663013-3847536692&amp;rd=1">Crear una cuenta de AdMob</a>y<a href="https://support.google.com/admob/answer/9989980?visit_id=638286911964685099-3190075945&amp;rd=1">registrar una aplicación</a>.</li>
+</ul>
+<h2 id="descargue-el-complemento-godot-admob-de-poing-studios">Descargue el complemento Godot AdMob de Poing Studios</h2>
+<p>El complemento Godot AdMob de Poing Studios simplifica el proceso para que los desarrolladores de Godot incorporen anuncios móviles de Google en sus aplicaciones de Android e iOS, eliminando la necesidad de escribir código Java/Kotlin u Objective-C++. En cambio, este complemento ofrece una interfaz basada en GDScript y C# para solicitudes de anuncios, que puede integrarse perfectamente en su proyecto Godot.</p>
+<p>Para acceder al complemento, puede descargar el paquete Godot proporcionado o explorar su código fuente en GitHub a través de los enlaces a continuación.</p>
+<p><a class="md-button md-button--primario" href="https://github.com/poingstudios/godot-admob-plugin/releases/latest">Descargar desde GitHub</a><a class="md-button md-button--primario" href="https://store.godotengine.org/asset/poingstudios/admob/">Descargar desde la tienda de activos</a><a class="md-button md-button--primario" href="https://github.com/poingstudios/godot-admob-plugin">Código fuente</a></p>
+<h3 id="importacion-del-complemento-godot-admob-en-el-proyecto">Importación del complemento Godot AdMob en el proyecto</h3>
+<p>El complemento AdMob para Godot está convenientemente disponible a través de Godot Asset Store. Para importar este complemento a su proyecto Godot, siga estos pasos:</p>
+<ol>
+<li>Abre tu proyecto Godot.</li>
+<li>Navegue hasta Asset Store dentro del editor Godot.</li>
+<li>En la barra de búsqueda, ingrese "AdMob" y asegúrese de que el editor esté configurado en "Poing Studios".
+<img alt="activate_plugin" src="../assets/asset_store.png" /></li>
+<li>Localice el complemento de AdMob y haga clic en el botón "Descargar".</li>
+<li>Una vez que se complete la descarga, vaya a "Proyecto → Configuración del proyecto" dentro del editor Godot.</li>
+<li>En la sección "Complementos", busque el complemento "AdMob" y actívelo.
+<img alt="activate_plugin" src="../assets/activate_plugin.png" /></li>
+<li>Las bibliotecas de Android e iOS se descargarán e instalarán automáticamente.</li>
+<li>Con estos pasos, habrá integrado con éxito el complemento de AdMob en su proyecto Godot sin necesidad de importar archivos manualmente adicionales.</li>
+</ol>
+<h2 id="download-install">Descargar e instalar</h2>
+<div class="admonition información">
+<p class="admonition-title">Información</p>
+</div>
+<p>Esta sección normalmente <strong>no es obligatoria</strong>, ya que el complemento maneja las bibliotecas automáticamente. Siga estos pasos solo si la descarga automática falló.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Androide</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<p>Para integrar la biblioteca de Android requerida para AdMob en Godot, siga estos pasos:</p>
+<div class="highlight"><pre><span></span><code>1. En Godot, navegue hasta `Proyecto → Herramientas → AdMob Manager → Android → Descargar e instalar`.
+1. Esta acción descargará e instalará la biblioteca de Android adecuada en su proyecto, que se encuentra en `res://addons/admob/android/bin/`.
+</code></pre></div>
+<p>Si tiene algún problema con la descarga, puede intentar descargar la biblioteca manualmente haciendo clic en<a href="https://github.com/poingstudios/godot-admob-android/releases/latest">aquí</a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">iOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<p>Para integrar la biblioteca iOS requerida para AdMob en Godot, siga estos pasos:</p>
+<div class="highlight"><pre><span></span><code>1. En Godot, navegue hasta `Proyecto → Herramientas → AdMob Manager → iOS → Descargar e instalar`.
+1. Esta acción descargará e instalará automáticamente la biblioteca de iOS requerida en su proyecto en `res://ios/plugins/`.
+</code></pre></div>
+<p>Si tiene algún problema con la descarga, puede intentar descargar la biblioteca manualmente haciendo clic en<a href="https://github.com/poingstudios/godot-admob-ios/releases/latest">aquí</a>.</p>
+<h3 id="exportador">Exportador</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Androide</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ol>
+<li>Instale el<a href="https://docs.godotengine.org/en/stable/tutorials/export/android_gradle_build.html">Plantilla de compilación de Android</a>navegando a <code>Proyecto → Instalar plantilla de compilación de Android</code>.</li>
+<li>Configure las opciones preestablecidas de Android en <code>Proyecto → Configuración del proyecto... → General</code>:<ul>
+<li>En la barra lateral izquierda, localice la sección <strong>Admob</strong> y haga clic en <strong>Android</strong>.</li>
+<li>Añade tu<a href="https://support.google.com/admob/answer/7356431">ID de aplicación de AdMob</a>al campo "Id. de aplicación".</li>
+<li>Habilite o deshabilite los complementos <code>Enabled</code> y Mediación (<code>Mediation/Meta</code>, <code>Mediation/Vungle</code>) activando las casillas de verificación respectivas.</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="admonition consejo">
+<p class="admonition-title">ID de aplicación frente a ID de bloque de anuncios</p>
+<div class="highlight"><pre><span></span><code>    - **ID de aplicación** (contiene `~`): se utiliza para el registro de la aplicación y la configuración interna.
+    - **ID del bloque de anuncios** (contiene `/`): se utiliza para cargar formatos de anuncios específicos en su código.
+</code></pre></div>
+<ol>
+<li>Al exportar su proyecto, seleccione "Usar Gradle Build".</li>
+</ol>
+</div>
+<p><img alt="export" src="../assets/android/export.png" /></p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">iOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ol>
+<li>Al exportar su proyecto, actualice <code>GADApplicationIdentifier</code> con su<a href="https://support.google.com/admob/answer/7356431">ID de aplicación de AdMob</a>y asegúrese de que <code>Ad Mob</code> esté habilitado en la sección Complementos del cuadro de diálogo Exportar. Si tienes Mediación, marca también <code>Ad Mob Meta</code>, etc...</li>
+</ol>
+</div>
+</div>
+</div>
+<p><img alt="gadapplicationidentifier" src="../assets/ios/gadapplicationidentifier.png" /></p>
+<div class="admonition consejo">
+<p class="admonition-title">ID de aplicación frente a ID de bloque de anuncios</p>
+<div class="highlight"><pre><span></span><code>    - **ID de aplicación** (contiene `~`): se utiliza para el registro de la aplicación y la configuración interna.
+    - **ID del bloque de anuncios** (contiene `/`): se utiliza para cargar formatos de anuncios específicos en su código.
+</code></pre></div>
+<ol>
+<li>
+<p><strong>¡Eso es todo!</strong> Dado que este complemento utiliza paquetes <code>.xcframework</code>, Godot 4.2+ integrará automáticamente todas las bibliotecas y marcos necesarios en su proyecto Xcode. No se requieren comandos de terminal manuales, CocoaPods o pasos de configuración de Xcode.</p>
+</li>
+<li>
+<p><a href="https://github.com/poingstudios/godot-admob-ios/issues/127">Si se enfrenta al error "__swift_FORCE_LOAD_", lea esto</a>.</p>
+<ol>
+<li>Cree un archivo <code>Untitled.swift</code> en su proyecto Xcode.</li>
+<li>Xcode le pedirá que "Crear encabezado de puente → Aceptar".</li>
+<li>Su proyecto ahora debería construirse normalmente.</li>
+</ol>
+</li>
+</ol>
+</div>
+<p><img alt="untitled.swift" src="../assets/ios/untitled.swift.png" /></p>
+<div class="highlight"><pre><span></span><code>1. Ejecute el juego.
+
+1. [Si está intentando ejecutar en Simulator y no funciona, lea esto](https://github.com/godotengine/godot/issues/44681#issuecomment-751399783).
+</code></pre></div>
+<h2 id="initialize-the-google-mobile-ads-sdk">Inicialice el SDK de anuncios de Google para móviles</h2>
+<p>Antes de cargar anuncios, asegúrese de que su aplicación inicialice el SDK de anuncios de Google para móviles. Puede lograr esto llamando a MobileAds.initialize(). Esta función inicializa el SDK y activa un detector de finalización una vez que finaliza el proceso de inicialización o si excede un tiempo de espera de 30 segundos. Es importante tener en cuenta que esta inicialización debe ocurrir solo una vez, idealmente durante la fase de inicio de la aplicación.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">MobileAds</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">{</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">MobileAds</span><span class="p">.</span><span class="n">Initialize</span><span class="p">();</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Si está utilizando la mediación, es esencial esperar a que se llame al controlador de finalización antes de continuar con la carga del anuncio. Este paso garantiza que todos los adaptadores de mediación se inicialicen correctamente antes de realizar solicitudes de anuncios.</p>
+<h2 id="seleccione-un-formato-de-anuncio">Seleccione un formato de anuncio</h2>
+<p>El SDK de anuncios de Google para móviles ya se ha importado correctamente y ya está preparado para integrar un anuncio en su aplicación. AdMob ofrece una variedad de formatos de anuncios, lo que le permite seleccionar el que mejor se adapta a la experiencia del usuario de su aplicación.</p>
+<h3 id="aplicacion-abierta">Aplicación abierta</h3>
+<div class="image-text-container">
+<p><img alt="app_open" src="https://developers.google.com/static/admob/images/format-app-open.svg" /></p>
+<p>La apertura de la aplicación es un formato de anuncio que aparece cuando los usuarios abren o vuelven a su aplicación. El anuncio se superpone a la pantalla de carga.</p>
+</div>
+<p><a class="md-button md-button--primario" href="ad_formats/app_open/">Implementar anuncios de apertura de aplicaciones</a></p>
+<h3 id="bandera">Bandera</h3>
+<div class="image-text-container">
+<p><img alt="banner" src="../assets/ad_formats/banner.png" /></p>
+<p>Los anuncios de banner son anuncios rectangulares, que constan de imágenes o texto, que se integran en el diseño de una aplicación. Estos anuncios permanecen en la pantalla mientras los usuarios interactúan con la aplicación y pueden actualizarse automáticamente después de un intervalo de tiempo designado. Si es nuevo en la publicidad móvil, los anuncios publicitarios proporcionan un excelente punto de partida para su proceso de implementación de anuncios.</p>
+</div>
+<p><a class="md-button md-button--primario" href="ad_formats/banner/get_started/">Implementar anuncios publicitarios</a></p>
+<h3 id="intersticial">Intersticial</h3>
+<div class="image-text-container">
+<p><img alt="interstitial" src="../assets/ad_formats/interstitial.png" /></p>
+<p>Los anuncios intersticiales son anuncios expansivos de pantalla completa que se superponen a la interfaz de una aplicación y persisten hasta que el usuario los cierra. Son más efectivos cuando se colocan estratégicamente durante las pausas naturales en la ejecución de la aplicación, como entre niveles de un juego o inmediatamente después de completar una tarea.</p>
+</div>
+<p><a class="md-button md-button--primario" href="ad_formats/interstitial/">Implementar anuncios intersticiales</a></p>
+<h3 id="superposicion-nativa">Superposición nativa</h3>
+<div class="image-text-container">
+<p><img alt="native_overlay" src="https://developers.google.com/static/admob/images/format-native.svg" /></p>
+<p>Los anuncios superpuestos nativos le permiten mostrar anuncios diseñados para adaptarse a la apariencia de su aplicación, utilizando plantillas prediseñadas encima del contenido de su aplicación. Admiten la personalización de colores, fuentes y opciones de diseño y, al mismo tiempo, mantienen la integración simple.</p>
+</div>
+<p><a class="md-button md-button--primario" href="ad_formats/native_overlay/">Implementar anuncios superpuestos nativos</a></p>
+<h3 id="recompensado">Recompensado</h3>
+<div class="image-text-container">
+<p><img alt="rewarded" src="../assets/ad_formats/rewarded.png" /></p>
+<p>Los anuncios de video recompensados ​​son anuncios de video inmersivos en pantalla completa que brindan a los usuarios la opción de verlos por completo. A cambio de su tiempo y atención, los usuarios reciben recompensas o beneficios dentro de la aplicación.</p>
+</div>
+<p><a class="md-button md-button--primario" href="ad_formats/rewarded/">Implementar anuncios recompensados</a></p>
+<h3 id="intersticial-recompensado">Intersticial recompensado</h3>
+<div class="image-text-container">
+<p><img alt="rewarded_interstitial" src="../assets/ad_formats/rewarded_interstitial.png" /></p>
+<p>Un intersticial recompensado es una forma específica de formato de anuncio incentivado que le permite ofrecer recompensas a cambio de anuncios que aparecen automáticamente durante las transiciones naturales de las aplicaciones. A diferencia de los anuncios bonificados habituales, los usuarios no están obligados a suscribirse activamente para ver un intersticial bonificado; están perfectamente integrados en la experiencia de la aplicación.</p>
+</div>
+<p><a class="md-button md-button--primario" href="ad_formats/rewarded_interstitial/">Implementar anuncios intersticiales bonificados</a></p>
+<style>
+.imagen-texto-contenedor {
+pantalla: flexible;
+alinear elementos: centro;
+}
+.image-text-container img {
+margen derecho: 20px;
+ancho máximo: 130px;
+altura: automático;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      
+
+
+<div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      &copy; 2023-2026 <a href="https://github.com/poingstudios/godot-admob-plugin" target="_blank" rel="noopener">Poing Studios</a>
+      | Partes de esta página son modificaciones basadas en el trabajo creado y
+      <a href="https://developers.google.com/terms/site-policies" target="_blank" rel="noopener">compartido por Google</a>
+      y se usan de acuerdo con los términos descritos en la
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Licencia de atribución de Creative Commons 4.0</a>.
+    </div>
+  
+  
+    <div class="md-copyright__generator">
+      Hecho con
+      <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+        Material for MkDocs
+      </a>
+    </div>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://discord.com/invite/YEPvYjSSMk" target="_blank" rel="noopener" title="discord.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M492.5 69.8c-.2-.3-.4-.6-.8-.7-38.1-17.5-78.4-30-119.7-37.1-.4-.1-.8 0-1.1.1s-.6.4-.8.8c-5.5 9.9-10.5 20.2-14.9 30.6-44.6-6.8-89.9-6.8-134.4 0-4.5-10.5-9.5-20.7-15.1-30.6-.2-.3-.5-.6-.8-.8s-.7-.2-1.1-.2C162.5 39 122.2 51.5 84.1 69c-.3.1-.6.4-.8.7C7.1 183.5-13.8 294.6-3.6 404.2c0 .3.1.5.2.8s.3.4.5.6c44.4 32.9 94 58 146.8 74.2.4.1.8.1 1.1 0s.7-.4.9-.7c11.3-15.4 21.4-31.8 30-48.8.1-.2.2-.5.2-.8s0-.5-.1-.8-.2-.5-.4-.6-.4-.3-.7-.4c-15.8-6.1-31.2-13.4-45.9-21.9-.3-.2-.5-.4-.7-.6s-.3-.6-.3-.9 0-.6.2-.9.3-.5.6-.7c3.1-2.3 6.2-4.7 9.1-7.1.3-.2.6-.4.9-.4s.7 0 1 .1c96.2 43.9 200.4 43.9 295.5 0 .3-.1.7-.2 1-.2s.7.2.9.4c2.9 2.4 6 4.9 9.1 7.2.2.2.4.4.6.7s.2.6.2.9-.1.6-.3.9-.4.5-.6.6c-14.7 8.6-30 15.9-45.9 21.8-.2.1-.5.2-.7.4s-.3.4-.4.7-.1.5-.1.8.1.5.2.8c8.8 17 18.8 33.3 30 48.8.2.3.6.6.9.7s.8.1 1.1 0c52.9-16.2 102.6-41.3 147.1-74.2.2-.2.4-.4.5-.6s.2-.5.2-.8c12.3-126.8-20.5-236.9-86.9-334.5zm-302 267.7c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.4 59.2-52.8 59.2m195.4 0c-29 0-52.8-26.6-52.8-59.2s23.4-59.2 52.8-59.2c29.7 0 53.3 26.8 52.8 59.2 0 32.7-23.2 59.2-52.8 59.2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/poingstudios" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["content.tabs.link", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.annotation", "content.code.copy", "navigation.tabs"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": {"default": "stable", "provider": "mike"}}</script>
+    
+    
+  
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../javascripts/extra.js"></script>
+      
+    
+  <script>
+    (function() {
+      function syncSidebarTop() {
+        var header = document.querySelector('.md-header');
+        var sidebar = document.querySelector('.md-sidebar--primary');
+        if (header && sidebar) {
+          if (window.innerWidth <= 1220) {
+            var rect = header.getBoundingClientRect();
+            var topOffset = Math.max(0, rect.top);
+            sidebar.style.setProperty('top', topOffset + 'px', 'important');
+            sidebar.style.setProperty('height', 'calc(100vh - ' + topOffset + 'px)', 'important');
+          } else {
+            sidebar.style.removeProperty('top');
+            sidebar.style.removeProperty('height');
+          }
+        }
+      }
+      window.addEventListener('scroll', syncSidebarTop, { passive: true });
+      window.addEventListener('resize', syncSidebarTop);
+      document.addEventListener('DOMContentLoaded', syncSidebarTop);
+      setInterval(syncSidebarTop, 200); // Guarantees sync against DOM recalculations
+    })();
+  </script>
+
+  </body>
+</html>
