@@ -135,10 +135,8 @@ body {
 /* 🐭 HOVER INTERACTION (Desktop Only) */
 @media (hover: hover) {
   .announcement-wrapper:hover .shape {
-    opacity: 0.4 !important;
-    /* Subtle boost */
-    filter: blur(0px);
-    transform: translate(0, -10px) scale(1.15) !important;
+    opacity: 0.45 !important;
+    filter: blur(2px);
   }
 
   .announcement-wrapper:hover::before {
