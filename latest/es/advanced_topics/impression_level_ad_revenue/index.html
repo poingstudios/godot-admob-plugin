@@ -1280,6 +1280,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mediate/integrate_partner_networks/unity_ads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unity Ads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2199,31 +2227,31 @@
 <p>Esta guía está destinada a ayudarle a implementar la captura de datos de ingresos publicitarios a nivel de impresiones en su proyecto Godot.</p>
 <h2 id="requisitos-previos">Requisitos previos</h2>
 <ul>
-<li>Asegúrate de tener<a href="https://support.google.com/admob/answer/11322405">activó la función de ingresos por publicidad a nivel de impresión</a>en la interfaz de usuario de AdMob.</li>
-<li>Completo<a href="../../">Empezar</a>. Su proyecto Godot ya debería tener el complemento AdMob de Poing Studios importado y configurado.</li>
+<li>Asegúrese de haber <a href="https://support.google.com/admob/answer/11322405">activado la función de ingresos por publicidad a nivel de impresión</a> en la interfaz de usuario de AdMob.</li>
+<li>Completa la <a href="../../">Guía de introducción</a>. Su proyecto Godot ya debería tener el complemento AdMob de Poing Studios importado y configurado.</li>
 <li>Antes de poder recibir datos de ingresos publicitarios a nivel de impresiones, debe implementar al menos un formato de anuncio:<ul>
-<li><a href="../../ad_formats/app_open/">Aplicación abierta</a></li>
-<li><a href="../../ad_formats/banner/get_started/">Bandera</a></li>
-<li><a href="../../ad_formats/interstitial/">intersticial</a></li>
+<li><a href="../../ad_formats/app_open/">App Open</a></li>
+<li><a href="../../ad_formats/banner/get_started/">Banner</a></li>
+<li><a href="../../ad_formats/interstitial/">Intersticial</a></li>
 <li><a href="../../ad_formats/rewarded/">Recompensado</a></li>
-<li><a href="../../ad_formats/rewarded_interstitial/">Intersticial recompensado</a></li>
-<li><a href="../../ad_formats/native_overlay/">Nativo</a></li>
+<li><a href="../../ad_formats/rewarded_interstitial/">Intersticial Recompensado</a></li>
+<li><a href="../../ad_formats/native_overlay/">Native Overlay</a></li>
 </ul>
 </li>
 </ul>
 <h2 id="implementacion-de-un-controlador-de-eventos-pago">Implementación de un controlador de eventos pago</h2>
-<p>Cada formato de anuncio tiene un evento <code>on_ad_paid</code> (<code>OnAdPaid</code> en C#). Durante el ciclo de vida de un evento publicitario, el complemento Godot AdMob monitorea los eventos de impresión e invoca al controlador con un "AdValue" que representa el valor ganado.</p>
-<p>El siguiente ejemplo maneja eventos pagos para un anuncio bonificado:</p>
+<p>Cada formato de anuncio tiene un evento <code>on_ad_paid</code> (<code>OnAdPaid</code> en C#). Durante el ciclo de vida de un evento publicitario, el complemento Godot AdMob monitorea los eventos de impresión e invoca al controlador con un <code>AdValue</code> que representa el valor ganado.</p>
+<p>El siguiente ejemplo maneja eventos pagos para un anuncio recompensado:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">GDScript</label><label for="__tabbed_1_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">var</span><span class="w"> </span><span class="n">_rewarded_ad</span><span class="p">:</span><span class="w"> </span><span class="n">RewardedAd</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">func</span><span class="w"> </span><span class="n">_load_rewarded_ad</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="c1"># Send the request to load the ad.</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="c1"># Envía la solicitud para cargar el anuncio.</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">ad_request</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdRequest</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">RewardedAdLoader</span><span class="o">.</span><span class="n">new</span><span class="p">()</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;AD_UNIT_ID&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ad_request</span><span class="p">,</span><span class="w"> </span><span class="k">func</span><span class="p">(</span><span class="n">rewarded_ad</span><span class="p">:</span><span class="w"> </span><span class="n">RewardedAd</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">:</span><span class="w"> </span><span class="n">LoadAdError</span><span class="p">):</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="c1"># If the operation failed with a reason.</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="c1"># Si la operación falló con una razón.</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb nb-Type">null</span><span class="p">:</span>
 <a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">            </span><span class="n">push_error</span><span class="p">(</span><span class="s2">&quot;Rewarded ad failed to load an ad with error: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">error</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">            </span><span class="k">return</span>
@@ -2233,8 +2261,8 @@
 <a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="p">)</span>
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="k">func</span><span class="w"> </span><span class="n">_handle_ad_paid_event</span><span class="p">(</span><span class="n">ad_value</span><span class="p">:</span><span class="w"> </span><span class="n">AdValue</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="c1"># TODO: Send the impression-level ad revenue information to your</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="c1"># preferred analytics server directly within this callback.</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">    </span><span class="c1"># TODO: Envíe la información de ingresos publicitarios a nivel de impresión a su</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">    </span><span class="c1"># servidor de análisis preferido directamente dentro de esta devolución de llamada.</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">value_micros</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ad_value</span><span class="o">.</span><span class="n">value_micros</span>
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">currency</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ad_value</span><span class="o">.</span><span class="n">currency_code</span>
@@ -2320,11 +2348,11 @@
 <a id="__codelineno-1-7" name="__codelineno-1-7"></a>
 <a id="__codelineno-1-8" name="__codelineno-1-8"></a><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">LoadRewardedAd</span><span class="p">()</span>
 <a id="__codelineno-1-9" name="__codelineno-1-9"></a><span class="p">{</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">    </span><span class="c1">// Send the request to load the ad.</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10"></a><span class="w">    </span><span class="c1">// Envía la solicitud para cargar el anuncio.</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11"></a><span class="w">    </span><span class="n">AdRequest</span><span class="w"> </span><span class="n">adRequest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdRequest</span><span class="p">();</span>
 <a id="__codelineno-1-12" name="__codelineno-1-12"></a><span class="w">    </span><span class="n">RewardedAdLoader</span><span class="p">.</span><span class="n">Load</span><span class="p">(</span><span class="s">&quot;AD_UNIT_ID&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">adRequest</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">rewardedAd</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">        </span><span class="c1">// If the operation failed with a reason.</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14"></a><span class="w">        </span><span class="c1">// Si la operación falló con una razón.</span>
 <a id="__codelineno-1-15" name="__codelineno-1-15"></a><span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">error</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16"></a><span class="w">        </span><span class="p">{</span>
 <a id="__codelineno-1-17" name="__codelineno-1-17"></a><span class="w">            </span><span class="n">GD</span><span class="p">.</span><span class="n">PrintErr</span><span class="p">(</span><span class="s">&quot;Rewarded ad failed to load an ad with error: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">error</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
@@ -2338,8 +2366,8 @@
 <a id="__codelineno-1-25" name="__codelineno-1-25"></a>
 <a id="__codelineno-1-26" name="__codelineno-1-26"></a><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">HandleAdPaidEvent</span><span class="p">(</span><span class="n">AdValue</span><span class="w"> </span><span class="n">adValue</span><span class="p">)</span>
 <a id="__codelineno-1-27" name="__codelineno-1-27"></a><span class="p">{</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="w">    </span><span class="c1">// TODO: Send the impression-level ad revenue information to your</span>
-<a id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="w">    </span><span class="c1">// preferred analytics server directly within this callback.</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28"></a><span class="w">    </span><span class="c1">// TODO: Envíe la información de ingresos publicitarios a nivel de impresión a su</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29"></a><span class="w">    </span><span class="c1">// servidor de análisis preferido directamente dentro de esta devolución de llamada.</span>
 <a id="__codelineno-1-30" name="__codelineno-1-30"></a>
 <a id="__codelineno-1-31" name="__codelineno-1-31"></a><span class="w">    </span><span class="kt">long</span><span class="w"> </span><span class="n">valueMicros</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adValue</span><span class="p">.</span><span class="n">ValueMicros</span><span class="p">;</span>
 <a id="__codelineno-1-32" name="__codelineno-1-32"></a><span class="w">    </span><span class="kt">string</span><span class="w"> </span><span class="n">currency</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">adValue</span><span class="p">.</span><span class="n">CurrencyCode</span><span class="p">;</span>
@@ -2461,12 +2489,12 @@
 </div>
 </div>
 </div>
-<p>Para obtener más información sobre la fuente publicitaria ganadora, consulte<a href="../response_info/">Recuperar información sobre la respuesta al anuncio.</a>.</p>
+<p>Para obtener más información sobre la fuente publicitaria ganadora, consulte <a href="../response_info/">Recuperar información sobre la respuesta al anuncio</a>.</p>
 <h2 id="integre-con-socios-de-atribucion-de-aplicaciones-aap">Integre con socios de atribución de aplicaciones (AAP)</h2>
 <p>Para obtener detalles completos sobre cómo reenviar datos de ingresos publicitarios a plataformas de análisis, consulte la guía para socios:</p>
 <ul>
-<li><a href="https://dev.adjust.com/en/sdk/android/integrations/admob">Ajustar</a></li>
-<li><a href="https://support.appsflyer.com/hc/en-us/articles/4416353506833-Integrate-the-ROI360-ad-revenue-SDK-API">Folleto de aplicaciones</a></li>
+<li><a href="https://dev.adjust.com/en/sdk/android/integrations/admob">Adjust</a></li>
+<li><a href="https://support.appsflyer.com/hc/en-us/articles/4416353506833-Integrate-the-ROI360-ad-revenue-SDK-API">AppsFlyer</a></li>
 <li><a href="https://support.singular.net/hc/en-us/articles/360037635452-Unity-SDK-Basic-Integration#42_Adding_Ad_Revenue_Attribution_Support">Singular</a></li>
 <li><a href="https://tenjin.com/docs/en/send-events/android.html#impression-level-ad-revenue-integration">Tenjin</a></li>
 </ul>
@@ -2476,24 +2504,24 @@
 <li>Envíe la información de ingresos publicitarios a nivel de impresión a su servidor de análisis preferido inmediatamente en su controlador <code>on_ad_paid</code>. Esto garantiza que no se pierda ninguna devolución de llamada accidentalmente y evita discrepancias en los datos.</li>
 </ul>
 <h2 id="valor-publicitario">Valor publicitario</h2>
-<div class="admonition consejo">
+<div class="admonition tip">
 <p class="admonition-title">Punto clave</p>
+<p>El valor de <code>AdValue</code> es un microvalor que representa el valor de cada anuncio. Por ejemplo, un valor de 5,000 indica que se estima que este anuncio vale $0.005.</p>
 </div>
-<p>El valor de "AdValue" es un microvalor que representa el valor de cada anuncio. Por ejemplo, un valor de 5000 indica que se estima que este anuncio vale 0,005 dólares.</p>
 <table>
 <thead>
 <tr>
-<th><code>ValorAd.TipoDePrecisión</code></th>
+<th><code>AdValue.PrecisionType</code></th>
 <th>Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>DESCONOCIDO</code></td>
+<td><code>UNKNOWN</code></td>
 <td>Un valor publicitario con precisión desconocida.</td>
 </tr>
 <tr>
-<td><code>ESTIMADO</code></td>
+<td><code>ESTIMATED</code></td>
 <td>Un valor de anuncio estimado a partir de datos agregados.</td>
 </tr>
 <tr>
@@ -2501,20 +2529,20 @@
 <td>Un valor de anuncio proporcionado por el editor, como CPM manuales en un grupo de mediación.</td>
 </tr>
 <tr>
-<td><code>PRECISO</code></td>
+<td><code>PRECISE</code></td>
 <td>El valor exacto pagado por este anuncio.</td>
 </tr>
 </tbody>
 </table>
-<p>En caso de mediación, AdMob intenta proporcionar un valor "ESTIMADO" para las fuentes publicitarias que son<a href="https://support.google.com/admob/answer/7374110">optimizado</a>. Para fuentes de anuncios no optimizadas, o en los casos en los que no hay suficientes datos agregados para informar una estimación significativa, se devuelve el valor "PUBLISHER_PROVIDED".</p>
+<p>En caso de mediación, AdMob intenta proporcionar un valor <code>ESTIMATED</code> para las fuentes publicitarias que son <a href="https://support.google.com/admob/answer/7374110">optimizadas</a>. Para fuentes de anuncios no optimizadas, o en los casos en los que no hay suficientes datos agregados para informar una estimación significativa, se devuelve el valor <code>PUBLISHER_PROVIDED</code>.</p>
 <h2 id="impresiones-de-prueba-de-fuentes-publicitarias-ofertantes">Impresiones de prueba de fuentes publicitarias ofertantes</h2>
 <p>Después de que se produzca un evento de ingresos publicitarios a nivel de impresión para una fuente publicitaria postora a través de una solicitud de prueba, recibirá solo los siguientes valores:</p>
 <ul>
 <li><code>UNKNOWN</code>: indica el tipo de precisión.</li>
 <li><code>0</code>: indica el valor del anuncio.</li>
 </ul>
-<p>Anteriormente, es posible que haya visto el tipo de precisión como un valor distinto de "DESCONOCIDO" y un valor de anuncio superior a 0.</p>
-<p>Para obtener detalles sobre cómo enviar una solicitud de anuncio de prueba, consulte<a href="../../enable_test_ads/">Habilitar dispositivos de prueba</a>.</p>
+<p>Anteriormente, es posible que haya visto el tipo de precisión como un valor distinto de <code>UNKNOWN</code> y un valor de anuncio superior a 0.</p>
+<p>Para obtener detalles sobre cómo enviar una solicitud de anuncio de prueba, consulte <a href="../../enable_test_ads/">Habilitar dispositivos de prueba</a>.</p>
 
 
 

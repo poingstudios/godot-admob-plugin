@@ -1451,6 +1451,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mediate/integrate_partner_networks/unity_ads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unity Ads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2293,12 +2321,12 @@
 </ul>
 <h2 id="requisitos-previos">Requisitos previos</h2>
 <ul>
-<li>Completa el<a href="../../">Guía de introducción</a></li>
+<li>Completa la <a href="../../">Guía de introducción</a></li>
 </ul>
 <h2 id="pruebe-siempre-con-anuncios-de-prueba">Pruebe siempre con anuncios de prueba</h2>
 <p>Al desarrollar y probar sus aplicaciones Godot, es fundamental utilizar anuncios de prueba en lugar de anuncios de producción en vivo. De lo contrario, se puede suspender su cuenta de AdMob.</p>
 <p>El método más sencillo para cargar anuncios de prueba es utilizar nuestro ID de bloque de anuncios de prueba dedicado para intersticiales de Android e iOS:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Androide</label><label for="__tabbed_1_2">iOS</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Android</label><label for="__tabbed_1_2">iOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ca-app-pub-3940256099942544/1033173712
@@ -2311,12 +2339,18 @@
 </div>
 </div>
 <p>Este ID de bloque de anuncios en particular se ha configurado específicamente para ofrecer anuncios de prueba para cada solicitud. Puede emplearlo de forma segura durante las fases de codificación, prueba y depuración. Sin embargo, recuerde reemplazar este ID de bloque de anuncios de prueba por el suyo propio cuando esté listo para publicar su aplicación.</p>
-<p>Para obtener una comprensión más completa de cómo funcionan los anuncios de prueba del SDK de anuncios móviles, consulte nuestra documentación en<a href="../../enable_test_ads/">Anuncios de prueba</a>.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Android</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block"></div>
+</div>
+</div>
+<p>...
+Para obtener una comprensión más completa de cómo funcionan los anuncios de prueba del SDK de anuncios móviles, consulte nuestra documentación en <a href="../../enable_test_ads/">Anuncios de prueba</a>.</p>
 <h2 id="ejemplo-intersticial">Ejemplo intersticial</h2>
 <p>El siguiente código de ejemplo demuestra cómo utilizar el Intersticial. En este ejemplo, creará una instancia de un intersticial, cargará un anuncio en él mediante una AdRequest y mejorará la funcionalidad manejando varios eventos del ciclo de vida.</p>
 <h3 id="cargar-un-anuncio">Cargar un anuncio</h3>
 <p>Para cargar un anuncio intersticial, utilice la clase <code>InterstitialAdLoader</code>. Pase un <code>InterstitialAdLoadCallback</code> para recibir el anuncio cargado o cualquier posible error. Vale la pena señalar que, al igual que otras devoluciones de llamada de carga de formato, <code>InterstitialAdLoadCallback</code> aprovecha <code>LoadAdError</code> para proporcionar detalles completos del error.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">GDScript</label><label for="__tabbed_2_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-2-1"> 1</a></span>
@@ -2474,7 +2508,7 @@
 </div>
 <h3 id="configurar-fullscreencontentcallback">Configurar FullScreenContentCallback</h3>
 <p><code>FullScreenContentCallback</code> gestiona los eventos asociados con la visualización de su <code>InterstitialAd</code>. Antes de presentar el <code>InterstitialAd</code>, asegúrese de configurar la devolución de llamada:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">GDScript</label><label for="__tabbed_4_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-4-1"> 1</a></span>
@@ -2622,7 +2656,7 @@
 </div>
 <h3 id="mostrar-el-anuncio">Mostrar el anuncio</h3>
 <p>Lo ideal es que los anuncios intersticiales se muestren durante las pausas orgánicas en la progresión de la aplicación. Los ejemplos incluyen entre niveles de juego o después de que un usuario realiza una tarea. Para presentar un anuncio intersticial, utilice la función <code>show()</code>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">GDScript</label><label for="__tabbed_4_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-6-1">1</a></span>
@@ -2648,7 +2682,7 @@
 </div>
 <h3 id="limpiar-la-memoria">Limpiar la memoria</h3>
 <p>Al completar un <code>InterstitialAd</code>, es importante invocar la función <code>destroy()</code> antes de publicar su referencia:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">GDScript</label><label for="__tabbed_6_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">if</span><span class="w"> </span><span class="n">_interstitial_ad</span><span class="p">:</span>

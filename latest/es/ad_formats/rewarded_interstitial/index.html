@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#anuncios-intersticiales-bonificados-beta" class="md-skip">
+        <a href="#anuncios-intersticiales-recompensados-beta" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -1451,6 +1451,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mediate/integrate_partner_networks/unity_ads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unity Ads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2284,8 +2312,8 @@
 
 
 
-<h1 id="anuncios-intersticiales-bonificados-beta">Anuncios intersticiales bonificados (beta)</h1>
-<p>A<a href="https://support.google.com/admob/answer/9884467">Intersticial recompensado</a>es una forma específica de formato de anuncio incentivado que le permite ofrecer recompensas a cambio de anuncios que aparecen automáticamente durante las transiciones naturales de las aplicaciones. A diferencia de los anuncios bonificados habituales, los usuarios no están obligados a suscribirse activamente para ver un intersticial bonificado; están perfectamente integrados en la experiencia de la aplicación.</p>
+<h1 id="anuncios-intersticiales-recompensados-beta">Anuncios intersticiales recompensados (beta)</h1>
+<p>Un <a href="https://support.google.com/admob/answer/9884467">Intersticial recompensado</a>es una forma específica de formato de anuncio incentivado que le permite ofrecer recompensas a cambio de anuncios que aparecen automáticamente durante las transiciones naturales de las aplicaciones. A diferencia de los anuncios bonificados habituales, los usuarios no están obligados a suscribirse activamente para ver un intersticial recompensado; están perfectamente integrados en la experiencia de la aplicación.</p>
 <p>Este documento se basa en:</p>
 <ul>
 <li><a href="https://developers.google.com/admob/android/rewarded-interstitial">Documentación de Android del SDK de anuncios de Google para móviles</a></li>
@@ -2293,12 +2321,12 @@
 </ul>
 <h2 id="requisitos-previos">Requisitos previos</h2>
 <ul>
-<li>Completa el<a href="../../">Guía de introducción</a></li>
+<li>Completa la <a href="../../">Guía de introducción</a></li>
 </ul>
 <h2 id="pruebe-siempre-con-anuncios-de-prueba">Pruebe siempre con anuncios de prueba</h2>
 <p>Al desarrollar y probar sus aplicaciones Godot, es fundamental utilizar anuncios de prueba en lugar de anuncios de producción en vivo. De lo contrario, se puede suspender su cuenta de AdMob.</p>
-<p>El método más sencillo para cargar anuncios de prueba es utilizar nuestro ID de bloque de anuncios de prueba dedicado para intersticiales premiados de Android e iOS:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Androide</label><label for="__tabbed_1_2">iOS</label></div>
+<p>El método más sencillo para cargar anuncios de prueba es utilizar nuestro ID de bloque de anuncios de prueba dedicado para intersticiales recompensados de Android e iOS:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Android</label><label for="__tabbed_1_2">iOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>ca-app-pub-3940256099942544/5354046379
@@ -2311,9 +2339,9 @@
 </div>
 </div>
 <p>Este ID de bloque de anuncios en particular se ha configurado específicamente para ofrecer anuncios de prueba para cada solicitud. Puede emplearlo de forma segura durante las fases de codificación, prueba y depuración. Sin embargo, recuerde reemplazar este ID de bloque de anuncios de prueba por el suyo propio cuando esté listo para publicar su aplicación.</p>
-<p>Para obtener una comprensión más completa de cómo funcionan los anuncios de prueba del SDK de anuncios móviles, consulte nuestra documentación en<a href="../../enable_test_ads/">Anuncios de prueba</a>.</p>
+<p>Para obtener una comprensión más completa de cómo funcionan los anuncios de prueba del SDK de anuncios móviles, consulte nuestra documentación en <a href="../../enable_test_ads/">Anuncios de prueba</a>.</p>
 <h2 id="ejemplo-de-intersticial-recompensado">Ejemplo de intersticial recompensado</h2>
-<p>El siguiente ejemplo de código demuestra cómo utilizar el intersticial bonificado. En este ejemplo, creará una instancia de un intersticial bonificado, cargará un anuncio en él mediante una AdRequest y mejorará la funcionalidad gestionando varios eventos del ciclo de vida.</p>
+<p>El siguiente ejemplo de código demuestra cómo utilizar el intersticial recompensado. En este ejemplo, creará una instancia de un intersticial recompensado, cargará un anuncio en él mediante una AdRequest y mejorará la funcionalidad gestionando varios eventos del ciclo de vida.</p>
 <h3 id="cargar-un-anuncio">Cargar un anuncio</h3>
 <p>Para cargar un anuncio intersticial recompensado, utilice la clase <code>RewardedInterstitialAdLoader</code>. Pase un <code>RewardedInterstitialAdLoadCallback</code> para recibir el anuncio cargado o cualquier posible error. Vale la pena señalar que, al igual que otras devoluciones de llamada de carga de formato, <code>RewardedInterstitialAdLoadCallback</code> aprovecha <code>LoadAdError</code> para proporcionar detalles completos del error.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">GDScript</label><label for="__tabbed_2_2">C#</label></div>
@@ -2473,8 +2501,8 @@
 </div>
 </div>
 <h3 id="opcional-validar-las-devoluciones-de-llamada-de-verificacion-del-lado-del-servidor-ssv">[Opcional] Validar las devoluciones de llamada de verificación del lado del servidor (SSV)</h3>
-<p>Para aplicaciones que requieren datos adicionales en la verificación del lado del servidor<a href="https://developers.google.com/admob/android/ssv">Androide</a>/<a href="https://developers.google.com/admob/ios/ssv">iOS</a>devoluciones de llamada, se puede emplear la función de datos personalizados de los anuncios recompensados. Cualquier valor de cadena asignado a un objeto publicitario recompensado se transmite al parámetro de consulta <code>custom_data</code> de la devolución de llamada SSV. Si no se establecen datos personalizados, el parámetro de consulta <code>custom_data</code> estará ausente en la devolución de llamada SSV.</p>
-<p>El siguiente fragmento de código ilustra cómo establecer datos personalizados en un objeto de anuncio intersticial bonificado antes de solicitar un anuncio:</p>
+<p>Para aplicaciones que requieren datos adicionales en la verificación del lado del servidor <a href="https://developers.google.com/admob/android/ssv">Android</a>/<a href="https://developers.google.com/admob/ios/ssv">iOS</a>devoluciones de llamada, se puede emplear la función de datos personalizados de los anuncios recompensados. Cualquier valor de cadena asignado a un objeto publicitario recompensado se transmite al parámetro de consulta <code>custom_data</code> de la devolución de llamada SSV. Si no se establecen datos personalizados, el parámetro de consulta <code>custom_data</code> estará ausente en la devolución de llamada SSV.</p>
+<p>El siguiente fragmento de código ilustra cómo establecer datos personalizados en un objeto de anuncio intersticial recompensado antes de solicitar un anuncio:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -2526,7 +2554,7 @@
 <div class="admonition nota">
 <p class="admonition-title">Nota</p>
 </div>
-<p>La cadena de recompensa personalizada es<a href="https://en.wikipedia.org/wiki/Percent-encoding">porcentaje escapó</a>y puede requerir decodificación cuando se analiza desde la devolución de llamada SSV.</p>
+<p>La cadena de recompensa personalizada es <a href="https://en.wikipedia.org/wiki/Percent-encoding">porcentaje escapó</a>y puede requerir decodificación cuando se analiza desde la devolución de llamada SSV.</p>
 <h3 id="configurar-fullscreencontentcallback">Configurar FullScreenContentCallback</h3>
 <p><code>FullScreenContentCallback</code> gestiona los eventos asociados con la visualización de su <code>RewardedInterstitialAd</code>. Antes de presentar el <code>RewardedInterstitialAd</code>, asegúrese de configurar la devolución de llamada:</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">GDScript</label><label for="__tabbed_4_2">C#</label></div>

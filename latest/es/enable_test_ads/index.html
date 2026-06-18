@@ -564,7 +564,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sample-ad-units" class="md-nav__link">
+  <a href="#bloques-de-anuncios-de-muestra" class="md-nav__link">
     <span class="md-ellipsis">
       
         Bloques de anuncios de muestra
@@ -592,7 +592,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enable-test-devices" class="md-nav__link">
+  <a href="#habilitar-dispositivos-de-prueba" class="md-nav__link">
     <span class="md-ellipsis">
       
         Habilitar dispositivos de prueba
@@ -1416,6 +1416,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mediate/integrate_partner_networks/unity_ads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unity Ads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2122,7 +2150,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sample-ad-units" class="md-nav__link">
+  <a href="#bloques-de-anuncios-de-muestra" class="md-nav__link">
     <span class="md-ellipsis">
       
         Bloques de anuncios de muestra
@@ -2150,7 +2178,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#enable-test-devices" class="md-nav__link">
+  <a href="#habilitar-dispositivos-de-prueba" class="md-nav__link">
     <span class="md-ellipsis">
       
         Habilitar dispositivos de prueba
@@ -2220,9 +2248,9 @@
 <p>Esta guía proporciona instrucciones sobre cómo habilitar anuncios de prueba en su integración de anuncios. Es fundamental habilitar anuncios de prueba durante la fase de desarrollo para permitir hacer clic en ellos sin incurrir en cargos para los anunciantes de Google. Hacer clic en demasiados anuncios sin estar en modo de prueba puede provocar que su cuenta sea marcada por actividad no válida.</p>
 <p>Para probar sus anuncios durante el desarrollo, puede:</p>
 <ol>
-<li><strong>Vista previa de anuncios simulados en el editor</strong>: pruebe la integración de sus anuncios y los diseños visuales directamente dentro del Editor Godot sin implementarlos en un dispositivo. Ver<a href="../editor_mock_ads/">Vista previa de anuncios simulados en el editor</a>.</li>
-<li><strong>Utilice los bloques de anuncios de muestra de Google</strong>: cargue anuncios de prueba en dispositivos físicos o simuladores/emuladores. Ver<a href="#sample-ad-units">Bloques de anuncios de muestra</a>.</li>
-<li><strong>Habilitar dispositivos de prueba</strong>: pruebe con sus propios bloques de anuncios de producción registrando sus dispositivos de prueba. Ver<a href="#enable-test-devices">Habilitar dispositivos de prueba</a>.</li>
+<li><strong>Vista previa de anuncios simulados en el editor</strong>: pruebe la integración de sus anuncios y los diseños visuales directamente dentro del Editor Godot sin implementarlos en un dispositivo. Ver <a href="../editor_mock_ads/">Vista previa de anuncios simulados en el editor</a>.</li>
+<li><strong>Utilice los bloques de anuncios de muestra de Google</strong>: cargue anuncios de prueba en dispositivos físicos o simuladores/emuladores. Ver <a href="#sample-ad-units">Bloques de anuncios de muestra</a>.</li>
+<li><strong>Habilitar dispositivos de prueba</strong>: pruebe con sus propios bloques de anuncios de producción registrando sus dispositivos de prueba. Ver <a href="#enable-test-devices">Habilitar dispositivos de prueba</a>.</li>
 </ol>
 <p>Este documento se basa en:</p>
 <ul>
@@ -2231,17 +2259,17 @@
 </ul>
 <h2 id="requisitos-previos">Requisitos previos</h2>
 <ul>
-<li>Completa el<a href="../">Guía de introducción</a></li>
+<li>Completa la <a href="../">Guía de introducción</a></li>
 </ul>
-<h2 id="sample-ad-units">Bloques de anuncios de muestra</h2>
+<h2 id="bloques-de-anuncios-de-muestra">Bloques de anuncios de muestra</h2>
 <p>El método más conveniente para permitir las pruebas es emplear los bloques de anuncios de prueba proporcionados por Google. Estos bloques de anuncios están separados de su cuenta de AdMob, lo que garantiza que no haya riesgo de que su cuenta de generar tráfico no válido mientras los usa.</p>
 <p>Tenga en cuenta que debe seleccionar el bloque de anuncios de prueba proporcionado por Google adecuado según la plataforma que esté probando. Utilice un bloque de anuncios de prueba de iOS para realizar solicitudes de anuncios de prueba en iOS y un bloque de anuncios de prueba de Android para realizar solicitudes en Android.</p>
-<div class="admonition nota">
-<p class="admonition-title">Nota</p>
-</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><strong>Nota importante</strong>: antes de lanzar su aplicación, asegúrese de sustituir estos ID de prueba por su propio ID de bloque de anuncios.
 A continuación se muestran bloques de anuncios de muestra para cada formato disponible tanto en Android como en iOS:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Androide</label></div>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Android</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
@@ -2255,7 +2283,7 @@ A continuación se muestran bloques de anuncios de muestra para cada formato dis
 </thead>
 <tbody>
 <tr>
-<td>Bandera</td>
+<td>Banner</td>
 <td>ca-app-pub-3940256099942544/6300978111</td>
 </tr>
 <tr>
@@ -2263,7 +2291,7 @@ A continuación se muestran bloques de anuncios de muestra para cada formato dis
 <td>ca-app-pub-3940256099942544/9257395921</td>
 </tr>
 <tr>
-<td>intersticial</td>
+<td>Intersticial</td>
 <td>ca-app-pub-3940256099942544/1033173712</td>
 </tr>
 <tr>
@@ -2271,7 +2299,7 @@ A continuación se muestran bloques de anuncios de muestra para cada formato dis
 <td>ca-app-pub-3940256099942544/5224354917</td>
 </tr>
 <tr>
-<td>Intersticial recompensado</td>
+<td>Intersticial Recompensado</td>
 <td>ca-app-pub-3940256099942544/5354046379</td>
 </tr>
 <tr>
@@ -2294,7 +2322,7 @@ A continuación se muestran bloques de anuncios de muestra para cada formato dis
 </thead>
 <tbody>
 <tr>
-<td>Bandera</td>
+<td>Banner</td>
 <td>ca-app-pub-3940256099942544/2934735716</td>
 </tr>
 <tr>
@@ -2302,7 +2330,7 @@ A continuación se muestran bloques de anuncios de muestra para cada formato dis
 <td>ca-app-pub-3940256099942544/5575463023</td>
 </tr>
 <tr>
-<td>intersticial</td>
+<td>Intersticial</td>
 <td>ca-app-pub-3940256099942544/4411468910</td>
 </tr>
 <tr>
@@ -2310,7 +2338,7 @@ A continuación se muestran bloques de anuncios de muestra para cada formato dis
 <td>ca-app-pub-3940256099942544/1712485313</td>
 </tr>
 <tr>
-<td>Intersticial recompensado</td>
+<td>Intersticial Recompensado</td>
 <td>ca-app-pub-3940256099942544/6978759866</td>
 </tr>
 <tr>
@@ -2325,7 +2353,7 @@ A continuación se muestran bloques de anuncios de muestra para cada formato dis
 <thead>
 <tr>
 <th style="text-align: left;">Característica</th>
-<th style="text-align: left;">Androide</th>
+<th style="text-align: left;">Android</th>
 <th style="text-align: left;">iOS</th>
 </tr>
 </thead>
@@ -2337,26 +2365,26 @@ A continuación se muestran bloques de anuncios de muestra para cada formato dis
 </tr>
 </tbody>
 </table>
-<h2 id="enable-test-devices">Habilitar dispositivos de prueba</h2>
+<h2 id="habilitar-dispositivos-de-prueba">Habilitar dispositivos de prueba</h2>
 <p>Para realizar pruebas más exhaustivas con anuncios similares a los de producción, puede configurar su dispositivo como dispositivo de prueba y utilizar sus propios ID de bloques de anuncios creados en la interfaz de usuario de AdMob. Puede agregar dispositivos de prueba a través de la interfaz de usuario de AdMob o mediante programación mediante el SDK de anuncios de Google para móviles.</p>
 <p>Estos son los pasos para agregar su dispositivo como dispositivo de prueba:</p>
-<div class="admonition nota">
-<p class="admonition-title">Nota</p>
-</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><strong>Nota importante</strong>: Los emuladores de Android y los simuladores de iOS se configuran automáticamente como dispositivos de prueba. Esto significa que puede probar anuncios en estos dispositivos virtuales sin necesidad de agregarlos manualmente a su lista de dispositivos de prueba.</p>
-<h3 id="anade-tu-dispositivo-de-prueba-en-la-interfaz-de-usuario-de-admob">Añade tu dispositivo de prueba en la interfaz de usuario de AdMob</h3>
-<p>Para utilizar un método sencillo y no programático para incluir un dispositivo de prueba y probar compilaciones de aplicaciones nuevas o existentes, puede utilizar la interfaz de usuario de AdMob.<a href="https://support.google.com/admob/answer/9691433">Así es como</a>.</p>
-<div class="admonition nota">
-<p class="admonition-title">Nota</p>
 </div>
+<h3 id="anade-tu-dispositivo-de-prueba-en-la-interfaz-de-usuario-de-admob">Añade tu dispositivo de prueba en la interfaz de usuario de AdMob</h3>
+<p>Para utilizar un método sencillo y no programático para incluir un dispositivo de prueba y probar compilaciones de aplicaciones nuevas o existentes, puede utilizar la interfaz de usuario de AdMob. <a href="https://support.google.com/admob/answer/9691433">Así es como</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p><strong>Nota importante</strong>: Los dispositivos de prueba recién agregados generalmente comienzan a publicar anuncios de prueba en su aplicación en 15 minutos, aunque la configuración también puede demorar hasta 24 horas en surtir efecto.</p>
+</div>
 <h3 id="agregue-su-dispositivo-de-prueba-mediante-programacion">Agregue su dispositivo de prueba mediante programación</h3>
 <p>Si desea probar anuncios dentro de su aplicación durante la fase de desarrollo y desea registrar mediante programación su dispositivo de prueba, siga los pasos a continuación:</p>
 <ol>
 <li>Abra su aplicación con anuncios integrados e inicie una solicitud de anuncio.</li>
 <li>Verifique la salida de logcat para ver un mensaje similar al siguiente, que muestra la ID de su dispositivo y cómo agregarlo como dispositivo de prueba:</li>
 </ol>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Androide</label><label for="__tabbed_3_2">iOS</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Android</label><label for="__tabbed_3_2">iOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>```java
@@ -2421,22 +2449,22 @@ GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers =
 </div>
 </div>
 </div>
-<div class="admonition información">
-<p class="admonition-title">Información</p>
-</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>Recuerde eliminar el código responsable de definir estos dispositivos de prueba antes de lanzar su aplicación.</p>
+</div>
 <ol>
-<li>Vuelva a iniciar su aplicación. Si el anuncio es de Google, observará una etiqueta <strong>Anuncio de prueba</strong> ubicada en la parte superior central del anuncio, ya sea un anuncio de banner, intersticial o de video bonificado:
+<li>Vuelva a iniciar su aplicación. Si el anuncio es de Google, observará una etiqueta <strong>Anuncio de prueba</strong> ubicada en la parte superior central del anuncio, ya sea un anuncio de banner, intersticial o de video recompensado:
 <img alt="testad" src="https://developers.google.com/static/admob/images/android-testad-0-admob.png" /></li>
 </ol>
-<div class="admonition información">
-<p class="admonition-title">Información</p>
-</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>Tenga en cuenta que los anuncios mediados <em>NO</em> muestran una etiqueta <strong>Anuncio de prueba</strong>. Consulte la sección siguiente para obtener más información.</p>
+</div>
 <h3 id="pruebas-con-mediacion">Pruebas con mediación</h3>
-<p>Los bloques de anuncios de muestra de Google muestran exclusivamente Google Ads. Para probar su configuración de mediación de manera efectiva, debe emplear el método de<a href="#enable-test-devices">habilitación de dispositivos de prueba</a>.</p>
-<p>Los anuncios mediados NO exhiben una etiqueta de "Anuncio de prueba". En consecuencia, es su responsabilidad asegurarse de que los anuncios de prueba estén habilitados para cada una de sus redes de mediación para evitar que estas redes marquen su cuenta por actividad no válida. Consulte la información individual de cada red.<a href="../mediate/get_started/">guía de mediación</a>para obtener instrucciones detalladas.</p>
-<p>Si no está seguro de si un adaptador de red de anuncios de mediación admite anuncios de prueba, es recomendable abstenerse de hacer clic en anuncios de esa red durante la fase de desarrollo. Puedes utilizar el<a href="https://github.com/poingstudios/godot-admob-plugin/blob/master/addons/admob/src/api/core/ResponseInfo.gd">ResponseInfo.mediation_adapter_class_name</a>propiedad dentro de cualquiera de los formatos de anuncios para determinar qué red publicitaria publicó el anuncio actual.</p>
+<p>Los bloques de anuncios de muestra de Google muestran exclusivamente Google Ads. Para probar su configuración de mediación de manera efectiva, debe emplear el método de <a href="#enable-test-devices">habilitación de dispositivos de prueba</a>.</p>
+<p>Los anuncios mediados NO exhiben una etiqueta de "Anuncio de prueba". En consecuencia, es su responsabilidad asegurarse de que los anuncios de prueba estén habilitados para cada una de sus redes de mediación para evitar que estas redes marquen su cuenta por actividad no válida. Consulte la información individual de cada red <a href="../mediate/get_started/">guía de mediación</a> para obtener instrucciones detalladas.</p>
+<p>Si no está seguro de si un adaptador de red de anuncios de mediación admite anuncios de prueba, es recomendable abstenerse de hacer clic en anuncios de esa red durante la fase de desarrollo. Puedes utilizar el <a href="https://github.com/poingstudios/godot-admob-plugin/blob/master/addons/admob/src/api/core/ResponseInfo.gd">ResponseInfo.mediation_adapter_class_name</a> propiedad dentro de cualquiera de los formatos de anuncios para determinar qué red publicitaria publicó el anuncio actual.</p>
 
 
 

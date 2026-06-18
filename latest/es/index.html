@@ -534,7 +534,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#download-install" class="md-nav__link">
+  <a href="#descargar-e-instalar" class="md-nav__link">
     <span class="md-ellipsis">
       
         Descargar e instalar
@@ -546,10 +546,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#exportador" class="md-nav__link">
+  <a href="#exportacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Exportador
+        Exportación
       
     </span>
   </a>
@@ -562,7 +562,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#initialize-the-google-mobile-ads-sdk" class="md-nav__link">
+  <a href="#inicialice-el-sdk-de-anuncios-de-google-para-moviles" class="md-nav__link">
     <span class="md-ellipsis">
       
         Inicialice el SDK de anuncios de Google para móviles
@@ -596,10 +596,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bandera" class="md-nav__link">
+  <a href="#banner" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bandera
+        Banner
       
     </span>
   </a>
@@ -1486,6 +1486,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="mediate/integrate_partner_networks/unity_ads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unity Ads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2220,7 +2248,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#download-install" class="md-nav__link">
+  <a href="#descargar-e-instalar" class="md-nav__link">
     <span class="md-ellipsis">
       
         Descargar e instalar
@@ -2232,10 +2260,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#exportador" class="md-nav__link">
+  <a href="#exportacion" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Exportador
+        Exportación
       
     </span>
   </a>
@@ -2248,7 +2276,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#initialize-the-google-mobile-ads-sdk" class="md-nav__link">
+  <a href="#inicialice-el-sdk-de-anuncios-de-google-para-moviles" class="md-nav__link">
     <span class="md-ellipsis">
       
         Inicialice el SDK de anuncios de Google para móviles
@@ -2282,10 +2310,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#bandera" class="md-nav__link">
+  <a href="#banner" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Bandera
+        Banner
       
     </span>
   </a>
@@ -2359,7 +2387,7 @@
 
 
 <h1 id="empezar">Empezar</h1>
-<p>Integrar el complemento AdMob en su proyecto Godot, específicamente para Godot v4.2+, es el paso inicial y crucial para permitir la visualización de anuncios y la generación de ingresos. Después de incorporar con éxito este complemento, tendrá la flexibilidad de seleccionar entre varios formatos de anuncios, como banner o intersticial, y continuar con los pasos de implementación necesarios.</p>
+<p>Integrar el complemento AdMob en su proyecto Godot, específicamente para Godot v4.2+, es el paso inicial y crucial para permitir la visualización de anuncios y la generación de ingresos. Después de incorporar con éxito este complemento, tendrá la flexibilidad de seleccionar entre varios formatos de anuncios, como Banner o Intersticial, y continuar con los pasos de implementación necesarios.</p>
 <p>Este documento se basa en:</p>
 <ul>
 <li><a href="https://developers.google.com/admob/android/quick-start">Documentación de Android del SDK de anuncios de Google para móviles</a></li>
@@ -2379,93 +2407,91 @@
 <li>Apunte a iOS 16.0 o superior</li>
 </ul>
 </li>
-<li>Recomendado:<a href="https://support.google.com/admob/answer/7356219?visit_id=638286911958663013-3847536692&amp;rd=1">Crear una cuenta de AdMob</a>y<a href="https://support.google.com/admob/answer/9989980?visit_id=638286911964685099-3190075945&amp;rd=1">registrar una aplicación</a>.</li>
+<li>Recomendado: <a href="https://support.google.com/admob/answer/7356219?visit_id=638286911958663013-3847536692&amp;rd=1">Crear una cuenta de AdMob</a> y <a href="https://support.google.com/admob/answer/9989980?visit_id=638286911964685099-3190075945&amp;rd=1">registrar una aplicación</a>.</li>
 </ul>
 <h2 id="descargue-el-complemento-godot-admob-de-poing-studios">Descargue el complemento Godot AdMob de Poing Studios</h2>
 <p>El complemento Godot AdMob de Poing Studios simplifica el proceso para que los desarrolladores de Godot incorporen anuncios móviles de Google en sus aplicaciones de Android e iOS, eliminando la necesidad de escribir código Java/Kotlin u Objective-C++. En cambio, este complemento ofrece una interfaz basada en GDScript y C# para solicitudes de anuncios, que puede integrarse perfectamente en su proyecto Godot.</p>
 <p>Para acceder al complemento, puede descargar el paquete Godot proporcionado o explorar su código fuente en GitHub a través de los enlaces a continuación.</p>
-<p><a class="md-button md-button--primario" href="https://github.com/poingstudios/godot-admob-plugin/releases/latest">Descargar desde GitHub</a><a class="md-button md-button--primario" href="https://store.godotengine.org/asset/poingstudios/admob/">Descargar desde la tienda de activos</a><a class="md-button md-button--primario" href="https://github.com/poingstudios/godot-admob-plugin">Código fuente</a></p>
+<p><a class="md-button md-button--primary" href="https://github.com/poingstudios/godot-admob-plugin/releases/latest">Descargar desde GitHub</a> <a class="md-button md-button--primary" href="https://store.godotengine.org/asset/poingstudios/admob/">Descargar desde la tienda de activos</a> <a class="md-button md-button--primary" href="https://github.com/poingstudios/godot-admob-plugin">Código fuente</a></p>
 <h3 id="importacion-del-complemento-godot-admob-en-el-proyecto">Importación del complemento Godot AdMob en el proyecto</h3>
 <p>El complemento AdMob para Godot está convenientemente disponible a través de Godot Asset Store. Para importar este complemento a su proyecto Godot, siga estos pasos:</p>
 <ol>
-<li>Abre tu proyecto Godot.</li>
+<li>Abra su proyecto Godot.</li>
 <li>Navegue hasta Asset Store dentro del editor Godot.</li>
-<li>En la barra de búsqueda, ingrese "AdMob" y asegúrese de que el editor esté configurado en "Poing Studios".
+<li>En la barra de búsqueda, ingrese <code>AdMob</code> y asegúrese de que el editor esté configurado en <code>Poing Studios</code>.
 <img alt="activate_plugin" src="../assets/asset_store.png" /></li>
-<li>Localice el complemento de AdMob y haga clic en el botón "Descargar".</li>
-<li>Una vez que se complete la descarga, vaya a "Proyecto → Configuración del proyecto" dentro del editor Godot.</li>
-<li>En la sección "Complementos", busque el complemento "AdMob" y actívelo.
+<li>Localice el complemento de AdMob y haga clic en el botón <code>Descargar</code>.</li>
+<li>Una vez que se complete la descarga, vaya a <code>Proyecto → Configuración del proyecto</code> dentro del editor Godot.</li>
+<li>En la sección <code>Plugins</code>, busque el complemento <code>AdMob</code> y actívelo.
 <img alt="activate_plugin" src="../assets/activate_plugin.png" /></li>
 <li>Las bibliotecas de Android e iOS se descargarán e instalarán automáticamente.</li>
 <li>Con estos pasos, habrá integrado con éxito el complemento de AdMob en su proyecto Godot sin necesidad de importar archivos manualmente adicionales.</li>
 </ol>
-<h2 id="download-install">Descargar e instalar</h2>
-<div class="admonition información">
-<p class="admonition-title">Información</p>
-</div>
+<h2 id="descargar-e-instalar">Descargar e instalar</h2>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
 <p>Esta sección normalmente <strong>no es obligatoria</strong>, ya que el complemento maneja las bibliotecas automáticamente. Siga estos pasos solo si la descarga automática falló.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Androide</label></div>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Android</label><label for="__tabbed_1_2">iOS</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block"></div>
-</div>
-</div>
+<div class="tabbed-block">
 <p>Para integrar la biblioteca de Android requerida para AdMob en Godot, siga estos pasos:</p>
-<div class="highlight"><pre><span></span><code>1. En Godot, navegue hasta `Proyecto → Herramientas → AdMob Manager → Android → Descargar e instalar`.
-1. Esta acción descargará e instalará la biblioteca de Android adecuada en su proyecto, que se encuentra en `res://addons/admob/android/bin/`.
-</code></pre></div>
-<p>Si tiene algún problema con la descarga, puede intentar descargar la biblioteca manualmente haciendo clic en<a href="https://github.com/poingstudios/godot-admob-android/releases/latest">aquí</a>.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">iOS</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block"></div>
+<ol>
+<li>En Godot, navegue hasta <code>Proyecto → Herramientas → AdMob Manager → Android → Descargar e instalar</code>.</li>
+<li>Esta acción descargará e instalará la biblioteca de Android adecuada en su proyecto, que se encuentra en <code>res://addons/admob/android/bin/</code>.</li>
+</ol>
+<p>Si tiene algún problema con la descarga, puede intentar descargar la biblioteca manualmente haciendo clic en <a href="https://github.com/poingstudios/godot-admob-android/releases/latest">aquí</a>.</p>
 </div>
-</div>
+<div class="tabbed-block">
 <p>Para integrar la biblioteca iOS requerida para AdMob en Godot, siga estos pasos:</p>
-<div class="highlight"><pre><span></span><code>1. En Godot, navegue hasta `Proyecto → Herramientas → AdMob Manager → iOS → Descargar e instalar`.
-1. Esta acción descargará e instalará automáticamente la biblioteca de iOS requerida en su proyecto en `res://ios/plugins/`.
-</code></pre></div>
-<p>Si tiene algún problema con la descarga, puede intentar descargar la biblioteca manualmente haciendo clic en<a href="https://github.com/poingstudios/godot-admob-ios/releases/latest">aquí</a>.</p>
-<h3 id="exportador">Exportador</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Androide</label></div>
+<ol>
+<li>En Godot, navegue hasta <code>Proyecto → Herramientas → AdMob Manager → iOS → Descargar e instalar</code>.</li>
+<li>Esta acción descargará e instalará automáticamente la biblioteca de iOS requerida en su proyecto en <code>res://ios/plugins/</code>.</li>
+</ol>
+<p>Si tiene algún problema con la descarga, puede intentar descargar la biblioteca manualmente haciendo clic en <a href="https://github.com/poingstudios/godot-admob-ios/releases/latest">aquí</a>.</p>
+</div>
+</div>
+</div>
+<h3 id="exportacion">Exportación</h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Android</label><label for="__tabbed_2_2">iOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <ol>
-<li>Instale el<a href="https://docs.godotengine.org/en/stable/tutorials/export/android_gradle_build.html">Plantilla de compilación de Android</a>navegando a <code>Proyecto → Instalar plantilla de compilación de Android</code>.</li>
-<li>Configure las opciones preestablecidas de Android en <code>Proyecto → Configuración del proyecto... → General</code>:<ul>
+<li>Instale la <a href="https://docs.godotengine.org/en/stable/tutorials/export/android_gradle_build.html">Plantilla de compilación de Android</a> navegando a <code>Proyecto → Instalar plantilla de compilación de Android</code>.</li>
+<li>
+<ul>
 <li>En la barra lateral izquierda, localice la sección <strong>Admob</strong> y haga clic en <strong>Android</strong>.</li>
-<li>Añade tu<a href="https://support.google.com/admob/answer/7356431">ID de aplicación de AdMob</a>al campo "Id. de aplicación".</li>
+<li>Añada su <a href="https://support.google.com/admob/answer/7356431">ID de aplicación de AdMob</a> al campo <code>Id. de aplicación</code>.</li>
 <li>Habilite o deshabilite los complementos <code>Enabled</code> y Mediación (<code>Mediation/Meta</code>, <code>Mediation/Vungle</code>) activando las casillas de verificación respectivas.</li>
 </ul>
+<p>Configure las opciones preestablecidas de Android en <code>Proyecto → Configuración del proyecto... → General</code>:</p>
+<div class="admonition tip">
+<p class="admonition-title">ID de aplicación frente a ID de bloque de anuncios</p>
+<ul>
+<li><strong>ID de aplicación</strong> (contiene <code>~</code>): se utiliza para el registro de la aplicación y la configuración interna.</li>
+<li><strong>ID del bloque de anuncios</strong> (contiene <code>/</code>): se utiliza para cargar formatos de anuncios específicos en su código.</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Al exportar su proyecto, seleccione <code>Use Gradle Build</code>.</p>
+<p><img alt="export" src="../assets/android/export.png" /></p>
 </li>
 </ol>
 </div>
-</div>
-</div>
-<div class="admonition consejo">
-<p class="admonition-title">ID de aplicación frente a ID de bloque de anuncios</p>
-<div class="highlight"><pre><span></span><code>    - **ID de aplicación** (contiene `~`): se utiliza para el registro de la aplicación y la configuración interna.
-    - **ID del bloque de anuncios** (contiene `/`): se utiliza para cargar formatos de anuncios específicos en su código.
-</code></pre></div>
-<ol>
-<li>Al exportar su proyecto, seleccione "Usar Gradle Build".</li>
-</ol>
-</div>
-<p><img alt="export" src="../assets/android/export.png" /></p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">iOS</label></div>
-<div class="tabbed-content">
 <div class="tabbed-block">
 <ol>
-<li>Al exportar su proyecto, actualice <code>GADApplicationIdentifier</code> con su<a href="https://support.google.com/admob/answer/7356431">ID de aplicación de AdMob</a>y asegúrese de que <code>Ad Mob</code> esté habilitado en la sección Complementos del cuadro de diálogo Exportar. Si tienes Mediación, marca también <code>Ad Mob Meta</code>, etc...</li>
-</ol>
-</div>
-</div>
-</div>
+<li>
+<p>Al exportar su proyecto, actualice <code>GADApplicationIdentifier</code> con su <a href="https://support.google.com/admob/answer/7356431">ID de aplicación de AdMob</a> y asegúrese de que <code>Ad Mob</code> esté habilitado en la sección Complementos del cuadro de diálogo Exportar. Si tiene Mediación, marque también <code>Ad Mob Meta</code>, etc...</p>
 <p><img alt="gadapplicationidentifier" src="../assets/ios/gadapplicationidentifier.png" /></p>
-<div class="admonition consejo">
+<div class="admonition tip">
 <p class="admonition-title">ID de aplicación frente a ID de bloque de anuncios</p>
-<div class="highlight"><pre><span></span><code>    - **ID de aplicación** (contiene `~`): se utiliza para el registro de la aplicación y la configuración interna.
-    - **ID del bloque de anuncios** (contiene `/`): se utiliza para cargar formatos de anuncios específicos en su código.
-</code></pre></div>
-<ol>
+<ul>
+<li><strong>ID de aplicación</strong> (contiene <code>~</code>): se utiliza para el registro de la aplicación y la configuración interna.</li>
+<li><strong>ID del bloque de anuncios</strong> (contiene <code>/</code>): se utiliza para cargar formatos de anuncios específicos en su código.</li>
+</ul>
+</div>
+</li>
 <li>
 <p><strong>¡Eso es todo!</strong> Dado que este complemento utiliza paquetes <code>.xcframework</code>, Godot 4.2+ integrará automáticamente todas las bibliotecas y marcos necesarios en su proyecto Xcode. No se requieren comandos de terminal manuales, CocoaPods o pasos de configuración de Xcode.</p>
 </li>
@@ -2473,20 +2499,24 @@
 <p><a href="https://github.com/poingstudios/godot-admob-ios/issues/127">Si se enfrenta al error "__swift_FORCE_LOAD_", lea esto</a>.</p>
 <ol>
 <li>Cree un archivo <code>Untitled.swift</code> en su proyecto Xcode.</li>
-<li>Xcode le pedirá que "Crear encabezado de puente → Aceptar".</li>
-<li>Su proyecto ahora debería construirse normalmente.</li>
+<li>Xcode le pedirá que <code>Crear encabezado de puente → Aceptar</code>.</li>
+<li>Su proyecto ahora debería construirse normalmente.
+    <img alt="untitled.swift" src="../assets/ios/untitled.swift.png" /></li>
 </ol>
+</li>
+<li>
+<p>Ejecute el juego.</p>
+</li>
+<li>
+<p><a href="https://github.com/godotengine/godot/issues/44681#issuecomment-751399783">Si está intentando ejecutar en Simulator y no funciona, lea esto</a>.</p>
 </li>
 </ol>
 </div>
-<p><img alt="untitled.swift" src="../assets/ios/untitled.swift.png" /></p>
-<div class="highlight"><pre><span></span><code>1. Ejecute el juego.
-
-1. [Si está intentando ejecutar en Simulator y no funciona, lea esto](https://github.com/godotengine/godot/issues/44681#issuecomment-751399783).
-</code></pre></div>
-<h2 id="initialize-the-google-mobile-ads-sdk">Inicialice el SDK de anuncios de Google para móviles</h2>
+</div>
+</div>
+<h2 id="inicialice-el-sdk-de-anuncios-de-google-para-moviles">Inicialice el SDK de anuncios de Google para móviles</h2>
 <p>Antes de cargar anuncios, asegúrese de que su aplicación inicialice el SDK de anuncios de Google para móviles. Puede lograr esto llamando a MobileAds.initialize(). Esta función inicializa el SDK y activa un detector de finalización una vez que finaliza el proceso de inicialización o si excede un tiempo de espera de 30 segundos. Es importante tener en cuenta que esta inicialización debe ocurrir solo una vez, idealmente durante la fase de inicio de la aplicación.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
@@ -2510,47 +2540,47 @@
 <p><img alt="app_open" src="https://developers.google.com/static/admob/images/format-app-open.svg" /></p>
 <p>La apertura de la aplicación es un formato de anuncio que aparece cuando los usuarios abren o vuelven a su aplicación. El anuncio se superpone a la pantalla de carga.</p>
 </div>
-<p><a class="md-button md-button--primario" href="ad_formats/app_open/">Implementar anuncios de apertura de aplicaciones</a></p>
-<h3 id="bandera">Bandera</h3>
+<p><a class="md-button md-button--primary" href="ad_formats/app_open/">Implementar anuncios de apertura de aplicaciones</a></p>
+<h3 id="banner">Banner</h3>
 <div class="image-text-container">
 <p><img alt="banner" src="../assets/ad_formats/banner.png" /></p>
 <p>Los anuncios de banner son anuncios rectangulares, que constan de imágenes o texto, que se integran en el diseño de una aplicación. Estos anuncios permanecen en la pantalla mientras los usuarios interactúan con la aplicación y pueden actualizarse automáticamente después de un intervalo de tiempo designado. Si es nuevo en la publicidad móvil, los anuncios publicitarios proporcionan un excelente punto de partida para su proceso de implementación de anuncios.</p>
 </div>
-<p><a class="md-button md-button--primario" href="ad_formats/banner/get_started/">Implementar anuncios publicitarios</a></p>
+<p><a class="md-button md-button--primary" href="ad_formats/banner/get_started/">Implementar anuncios de banner</a></p>
 <h3 id="intersticial">Intersticial</h3>
 <div class="image-text-container">
 <p><img alt="interstitial" src="../assets/ad_formats/interstitial.png" /></p>
 <p>Los anuncios intersticiales son anuncios expansivos de pantalla completa que se superponen a la interfaz de una aplicación y persisten hasta que el usuario los cierra. Son más efectivos cuando se colocan estratégicamente durante las pausas naturales en la ejecución de la aplicación, como entre niveles de un juego o inmediatamente después de completar una tarea.</p>
 </div>
-<p><a class="md-button md-button--primario" href="ad_formats/interstitial/">Implementar anuncios intersticiales</a></p>
+<p><a class="md-button md-button--primary" href="ad_formats/interstitial/">Implementar anuncios intersticiales</a></p>
 <h3 id="superposicion-nativa">Superposición nativa</h3>
 <div class="image-text-container">
 <p><img alt="native_overlay" src="https://developers.google.com/static/admob/images/format-native.svg" /></p>
 <p>Los anuncios superpuestos nativos le permiten mostrar anuncios diseñados para adaptarse a la apariencia de su aplicación, utilizando plantillas prediseñadas encima del contenido de su aplicación. Admiten la personalización de colores, fuentes y opciones de diseño y, al mismo tiempo, mantienen la integración simple.</p>
 </div>
-<p><a class="md-button md-button--primario" href="ad_formats/native_overlay/">Implementar anuncios superpuestos nativos</a></p>
+<p><a class="md-button md-button--primary" href="ad_formats/native_overlay/">Implementar anuncios superpuestos nativos</a></p>
 <h3 id="recompensado">Recompensado</h3>
 <div class="image-text-container">
 <p><img alt="rewarded" src="../assets/ad_formats/rewarded.png" /></p>
-<p>Los anuncios de video recompensados ​​son anuncios de video inmersivos en pantalla completa que brindan a los usuarios la opción de verlos por completo. A cambio de su tiempo y atención, los usuarios reciben recompensas o beneficios dentro de la aplicación.</p>
+<p>Los anuncios de video recompensados son anuncios de video inmersivos en pantalla completa que brindan a los usuarios la opción de verlos por completo. A cambio de su tiempo y atención, los usuarios reciben recompensas o beneficios dentro de la aplicación.</p>
 </div>
-<p><a class="md-button md-button--primario" href="ad_formats/rewarded/">Implementar anuncios recompensados</a></p>
+<p><a class="md-button md-button--primary" href="ad_formats/rewarded/">Implementar anuncios recompensados</a></p>
 <h3 id="intersticial-recompensado">Intersticial recompensado</h3>
 <div class="image-text-container">
 <p><img alt="rewarded_interstitial" src="../assets/ad_formats/rewarded_interstitial.png" /></p>
 <p>Un intersticial recompensado es una forma específica de formato de anuncio incentivado que le permite ofrecer recompensas a cambio de anuncios que aparecen automáticamente durante las transiciones naturales de las aplicaciones. A diferencia de los anuncios bonificados habituales, los usuarios no están obligados a suscribirse activamente para ver un intersticial bonificado; están perfectamente integrados en la experiencia de la aplicación.</p>
 </div>
-<p><a class="md-button md-button--primario" href="ad_formats/rewarded_interstitial/">Implementar anuncios intersticiales bonificados</a></p>
+<p><a class="md-button md-button--primary" href="ad_formats/rewarded_interstitial/">Implementar anuncios intersticiales recompensados</a></p>
 <style>
-.imagen-texto-contenedor {
-pantalla: flexible;
-alinear elementos: centro;
-}
-.image-text-container img {
-margen derecho: 20px;
-ancho máximo: 130px;
-altura: automático;
-}
+  .image-text-container {
+    display: flex;
+    align-items: center;
+  }
+  .image-text-container img {
+    margin-right: 20px;
+    max-width: 130px;
+    height: auto;
+  }
 </style>
 
 

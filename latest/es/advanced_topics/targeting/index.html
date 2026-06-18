@@ -1280,6 +1280,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../mediate/integrate_partner_networks/unity_ads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unity Ads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1738,7 +1766,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#child-directed-setting" class="md-nav__link">
+  <a href="#entorno-dirigido-a-ninos" class="md-nav__link">
     <span class="md-ellipsis">
       
         Entorno dirigido a niños
@@ -2108,7 +2136,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#child-directed-setting" class="md-nav__link">
+  <a href="#entorno-dirigido-a-ninos" class="md-nav__link">
     <span class="md-ellipsis">
       
         Entorno dirigido a niños
@@ -2171,12 +2199,12 @@
 </ul>
 <h2 id="requisitos-previos">Requisitos previos</h2>
 <ul>
-<li>Completa el<a href="../../">Guía de introducción</a></li>
+<li>Completa la <a href="../../">Guía de introducción</a></li>
 </ul>
 <h2 id="solicitar-configuracion">Solicitar configuración</h2>
 <p>"RequestConfiguration" es una entidad utilizada para recopilar detalles de orientación que se pueden aplicar globalmente a través de un método estático dentro de "MobileAds". Y se aplica mediante <code>MobileAds.set_request_configuration(request_configuration)</code></p>
-<h3 id="child-directed-setting">Entorno dirigido a niños</h3>
-<p>para cumplir con<a href="https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children%27s-privacy">Ley de protección de la privacidad infantil en línea (COPPA)</a>, puede configurar la opción "etiqueta para tratamiento dirigido a niños". Esto significa que desea que su contenido sea tratado como dirigido a niños a efectos de la COPPA. Es importante asegurarse de tener la autoridad para tomar esta decisión en nombre del propietario de la aplicación. Tenga en cuenta que el uso indebido de esta configuración puede provocar la cancelación de su cuenta de Google.</p>
+<h3 id="entorno-dirigido-a-ninos">Entorno dirigido a niños</h3>
+<p>Para cumplir con la <a href="https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children%27s-privacy">Ley de protección de la privacidad infantil en línea (COPPA)</a>, puede configurar la opción "etiqueta para tratamiento dirigido a niños". Esto significa que desea que su contenido sea tratado como dirigido a niños a efectos de la COPPA. Es importante asegurarse de tener la autoridad para tomar esta decisión en nombre del propietario de la aplicación. Tenga en cuenta que el uso indebido de esta configuración puede provocar la cancelación de su cuenta de Google.</p>
 <p>Como desarrollador de aplicaciones, puedes indicar si tu contenido está dirigido a niños al realizar solicitudes de anuncios. Cuando especifica que su contenido está dirigido a niños, Google tomará medidas para desactivar la publicidad basada en intereses (IBA) y los anuncios de remarketing para esa solicitud de anuncio en particular.</p>
 <p>Para implementar esta configuración, puede usar <code>RequestConfiguration.new().tag_for_child_directed_treatment = int</code> con las siguientes opciones:</p>
 <ul>
@@ -2216,7 +2244,7 @@
 </div>
 </div>
 <h3 id="usuarios-menores-de-edad-de-consentimiento">Usuarios menores de edad de consentimiento</h3>
-<p>Puede configurar sus solicitudes de anuncios para recibir tratamiento para los usuarios del Espacio Económico Europeo (EEE) que tienen menos de la edad de consentimiento. Esta característica está diseñada para ayudar con el cumplimiento de la<a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679">Reglamento General de Protección de Datos (GDPR)</a>. Es importante tener en cuenta que el RGPD puede imponer obligaciones legales adicionales, por lo que es recomendable consultar con un asesor legal y revisar las directrices de la Unión Europea. Las herramientas de Google están destinadas a respaldar el cumplimiento, pero no reemplazan las responsabilidades legales de los editores.<a href="https://support.google.com/admob/answer/7666366">Obtenga más información sobre cómo el RGPD afecta a los editores</a>.</p>
+<p>Puede configurar sus solicitudes de anuncios para recibir tratamiento para los usuarios del Espacio Económico Europeo (EEE) que tienen menos de la edad de consentimiento. Esta característica está diseñada para ayudar con el cumplimiento de la <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679">Reglamento General de Protección de Datos (GDPR)</a>. Es importante tener en cuenta que el RGPD puede imponer obligaciones legales adicionales, por lo que es recomendable consultar con un asesor legal y revisar las directrices de la Unión Europea. Las herramientas de Google están destinadas a respaldar el cumplimiento, pero no reemplazan las responsabilidades legales de los editores. <a href="https://support.google.com/admob/answer/7666366">Obtenga más información sobre cómo el RGPD afecta a los editores</a>.</p>
 <p>Al utilizar esta función, una solicitud de anuncio contendrá un parámetro "Etiqueta para usuarios menores de la edad de consentimiento en Europa" (TFUA). Este parámetro desactiva la publicidad personalizada, incluido el remarketing, para todas las solicitudes de anuncios. También evita solicitudes a proveedores de publicidad de terceros, como píxeles de medición de publicidad y servidores de publicidad de terceros.</p>
 <p>De manera similar a la configuración dirigida a niños, puede utilizar la propiedad en la clase <code>RequestConfiguration.new()</code> para establecer el parámetro TFUA: <code>tag_for_under_age_of_consent = int</code>. Ofrece las siguientes opciones:</p>
 <ul>
@@ -2227,7 +2255,7 @@
 <p>Utilice <code>tag_for_under_age_of_consent</code> con <code>RequestConfiguration.TagForUnderAgeOfConsent.FALSE</code> para especificar que no desea que la solicitud de anuncio reciba tratamiento para usuarios en el Espacio Económico Europeo (EEE) menores de la edad de consentimiento.</p>
 </li>
 <li>
-<p>Utilice <code>tag_for_under_age_of_consent</code> con <code>RequestConfiguration.TagForUnderAgeOfConsent.UNSPECIFIED</code> para indicar que no ha especificado si la solicitud de anuncio debe recibir tratamiento para usuarios en el Espacio Económico Europeo (EEE) menores de edad de consentimiento.</p>
+<p>Utilice <code>tag_for_under_age_of_consent</code> with <code>RequestConfiguration.TagForUnderAgeOfConsent.UNSPECIFIED</code> para indicar que no ha especificado si la solicitud de anuncio debe recibir tratamiento para usuarios en el Espacio Económico Europeo (EEE) menores de edad de consentimiento.</p>
 </li>
 </ul>
 <p>A continuación se muestra un ejemplo que indica su intención de incluir TFUA en sus solicitudes de anuncios:</p>
@@ -2255,11 +2283,11 @@
 </div>
 </div>
 </div>
-<p>Las etiquetas para habilitar el<a href="#child-directed-setting">Entorno dirigido a niños</a>y la propiedad <code>tag_for_under_age_of_consent</code> no deben establecerse simultáneamente en <code>true</code>. Si es así, el entorno dirigido a niños tiene prioridad.</p>
+<p>Las etiquetas para habilitar el <a href="#child-directed-setting">Entorno dirigido a niños</a> y la propiedad <code>tag_for_under_age_of_consent</code> no deben establecerse simultáneamente en <code>true</code>. Si es así, el entorno dirigido a niños tiene prioridad.</p>
 <h3 id="filtrado-de-contenido-publicitario">Filtrado de contenido publicitario</h3>
-<p>Para garantizar el cumplimiento de las normas de Google Play<a href="https://support.google.com/googleplay/android-developer/answer/9857753#zippy=%2Cexamples-of-common-violations">Política de anuncios inapropiados</a>, que abarca ofertas asociadas dentro de los anuncios, es esencial que todos los anuncios y sus ofertas asociadas que se muestran en su aplicación estén alineados con la<a href="https://support.google.com/googleplay/android-developer/answer/9898843">calificación de contenido</a>. Esto se aplica incluso si el contenido en sí cumple con las políticas de Google Play.</p>
+<p>Para garantizar el cumplimiento de las normas de la <a href="https://support.google.com/googleplay/android-developer/answer/9857753#zippy=%2Cexamples-of-common-violations">Política de anuncios inapropiados</a> de Google Play, que abarca ofertas asociadas dentro de los anuncios, es esencial que todos los anuncios y sus ofertas asociadas que se muestran en su aplicación estén alineados con la <a href="https://support.google.com/googleplay/android-developer/answer/9898843">calificación de contenido</a>. Esto se aplica incluso si el contenido en sí cumple con las políticas de Google Play.</p>
 <p>Herramientas como la clasificación máxima del contenido de los anuncios le brindan un mayor control sobre el contenido de los anuncios que se muestran a sus usuarios. Puede establecer una clasificación de contenido máxima para garantizar el cumplimiento de las políticas de la plataforma.</p>
-<p>Las aplicaciones pueden especificar una clasificación máxima de contenido publicitario para sus solicitudes de anuncios mediante la propiedad <code>max_ad_content_rating</code>. Los anuncios de AdMob devueltos con esta configuración tendrán una clasificación de contenido que coincida o quede por debajo del nivel especificado. Los valores disponibles para este extra de red se basan en<a href="https://support.google.com/admob/answer/7562142">clasificaciones de etiquetas de contenido digital</a>y debe ser una de las siguientes cadenas:</p>
+<p>Las aplicaciones pueden especificar una clasificación máxima de contenido publicitario para sus solicitudes de anuncios mediante la propiedad <code>max_ad_content_rating</code>. Los anuncios de AdMob devueltos con esta configuración tendrán una clasificación de contenido que coincida o quede por debajo del nivel especificado. Los valores disponibles para este extra de red se basan en <a href="https://support.google.com/admob/answer/7562142">clasificaciones de etiquetas de contenido digital</a> y debe ser una de las siguientes cadenas:</p>
 <ul>
 <li><code>Solicitud de configuración.MAX_AD_CONTENT_RATING_G</code></li>
 <li><code>Solicitud de configuración.MAX_AD_CONTENT_RATING_PG</code></li>

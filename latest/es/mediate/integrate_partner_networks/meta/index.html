@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#integre-meta-audience-network-con-las-ofertas" class="md-skip">
+        <a href="#integrar-meta-audience-network-con-las-ofertas" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -1320,7 +1320,7 @@
   <a href="#paso-1-configurar-la-red-meta-audience" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Paso 1: configurar la red Meta Audience
+        Paso 1: Configurar la red Meta Audience
       
     </span>
   </a>
@@ -1342,7 +1342,7 @@
   <a href="#paso-3-importe-el-complemento-meta-audience-network" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Paso 3: importe el complemento Meta Audience Network
+        Paso 3: Importe el complemento Meta Audience Network
       
     </span>
   </a>
@@ -1353,7 +1353,7 @@
   <a href="#paso-4-habilite-el-complemento" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Paso 4: habilite el complemento
+        Paso 4: Habilite el complemento
       
     </span>
   </a>
@@ -1364,7 +1364,7 @@
   <a href="#paso-5-se-requiere-codigo-adicional" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Paso 5: se requiere código adicional
+        Paso 5: Se requiere código adicional
       
     </span>
   </a>
@@ -1501,6 +1501,34 @@
     
   
     Vungle
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../unity_ads/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unity Ads
   
 
     
@@ -2234,7 +2262,7 @@
   <a href="#paso-1-configurar-la-red-meta-audience" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Paso 1: configurar la red Meta Audience
+        Paso 1: Configurar la red Meta Audience
       
     </span>
   </a>
@@ -2256,7 +2284,7 @@
   <a href="#paso-3-importe-el-complemento-meta-audience-network" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Paso 3: importe el complemento Meta Audience Network
+        Paso 3: Importe el complemento Meta Audience Network
       
     </span>
   </a>
@@ -2267,7 +2295,7 @@
   <a href="#paso-4-habilite-el-complemento" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Paso 4: habilite el complemento
+        Paso 4: Habilite el complemento
       
     </span>
   </a>
@@ -2278,7 +2306,7 @@
   <a href="#paso-5-se-requiere-codigo-adicional" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Paso 5: se requiere código adicional
+        Paso 5: Se requiere código adicional
       
     </span>
   </a>
@@ -2408,12 +2436,12 @@
 
 
 
-<h1 id="integre-meta-audience-network-con-las-ofertas">Integre Meta Audience Network con las ofertas</h1>
-<div class="admonition información">
-<p class="admonition-title">Información</p>
+<h1 id="integrar-meta-audience-network-con-las-ofertas">Integrar Meta Audience Network con las ofertas</h1>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>Importante</strong>: Facebook Audience Network ahora es Meta Audience Network. Ver <a href="https://about.fb.com/news/2021/10/facebook-company-is-now-meta/">El anuncio de Meta</a> para más información.</p>
 </div>
-<p><strong>Importante</strong>: Facebook Audience Network ahora es Meta Audience Network. Ver<a href="https://about.fb.com/news/2021/10/facebook-company-is-now-meta/">El anuncio de Meta.</a>para más información.
-Esta guía explica cómo utilizar el SDK de anuncios de Google para móviles para cargar y presentar anuncios de Meta Audience Network a través de<a href="../../get_started/">mediación</a>, with a focus on bidding integrations. Proporciona instrucciones sobre cómo integrar Meta Audience Network en la configuración de mediación de una aplicación Godot e integrar el SDK y el adaptador de Meta Audience Network en su aplicación Godot.</p>
+<p>Esta guía explica cómo utilizar el SDK de anuncios de Google para móviles para cargar y presentar anuncios de Meta Audience Network a través de <a href="../../get_started/">mediación</a>, con un enfoque en las integraciones de ofertas. Proporciona instrucciones sobre cómo integrar Meta Audience Network en la configuración de mediación de una aplicación Godot e integrar el SDK y el adaptador de Meta Audience Network en su aplicación Godot.</p>
 <p>Este documento se basa en:</p>
 <ul>
 <li><a href="https://developers.google.com/admob/android/mediation/meta">Documentación de Android del SDK de anuncios de Google para móviles</a></li>
@@ -2448,11 +2476,11 @@ Esta guía explica cómo utilizar el SDK de anuncios de Google para móviles par
 </thead>
 <tbody>
 <tr>
-<td>Bandera</td>
+<td>Banner</td>
 <td>✅</td>
 </tr>
 <tr>
-<td>intersticial</td>
+<td>Intersticial</td>
 <td>✅</td>
 </tr>
 <tr>
@@ -2463,19 +2491,19 @@ Esta guía explica cómo utilizar el SDK de anuncios de Google para móviles par
 </table>
 <h2 id="requisitos-previos">Requisitos previos</h2>
 <ul>
-<li>Completa el<a href="../../../">Guía de introducción</a></li>
-<li>Completa la mediación<a href="../../get_started/">Guía de introducción</a></li>
+<li>Completa la <a href="../../../">Guía de introducción</a></li>
+<li>Completa la <a href="../../get_started/">Guía de introducción a la mediación</a></li>
 </ul>
-<h2 id="paso-1-configurar-la-red-meta-audience">Paso 1: configurar la red Meta Audience</h2>
-<p>Recomendamos seguir el tutorial para<a href="https://developers.google.com/admob/android/mediation/meta#setup">Androide</a>o<a href="https://developers.google.com/admob/ios/mediation/meta#setup">iOS</a>, ya que será igual para ambos.</p>
+<h2 id="paso-1-configurar-la-red-meta-audience">Paso 1: Configurar la red Meta Audience</h2>
+<p>Recomendamos seguir el tutorial para <a href="https://developers.google.com/admob/android/mediation/meta#setup">Android</a> o <a href="https://developers.google.com/admob/ios/mediation/meta#setup">iOS</a>, ya que será igual para ambos.</p>
 <h2 id="paso-2-configure-los-ajustes-de-mediacion-para-su-bloque-de-anuncios-de-admob">Paso 2: Configure los ajustes de mediación para su bloque de anuncios de AdMob</h2>
-<p>Recomendamos seguir el tutorial para<a href="https://developers.google.com/admob/android/mediation/meta#configure_mediation">Androide</a>o<a href="https://developers.google.com/admob/ios/mediation/meta#configure_mediation">iOS</a>, ya que será igual para ambos.</p>
-<h2 id="paso-3-importe-el-complemento-meta-audience-network">Paso 3: importe el complemento Meta Audience Network</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Androide</label></div>
+<p>Recomendamos seguir el tutorial para <a href="https://developers.google.com/admob/android/mediation/meta#configure_mediation">Android</a> o <a href="https://developers.google.com/admob/ios/mediation/meta#configure_mediation">iOS</a>, ya que será igual para ambos.</p>
+<h2 id="paso-3-importe-el-complemento-meta-audience-network">Paso 3: Importe el complemento Meta Audience Network</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:1"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Android</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <ol>
-<li>Descargue el complemento para<a href="https://github.com/poingstudios/godot-admob-android/releases/latest">Androide</a>.</li>
+<li>Descargue el complemento para <a href="https://github.com/poingstudios/godot-admob-android/releases/latest">Android</a>.</li>
 <li>Extraiga el archivo <code>.zip</code>. Dentro, encontrarás una carpeta <code>meta</code>.</li>
 <li>Copie el contenido de la carpeta <code>meta</code> y péguelo en la carpeta del complemento de Android en <code>res://addons/admob/android/bin/</code>.</li>
 </ol>
@@ -2485,77 +2513,61 @@ Esta guía explica cómo utilizar el SDK de anuncios de Google para móviles par
 <p><img alt="android-meta" src="../../../../assets/android/meta.png" /></p>
 <div class="tabbed-set tabbed-alternate" data-tabs="2:1"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">iOS</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block"></div>
+<div class="tabbed-block">
+<p>El adaptador Meta Audience Network <strong>ya está incluido</strong> en la descarga del complemento estándar de iOS. Si siguió la <a href="../../../#download-install">Guía de instalación de iOS</a>, ya debería tener los archivos necesarios (<code>poing-godot-admob-meta.gdip</code> y marcos relacionados) en su directorio <code>res://ios/plugins/</code>.</p>
 </div>
 </div>
-<p>El adaptador Meta Audience Network <strong>ya está incluido</strong> en la descarga del complemento estándar de iOS. Si seguiste el<a href="../../../#download-install">Guía de instalación de iOS</a>, ya debería tener los archivos necesarios (<code>poing-godot-admob-meta.gdip</code> y marcos relacionados) en su directorio <code>res://ios/plugins/</code>.</p>
-<h2 id="paso-4-habilite-el-complemento">Paso 4: habilite el complemento</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:1"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Androide</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block"></div>
 </div>
-</div>
-<p>Asegúrese de habilitar <strong>Meta</strong> en <strong>Configuración del proyecto</strong> (en <code>Admob &gt; Android &gt; Mediación &gt; Meta</code>).</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:1"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">iOS</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block"></div>
-</div>
-</div>
-<p>Asegúrese de marcar <code>Ad Mob</code> y <code>Ad Mob Meta</code> en la lista de complementos en sus <strong>Preajustes de exportación de iOS</strong> (además de ingresar el ID de su aplicación AdMob en la configuración de Plists).</p>
-<p><img alt="ios-meta-export" src="../../../../assets/ios/meta-export.png" /></p>
-<h2 id="paso-5-se-requiere-codigo-adicional">Paso 5: se requiere código adicional</h2>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:1"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Androide</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block"></div>
-</div>
-</div>
-<p>No se requiere código adicional para la integración de Meta Audience Network.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:1"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">iOS</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block"></div>
-</div>
-</div>
-<p><strong>Integración SKAdNetwork</strong>
-Seguir<a href="https://developers.facebook.com/docs/setting-up/platform-setup/ios/SKAdNetwork">Documentación de Meta Audience Network</a>para agregar los identificadores SKAdNetwork al archivo <code>Info.plist</code> de su proyecto.</p>
-<div class="highlight"><pre><span></span><code>---
-**Compile errors**
-
-You must follow the steps below to add Swift paths to your target&#39;s Build Settings to prevent compile errors.
-
-Add the following paths to the target&#39;s **Build Settings** under **Library Search Paths**:
-
-```
-$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)
-$(SDKROOT)/usr/lib/swift
-```
-
-Add the following path to the target&#39;s **Build Settings** under **Runpath Search Paths**:
-```
-/usr/lib/swift
-```
-
-Read more about: https://developers.google.com/admob/ios/mediation/meta#step_4_additional_code_required
-
----
-</code></pre></div>
-<p><strong>Seguimiento publicitario habilitado</strong>
-Si está compilando para iOS 14 o posterior, Meta Audience Network requiere que configure explícitamente su<a href="https://developers.facebook.com/docs/audience-network/setting-up/platform-setup/ios/advertising-tracking-enabled">Seguimiento de publicidad habilitado</a>marcar usando el siguiente código:</p>
-<div class="admonition información">
-<p class="admonition-title">Información</p>
-</div>
-<p><strong>Punto importante</strong>: Debe configurar esta marca antes de inicializar el SDK de anuncios móviles.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">GDScript</label><label for="__tabbed_7_2">C#</label></div>
+<h2 id="paso-4-habilite-el-complemento">Paso 4: Habilite el complemento</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Android</label><label for="__tabbed_3_2">iOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
+<p>Asegúrese de habilitar <strong>Meta</strong> en <strong>Configuración del proyecto</strong> (en <code>Admob &gt; Android &gt; Mediación &gt; Meta</code>).</p>
+</div>
+<div class="tabbed-block">
+<p>Asegúrese de marcar <code>Ad Mob</code> y <code>Ad Mob Meta</code> en la lista de complementos en sus <strong>Preajustes de exportación de iOS</strong> (además de ingresar el ID de su aplicación AdMob en la configuración de Plists).</p>
+</div>
+</div>
+</div>
+<p><img alt="ios-meta-export" src="../../../../assets/ios/meta-export.png" /></p>
+<h2 id="paso-5-se-requiere-codigo-adicional">Paso 5: Se requiere código adicional</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:4"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><input id="__tabbed_4_3" name="__tabbed_4" type="radio" /><input id="__tabbed_4_4" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Android</label><label for="__tabbed_4_2">iOS</label><label for="__tabbed_4_3">GDScript</label><label for="__tabbed_4_4">C#</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>No se requiere código adicional para la integración de Meta Audience Network.</p>
+</div>
+<div class="tabbed-block">
+<p><strong>Integración SKAdNetwork</strong>
+Siga la <a href="https://developers.facebook.com/docs/setting-up/platform-setup/ios/SKAdNetwork">Documentación de Meta Audience Network</a> para agregar los identificadores SKAdNetwork al archivo <code>Info.plist</code> de su proyecto.</p>
+<hr />
+<p><strong>Errores de compilación</strong></p>
+<p>Debe seguir los pasos a continuación para agregar rutas de Swift a los Ajustes de compilación de su objetivo para evitar errores de compilación.</p>
+<p>Agregue las siguientes rutas a los <strong>Build Settings</strong> del objetivo bajo <strong>Library Search Paths</strong>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>$(SDKROOT)/usr/lib/swift
+</code></pre></div>
+<p>Agregue la siguiente ruta a los <strong>Build Settings</strong> del objetivo bajo <strong>Runpath Search Paths</strong>:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>/usr/lib/swift
+</code></pre></div></p>
+<p>Lea más sobre: https://developers.google.com/admob/ios/mediation/meta#step_4_additional_code_required</p>
+<hr />
+<p><strong>Seguimiento publicitario habilitado</strong>
+Si está compilando para iOS 14 o posterior, Meta Audience Network requiere que configure explícitamente su marca de <a href="https://developers.facebook.com/docs/audience-network/setting-up/platform-setup/ios/advertising-tracking-enabled">Seguimiento de publicidad habilitado</a> usando el siguiente código:</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>Punto importante</strong>: Debe configurar esta marca antes de inicializar el SDK de anuncios móviles.</p>
+</div>
+</div>
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">if</span><span class="w"> </span><span class="n">OS</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;iOS&quot;</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="c1">#FBAdSettings is available only for iOS, Google didn&#39;t put this method on Android SDK</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="c1"># FBAdSettings está disponible solo para iOS, Google no puso este método en el SDK de Android</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">FBAdSettings</span><span class="o">.</span><span class="n">set_advertiser_tracking_enabled</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">OS</span><span class="p">.</span><span class="n">GetName</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;iOS&quot;</span><span class="p">)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">{</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="c1">//FBAdSettings is available only for iOS, Google didn&#39;t put this method on Android SDK</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="c1">// FBAdSettings está disponible solo para iOS, Google no puso este método en el SDK de Android</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">FBAdSettings</span><span class="p">.</span><span class="n">SetAdvertiserTrackingEnabled</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">}</span>
 </code></pre></div>
@@ -2563,40 +2575,38 @@ Si está compilando para iOS 14 o posterior, Meta Audience Network requiere que 
 </div>
 </div>
 <h2 id="paso-6-pruebe-su-implementacion">Paso 6: Pruebe su implementación</h2>
-<p>Recomendamos seguir el tutorial para<a href="https://developers.google.com/admob/android/mediation/meta#step_5_test_your_implementation">Androide</a>o<a href="https://developers.google.com/admob/ios/mediation/meta#step_5_test_your_implementation">iOS</a>, ya que será igual para ambos.</p>
+<p>Recomendamos seguir el tutorial para <a href="https://developers.google.com/admob/android/mediation/meta#step_5_test_your_implementation">Android</a> o <a href="https://developers.google.com/admob/ios/mediation/meta#step_5_test_your_implementation">iOS</a>, ya que será igual para ambos.</p>
 <h2 id="pasos-opcionales">Pasos opcionales</h2>
-<div class="admonition información">
-<p class="admonition-title">Información</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p><strong>Importante</strong>: Verifique que tiene permiso de <strong>Administración de cuentas</strong> para completar la configuración de Consentimiento de la UE y GDPR, CCPA y Plataforma de mensajería de usuario. Para obtener más información, consulte el siguiente artículo sobre <a href="https://support.google.com/admob/answer/2784628">nuevos roles de usuario</a>.</p>
 </div>
-<p><strong>Importante</strong>: Verifique que tiene permiso de <strong>Administración de cuentas</strong> para completar la configuración de Consentimiento de la UE y GDPR, CCPA y Plataforma de mensajería de usuario. Para obtener más información, consulte lo siguiente.<a href="https://support.google.com/admob/answer/2784628">nuevos roles de usuario</a>artículo.</p>
 <h3 id="consentimiento-de-la-ue-y-rgpd">Consentimiento de la UE y RGPD</h3>
-<p>Bajo Google<a href="https://www.google.com/about/company/consentstaging.html">Política de consentimiento del usuario de la UE</a>, es obligatorio proporcionar ciertas divulgaciones y obtener consentimientos de los usuarios dentro del Espacio Económico Europeo (EEE) con respecto a la utilización de identificadores de dispositivos y datos personales. Esta política se alinea con la Directiva de privacidad electrónica de la UE y el Reglamento general de protección de datos (GDPR). Al solicitar el consentimiento, debe identificar explícitamente cada red publicitaria dentro de su cadena de mediación que pueda recopilar, recibir o utilizar datos personales. Además, debe proporcionar información sobre cómo cada red pretende utilizar estos datos. Es importante destacar que actualmente Google no puede transmitir automáticamente la elección de consentimiento del usuario a estas redes.</p>
-<p>Por favor revise Meta's<a href="https://www.facebook.com/business/gdpr">guía</a>para obtener información sobre GDPR y metapublicidad.</p>
+<p>Bajo la <a href="https://www.google.com/about/company/consentstaging.html">Política de consentimiento del usuario de la UE</a> de Google, es obligatorio proporcionar ciertas divulgaciones y obtener consentimientos de los usuarios dentro del Espacio Económico Europeo (EEE) con respecto a la utilización de identificadores de dispositivos y datos personales. Esta política se alinea con la Directiva de privacidad electrónica de la UE y el Reglamento General de Protección de Datos (GDPR). Al solicitar el consentimiento, debe identificar explícitamente cada red publicitaria dentro de su cadena de mediación que pueda recopilar, recibir o utilizar datos personales. Además, debe proporcionar información sobre cómo cada red pretende utilizar estos datos. Es importante destacar que actualmente Google no puede transmitir automáticamente la elección de consentimiento del usuario a estas redes.</p>
+<p>Por favor revise la <a href="https://www.facebook.com/business/gdpr">guía</a> de Meta para obtener información sobre GDPR y publicidad en Meta.</p>
 <h4 id="agregue-facebook-a-la-lista-de-socios-publicitarios-del-rgpd">Agregue Facebook a la lista de socios publicitarios del RGPD</h4>
-<p>Siga los pasos en<a href="https://support.google.com/admob/answer/10113004#adding_ad_partners_to_published_gdpr_messages">Configuración del RGPD</a>para agregar <strong>Facebook</strong> a la lista de socios publicitarios del RGPD en la interfaz de usuario de AdMob.</p>
+<p>Siga los pasos en <a href="https://support.google.com/admob/answer/10113004#adding_ad_partners_to_published_gdpr_messages">Configuración del RGPD</a> para agregar <strong>Facebook</strong> a la lista de socios publicitarios del RGPD en la interfaz de usuario de AdMob.</p>
 <h3 id="ccpa">CCPA</h3>
-<p>El<a href="https://support.google.com/admob/answer/9561022">Ley de Privacidad del Consumidor de California (CCPA)</a>exige que los residentes del estado de California tengan derecho a optar por no participar en la "venta" de su "información personal", según lo define la ley. Esta opción de exclusión voluntaria debe mostrarse de manera destacada a través del enlace "No vender mi información personal" en la página de inicio de la parte que realiza la venta.</p>
-<p>El<a href="../../../privacy/regulatory_solutions/us_states_privacy_laws/">preparación de la CCPA</a>La guía ofrece una función para permitir<a href="https://privacy.google.com/businesses/rdp/">procesamiento de datos restringido</a>para la publicación de anuncios de Google. Sin embargo, Google no puede aplicar esta configuración a todas las redes publicitarias dentro de su cadena de mediación. Por lo tanto, es esencial identificar cada red publicitaria en su cadena de mediación que podría estar involucrada en la venta de información personal y seguir la guía específica proporcionada por cada una de esas redes para garantizar el cumplimiento de la CCPA.</p>
-<p>Por favor revise Meta's<a href="https://developers.facebook.com/docs/marketing-apis/data-processing-options">documentación</a>para opciones de procesamiento de datos para usuarios en California.</p>
+<p>La <a href="https://support.google.com/admob/answer/9561022">Ley de Privacidad del Consumidor de California (CCPA)</a> exige que los residentes del estado de California tengan derecho a optar por no participar en la "venta" de su "información personal", según lo define la ley. Esta opción de exclusión voluntaria debe mostrarse de manera destacada a través del enlace "No vender mi información personal" en la página de inicio de la parte que realiza la venta.</p>
+<p>La guía de <a href="../../../privacy/regulatory_solutions/us_states_privacy_laws/">preparación de la CCPA</a> ofrece una función para permitir el <a href="https://privacy.google.com/businesses/rdp/">procesamiento de datos restringido</a> para la publicación de anuncios de Google. Sin embargo, Google no puede aplicar esta configuración a todas las redes publicitarias dentro de su cadena de mediación. Por lo tanto, es esencial identificar cada red publicitaria en su cadena de mediación que podría estar involucrada en la venta de información personal y seguir la guía específica proporcionada por cada una de esas redes para garantizar el cumplimiento de la CCPA.</p>
+<p>Por favor revise la <a href="https://developers.facebook.com/docs/marketing-apis/data-processing-options">documentación</a> de Meta para opciones de procesamiento de datos para usuarios en California.</p>
 <h4 id="agregue-facebook-a-la-lista-de-socios-publicitarios-de-ccpa">Agregue Facebook a la lista de socios publicitarios de CCPA</h4>
-<p>Siga los pasos en<a href="https://support.google.com/admob/answer/10860309">Configuración CCPA</a>para agregar <strong>Facebook</strong> a la lista de socios publicitarios CCPA en la interfaz de usuario de AdMob.</p>
+<p>Siga los pasos en <a href="https://support.google.com/admob/answer/10860309">Configuración CCPA</a> para agregar <strong>Facebook</strong> a la lista de socios publicitarios CCPA en la interfaz de usuario de AdMob.</p>
 <h3 id="almacenamiento-en-cache">Almacenamiento en caché</h3>
-<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">Androide</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Android</label><label for="__tabbed_5_2">iOS</label></div>
 <div class="tabbed-content">
-<div class="tabbed-block"></div>
-</div>
-</div>
+<div class="tabbed-block">
 <p><strong>Android 9</strong>:
-A partir de Android 9 (nivel de API 28),<a href="https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted">La compatibilidad con texto sin cifrar está deshabilitada de forma predeterminada.</a>, lo que afectará la funcionalidad del almacenamiento en caché de medios del SDK de Meta Audience Network y podría afectar la experiencia del usuario y los ingresos por publicidad. Seguir<a href="https://developers.facebook.com/docs/audience-network/android-network-security-config/">documentación de meta</a>para actualizar la configuración de seguridad de red en su aplicación.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="9:1"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">iOS</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block"></div>
+A partir de Android 9 (nivel de API 28), <a href="https://developer.android.com/training/articles/security-config#CleartextTrafficPermitted">la compatibilidad con texto sin cifrar está deshabilitada de forma predeterminada</a>, lo que afectará la funcionalidad del almacenamiento en caché de medios del SDK de Meta Audience Network y podría afectar la experiencia del usuario y los ingresos por publicidad. Siga la <a href="https://developers.facebook.com/docs/audience-network/android-network-security-config/">documentación de Meta</a> para actualizar la configuración de seguridad de red en su aplicación.</p>
 </div>
-</div>
+<div class="tabbed-block">
 <p>No aplicable.</p>
+</div>
+</div>
+</div>
 <h2 id="codigos-de-error">Códigos de error</h2>
 <p>Si el adaptador no puede recibir un anuncio de Audience Network, los editores pueden verificar el error subyacente de la respuesta del anuncio usando <code>ResponseInfo</code> en las siguientes clases:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="10:2"><input checked="checked" id="__tabbed_10_1" name="__tabbed_10" type="radio" /><input id="__tabbed_10_2" name="__tabbed_10" type="radio" /><div class="tabbed-labels"><label for="__tabbed_10_1">Androide</label><label for="__tabbed_10_2">iOS</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">Android</label><label for="__tabbed_6_2">iOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>com.google.ads.mediation.facebook.FacebookAdapter
@@ -2611,7 +2621,7 @@ A partir de Android 9 (nivel de API 28),<a href="https://developer.android.com/t
 </div>
 </div>
 <p>Estos son los códigos y los mensajes adjuntos que genera el adaptador de Meta Audience Network cuando un anuncio no se carga:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="11:1"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio" /><div class="tabbed-labels"><label for="__tabbed_11_1">Androide</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">Android</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
@@ -2619,7 +2629,7 @@ A partir de Android 9 (nivel de API 28),<a href="https://developer.android.com/t
 <table>
 <thead>
 <tr>
-<th>código de error</th>
+<th>Código de error</th>
 <th>Razón</th>
 </tr>
 </thead>
@@ -2670,11 +2680,11 @@ A partir de Android 9 (nivel de API 28),<a href="https://developer.android.com/t
 </tr>
 <tr>
 <td>1000-9999</td>
-<td>Meta Audience Network devolvió un error específico del SDK. Ver Meta Audience Network<a href="https://developers.facebook.com/docs/audience-network/setting-up/test/checklist-errors">documentación</a>para más detalles.</td>
+<td>Meta Audience Network devolvió un error específico del SDK. Ver la <a href="https://developers.facebook.com/docs/audience-network/setting-up/test/checklist-errors">documentación</a> de Meta Audience Network para más detalles.</td>
 </tr>
 </tbody>
 </table>
-<div class="tabbed-set tabbed-alternate" data-tabs="12:1"><input checked="checked" id="__tabbed_12_1" name="__tabbed_12" type="radio" /><div class="tabbed-labels"><label for="__tabbed_12_1">iOS</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:1"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">iOS</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block"></div>
 </div>
@@ -2682,7 +2692,7 @@ A partir de Android 9 (nivel de API 28),<a href="https://developer.android.com/t
 <table>
 <thead>
 <tr>
-<th>código de error</th>
+<th>Código de error</th>
 <th>Razón</th>
 </tr>
 </thead>
@@ -2713,7 +2723,7 @@ A partir de Android 9 (nivel de API 28),<a href="https://developer.android.com/t
 </tr>
 <tr>
 <td>1000-9999</td>
-<td>Meta Audience Network devolvió un error específico del SDK. Ver Meta Audience Network<a href="https://developers.facebook.com/docs/audience-network/setting-up/test/checklist-errors">documentación</a>para más detalles.</td>
+<td>Meta Audience Network devolvió un error específico del SDK. Ver la <a href="https://developers.facebook.com/docs/audience-network/setting-up/test/checklist-errors">documentación</a> de Meta Audience Network para más detalles.</td>
 </tr>
 </tbody>
 </table>
@@ -2721,7 +2731,7 @@ A partir de Android 9 (nivel de API 28),<a href="https://developer.android.com/t
 <hr />
 <ol>
 <li id="fn:1">
-<p>Meta Audience Network se convirtió<a href="https://www.facebook.com/audiencenetwork/resources/blog/audience-network-to-become-bidding-only-beginning-with-ios-in-2021">solo pujar</a>en 2021.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+<p>Meta Audience Network se convirtió en <a href="https://www.facebook.com/audiencenetwork/resources/blog/audience-network-to-become-bidding-only-beginning-with-ios-in-2021">solo pujar</a> en 2021.&#160;<a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">&#8617;</a></p>
 </li>
 </ol>
 </div>
