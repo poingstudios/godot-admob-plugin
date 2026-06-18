@@ -64,6 +64,15 @@
       }
     },
     {
+      "identity" : "googleads-mobile-ios-mediation-unity",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-unity.git",
+      "state" : {
+        "revision" : "63742a7728ab02f8fc5c9a249ca3f0b60dfe8b8a",
+        "version" : "4.18.100"
+      }
+    },
+    {
       "identity" : "omsdk-appodeal-ios-package",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/bidmachine/OMSDK-Appodeal-iOS-Package",

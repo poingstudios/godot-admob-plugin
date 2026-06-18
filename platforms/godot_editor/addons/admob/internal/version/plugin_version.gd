@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-const FALLBACK_PLUGIN_VERSION := "v4.0.0"
+const FALLBACK_PLUGIN_VERSION := "v5.0.0"
 
 const PLUGIN_CONFIG_PATH := "res://addons/admob/plugin.cfg"
 const ANDROID_PACKAGE_PATH := "res://addons/admob/android/bin/package.gd"
