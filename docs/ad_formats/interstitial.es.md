@@ -7,7 +7,7 @@ Este documento se basa en:
 - [Documentación de iOS del SDK de anuncios de Google para móviles](https://developers.google.com/admob/ios/interstitial)
 
 ## Requisitos previos
-- Completa el[Guía de introducción](../index.md)
+- Completa la [Guía de introducción](../index.md)
 
 ## Pruebe siempre con anuncios de prueba
 
@@ -15,7 +15,7 @@ Al desarrollar y probar sus aplicaciones Godot, es fundamental utilizar anuncios
 
 El método más sencillo para cargar anuncios de prueba es utilizar nuestro ID de bloque de anuncios de prueba dedicado para intersticiales de Android e iOS:
 
-=== "Androide"
+=== "Android"
     ```
     ca-app-pub-3940256099942544/1033173712
     ```
@@ -26,8 +26,9 @@ El método más sencillo para cargar anuncios de prueba es utilizar nuestro ID d
     ```
 
 Este ID de bloque de anuncios en particular se ha configurado específicamente para ofrecer anuncios de prueba para cada solicitud. Puede emplearlo de forma segura durante las fases de codificación, prueba y depuración. Sin embargo, recuerde reemplazar este ID de bloque de anuncios de prueba por el suyo propio cuando esté listo para publicar su aplicación.
-
-Para obtener una comprensión más completa de cómo funcionan los anuncios de prueba del SDK de anuncios móviles, consulte nuestra documentación en[Anuncios de prueba](../enable_test_ads.md).
+=== "Android"
+...
+Para obtener una comprensión más completa de cómo funcionan los anuncios de prueba del SDK de anuncios móviles, consulte nuestra documentación en [Anuncios de prueba](../enable_test_ads.md).
 
 
 ## Ejemplo intersticial

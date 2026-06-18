@@ -87,6 +87,10 @@ func _setup_mediation_adapters() -> void:
 	BidMachine.set_consent_status(true)
 	BidMachine.set_us_privacy_string("1YNN")
 
+	# Unity Ads setup example
+	UnityAds.set_consent(true)
+	UnityAds.set_privacy_consent("user_privacy_data", true)
+
 
 func _on_get_initialization_status_pressed() -> void:
 	var status := MobileAds.get_initialization_status()

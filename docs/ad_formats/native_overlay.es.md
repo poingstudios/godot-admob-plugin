@@ -1,6 +1,7 @@
 # Anuncios superpuestos nativos
 
-Los anuncios nativos superpuestos son un formato de anuncio especializado que le permite mostrar una[Anuncio nativo](https://support.google.com/admob/answer/6329630)encima del contenido de su aplicación. A diferencia de los anuncios nativos estándar que requieren que usted mismo cree la interfaz de usuario, los anuncios nativos superpuestos utilizan **Plantillas** para brindar una experiencia consistente y fácil de integrar, similar a otras plataformas.
+Los anuncios nativos superpuestos son un formato de anuncio especializado que le permite mostrar un [Anuncio nativo](https://support.google.com/admob/answer/6329630) encima del contenido de su aplicación.
+ A diferencia de los anuncios nativos estándar que requieren que usted mismo cree la interfaz de usuario, los anuncios nativos superpuestos utilizan **Plantillas** para brindar una experiencia consistente y fácil de integrar, similar a otras plataformas.
 
 !!! nota
 Este formato es ideal para juegos y aplicaciones que desean una apariencia nativa sin la complejidad del diseño manual de la interfaz de usuario.
@@ -9,15 +10,16 @@ Este formato es ideal para juegos y aplicaciones que desean una apariencia nativ
 
 Antes de continuar, haga lo siguiente:
 
-- Completa el[Guía de introducción](../index.md).
+- Completa la [Guía de introducción](../index.md).
 
 ## Pruebe siempre con anuncios de prueba
 
 La siguiente tabla contiene ID de bloques de anuncios que puede utilizar para solicitar anuncios de prueba. Se han configurado especialmente para devolver anuncios de prueba en lugar de anuncios de producción para cada solicitud, lo que hace que su uso sea seguro.
 
-Sin embargo, después de registrar una aplicación en la interfaz web de AdMob y crear sus propios ID de bloque de anuncios para usar en su aplicación, explícitamente[configure su dispositivo como dispositivo de prueba](../enable_test_ads.md)durante el desarrollo.
+Sin embargo, después de registrar una aplicación en la interfaz web de AdMob y crear sus propios ID de bloque de anuncios para usar en su aplicación, explícitamente [configure su dispositivo como dispositivo de prueba](../enable_test_ads.md) durante el desarrollo.
 
-=== "Androide"
+=== "Android"
+
 
     ```
     ca-app-pub-3940256099942544/2247696110

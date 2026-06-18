@@ -1,4 +1,4 @@
-# Integre Liftoff Monetize (Vungle) con mediación
+# Integrar Liftoff Monetize (Vungle) con mediación
 !!! información
     
 **Nota**: Vungle ahora es Liftoff Monetize.

@@ -29,6 +29,7 @@ using PoingStudios.AdMob.Mediation.Extras.Vungle;
 using PoingStudios.AdMob.Mediation.Extras.IronSource;
 using PoingStudios.AdMob.Mediation.Extras.AppLovin;
 using PoingStudios.AdMob.Mediation.Extras.BidMachine;
+using PoingStudios.AdMob.Mediation.Extras.UnityAds;
 using PoingStudios.AdMob.Sample;
 
 public partial class MainCSharpExample : Control, ISampleLogger
@@ -112,6 +113,10 @@ public partial class MainCSharpExample : Control, ISampleLogger
 		BidMachine.SetSubjectToGdpr(true);
 		BidMachine.SetConsentStatus(true);
 		BidMachine.SetUsPrivacyString("1YNN");
+
+		// Unity Ads setup example
+		UnityAds.SetConsent(true);
+		UnityAds.SetPrivacyConsent("user_privacy_data", true);
 	}
 
 	private void _OnGetInitializationStatusPressed()

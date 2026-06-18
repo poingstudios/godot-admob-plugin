@@ -13,7 +13,7 @@ Esta guía completa sirve como recurso integral para integrar la mediación en s
     - [Anuncios recompensados](../ad_formats/rewarded.md)
     - [Anuncios intersticiales recompensados](../ad_formats/rewarded_interstitial.md)
 
-Si es nuevo en la mediación, es recomendable revisar la[Descripción general de la mediación de AdMob](https://support.google.com/admob/answer/13420272)para una mejor comprensión del concepto.
+Si es nuevo en la mediación, es recomendable revisar la [Descripción general de la mediación de AdMob](https://support.google.com/admob/answer/13420272)para una mejor comprensión del concepto.
 
 Este documento se basa en:
 
@@ -22,7 +22,7 @@ Este documento se basa en:
 
 ## Inicializar el SDK de anuncios para móviles
 
-La guía de inicio rápido proporciona instrucciones sobre cómo[inicializar el SDK de anuncios para móviles](../index.md#initialize-the-google-mobile-ads-sdk). Durante este proceso de inicialización, también se inicializan los adaptadores de mediación y oferta. Es fundamental esperar a que se complete esta inicialización antes de cargar anuncios para garantizar que todas las redes publicitarias participen plenamente en la primera solicitud de anuncio.
+La guía de inicio rápido proporciona instrucciones sobre cómo [inicializar el SDK de anuncios para móviles](../index.md#initialize-the-google-mobile-ads-sdk). Durante este proceso de inicialización, también se inicializan los adaptadores de mediación y oferta. Es fundamental esperar a que se complete esta inicialización antes de cargar anuncios para garantizar que todas las redes publicitarias participen plenamente en la primera solicitud de anuncio.
 
 El siguiente código de muestra demuestra cómo puede verificar el estado de inicialización de cada adaptador antes de iniciar una solicitud de anuncio.
 
@@ -96,7 +96,7 @@ Le recomendamos encarecidamente que personalice todos los valores de recompensa 
 
 Para obtener más información sobre cómo configurar valores de recompensa en la interfaz de usuario de AdMob, consulte crear un bloque de anuncios recompensados.
 
-Para obtener detalles completos sobre cómo establecer valores de recompensa en la interfaz de usuario de AdMob, consulte la[Crear un bloque de anuncios recompensados](https://support.google.com/admob/answer/7311747)documentación.
+Para obtener detalles completos sobre cómo establecer valores de recompensa en la interfaz de usuario de AdMob, consulte la [Crear un bloque de anuncios recompensados](https://support.google.com/admob/answer/7311747)documentación.
 
 
 ## CCPA y RGPD
