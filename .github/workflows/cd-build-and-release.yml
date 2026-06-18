@@ -130,10 +130,10 @@ jobs:
                 content = content.replace("/* End PBXGroup section */", "/* End PBXGroup section */\n\n/* Begin XCLocalSwiftPackageReference section */\n/* End XCLocalSwiftPackageReference section */")
             if "/* Begin XCSwiftPackageProductDependency section */" not in content:
                 content = content.replace("/* End XCLocalSwiftPackageReference section */", "/* End XCLocalSwiftPackageReference section */\n\n/* Begin XCSwiftPackageProductDependency section */\n/* End XCSwiftPackageProductDependency section */")
-            content = content.replace("/* End XCLocalSwiftPackageReference section */", f'\t\t{local_ref_id} /* XCLocalSwiftPackageReference "." */ = {{isa = XCLocalSwiftPackageReference; relativePath = "."; }};\n' + "/* End XCLocalSwiftPackageReference section */")
-            content = content.replace("/* End XCSwiftPackageProductDependency section */", f'\t\t{product_dep_id} /* PoingGodotAdMobDeps */ = {{isa = XCSwiftPackageProductDependency; package = {local_ref_id} /* XCLocalSwiftPackageReference "." */; productName = "PoingGodotAdMobDeps"; }};\n' + "/* End XCSwiftPackageProductDependency section */")
+            content = content.replace("/* End XCLocalSwiftPackageReference section */", f'\t\t{local_ref_id} /* XCLocalSwiftPackageReference "admob_spm" */ = {{isa = XCLocalSwiftPackageReference; relativePath = "admob_spm"; }};\n' + "/* End XCLocalSwiftPackageReference section */")
+            content = content.replace("/* End XCSwiftPackageProductDependency section */", f'\t\t{product_dep_id} /* PoingGodotAdMobDeps */ = {{isa = XCSwiftPackageProductDependency; package = {local_ref_id} /* XCLocalSwiftPackageReference "admob_spm" */; productName = "PoingGodotAdMobDeps"; }};\n' + "/* End XCSwiftPackageProductDependency section */")
             content = content.replace("/* Begin PBXBuildFile section */", "/* Begin PBXBuildFile section */\n" + f"\t\t{build_file_id} /* PoingGodotAdMobDeps in Frameworks */ = {{isa = PBXBuildFile; productRef = {product_dep_id} /* PoingGodotAdMobDeps */; }};\n")
-            content = content.replace("productRefGroup =", f"packageReferences = (\n\t\t\t\t{local_ref_id} /* XCLocalSwiftPackageReference \".\" */,\n\t\t\t);\n\t\t\tproductRefGroup =")
+            content = content.replace("productRefGroup =", f"packageReferences = (\n\t\t\t\t{local_ref_id} /* XCLocalSwiftPackageReference \"admob_spm\" */,\n\t\t\t);\n\t\t\tproductRefGroup =")
             content = content.replace("buildRules = (", f"packageProductDependencies = (\n\t\t\t\t{product_dep_id} /* PoingGodotAdMobDeps */,\n\t\t\t);\n\t\t\tbuildRules = (")
             fw_start = content.find("isa = PBXFrameworksBuildPhase;")
             if fw_start != -1:
