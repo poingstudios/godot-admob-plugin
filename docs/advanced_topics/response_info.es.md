@@ -75,7 +75,7 @@ Los métodos del objeto `ResponseInfo` incluyen lo siguiente:
 
  | Propiedad | Descripción | 
  | -------- | ----------- | 
- | `adapter_responses` (`AdapterResponses`) | Devuelve la lista de `AdapterResponseInfo` que contiene metadatos para cada adaptador incluido en la respuesta del anuncio. Se puede utilizar para depurar la mediación en cascada y la ejecución de ofertas. El orden de la lista coincide con el orden de la cascada de mediación para esta solicitud de anuncio. Ver[Información de respuesta del adaptador](#adapter-response-info)para más información. | 
+ | `adapter_responses` (`AdapterResponses`) | Devuelve la lista de `AdapterResponseInfo` que contiene metadatos para cada adaptador incluido en la respuesta del anuncio. Se puede utilizar para depurar la mediación en cascada y la ejecución de ofertas. El orden de la lista coincide con el orden de la cascada de mediación para esta solicitud de anuncio. Ver [Información de respuesta del adaptador](#adapter-response-info)para más información. | 
  | `loaded_adapter_response_info` (`LoadedAdapterResponseInfo`) | Devuelve el `AdapterResponseInfo` correspondiente al adaptador que cargó el anuncio. | 
  | `mediation_adapter_class_name` (`MediationAdapterClassName`) | Devuelve el nombre de clase del adaptador de mediación de la fuente de anuncios que cargó el anuncio. | 
  | `respuesta_id` (`RespuestaId`) | El identificador de respuesta es un identificador único para la respuesta del anuncio. Este identificador se puede utilizar para identificar y bloquear el anuncio en el Centro de revisión de anuncios (ARC). | 

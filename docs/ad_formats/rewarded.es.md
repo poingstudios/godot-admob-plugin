@@ -8,7 +8,7 @@ Este documento se basa en:
 - [Documentación de iOS del SDK de anuncios de Google para móviles](https://developers.google.com/admob/ios/rewarded)
 
 ## Requisitos previos
-- Completa el[Guía de introducción](../index.md)
+- Completa la [Guía de introducción](../index.md)
 
 
 ## Pruebe siempre con anuncios de prueba
@@ -17,7 +17,7 @@ Al desarrollar y probar sus aplicaciones Godot, es fundamental utilizar anuncios
 
 El método más sencillo para cargar anuncios de prueba es utilizar nuestro ID de bloque de anuncios de prueba dedicado para Android e iOS recompensados:
 
-=== "Androide"
+=== "Android"
     ```
     ca-app-pub-3940256099942544/5224354917
     ```
@@ -28,8 +28,9 @@ El método más sencillo para cargar anuncios de prueba es utilizar nuestro ID d
     ```
 
 Este ID de bloque de anuncios en particular se ha configurado específicamente para ofrecer anuncios de prueba para cada solicitud. Puede emplearlo de forma segura durante las fases de codificación, prueba y depuración. Sin embargo, recuerde reemplazar este ID de bloque de anuncios de prueba por el suyo propio cuando esté listo para publicar su aplicación.
-
-Para obtener una comprensión más completa de cómo funcionan los anuncios de prueba del SDK de anuncios móviles, consulte nuestra documentación en[Anuncios de prueba](../enable_test_ads.md).
+=== "Android"
+...
+Para obtener una comprensión más completa de cómo funcionan los anuncios de prueba del SDK de anuncios móviles, consulte nuestra documentación en [Anuncios de prueba](../enable_test_ads.md).
 
 
 ## Ejemplo recompensado
@@ -125,7 +126,7 @@ Para cargar un anuncio recompensado, utilice la clase `RewardedAdLoader`. Pase u
     ```
 
 ### [Opcional] Validar las devoluciones de llamada de verificación del lado del servidor (SSV)
-Para aplicaciones que requieren datos adicionales en la verificación del lado del servidor[Androide](https://developers.google.com/admob/android/ssv)/[iOS](https://developers.google.com/admob/ios/ssv)devoluciones de llamada, se puede emplear la función de datos personalizados de los anuncios recompensados. Cualquier valor de cadena asignado a un objeto publicitario recompensado se transmite al parámetro de consulta `custom_data` de la devolución de llamada SSV. Si no se establecen datos personalizados, el parámetro de consulta `custom_data` estará ausente en la devolución de llamada SSV.
+Para aplicaciones que requieren datos adicionales en la verificación del lado del servidor [Android](https://developers.google.com/admob/android/ssv)/[iOS](https://developers.google.com/admob/ios/ssv)devoluciones de llamada, se puede emplear la función de datos personalizados de los anuncios recompensados. Cualquier valor de cadena asignado a un objeto publicitario recompensado se transmite al parámetro de consulta `custom_data` de la devolución de llamada SSV. Si no se establecen datos personalizados, el parámetro de consulta `custom_data` estará ausente en la devolución de llamada SSV.
 
 El siguiente fragmento de código ilustra cómo establecer datos personalizados en un objeto publicitario recompensado antes de solicitar un anuncio:
 
@@ -160,7 +161,7 @@ El siguiente fragmento de código ilustra cómo establecer datos personalizados 
     ```
 !!! nota
 
-La cadena de recompensa personalizada es[porcentaje escapó](https://en.wikipedia.org/wiki/Percent-encoding)y puede requerir decodificación cuando se analiza desde la devolución de llamada SSV.
+La cadena de recompensa personalizada es [porcentaje escapó](https://en.wikipedia.org/wiki/Percent-encoding)y puede requerir decodificación cuando se analiza desde la devolución de llamada SSV.
 
 ### Configurar FullScreenContentCallback
 `FullScreenContentCallback` gestiona los eventos asociados con la visualización de su `RewardedAd`. Antes de presentar el `RewardedAd`, asegúrese de configurar la devolución de llamada:

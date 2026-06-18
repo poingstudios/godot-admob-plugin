@@ -5,21 +5,21 @@ Cuando se produce una impresión, el complemento Godot AdMob proporciona datos d
 Esta guía está destinada a ayudarle a implementar la captura de datos de ingresos publicitarios a nivel de impresiones en su proyecto Godot.
 
 ## Requisitos previos
-- Asegúrate de tener[activó la función de ingresos por publicidad a nivel de impresión](https://support.google.com/admob/answer/11322405)en la interfaz de usuario de AdMob.
-- Completo[Empezar](../index.md). Su proyecto Godot ya debería tener el complemento AdMob de Poing Studios importado y configurado.
+- Asegúrese de haber [activado la función de ingresos por publicidad a nivel de impresión](https://support.google.com/admob/answer/11322405) en la interfaz de usuario de AdMob.
+- Completa la [Guía de introducción](../index.md). Su proyecto Godot ya debería tener el complemento AdMob de Poing Studios importado y configurado.
 - Antes de poder recibir datos de ingresos publicitarios a nivel de impresiones, debe implementar al menos un formato de anuncio:
-    - [Aplicación abierta](../ad_formats/app_open.md)
-    - [Bandera](../ad_formats/banner/get_started.md)
-    - [intersticial](../ad_formats/interstitial.md)
+    - [App Open](../ad_formats/app_open.md)
+    - [Banner](../ad_formats/banner/get_started.md)
+    - [Intersticial](../ad_formats/interstitial.md)
     - [Recompensado](../ad_formats/rewarded.md)
-    - [Intersticial recompensado](../ad_formats/rewarded_interstitial.md)
-    - [Nativo](../ad_formats/native_overlay.md)
+    - [Intersticial Recompensado](../ad_formats/rewarded_interstitial.md)
+    - [Native Overlay](../ad_formats/native_overlay.md)
 
 ## Implementación de un controlador de eventos pago
 
-Cada formato de anuncio tiene un evento `on_ad_paid` (`OnAdPaid` en C#). Durante el ciclo de vida de un evento publicitario, el complemento Godot AdMob monitorea los eventos de impresión e invoca al controlador con un "AdValue" que representa el valor ganado.
+Cada formato de anuncio tiene un evento `on_ad_paid` (`OnAdPaid` en C#). Durante el ciclo de vida de un evento publicitario, el complemento Godot AdMob monitorea los eventos de impresión e invoca al controlador con un `AdValue` que representa el valor ganado.
 
-El siguiente ejemplo maneja eventos pagos para un anuncio bonificado:
+El siguiente ejemplo maneja eventos pagos para un anuncio recompensado:
 
 === "GDScript"
 
@@ -27,10 +27,10 @@ El siguiente ejemplo maneja eventos pagos para un anuncio bonificado:
     var _rewarded_ad: RewardedAd
 
     func _load_rewarded_ad() -> void:
-        # Send the request to load the ad.
+        # Envía la solicitud para cargar el anuncio.
         var ad_request := AdRequest.new()
         RewardedAdLoader.new().load("AD_UNIT_ID", ad_request, func(rewarded_ad: RewardedAd, error: LoadAdError):
-            # If the operation failed with a reason.
+            # Si la operación falló con una razón.
             if error != null:
                 push_error("Rewarded ad failed to load an ad with error: %s" % error.message)
                 return
@@ -40,8 +40,8 @@ El siguiente ejemplo maneja eventos pagos para un anuncio bonificado:
         )
 
     func _handle_ad_paid_event(ad_value: AdValue) -> void:
-        # TODO: Send the impression-level ad revenue information to your
-        # preferred analytics server directly within this callback.
+        # TODO: Envíe la información de ingresos publicitarios a nivel de impresión a su
+        # servidor de análisis preferido directamente dentro de esta devolución de llamada.
 
         var value_micros: int = ad_value.value_micros
         var currency: String = ad_value.currency_code
@@ -77,11 +77,11 @@ El siguiente ejemplo maneja eventos pagos para un anuncio bonificado:
 
     private void LoadRewardedAd()
     {
-        // Send the request to load the ad.
+        // Envía la solicitud para cargar el anuncio.
         AdRequest adRequest = new AdRequest();
         RewardedAdLoader.Load("AD_UNIT_ID", adRequest, (rewardedAd, error) =>
         {
-            // If the operation failed with a reason.
+            // Si la operación falló con una razón.
             if (error != null)
             {
                 GD.PrintErr("Rewarded ad failed to load an ad with error: " + error.Message);
@@ -95,8 +95,8 @@ El siguiente ejemplo maneja eventos pagos para un anuncio bonificado:
 
     private void HandleAdPaidEvent(AdValue adValue)
     {
-        // TODO: Send the impression-level ad revenue information to your
-        // preferred analytics server directly within this callback.
+        // TODO: Envíe la información de ingresos publicitarios a nivel de impresión a su
+        // servidor de análisis preferido directamente dentro de esta devolución de llamada.
 
         long valueMicros = adValue.ValueMicros;
         string currency = adValue.CurrencyCode;
@@ -189,14 +189,14 @@ El siguiente ejemplo establece un nombre de fuente de anuncios único para un ev
     }
     ```
 
-Para obtener más información sobre la fuente publicitaria ganadora, consulte[Recuperar información sobre la respuesta al anuncio.](response_info.md).
+Para obtener más información sobre la fuente publicitaria ganadora, consulte [Recuperar información sobre la respuesta al anuncio](response_info.md).
 
 ## Integre con socios de atribución de aplicaciones (AAP)
 
 Para obtener detalles completos sobre cómo reenviar datos de ingresos publicitarios a plataformas de análisis, consulte la guía para socios:
 
-- [Ajustar](https://dev.adjust.com/en/sdk/android/integrations/admob)
-- [Folleto de aplicaciones](https://support.appsflyer.com/hc/en-us/articles/4416353506833-Integrate-the-ROI360-ad-revenue-SDK-API)
+- [Adjust](https://dev.adjust.com/en/sdk/android/integrations/admob)
+- [AppsFlyer](https://support.appsflyer.com/hc/en-us/articles/4416353506833-Integrate-the-ROI360-ad-revenue-SDK-API)
 - [Singular](https://support.singular.net/hc/en-us/articles/360037635452-Unity-SDK-Basic-Integration#42_Adding_Ad_Revenue_Attribution_Support)
 - [Tenjin](https://tenjin.com/docs/en/send-events/android.html#impression-level-ad-revenue-integration)
 
@@ -207,17 +207,17 @@ Para obtener detalles completos sobre cómo reenviar datos de ingresos publicita
 
 ## Valor publicitario
 
-!!! consejo "Punto clave"
-El valor de "AdValue" es un microvalor que representa el valor de cada anuncio. Por ejemplo, un valor de 5000 indica que se estima que este anuncio vale 0,005 dólares.
+!!! tip "Punto clave"
+    El valor de `AdValue` es un microvalor que representa el valor de cada anuncio. Por ejemplo, un valor de 5,000 indica que se estima que este anuncio vale $0.005.
 
- | `ValorAd.TipoDePrecisión` | Descripción | 
- | --- | --- | 
- | `DESCONOCIDO` | Un valor publicitario con precisión desconocida. | 
- | `ESTIMADO` | Un valor de anuncio estimado a partir de datos agregados. | 
- | `PUBLISHER_PROVIDED` | Un valor de anuncio proporcionado por el editor, como CPM manuales en un grupo de mediación. | 
- | `PRECISO` | El valor exacto pagado por este anuncio. | 
+| `AdValue.PrecisionType` | Descripción |
+|---|---|
+| `UNKNOWN` | Un valor publicitario con precisión desconocida. |
+| `ESTIMATED` | Un valor de anuncio estimado a partir de datos agregados. |
+| `PUBLISHER_PROVIDED` | Un valor de anuncio proporcionado por el editor, como CPM manuales en un grupo de mediación. |
+| `PRECISE` | El valor exacto pagado por este anuncio. |
 
-En caso de mediación, AdMob intenta proporcionar un valor "ESTIMADO" para las fuentes publicitarias que son[optimizado](https://support.google.com/admob/answer/7374110). Para fuentes de anuncios no optimizadas, o en los casos en los que no hay suficientes datos agregados para informar una estimación significativa, se devuelve el valor "PUBLISHER_PROVIDED".
+En caso de mediación, AdMob intenta proporcionar un valor `ESTIMATED` para las fuentes publicitarias que son [optimizadas](https://support.google.com/admob/answer/7374110). Para fuentes de anuncios no optimizadas, o en los casos en los que no hay suficientes datos agregados para informar una estimación significativa, se devuelve el valor `PUBLISHER_PROVIDED`.
 
 ## Impresiones de prueba de fuentes publicitarias ofertantes
 
@@ -226,7 +226,6 @@ Después de que se produzca un evento de ingresos publicitarios a nivel de impre
 - `UNKNOWN`: indica el tipo de precisión.
 - `0`: indica el valor del anuncio.
 
-Anteriormente, es posible que haya visto el tipo de precisión como un valor distinto de "DESCONOCIDO" y un valor de anuncio superior a 0.
+Anteriormente, es posible que haya visto el tipo de precisión como un valor distinto de `UNKNOWN` y un valor de anuncio superior a 0.
 
-Para obtener detalles sobre cómo enviar una solicitud de anuncio de prueba, consulte[Habilitar dispositivos de prueba](../enable_test_ads.md).
-
+Para obtener detalles sobre cómo enviar una solicitud de anuncio de prueba, consulte [Habilitar dispositivos de prueba](../enable_test_ads.md).

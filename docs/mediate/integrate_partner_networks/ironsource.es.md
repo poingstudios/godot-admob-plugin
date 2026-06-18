@@ -1,4 +1,4 @@
-# Integre IronSource con la mediación
+# Integrar IronSource con la mediación
 
 Esta guía explica cómo utilizar el SDK de anuncios móviles de Google para cargar y presentar anuncios desde IronSource a través de[mediación](../get_started.md). Proporciona instrucciones sobre cómo integrar IronSource en la configuración de mediación de una aplicación Godot e integrar el SDK y el adaptador de IronSource en su aplicación Godot.
 

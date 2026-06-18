@@ -1,6 +1,6 @@
-# Anuncios intersticiales bonificados (beta)
+# Anuncios intersticiales recompensados (beta)
 
-A[Intersticial recompensado](https://support.google.com/admob/answer/9884467)es una forma específica de formato de anuncio incentivado que le permite ofrecer recompensas a cambio de anuncios que aparecen automáticamente durante las transiciones naturales de las aplicaciones. A diferencia de los anuncios bonificados habituales, los usuarios no están obligados a suscribirse activamente para ver un intersticial bonificado; están perfectamente integrados en la experiencia de la aplicación.
+Un [Intersticial recompensado](https://support.google.com/admob/answer/9884467)es una forma específica de formato de anuncio incentivado que le permite ofrecer recompensas a cambio de anuncios que aparecen automáticamente durante las transiciones naturales de las aplicaciones. A diferencia de los anuncios bonificados habituales, los usuarios no están obligados a suscribirse activamente para ver un intersticial recompensado; están perfectamente integrados en la experiencia de la aplicación.
 
 Este documento se basa en:
 
@@ -8,16 +8,16 @@ Este documento se basa en:
 - [Documentación de iOS del SDK de anuncios de Google para móviles](https://developers.google.com/admob/ios/rewarded-interstitial)
 
 ## Requisitos previos
-- Completa el[Guía de introducción](../index.md)
+- Completa la [Guía de introducción](../index.md)
 
 
 ## Pruebe siempre con anuncios de prueba
 
 Al desarrollar y probar sus aplicaciones Godot, es fundamental utilizar anuncios de prueba en lugar de anuncios de producción en vivo. De lo contrario, se puede suspender su cuenta de AdMob.
 
-El método más sencillo para cargar anuncios de prueba es utilizar nuestro ID de bloque de anuncios de prueba dedicado para intersticiales premiados de Android e iOS:
+El método más sencillo para cargar anuncios de prueba es utilizar nuestro ID de bloque de anuncios de prueba dedicado para intersticiales recompensados de Android e iOS:
 
-=== "Androide"
+=== "Android"
     ```
     ca-app-pub-3940256099942544/5354046379
     ```
@@ -29,11 +29,11 @@ El método más sencillo para cargar anuncios de prueba es utilizar nuestro ID d
 
 Este ID de bloque de anuncios en particular se ha configurado específicamente para ofrecer anuncios de prueba para cada solicitud. Puede emplearlo de forma segura durante las fases de codificación, prueba y depuración. Sin embargo, recuerde reemplazar este ID de bloque de anuncios de prueba por el suyo propio cuando esté listo para publicar su aplicación.
 
-Para obtener una comprensión más completa de cómo funcionan los anuncios de prueba del SDK de anuncios móviles, consulte nuestra documentación en[Anuncios de prueba](../enable_test_ads.md).
+Para obtener una comprensión más completa de cómo funcionan los anuncios de prueba del SDK de anuncios móviles, consulte nuestra documentación en [Anuncios de prueba](../enable_test_ads.md).
 
 ## Ejemplo de intersticial recompensado
 
-El siguiente ejemplo de código demuestra cómo utilizar el intersticial bonificado. En este ejemplo, creará una instancia de un intersticial bonificado, cargará un anuncio en él mediante una AdRequest y mejorará la funcionalidad gestionando varios eventos del ciclo de vida.
+El siguiente ejemplo de código demuestra cómo utilizar el intersticial recompensado. En este ejemplo, creará una instancia de un intersticial recompensado, cargará un anuncio en él mediante una AdRequest y mejorará la funcionalidad gestionando varios eventos del ciclo de vida.
 
 
 ### Cargar un anuncio
@@ -125,9 +125,9 @@ Para cargar un anuncio intersticial recompensado, utilice la clase `RewardedInte
 
 
 ### [Opcional] Validar las devoluciones de llamada de verificación del lado del servidor (SSV)
-Para aplicaciones que requieren datos adicionales en la verificación del lado del servidor[Androide](https://developers.google.com/admob/android/ssv)/[iOS](https://developers.google.com/admob/ios/ssv)devoluciones de llamada, se puede emplear la función de datos personalizados de los anuncios recompensados. Cualquier valor de cadena asignado a un objeto publicitario recompensado se transmite al parámetro de consulta `custom_data` de la devolución de llamada SSV. Si no se establecen datos personalizados, el parámetro de consulta `custom_data` estará ausente en la devolución de llamada SSV.
+Para aplicaciones que requieren datos adicionales en la verificación del lado del servidor [Android](https://developers.google.com/admob/android/ssv)/[iOS](https://developers.google.com/admob/ios/ssv)devoluciones de llamada, se puede emplear la función de datos personalizados de los anuncios recompensados. Cualquier valor de cadena asignado a un objeto publicitario recompensado se transmite al parámetro de consulta `custom_data` de la devolución de llamada SSV. Si no se establecen datos personalizados, el parámetro de consulta `custom_data` estará ausente en la devolución de llamada SSV.
 
-El siguiente fragmento de código ilustra cómo establecer datos personalizados en un objeto de anuncio intersticial bonificado antes de solicitar un anuncio:
+El siguiente fragmento de código ilustra cómo establecer datos personalizados en un objeto de anuncio intersticial recompensado antes de solicitar un anuncio:
 
 === "GDScript"
 
@@ -160,7 +160,7 @@ El siguiente fragmento de código ilustra cómo establecer datos personalizados 
     ```
 !!! nota
 
-La cadena de recompensa personalizada es[porcentaje escapó](https://en.wikipedia.org/wiki/Percent-encoding)y puede requerir decodificación cuando se analiza desde la devolución de llamada SSV.
+La cadena de recompensa personalizada es [porcentaje escapó](https://en.wikipedia.org/wiki/Percent-encoding)y puede requerir decodificación cuando se analiza desde la devolución de llamada SSV.
 
 ### Configurar FullScreenContentCallback
 `FullScreenContentCallback` gestiona los eventos asociados con la visualización de su `RewardedInterstitialAd`. Antes de presentar el `RewardedInterstitialAd`, asegúrese de configurar la devolución de llamada:

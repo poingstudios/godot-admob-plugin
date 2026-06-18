@@ -1,4 +1,4 @@
-# Integra AppLovin con la mediación
+# Integrar AppLovin con la mediación
 
 Esta guía explica cómo utilizar el SDK de anuncios móviles de Google para cargar y presentar anuncios desde AppLovin a través de[mediación](../get_started.md). Proporciona instrucciones sobre cómo integrar AppLovin en la configuración de mediación de una aplicación Godot e integrar el SDK y el adaptador de AppLovin en su aplicación Godot.
 

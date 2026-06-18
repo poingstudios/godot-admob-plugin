@@ -1,4 +1,4 @@
-# Integrar Unity Ads con Mediación
+# Integrar Unity Ads con mediación
 
 Esta guía explica cómo utilizar el SDK de Google Mobile Ads para cargar y presentar anuncios de Unity Ads a través de la [mediación](../get_started.md). Proporciona instrucciones sobre cómo integrar Unity Ads en la configuración de mediación de una aplicación de Godot e integrar el SDK y el adaptador de Unity Ads en su aplicación de Godot.
 
@@ -9,7 +9,7 @@ Este documento se basa en:
 
 ## Integraciones y formatos de anuncios compatibles
 
-El adaptador de mediación de AdMob para Unity Ads tiene as seguintes capacidades:
+El adaptador de mediación de AdMob para Unity Ads tiene las siguientes capacidades:
 
 | Integración |   |
 |-------------|---|
@@ -20,12 +20,12 @@ El adaptador de mediación de AdMob para Unity Ads tiene as seguintes capacidade
 |-----------------------|------------|
 | Banner                | ✅          |
 | Intersticial          | ✅          |
-| Bonificado (Rewarded) | ✅          |
-| Intersticial Bonificado | ✅          |
+| Recompensado          | ✅          |
+| Intersticial Recompensado | ✅          |
 
 ## Requisitos previos
-- Complete la [guía de inicio](../../index.md)
-- Complete la [guía de inicio de mediación](../get_started.md)
+- Completa la [Guía de introducción](../../index.md)
+- Completa la [Guía de introducción a la mediación](../get_started.md)
 
 ## Paso 1: Configurar Unity Ads
 Recomendamos seguir el tutorial para [Android](https://developers.google.com/admob/android/mediation/unity#step_1_set_up_unity_ads) o [iOS](https://developers.google.com/admob/ios/mediation/unity#step_1_set_up_unity_ads), ya que será el mismo para ambos.
@@ -41,20 +41,20 @@ Recomendamos seguir el tutorial para [Android](https://developers.google.com/adm
     3. Copie el contenido de la carpeta `unity_ads` y péguelo en la carpeta de complementos de Android en `res://addons/admob/android/bin/`.
 
 === "iOS"
-    El adaptador de Unity Ads **ya está incluido** en la descarga estándar del complemento para iOS. Si siguió la [guía de instalación de iOS](../../index.md#download-install), ya debería tener los archivos necesarios (`poing-godot-admob-unity_ads.gdip` y marcos relacionados) en su directorio `res://ios/plugins/`.
+    El adaptador de Unity Ads **ya está incluido** en la descarga estándar del complemento para iOS. Si siguió la [Guía de instalación de iOS](../../index.md#download-install), ya debería tener los archivos necesarios (`poing-godot-admob-unity_ads.gdip` y marcos relacionados) en su directorio `res://ios/plugins/`.
 
-## Paso 4: Habilitar el complemento
+## Paso 4: Habilite el complemento
 
 === "Android"
-    Asegúrese de habilitar **Unity Ads** en **Project Settings** (bajo `Admob > Android > Mediation > Unity Ads`).
+    Asegúrese de habilitar **Unity Ads** en **Configuración del proyecto** (bajo `Admob > Android > Mediación > Unity Ads`).
 
 === "iOS"
-    Asegúrese de marcar tanto `Ad Mob` como `Ad Mob Unity Ads` en la lista de Plugins en sus **iOS Export Presets** (además de ingresar su ID de aplicación de AdMob en la configuración de Plists).
+    Asegúrese de marcar tanto `Ad Mob` como `Ad Mob Unity Ads` en la lista de Plugins en sus **Preajustes de exportación de iOS** (además de ingresar su ID de aplicación de AdMob en la configuración de Plists).
 
 ## Paso 5: Pasos opcionales
 
 ### Política de consentimiento de usuarios de la UE
-Para pasar información de consentimiento al SDK de Unity Ads, utilice el seguinte código:
+Para pasar información de consentimiento al SDK de Unity Ads, utilice el siguiente código:
 
 === "GDScript"
 
@@ -69,7 +69,7 @@ Para pasar información de consentimiento al SDK de Unity Ads, utilice el seguin
     ```
 
 ### Consentimiento de privacidad
-Para configurar el consentimiento de privacidad (por ejemplo, para CCPA), utilice o seguinte código:
+Para configurar el consentimiento de privacidad (por ejemplo, para CCPA), utilice el siguiente código:
 
 === "GDScript"
 

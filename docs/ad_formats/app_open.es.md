@@ -15,15 +15,16 @@ Los anuncios de apertura de aplicaciones muestran automáticamente una pequeña 
 
 Antes de continuar, haga lo siguiente:
 
-- Completa el[Guía de introducción](../index.md).
+- Completa la [Guía de introducción](../index.md).
 
 ## Pruebe siempre con anuncios de prueba
 
 La siguiente tabla contiene un ID de bloque de anuncios que puede utilizar para solicitar anuncios de prueba. Se ha configurado especialmente para devolver anuncios de prueba en lugar de anuncios de producción para cada solicitud, lo que hace que su uso sea seguro.
 
-Sin embargo, después de registrar una aplicación en la interfaz web de AdMob y crear sus propios ID de bloque de anuncios para usar en su aplicación, explícitamente[configure su dispositivo como dispositivo de prueba](../enable_test_ads.md)durante el desarrollo.
+Sin embargo, después de registrar una aplicación en la interfaz web de AdMob y crear sus propios ID de bloque de anuncios para usar en su aplicación, explícitamente [configure su dispositivo como dispositivo de prueba](../enable_test_ads.md) durante el desarrollo.
 
-=== "Androide"
+=== "Android"
+
 
     ```
     ca-app-pub-3940256099942544/9257395921
