@@ -41,26 +41,18 @@ if [ -f "$VERSION_FILE" ]; then
     fi
 fi
 
-# Determine repo and tag name
-# E.g. stable version 4.6.3 vs pre-release 4.7-rc3
+# Determine repo, tag, and asset name
 if [[ "$GODOT_VERSION" =~ (beta|rc|dev) ]]; then
     GODOT_TAG="$GODOT_VERSION"
     GODOT_REPO="godotengine/godot-builds"
 else
-    # Check if suffix -stable is already present, if not append it
-    if [[ "$GODOT_VERSION" == *-stable ]]; then
-        GODOT_TAG="$GODOT_VERSION"
-    else
-        GODOT_TAG="${GODOT_VERSION}-stable"
-    fi
+    # Strip trailing .0 (e.g. 4.3.0 -> 4.3) to match Godot release URL convention
+    NORMALIZED="${GODOT_VERSION%.0}"
+    GODOT_TAG="${NORMALIZED}-stable"
     GODOT_REPO="godotengine/godot"
 fi
 
-# Replace '-' with '.' in the tag for the asset name
-# E.g. 4.7-rc3 -> 4.7.rc3
-# E.g. 4.6.3-stable -> 4.6.3.stable
-GODOT_TAG_DOTS="${GODOT_TAG//-/.}"
-ASSET_NAME="godot-lib.${GODOT_TAG_DOTS}.template_release.aar"
+ASSET_NAME="godot-lib.${GODOT_TAG//-/.}.template_release.aar"
 DOWNLOAD_URL="https://github.com/${GODOT_REPO}/releases/download/${GODOT_TAG}/${ASSET_NAME}"
 
 echo "[INFO] Downloading godot-lib.aar from: $DOWNLOAD_URL"
