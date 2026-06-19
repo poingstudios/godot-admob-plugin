@@ -12,8 +12,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-ironsource.git@exact:9.4.10001|IronSourceAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-ironsource.git",
+    "version": "9.4.10001",
+    "products": ["IronSourceAdapterTarget"]
+  }
 ]
 
 [plist]
