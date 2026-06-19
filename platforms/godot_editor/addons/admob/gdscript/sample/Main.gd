@@ -26,13 +26,36 @@ const Registry = preload("res://addons/admob/internal/sample_registry.gd")
 
 @onready
 var _console_output: RichTextLabel = $Background/SafeArea/LayoutContainer/ConsolePanel/ConsoleOutput
+@onready
+var _main_tabs: TabContainer = $Background/SafeArea/LayoutContainer/TabContent/MainTabs
 
 
 func _ready() -> void:
+	var config := ConfigFile.new()
+	if config.load(Registry.SETTINGS_PATH) == OK:
+		var saved_locale := config.get_value(Registry.LOCALIZATION_SECTION, Registry.LOCALE_KEY, "") as String
+		if saved_locale != "":
+			TranslationServer.set_locale(saved_locale)
+
 	Registry.logger = self
+	_console_output.text = tr("GAD_LogsStart")
 	log_message("Main initialized")
 
+	$Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportLabel.text = tr("GAD_SupportProject")
+
 	_initialize_mobile_ads()
+	_setup_tab_titles()
+
+
+func _setup_tab_titles() -> void:
+	_main_tabs.set_tab_title(0, "Banner")
+	_main_tabs.set_tab_title(1, "Native")
+	_main_tabs.set_tab_title(2, "App Open")
+	_main_tabs.set_tab_title(3, "Interstitial")
+	_main_tabs.set_tab_title(4, "Rewarded")
+	_main_tabs.set_tab_title(5, "Rewarded Interstitial")
+	_main_tabs.set_tab_title(6, "UMP")
+	_main_tabs.set_tab_title(7, "Mobile Ads")
 
 
 func log_message(message: String) -> void:
@@ -104,13 +127,10 @@ func _on_get_initialization_status_pressed() -> void:
 func _log_adapter_status(status: InitializationStatus) -> void:
 	for adapter_name in status.adapter_status_map:
 		var adapter_status: AdapterStatus = status.adapter_status_map[adapter_name]
-		var info := (
-			"[%s] State: %d | Latency: %dms | Desc: %s"
-			% [
+		var info := "[{0}] State: {1} | Latency: {2}ms | Desc: {3}".format([
 				adapter_name,
 				adapter_status.initialization_state,
 				adapter_status.latency,
 				adapter_status.description
-			]
-		)
+			])
 		log_message(info)

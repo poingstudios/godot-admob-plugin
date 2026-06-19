@@ -39,14 +39,28 @@ public partial class MainCSharpExample : Control, ISampleLogger
 
 	public override async void _Ready()
 	{
+		var config = new ConfigFile();
+		if (config.Load(SampleRegistry.SettingsPath) == Error.Ok)
+		{
+			string savedLocale = (string)config.GetValue(SampleRegistry.LocalizationSection, SampleRegistry.LocaleKey, "");
+			if (!string.IsNullOrEmpty(savedLocale))
+			{
+				TranslationServer.SetLocale(savedLocale);
+			}
+		}
+
 		_consoleOutput = GetNode<RichTextLabel>("Background/SafeArea/LayoutContainer/ConsolePanel/ConsoleOutput");
+		_consoleOutput.Text = Tr("GAD_LogsStart");
 
 		var mainTabs = GetNode<TabContainer>("Background/SafeArea/LayoutContainer/TabContent/MainTabs");
 		
 		SampleRegistry.Logger = this;
 		LogMessage("Main initialized");
 
+		GetNode<Label>("Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportLabel").Text = Tr("GAD_SupportProject");
+
 		InitializeMobileAds();
+		SetupTabTitles(mainTabs);
 
 		// Workaround for TabContainer headers not showing up on start in Godot 4
 		// We wait for a couple of frames to ensure the layout and theme are fully applied
@@ -54,6 +68,18 @@ public partial class MainCSharpExample : Control, ISampleLogger
 		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		mainTabs.TabsVisible = false;
 		mainTabs.TabsVisible = true;
+	}
+
+	private void SetupTabTitles(TabContainer mainTabs)
+	{
+		mainTabs.SetTabTitle(0, "Banner");
+		mainTabs.SetTabTitle(1, "Native");
+		mainTabs.SetTabTitle(2, "App Open");
+		mainTabs.SetTabTitle(3, "Interstitial");
+		mainTabs.SetTabTitle(4, "Rewarded");
+		mainTabs.SetTabTitle(5, "Rewarded Interstitial");
+		mainTabs.SetTabTitle(6, "UMP");
+		mainTabs.SetTabTitle(7, "Mobile Ads");
 	}
 
 	public void LogMessage(string message)

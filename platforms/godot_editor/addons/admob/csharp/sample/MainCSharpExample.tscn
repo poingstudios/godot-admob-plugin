@@ -96,9 +96,8 @@ layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("4_arial")
-theme_override_font_sizes/font_size = 35
-text = "AdMob Plugin (C#) - Poing Studios"
+theme_override_font_sizes/font_size = 26
+text = "GAD_MainTitleCS"
 vertical_alignment = 1
 
 [node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox" unique_id=1632407447]
@@ -109,15 +108,12 @@ theme_type_variation = &"SupportCard"
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="SupportLabel" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=1316534474]
-clip_contents = false
+[node name="SupportLabel" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=1316534474]
 layout_mode = 2
-theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 0.8)
-theme_override_fonts/normal_font = ExtResource("4_arial")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "[center][b]S U P P O R T   T H E   P R O J E C T[/b][/center]"
-fit_content = true
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 0.8)
+theme_override_font_sizes/font_size = 16
+text = "GAD_SupportProject"
+horizontal_alignment = 1
 
 [node name="SupportButtons" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=1448736378]
 layout_mode = 2
@@ -252,7 +248,7 @@ theme_type_variation = &"GlassPanel"
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "--- LOGS START ---"
+text = "GAD_LogsStart"
 scroll_following = true
 
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" method="_on_pressed"]
