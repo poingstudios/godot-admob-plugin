@@ -13,6 +13,7 @@ jobs:
     outputs:
       godot_version: ${{ steps.detect.outputs.godot_version }}
       should_build: ${{ steps.detect.outputs.should_build }}
+      plugin_tag: ${{ steps.detect.outputs.plugin_tag }}
     steps:
     - uses: actions/checkout@v6
 
@@ -41,6 +42,7 @@ jobs:
         else
           echo "should_build=true" >> $GITHUB_OUTPUT
           echo "godot_version=$LATEST_PAD" >> $GITHUB_OUTPUT
+          echo "plugin_tag=$TAG" >> $GITHUB_OUTPUT
         fi
 
   android:
@@ -49,6 +51,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
+      with:
+        ref: ${{ needs.detect-latest.outputs.plugin_tag }}
     
     - name: Build Plugins
       working-directory: platforms/android
@@ -61,17 +65,12 @@ jobs:
       run: |
         ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}"
 
-    - name: Set plugin version
-      run: |
-        RAW_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
-        echo "PLUGIN_TAG=v${RAW_VERSION#v}" >> $GITHUB_ENV
-
     - name: Upload binary
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: platforms/android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip
-        tag: ${{ env.PLUGIN_TAG }}
+        tag: ${{ needs.detect-latest.outputs.plugin_tag }}
         overwrite: true
 
   ios:
@@ -80,6 +79,8 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v6
+      with:
+        ref: ${{ needs.detect-latest.outputs.plugin_tag }}
 
     - name: Dependencies
       uses: actions/setup-python@v6
@@ -90,16 +91,11 @@ jobs:
       working-directory: platforms/ios
       run: ./scripts/build.sh ${{ needs.detect-latest.outputs.godot_version }}
 
-    - name: Set plugin version
-      run: |
-        RAW_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
-        echo "PLUGIN_TAG=v${RAW_VERSION#v}" >> $GITHUB_ENV
-
     - name: Upload binary
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: platforms/ios/bin/release/*.zip
         file_glob: true
-        tag: ${{ env.PLUGIN_TAG }}
+        tag: ${{ needs.detect-latest.outputs.plugin_tag }}
         overwrite: true
