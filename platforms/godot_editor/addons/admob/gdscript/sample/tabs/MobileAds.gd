@@ -60,7 +60,6 @@ func _ready() -> void:
 		_language_button.selected = 4
 	else:
 		_language_button.selected = 0
-		
 	_language_button.item_selected.connect(_on_language_selected)
 
 
@@ -68,7 +67,7 @@ func _on_language_selected(index: int) -> void:
 	var locale := _language_button.get_item_metadata(index) as String
 	_log("Changing language to: " + locale)
 	TranslationServer.set_locale(locale)
-	
+
 	var config := ConfigFile.new()
 	config.load(Registry.SETTINGS_PATH)
 	config.set_value(Registry.LOCALIZATION_SECTION, Registry.LOCALE_KEY, locale)
