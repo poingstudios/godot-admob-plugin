@@ -16,17 +16,17 @@ script = ExtResource("1_pyoth")
 [node name="GetConsentStatus" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "GetConsentStatus"
+text = "GAD_GetConsentStatus"
 
 [node name="ResetConsentInformation" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "ResetConsentInformation"
+text = "GAD_ResetConsentInformation"
 
 [node name="ShowPrivacyOptionsForm" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "ShowPrivacyOptionsForm"
+text = "GAD_ShowPrivacyOptionsForm"
 
 [connection signal="pressed" from="GetConsentStatus" to="." method="_on_get_consent_status_pressed"]
 [connection signal="pressed" from="ResetConsentInformation" to="." method="_on_reset_consent_information_pressed"]

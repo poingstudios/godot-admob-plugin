@@ -48,6 +48,61 @@ public partial class MobileAds : BaseTab
 
 		var initBtn = GetNode<Button>("GetInitStatus");
 		initBtn.Pressed += OnGetInitializationStatusPressed;
+
+		var langBtn = GetNode<OptionButton>("LanguageCard/LanguageContainer/LanguageButton");
+		langBtn.AddItem("English", 0);
+		langBtn.SetItemMetadata(0, "en");
+		langBtn.AddItem("Português (Brasil)", 1);
+		langBtn.SetItemMetadata(1, "pt_BR");
+		langBtn.AddItem("Español", 2);
+		langBtn.SetItemMetadata(2, "es");
+		langBtn.AddItem("简体中文", 3);
+		langBtn.SetItemMetadata(3, "zh_CN");
+		langBtn.AddItem("日本語", 4);
+		langBtn.SetItemMetadata(4, "ja");
+
+		var currentLocale = TranslationServer.GetLocale();
+		var config = new ConfigFile();
+		if (config.Load(SampleRegistry.SettingsPath) == Error.Ok)
+		{
+			currentLocale = (string)config.GetValue(SampleRegistry.LocalizationSection, SampleRegistry.LocaleKey, currentLocale);
+		}
+
+		if (currentLocale.StartsWith("pt"))
+		{
+			langBtn.Selected = 1;
+		}
+		else if (currentLocale.StartsWith("es"))
+		{
+			langBtn.Selected = 2;
+		}
+		else if (currentLocale.StartsWith("zh"))
+		{
+			langBtn.Selected = 3;
+		}
+		else if (currentLocale.StartsWith("ja"))
+		{
+			langBtn.Selected = 4;
+		}
+		else
+		{
+			langBtn.Selected = 0;
+		}
+
+		langBtn.ItemSelected += OnLanguageSelected;
+	}
+
+	private void OnLanguageSelected(long index)
+	{
+		var langBtn = GetNode<OptionButton>("LanguageCard/LanguageContainer/LanguageButton");
+		string locale = (string)langBtn.GetItemMetadata((int)index);
+		Log(string.Format("Changing language to: {0}", locale));
+		TranslationServer.SetLocale(locale);
+
+		var config = new ConfigFile();
+		config.Load(SampleRegistry.SettingsPath);
+		config.SetValue(SampleRegistry.LocalizationSection, SampleRegistry.LocaleKey, locale);
+		config.Save(SampleRegistry.SettingsPath);
 	}
 
 	private void OnGetInitializationStatusPressed()
@@ -64,31 +119,31 @@ public partial class MobileAds : BaseTab
 		foreach (var adapterName in status.AdapterStatusMap.Keys)
 		{
 			var adapterStatus = status.AdapterStatusMap[adapterName];
-			Log($"[{adapterName}] State: {adapterStatus.State} | Latency: {adapterStatus.Latency}ms | Desc: {adapterStatus.Description}");
+			Log(string.Format("[{0}] State: {1} | Latency: {2}ms | Desc: {3}", adapterName, adapterStatus.State, adapterStatus.Latency, adapterStatus.Description));
 		}
 	}
 
 	private void OnSetIosAppPausePressed(bool isEnabled)
 	{
-		Log("Setting iOS App Pause on Background: " + isEnabled);
+		Log(string.Format("Setting iOS App Pause on Background: {0}", isEnabled));
 		PoingStudios.AdMob.Api.MobileAds.SetIosAppPauseOnBackground(isEnabled);
 	}
 
 	private void OnMuteMusicPressed(bool isMuted)
 	{
-		Log("Muting music: " + isMuted);
+		Log(string.Format("Muting music: {0}", isMuted));
 		_musicPlayer.StreamPaused = isMuted;
 	}
 
 	private void OnAdVolumeChanged(double value)
 	{
-		Log("Setting ad volume: " + value);
+		Log(string.Format("Setting ad volume: {0}", value));
 		PoingStudios.AdMob.Api.MobileAds.SetAppVolume((float)value);
 	}
 
 	private void OnAdMutedPressed(bool isMuted)
 	{
-		Log("Muting ads: " + isMuted);
+		Log(string.Format("Muting ads: {0}", isMuted));
 		PoingStudios.AdMob.Api.MobileAds.SetAppMuted(isMuted);
 	}
 

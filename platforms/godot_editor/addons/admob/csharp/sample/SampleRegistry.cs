@@ -31,6 +31,10 @@ namespace PoingStudios.AdMob.Sample
 
 	public static class SampleRegistry
 	{
+		public const string SettingsPath = "user://sample_admob_settings.cfg";
+		public const string LocalizationSection = "localization";
+		public const string LocaleKey = "locale";
+
 		public static ISampleLogger Logger { get; set; }
 		public static SafeArea SafeArea { get; set; }
 	}

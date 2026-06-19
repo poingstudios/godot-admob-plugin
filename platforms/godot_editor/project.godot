@@ -52,6 +52,10 @@ enabled=PackedStringArray("res://addons/admob/plugin.cfg")
 
 import/blender/enabled=false
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://addons/admob/gdscript/sample/translations/admob_sample.en.translation", "res://addons/admob/gdscript/sample/translations/admob_sample.pt_BR.translation", "res://addons/admob/gdscript/sample/translations/admob_sample.es.translation", "res://addons/admob/gdscript/sample/translations/admob_sample.zh_CN.translation", "res://addons/admob/gdscript/sample/translations/admob_sample.ja.translation")
+
 [physics]
 
 common/enable_pause_aware_picking=true

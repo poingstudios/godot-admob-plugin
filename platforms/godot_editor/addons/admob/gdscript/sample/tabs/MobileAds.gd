@@ -29,6 +29,50 @@ const Registry = preload("res://addons/admob/internal/sample_registry.gd")
 @onready var _music_player: AudioStreamPlayer = $MusicPlayer
 @onready var _ad_volume_slider: HSlider = $AdVolumeCard/AdVolumeContainer/AdVolumeSlider
 @onready var _ad_muted_check: CheckButton = $AdMuted
+@onready var _language_button: OptionButton = %LanguageButton
+
+
+
+func _ready() -> void:
+	_language_button.add_item("English", 0)
+	_language_button.set_item_metadata(0, "en")
+	_language_button.add_item("Português (Brasil)", 1)
+	_language_button.set_item_metadata(1, "pt_BR")
+	_language_button.add_item("Español", 2)
+	_language_button.set_item_metadata(2, "es")
+	_language_button.add_item("简体中文", 3)
+	_language_button.set_item_metadata(3, "zh_CN")
+	_language_button.add_item("日本語", 4)
+	_language_button.set_item_metadata(4, "ja")
+
+	var current_locale := TranslationServer.get_locale()
+	var config := ConfigFile.new()
+	if config.load(Registry.SETTINGS_PATH) == OK:
+		current_locale = config.get_value(Registry.LOCALIZATION_SECTION, Registry.LOCALE_KEY, current_locale) as String
+
+	if current_locale.begins_with("pt"):
+		_language_button.selected = 1
+	elif current_locale.begins_with("es"):
+		_language_button.selected = 2
+	elif current_locale.begins_with("zh"):
+		_language_button.selected = 3
+	elif current_locale.begins_with("ja"):
+		_language_button.selected = 4
+	else:
+		_language_button.selected = 0
+		
+	_language_button.item_selected.connect(_on_language_selected)
+
+
+func _on_language_selected(index: int) -> void:
+	var locale := _language_button.get_item_metadata(index) as String
+	_log("Changing language to: " + locale)
+	TranslationServer.set_locale(locale)
+	
+	var config := ConfigFile.new()
+	config.load(Registry.SETTINGS_PATH)
+	config.set_value(Registry.LOCALIZATION_SECTION, Registry.LOCALE_KEY, locale)
+	config.save(Registry.SETTINGS_PATH)
 
 
 func _on_get_initialization_status_pressed() -> void:

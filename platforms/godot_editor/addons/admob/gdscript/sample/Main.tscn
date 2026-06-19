@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bvlvnb742xsr1" path="res://addons/admob/gdscript/sample/Main.gd" id="1_xm28w"]
 [ext_resource type="Script" uid="uid://ccy0heku3fag" path="res://addons/admob/gdscript/sample/SafeArea.gd" id="2_safe"]
 [ext_resource type="Texture2D" uid="uid://to8hnfn5fmrl" path="res://addons/admob/assets/icon-76.png" id="3_icon"]
-[ext_resource type="FontFile" uid="uid://ctd0my3oi3sl7" path="res://addons/admob/assets/fonts/arial.ttf" id="4_arial"]
 [ext_resource type="Texture2D" uid="uid://b04npsmf70fhr" path="res://addons/admob/assets/donate/Patreon_logo_with_wordmark.svg" id="5_patreon"]
 [ext_resource type="Texture2D" uid="uid://c1p3ju4a5gwe3" path="res://addons/admob/assets/donate/Ko-fi_Logo_RGB_ColorBg.png" id="6_kofi"]
 [ext_resource type="Texture2D" uid="uid://jksg4sbkq0p7" path="res://addons/admob/assets/donate/PayPal.svg" id="7_paypal"]
@@ -95,9 +94,8 @@ layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("4_arial")
-theme_override_font_sizes/font_size = 35
-text = "AdMob Plugin (GDScript) - Poing Studios"
+theme_override_font_sizes/font_size = 26
+text = "GAD_MainTitleGDS"
 vertical_alignment = 1
 
 [node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox" unique_id=2017800703]
@@ -108,15 +106,12 @@ theme_type_variation = &"SupportCard"
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="SupportLabel" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=309886958]
-clip_contents = false
+[node name="SupportLabel" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=309886958]
 layout_mode = 2
-theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 0.8)
-theme_override_fonts/normal_font = ExtResource("4_arial")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "[center][b]S U P P O R T   T H E   P R O J E C T[/b][/center]"
-fit_content = true
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 0.8)
+theme_override_font_sizes/font_size = 16
+text = "GAD_SupportProject"
+horizontal_alignment = 1
 
 [node name="SupportButtons" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=1645840664]
 layout_mode = 2
@@ -252,7 +247,7 @@ theme_type_variation = &"GlassPanel"
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "--- LOGS START ---"
+text = "GAD_LogsStart"
 scroll_following = true
 
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" method="_on_pressed"]
