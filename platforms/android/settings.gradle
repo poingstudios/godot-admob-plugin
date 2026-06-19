@@ -10,6 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://cboost.jfrog.io/artifactory/chartboost-mediation' }
+        maven { url 'https://cboost.jfrog.io/artifactory/chartboost-core' }
+        maven { url 'https://cboost.jfrog.io/artifactory/chartboost-ads/' }
         maven { url 'https://android-sdk.is.com/' }
         maven { url "https://artifactory.bidmachine.io/bidmachine" }
         flatDir {
@@ -27,3 +30,4 @@ include ':src:mediation:ironsource'
 include ':src:mediation:applovin'
 include ':src:mediation:bidmachine'
 include ':src:mediation:unity_ads'
+include ':src:mediation:chartboost'

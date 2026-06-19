@@ -37,6 +37,15 @@
       }
     },
     {
+      "identity" : "googleads-mobile-ios-mediation-chartboost",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-chartboost.git",
+      "state" : {
+        "revision" : "ae63dc5608f329580cfbaa139254c898a0023771",
+        "version" : "9.12.0"
+      }
+    },
+    {
       "identity" : "googleads-mobile-ios-mediation-ironsource",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-ironsource.git",
