@@ -30,6 +30,7 @@ using PoingStudios.AdMob.Mediation.Extras.IronSource;
 using PoingStudios.AdMob.Mediation.Extras.AppLovin;
 using PoingStudios.AdMob.Mediation.Extras.BidMachine;
 using PoingStudios.AdMob.Mediation.Extras.UnityAds;
+using PoingStudios.AdMob.Mediation.Extras.Chartboost;
 using PoingStudios.AdMob.Sample;
 
 public partial class MainCSharpExample : Control, ISampleLogger
@@ -117,6 +118,9 @@ public partial class MainCSharpExample : Control, ISampleLogger
 		// Unity Ads setup example
 		UnityAds.SetConsent(true);
 		UnityAds.SetPrivacyConsent("user_privacy_data", true);
+
+		// Chartboost setup example
+		Chartboost.SetConsent(true);
 	}
 
 	private void _OnGetInitializationStatusPressed()

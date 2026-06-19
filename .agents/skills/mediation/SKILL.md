@@ -79,7 +79,7 @@ Create `<NetworkName>.cs` in `platforms/godot_editor/addons/admob/csharp/src/Med
 2. **iOS GDIP Config**:
    - Create `config/poing-godot-admob-<network_name>.gdip` under `platforms/ios/src/mediation/<network_name>/config/` declaring SPM package rules.
    - **Crucial SPM Tip**: Swift Package Manager uses Semantic Versioning (`major.minor.patch`). For 4-component mediation versions (e.g., `13.6.3.0`), multiply the patch component by 100 (e.g., use `13.6.300`).
-   - Create an identical copy under `platforms/godot_editor/ios/plugins/` replacing `admob_packages` array with `spm_packages` dictionary format.
+   - Create an identical copy under `platforms/godot_editor/ios/plugins/` using the `admob_packages` array format.
 3. **Objective-C++ Wrapper**:
    - Implement `PoingGodotAdMob<NetworkName>.h` & `.mm` referencing `<NetworkNameSDK/NetworkNameSDK.h>`.
    - Implement `PoingGodotAdMob<NetworkName>Module.h` & `.mm` to register the plugin singleton with the engine during initialization.

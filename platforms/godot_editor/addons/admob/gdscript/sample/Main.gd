@@ -91,6 +91,9 @@ func _setup_mediation_adapters() -> void:
 	UnityAds.set_consent(true)
 	UnityAds.set_privacy_consent("user_privacy_data", true)
 
+	# Chartboost setup example
+	Chartboost.set_consent(true)
+
 
 func _on_get_initialization_status_pressed() -> void:
 	var status := MobileAds.get_initialization_status()

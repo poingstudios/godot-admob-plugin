@@ -110,6 +110,7 @@ plugins:
             Meta: Meta
             Vungle: Vungle
             UnityAds: Unity Ads
+            Chartboost: Chartboost
             Privacy: Privacidade
             Regulatory solutions: Soluções regulatórias
             US states privacy laws: Leis de privacidade dos estados dos EUA
@@ -151,6 +152,7 @@ plugins:
             Meta: Meta
             Vungle: Vungle
             UnityAds: Unity Ads
+            Chartboost: Chartboost
             Privacy: Privacidad
             Regulatory solutions: Soluciones regulatorias
             US states privacy laws: Leyes de privacidad de estados de EE. UU.
@@ -192,6 +194,7 @@ plugins:
             Meta: Meta
             Vungle: Vungle
             UnityAds: Unity Ads
+            Chartboost: Chartboost
             Privacy: 隐私
             Regulatory solutions: 监管解决方案
             US states privacy laws: 美国各州隐私法
@@ -233,6 +236,7 @@ plugins:
             Meta: Meta
             Vungle: Vungle
             UnityAds: Unity Ads
+            Chartboost: Chartboost
             Privacy: プライバシー
             Regulatory solutions: 規制対応ソリューション
             US states privacy laws: 米国各州のプライバシー法
@@ -277,6 +281,7 @@ nav:
         - Meta: mediate/integrate_partner_networks/meta.md
         - Vungle: mediate/integrate_partner_networks/vungle.md
         - Unity Ads: mediate/integrate_partner_networks/unity_ads.md
+        - Chartboost: mediate/integrate_partner_networks/chartboost.md
     - Privacy:
       - Regulatory solutions:
         - US states privacy laws: privacy/regulatory_solutions/us_states_privacy_laws.md
