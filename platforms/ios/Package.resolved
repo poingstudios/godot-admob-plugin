@@ -82,12 +82,30 @@
       }
     },
     {
+      "identity" : "googleads-mobile-ios-mediation-moloco",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-moloco.git",
+      "state" : {
+        "revision" : "cde912984d63ef0e3896e36531a5230606233e0f",
+        "version" : "4.7.0"
+      }
+    },
+    {
       "identity" : "googleads-mobile-ios-mediation-unity",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-unity.git",
       "state" : {
         "revision" : "63742a7728ab02f8fc5c9a249ca3f0b60dfe8b8a",
         "version" : "4.18.100"
+      }
+    },
+    {
+      "identity" : "moloco-sdk-ios-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/moloco/moloco-sdk-ios-spm.git",
+      "state" : {
+        "revision" : "7ce02e4e9820179233854316a203ac5f709101be",
+        "version" : "4.7.0"
       }
     },
     {
