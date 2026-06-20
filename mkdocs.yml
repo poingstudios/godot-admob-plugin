@@ -111,6 +111,7 @@ plugins:
             Vungle: Vungle
             UnityAds: Unity Ads
             Chartboost: Chartboost
+            Maio: Maio
             Privacy: Privacidade
             Regulatory solutions: Soluções regulatórias
             US states privacy laws: Leis de privacidade dos estados dos EUA
@@ -153,6 +154,7 @@ plugins:
             Vungle: Vungle
             UnityAds: Unity Ads
             Chartboost: Chartboost
+            Maio: Maio
             Privacy: Privacidad
             Regulatory solutions: Soluciones regulatorias
             US states privacy laws: Leyes de privacidad de estados de EE. UU.
@@ -195,6 +197,7 @@ plugins:
             Vungle: Vungle
             UnityAds: Unity Ads
             Chartboost: Chartboost
+            Maio: Maio
             Privacy: 隐私
             Regulatory solutions: 监管解决方案
             US states privacy laws: 美国各州隐私法
@@ -237,6 +240,7 @@ plugins:
             Vungle: Vungle
             UnityAds: Unity Ads
             Chartboost: Chartboost
+            Maio: Maio
             Privacy: プライバシー
             Regulatory solutions: 規制対応ソリューション
             US states privacy laws: 米国各州のプライバシー法
@@ -282,6 +286,7 @@ nav:
         - Vungle: mediate/integrate_partner_networks/vungle.md
         - Unity Ads: mediate/integrate_partner_networks/unity_ads.md
         - Chartboost: mediate/integrate_partner_networks/chartboost.md
+        - Maio: mediate/integrate_partner_networks/maio.md
     - Privacy:
       - Regulatory solutions:
         - US states privacy laws: privacy/regulatory_solutions/us_states_privacy_laws.md

@@ -24,7 +24,7 @@ opts.Add(EnumVariable('arch', "Compilation Architecture", '', ['', 'arm64', 'arm
 opts.Add(BoolVariable('simulator', "Compilation platform", 'no'))
 opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
 opts.Add(PathVariable('target_path', 'The path where the lib is installed.', 'bin/static_libraries/'))
-opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource', 'applovin', 'bidmachine', 'unity_ads', 'chartboost']))
+opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource', 'applovin', 'bidmachine', 'unity_ads', 'chartboost', 'line', 'maio']))
 
 # Updates the environment with the option variables.
 opts.Update(env)
@@ -103,6 +103,16 @@ elif env['plugin'] == 'chartboost':
     env.Append(FRAMEWORKPATH=[
         spm_artifacts + '/googleads-mobile-ios-mediation-chartboost/ChartboostAdapter/ChartboostAdapter.xcframework/' + xcframework_directory,
         spm_artifacts + '/googleads-mobile-ios-mediation-chartboost/ChartboostSDK/ChartboostSDK.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'line':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-line/LineAdapterTarget/LineAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/swift-package-manager-fivead/FiveAdTarget/FiveAd.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'maio':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-maio/MaioAdapter/MaioAdapter.xcframework/' + xcframework_directory,
+        '.build/checkouts/MaioSDK-v2-iOS/Maio.xcframework/' + xcframework_directory
     ])
 
 try:

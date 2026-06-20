@@ -15,6 +15,7 @@ dependencyResolutionManagement {
         maven { url 'https://cboost.jfrog.io/artifactory/chartboost-ads/' }
         maven { url 'https://android-sdk.is.com/' }
         maven { url "https://artifactory.bidmachine.io/bidmachine" }
+        maven { url "https://imobile-maio.github.io/maven" }
         flatDir {
             dirs 'godot-lib'
         }
@@ -31,3 +32,4 @@ include ':src:mediation:applovin'
 include ':src:mediation:bidmachine'
 include ':src:mediation:unity_ads'
 include ':src:mediation:chartboost'
+include ':src:mediation:maio'
