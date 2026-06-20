@@ -1,0 +1,20 @@
+[config]
+name="AdMob Line"
+binary="poing-godot-admob/bin/poing-godot-admob-line.xcframework"
+
+initialization="register_poing_godot_admob_line_types"
+deinitialization="unregister_poing_godot_admob_line_types"
+
+[dependencies]
+linked=[]
+embedded=[]
+system=[]
+capabilities=[]
+files=[]
+linker_flags=[]
+admob_packages=[
+    "https://github.com/googleads/googleads-mobile-ios-mediation-line.git@exact:3.0.102|LineAdapterTarget"
+]
+
+[plist]
+
