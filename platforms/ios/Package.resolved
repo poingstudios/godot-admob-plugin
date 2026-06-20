@@ -46,6 +46,15 @@
       }
     },
     {
+      "identity" : "googleads-mobile-ios-mediation-inmobi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-inmobi.git",
+      "state" : {
+        "revision" : "37d04f053040c70f713d4c48b8fe7807b8400aa6",
+        "version" : "11.3.0"
+      }
+    },
+    {
       "identity" : "googleads-mobile-ios-mediation-ironsource",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-ironsource.git",
