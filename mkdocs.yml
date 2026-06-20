@@ -111,6 +111,7 @@ plugins:
             Vungle: Vungle
             UnityAds: Unity Ads
             Chartboost: Chartboost
+            InMobi: InMobi
             Line: Line
             Maio: Maio
             Moloco: Moloco
@@ -156,6 +157,7 @@ plugins:
             Vungle: Vungle
             UnityAds: Unity Ads
             Chartboost: Chartboost
+            InMobi: InMobi
             Line: Line
             Maio: Maio
             Moloco: Moloco
@@ -201,6 +203,7 @@ plugins:
             Vungle: Vungle
             UnityAds: Unity Ads
             Chartboost: Chartboost
+            InMobi: InMobi
             Line: Line
             Maio: Maio
             Moloco: Moloco
@@ -246,6 +249,7 @@ plugins:
             Vungle: Vungle
             UnityAds: Unity Ads
             Chartboost: Chartboost
+            InMobi: InMobi
             Line: Line
             Maio: Maio
             Moloco: Moloco
@@ -294,6 +298,7 @@ nav:
         - Vungle: mediate/integrate_partner_networks/vungle.md
         - Unity Ads: mediate/integrate_partner_networks/unity_ads.md
         - Chartboost: mediate/integrate_partner_networks/chartboost.md
+        - InMobi: mediate/integrate_partner_networks/inmobi.md
         - Line: mediate/integrate_partner_networks/line.md
         - Maio: mediate/integrate_partner_networks/maio.md
         - Moloco: mediate/integrate_partner_networks/moloco.md
