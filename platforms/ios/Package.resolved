@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "dtexchangesdk-ios-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/inner-active/DTExchangeSDK-iOS-SPM.git",
+      "state" : {
+        "revision" : "b8e1d9dcbea2c8df8e342595e591ec78f235814d",
+        "version" : "8.4.7"
+      }
+    },
+    {
       "identity" : "googleads-mobile-ios-mediation-applovin",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-applovin.git",
@@ -43,6 +52,15 @@
       "state" : {
         "revision" : "ae63dc5608f329580cfbaa139254c898a0023771",
         "version" : "9.12.0"
+      }
+    },
+    {
+      "identity" : "googleads-mobile-ios-mediation-dtexchange",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-dtexchange.git",
+      "state" : {
+        "revision" : "0c7bf225bcfa5f13473f813066e890539ebd82f5",
+        "version" : "8.4.701"
       }
     },
     {
