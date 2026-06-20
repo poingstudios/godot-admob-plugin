@@ -111,6 +111,7 @@ plugins:
             Vungle: Vungle
             UnityAds: Unity Ads
             Chartboost: Chartboost
+            DTExchange: DT Exchange
             iMobile: i-mobile
             InMobi: InMobi
             Line: Line
@@ -158,6 +159,7 @@ plugins:
             Vungle: Vungle
             UnityAds: Unity Ads
             Chartboost: Chartboost
+            DTExchange: DT Exchange
             iMobile: i-mobile
             InMobi: InMobi
             Line: Line
@@ -205,6 +207,7 @@ plugins:
             Vungle: Vungle
             UnityAds: Unity Ads
             Chartboost: Chartboost
+            DTExchange: DT Exchange
             iMobile: i-mobile
             InMobi: InMobi
             Line: Line
@@ -252,6 +255,7 @@ plugins:
             Vungle: Vungle
             UnityAds: Unity Ads
             Chartboost: Chartboost
+            DTExchange: DT Exchange
             iMobile: i-mobile
             InMobi: InMobi
             Line: Line
@@ -302,6 +306,7 @@ nav:
         - Vungle: mediate/integrate_partner_networks/vungle.md
         - Unity Ads: mediate/integrate_partner_networks/unity_ads.md
         - Chartboost: mediate/integrate_partner_networks/chartboost.md
+        - DT Exchange: mediate/integrate_partner_networks/dtexchange.md
         - i-mobile: mediate/integrate_partner_networks/imobile.md
         - InMobi: mediate/integrate_partner_networks/inmobi.md
         - Line: mediate/integrate_partner_networks/line.md

@@ -117,6 +117,11 @@ func _setup_mediation_adapters() -> void:
 	# Chartboost setup example
 	Chartboost.set_consent(true)
 
+	# DT Exchange setup example
+	DTExchange.set_gdpr_consent(true)
+	DTExchange.set_gdpr_consent_string("consent_string_example")
+	DTExchange.set_ccpa_string("1YNN")
+
 
 func _on_get_initialization_status_pressed() -> void:
 	var status := MobileAds.get_initialization_status()

@@ -31,6 +31,7 @@ using PoingStudios.AdMob.Mediation.Extras.AppLovin;
 using PoingStudios.AdMob.Mediation.Extras.BidMachine;
 using PoingStudios.AdMob.Mediation.Extras.UnityAds;
 using PoingStudios.AdMob.Mediation.Extras.Chartboost;
+using PoingStudios.AdMob.Mediation.Extras.DTExchange;
 using PoingStudios.AdMob.Sample;
 
 public partial class MainCSharpExample : Control, ISampleLogger
@@ -147,6 +148,11 @@ public partial class MainCSharpExample : Control, ISampleLogger
 
 		// Chartboost setup example
 		Chartboost.SetConsent(true);
+
+		// DT Exchange setup example
+		DTExchange.SetGDPRConsent(true);
+		DTExchange.SetGDPRConsentString("consent_string_example");
+		DTExchange.SetCCPAString("1YNN");
 	}
 
 	private void _OnGetInitializationStatusPressed()
