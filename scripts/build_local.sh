@@ -24,16 +24,17 @@
 # scripts/build_local.sh
 
 show_help() {
-    echo "Usage: ./scripts/build_local.sh [android|ios|all] <godot_version>"
+    echo "Usage: ./scripts/build_local.sh [android|ios|all] <godot_version> [--clean]"
     echo ""
     echo "Arguments:"
     echo "  [platform]       android, ios, or all (default: all)"
     echo "  <godot_version>  The Godot version (e.g., 4.6.1 or 4.7-beta1)"
+    echo "  --clean          Clean before building"
     echo ""
     echo "Examples:"
     echo "  ./scripts/build_local.sh all 4.6.3"
-    echo "  ./scripts/build_local.sh ios 4.7-rc3"
-    echo "  ./scripts/build_local.sh android 4.6.3"
+    echo "  ./scripts/build_local.sh ios 4.7-rc3 --clean"
+    echo "  ./scripts/build_local.sh android 4.6.3 --clean"
 }
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
@@ -41,8 +42,18 @@ if [[ "$1" == "--help" || "$1" == "-h" ]]; then
     exit 0
 fi
 
-PLATFORM=${1:-all}
-GODOT_VERSION=${2}
+CLEAN=false
+ARGS=()
+for arg in "$@"; do
+    if [ "$arg" = "--clean" ]; then
+        CLEAN=true
+    else
+        ARGS+=("$arg")
+    fi
+done
+
+PLATFORM=${ARGS[0]:-all}
+GODOT_VERSION=${ARGS[1]}
 
 if [ -z "$GODOT_VERSION" ]; then
     show_help
@@ -57,14 +68,24 @@ build_android() {
     cd "$ROOT_DIR/platforms/android" && \
     chmod +x ./scripts/unix/download_godot.sh && \
     ./scripts/unix/download_godot.sh "$GODOT_VERSION" && \
-    chmod +x gradlew && \
+    chmod +x gradlew
+    
+    if [ "$CLEAN" = true ]; then
+        echo ">>> Cleaning Android build..."
+        ./gradlew clean || exit 1
+    fi
+    
     ./gradlew build -PgodotVersion="$GODOT_VERSION" && \
     ./gradlew exportFiles -PpluginExportPath="$DEST/addons/admob/android/bin" || exit 1
 }
 
 build_ios() {
     echo ">>> Building iOS ($GODOT_VERSION)..."
-    cd "$ROOT_DIR/platforms/ios" && ./scripts/build.sh "$GODOT_VERSION" || exit 1
+    BUILD_OPTS=""
+    if [ "$CLEAN" = true ]; then
+        BUILD_OPTS="--clean"
+    fi
+    cd "$ROOT_DIR/platforms/ios" && ./scripts/build.sh $BUILD_OPTS "$GODOT_VERSION" || exit 1
     
     ARCHIVE=$(ls -1 bin/release/poing-godot-admob-ios-v${GODOT_VERSION}.zip 2>/dev/null | tail -n 1)
     if [ -f "$ARCHIVE" ]; then

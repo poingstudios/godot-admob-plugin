@@ -43,13 +43,14 @@ static func register_settings() -> void:
 	var settings: Array[SettingDefinition] = [
 		SettingDefinition.new(ANDROID_ENABLED, TYPE_BOOL, true),
 		SettingDefinition.new(ANDROID_APP_ID, TYPE_STRING, DEFAULT_APP_ID),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "meta", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "vungle", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "ironsource", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "applovin", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "bidmachine", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "chartboost", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "ironsource", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "maio", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "meta", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "unity_ads", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "chartboost", TYPE_BOOL, false)
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "vungle", TYPE_BOOL, false)
 	]
 
 	var active_names: Array[String] = []

@@ -64,6 +64,15 @@
       }
     },
     {
+      "identity" : "googleads-mobile-ios-mediation-maio",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-maio.git",
+      "state" : {
+        "revision" : "349e4e4d0c088594a4c7b150a54e0028d3064c46",
+        "version" : "2.2.0"
+      }
+    },
+    {
       "identity" : "googleads-mobile-ios-mediation-meta",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-meta.git",
