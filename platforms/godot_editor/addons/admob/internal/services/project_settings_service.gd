@@ -47,6 +47,7 @@ static func register_settings() -> void:
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "bidmachine", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "chartboost", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "ironsource", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "line", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "maio", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "meta", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "moloco", TYPE_BOOL, false),

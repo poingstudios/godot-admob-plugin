@@ -64,6 +64,15 @@
       }
     },
     {
+      "identity" : "googleads-mobile-ios-mediation-line",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-line.git",
+      "state" : {
+        "revision" : "5235276343f96a64c7893e074e34610c83430645",
+        "version" : "3.0.102"
+      }
+    },
+    {
       "identity" : "googleads-mobile-ios-mediation-maio",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-maio.git",
@@ -115,6 +124,15 @@
       "state" : {
         "revision" : "4bf273b11b7e54055272330ee2a2329b0f1d19e9",
         "version" : "1.6.3"
+      }
+    },
+    {
+      "identity" : "swift-package-manager-fivead",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ly-ads-network/swift-package-manager-fivead.git",
+      "state" : {
+        "revision" : "7daac26259185d5e375f3e2268d4310143be561e",
+        "version" : "3.0.1"
       }
     },
     {

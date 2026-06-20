@@ -32,5 +32,7 @@ include ':src:mediation:applovin'
 include ':src:mediation:bidmachine'
 include ':src:mediation:unity_ads'
 include ':src:mediation:chartboost'
+include ':src:mediation:line'
 include ':src:mediation:maio'
 include ':src:mediation:moloco'
+
