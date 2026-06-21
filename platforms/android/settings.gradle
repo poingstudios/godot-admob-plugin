@@ -19,6 +19,7 @@ dependencyResolutionManagement {
         maven { url "https://imobile.github.io/adnw-sdk-android" }
         maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" }
         maven { url "https://artifact.bytedance.com/repository/pangle/" }
+        maven { url "https://repo.pubmatic.com/artifactory/public-repos" }
         flatDir {
             dirs 'godot-lib'
         }
@@ -44,3 +45,4 @@ include ':src:mediation:mintegral'
 include ':src:mediation:moloco'
 include ':src:mediation:mytarget'
 include ':src:mediation:pangle'
+include ':src:mediation:pubmatic'
