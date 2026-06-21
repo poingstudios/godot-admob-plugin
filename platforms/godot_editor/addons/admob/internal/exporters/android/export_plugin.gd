@@ -43,6 +43,7 @@ const MEDIATION_LIBS: Array[String] = [
 	"maio",
 	"mintegral",
 	"moloco",
+	"mytarget",
 ]
 static var KNOWN_LIBS: Array[String] = ["ads"] + MEDIATION_LIBS
 

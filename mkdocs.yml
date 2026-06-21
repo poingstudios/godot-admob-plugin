@@ -118,6 +118,7 @@ plugins:
             Maio: Maio
             Mintegral: Mintegral
             Moloco: Moloco
+            myTarget: myTarget
             Privacy: Privacidade
             Regulatory solutions: Soluções regulatórias
             US states privacy laws: Leis de privacidade dos estados dos EUA
@@ -167,6 +168,7 @@ plugins:
             Maio: Maio
             Mintegral: Mintegral
             Moloco: Moloco
+            myTarget: myTarget
             Privacy: Privacidad
             Regulatory solutions: Soluciones regulatorias
             US states privacy laws: Leyes de privacidad de estados de EE. UU.
@@ -216,6 +218,7 @@ plugins:
             Maio: Maio
             Mintegral: Mintegral
             Moloco: Moloco
+            myTarget: myTarget
             Privacy: 隐私
             Regulatory solutions: 监管解决方案
             US states privacy laws: 美国各州隐私法
@@ -265,6 +268,7 @@ plugins:
             Maio: Maio
             Mintegral: Mintegral
             Moloco: Moloco
+            myTarget: myTarget
             Privacy: プライバシー
             Regulatory solutions: 規制対応ソリューション
             US states privacy laws: 米国各州のプライバシー法
@@ -317,6 +321,7 @@ nav:
         - Maio: mediate/integrate_partner_networks/maio.md
         - Mintegral: mediate/integrate_partner_networks/mintegral.md
         - Moloco: mediate/integrate_partner_networks/moloco.md
+        - myTarget: mediate/integrate_partner_networks/mytarget.md
     - Privacy:
       - Regulatory solutions:
         - US states privacy laws: privacy/regulatory_solutions/us_states_privacy_laws.md
