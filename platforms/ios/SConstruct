@@ -24,7 +24,7 @@ opts.Add(EnumVariable('arch', "Compilation Architecture", '', ['', 'arm64', 'arm
 opts.Add(BoolVariable('simulator', "Compilation platform", 'no'))
 opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
 opts.Add(PathVariable('target_path', 'The path where the lib is installed.', 'bin/static_libraries/'))
-opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource', 'applovin', 'bidmachine', 'unity_ads', 'chartboost', 'line', 'maio', 'moloco', 'inmobi', 'imobile', 'dtexchange', 'mintegral', 'mytarget', 'pangle']))
+opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource', 'applovin', 'bidmachine', 'unity_ads', 'chartboost', 'line', 'maio', 'moloco', 'inmobi', 'imobile', 'dtexchange', 'mintegral', 'mytarget', 'pangle', 'pubmatic']))
 
 # Updates the environment with the option variables.
 opts.Update(env)
@@ -156,6 +156,12 @@ elif env['plugin'] == 'pangle':
     env.Append(FRAMEWORKPATH=[
         spm_artifacts + '/googleads-mobile-ios-mediation-pangle/PangleAdapter/PangleAdapter.xcframework/' + xcframework_directory,
         spm_artifacts + '/pangle-ios-sdk-spm/PAGAdSDK.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'pubmatic':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-pubmatic/PubMaticAdapter/PubMaticAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/OpenWrapSDK-Swift-Package/OpenWrapSDK.xcframework/' + xcframework_directory,
+        spm_artifacts + '/OpenWrapSDK-Swift-Package/OMSDK_Pubmatic.xcframework/' + xcframework_directory
     ])
 
 try:

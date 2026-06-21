@@ -1,0 +1,18 @@
+[config]
+name="AdMob PubMatic"
+binary="poing-godot-admob/bin/poing-godot-admob-pubmatic.xcframework"
+initialization="register_poing_godot_admob_pubmatic_types"
+deinitialization="unregister_poing_godot_admob_pubmatic_types"
+
+[dependencies]
+linked=[]
+embedded=[]
+system=[]
+capabilities=[]
+files=[]
+linker_flags=[]
+admob_packages=[
+    "https://github.com/googleads/googleads-mobile-ios-mediation-pubmatic.git@exact:5.1.100|PubMaticAdapterTarget"
+]
+
+[plist]
