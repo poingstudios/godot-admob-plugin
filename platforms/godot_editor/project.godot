@@ -10,14 +10,14 @@ config_version=5
 
 [admob]
 
-android/mediation/meta=true
-android/mediation/vungle=true
-android/mediation/ironsource=true
 android/mediation/applovin=true
 android/mediation/bidmachine=true
-android/mediation/unity_ads=true
 android/mediation/chartboost=true
+android/mediation/ironsource=true
 android/mediation/maio=true
+android/mediation/meta=true
+android/mediation/unity_ads=true
+android/mediation/vungle=true
 
 [animation]
 

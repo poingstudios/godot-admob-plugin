@@ -56,6 +56,7 @@ static func register_settings() -> void:
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "mintegral", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "moloco", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "mytarget", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "pangle", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "unity_ads", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "vungle", TYPE_BOOL, false)
 	]
