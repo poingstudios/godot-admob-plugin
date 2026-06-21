@@ -24,7 +24,7 @@ opts.Add(EnumVariable('arch', "Compilation Architecture", '', ['', 'arm64', 'arm
 opts.Add(BoolVariable('simulator', "Compilation platform", 'no'))
 opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
 opts.Add(PathVariable('target_path', 'The path where the lib is installed.', 'bin/static_libraries/'))
-opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource', 'applovin', 'bidmachine', 'unity_ads', 'chartboost', 'line', 'maio', 'moloco', 'inmobi', 'imobile', 'dtexchange', 'mintegral']))
+opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource', 'applovin', 'bidmachine', 'unity_ads', 'chartboost', 'line', 'maio', 'moloco', 'inmobi', 'imobile', 'dtexchange', 'mintegral', 'mytarget']))
 
 # Updates the environment with the option variables.
 opts.Update(env)
@@ -145,6 +145,12 @@ elif env['plugin'] == 'mintegral':
         spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKBidding/MTGSDKBidding.xcframework/' + xcframework_directory,
         spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKNewInterstitial/MTGSDKNewInterstitial.xcframework/' + xcframework_directory,
         spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKSplash/MTGSDKSplash.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'mytarget':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-mytarget/MyTargetAdapter/MyTargetAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mytarget-ios-spm/MyTargetSDK/MyTargetSDK.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mytracker-ios-spm/MyTrackerSDK/MyTrackerSDK.xcframework/' + xcframework_directory
     ])
 
 try:
