@@ -28,7 +28,22 @@ const ProjectSettingsService := preload(
 	"res://addons/admob/internal/services/project_settings_service.gd"
 )
 
-const MEDIATION_LIBS: Array[String] = ["meta", "vungle", "ironsource", "applovin", "bidmachine", "unity_ads", "chartboost", "imobile", "inmobi", "line", "maio", "mintegral", "moloco"]
+const MEDIATION_LIBS: Array[String] = [
+	"meta",
+	"vungle",
+	"ironsource",
+	"applovin",
+	"bidmachine",
+	"unity_ads",
+	"chartboost",
+	"dtexchange",
+	"imobile",
+	"inmobi",
+	"line",
+	"maio",
+	"mintegral",
+	"moloco",
+]
 static var KNOWN_LIBS: Array[String] = ["ads"] + MEDIATION_LIBS
 
 
