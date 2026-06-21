@@ -109,6 +109,15 @@
       }
     },
     {
+      "identity" : "googleads-mobile-ios-mediation-mintegral",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-mintegral.git",
+      "state" : {
+        "revision" : "e4b46b7cb69722c491e528f1be275a214854a2d5",
+        "version" : "8.1.500"
+      }
+    },
+    {
       "identity" : "googleads-mobile-ios-mediation-moloco",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-moloco.git",
@@ -124,6 +133,15 @@
       "state" : {
         "revision" : "63742a7728ab02f8fc5c9a249ca3f0b60dfe8b8a",
         "version" : "4.18.100"
+      }
+    },
+    {
+      "identity" : "mintegraladsdk-swift-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Mintegral-official/MintegralAdSDK-Swift-Package.git",
+      "state" : {
+        "revision" : "85766287bfef7536a6da5ba101dc4da1d9d0cbc1",
+        "version" : "8.1.5"
       }
     },
     {

@@ -17,6 +17,7 @@ dependencyResolutionManagement {
         maven { url "https://artifactory.bidmachine.io/bidmachine" }
         maven { url "https://imobile-maio.github.io/maven" }
         maven { url "https://imobile.github.io/adnw-sdk-android" }
+        maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" }
         flatDir {
             dirs 'godot-lib'
         }
@@ -37,4 +38,5 @@ include ':src:mediation:imobile'
 include ':src:mediation:inmobi'
 include ':src:mediation:line'
 include ':src:mediation:maio'
+include ':src:mediation:mintegral'
 include ':src:mediation:moloco'

@@ -24,7 +24,7 @@ opts.Add(EnumVariable('arch', "Compilation Architecture", '', ['', 'arm64', 'arm
 opts.Add(BoolVariable('simulator', "Compilation platform", 'no'))
 opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
 opts.Add(PathVariable('target_path', 'The path where the lib is installed.', 'bin/static_libraries/'))
-opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource', 'applovin', 'bidmachine', 'unity_ads', 'chartboost', 'line', 'maio', 'moloco', 'inmobi', 'imobile']))
+opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource', 'applovin', 'bidmachine', 'unity_ads', 'chartboost', 'line', 'maio', 'moloco', 'inmobi', 'imobile', 'mintegral']))
 
 # Updates the environment with the option variables.
 opts.Update(env)
@@ -128,6 +128,18 @@ elif env['plugin'] == 'imobile':
     env.Append(FRAMEWORKPATH=[
         spm_artifacts + '/googleads-mobile-ios-mediation-imobile/IMobileAdapter/IMobileAdapter.xcframework/' + xcframework_directory,
         spm_artifacts + '/googleads-mobile-ios-mediation-imobile/IMobileSDK/ImobileSdkAds.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'mintegral':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-mintegral/MintegralAdapter/MintegralAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDK/MTGSDK.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKBanner/MTGSDKBanner.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKNativeAdvanced/MTGSDKNativeAdvanced.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKReward/MTGSDKReward.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKInterstitialVideo/MTGSDKInterstitialVideo.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKBidding/MTGSDKBidding.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKNewInterstitial/MTGSDKNewInterstitial.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKSplash/MTGSDKSplash.xcframework/' + xcframework_directory
     ])
 
 try:
