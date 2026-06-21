@@ -116,6 +116,7 @@ plugins:
             InMobi: InMobi
             Line: Line
             Maio: Maio
+            Mintegral: Mintegral
             Moloco: Moloco
             Privacy: Privacidade
             Regulatory solutions: Soluções regulatórias
@@ -164,6 +165,7 @@ plugins:
             InMobi: InMobi
             Line: Line
             Maio: Maio
+            Mintegral: Mintegral
             Moloco: Moloco
             Privacy: Privacidad
             Regulatory solutions: Soluciones regulatorias
@@ -212,6 +214,7 @@ plugins:
             InMobi: InMobi
             Line: Line
             Maio: Maio
+            Mintegral: Mintegral
             Moloco: Moloco
             Privacy: 隐私
             Regulatory solutions: 监管解决方案
@@ -260,6 +263,7 @@ plugins:
             InMobi: InMobi
             Line: Line
             Maio: Maio
+            Mintegral: Mintegral
             Moloco: Moloco
             Privacy: プライバシー
             Regulatory solutions: 規制対応ソリューション
@@ -311,6 +315,7 @@ nav:
         - InMobi: mediate/integrate_partner_networks/inmobi.md
         - Line: mediate/integrate_partner_networks/line.md
         - Maio: mediate/integrate_partner_networks/maio.md
+        - Mintegral: mediate/integrate_partner_networks/mintegral.md
         - Moloco: mediate/integrate_partner_networks/moloco.md
     - Privacy:
       - Regulatory solutions:
