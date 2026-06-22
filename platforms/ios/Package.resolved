@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "adsglobalpackage",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bytedance/AdsGlobalPackage.git",
+      "state" : {
+        "revision" : "e0ddb54593eee5089165667f7d34d48ce65eedfe",
+        "version" : "8.1.0-release.6"
+      }
+    },
+    {
       "identity" : "applovin-max-swift-package",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/AppLovin/AppLovin-MAX-Swift-Package.git",
@@ -145,6 +154,33 @@
       }
     },
     {
+      "identity" : "googleads-mobile-ios-mediation-mytarget",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-mytarget.git",
+      "state" : {
+        "revision" : "f6c9c51af36bebb70d8409131e31360c25a48081",
+        "version" : "5.44.100"
+      }
+    },
+    {
+      "identity" : "googleads-mobile-ios-mediation-pangle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-pangle.git",
+      "state" : {
+        "revision" : "e07eacb077b599d1043dd9fb118ce1c6473d54de",
+        "version" : "8.1.600"
+      }
+    },
+    {
+      "identity" : "googleads-mobile-ios-mediation-pubmatic",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-pubmatic.git",
+      "state" : {
+        "revision" : "a3b2fb945b0643395c220a8861e1d1eed30bdc07",
+        "version" : "5.1.100"
+      }
+    },
+    {
       "identity" : "googleads-mobile-ios-mediation-unity",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-unity.git",
@@ -172,12 +208,39 @@
       }
     },
     {
+      "identity" : "mytarget-ios-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/myTargetSDK/mytarget-ios-spm.git",
+      "state" : {
+        "revision" : "0419542f5592022f57e3a47939423d2a942e3659",
+        "version" : "5.44.1"
+      }
+    },
+    {
+      "identity" : "mytracker-ios-spm",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/myTrackerSDK/mytracker-ios-spm.git",
+      "state" : {
+        "revision" : "bbd0468cfa1a3b93aeab8f8304ece39141e1aeba",
+        "version" : "3.4.2"
+      }
+    },
+    {
       "identity" : "omsdk-appodeal-ios-package",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/bidmachine/OMSDK-Appodeal-iOS-Package",
       "state" : {
         "revision" : "4bf273b11b7e54055272330ee2a2329b0f1d19e9",
         "version" : "1.6.3"
+      }
+    },
+    {
+      "identity" : "openwrapsdk-swift-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/PubMatic/OpenWrapSDK-Swift-Package.git",
+      "state" : {
+        "revision" : "580ccd7d8f966a2bfd2614a88a44bc1a13419b1f",
+        "version" : "5.1.1"
       }
     },
     {
