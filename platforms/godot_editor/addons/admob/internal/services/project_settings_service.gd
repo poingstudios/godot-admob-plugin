@@ -60,7 +60,8 @@ static func register_settings() -> void:
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "pubmatic", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "vpon", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "unity_ads", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "vungle", TYPE_BOOL, false)
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "vungle", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "zucks", TYPE_BOOL, false)
 	]
 
 	var active_names: Array[String] = []

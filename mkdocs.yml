@@ -337,6 +337,7 @@ nav:
         - Pangle: mediate/integrate_partner_networks/pangle.md
         - PubMatic: mediate/integrate_partner_networks/pubmatic.md
         - Vpon: mediate/integrate_partner_networks/vpon.md
+        - Zucks: mediate/integrate_partner_networks/zucks.md
     - Privacy:
       - Regulatory solutions:
         - US states privacy laws: privacy/regulatory_solutions/us_states_privacy_laws.md
