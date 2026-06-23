@@ -12,7 +12,7 @@ capabilities=[]
 files=[]
 linker_flags=[]
 admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-imobile.git@exact:2.3.407|iMobileAdapterTarget"
+    "https://github.com/googleads/googleads-mobile-ios-mediation-imobile.git@exact:2.3.407|IMobileAdapterTarget"
 ]
 
 [plist]

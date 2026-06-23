@@ -35,11 +35,11 @@ fi
 
 log_info "Resolving Swift Package Manager dependencies..."
 
-if swift package resolve; then
+if swift build; then
     SPM_BUILD_DIR="$(pwd)/.build"
     export SPM_BUILD_DIR
-    log_success "SPM dependencies resolved at: $SPM_BUILD_DIR"
+    log_success "SPM dependencies resolved and built at: $SPM_BUILD_DIR"
 else
-    log_error "Failed to resolve SPM dependencies."
+    log_error "Failed to build SPM dependencies."
     exit 1
 fi
