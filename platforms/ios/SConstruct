@@ -71,6 +71,22 @@ else:
 spm_artifacts = '.build/artifacts'
 env.Append(FRAMEWORKPATH=[spm_artifacts + '/swift-package-manager-google-mobile-ads/GoogleMobileAds/GoogleMobileAds.xcframework/' + xcframework_directory])
 
+def get_spm_binary_target(artifact_folder, xcframework_name, zip_url):
+    for root, dirs, files in os.walk('.build', followlinks=True):
+        if root.endswith(xcframework_name):
+            return os.path.join(root, xcframework_directory)
+    print("WARNING: " + xcframework_name + " not found! Forcing manual download (SPM lazy-loads transitive binary targets)...")
+    import subprocess
+    target_dir = os.path.join('.build/artifacts', artifact_folder)
+    zip_path = os.path.join(target_dir, 'artifact.zip')
+    subprocess.call(['mkdir', '-p', target_dir])
+    subprocess.call(['curl', '-L', zip_url, '-o', zip_path])
+    subprocess.call(['unzip', '-q', '-o', zip_path, '-d', target_dir])
+    for root, dirs, files in os.walk(target_dir, followlinks=True):
+        if root.endswith(xcframework_name):
+            return os.path.join(root, xcframework_directory)
+    return ''
+
 if env['plugin'] == 'ads':
     env.Append(FRAMEWORKPATH=[spm_artifacts + '/swift-package-manager-google-user-messaging-platform/UserMessagingPlatform/UserMessagingPlatform.xcframework/' + xcframework_directory])
 elif env['plugin'] == 'meta':
@@ -108,7 +124,7 @@ elif env['plugin'] == 'chartboost':
     ])
 elif env['plugin'] == 'line':
     env.Append(FRAMEWORKPATH=[
-        spm_artifacts + '/googleads-mobile-ios-mediation-line/LineAdapter/LineAdapter.xcframework/' + xcframework_directory,
+        get_spm_binary_target('googleads-mobile-ios-mediation-line', 'LineAdapter.xcframework', 'https://dl.google.com/googleadmobadssdk/mediation/ios/line/LineAdapter-3.0.1.2.zip'),
         spm_artifacts + '/swift-package-manager-fivead/FiveAd/FiveAd.xcframework/' + xcframework_directory
     ])
 elif env['plugin'] == 'maio':
@@ -132,25 +148,9 @@ elif env['plugin'] == 'imobile':
         spm_artifacts + '/googleads-mobile-ios-mediation-imobile/IMobileSDK/ImobileSdkAds.xcframework/' + xcframework_directory
     ])
 elif env['plugin'] == 'dtexchange':
-    def get_iasdk_path():
-        for root, dirs, files in os.walk('.build', followlinks=True):
-            if root.endswith('IASDKCore.xcframework'):
-                return os.path.join(root, xcframework_directory)
-        
-        print("IASDKCore.xcframework not found! Forcing manual download (SPM lazy-loads transitive binary targets)...")
-        import subprocess
-        subprocess.call(['mkdir', '-p', '.build/artifacts/dtexchangesdk-ios-spm'])
-        subprocess.call(['curl', '-L', 'https://cdn2.inner-active.mobi/fmp-sdk/files/DTExchangeSDK-iOS-SPM-8.4.7.zip', '-o', '.build/artifacts/dtexchangesdk-ios-spm/iasdk.zip'])
-        subprocess.call(['unzip', '-q', '-o', '.build/artifacts/dtexchangesdk-ios-spm/iasdk.zip', '-d', '.build/artifacts/dtexchangesdk-ios-spm/'])
-        
-        for root, dirs, files in os.walk('.build/artifacts/dtexchangesdk-ios-spm', followlinks=True):
-            if root.endswith('IASDKCore.xcframework'):
-                return os.path.join(root, xcframework_directory)
-                
-        return ''
     env.Append(FRAMEWORKPATH=[
         spm_artifacts + '/googleads-mobile-ios-mediation-dtexchange/DTExchangeAdapter/DTExchangeAdapter.xcframework/' + xcframework_directory,
-        get_iasdk_path()
+        get_spm_binary_target('dtexchangesdk-ios-spm', 'IASDKCore.xcframework', 'https://cdn2.inner-active.mobi/fmp-sdk/files/DTExchangeSDK-iOS-SPM-8.4.7.zip')
     ])
 elif env['plugin'] == 'mintegral':
     env.Append(FRAMEWORKPATH=[
