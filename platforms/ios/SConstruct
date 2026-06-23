@@ -133,9 +133,13 @@ elif env['plugin'] == 'imobile':
     ])
 elif env['plugin'] == 'dtexchange':
     def get_iasdk_path():
-        for root, dirs, files in os.walk(spm_artifacts):
+        found = []
+        for root, dirs, files in os.walk('.build', followlinks=True):
+            if root.endswith('.xcframework'):
+                found.append(root)
             if root.endswith('IASDKCore.xcframework'):
                 return os.path.join(root, xcframework_directory)
+        print("DEBUG XCFRAMEWORKS FOUND: ", found)
         return ''
     env.Append(FRAMEWORKPATH=[
         spm_artifacts + '/googleads-mobile-ios-mediation-dtexchange/DTExchangeAdapter/DTExchangeAdapter.xcframework/' + xcframework_directory,
