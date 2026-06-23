@@ -2,7 +2,6 @@
 import os
 import sys
 import subprocess
-import glob
 
 if sys.version_info < (3,):
     def decode_utf8(x):
@@ -12,12 +11,7 @@ else:
     def decode_utf8(x):
         return codecs.utf_8_decode(x)[0]
 
-def find_framework_path(spm_artifacts, pattern, xcframework_directory):
-    search_pattern = os.path.join(spm_artifacts, pattern)
-    matches = glob.glob(search_pattern, recursive=True)
-    if matches:
-        return os.path.join(matches[0], xcframework_directory)
-    return os.path.join(spm_artifacts, pattern.replace('**/', ''), xcframework_directory)
+
 
 # Most of the settings are taken from https://github.com/BastiaanOlij/gdnative_cpp_example
 
@@ -140,7 +134,7 @@ elif env['plugin'] == 'imobile':
 elif env['plugin'] == 'dtexchange':
     env.Append(FRAMEWORKPATH=[
         spm_artifacts + '/googleads-mobile-ios-mediation-dtexchange/DTExchangeAdapter/DTExchangeAdapter.xcframework/' + xcframework_directory,
-        find_framework_path(spm_artifacts, '**/IASDKCore.xcframework', xcframework_directory)
+        spm_artifacts + '/dtexchangesdk-ios-spm/IASDKCore/IASDKCore.xcframework/' + xcframework_directory
     ])
 elif env['plugin'] == 'mintegral':
     env.Append(FRAMEWORKPATH=[
