@@ -132,9 +132,14 @@ elif env['plugin'] == 'imobile':
         spm_artifacts + '/googleads-mobile-ios-mediation-imobile/IMobileSDK/ImobileSdkAds.xcframework/' + xcframework_directory
     ])
 elif env['plugin'] == 'dtexchange':
+    def get_iasdk_path():
+        for root, dirs, files in os.walk(spm_artifacts):
+            if root.endswith('IASDKCore.xcframework'):
+                return os.path.join(root, xcframework_directory)
+        return ''
     env.Append(FRAMEWORKPATH=[
         spm_artifacts + '/googleads-mobile-ios-mediation-dtexchange/DTExchangeAdapter/DTExchangeAdapter.xcframework/' + xcframework_directory,
-        spm_artifacts + '/dtexchangesdk-ios-spm/IASDKCore/IASDKCore.xcframework/' + xcframework_directory
+        get_iasdk_path()
     ])
 elif env['plugin'] == 'mintegral':
     env.Append(FRAMEWORKPATH=[
