@@ -48,5 +48,5 @@ func _get_android_dependencies(_platform: EditorExportPlatform, _debug: bool) ->
 
 func _get_android_dependencies_maven_repos(_platform: EditorExportPlatform, _debug: bool) -> PackedStringArray:
 	return PackedStringArray([
-		"https://raw.githubusercontent.com/zucks/ZucksAdNetworkSDK-Maven/master"
+		"https://raw.githubusercontent.com/zucks/ZucksAdNetworkSDK-Maven/admob-6.1.0.1"
 	])
