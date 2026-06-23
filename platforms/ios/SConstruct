@@ -132,7 +132,7 @@ elif env['plugin'] == 'imobile':
 elif env['plugin'] == 'dtexchange':
     env.Append(FRAMEWORKPATH=[
         spm_artifacts + '/googleads-mobile-ios-mediation-dtexchange/DTExchangeAdapter/DTExchangeAdapter.xcframework/' + xcframework_directory,
-        spm_artifacts + '/DTExchangeSDK-iOS-SPM/IASDKCore/IASDKCore.xcframework/' + xcframework_directory
+        spm_artifacts + '/dtexchangesdk-ios-spm/IASDKCore/IASDKCore.xcframework/' + xcframework_directory
     ])
 elif env['plugin'] == 'mintegral':
     env.Append(FRAMEWORKPATH=[
