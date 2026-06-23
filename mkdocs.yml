@@ -89,6 +89,7 @@ plugins:
           nav_translations:
             Guides: Guias
             Reference: Referência
+            'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades do AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
             Ad formats: Formatos de Anúncios
             App Open: App Open
             Banner: Banner
@@ -142,6 +143,7 @@ plugins:
           nav_translations:
             Guides: Guías
             Reference: Referencia
+            'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades de AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
             Ad formats: Formatos de anuncios
             App Open: App Open
             Banner: Banner
@@ -195,6 +197,7 @@ plugins:
           nav_translations:
             Guides: 指南
             Reference: 参考
+            'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot 技能 <span class="modern-icon" title="Beta">🧪</span>'
             Ad formats: 广告格式
             App Open: 开屏广告
             Banner: 横幅广告
@@ -248,6 +251,7 @@ plugins:
           nav_translations:
             Guides: ガイド
             Reference: リファレンス
+            'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot スキル <span class="modern-icon" title="Beta">🧪</span>'
             Ad formats: 広告フォーマット
             App Open: アプリ起動時広告 (App Open)
             Banner: バナー広告 (Banner)
@@ -304,6 +308,7 @@ nav:
     - enable_test_ads.md
     - ios_pause_background.md
     - volume_controls.md
+    - 'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': ai_skills.md
     - Ad formats:
       - App Open: ad_formats/app_open.md
       - Banner:

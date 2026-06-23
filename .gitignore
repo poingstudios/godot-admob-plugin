@@ -1,6 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 .import/
+.skills/
 export.cfg
 export_presets.cfg
 
