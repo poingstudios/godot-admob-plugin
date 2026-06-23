@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "vpon"
-var _dependency_library := [""]
+var _dependency_library := [ ]
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
