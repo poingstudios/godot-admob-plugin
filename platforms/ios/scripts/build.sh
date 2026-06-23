@@ -119,9 +119,9 @@ ensure_dir "$RELEASE_DIR"
 ensure_dir "./bin/static_libraries"
 ensure_dir "./bin/xcframeworks"
 
-if [ ! -d "$SPM_BUILD_DIR" ]; then
-    ./scripts/lib/resolve_spm_deps.sh || exit 1
-fi
+# Always resolve SPM dependencies to ensure all binary targets (even lazy-loaded ones) are present,
+# especially when restoring the .build folder from CI cache.
+./scripts/lib/resolve_spm_deps.sh || exit 1
 
 # --- INTERNAL BUILD ---
 log_info "--- Building Internal Plugin ---"

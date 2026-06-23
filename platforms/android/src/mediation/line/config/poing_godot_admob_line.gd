@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "line"
-var _dependency_library := ["com.google.ads.mediation:line:3.1.0.0"]
+var _dependency_library := ["com.google.ads.mediation:line:3.0.1.1"]
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:

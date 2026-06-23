@@ -11,6 +11,8 @@ else:
     def decode_utf8(x):
         return codecs.utf_8_decode(x)[0]
 
+
+
 # Most of the settings are taken from https://github.com/BastiaanOlij/gdnative_cpp_example
 
 opts = Variables([], ARGUMENTS)
@@ -68,6 +70,7 @@ else:
 # SPM artifact paths (resolved via `swift package resolve`)
 spm_artifacts = '.build/artifacts'
 env.Append(FRAMEWORKPATH=[spm_artifacts + '/swift-package-manager-google-mobile-ads/GoogleMobileAds/GoogleMobileAds.xcframework/' + xcframework_directory])
+
 
 if env['plugin'] == 'ads':
     env.Append(FRAMEWORKPATH=[spm_artifacts + '/swift-package-manager-google-user-messaging-platform/UserMessagingPlatform/UserMessagingPlatform.xcframework/' + xcframework_directory])
@@ -132,7 +135,7 @@ elif env['plugin'] == 'imobile':
 elif env['plugin'] == 'dtexchange':
     env.Append(FRAMEWORKPATH=[
         spm_artifacts + '/googleads-mobile-ios-mediation-dtexchange/DTExchangeAdapter/DTExchangeAdapter.xcframework/' + xcframework_directory,
-        spm_artifacts + '/DTExchangeSDK-iOS-SPM/IASDKCore/IASDKCore.xcframework/' + xcframework_directory
+        spm_artifacts + '/dtexchangesdk-ios-spm/IASDKCore/IASDKCore.xcframework/' + xcframework_directory
     ])
 elif env['plugin'] == 'mintegral':
     env.Append(FRAMEWORKPATH=[

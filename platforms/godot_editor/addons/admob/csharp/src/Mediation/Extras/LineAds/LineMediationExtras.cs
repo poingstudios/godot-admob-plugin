@@ -31,12 +31,12 @@ namespace PoingStudios.AdMob.Mediation.Extras.LineAds
             set => Extras[ENABLE_AD_SOUND_KEY] = value;
         }
 
-        public override string GetAndroidMediationExtraClassName()
+        protected override string GetAndroidMediationExtraClassName()
         {
             return "com.poingstudios.godot.admob.mediation.line.LineExtrasBuilder";
         }
 
-        public override string GetIOSMediationExtraClassName()
+        protected override string GetIosMediationExtraClassName()
         {
             return "LinePoingExtrasBuilder";
         }

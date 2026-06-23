@@ -13,11 +13,22 @@ config_version=5
 android/mediation/applovin=true
 android/mediation/bidmachine=true
 android/mediation/chartboost=true
+android/mediation/dtexchange=true
+android/mediation/imobile=true
+android/mediation/inmobi=true
 android/mediation/ironsource=true
+android/mediation/line=true
 android/mediation/maio=true
 android/mediation/meta=true
+android/mediation/mintegral=true
+android/mediation/moloco=true
+android/mediation/mytarget=true
+android/mediation/pangle=true
+android/mediation/pubmatic=true
+android/mediation/vpon=true
 android/mediation/unity_ads=true
 android/mediation/vungle=true
+android/mediation/zucks=true
 
 [animation]
 
