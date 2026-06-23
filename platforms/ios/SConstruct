@@ -133,13 +133,20 @@ elif env['plugin'] == 'imobile':
     ])
 elif env['plugin'] == 'dtexchange':
     def get_iasdk_path():
-        found = []
         for root, dirs, files in os.walk('.build', followlinks=True):
-            if root.endswith('.xcframework'):
-                found.append(root)
             if root.endswith('IASDKCore.xcframework'):
                 return os.path.join(root, xcframework_directory)
-        print("DEBUG XCFRAMEWORKS FOUND: ", found)
+        
+        print("IASDKCore.xcframework not found! Forcing manual download (SPM lazy-loads transitive binary targets)...")
+        import subprocess
+        subprocess.call(['mkdir', '-p', '.build/artifacts/dtexchangesdk-ios-spm'])
+        subprocess.call(['curl', '-L', 'https://cdn2.inner-active.mobi/fmp-sdk/files/DTExchangeSDK-iOS-SPM-8.4.7.zip', '-o', '.build/artifacts/dtexchangesdk-ios-spm/iasdk.zip'])
+        subprocess.call(['unzip', '-q', '-o', '.build/artifacts/dtexchangesdk-ios-spm/iasdk.zip', '-d', '.build/artifacts/dtexchangesdk-ios-spm/'])
+        
+        for root, dirs, files in os.walk('.build/artifacts/dtexchangesdk-ios-spm', followlinks=True):
+            if root.endswith('IASDKCore.xcframework'):
+                return os.path.join(root, xcframework_directory)
+                
         return ''
     env.Append(FRAMEWORKPATH=[
         spm_artifacts + '/googleads-mobile-ios-mediation-dtexchange/DTExchangeAdapter/DTExchangeAdapter.xcframework/' + xcframework_directory,
