@@ -13,8 +13,7 @@ capabilities=[]
 files=[]
 linker_flags=[]
 admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-dtexchange.git@exact:8.4.701|DTExchangeAdapterTarget",
-    "https://github.com/inner-active/DTExchangeSDK-iOS-SPM.git@exact:8.4.7|DTExchangeSDKTarget"
+    "https://github.com/googleads/googleads-mobile-ios-mediation-dtexchange.git@exact:8.4.701|DTExchangeAdapterTarget"
 ]
 
 [plist]
