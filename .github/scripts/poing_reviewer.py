@@ -445,18 +445,83 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
             else:
                 print(f"Skipping comment on invalid line: {path} L{line}", file=sys.stderr)
 
+    try:
+        owner, repo_name = repo.split("/")
+        graphql_query = """
+        query($owner: String!, $repo: String!, $pr: Int!) {
+          repository(owner: $owner, name: $repo) {
+            pullRequest(number: $pr) {
+              reviewThreads(first: 100) {
+                nodes {
+                  isResolved
+                  comments(first: 50) {
+                    nodes {
+                      author { login }
+                      path
+                      line
+                      body
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        """
+        graphql_payload = {
+            "query": graphql_query,
+            "variables": {
+                "owner": owner,
+                "repo": repo_name,
+                "pr": int(pr_number)
+            }
+        }
+        graphql_req = requests.post(
+            "https://api.github.com/graphql",
+            headers={"Authorization": f"Bearer {github_token}"},
+            json=graphql_payload
+        )
+        unresolved_bot_comments = set()
+        if graphql_req.status_code == 200:
+            data = graphql_req.json()
+            threads = data.get("data", {}).get("repository", {}).get("pullRequest", {}).get("reviewThreads", {}).get("nodes", [])
+            for thread in threads:
+                if thread and not thread.get("isResolved", False):
+                    for c in thread.get("comments", {}).get("nodes", []):
+                        if c:
+                            author_login = c.get("author", {}).get("login", "") if c.get("author") else ""
+                            if "bot" in author_login.lower():
+                                unresolved_bot_comments.add((c.get("path"), c.get("line"), c.get("body", "").strip()))
+        filtered_comments_list = []
+        for c in comments_list:
+            if (c["path"], c["line"], c["body"].strip()) not in unresolved_bot_comments:
+                filtered_comments_list.append(c)
+            else:
+                print(f"Skipping duplicate comment on {c['path']} L{c['line']}", file=sys.stderr)
+    except Exception as e:
+        print(f"Failed to fetch unresolved bot comments via GraphQL: {e}", file=sys.stderr)
+        filtered_comments_list = comments_list
+
     review_payload = {
         "body": body_markdown.strip(),
         "event": github_event
     }
-    if comments_list:
-        review_payload["comments"] = comments_list
+    if filtered_comments_list:
+        review_payload["comments"] = filtered_comments_list
 
     r = requests.post(
         f"https://api.github.com/repos/{repo}/pulls/{pr_number}/reviews",
         headers=headers,
         json=review_payload
     )
+    if r.status_code == 422 and "comments" in review_payload:
+        print("GitHub rejected 422 with comments. Retrying without inline comments...", file=sys.stderr)
+        del review_payload["comments"]
+        r = requests.post(
+            f"https://api.github.com/repos/{repo}/pulls/{pr_number}/reviews",
+            headers=headers,
+            json=review_payload
+        )
     if r.status_code >= 400:
         print(f"GitHub API error: {r.status_code} {r.text}", file=sys.stderr)
         sys.exit(1)
