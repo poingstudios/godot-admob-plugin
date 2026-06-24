@@ -1,0 +1,33 @@
+name: Poing Reviewer
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: 1. Generate App Token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: 2. Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 3. Review Code
+        uses: google-github-actions/run-gemini-cli@v1
+        with:
+          args: "pr review"
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          GEMINI_MODEL: "gemma-4-31b-it"
