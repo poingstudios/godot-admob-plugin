@@ -24,9 +24,7 @@ jobs:
       run: |
         LATEST=$(gh api repos/godotengine/godot/releases --jq '[.[] | select(.tag_name | test("^4\\.[0-9]+(\\.[0-9]+)?-stable$")) | .tag_name][0]' | sed 's/-stable//')
         LATEST_PAD=$(echo "$LATEST" | awk -F. '{if(NF==2) print $0".0"; else print $0}')
-        PLUGIN_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
-        
-        TAG="v${PLUGIN_VERSION#v}"
+        TAG=$(gh api repos/${{ github.repository }}/releases --jq '[.[] | select(.prerelease == false and .draft == false) | .tag_name][0]')
         RELEASE_EXISTS=$(gh api "repos/${{ github.repository }}/releases/tags/${TAG}" > /dev/null 2>&1 && echo "true" || echo "false")
         
         if [ "$RELEASE_EXISTS" = "true" ]; then
