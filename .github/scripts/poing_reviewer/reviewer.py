@@ -43,10 +43,7 @@ from poing_reviewer.false_positive import (
     fetch_thumbs_down_fingerprints,
     add_footer_hint,
 )
-from poing_reviewer.thread_resolver import (
-    collect_thread_fingerprints,
-    resolve_fixed_threads,
-)
+from poing_reviewer.thread_resolver import collect_thread_fingerprints
 
 
 def _filter_model_false_positives(findings):
@@ -97,39 +94,7 @@ def main():
         r for r in existing_reviews
         if r.get("state") == "CHANGES_REQUESTED" and r.get("commit_id") != cfg.HEAD_SHA
     ]
-
-    if stale_reviews:
-        stale_review_ids = {r["id"] for r in stale_reviews}
-
-        threads = []
-        try:
-            threads = fetch_review_threads(cfg.owner, cfg.repo_name, cfg.PR_NUMBER, cfg.GITHUB_TOKEN)
-        except Exception as e:
-            print(f"Failed to fetch review threads: {e}", file=sys.stderr)
-
-        # Resolve only threads belonging to the stale reviews being dismissed
-        if threads:
-            for t in threads:
-                if not t or t.get("isResolved", False):
-                    continue
-                review_node = t.get("pullRequestReview") or {}
-                thread_review_id = review_node.get("databaseId")
-                if thread_review_id and thread_review_id in stale_review_ids:
-                    try:
-                        resolve_thread(t["id"], cfg.GITHUB_TOKEN)
-                    except Exception as exc:
-                        print(f"Failed to resolve thread {t['id']}: {exc}", file=sys.stderr)
-
-        for review in stale_reviews:
-            dismissed = dismiss_review(
-                cfg.REPO,
-                cfg.PR_NUMBER,
-                review["id"],
-                cfg.GITHUB_TOKEN,
-                f"Superseded by review on commit {cfg.HEAD_SHA[:8]}",
-            )
-            if dismissed:
-                print(f"Dismissed stale review #{review['id']}", file=sys.stderr)
+    stale_review_ids = {r["id"] for r in stale_reviews}
 
     file_blocks = split_diff_by_file(diff)
     batches = split_batches(file_blocks, cfg.MAX_CHARS)[:cfg.MAX_BATCHES]
@@ -310,14 +275,33 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
         filtered_comments,
     )
 
-    # After posting, attempt to resolve fixed threads
-    if threads:
+    # After posting, dismiss stale reviews and resolve their threads
+    if stale_review_ids:
         try:
-            resolved = resolve_fixed_threads(cfg, current_comment_fingerprints, reviewed_paths, {})
-            if resolved:
-                print(f"Auto-resolved {resolved} thread(s).", file=sys.stderr)
+            threads = fetch_review_threads(cfg.owner, cfg.repo_name, cfg.PR_NUMBER, cfg.GITHUB_TOKEN)
         except Exception as e:
-            print(f"Failed to resolve threads: {e}", file=sys.stderr)
+            print(f"Failed to fetch review threads: {e}", file=sys.stderr)
+            threads = []
+
+        if threads:
+            for t in threads:
+                if not t or t.get("isResolved", False):
+                    continue
+                review_node = t.get("pullRequestReview") or {}
+                thread_review_id = review_node.get("databaseId")
+                if thread_review_id and thread_review_id in stale_review_ids:
+                    try:
+                        resolve_thread(t["id"], cfg.GITHUB_TOKEN)
+                    except Exception as exc:
+                        print(f"Failed to resolve thread {t['id']}: {exc}", file=sys.stderr)
+
+        for review in [r for r in existing_reviews if r["id"] in stale_review_ids]:
+            dismissed = dismiss_review(
+                cfg.REPO, cfg.PR_NUMBER, review["id"], cfg.GITHUB_TOKEN,
+                f"Superseded by review on commit {cfg.HEAD_SHA[:8]}",
+            )
+            if dismissed:
+                print(f"Dismissed stale review #{review['id']}", file=sys.stderr)
 
 
 if __name__ == "__main__":
