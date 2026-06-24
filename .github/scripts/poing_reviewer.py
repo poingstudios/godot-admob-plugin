@@ -332,13 +332,6 @@ def main():
     batches = split_batches(file_blocks, max_chars)[:max_batches]
 
     total = len(batches)
-    truncated = total > 1 or (total == 1 and len(diff) > max_chars and len(batches) > len(split_batches(file_blocks, max_chars)))
-
-    if total == 1:
-        banner = ""
-    else:
-        banner = f"(Review split into {total} parts — this is part 1 of {total})"
-
     guidelines_raw = load_guidelines()
     guidelines = ""
     if guidelines_raw:
@@ -445,6 +438,8 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
             else:
                 print(f"Skipping comment on invalid line: {path} L{line}", file=sys.stderr)
 
+    # GraphQL query to check for unresolved bot review threads
+    unresolved_bot_comments = set()
     try:
         owner, repo_name = repo.split("/")
         graphql_query = """
@@ -481,7 +476,7 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
             headers={"Authorization": f"Bearer {github_token}"},
             json=graphql_payload
         )
-        unresolved_bot_comments = set()
+        
         if graphql_req.status_code == 200:
             data = graphql_req.json()
             threads = data.get("data", {}).get("repository", {}).get("pullRequest", {}).get("reviewThreads", {}).get("nodes", [])
@@ -492,20 +487,29 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
                             author_login = c.get("author", {}).get("login", "") if c.get("author") else ""
                             if "bot" in author_login.lower():
                                 unresolved_bot_comments.add((c.get("path"), c.get("line"), c.get("body", "").strip()))
+                                
         filtered_comments_list = []
         for c in comments_list:
             if (c["path"], c["line"], c["body"].strip()) not in unresolved_bot_comments:
                 filtered_comments_list.append(c)
             else:
                 print(f"Skipping duplicate comment on {c['path']} L{c['line']}", file=sys.stderr)
+                
     except Exception as e:
         print(f"Failed to fetch unresolved bot comments via GraphQL: {e}", file=sys.stderr)
         filtered_comments_list = comments_list
+
+    # Downgrade APPROVE to COMMENT if there are unresolved bot discussions
+    if github_event == "APPROVE" and unresolved_bot_comments:
+        print("Unresolved bot comments found. Downgrading APPROVE to COMMENT.", file=sys.stderr)
+        github_event = "COMMENT"
+        body_markdown += "\n\n--- \n⚠️ **Note:** Unresolved discussions found above. Downgrading to COMMENT to avoid auto-approving the PR."
 
     review_payload = {
         "body": body_markdown.strip(),
         "event": github_event
     }
+    
     if filtered_comments_list:
         review_payload["comments"] = filtered_comments_list
 
@@ -514,6 +518,7 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
         headers=headers,
         json=review_payload
     )
+    
     if r.status_code == 422 and "comments" in review_payload:
         print("GitHub rejected 422 with comments. Retrying without inline comments...", file=sys.stderr)
         del review_payload["comments"]
@@ -522,6 +527,7 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
             headers=headers,
             json=review_payload
         )
+        
     if r.status_code >= 400:
         print(f"GitHub API error: {r.status_code} {r.text}", file=sys.stderr)
         sys.exit(1)
