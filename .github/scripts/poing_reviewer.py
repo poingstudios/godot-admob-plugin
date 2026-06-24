@@ -65,6 +65,17 @@ def split_diff_by_file(diff_text):
     return blocks
 
 
+def load_guidelines():
+    paths = ["AGENTS.md", ".github/AGENTS.md"]
+    for path in paths:
+        try:
+            with open(path) as f:
+                return f.read()
+        except FileNotFoundError:
+            continue
+    return None
+
+
 def main():
     gemma_key = os.environ["GEMMA_API_KEY"]
     github_token = os.environ["GITHUB_TOKEN"]
@@ -112,18 +123,53 @@ def main():
 
     annotated_diff, valid_lines = annotate_diff(diff)
 
-    safe_title = json.dumps(pr_title)
+    safe_title = json.dumps(pr_title)[1:-1]
 
-    prompt = f"""You are Poing Reviewer, an AI code reviewer.
-Analyze the annotated diff of a pull request and return a structured JSON response matching the schema.
+    guidelines = load_guidelines()
+    guidelines_section = ""
+    if guidelines:
+        guidelines_section = f"""
+## Repository Guidelines
+
+The repository has an AGENTS.md file with project-specific rules. Follow these guidelines when reviewing:
+
+{json.dumps(guidelines)[1:-1]}
+"""
+
+    prompt = f"""You are Poing Reviewer, a senior code reviewer.
+Analyze the pull request diff below and return a structured JSON response.
 
 PR Title: {safe_title}
 
-In the annotated diff, each line of code is prefixed with its file path and new line number like: [path/to/file L12].
-If you want to leave an inline comment on a specific line, add it to the 'comments' array in the JSON response.
-Only comment on lines that exist in the diff. Ensure the 'line' number matches the number after the 'L' in the prefix exactly.
+## What to focus on
 
-Annotated Diff:
+1. **Logic errors and bugs** - Race conditions, null pointers, incorrect API usage
+2. **Security issues** - Hardcoded secrets, injection vulnerabilities, permission problems
+3. **Architecture violations** - Breaking cross-platform patterns, incorrect abstraction layers
+4. **Project conventions** - GDScript/C# style, naming, type annotations, signal patterns
+5. **API compatibility** - Breaking changes to the public API, missing signal parity
+6. **Reliability** - Error handling, edge cases, resource cleanup
+
+Do NOT comment on:
+- Code style that already matches project conventions
+- Minor formatting differences
+- Comments or documentation formatting
+- Changes outside the diff
+
+## Output format
+
+Return valid JSON with:
+- `verdict`: APPROVED | APPROVED_WITH_SUGGESTIONS | CHANGES_REQUESTED
+- `summary`: 1-2 sentence summary of what the PR does
+- `findings`: array of {{severity: "🔴"|"🟡"|"🟢", file: "path", finding: "description"}}
+- `comments`: array of {{path, line, body}} for inline review notes
+
+In the annotated diff, each code line is prefixed like [path/to/file L12].
+Match line numbers exactly when adding inline comments.
+Only comment on lines that exist in the diff.
+{guidelines_section}
+## Annotated Diff
+
 ```diff
 {annotated_diff}
 ```"""
