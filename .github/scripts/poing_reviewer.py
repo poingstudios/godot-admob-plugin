@@ -263,7 +263,7 @@ def call_model(prompt, model_name, gemini_key):
         return None
 
 
-FALLBACK_MODELS = ["gemini-3.5-flash", "gemini-3-flash", "gemma-4-31b-it"]
+FALLBACK_MODELS = ["gemini-3.5-flash", "gemini-3.1-flash-lite", "gemini-3-flash-preview", "gemma-4-31b-it"]
 
 VERDICT_PRIORITY = {"CHANGES_REQUESTED": 2, "APPROVED_WITH_SUGGESTIONS": 1, "APPROVED": 0}
 
