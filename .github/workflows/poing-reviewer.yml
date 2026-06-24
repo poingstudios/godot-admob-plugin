@@ -53,43 +53,42 @@ jobs:
           base_ref = os.environ["BASE_REF"]
           pr_title = os.environ["PR_TITLE"]
 
-          # Get diff
           diff = subprocess.check_output(["git", "diff", f"origin/{base_ref}...HEAD"]).decode("utf-8")
 
-          # Truncate diff if too large (API limit)
           max_chars = 30000
           if len(diff) > max_chars:
-              diff = diff[:max_chars] + "\n\n... (diff truncated due to size)"
+              diff = diff[:max_chars] + "\n\n... (diff truncated)"
 
-          prompt = f"""You are **Poing Reviewer**, an automated code review bot for a Godot AdMob plugin.
+          prompt = f"""You are Poing Reviewer, an AI code reviewer. Analyze the diff below and respond ONLY with the final review using this EXACT markdown template. Do NOT include any reasoning, analysis steps, or thinking — output ONLY the filled template.
 
-          Review this Pull Request diff and provide structured feedback in GitHub-flavored Markdown.
+          ---
 
-          **PR Title:** {pr_title}
+          ## 📋 Summary
 
-          **Rules:**
-          - Be concise and actionable. Do NOT repeat the code back.
-          - Focus only on meaningful issues: bugs, security, logic errors, missing edge cases.
-          - Ignore formatting/style nitpicks unless they affect readability significantly.
-          - If the changes look good, say so briefly.
-          - Use emojis for severity: 🔴 Critical, 🟡 Warning, 🟢 Suggestion, ✅ Looks Good
+          _One or two sentences describing what this PR changes._
 
-          **Output format:**
-          ## Summary
-          (1-2 sentence overview of what this PR does)
+          ## 🔍 Findings
 
-          ## Findings
-          (List each finding with severity emoji, file, and explanation. If none, write "No issues found.")
+          | | File | Finding |
+          |---|---|---|
+          | 🔴 | `filename.ext` | Description of critical issue |
+          | 🟡 | `filename.ext` | Description of warning |
+          | 🟢 | `filename.ext` | Description of suggestion |
 
-          ## Verdict
-          (One of: ✅ Approved | 🟡 Approved with suggestions | 🔴 Changes requested)
+          _If no issues found, write: **No issues found. ✅**_
 
-          **Diff:**
+          ## 📌 Verdict
+
+          **✅ Approved** / **🟡 Approved with suggestions** / **🔴 Changes requested**
+
+          ---
+
+          PR Title: {pr_title}
+
           ```diff
           {diff}
           ```"""
 
-          # Call Gemma API
           url = f"https://generativelanguage.googleapis.com/v1beta/models/gemma-4-31b-it:generateContent?key={gemma_key}"
           payload = {"contents": [{"parts": [{"text": prompt}]}]}
 
@@ -100,17 +99,24 @@ jobs:
 
           data = resp.json()
           if "candidates" not in data:
-              print(f"Unexpected API response: {json.dumps(data, indent=2)}", file=sys.stderr)
+              print(f"Unexpected response: {json.dumps(data, indent=2)}", file=sys.stderr)
               sys.exit(1)
 
-          feedback = data["candidates"][0]["content"]["parts"][0]["text"]
+          # Extract only the non-thinking parts from the response
+          parts = data["candidates"][0]["content"]["parts"]
+          feedback = ""
+          for part in parts:
+              if not part.get("thought", False):
+                  feedback += part.get("text", "")
 
-          # Post as PR Review (appears as Reviewer)
+          if not feedback.strip():
+              print("No review content generated", file=sys.stderr)
+              sys.exit(1)
+
           headers = {"Authorization": f"Bearer {github_token}", "Accept": "application/vnd.github.v3+json"}
-          review_payload = {"body": feedback, "event": "COMMENT"}
           r = requests.post(
               f"https://api.github.com/repos/{repo}/pulls/{pr_number}/reviews",
-              headers=headers, json=review_payload
+              headers=headers, json={"body": feedback.strip(), "event": "COMMENT"}
           )
           if r.status_code >= 400:
               print(f"GitHub API error: {r.status_code} {r.text}", file=sys.stderr)
