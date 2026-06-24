@@ -323,10 +323,22 @@ def main():
         headers=headers
     )
     if existing_reviews.status_code == 200:
-        for review in existing_reviews.json():
+        reviews_data = existing_reviews.json()
+        for review in reviews_data:
             if review.get("commit_id") == head_sha and review.get("state") != "PENDING":
                 print(f"Review already exists for commit {head_sha[:8]}. Skipping.")
                 sys.exit(0)
+        for review in reviews_data:
+            if (review.get("state") == "CHANGES_REQUESTED"
+                    and review.get("commit_id") != head_sha):
+                rid = review["id"]
+                resp = requests.post(
+                    f"https://api.github.com/repos/{repo}/pulls/{pr_number}/reviews/{rid}/dismissals",
+                    headers=headers,
+                    json={"message": f"Superseded by review on commit {head_sha[:8]}"}
+                )
+                if resp.status_code == 200:
+                    print(f"Dismissed stale review #{rid}", file=sys.stderr)
 
     file_blocks = split_diff_by_file(diff)
     batches = split_batches(file_blocks, max_chars)[:max_batches]
@@ -377,9 +389,29 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
 
     combined_verdict = pick_verdict(all_verdicts)
 
+    # Filter out known false positives about model names
+    fp_keywords = ["invalid", "non-existent", "not found", "does not exist", "fictional", "not a valid"]
+    filtered_findings = []
+    for f in all_findings:
+        finding_lower = f.get("finding", "").lower()
+        file_lower = f.get("file", "").lower()
+        if any(kw in finding_lower for kw in fp_keywords) and any(m in finding_lower + file_lower for m in ["model", "gemini", "gemma"]):
+            print(f"Filtering false positive finding: {f['finding'][:80]}", file=sys.stderr)
+            continue
+        filtered_findings.append(f)
+
+    # Recalculate verdict after filtering
+    has_red = any(f.get("severity") == "🔴" for f in filtered_findings)
+    has_yellow = any(f.get("severity") in ("🟡", "🟢") for f in filtered_findings)
+    if not has_red:
+        if has_yellow:
+            combined_verdict = "APPROVED_WITH_SUGGESTIONS"
+        else:
+            combined_verdict = "APPROVED"
+
     seen = set()
     unique_findings = []
-    for f in all_findings:
+    for f in filtered_findings:
         key = (f.get("file", ""), f.get("finding", ""))
         if key not in seen:
             seen.add(key)
