@@ -67,7 +67,7 @@ def fetch_thumbs_down_fingerprints(threads, bot_login):
 
             reactions = (comment.get("reactions") or {}).get("nodes") or []
             has_thumbs_down = any(
-                r.get("content") == "-1" for r in reactions
+                r.get("content") == "THUMBS_DOWN" for r in reactions
             )
             if not has_thumbs_down:
                 continue
