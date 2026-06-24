@@ -42,6 +42,6 @@ jobs:
           REPO: ${{ github.repository }}
           BASE_REF: ${{ github.event.pull_request.base.ref }}
           PR_TITLE: ${{ github.event.pull_request.title }}
-          MODEL_NAME: gemma-4-31b-it
+          MODEL_NAME: gemini-3.5-flash
           MAX_CHARS: 100000
         run: python .github/scripts/poing_reviewer.py

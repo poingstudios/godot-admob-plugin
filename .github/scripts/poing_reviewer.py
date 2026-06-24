@@ -123,6 +123,11 @@ Do NOT comment on:
 - Comments or documentation formatting
 - Changes outside the diff
 
+CRITICAL: Do NOT suggest changes for code that already exists in the diff.
+Only report findings that are clearly present. If you are unsure whether an
+issue exists, err on the side of not commenting. False positives waste
+reviewer time.
+
 ## Output format
 
 Return valid JSON with:
@@ -149,6 +154,7 @@ def call_model(prompt, model_name, gemma_key):
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
         "generationConfig": {
+            "temperature": 0.2,
             "responseMimeType": "application/json",
             "responseSchema": {
                 "type": "OBJECT",
@@ -276,7 +282,7 @@ def main():
     pr_number = get_env("PR_NUMBER")
     base_ref = get_env("BASE_REF")
     pr_title = get_env("PR_TITLE")
-    model_name = os.environ.get("MODEL_NAME", "gemma-4-31b-it")
+    model_name = os.environ.get("MODEL_NAME", "gemini-3.5-flash")
     max_chars = int(os.environ.get("MAX_CHARS", "100000"))
     max_batches = 5
 
