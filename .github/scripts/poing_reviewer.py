@@ -133,8 +133,6 @@ def main():
 
     annotated_diff, valid_lines = annotate_diff(diff)
 
-    safe_title = json.dumps(pr_title)[1:-1]
-
     guidelines = load_guidelines()
     guidelines_section = ""
     if guidelines:
@@ -149,7 +147,7 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
     prompt = f"""You are Poing Reviewer, a senior code reviewer.
 Analyze the pull request diff below and return a structured JSON response.
 
-PR Title: {safe_title}
+PR Title: {pr_title}
 
 ## What to focus on
 
@@ -159,6 +157,9 @@ PR Title: {safe_title}
 4. **Project conventions** - GDScript/C# style, naming, type annotations, signal patterns
 5. **API compatibility** - Breaking changes to the public API, missing signal parity
 6. **Reliability** - Error handling, edge cases, resource cleanup
+
+Examine every changed file carefully. Identify ALL issues you find — do not limit yourself to just a few.
+Cover bugs, logic errors, and potential improvements in every file touched.
 
 Do NOT comment on:
 - Code style that already matches project conventions
