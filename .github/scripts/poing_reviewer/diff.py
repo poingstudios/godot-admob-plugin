@@ -47,6 +47,7 @@ def annotate_diff(diff_text):
             parts = line.split(" ")
             if len(parts) >= 4:
                 current_file = parts[3][2:]
+            new_line_num = 0
             annotated.append(line)
         elif line.startswith("+++ b/"):
             current_file = line[6:]

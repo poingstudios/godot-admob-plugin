@@ -56,8 +56,7 @@ PR Title: {pr_title}
 6. **Reliability** - Error handling, edge cases, resource cleanup
 
 {batch_label}
-Examine every changed file carefully. Identify ALL issues you find.
-Cover bugs, logic errors, and potential improvements in every file touched.
+Examine the diff and identify any real issues.
 
 Do NOT comment on:
 - Code style that already matches project conventions
@@ -65,18 +64,21 @@ Do NOT comment on:
 - Comments or documentation formatting
 - Changes outside the diff
 
-CRITICAL: Do NOT suggest changes for code that already exists in the diff.
-Only report findings that are clearly present. If you are unsure whether an
-issue exists, err on the side of not commenting. False positives waste
-reviewer time.
+CRITICAL: Only report findings that are clearly present. If you are unsure
+whether an issue exists, err on the side of not commenting. False positives
+waste reviewer time.
+
+CRITICAL: It is perfectly fine to return empty arrays. If the code looks
+correct, return `{{"findings": [], "comments": []}}`. Do NOT fabricate issues
+just to populate the arrays.
 
 ## Output format
 
 Return valid JSON with:
 - `verdict`: APPROVED | APPROVED_WITH_SUGGESTIONS | CHANGES_REQUESTED
 - `summary`: 1-2 sentence summary of what the PR does
-- `findings`: array of {{severity: "🔴"|"🟡"|"🟢", file: "path", finding: "description"}}
-- `comments`: array of {{path, line, body}} for inline review notes
+- `findings`: array of {{severity: "🔴"|"🟡"|"🟢", file: "path", finding: "description"}} (can be empty)
+- `comments`: array of {{path, line, body}} for inline review notes (can be empty)
 
 In the annotated diff, each code line is prefixed like [path/to/file L12].
 Match line numbers exactly when adding inline comments.

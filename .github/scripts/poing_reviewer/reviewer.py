@@ -37,6 +37,7 @@ from poing_reviewer.github_api import (
     submit_review_with_retry,
     fetch_bot_login,
     fetch_review_threads,
+    resolve_thread,
 )
 from poing_reviewer.false_positive import (
     fetch_thumbs_down_fingerprints,
@@ -72,16 +73,46 @@ def main():
     diff = get_git_diff(cfg.BASE_REF)
 
     existing_reviews = fetch_existing_reviews(cfg.REPO, cfg.PR_NUMBER, cfg.GITHUB_TOKEN)
+
+    # Check if already reviewed for current commit
     for review in existing_reviews:
         if review.get("commit_id") == cfg.HEAD_SHA and review.get("state") != "PENDING":
             print(f"Review already exists for commit {cfg.HEAD_SHA[:8]}. Skipping.")
             sys.exit(0)
 
-    for review in existing_reviews:
-        if (
-            review.get("state") == "CHANGES_REQUESTED"
-            and review.get("commit_id") != cfg.HEAD_SHA
-        ):
+    stale_reviews = [
+        r for r in existing_reviews
+        if r.get("state") == "CHANGES_REQUESTED" and r.get("commit_id") != cfg.HEAD_SHA
+    ]
+
+    if stale_reviews:
+        # Fetch threads once and reuse
+        threads = []
+        try:
+            threads = fetch_review_threads(cfg.owner, cfg.repo_name, cfg.PR_NUMBER, cfg.GITHUB_TOKEN)
+        except Exception as e:
+            print(f"Failed to fetch review threads: {e}", file=sys.stderr)
+
+        # Resolve ALL unresolved bot threads before dismissing stale reviews
+        if threads:
+            for t in threads:
+                if not t or t.get("isResolved", False):
+                    continue
+                comments = (t.get("comments") or {}).get("nodes") or []
+                first = comments[0] if comments else {}
+                author_login = (first.get("author") or {}).get("login", "")
+                is_bot = "bot" in author_login.lower() or (
+                    cfg.BOT_LOGIN and author_login.lower() == cfg.BOT_LOGIN.lower()
+                )
+                if not is_bot:
+                    continue
+                try:
+                    resolve_thread(t["id"], cfg.GITHUB_TOKEN)
+                except Exception as exc:
+                    print(f"Failed to resolve thread {t['id']}: {exc}", file=sys.stderr)
+
+        # Now dismiss stale reviews
+        for review in stale_reviews:
             dismissed = dismiss_review(
                 cfg.REPO,
                 cfg.PR_NUMBER,
@@ -165,6 +196,10 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
         if key not in seen:
             seen.add(key)
             unique_findings.append(f)
+
+    if not unique_findings:
+        print("No findings after filtering. Skipping review post.", file=sys.stderr)
+        sys.exit(0)
 
     findings_rows = ""
     for f in unique_findings:
