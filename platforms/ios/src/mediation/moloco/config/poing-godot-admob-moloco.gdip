@@ -1,5 +1,5 @@
 [config]
-name="AdMob Moloco"
+name="AdMob Mediation Moloco"
 binary="poing-godot-admob/bin/poing-godot-admob-moloco.xcframework"
 
 initialization="register_poing_godot_admob_moloco_types"

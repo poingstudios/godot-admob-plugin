@@ -1,5 +1,5 @@
 [config]
-name="AdMob Vungle"
+name="AdMob Mediation Vungle"
 binary="poing-godot-admob/bin/poing-godot-admob-vungle.xcframework"
 
 initialization="register_poing_godot_admob_vungle_types"

@@ -1,5 +1,5 @@
 [config]
-name="AdMob Line"
+name="AdMob Mediation Line"
 binary="poing-godot-admob/bin/poing-godot-admob-line.xcframework"
 
 initialization="register_poing_godot_admob_line_types"
