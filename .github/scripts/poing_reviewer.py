@@ -302,6 +302,7 @@ def main():
     pr_number = get_env("PR_NUMBER")
     base_ref = get_env("BASE_REF")
     pr_title = get_env("PR_TITLE")
+    head_sha = get_env("PR_HEAD_SHA")
     primary_model = os.environ.get("MODEL_NAME", "gemini-3.5-flash")
     fallback_env = os.environ.get("FALLBACK_MODELS", "")
     models_to_try = [primary_model] + [m.strip() for m in fallback_env.split(",") if m.strip()] + FALLBACK_MODELS
@@ -314,12 +315,6 @@ def main():
         diff = subprocess.check_output(["git", "diff", f"origin/{base_ref}...HEAD"]).decode("utf-8")
     except Exception as e:
         print(f"Failed to get git diff: {e}", file=sys.stderr)
-        sys.exit(1)
-
-    try:
-        head_sha = subprocess.check_output(["git", "rev-parse", "HEAD"]).decode("utf-8").strip()
-    except Exception as e:
-        print(f"Failed to get HEAD SHA: {e}", file=sys.stderr)
         sys.exit(1)
 
     headers = {"Authorization": f"Bearer {github_token}", "Accept": "application/vnd.github.v3+json"}
