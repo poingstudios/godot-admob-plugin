@@ -23,11 +23,36 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: 3. Review Code
-        uses: google-github-actions/run-gemini-cli@v0
+      - name: 3. Setup Python
+        uses: actions/setup-python@v5
         with:
-          args: "pr review"
+          python-version: '3.10'
+
+      - name: 4. Install Dependencies
+        run: pip install requests
+
+      - name: 5. Run Reviewer
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-          GEMINI_MODEL: "gemma-4-31b-it"
+          GEMMA_API_KEY: ${{ secrets.GEMMA_API_KEY }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          REPO: ${{ github.repository }}
+        run: |
+          python -c '
+          import os, requests, subprocess
+          
+          # Get diff
+          diff = subprocess.check_output(["git", "diff", "origin/main...HEAD"]).decode("utf-8")
+          
+          # Call Google API
+          url = f"https://generativelanguage.googleapis.com/v1beta/models/gemma-2-27b-it:generateContent?key={os.environ["GEMMA_API_KEY"]}"
+          payload = {"contents": [{"parts": [{"text": f"Act as a code reviewer. Review this diff and provide feedback:\n{diff}"}]}]}
+          
+          response = requests.post(url, json=payload).json()
+          feedback = response["candidates"][0]["content"]["parts"][0]["text"]
+          
+          # Post to GitHub
+          headers = {"Authorization": f"Bearer {os.environ["GITHUB_TOKEN"]}", "Accept": "application/vnd.github.v3+json"}
+          requests.post(f"https://api.github.com/repos/{os.environ["REPO"]}/issues/{os.environ["PR_NUMBER"]}/comments", 
+                        headers=headers, json={"body": feedback})
+          '
