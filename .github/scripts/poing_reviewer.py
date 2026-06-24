@@ -1,14 +1,8 @@
 import os
-import re
 import requests
 import subprocess
 import json
 import sys
-
-
-def sanitize_text(text):
-    escaped = text.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", " ").replace("\r", " ")
-    return re.sub(r'\s+', ' ', escaped).strip()
 
 
 def annotate_diff(diff_text):
@@ -87,6 +81,23 @@ def main():
         print(f"Failed to get git diff: {e}", file=sys.stderr)
         sys.exit(1)
 
+    try:
+        head_sha = subprocess.check_output(["git", "rev-parse", "HEAD"]).decode("utf-8").strip()
+    except Exception as e:
+        print(f"Failed to get HEAD SHA: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    headers = {"Authorization": f"Bearer {github_token}", "Accept": "application/vnd.github.v3+json"}
+    existing_reviews = requests.get(
+        f"https://api.github.com/repos/{repo}/pulls/{pr_number}/reviews",
+        headers=headers
+    )
+    if existing_reviews.status_code == 200:
+        for review in existing_reviews.json():
+            if review.get("commit_id") == head_sha and review.get("state") != "PENDING":
+                print(f"Review already exists for commit {head_sha[:8]}. Skipping.")
+                sys.exit(0)
+
     file_diffs = split_diff_by_file(diff)
     truncated_diff = ""
     if file_diffs:
@@ -101,7 +112,7 @@ def main():
 
     annotated_diff, valid_lines = annotate_diff(diff)
 
-    safe_title = sanitize_text(pr_title)
+    safe_title = json.dumps(pr_title)
 
     prompt = f"""You are Poing Reviewer, an AI code reviewer.
 Analyze the annotated diff of a pull request and return a structured JSON response matching the schema.
@@ -262,7 +273,6 @@ Annotated Diff:
             else:
                 print(f"Skipping comment on invalid line: {path} L{line}", file=sys.stderr)
 
-    headers = {"Authorization": f"Bearer {github_token}", "Accept": "application/vnd.github.v3+json"}
     review_payload = {
         "body": body_markdown.strip(),
         "event": github_event
