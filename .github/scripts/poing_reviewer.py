@@ -30,7 +30,7 @@ def annotate_diff(diff_text):
                 new_part = header.split(" ")[1]
                 new_start = int(new_part.split(",")[0][1:])
                 new_line_num = new_start
-            except Exception:
+            except (ValueError, IndexError):
                 pass
         elif current_file:
             if line.startswith("+"):
@@ -76,13 +76,21 @@ def load_guidelines():
     return None
 
 
+def get_env(key):
+    value = os.environ.get(key)
+    if value is None:
+        print(f"Missing required environment variable: {key}", file=sys.stderr)
+        sys.exit(1)
+    return value
+
+
 def main():
-    gemma_key = os.environ["GEMMA_API_KEY"]
-    github_token = os.environ["GITHUB_TOKEN"]
-    repo = os.environ["REPO"]
-    pr_number = os.environ["PR_NUMBER"]
-    base_ref = os.environ["BASE_REF"]
-    pr_title = os.environ["PR_TITLE"]
+    gemma_key = get_env("GEMMA_API_KEY")
+    github_token = get_env("GITHUB_TOKEN")
+    repo = get_env("REPO")
+    pr_number = get_env("PR_NUMBER")
+    base_ref = get_env("BASE_REF")
+    pr_title = get_env("PR_TITLE")
     model_name = os.environ.get("MODEL_NAME", "gemma-4-31b-it")
     max_chars = int(os.environ.get("MAX_CHARS", "100000"))
 
@@ -111,13 +119,15 @@ def main():
 
     file_diffs = split_diff_by_file(diff)
     truncated_diff = ""
+    truncated = False
     if file_diffs:
         truncated_diff += file_diffs[0]
     for fd in file_diffs[1:]:
         if len(truncated_diff) + len(fd) < max_chars:
             truncated_diff += fd
         else:
-            truncated_diff += "\n\n... (remaining files truncated due to size limit)"
+            truncated = True
+            truncated_diff += "\n\n# ⚠️ DIFF TRUNCATED — remaining files omitted due to size limit. Review is based on a partial diff."
             break
     diff = truncated_diff
 
@@ -264,7 +274,7 @@ Only comment on lines that exist in the diff.
         if raw.endswith("```"):
             raw = raw.rsplit("```", 1)[0]
         review_data = json.loads(raw.strip())
-    except Exception as e:
+    except json.JSONDecodeError as e:
         print(f"Failed to parse model response as JSON: {e}\nResponse: {feedback}", file=sys.stderr)
         sys.exit(1)
 
