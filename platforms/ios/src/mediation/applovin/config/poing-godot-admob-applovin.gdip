@@ -1,5 +1,5 @@
 [config]
-name="AdMob AppLovin"
+name="AdMob Mediation AppLovin"
 binary="poing-godot-admob/bin/poing-godot-admob-applovin.xcframework"
 
 initialization="register_poing_godot_admob_applovin_types"

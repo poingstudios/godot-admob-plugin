@@ -1,5 +1,5 @@
 [config]
-name="AdMob DT Exchange"
+name="AdMob Mediation DT Exchange"
 binary="poing-godot-admob/bin/poing-godot-admob-dtexchange.xcframework"
 
 initialization="register_poing_godot_admob_dtexchange_types"

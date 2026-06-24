@@ -1,5 +1,5 @@
 [config]
-name="AdMob Maio"
+name="AdMob Mediation Maio"
 binary="poing-godot-admob/bin/poing-godot-admob-maio.xcframework"
 
 initialization="register_poing_godot_admob_maio_types"

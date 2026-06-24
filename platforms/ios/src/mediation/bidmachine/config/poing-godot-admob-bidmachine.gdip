@@ -1,5 +1,5 @@
 [config]
-name="AdMob BidMachine"
+name="AdMob Mediation BidMachine"
 binary="poing-godot-admob/bin/poing-godot-admob-bidmachine.xcframework"
 
 initialization="register_poing_godot_admob_bidmachine_types"
