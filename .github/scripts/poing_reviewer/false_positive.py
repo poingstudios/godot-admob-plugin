@@ -23,7 +23,6 @@
 import sys
 
 from poing_reviewer.config import fingerprint, COMMENT_FOOTER_HINT
-from poing_reviewer.github_api import fetch_pr_comments, fetch_comment_reactions
 
 
 def strip_footer(body):
@@ -39,37 +38,45 @@ def add_footer_hint(body):
     return body.rstrip() + COMMENT_FOOTER_HINT
 
 
-def _is_bot_comment(comment, bot_login):
-    user = comment.get("user") or {}
-    login = user.get("login", "")
-    if not login:
+def _is_bot_comment_by_login(author_login, bot_login):
+    if not author_login:
         return False
-    if bot_login and login.lower() == bot_login.lower():
+    if bot_login and author_login.lower() == bot_login.lower():
         return True
-    return "bot" in login.lower() and login != bot_login
+    return "bot" in author_login.lower()
 
 
-def fetch_thumbs_down_fingerprints(repo, pr_number, bot_login, token):
-    """Collect fingerprints of bot comments that have a 👎 reaction."""
-    comments = fetch_pr_comments(repo, pr_number, token)
+def fetch_thumbs_down_fingerprints(threads, bot_login):
+    """Extract fingerprints of bot thread comments that have a 👎 reaction.
+
+    Uses already-fetched GraphQL thread data (single call) instead of
+    N+1 REST calls per comment.
+    """
     suppressed = set()
 
-    for comment in comments:
-        if not _is_bot_comment(comment, bot_login):
+    for thread in threads:
+        if not thread:
             continue
+        comments = (thread.get("comments") or {}).get("nodes") or []
+        for comment in comments:
+            if not comment:
+                continue
+            author_login = (comment.get("author") or {}).get("login", "")
+            if not _is_bot_comment_by_login(author_login, bot_login):
+                continue
 
-        reactions = fetch_comment_reactions(repo, comment["id"], token)
-        has_thumbs_down = any(
-            r.get("content") == "-1" for r in reactions
-        )
-        if not has_thumbs_down:
-            continue
+            reactions = (comment.get("reactions") or {}).get("nodes") or []
+            has_thumbs_down = any(
+                r.get("content") == "-1" for r in reactions
+            )
+            if not has_thumbs_down:
+                continue
 
-        body = strip_footer(comment.get("body", ""))
-        path = comment.get("path", "")
-        line = comment.get("line")
-        fp = fingerprint(path, body, line)
-        suppressed.add(fp)
+            body = strip_footer(comment.get("body", ""))
+            path = thread.get("path", "")
+            line = thread.get("line")
+            fp = fingerprint(path, body, line)
+            suppressed.add(fp)
 
     if suppressed:
         print(

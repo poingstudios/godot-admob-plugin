@@ -112,6 +112,9 @@ def fetch_review_threads(owner, repo_name, pr_number, token):
                   author { login }
                   body
                   databaseId
+                  reactions(first: 10) {
+                    nodes { content }
+                  }
                 }
               }
             }
@@ -175,31 +178,4 @@ def post_thread_comment(repo, comment_id, token, body):
     return resp.status_code == 201
 
 
-def fetch_comment_reactions(repo, comment_id, token):
-    resp = requests.get(
-        f"{BASE_URL}/repos/{repo}/pulls/comments/{comment_id}/reactions",
-        headers=_headers(token),
-    )
-    if resp.status_code == 200:
-        return resp.json()
-    return []
 
-
-def fetch_pr_comments(repo, pr_number, token):
-    """Fetch all PR review comments (not issue comments)."""
-    comments = []
-    page = 1
-    while True:
-        resp = requests.get(
-            f"{BASE_URL}/repos/{repo}/pulls/{pr_number}/comments",
-            headers=_headers(token),
-            params={"per_page": 100, "page": page},
-        )
-        if resp.status_code != 200:
-            break
-        page_comments = resp.json()
-        if not page_comments:
-            break
-        comments.extend(page_comments)
-        page += 1
-    return comments

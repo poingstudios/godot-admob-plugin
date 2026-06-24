@@ -133,6 +133,8 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
             sys.exit(1)
         all_results.append(result)
 
+    reviewed_paths = {p for p, _ in all_valid_lines}
+
     all_findings = []
     all_comments = []
     all_verdicts = []
@@ -204,17 +206,15 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
             else:
                 print(f"Skipping comment on invalid line: {path} L{line}", file=sys.stderr)
 
-    # Fetch thumbs-down fingerprints for false positive suppression
-    suppressed_fingerprints = fetch_thumbs_down_fingerprints(
-        cfg.REPO, cfg.PR_NUMBER, cfg.BOT_LOGIN, cfg.GITHUB_TOKEN
-    )
-
-    # Fetch review threads for dedup + resolution
+    # Fetch review threads (1 GraphQL call — includes reactions for FP suppression)
     threads = []
     try:
         threads = fetch_review_threads(cfg.owner, cfg.repo_name, cfg.PR_NUMBER, cfg.GITHUB_TOKEN)
     except Exception as e:
         print(f"Failed to fetch review threads: {e}", file=sys.stderr)
+
+    # Extract thumbs-down fingerprints from the same thread data (no N+1)
+    suppressed_fingerprints = fetch_thumbs_down_fingerprints(threads, cfg.BOT_LOGIN)
 
     unresolved_fingerprints, fp_to_thread = collect_thread_fingerprints(threads, cfg.BOT_LOGIN)
 
@@ -274,7 +274,7 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
     # After posting, attempt to resolve fixed threads
     if threads:
         try:
-            resolved = resolve_fixed_threads(cfg, current_comment_fingerprints, {})
+            resolved = resolve_fixed_threads(cfg, current_comment_fingerprints, reviewed_paths, {})
             if resolved:
                 print(f"Auto-resolved {resolved} thread(s).", file=sys.stderr)
         except Exception as e:

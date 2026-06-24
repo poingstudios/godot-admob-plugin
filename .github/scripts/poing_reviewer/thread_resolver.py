@@ -78,8 +78,12 @@ def collect_thread_fingerprints(threads, bot_login):
     return unresolved_fp, fp_to_thread
 
 
-def resolve_fixed_threads(cfg, current_fingerprints, github_api_funcs):
+def resolve_fixed_threads(cfg, current_fingerprints, reviewed_paths, github_api_funcs):
     """Resolve bot threads whose finding is no longer present.
+
+    Only processes threads for files that were actually reviewed in the current
+    run (reviewed_paths) to avoid incorrectly resolving threads on files that
+    were truncated by MAX_BATCHES.
 
     github_api_funcs is a dict with keys: resolve_thread, post_thread_comment
     to allow dependency injection for testing.
@@ -97,6 +101,8 @@ def resolve_fixed_threads(cfg, current_fingerprints, github_api_funcs):
     resolved_count = 0
     for fp, info in fp_to_thread.items():
         if info["is_resolved"]:
+            continue
+        if info["path"] not in reviewed_paths:
             continue
         if fp not in current_fingerprints:
             thread_id = info["id"]
