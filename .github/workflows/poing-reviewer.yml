@@ -23,6 +23,9 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Fetch Base Branch
+        run: git fetch origin ${{ github.event.pull_request.base.ref }}:origin/${{ github.event.pull_request.base.ref }}
+
       - name: 3. Setup Python
         uses: actions/setup-python@v5
         with:
@@ -37,6 +40,7 @@ jobs:
           GEMMA_API_KEY: ${{ secrets.GEMMA_API_KEY }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REPO: ${{ github.repository }}
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
         run: |
           python -c '
           import os, requests, subprocess
@@ -45,9 +49,10 @@ jobs:
           github_token = os.environ["GITHUB_TOKEN"]
           repo = os.environ["REPO"]
           pr_number = os.environ["PR_NUMBER"]
+          base_ref = os.environ["BASE_REF"]
           
           # Get diff
-          diff = subprocess.check_output(["git", "diff", "origin/main...HEAD"]).decode("utf-8")
+          diff = subprocess.check_output(["git", "diff", f"origin/{base_ref}...HEAD"]).decode("utf-8")
           
           # Call Google API
           url = f"https://generativelanguage.googleapis.com/v1beta/models/gemma-4-31b-it:generateContent?key={gemma_key}"
