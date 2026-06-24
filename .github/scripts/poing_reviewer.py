@@ -296,7 +296,7 @@ def split_batches(file_blocks, max_chars):
 
 
 def main():
-    gemma_key = get_env("GEMMA_API_KEY")
+    gemini_key = get_env("GEMINI_API_KEY")
     github_token = get_env("GITHUB_TOKEN")
     repo = get_env("REPO")
     pr_number = get_env("PR_NUMBER")
@@ -362,7 +362,7 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
         result = None
         for model in models_to_try:
             print(f"Request {i + 1}/{total} ({len(batch)} file(s)) using {model}...")
-            result = call_model(prompt, model, gemma_key)
+            result = call_model(prompt, model, gemini_key)
             if result is not None:
                 break
             print(f"  {model} failed, trying next model..." if model != models_to_try[-1] else f"  All models exhausted for batch {i + 1}.", file=sys.stderr)

@@ -37,7 +37,7 @@ jobs:
       - name: 5. Run Reviewer
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-          GEMMA_API_KEY: ${{ secrets.GEMMA_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REPO: ${{ github.repository }}
           BASE_REF: ${{ github.event.pull_request.base.ref }}
