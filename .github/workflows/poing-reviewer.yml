@@ -111,8 +111,18 @@ jobs:
                   print(f"Failed to get git diff: {e}", file=sys.stderr)
                   sys.exit(1)
 
-              if len(diff) > max_chars:
-                  diff = diff[:max_chars] + "\n\n... (diff truncated)"
+              file_diffs = diff.split("diff --git")
+              truncated_diff = ""
+              if file_diffs:
+                  truncated_diff += file_diffs[0]
+              for fd in file_diffs[1:]:
+                  file_block = "diff --git" + fd
+                  if len(truncated_diff) + len(file_block) < max_chars:
+                      truncated_diff += file_block
+                  else:
+                      truncated_diff += "\n\n... (remaining files truncated due to size limit)"
+                      break
+              diff = truncated_diff
 
               annotated_diff, valid_lines = annotate_diff(diff)
 
