@@ -25,6 +25,11 @@ name: Poing Reviewer
 on:
   pull_request:
     types: [opened, synchronize, review_requested]
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: 'PR number to review'
+        required: true
 
 jobs:
   review:
@@ -45,8 +50,30 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Checkout PR (workflow_dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        run: gh pr checkout ${{ inputs.pr_number }}
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+
+      - name: Set PR Env (workflow_dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          pr_data=$(gh pr view ${{ inputs.pr_number }} --json baseRef,number,title,headRefName,headRefOid --repo ${{ github.repository }})
+          echo "PR_NUMBER=$(echo $pr_data | jq -r '.number')" >> $GITHUB_ENV
+          echo "PR_TITLE=$(echo $pr_data | jq -r '.title')" >> $GITHUB_ENV
+          echo "BASE_REF=$(echo $pr_data | jq -r '.baseRef')" >> $GITHUB_ENV
+          echo "PR_HEAD_SHA=$(echo $pr_data | jq -r '.headRefOid')" >> $GITHUB_ENV
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+
       - name: Fetch Base Branch
-        run: git fetch origin ${{ github.event.pull_request.base.ref }}
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch origin "${{ github.event.pull_request.base.ref }}"
+          else
+            git fetch origin "$BASE_REF"
+          fi
 
       - name: 3. Setup Python
         uses: actions/setup-python@v5
@@ -60,12 +87,12 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
-          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PR_NUMBER: ${{ github.event.pull_request.number || env.PR_NUMBER }}
           REPO: ${{ github.repository }}
-          BASE_REF: ${{ github.event.pull_request.base.ref }}
-          PR_TITLE: ${{ github.event.pull_request.title }}
-          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          BASE_REF: ${{ github.event.pull_request.base.ref || env.BASE_REF }}
+          PR_TITLE: ${{ github.event.pull_request.title || env.PR_TITLE }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || env.PR_HEAD_SHA }}
           MODEL_NAME: gemini-3.5-flash
           MAX_CHARS: 100000
-          TRIGGER_ACTION: ${{ github.event.action }}
+          TRIGGER_ACTION: ${{ github.event.action || 'workflow_dispatch' }}
         run: python .github/scripts/poing_reviewer.py

@@ -38,12 +38,13 @@ from poing_reviewer.github_api import (
     fetch_bot_login,
     fetch_review_threads,
     resolve_thread,
+    post_thread_comment,
 )
 from poing_reviewer.false_positive import (
     fetch_thumbs_down_fingerprints,
     add_footer_hint,
 )
-from poing_reviewer.thread_resolver import collect_thread_fingerprints
+from poing_reviewer.thread_resolver import collect_thread_fingerprints, resolve_fixed_threads
 
 
 def _filter_model_false_positives(findings):
@@ -302,6 +303,17 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
             )
             if dismissed:
                 print(f"Dismissed stale review #{review['id']}", file=sys.stderr)
+
+    # Resolve bot threads for issues fixed in this push
+    resolve_fixed_threads(
+        cfg,
+        current_comment_fingerprints,
+        reviewed_paths,
+        {
+            "resolve_thread": resolve_thread,
+            "post_thread_comment": post_thread_comment,
+        },
+    )
 
 
 if __name__ == "__main__":
