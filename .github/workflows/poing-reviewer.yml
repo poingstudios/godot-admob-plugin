@@ -42,6 +42,8 @@ jobs:
           REPO: ${{ github.repository }}
           BASE_REF: ${{ github.event.pull_request.base.ref }}
           PR_TITLE: ${{ github.event.pull_request.title }}
+          MODEL_NAME: gemma-4-31b-it
+          MAX_CHARS: 100000
         run: |
           cat << 'EOF' > reviewer.py
           import os
@@ -100,6 +102,8 @@ jobs:
               pr_number = os.environ["PR_NUMBER"]
               base_ref = os.environ["BASE_REF"]
               pr_title = os.environ["PR_TITLE"]
+              model_name = os.environ.get("MODEL_NAME", "gemma-4-31b-it")
+              max_chars = int(os.environ.get("MAX_CHARS", "100000"))
 
               try:
                   diff = subprocess.check_output(["git", "diff", f"origin/{base_ref}...HEAD"]).decode("utf-8")
@@ -107,7 +111,6 @@ jobs:
                   print(f"Failed to get git diff: {e}", file=sys.stderr)
                   sys.exit(1)
 
-              max_chars = 30000
               if len(diff) > max_chars:
                   diff = diff[:max_chars] + "\n\n... (diff truncated)"
 
@@ -127,7 +130,7 @@ jobs:
           {annotated_diff}
           ```"""
 
-              url = f"https://generativelanguage.googleapis.com/v1beta/models/gemma-4-31b-it:generateContent?key={gemma_key}"
+              url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={gemma_key}"
               
               payload = {
                   "contents": [{"parts": [{"text": prompt}]}],
@@ -246,7 +249,7 @@ jobs:
 
               github_event_map = {
                   "APPROVED": "APPROVE",
-                  "APPROVED_WITH_SUGGESTIONS": "COMMENT",
+                  "APPROVED_WITH_SUGGESTIONS": "APPROVE",
                   "CHANGES_REQUESTED": "REQUEST_CHANGES"
               }
               github_event = github_event_map.get(review_data.get("verdict"), "COMMENT")
