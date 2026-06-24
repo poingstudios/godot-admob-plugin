@@ -224,7 +224,12 @@ jobs:
                   sys.exit(1)
 
               try:
-                  review_data = json.loads(feedback)
+                  raw = feedback.strip()
+                  if raw.startswith("```"):
+                      raw = raw.split("\n", 1)[-1]
+                  if raw.endswith("```"):
+                      raw = raw.rsplit("```", 1)[0]
+                  review_data = json.loads(raw.strip())
               except Exception as e:
                   print(f"Failed to parse model response as JSON: {e}\nResponse: {feedback}", file=sys.stderr)
                   sys.exit(1)
