@@ -41,28 +41,80 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           REPO: ${{ github.repository }}
           BASE_REF: ${{ github.event.pull_request.base.ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
         run: |
           python -c '
-          import os, requests, subprocess
-          
+          import os, requests, subprocess, json, sys
+
           gemma_key = os.environ["GEMMA_API_KEY"]
           github_token = os.environ["GITHUB_TOKEN"]
           repo = os.environ["REPO"]
           pr_number = os.environ["PR_NUMBER"]
           base_ref = os.environ["BASE_REF"]
-          
+          pr_title = os.environ["PR_TITLE"]
+
           # Get diff
           diff = subprocess.check_output(["git", "diff", f"origin/{base_ref}...HEAD"]).decode("utf-8")
-          
-          # Call Google API
+
+          # Truncate diff if too large (API limit)
+          max_chars = 30000
+          if len(diff) > max_chars:
+              diff = diff[:max_chars] + "\n\n... (diff truncated due to size)"
+
+          prompt = f"""You are **Poing Reviewer**, an automated code review bot for a Godot AdMob plugin.
+
+          Review this Pull Request diff and provide structured feedback in GitHub-flavored Markdown.
+
+          **PR Title:** {pr_title}
+
+          **Rules:**
+          - Be concise and actionable. Do NOT repeat the code back.
+          - Focus only on meaningful issues: bugs, security, logic errors, missing edge cases.
+          - Ignore formatting/style nitpicks unless they affect readability significantly.
+          - If the changes look good, say so briefly.
+          - Use emojis for severity: 🔴 Critical, 🟡 Warning, 🟢 Suggestion, ✅ Looks Good
+
+          **Output format:**
+          ## Summary
+          (1-2 sentence overview of what this PR does)
+
+          ## Findings
+          (List each finding with severity emoji, file, and explanation. If none, write "No issues found.")
+
+          ## Verdict
+          (One of: ✅ Approved | 🟡 Approved with suggestions | 🔴 Changes requested)
+
+          **Diff:**
+          ```diff
+          {diff}
+          ```"""
+
+          # Call Gemma API
           url = f"https://generativelanguage.googleapis.com/v1beta/models/gemma-4-31b-it:generateContent?key={gemma_key}"
-          payload = {"contents": [{"parts": [{"text": f"Act as a code reviewer. Review this diff and provide feedback:\n{diff}"}]}]}
-          
-          response = requests.post(url, json=payload).json()
-          feedback = response["candidates"][0]["content"]["parts"][0]["text"]
-          
-          # Post to GitHub
+          payload = {"contents": [{"parts": [{"text": prompt}]}]}
+
+          resp = requests.post(url, json=payload)
+          if resp.status_code != 200:
+              print(f"API error: {resp.status_code} {resp.text}", file=sys.stderr)
+              sys.exit(1)
+
+          data = resp.json()
+          if "candidates" not in data:
+              print(f"Unexpected API response: {json.dumps(data, indent=2)}", file=sys.stderr)
+              sys.exit(1)
+
+          feedback = data["candidates"][0]["content"]["parts"][0]["text"]
+
+          # Post as PR Review (appears as Reviewer)
           headers = {"Authorization": f"Bearer {github_token}", "Accept": "application/vnd.github.v3+json"}
-          requests.post(f"https://api.github.com/repos/{repo}/issues/{pr_number}/comments", 
-                        headers=headers, json={"body": feedback})
+          review_payload = {"body": feedback, "event": "COMMENT"}
+          r = requests.post(
+              f"https://api.github.com/repos/{repo}/pulls/{pr_number}/reviews",
+              headers=headers, json=review_payload
+          )
+          if r.status_code >= 400:
+              print(f"GitHub API error: {r.status_code} {r.text}", file=sys.stderr)
+              sys.exit(1)
+
+          print("Review posted successfully!")
           '
