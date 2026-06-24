@@ -41,18 +41,23 @@ jobs:
           python -c '
           import os, requests, subprocess
           
+          gemma_key = os.environ["GEMMA_API_KEY"]
+          github_token = os.environ["GITHUB_TOKEN"]
+          repo = os.environ["REPO"]
+          pr_number = os.environ["PR_NUMBER"]
+          
           # Get diff
           diff = subprocess.check_output(["git", "diff", "origin/main...HEAD"]).decode("utf-8")
           
           # Call Google API
-          url = f"https://generativelanguage.googleapis.com/v1beta/models/gemma-2-27b-it:generateContent?key={os.environ["GEMMA_API_KEY"]}"
+          url = f"https://generativelanguage.googleapis.com/v1beta/models/gemma-4-31b-it:generateContent?key={gemma_key}"
           payload = {"contents": [{"parts": [{"text": f"Act as a code reviewer. Review this diff and provide feedback:\n{diff}"}]}]}
           
           response = requests.post(url, json=payload).json()
           feedback = response["candidates"][0]["content"]["parts"][0]["text"]
           
           # Post to GitHub
-          headers = {"Authorization": f"Bearer {os.environ["GITHUB_TOKEN"]}", "Accept": "application/vnd.github.v3+json"}
-          requests.post(f"https://api.github.com/repos/{os.environ["REPO"]}/issues/{os.environ["PR_NUMBER"]}/comments", 
+          headers = {"Authorization": f"Bearer {github_token}", "Accept": "application/vnd.github.v3+json"}
+          requests.post(f"https://api.github.com/repos/{repo}/issues/{pr_number}/comments", 
                         headers=headers, json={"body": feedback})
           '
