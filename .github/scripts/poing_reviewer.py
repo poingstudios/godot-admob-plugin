@@ -25,6 +25,7 @@ import requests
 import subprocess
 import json
 import sys
+import time
 
 
 def annotate_diff(diff_text):
@@ -158,8 +159,8 @@ Only comment on lines that exist in the diff.
     return prompt
 
 
-def call_model(prompt, model_name, gemma_key):
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={gemma_key}"
+def call_model(prompt, model_name, gemini_key):
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={gemini_key}"
 
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
@@ -223,15 +224,22 @@ def call_model(prompt, model_name, gemma_key):
         }
     }
 
-    resp = requests.post(url, json=payload)
-    if resp.status_code != 200:
-        print(f"API error: {resp.status_code} {resp.text}", file=sys.stderr)
-        sys.exit(1)
+    for attempt in range(4):
+        resp = requests.post(url, json=payload)
+        if resp.status_code == 200:
+            break
+        if resp.status_code == 503 and attempt < 3:
+            wait = 2 ** attempt * 10
+            print(f"Model {model_name} busy (503), retry {attempt + 1}/3 in {wait}s...", file=sys.stderr)
+            time.sleep(wait)
+            continue
+        print(f"API error ({model_name}): {resp.status_code} {resp.text}", file=sys.stderr)
+        return None
 
     data = resp.json()
     if "candidates" not in data:
-        print(f"Unexpected response: {json.dumps(data, indent=2)}", file=sys.stderr)
-        sys.exit(1)
+        print(f"Unexpected response ({model_name}): {json.dumps(data, indent=2)}", file=sys.stderr)
+        return None
 
     parts = data["candidates"][0]["content"]["parts"]
     feedback = ""
@@ -240,8 +248,8 @@ def call_model(prompt, model_name, gemma_key):
             feedback += part.get("text", "")
 
     if not feedback.strip():
-        print("No review content generated", file=sys.stderr)
-        sys.exit(1)
+        print(f"No review content generated ({model_name})", file=sys.stderr)
+        return None
 
     try:
         raw = feedback.strip()
@@ -251,9 +259,11 @@ def call_model(prompt, model_name, gemma_key):
             raw = raw.rsplit("```", 1)[0]
         return json.loads(raw.strip())
     except json.JSONDecodeError as e:
-        print(f"Failed to parse model response as JSON: {e}\nResponse: {feedback}", file=sys.stderr)
-        sys.exit(1)
+        print(f"Failed to parse model response as JSON ({model_name}): {e}\nResponse: {feedback}", file=sys.stderr)
+        return None
 
+
+FALLBACK_MODELS = ["gemini-3.5-flash", "gemini-3-flash", "gemma-4-31b-it"]
 
 VERDICT_PRIORITY = {"CHANGES_REQUESTED": 2, "APPROVED_WITH_SUGGESTIONS": 1, "APPROVED": 0}
 
@@ -292,7 +302,11 @@ def main():
     pr_number = get_env("PR_NUMBER")
     base_ref = get_env("BASE_REF")
     pr_title = get_env("PR_TITLE")
-    model_name = os.environ.get("MODEL_NAME", "gemini-3.5-flash")
+    primary_model = os.environ.get("MODEL_NAME", "gemini-3.5-flash")
+    fallback_env = os.environ.get("FALLBACK_MODELS", "")
+    models_to_try = [primary_model] + [m.strip() for m in fallback_env.split(",") if m.strip()] + FALLBACK_MODELS
+    seen = set()
+    models_to_try = [m for m in models_to_try if not (m in seen or seen.add(m))]
     max_chars = int(os.environ.get("MAX_CHARS", "100000"))
     max_batches = 5
 
@@ -350,8 +364,16 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
         annotated, valid_lines = annotate_diff(batch_diff)
         all_valid_lines.update(valid_lines)
         prompt = build_prompt(pr_title, annotated, guidelines, batch_label)
-        print(f"Request {i + 1}/{total} ({len(batch)} file(s))...")
-        result = call_model(prompt, model_name, gemma_key)
+        result = None
+        for model in models_to_try:
+            print(f"Request {i + 1}/{total} ({len(batch)} file(s)) using {model}...")
+            result = call_model(prompt, model, gemma_key)
+            if result is not None:
+                break
+            print(f"  {model} failed, trying next model..." if model != models_to_try[-1] else f"  All models exhausted for batch {i + 1}.", file=sys.stderr)
+        if result is None:
+            print(f"All models failed for batch {i + 1}. Aborting.", file=sys.stderr)
+            sys.exit(1)
         all_results.append(result)
 
     all_findings = []
