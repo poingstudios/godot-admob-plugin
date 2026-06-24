@@ -97,6 +97,7 @@ class Config:
         self.MAX_CHARS = int(os.environ.get("MAX_CHARS", "100000"))
         self.MAX_BATCHES = 5
         self.BOT_LOGIN = os.environ.get("BOT_LOGIN", "")
+        self.TRIGGER_ACTION = os.environ.get("TRIGGER_ACTION", "")
 
     @property
     def owner(self):

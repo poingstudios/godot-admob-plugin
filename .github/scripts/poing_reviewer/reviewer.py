@@ -75,10 +75,23 @@ def main():
     existing_reviews = fetch_existing_reviews(cfg.REPO, cfg.PR_NUMBER, cfg.GITHUB_TOKEN)
 
     # Check if already reviewed for current commit
+    is_re_request = cfg.TRIGGER_ACTION == "review_requested"
+    has_existing_review = False
     for review in existing_reviews:
         if review.get("commit_id") == cfg.HEAD_SHA and review.get("state") != "PENDING":
-            print(f"Review already exists for commit {cfg.HEAD_SHA[:8]}. Skipping.")
-            sys.exit(0)
+            if is_re_request:
+                print(f"Re-review requested. Dismissing existing review.", file=sys.stderr)
+                dismiss_review(
+                    cfg.REPO, cfg.PR_NUMBER, review["id"], cfg.GITHUB_TOKEN,
+                    f"Re-review triggered on commit {cfg.HEAD_SHA[:8]}",
+                )
+                has_existing_review = True
+            else:
+                print(f"Review already exists for commit {cfg.HEAD_SHA[:8]}. Skipping.")
+                sys.exit(0)
+
+    if is_re_request and not has_existing_review:
+        print(f"Re-review requested but no existing review found for commit {cfg.HEAD_SHA[:8]}.", file=sys.stderr)
 
     stale_reviews = [
         r for r in existing_reviews

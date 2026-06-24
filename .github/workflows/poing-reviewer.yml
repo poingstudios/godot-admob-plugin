@@ -67,4 +67,5 @@ jobs:
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
           MODEL_NAME: gemini-3.5-flash
           MAX_CHARS: 100000
+          TRIGGER_ACTION: ${{ github.event.action }}
         run: python .github/scripts/poing_reviewer.py
