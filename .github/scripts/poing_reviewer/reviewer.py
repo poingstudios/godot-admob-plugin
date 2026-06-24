@@ -86,32 +86,27 @@ def main():
     ]
 
     if stale_reviews:
-        # Fetch threads once and reuse
+        stale_review_ids = {r["id"] for r in stale_reviews}
+
         threads = []
         try:
             threads = fetch_review_threads(cfg.owner, cfg.repo_name, cfg.PR_NUMBER, cfg.GITHUB_TOKEN)
         except Exception as e:
             print(f"Failed to fetch review threads: {e}", file=sys.stderr)
 
-        # Resolve ALL unresolved bot threads before dismissing stale reviews
+        # Resolve only threads belonging to the stale reviews being dismissed
         if threads:
             for t in threads:
                 if not t or t.get("isResolved", False):
                     continue
-                comments = (t.get("comments") or {}).get("nodes") or []
-                first = comments[0] if comments else {}
-                author_login = (first.get("author") or {}).get("login", "")
-                is_bot = "bot" in author_login.lower() or (
-                    cfg.BOT_LOGIN and author_login.lower() == cfg.BOT_LOGIN.lower()
-                )
-                if not is_bot:
-                    continue
-                try:
-                    resolve_thread(t["id"], cfg.GITHUB_TOKEN)
-                except Exception as exc:
-                    print(f"Failed to resolve thread {t['id']}: {exc}", file=sys.stderr)
+                review_node = t.get("pullRequestReview") or {}
+                thread_review_id = review_node.get("databaseId")
+                if thread_review_id and thread_review_id in stale_review_ids:
+                    try:
+                        resolve_thread(t["id"], cfg.GITHUB_TOKEN)
+                    except Exception as exc:
+                        print(f"Failed to resolve thread {t['id']}: {exc}", file=sys.stderr)
 
-        # Now dismiss stale reviews
         for review in stale_reviews:
             dismissed = dismiss_review(
                 cfg.REPO,
@@ -196,10 +191,6 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
         if key not in seen:
             seen.add(key)
             unique_findings.append(f)
-
-    if not unique_findings:
-        print("No findings after filtering. Skipping review post.", file=sys.stderr)
-        sys.exit(0)
 
     findings_rows = ""
     for f in unique_findings:
