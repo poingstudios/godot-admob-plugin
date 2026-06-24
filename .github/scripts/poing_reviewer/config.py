@@ -57,7 +57,7 @@ FP_KEYWORDS = [
 
 COMMENT_FOOTER_HINT = (
     "\n\n---\n"
-    "> 👍 helpful \u00b7 👎 false positive \u2014 react to give feedback"
+    "> 👍 helpful \u00b7 👎 false positive"
 )
 
 
