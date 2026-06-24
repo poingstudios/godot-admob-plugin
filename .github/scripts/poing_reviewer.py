@@ -1,3 +1,17 @@
+# Copyright 2026 Poing Studios
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import os
 import requests
 import subprocess
@@ -84,66 +98,7 @@ def get_env(key):
     return value
 
 
-def main():
-    gemma_key = get_env("GEMMA_API_KEY")
-    github_token = get_env("GITHUB_TOKEN")
-    repo = get_env("REPO")
-    pr_number = get_env("PR_NUMBER")
-    base_ref = get_env("BASE_REF")
-    pr_title = get_env("PR_TITLE")
-    model_name = os.environ.get("MODEL_NAME", "gemma-4-31b-it")
-    max_chars = int(os.environ.get("MAX_CHARS", "100000"))
-
-    try:
-        diff = subprocess.check_output(["git", "diff", f"origin/{base_ref}...HEAD"]).decode("utf-8")
-    except Exception as e:
-        print(f"Failed to get git diff: {e}", file=sys.stderr)
-        sys.exit(1)
-
-    try:
-        head_sha = subprocess.check_output(["git", "rev-parse", "HEAD"]).decode("utf-8").strip()
-    except Exception as e:
-        print(f"Failed to get HEAD SHA: {e}", file=sys.stderr)
-        sys.exit(1)
-
-    headers = {"Authorization": f"Bearer {github_token}", "Accept": "application/vnd.github.v3+json"}
-    existing_reviews = requests.get(
-        f"https://api.github.com/repos/{repo}/pulls/{pr_number}/reviews",
-        headers=headers
-    )
-    if existing_reviews.status_code == 200:
-        for review in existing_reviews.json():
-            if review.get("commit_id") == head_sha and review.get("state") != "PENDING":
-                print(f"Review already exists for commit {head_sha[:8]}. Skipping.")
-                sys.exit(0)
-
-    file_diffs = split_diff_by_file(diff)
-    truncated_diff = ""
-    truncated = False
-    if file_diffs:
-        truncated_diff += file_diffs[0]
-    for fd in file_diffs[1:]:
-        if len(truncated_diff) + len(fd) < max_chars:
-            truncated_diff += fd
-        else:
-            truncated = True
-            truncated_diff += "\n\n# ⚠️ DIFF TRUNCATED — remaining files omitted due to size limit. Review is based on a partial diff."
-            break
-    diff = truncated_diff
-
-    annotated_diff, valid_lines = annotate_diff(diff)
-
-    guidelines = load_guidelines()
-    guidelines_section = ""
-    if guidelines:
-        guidelines_section = f"""
-## Repository Guidelines
-
-The repository has an AGENTS.md file with project-specific rules. Follow these guidelines when reviewing:
-
-{json.dumps(guidelines)[1:-1]}
-"""
-
+def build_prompt(pr_title, annotated_diff, guidelines, batch_label):
     prompt = f"""You are Poing Reviewer, a senior code reviewer.
 Analyze the pull request diff below and return a structured JSON response.
 
@@ -158,7 +113,8 @@ PR Title: {pr_title}
 5. **API compatibility** - Breaking changes to the public API, missing signal parity
 6. **Reliability** - Error handling, edge cases, resource cleanup
 
-Examine every changed file carefully. Identify ALL issues you find — do not limit yourself to just a few.
+{batch_label}
+Examine every changed file carefully. Identify ALL issues you find.
 Cover bugs, logic errors, and potential improvements in every file touched.
 
 Do NOT comment on:
@@ -178,13 +134,16 @@ Return valid JSON with:
 In the annotated diff, each code line is prefixed like [path/to/file L12].
 Match line numbers exactly when adding inline comments.
 Only comment on lines that exist in the diff.
-{guidelines_section}
+{guidelines}
 ## Annotated Diff
 
 ```diff
 {annotated_diff}
 ```"""
+    return prompt
 
+
+def call_model(prompt, model_name, gemma_key):
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model_name}:generateContent?key={gemma_key}"
 
     payload = {
@@ -274,28 +233,151 @@ Only comment on lines that exist in the diff.
             raw = raw.split("\n", 1)[-1]
         if raw.endswith("```"):
             raw = raw.rsplit("```", 1)[0]
-        review_data = json.loads(raw.strip())
+        return json.loads(raw.strip())
     except json.JSONDecodeError as e:
         print(f"Failed to parse model response as JSON: {e}\nResponse: {feedback}", file=sys.stderr)
         sys.exit(1)
 
+
+VERDICT_PRIORITY = {"CHANGES_REQUESTED": 2, "APPROVED_WITH_SUGGESTIONS": 1, "APPROVED": 0}
+
+
+def pick_verdict(verdicts):
+    best = "APPROVED"
+    best_score = 0
+    for v in verdicts:
+        score = VERDICT_PRIORITY.get(v, 0)
+        if score > best_score:
+            best_score = score
+            best = v
+    return best
+
+
+def split_batches(file_blocks, max_chars):
+    batches = []
+    current = []
+    current_size = 0
+    for block in file_blocks:
+        if current and current_size + len(block) > max_chars:
+            batches.append(current)
+            current = []
+            current_size = 0
+        current.append(block)
+        current_size += len(block)
+    if current:
+        batches.append(current)
+    return batches
+
+
+def main():
+    gemma_key = get_env("GEMMA_API_KEY")
+    github_token = get_env("GITHUB_TOKEN")
+    repo = get_env("REPO")
+    pr_number = get_env("PR_NUMBER")
+    base_ref = get_env("BASE_REF")
+    pr_title = get_env("PR_TITLE")
+    model_name = os.environ.get("MODEL_NAME", "gemma-4-31b-it")
+    max_chars = int(os.environ.get("MAX_CHARS", "100000"))
+    max_batches = 5
+
+    try:
+        diff = subprocess.check_output(["git", "diff", f"origin/{base_ref}...HEAD"]).decode("utf-8")
+    except Exception as e:
+        print(f"Failed to get git diff: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        head_sha = subprocess.check_output(["git", "rev-parse", "HEAD"]).decode("utf-8").strip()
+    except Exception as e:
+        print(f"Failed to get HEAD SHA: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    headers = {"Authorization": f"Bearer {github_token}", "Accept": "application/vnd.github.v3+json"}
+    existing_reviews = requests.get(
+        f"https://api.github.com/repos/{repo}/pulls/{pr_number}/reviews",
+        headers=headers
+    )
+    if existing_reviews.status_code == 200:
+        for review in existing_reviews.json():
+            if review.get("commit_id") == head_sha and review.get("state") != "PENDING":
+                print(f"Review already exists for commit {head_sha[:8]}. Skipping.")
+                sys.exit(0)
+
+    file_blocks = split_diff_by_file(diff)
+    batches = split_batches(file_blocks, max_chars)[:max_batches]
+
+    total = len(batches)
+    truncated = total > 1 or (total == 1 and len(diff) > max_chars and len(batches) > len(split_batches(file_blocks, max_chars)))
+
+    if total == 1:
+        banner = ""
+    else:
+        banner = f"(Review split into {total} parts — this is part 1 of {total})"
+
+    guidelines_raw = load_guidelines()
+    guidelines = ""
+    if guidelines_raw:
+        guidelines = f"""
+## Repository Guidelines
+
+The repository has an AGENTS.md file with project-specific rules. Follow these guidelines when reviewing:
+
+{guidelines_raw}
+"""
+
+    all_results = []
+    all_valid_lines = set()
+
+    for i, batch in enumerate(batches):
+        batch_label = f"You are reviewing part {i + 1} of {total}." if total > 1 else ""
+        batch_diff = "".join(batch)
+        annotated, valid_lines = annotate_diff(batch_diff)
+        all_valid_lines.update(valid_lines)
+        prompt = build_prompt(pr_title, annotated, guidelines, batch_label)
+        print(f"Request {i + 1}/{total} ({len(batch)} file(s))...")
+        result = call_model(prompt, model_name, gemma_key)
+        all_results.append(result)
+
+    all_findings = []
+    all_comments = []
+    all_verdicts = []
+    summaries = []
+
+    for r in all_results:
+        all_findings.extend(r.get("findings", []))
+        all_comments.extend(r.get("comments", []))
+        all_verdicts.append(r.get("verdict", "APPROVED"))
+        summaries.append(r.get("summary", ""))
+
+    combined_verdict = pick_verdict(all_verdicts)
+
+    seen = set()
+    unique_findings = []
+    for f in all_findings:
+        key = (f.get("file", ""), f.get("finding", ""))
+        if key not in seen:
+            seen.add(key)
+            unique_findings.append(f)
+
     findings_rows = ""
-    for f in review_data.get("findings", []):
+    for f in unique_findings:
         findings_rows += f"| {f['severity']} | `{f['file']}` | {f['finding']} |\n"
 
     if not findings_rows:
         findings_rows = "| | | No issues found. ✅ |\n"
+
+    combined_summary = " | ".join(s for s in summaries if s)
 
     verdict_map = {
         "APPROVED": "**✅ Approved**",
         "APPROVED_WITH_SUGGESTIONS": "**🟡 Approved with suggestions**",
         "CHANGES_REQUESTED": "**🔴 Changes requested**"
     }
-    verdict_str = verdict_map.get(review_data.get("verdict"), "**🟡 Comment**")
+    verdict_str = verdict_map.get(combined_verdict, "**🟡 Comment**")
 
     body_markdown = f"""## 📋 Summary
 
-{review_data.get('summary', '')}
+{combined_summary}
 
 ## 🔍 Findings
 
@@ -312,15 +394,15 @@ Only comment on lines that exist in the diff.
         "APPROVED_WITH_SUGGESTIONS": "APPROVE",
         "CHANGES_REQUESTED": "REQUEST_CHANGES"
     }
-    github_event = github_event_map.get(review_data.get("verdict"), "COMMENT")
+    github_event = github_event_map.get(combined_verdict, "COMMENT")
 
     comments_list = []
-    for c in review_data.get("comments", []):
+    for c in all_comments:
         path = c.get("path")
         line = c.get("line")
         body = c.get("body")
         if path and line and body:
-            if (path, int(line)) in valid_lines:
+            if (path, int(line)) in all_valid_lines:
                 comments_list.append({
                     "path": path,
                     "line": int(line),
