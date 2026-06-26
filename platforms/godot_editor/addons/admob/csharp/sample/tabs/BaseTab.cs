@@ -29,6 +29,22 @@ namespace PoingStudios.AdMob.Sample
         public override void _Ready()
         {
             OptimizeForScrolling(this);
+            GetViewport().SizeChanged += OnViewportSizeChanged;
+            OnViewportSizeChanged();
+        }
+
+        private void OnViewportSizeChanged()
+        {
+            Vector2 vp = GetViewportRect().Size;
+            Vector2 winSize = GetWindow().Size;
+            if (vp.X <= 0 || vp.Y <= 0 || winSize.X <= 0 || winSize.Y <= 0)
+                return;
+
+            float scaleFactor = vp.Y / (float)winSize.Y;
+            float windowFactor = (winSize.X + winSize.Y) / 1140.0f;
+            float totalFactor = windowFactor * scaleFactor;
+
+            UIScaler.ScaleUi(this, totalFactor, scaleFactor);
         }
 
         private void OptimizeForScrolling(Node node)

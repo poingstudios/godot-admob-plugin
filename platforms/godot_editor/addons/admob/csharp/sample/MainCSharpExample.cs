@@ -37,9 +37,19 @@ using PoingStudios.AdMob.Sample;
 public partial class MainCSharpExample : Control, ISampleLogger
 {
 	private RichTextLabel _consoleOutput;
+	private PanelContainer _supportCard;
+	private Timer _resizeTimer;
+	private Label _appTitle;
 
 	public override async void _Ready()
 	{
+		_appTitle = GetNode<Label>("Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/AppTitle");
+		_resizeTimer = GetNode<Timer>("ResizeTimer");
+		_resizeTimer.Timeout += ApplyResize;
+
+		Resized += OnResized;
+		ApplyResize();
+
 		var config = new ConfigFile();
 		if (config.Load(SampleRegistry.SettingsPath) == Error.Ok)
 		{
@@ -52,6 +62,8 @@ public partial class MainCSharpExample : Control, ISampleLogger
 
 		_consoleOutput = GetNode<RichTextLabel>("Background/SafeArea/LayoutContainer/ConsolePanel/ConsoleOutput");
 		_consoleOutput.Text = Tr("GAD_LogsStart");
+
+		_supportCard = GetNode<PanelContainer>("Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard");
 
 		var mainTabs = GetNode<TabContainer>("Background/SafeArea/LayoutContainer/TabContent/MainTabs");
 		
@@ -81,6 +93,31 @@ public partial class MainCSharpExample : Control, ISampleLogger
 		mainTabs.SetTabTitle(5, "Rewarded Interstitial");
 		mainTabs.SetTabTitle(6, "UMP");
 		mainTabs.SetTabTitle(7, "Mobile Ads");
+	}
+
+	private void OnResized()
+	{
+		_resizeTimer?.Start();
+	}
+
+	private void ApplyResize()
+	{
+		var viewportSize = GetViewportRect().Size;
+		var windowSize = GetWindow().Size;
+		if (viewportSize.X <= 0 || viewportSize.Y <= 0 || windowSize.X <= 0 || windowSize.Y <= 0)
+			return;
+
+		float scaleFactor = viewportSize.Y / (float)windowSize.Y;
+		float windowFactor = (windowSize.X + windowSize.Y) / 1140.0f;
+		float totalFactor = windowFactor * scaleFactor;
+
+		// Use the centralized UI scaling utility to recursively scale all controls
+		UIScaler.ScaleUi(this, totalFactor, scaleFactor);
+
+		if (_supportCard != null)
+		{
+			_supportCard.Visible = windowSize.Y >= 500;
+		}
 	}
 
 	public void LogMessage(string message)

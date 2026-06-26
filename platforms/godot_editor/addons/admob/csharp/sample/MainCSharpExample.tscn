@@ -92,12 +92,19 @@ stretch_mode = 5
 
 [node name="AppTitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer" unique_id=1933940773]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 26
 text = "GAD_MainTitleCS"
+horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="CenteringSpacer" type="Control" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
 
 [node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox" unique_id=1632407447]
 layout_mode = 2
@@ -109,18 +116,20 @@ theme_override_constants/separation = 12
 
 [node name="SupportLabel" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=1316534474]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 0.8)
 theme_override_font_sizes/font_size = 16
 text = "GAD_SupportProject"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="SupportButtons" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=1448736378]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Patreon" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=365765314]
-custom_minimum_size = Vector2(180, 55)
+custom_minimum_size = Vector2(120, 36)
 layout_mode = 2
 texture_normal = ExtResource("5_patreon")
 ignore_texture_size = true
@@ -128,7 +137,7 @@ stretch_mode = 5
 script = SubResource("GDScript_1vvio")
 
 [node name="Ko-fi" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=1547503384]
-custom_minimum_size = Vector2(140, 55)
+custom_minimum_size = Vector2(95, 36)
 layout_mode = 2
 texture_normal = ExtResource("6_kofi")
 ignore_texture_size = true
@@ -136,7 +145,7 @@ stretch_mode = 5
 script = SubResource("GDScript_hcar3")
 
 [node name="PayPal" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=2032058188]
-custom_minimum_size = Vector2(150, 55)
+custom_minimum_size = Vector2(100, 36)
 layout_mode = 2
 texture_normal = ExtResource("7_paypal")
 ignore_texture_size = true
@@ -239,8 +248,8 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ConsolePanel" type="PanelContainer" parent="Background/SafeArea/LayoutContainer" unique_id=405248162]
-custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
 theme_type_variation = &"GlassPanel"
 
 [node name="ConsoleOutput" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/ConsolePanel" unique_id=214134769]
@@ -249,6 +258,10 @@ size_flags_vertical = 3
 bbcode_enabled = true
 text = "GAD_LogsStart"
 scroll_following = true
+
+[node name="ResizeTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" method="_on_pressed"]
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Ko-fi" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Ko-fi" method="_on_pressed"]
