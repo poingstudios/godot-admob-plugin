@@ -31,7 +31,7 @@ var _console_output: RichTextLabel = $Background/SafeArea/LayoutContainer/Consol
 var _main_tabs: TabContainer = $Background/SafeArea/LayoutContainer/TabContent/MainTabs
 
 @onready
-var _app_title: Label = $Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/AppTitle
+var _app_title: Label = $Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer/AppTitle
 @onready
 var _support_label: Label = $Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportLabel
 @onready
@@ -39,10 +39,15 @@ var _support_card: Control = $Background/SafeArea/LayoutContainer/HeaderContaine
 
 
 @onready
+var _app_subtitle: Label = $Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer/AppSubtitle
+@onready
 var _resize_timer: Timer = $ResizeTimer
 
 
 func _ready() -> void:
+	var current_year: int = Time.get_datetime_dict_from_system().year
+	_app_subtitle.text = "© %d Poing Studios" % current_year
+
 	_resize_timer.timeout.connect(_apply_resize)
 	resized.connect(_on_resized)
 	_apply_resize()
@@ -54,7 +59,7 @@ func _ready() -> void:
 			TranslationServer.set_locale(saved_locale)
 
 	Registry.logger = self
-	_app_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_app_title.autowrap_mode = TextServer.AUTOWRAP_OFF
 	_support_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_console_output.text = tr("GAD_LogsStart")
 	log_message("Main initialized")

@@ -43,7 +43,10 @@ public partial class MainCSharpExample : Control, ISampleLogger
 
 	public override async void _Ready()
 	{
-		_appTitle = GetNode<Label>("Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/AppTitle");
+		_appTitle = GetNode<Label>("Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer/AppTitle");
+		var appSubtitle = GetNode<Label>("Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer/AppSubtitle");
+		appSubtitle.Text = $"© {System.DateTime.Now.Year} Poing Studios";
+
 		_resizeTimer = GetNode<Timer>("ResizeTimer");
 		_resizeTimer.Timeout += ApplyResize;
 

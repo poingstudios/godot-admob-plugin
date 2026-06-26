@@ -407,63 +407,63 @@ theme_override_constants/v_separation = 15
 columns = 3
 
 [node name="TOP_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_TopLeft"
 icon = ExtResource("2_tl")
 expand_icon = true
 
 [node name="TOP" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_Top"
 icon = ExtResource("3_t")
 expand_icon = true
 
 [node name="TOP_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_TopRight"
 icon = ExtResource("4_tr")
 expand_icon = true
 
 [node name="LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_Left"
 icon = ExtResource("5_l")
 expand_icon = true
 
 [node name="CENTER" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_Center"
 icon = ExtResource("6_c")
 expand_icon = true
 
 [node name="RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_Right"
 icon = ExtResource("7_r")
 expand_icon = true
 
 [node name="BOTTOM_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_BottomLeft"
 icon = ExtResource("8_bl")
 expand_icon = true
 
 [node name="BOTTOM" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_Bottom"
 icon = ExtResource("9_b")
 expand_icon = true
 
 [node name="BOTTOM_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(60, 60)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_BottomRight"
 icon = ExtResource("10_br")

@@ -84,15 +84,18 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="AppIcon" type="TextureRect" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer" unique_id=571629929]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("3_icon")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AppTitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer" unique_id=1933940773]
+[node name="TitleContainer" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer"]
 layout_mode = 2
-size_flags_horizontal = 3
+theme_override_constants/separation = 2
+
+[node name="AppTitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer" unique_id=1933940773]
+layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
@@ -100,11 +103,15 @@ theme_override_font_sizes/font_size = 26
 text = "GAD_MainTitleCS"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 3
+autowrap_mode = 0
 
-[node name="CenteringSpacer" type="Control" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer"]
-custom_minimum_size = Vector2(50, 0)
+[node name="AppSubtitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 14
+text = "© Poing Studios"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox" unique_id=1632407447]
 layout_mode = 2
@@ -129,7 +136,7 @@ theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Patreon" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=365765314]
-custom_minimum_size = Vector2(120, 36)
+custom_minimum_size = Vector2(96, 29)
 layout_mode = 2
 texture_normal = ExtResource("5_patreon")
 ignore_texture_size = true
@@ -137,7 +144,7 @@ stretch_mode = 5
 script = SubResource("GDScript_1vvio")
 
 [node name="Ko-fi" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=1547503384]
-custom_minimum_size = Vector2(95, 36)
+custom_minimum_size = Vector2(76, 29)
 layout_mode = 2
 texture_normal = ExtResource("6_kofi")
 ignore_texture_size = true
@@ -145,7 +152,7 @@ stretch_mode = 5
 script = SubResource("GDScript_hcar3")
 
 [node name="PayPal" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=2032058188]
-custom_minimum_size = Vector2(100, 36)
+custom_minimum_size = Vector2(80, 29)
 layout_mode = 2
 texture_normal = ExtResource("7_paypal")
 ignore_texture_size = true
