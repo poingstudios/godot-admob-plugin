@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="pt" class="no-js">
+<html lang="ja" class="no-js">
   <head>
     
       <meta charset="utf-8">
@@ -8,41 +8,37 @@
       
       
       
-        <link rel="canonical" href="https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/volume_controls/">
+        <link rel="canonical" href="https://poingstudios.github.io/godot-admob-plugin/latest/ja/mediate/choose_networks/">
       
       
-        <link rel="prev" href="../ios_pause_background/">
-      
-      
-        <link rel="next" href="../ai_skills/">
       
       
         
-          <link rel="alternate" href="../../volume_controls/" hreflang="en">
+          <link rel="alternate" href="../../../mediate/choose_networks/" hreflang="en">
         
-          <link rel="alternate" href="./" hreflang="pt-BR">
+          <link rel="alternate" href="../../../pt-BR/mediate/choose_networks/" hreflang="pt-BR">
         
-          <link rel="alternate" href="../../es/volume_controls/" hreflang="es">
+          <link rel="alternate" href="../../../es/mediate/choose_networks/" hreflang="es">
         
-          <link rel="alternate" href="../../zh/volume_controls/" hreflang="zh">
+          <link rel="alternate" href="../../../zh/mediate/choose_networks/" hreflang="zh">
         
-          <link rel="alternate" href="../../ja/volume_controls/" hreflang="ja">
+          <link rel="alternate" href="./" hreflang="ja">
         
       
       
-      <link rel="icon" href="../../assets/icon.ico">
+      <link rel="icon" href="../../../assets/icon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Controles de Volume - Godot AdMob Plugin - Poing Studios</title>
+        <title>Choose ad sources - Godot AdMob Plugin - Poing Studios</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -61,9 +57,9 @@
       
     
     
-      <link rel="stylesheet" href="../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -88,8 +84,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#controles-de-volume" class="md-skip">
-          Pular para conteúdo
+        <a href="#choose-ad-sources" class="md-skip">
+          コンテンツにスキップ
         </a>
       
     </div>
@@ -115,12 +111,12 @@
           <div class='shape shape-2'>⚠️</div>
           <div class='shape shape-3'>⚠️</div>
         </div>
-        <span class='announcement-title'>⚠️ DOCUMENTAÇÃO EXPERIMENTAL</span>
+        <span class='announcement-title'>⚠️ 実験的ドキュメント</span>
         <div class='announcement-text'>
-          Você está visualizando a
-          <a href="https://github.com/poingstudios/godot-admob-plugin/tree/master" target="_blank" rel="noopener" class="announcement-badge">Branch Master</a>
-          (mais recente).<br>Para versões estáveis, por favor veja a
-          <a href="https://poingstudios.github.io/godot-admob-plugin/stable/" class="announcement-link">versão estável</a>.
+          現在、
+          <a href="https://github.com/poingstudios/godot-admob-plugin/tree/master" target="_blank" rel="noopener" class="announcement-badge">Master ブランチ</a>
+          （最新版）を表示しています。<br>安定版リリースについては、
+          <a href="https://poingstudios.github.io/godot-admob-plugin/stable/" class="announcement-link">安定版</a>を参照してください。
         </div>
       </div>
     </div>
@@ -140,10 +136,10 @@
       
 
 <header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
-    <a href="../" title="Godot AdMob Plugin - Poing Studios" class="md-header__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
+    <a href="../../" title="Godot AdMob Plugin - Poing Studios" class="md-header__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
       
-  <img src="../../assets/icon.ico" alt="logo">
+  <img src="../../../assets/icon.ico" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -160,7 +156,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Controles de Volume
+              Choose ad sources
             
           </span>
         </div>
@@ -200,38 +196,38 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="Selecione o idioma">
+    <button class="md-header__button md-icon" aria-label="言語切り替え">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../volume_controls/" hreflang="en" class="md-select__link">
+            <a href="../../../mediate/choose_networks/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="pt-BR" class="md-select__link">
+            <a href="../../../pt-BR/mediate/choose_networks/" hreflang="pt-BR" class="md-select__link">
               Português (Brasil)
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../es/volume_controls/" hreflang="es" class="md-select__link">
+            <a href="../../../es/mediate/choose_networks/" hreflang="es" class="md-select__link">
               Español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../zh/volume_controls/" hreflang="zh" class="md-select__link">
+            <a href="../../../zh/mediate/choose_networks/" hreflang="zh" class="md-select__link">
               简体中文
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../ja/volume_controls/" hreflang="ja" class="md-select__link">
+            <a href="./" hreflang="ja" class="md-select__link">
               日本語
             </a>
           </li>
@@ -252,16 +248,16 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Pesquisar">
+      <nav class="md-search__options" aria-label="検索">
         
-        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -274,7 +270,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Inicializando busca
+            検索を初期化
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -295,7 +291,7 @@
         
           
             
-<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
+<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -303,17 +299,15 @@
   
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../" class="md-tabs__link">
           
   
   
-  Guias
+  ガイド
 
         </a>
       </li>
@@ -329,11 +323,11 @@
     
     
       <li class="md-tabs__item">
-        <a href="../reference/" class="md-tabs__link">
+        <a href="../../reference/" class="md-tabs__link">
           
   
   
-  Referência
+  リファレンス
 
         </a>
       </li>
@@ -361,11 +355,11 @@
   
 
 
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../" title="Godot AdMob Plugin - Poing Studios" class="md-nav__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
+    <a href="../../" title="Godot AdMob Plugin - Poing Studios" class="md-nav__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
       
-  <img src="../../assets/icon.ico" alt="logo">
+  <img src="../../../assets/icon.ico" alt="logo">
 
     </a>
     Godot AdMob Plugin - Poing Studios
@@ -377,38 +371,33 @@
       
   
   
-    
   
   
-  
     
     
     
     
-      
-        
-        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
         
           
-          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
     
   
-    Guias
+    ガイド
   
 
     
@@ -419,12 +408,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Guias
+    ガイド
   
 
           </label>
@@ -437,14 +426,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Começar
+    はじめに
   
 
     
@@ -465,14 +454,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../editor_mock_ads/" class="md-nav__link">
+      <a href="../../enable_test_ads/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Pré-visualizar Anúncios de Teste no Editor
+    Enable test ads
   
 
     
@@ -493,14 +482,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../enable_test_ads/" class="md-nav__link">
+      <a href="../../editor_mock_ads/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Ativar anúncios de teste
+    Preview Mock Ads in Editor
   
 
     
@@ -521,14 +510,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../ios_pause_background/" class="md-nav__link">
+      <a href="../../ios_pause_background/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    iOS Pausar em Segundo Plano (Pause Background)
+    iOS Pause Background
   
 
     
@@ -537,44 +526,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Controles de Volume
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
     </li>
   
 
@@ -587,14 +538,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../ai_skills/" class="md-nav__link">
+      <a href="../../ai_skills/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Habilidades do AI Copilot <span class="modern-icon" title="Beta">🧪</span>
+    AI Copilot スキル <span class="modern-icon" title="Beta">🧪</span>
   
 
     
@@ -620,28 +571,457 @@
     
       
       
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_6" >
         
           
-          
+          <label class="md-nav__link" for="__nav_1_6" id="__nav_1_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    広告フォーマット
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    広告フォーマット
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ad_formats/app_open/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    アプリ起動時広告 (App Open)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
         
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_6_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_6_2" id="__nav_1_6_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    バナー広告 (Banner)
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_6_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_6_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    バナー広告 (Banner)
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ad_formats/banner/get_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    バナー広告のセットアップ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ad_formats/banner/collapsible/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    折りたたみ式バナーの使用
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_6_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_6_2_3" id="__nav_1_6_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    サイズ
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_6_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_6_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    サイズ
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ad_formats/banner/sizes/anchored_adaptive/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    アンカー付きアダプティブバナー
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ad_formats/banner/sizes/smart_banner/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    スマートバナー <span class="modern-icon" title="Deprecated">🚫</span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ad_formats/interstitial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    インタースティシャル広告 (Interstitial)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ad_formats/native_overlay/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ネイティブオーバーレイ広告 (Native Overlay)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ad_formats/rewarded/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    リワード広告 (Rewarded)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../ad_formats/rewarded_interstitial/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    リワードインタースティシャル広告 <span class="modern-icon" title="Beta">🧪</span>
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7" >
         
           
-          <label class="md-nav__link" for="__nav_1_7" id="__nav_1_7_label" tabindex="">
+          <label class="md-nav__link" for="__nav_1_7" id="__nav_1_7_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
     
   
-    Formatos de Anúncios
+    メディエーション (Mediation)
   
 
     
@@ -657,7 +1037,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Formatos de Anúncios
+    メディエーション (Mediation)
   
 
           </label>
@@ -670,14 +1050,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../ad_formats/app_open/" class="md-nav__link">
+      <a href="../get_started/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    App Open
+    はじめに
   
 
     
@@ -721,7 +1101,7 @@
   <span class="md-ellipsis">
     
   
-    Banner
+    パートナーネットワークの統合
   
 
     
@@ -737,7 +1117,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Banner
+    パートナーネットワークの統合
   
 
           </label>
@@ -750,442 +1130,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ad_formats/banner/get_started/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Configurar anúncios de banner
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ad_formats/banner/collapsible/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Usar banners colapsáveis
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7_2_3" >
-        
-          
-          <label class="md-nav__link" for="__nav_1_7_2_3" id="__nav_1_7_2_3_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Tamanhos
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="4" aria-labelledby="__nav_1_7_2_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_7_2_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Tamanhos
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ad_formats/banner/sizes/anchored_adaptive/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Banners adaptativos ancorados
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ad_formats/banner/sizes/smart_banner/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Smart banners <span class="modern-icon" title="Deprecated">🚫</span>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ad_formats/interstitial/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Intersticial
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ad_formats/native_overlay/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Native Overlay
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ad_formats/rewarded/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Premiado (Rewarded)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../ad_formats/rewarded_interstitial/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Intersticial Premiado <span class="modern-icon" title="Beta">🧪</span>
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8" >
-        
-          
-          <label class="md-nav__link" for="__nav_1_8" id="__nav_1_8_label" tabindex="">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Mediação
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_8">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Mediação
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../mediate/get_started/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Primeiros Passos
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_1_8_2" id="__nav_1_8_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Integrar redes parceiras
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_8_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_8_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Integrar redes parceiras
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/applovin/" class="md-nav__link">
+      <a href="../integrate_partner_networks/applovin/" class="md-nav__link">
         
   
   
@@ -1213,7 +1158,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/bidmachine/" class="md-nav__link">
+      <a href="../integrate_partner_networks/bidmachine/" class="md-nav__link">
         
   
   
@@ -1241,7 +1186,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/ironsource/" class="md-nav__link">
+      <a href="../integrate_partner_networks/ironsource/" class="md-nav__link">
         
   
   
@@ -1269,7 +1214,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/meta/" class="md-nav__link">
+      <a href="../integrate_partner_networks/meta/" class="md-nav__link">
         
   
   
@@ -1297,7 +1242,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/vungle/" class="md-nav__link">
+      <a href="../integrate_partner_networks/vungle/" class="md-nav__link">
         
   
   
@@ -1325,7 +1270,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/unity_ads/" class="md-nav__link">
+      <a href="../integrate_partner_networks/unity_ads/" class="md-nav__link">
         
   
   
@@ -1353,7 +1298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/chartboost/" class="md-nav__link">
+      <a href="../integrate_partner_networks/chartboost/" class="md-nav__link">
         
   
   
@@ -1381,7 +1326,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/dtexchange/" class="md-nav__link">
+      <a href="../integrate_partner_networks/dtexchange/" class="md-nav__link">
         
   
   
@@ -1409,7 +1354,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/imobile/" class="md-nav__link">
+      <a href="../integrate_partner_networks/imobile/" class="md-nav__link">
         
   
   
@@ -1437,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/inmobi/" class="md-nav__link">
+      <a href="../integrate_partner_networks/inmobi/" class="md-nav__link">
         
   
   
@@ -1465,7 +1410,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/line/" class="md-nav__link">
+      <a href="../integrate_partner_networks/line/" class="md-nav__link">
         
   
   
@@ -1493,7 +1438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/maio/" class="md-nav__link">
+      <a href="../integrate_partner_networks/maio/" class="md-nav__link">
         
   
   
@@ -1521,7 +1466,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/mintegral/" class="md-nav__link">
+      <a href="../integrate_partner_networks/mintegral/" class="md-nav__link">
         
   
   
@@ -1549,7 +1494,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/moloco/" class="md-nav__link">
+      <a href="../integrate_partner_networks/moloco/" class="md-nav__link">
         
   
   
@@ -1577,7 +1522,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/mytarget/" class="md-nav__link">
+      <a href="../integrate_partner_networks/mytarget/" class="md-nav__link">
         
   
   
@@ -1605,7 +1550,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/pangle/" class="md-nav__link">
+      <a href="../integrate_partner_networks/pangle/" class="md-nav__link">
         
   
   
@@ -1633,7 +1578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/pubmatic/" class="md-nav__link">
+      <a href="../integrate_partner_networks/pubmatic/" class="md-nav__link">
         
   
   
@@ -1661,7 +1606,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/vpon/" class="md-nav__link">
+      <a href="../integrate_partner_networks/vpon/" class="md-nav__link">
         
   
   
@@ -1689,7 +1634,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mediate/integrate_partner_networks/zucks/" class="md-nav__link">
+      <a href="../integrate_partner_networks/zucks/" class="md-nav__link">
         
   
   
@@ -1739,27 +1684,316 @@
       
       
         
-          
-          
-        
       
     
     
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_9" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8" >
         
           
-          <label class="md-nav__link" for="__nav_1_9" id="__nav_1_9_label" tabindex="">
+          <label class="md-nav__link" for="__nav_1_8" id="__nav_1_8_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
     
   
-    Privacidade
+    プライバシー
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    プライバシー
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_1" id="__nav_1_8_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    規制対応ソリューション
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_8_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_8_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    規制対応ソリューション
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../privacy/regulatory_solutions/us_states_privacy_laws/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    米国各州のプライバシー法
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_2" id="__nav_1_8_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ユーザーメッセージングツール
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_8_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_8_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    ユーザーメッセージングツール
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../privacy/user_messaging_tools/get_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    はじめに
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../privacy/user_messaging_tools/gdpr_iab_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GDPR IAB サポート
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../privacy/user_messaging_tools/idfa_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IDFA サポート
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_9" id="__nav_1_9_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshoot
   
 
     
@@ -1775,59 +2009,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Privacidade
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_9_1" >
-        
-          
-          <label class="md-nav__link" for="__nav_1_9_1" id="__nav_1_9_1_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Soluções regulatórias
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_9_1_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_9_1">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Soluções regulatórias
+    Troubleshoot
   
 
           </label>
@@ -1840,14 +2022,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../privacy/regulatory_solutions/us_states_privacy_laws/" class="md-nav__link">
+      <a href="../../advanced_topics/response_info/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Leis de privacidade dos estados dos EUA
+    レスポンス情報
   
 
     
@@ -1886,175 +2068,20 @@
     
     
     <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_9_2" >
-        
-          
-          <label class="md-nav__link" for="__nav_1_9_2" id="__nav_1_9_2_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Ferramentas de mensagens de usuários
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_9_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_9_2">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Ferramentas de mensagens de usuários
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../privacy/user_messaging_tools/get_started/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Começar
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../privacy/user_messaging_tools/gdpr_iab_support/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Suporte ao GDPR IAB
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../privacy/user_messaging_tools/idfa_support/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Suporte ao IDFA
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-        
-          
-          
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_10" >
         
           
-          <label class="md-nav__link" for="__nav_1_10" id="__nav_1_10_label" tabindex="">
+          <label class="md-nav__link" for="__nav_1_10" id="__nav_1_10_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
     
   
-    Tópicos Avançados
+    Optimize
   
 
     
@@ -2070,7 +2097,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Tópicos Avançados
+    Optimize
   
 
           </label>
@@ -2083,14 +2110,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../advanced_topics/targeting/" class="md-nav__link">
+      <a href="../../global_settings/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Segmentação (Targeting)
+    Global settings
   
 
     
@@ -2111,14 +2138,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../advanced_topics/impression_level_ad_revenue/" class="md-nav__link">
+      <a href="../../advanced_topics/impression_level_ad_revenue/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Receita de Anúncios a Nível de Impressão
+    インプレッションレベルの広告収益
   
 
     
@@ -2139,14 +2166,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../advanced_topics/response_info/" class="md-nav__link">
+      <a href="../../advanced_topics/targeting/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Informações de Resposta
+    ターゲティング (Targeting)
   
 
     
@@ -2205,7 +2232,7 @@
   <span class="md-ellipsis">
     
   
-    Referência
+    リファレンス
   
 
     
@@ -2221,7 +2248,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Referência
+    リファレンス
   
 
           </label>
@@ -2234,14 +2261,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/" class="md-nav__link">
+      <a href="../../reference/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Visão Geral
+    概要
   
 
     
@@ -2285,7 +2312,7 @@
   <span class="md-ellipsis">
     
   
-    Classes
+    クラス
   
 
     
@@ -2301,7 +2328,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Classes
+    クラス
   
 
           </label>
@@ -2314,7 +2341,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/classes/AdView/" class="md-nav__link">
+      <a href="../../reference/classes/AdView/" class="md-nav__link">
         
   
   
@@ -2350,14 +2377,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../reference/enums/" class="md-nav__link">
+      <a href="../../reference/enums/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Enums
+    列挙型 (Enums)
   
 
     
@@ -2391,12 +2418,53 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Índice">
+<nav class="md-nav md-nav--secondary" aria-label="目次">
   
   
   
     
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目次
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#supported-ad-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supported ad sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choosing-ad-sources" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choosing ad sources
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#bidding-vs-waterfall" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bidding vs Waterfall
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -2413,46 +2481,25 @@
 
 
 
-<h1 id="controles-de-volume">Controles de Volume</h1>
-<p>Controle o volume dos anúncios em vídeo do AdMob para que você possa integrá-los às configurações de áudio do seu aplicativo. Os controles de volume funcionam tanto no Android quanto no iOS.</p>
-<p>Use <code>set_app_volume()</code> para definir o volume relativo (0.0 a 1.0) e <code>set_app_muted()</code> para silenciar ou reativar o áudio do anúncio.</p>
-<h1 id="pre-requisitos">Pré-requisitos</h1>
+<h1 id="choose-ad-sources">Choose ad sources</h1>
+<p>Once you've set up AdMob Mediation, you can choose which ad sources to use. Ad sources are third-party ad networks that can serve ads through AdMob Mediation.</p>
+<h2 id="supported-ad-sources">Supported ad sources</h2>
+<p>AdMob Mediation supports a wide range of ad sources. See the list of <a href="../integrate_partner_networks/applovin/">integrated ad sources</a> for details on each network.</p>
+<h2 id="choosing-ad-sources">Choosing ad sources</h2>
+<p>When choosing ad sources, consider:</p>
 <ul>
-<li>Concluir o <a href="../">Guia de Início Rápido</a></li>
-<li>Usar Godot v4.2 ou superior</li>
+<li><strong>Fill rate</strong>: How well the ad source fills ad requests in your target regions</li>
+<li><strong>eCPM</strong>: The effective cost per mille (thousand impressions) the ad source provides</li>
+<li><strong>Ad formats</strong>: Which ad formats the ad source supports</li>
+<li><strong>Integration complexity</strong>: How easy it is to integrate the ad source</li>
 </ul>
-<h1 id="como-usar">Como usar</h1>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">GDScript</label><label for="__tabbed_1_2">C#</label></div>
-<div class="tabbed-content">
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Define o volume do anúncio (0.0 = silencioso, 1.0 = volume máximo)</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">MobileAds</span><span class="o">.</span><span class="n">set_app_volume</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Silencia ou ativa o áudio dos anúncios</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">MobileAds</span><span class="o">.</span><span class="n">set_app_muted</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
-</code></pre></div>
-</div>
-<div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1">// Define o volume do anúncio (0.0 = silencioso, 1.0 = volume máximo)</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">MobileAds</span><span class="p">.</span><span class="n">SetAppVolume</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">);</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="c1">// Silencia ou ativa o áudio dos anúncios</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">MobileAds</span><span class="p">.</span><span class="n">SetAppMuted</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
-</code></pre></div>
-</div>
-</div>
-</div>
-<h1 id="referencia-da-api">Referência da API</h1>
-<p><strong>set_app_volume(volume: float)</strong></p>
-<p>Define o volume relativo para a reprodução do anúncio. Os valores são limitados ao intervalo entre 0.0 (silencioso) e 1.0 (volume atual do dispositivo).</p>
-<p><strong>set_app_muted(muted: bool)</strong></p>
-<p>Informa ao AdMob SDK quando o áudio do aplicativo está silenciado. Quando definido como <code>true</code>, o áudio do anúncio é silenciado.</p>
-<h1 id="notas-importantes">Notas importantes</h1>
+<h2 id="bidding-vs-waterfall">Bidding vs Waterfall</h2>
+<p>AdMob Mediation supports two integration methods:</p>
 <ul>
-<li>Essas configurações se aplicam a anúncios em vídeo (Intersticial, Premiado, Intersticial Premiado, App Open). Anúncios de banner e nativos podem não oferecer suporte ao controle de volume personalizado.</li>
-<li>As configurações de volume podem ser alteradas a qualquer momento, antes ou depois do carregamento do anúncio.</li>
-<li>Sincronize essas chamadas com a barra de volume do seu jogo ou tela de configurações para obter uma experiência de usuário consistente.</li>
+<li><strong>Bidding</strong>: Ad sources compete in real-time for your ad inventory. This is the recommended method.</li>
+<li><strong>Waterfall</strong>: Ad sources are prioritized in a sequential order.</li>
 </ul>
+<p>For more information on bidding, see <a href="../troubleshoot_bidding/">Troubleshoot bidding</a>.</p>
 
 
 
@@ -2478,7 +2525,7 @@
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Voltar para o topo
+  ページトップへ戻る
 </button>
         
       </main>
@@ -2494,15 +2541,15 @@
   
     <div class="md-copyright__highlight">
       &copy; 2023-2026 <a href="https://github.com/poingstudios/godot-admob-plugin" target="_blank" rel="noopener">Poing Studios</a>
-      | Partes desta página são modificações baseadas no trabalho criado e
-      <a href="https://developers.google.com/terms/site-policies" target="_blank" rel="noopener">compartilhado pelo Google</a>
-      e usadas de acordo com os termos descritos na
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Licença de Atribuição Creative Commons 4.0</a>.
+      | 本ページの一部は、Google が作成および
+      <a href="https://developers.google.com/terms/site-policies" target="_blank" rel="noopener">共有した内容を基に改変されており、</a>
+      以下のライセンスに記載された条件に従って使用されています：
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">クリエイティブ・コモンズ 表示 4.0 ライセンス</a>.
     </div>
   
   
     <div class="md-copyright__generator">
-      Feito com
+      で作成
       <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
         Material for MkDocs
       </a>
@@ -2550,13 +2597,13 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.tabs.link", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.annotation", "content.code.copy", "navigation.tabs"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"default": "stable", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.tabs.link", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.annotation", "content.code.copy", "navigation.tabs"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": {"default": "stable", "provider": "mike"}}</script>
     
     
   
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../javascripts/extra.js"></script>
+        <script src="../../../javascripts/extra.js"></script>
       
     
   <script>
