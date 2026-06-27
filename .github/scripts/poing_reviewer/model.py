@@ -244,7 +244,7 @@ GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model
 
 
 def call_model(prompt, model_name, api_key, generation_config=None, response_schema=None):
-    url = GEMINI_API_URL.format(model=model_name)
+    url = GEMINI_API_URL.format(model=model_name) + f"?key={api_key}"
 
     config = {
         "temperature": 0.2,
