@@ -20,7 +20,14 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-from poing_reviewer.reviewer import main
+from poing_reviewer.config import Config
+from poing_reviewer.reviewer import main as run_review
+from poing_reviewer.triage import run_triage
+
 
 if __name__ == "__main__":
-    main()
+    cfg = Config()
+    if cfg.MODE == "triage":
+        run_triage(cfg)
+    else:
+        run_review()

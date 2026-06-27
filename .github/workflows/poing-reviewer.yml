@@ -25,14 +25,27 @@ name: Poing Reviewer
 on:
   pull_request:
     types: [opened, synchronize, review_requested]
+  issues:
+    types: [opened]
+  issue_comment:
+    types: [created]
   workflow_dispatch:
     inputs:
-      pr_number:
-        description: 'PR number to review'
+      mode:
+        description: 'Mode: review or triage'
+        required: true
+        default: 'review'
+        type: choice
+        options:
+          - review
+          - triage
+      number:
+        description: 'PR or Issue number'
         required: true
 
 jobs:
   review:
+    if: github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'review')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -52,14 +65,14 @@ jobs:
 
       - name: Checkout PR (workflow_dispatch)
         if: github.event_name == 'workflow_dispatch'
-        run: gh pr checkout ${{ inputs.pr_number }}
+        run: gh pr checkout ${{ inputs.number }}
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
       - name: Set PR Env (workflow_dispatch)
         if: github.event_name == 'workflow_dispatch'
         run: |
-          pr_data=$(gh pr view ${{ inputs.pr_number }} --json baseRef,number,title,headRefName,headRefOid --repo ${{ github.repository }})
+          pr_data=$(gh pr view ${{ inputs.number }} --json baseRef,number,title,headRefName,headRefOid --repo ${{ github.repository }})
           echo "PR_NUMBER=$(echo $pr_data | jq -r '.number')" >> $GITHUB_ENV
           echo "PR_TITLE=$(echo $pr_data | jq -r '.title')" >> $GITHUB_ENV
           echo "BASE_REF=$(echo $pr_data | jq -r '.baseRef')" >> $GITHUB_ENV
@@ -87,6 +100,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
+          MODE: review
           PR_NUMBER: ${{ github.event.pull_request.number || env.PR_NUMBER }}
           REPO: ${{ github.repository }}
           BASE_REF: ${{ github.event.pull_request.base.ref || env.BASE_REF }}
@@ -95,4 +109,46 @@ jobs:
           MODEL_NAME: gemini-3.5-flash
           MAX_CHARS: 100000
           TRIGGER_ACTION: ${{ github.event.action || 'workflow_dispatch' }}
+        run: python .github/scripts/poing_reviewer.py
+
+  triage:
+    if: >
+      (github.event_name == 'issues') ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '/triage')) ||
+      (github.event_name == 'workflow_dispatch' && inputs.mode == 'triage')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: 1. Generate App Token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: 2. Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 3. Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 4. Install Dependencies
+        run: pip install -r .github/scripts/requirements.txt
+
+      - name: 5. Run Triage
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
+          MODE: triage
+          ISSUE_NUMBER: ${{ github.event.issue.number || inputs.number }}
+          REPO: ${{ github.repository }}
+          ISSUE_TITLE: ${{ github.event.issue.title || '' }}
+          ISSUE_BODY: ${{ github.event.issue.body || '' }}
+          ISSUE_ACTION: ${{ github.event.action || 'workflow_dispatch' }}
+          COMMENT_BODY: ${{ github.event.comment.body || '' }}
+          IS_MAINTAINER: ${{ contains(github.event.comment.author_association, 'MEMBER') || contains(github.event.comment.author_association, 'OWNER') }}
+          MODEL_NAME: gemini-3.5-flash
         run: python .github/scripts/poing_reviewer.py

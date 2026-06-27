@@ -30,7 +30,7 @@ from poing_reviewer.config import (
     fingerprint,
 )
 from poing_reviewer.diff import get_git_diff, annotate_diff, split_diff_by_file, split_batches
-from poing_reviewer.model import load_guidelines, build_prompt, call_model, pick_verdict
+from poing_reviewer.model import load_guidelines, build_prompt, call_review_model, pick_verdict
 from poing_reviewer.github_api import (
     fetch_existing_reviews,
     dismiss_review,
@@ -72,24 +72,24 @@ def main():
 
     existing_reviews = fetch_existing_reviews(cfg.REPO, cfg.PR_NUMBER, cfg.GITHUB_TOKEN)
 
-    # Check if already reviewed for current commit
-    is_re_request = cfg.TRIGGER_ACTION == "review_requested"
-    has_existing_review = False
-    for review in existing_reviews:
-        if review.get("commit_id") == cfg.HEAD_SHA and review.get("state") != "PENDING":
-            if is_re_request:
-                print(f"Re-review requested. Dismissing existing review.", file=sys.stderr)
+    # Check if already reviewed
+    is_re_request = cfg.TRIGGER_ACTION in ("review_requested", "workflow_dispatch")
+    bot_reviews = [
+        r for r in existing_reviews
+        if r.get("user", {}).get("login") == cfg.BOT_LOGIN and r.get("state") != "PENDING"
+    ]
+
+    if bot_reviews:
+        if is_re_request:
+            print("Re-review requested. Dismissing existing reviews by the bot.", file=sys.stderr)
+            for review in bot_reviews:
                 dismiss_review(
                     cfg.REPO, cfg.PR_NUMBER, review["id"], cfg.GITHUB_TOKEN,
                     f"Re-review triggered on commit {cfg.HEAD_SHA[:8]}",
                 )
-                has_existing_review = True
-            else:
-                print(f"Review already exists for commit {cfg.HEAD_SHA[:8]}. Skipping.")
-                sys.exit(0)
-
-    if is_re_request and not has_existing_review:
-        print(f"Re-review requested but no existing review found for commit {cfg.HEAD_SHA[:8]}.", file=sys.stderr)
+        else:
+            print("PR has already been reviewed by the bot. Skipping.")
+            sys.exit(0)
 
     stale_reviews = [
         r for r in existing_reviews
@@ -124,7 +124,7 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
         result = None
         for model in cfg.MODELS_TO_TRY:
             print(f"Request {i + 1}/{total} ({len(batch)} file(s)) using {model}...")
-            result = call_model(prompt, model, cfg.GEMINI_API_KEY)
+            result = call_review_model(prompt, model, cfg.GEMINI_API_KEY)
             if result is not None:
                 break
             print(

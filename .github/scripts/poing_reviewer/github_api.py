@@ -179,4 +179,79 @@ def post_thread_comment(repo, comment_id, token, body):
     return resp.status_code == 201
 
 
+def fetch_issue(repo, issue_number, token):
+    resp = requests.get(
+        f"{BASE_URL}/repos/{repo}/issues/{issue_number}",
+        headers=_headers(token),
+    )
+    if resp.status_code == 200:
+        return resp.json()
+    print(f"Error fetching issue {issue_number}: {resp.status_code} {resp.text}", file=sys.stderr)
+    return None
+
+
+def fetch_issue_labels(repo, token):
+    resp = requests.get(
+        f"{BASE_URL}/repos/{repo}/labels",
+        headers=_headers(token),
+    )
+    if resp.status_code == 200:
+        return resp.json()
+    print(f"Error fetching labels for {repo}: {resp.status_code} {resp.text}", file=sys.stderr)
+    return []
+
+
+def create_label(repo, name, token, color=None, description=None):
+    payload = {"name": name}
+    if color:
+        payload["color"] = color
+    if description:
+        payload["description"] = description
+    resp = requests.post(
+        f"{BASE_URL}/repos/{repo}/labels",
+        headers=_headers(token),
+        json=payload,
+    )
+    if resp.status_code == 201:
+        return resp.json()
+    print(f"Error creating label '{name}': {resp.status_code} {resp.text}", file=sys.stderr)
+    return None
+
+
+def add_labels_to_issue(repo, issue_number, labels, token):
+    resp = requests.post(
+        f"{BASE_URL}/repos/{repo}/issues/{issue_number}/labels",
+        headers=_headers(token),
+        json={"labels": labels},
+    )
+    if resp.status_code == 200:
+        return resp.json()
+    print(f"Error adding labels to issue {issue_number}: {resp.status_code} {resp.text}", file=sys.stderr)
+    return None
+
+
+def remove_label_from_issue(repo, issue_number, label, token):
+    resp = requests.delete(
+        f"{BASE_URL}/repos/{repo}/issues/{issue_number}/labels/{label}",
+        headers=_headers(token),
+    )
+    if resp.status_code == 200:
+        return resp.json()
+    print(f"Error removing label '{label}' from issue {issue_number}: {resp.status_code} {resp.text}", file=sys.stderr)
+    return None
+
+
+def add_comment(repo, issue_number, body, token):
+    resp = requests.post(
+        f"{BASE_URL}/repos/{repo}/issues/{issue_number}/comments",
+        headers=_headers(token),
+        json={"body": body},
+    )
+    if resp.status_code == 201:
+        return resp.json()
+    print(f"Error adding comment to issue {issue_number}: {resp.status_code} {resp.text}", file=sys.stderr)
+    return None
+
+
+
 
