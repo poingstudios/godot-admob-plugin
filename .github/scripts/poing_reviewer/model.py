@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 import json
+import sys
 import time
 import requests
 from poing_reviewer.config import VERDICT_PRIORITY
@@ -225,11 +226,11 @@ def parse_triage_response(data):
         return None
 
     if "labels" not in data or "priority" not in data:
-        print(f"Missing required fields in response: {data}", __import__('sys').stderr)
+        print(f"Missing required fields in response: {data}", file=sys.stderr)
         return None
 
     if data["priority"] not in ("high", "medium", "low"):
-        print(f"Invalid priority level: {data['priority']}", __import__('sys').stderr)
+        print(f"Invalid priority level: {data['priority']}", file=sys.stderr)
         data["priority"] = "medium"
 
     return {

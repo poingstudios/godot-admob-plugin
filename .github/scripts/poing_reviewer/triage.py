@@ -61,7 +61,7 @@ def _ensure_labels_exist(repo, labels_to_ensure, existing_labels, token):
 
     for label in labels_to_ensure:
         normalized = _normalize_label(label)
-        if normalized not in [_normalize_label(l) for l in existing_labels]:
+        if normalized not in [_normalize_label(l["name"]) for l in existing_labels]:
             if normalized in label_colors:
                 color, desc = label_colors[normalized]
                 create_label(repo, normalized, token, color=color, description=desc)

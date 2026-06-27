@@ -129,7 +129,7 @@ def fetch_review_threads(owner, repo_name, pr_number, token):
         "variables": {
             "owner": owner,
             "repo": repo_name,
-            "pr": pr_number,
+            "pr": int(pr_number),
         },
     }
     resp = requests.post(GRAPHQL_URL, headers=_graphql_headers(token), json=payload)
