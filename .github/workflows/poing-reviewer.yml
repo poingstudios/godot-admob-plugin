@@ -24,7 +24,7 @@ name: Poing Reviewer
 
 on:
   pull_request:
-    types: [opened, synchronize, review_requested]
+    types: [opened, review_requested]
   issues:
     types: [opened]
   issue_comment:
