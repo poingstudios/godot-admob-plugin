@@ -23,14 +23,35 @@
 extends Control
 
 const Registry = preload("res://addons/admob/internal/sample_registry.gd")
+const UIScaler = preload("res://addons/admob/gdscript/sample/UIScaler.gd")
 
 @onready
 var _console_output: RichTextLabel = $Background/SafeArea/LayoutContainer/ConsolePanel/ConsoleOutput
 @onready
 var _main_tabs: TabContainer = $Background/SafeArea/LayoutContainer/TabContent/MainTabs
 
+@onready
+var _app_title: Label = $Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer/AppTitle
+@onready
+var _support_label: Label = $Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportLabel
+@onready
+var _support_card: Control = $Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard
+
+
+@onready
+var _app_subtitle: Label = $Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer/AppSubtitle
+@onready
+var _resize_timer: Timer = $ResizeTimer
+
 
 func _ready() -> void:
+	var current_year: int = Time.get_datetime_dict_from_system().year
+	_app_subtitle.text = "© %d Poing Studios" % current_year
+
+	_resize_timer.timeout.connect(_apply_resize)
+	resized.connect(_on_resized)
+	_apply_resize()
+
 	var config := ConfigFile.new()
 	if config.load(Registry.SETTINGS_PATH) == OK:
 		var saved_locale := config.get_value(Registry.LOCALIZATION_SECTION, Registry.LOCALE_KEY, "") as String
@@ -38,6 +59,8 @@ func _ready() -> void:
 			TranslationServer.set_locale(saved_locale)
 
 	Registry.logger = self
+	_app_title.autowrap_mode = TextServer.AUTOWRAP_OFF
+	_support_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_console_output.text = tr("GAD_LogsStart")
 	log_message("Main initialized")
 
@@ -62,6 +85,28 @@ func log_message(message: String) -> void:
 	print(message)
 	if _console_output:
 		_console_output.text += "\n" + message
+
+
+func _on_resized() -> void:
+	if _resize_timer:
+		_resize_timer.start()
+
+
+func _apply_resize() -> void:
+	var vp := get_viewport_rect().size
+	var win_size := get_window().size
+	if vp.x <= 0 or vp.y <= 0 or win_size.x <= 0 or win_size.y <= 0:
+		return
+
+	var scale_factor := vp.y / float(win_size.y)
+	var window_factor: float = (float(win_size.x) + float(win_size.y)) / 1140.0
+	var total_factor: float = window_factor * scale_factor
+
+	# Use the centralized UI scaling utility to recursively scale all controls
+	UIScaler.scale_ui(self, total_factor, scale_factor)
+
+	# Correctly hide the support card in landscape modes based on physical window height
+	_support_card.visible = win_size.y >= 500
 
 
 func _initialize_mobile_ads() -> void:

@@ -95,15 +95,16 @@ horizontal_alignment = 1
 [node name="NativeActions" type="GridContainer" parent="ActionsCard/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="LoadNative" type="Button" parent="ActionsCard/VBox/NativeActions"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_hover_color = Color(0.25, 0.75, 0.25, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.35, 0.1, 1)
 theme_override_colors/font_color = Color(0.15, 0.45, 0.15, 1)
@@ -111,8 +112,9 @@ text = "GAD_Load"
 
 [node name="LoadNativeBackground" type="Button" parent="ActionsCard/VBox/NativeActions"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_hover_color = Color(0.25, 0.75, 0.25, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.35, 0.1, 1)
 theme_override_colors/font_color = Color(0.15, 0.45, 0.15, 1)
@@ -120,8 +122,9 @@ text = "GAD_LoadBackground"
 
 [node name="ShowNative" type="Button" parent="ActionsCard/VBox/NativeActions"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_disabled_color = Color(0.1, 0.25, 0.5, 0.4)
 theme_override_colors/font_hover_color = Color(0.25, 0.5, 0.9, 1)
 theme_override_colors/font_pressed_color = Color(0.05, 0.15, 0.3, 1)
@@ -131,8 +134,9 @@ text = "GAD_Show"
 
 [node name="HideNative" type="Button" parent="ActionsCard/VBox/NativeActions"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_disabled_color = Color(0.5, 0.4, 0.1, 0.4)
 theme_override_colors/font_hover_color = Color(0.8, 0.7, 0.2, 1)
 theme_override_colors/font_pressed_color = Color(0.3, 0.2, 0.05, 1)
@@ -142,8 +146,9 @@ text = "GAD_Hide"
 
 [node name="GetSize" type="Button" parent="ActionsCard/VBox/NativeActions"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_disabled_color = Color(0.3, 0.3, 0.3, 0.4)
 theme_override_colors/font_hover_color = Color(0.6, 0.6, 0.6, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.1, 0.1, 1)
@@ -153,8 +158,9 @@ text = "GAD_GetSize"
 
 [node name="DestroyNative" type="Button" parent="ActionsCard/VBox/NativeActions"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_disabled_color = Color(0.6, 0.15, 0.15, 0.4)
 theme_override_colors/font_hover_color = Color(0.9, 0.3, 0.3, 1)
 theme_override_colors/font_pressed_color = Color(0.4, 0.05, 0.05, 1)
@@ -185,7 +191,6 @@ columns = 2
 [node name="TemplateLabel" type="Label" parent="StyleCard/VBox/TemplateGrid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 22
 text = "GAD_Template"
 
 [node name="TemplateType" type="OptionButton" parent="StyleCard/VBox/TemplateGrid"]
@@ -217,7 +222,6 @@ columns = 2
 [node name="MainBGLabel" type="Label" parent="StyleCard/VBox/ColorGrid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 22
 text = "GAD_Background"
 
 [node name="MainBGButton" type="Button" parent="StyleCard/VBox/ColorGrid"]
@@ -232,7 +236,6 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_p1r38")
 [node name="CTABGLabel" type="Label" parent="StyleCard/VBox/ColorGrid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 22
 text = "GAD_ButtonBG"
 
 [node name="CTABGButton" type="Button" parent="StyleCard/VBox/ColorGrid"]
@@ -247,7 +250,6 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_p1r38")
 [node name="CTATextLabel" type="Label" parent="StyleCard/VBox/ColorGrid"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 22
 text = "GAD_ButtonText"
 
 [node name="CTATextButton" type="Button" parent="StyleCard/VBox/ColorGrid"]
@@ -405,63 +407,63 @@ theme_override_constants/v_separation = 15
 columns = 3
 
 [node name="TOP_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_TopLeft"
 icon = ExtResource("2_tl")
 expand_icon = true
 
 [node name="TOP" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_Top"
 icon = ExtResource("3_t")
 expand_icon = true
 
 [node name="TOP_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_TopRight"
 icon = ExtResource("4_tr")
 expand_icon = true
 
 [node name="LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_Left"
 icon = ExtResource("5_l")
 expand_icon = true
 
 [node name="CENTER" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_Center"
 icon = ExtResource("6_c")
 expand_icon = true
 
 [node name="RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_Right"
 icon = ExtResource("7_r")
 expand_icon = true
 
 [node name="BOTTOM_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_BottomLeft"
 icon = ExtResource("8_bl")
 expand_icon = true
 
 [node name="BOTTOM" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_Bottom"
 icon = ExtResource("9_b")
 expand_icon = true
 
 [node name="BOTTOM_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
 tooltip_text = "GAD_BottomRight"
 icon = ExtResource("10_br")

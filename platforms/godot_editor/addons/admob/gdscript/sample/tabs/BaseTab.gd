@@ -22,9 +22,26 @@
 
 extends VBoxContainer
 
+const UIScaler = preload("res://addons/admob/gdscript/sample/UIScaler.gd")
+
 
 func _ready() -> void:
 	_optimize_for_scrolling(self)
+	get_viewport().size_changed.connect(_on_viewport_size_changed)
+	_on_viewport_size_changed()
+
+
+func _on_viewport_size_changed() -> void:
+	var vp := get_viewport_rect().size
+	var win_size := get_window().size
+	if vp.x <= 0 or vp.y <= 0 or win_size.x <= 0 or win_size.y <= 0:
+		return
+
+	var scale_factor := vp.y / float(win_size.y)
+	var window_factor: float = (float(win_size.x) + float(win_size.y)) / 1140.0
+	var total_factor: float = window_factor * scale_factor
+
+	UIScaler.scale_ui(self, total_factor, scale_factor)
 
 
 func _optimize_for_scrolling(node: Node) -> void:
