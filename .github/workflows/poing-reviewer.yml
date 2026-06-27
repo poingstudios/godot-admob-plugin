@@ -45,7 +45,10 @@ on:
 
 jobs:
   review:
-    if: github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.mode == 'review')
+    if: >
+      github.event_name == 'pull_request' ||
+      (github.event_name == 'issue_comment' && github.event.issue.pull_request && contains(github.event.comment.body, '/review')) ||
+      (github.event_name == 'workflow_dispatch' && inputs.mode == 'review')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -63,16 +66,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout PR (workflow_dispatch)
-        if: github.event_name == 'workflow_dispatch'
-        run: gh pr checkout ${{ inputs.number }}
+      - name: Checkout PR (workflow_dispatch or issue_comment)
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'issue_comment'
+        run: gh pr checkout ${{ github.event.issue.number || inputs.number }}
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
-      - name: Set PR Env (workflow_dispatch)
-        if: github.event_name == 'workflow_dispatch'
+      - name: Set PR Env (workflow_dispatch or issue_comment)
+        if: github.event_name == 'workflow_dispatch' || github.event_name == 'issue_comment'
         run: |
-          pr_data=$(gh pr view ${{ inputs.number }} --json baseRef,number,title,headRefName,headRefOid --repo ${{ github.repository }})
+          pr_data=$(gh pr view ${{ github.event.issue.number || inputs.number }} --json baseRef,number,title,headRefName,headRefOid --repo ${{ github.repository }})
           echo "PR_NUMBER=$(echo $pr_data | jq -r '.number')" >> $GITHUB_ENV
           echo "PR_TITLE=$(echo $pr_data | jq -r '.title')" >> $GITHUB_ENV
           echo "BASE_REF=$(echo $pr_data | jq -r '.baseRef')" >> $GITHUB_ENV
@@ -109,6 +112,7 @@ jobs:
           MODEL_NAME: gemini-3.5-flash
           MAX_CHARS: 100000
           TRIGGER_ACTION: ${{ github.event.action || 'workflow_dispatch' }}
+          COMMENT_BODY: ${{ github.event.comment.body || '' }}
         run: python .github/scripts/poing_reviewer.py
 
   triage:
@@ -120,27 +124,20 @@ jobs:
     permissions:
       issues: write
     steps:
-      - name: 1. Generate App Token
-        id: app-token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-
-      - name: 2. Checkout Code
+      - name: 1. Checkout Code
         uses: actions/checkout@v4
 
-      - name: 3. Setup Python
+      - name: 2. Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: 4. Install Dependencies
+      - name: 3. Install Dependencies
         run: pip install -r .github/scripts/requirements.txt
 
-      - name: 5. Run Triage
+      - name: 4. Run Triage
         env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
           MODE: triage
           ISSUE_NUMBER: ${{ github.event.issue.number || inputs.number }}

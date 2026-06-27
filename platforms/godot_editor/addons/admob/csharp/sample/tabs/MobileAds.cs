@@ -31,19 +31,25 @@ public partial class MobileAds : BaseTab
 	private AudioStreamPlayer _musicPlayer;
 	private HSlider _adVolumeSlider;
 	private CheckButton _adMutedCheck;
+	private CheckButton _consentCookiesCheck;
 
 	public override void _Ready()
 	{
 		base._Ready();
+
 		_iosPauseCheck = GetNode<CheckButton>("iOSAppPause");
 		_muteMusicCheck = GetNode<CheckButton>("MuteMusic");
 		_musicPlayer = GetNode<AudioStreamPlayer>("MusicPlayer");
 		_adVolumeSlider = GetNode<HSlider>("AdVolumeCard/AdVolumeContainer/AdVolumeSlider");
+		_consentCookiesCheck = GetNode<CheckButton>("ConsentCookies");
 		_adMutedCheck = GetNode<CheckButton>("AdMuted");
+
+		_consentCookiesCheck.SetPressedNoSignal(PoingStudios.AdMob.Api.MobileAds.GetGadHasConsentForCookies());
 
 		_iosPauseCheck.Toggled += OnSetIosAppPausePressed;
 		_muteMusicCheck.Toggled += OnMuteMusicPressed;
 		_adVolumeSlider.ValueChanged += OnAdVolumeChanged;
+		_consentCookiesCheck.Toggled += OnConsentCookiesToggled;
 		_adMutedCheck.Toggled += OnAdMutedPressed;
 
 		var initBtn = GetNode<Button>("GetInitStatus");
@@ -139,6 +145,12 @@ public partial class MobileAds : BaseTab
 	{
 		Log(string.Format("Setting ad volume: {0}", value));
 		PoingStudios.AdMob.Api.MobileAds.SetAppVolume((float)value);
+	}
+
+	private void OnConsentCookiesToggled(bool isEnabled)
+	{
+		Log(string.Format("Setting consent for cookies: {0}", isEnabled));
+		PoingStudios.AdMob.Api.MobileAds.SetGadHasConsentForCookies(isEnabled);
 	}
 
 	private void OnAdMutedPressed(bool isMuted)

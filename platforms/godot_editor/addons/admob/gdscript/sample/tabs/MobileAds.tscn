@@ -65,6 +65,12 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
+[node name="ConsentCookies" type="CheckButton" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Consent for Cookies (Limited Ads)"
+alignment = 1
+
 [node name="AdMuted" type="CheckButton" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -100,4 +106,5 @@ autoplay = true
 [connection signal="toggled" from="iOSAppPause" to="." method="_on_set_ios_app_pause_on_background_button_pressed"]
 [connection signal="toggled" from="MuteMusic" to="." method="_on_mute_music_pressed"]
 [connection signal="value_changed" from="AdVolumeCard/AdVolumeContainer/AdVolumeSlider" to="." method="_on_ad_volume_changed"]
+[connection signal="toggled" from="ConsentCookies" to="." method="_on_consent_cookies_toggled"]
 [connection signal="toggled" from="AdMuted" to="." method="_on_ad_muted_pressed"]

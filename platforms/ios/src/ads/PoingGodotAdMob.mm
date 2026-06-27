@@ -91,6 +91,28 @@ void PoingGodotAdMob::set_app_muted(bool muted) {
     [GADMobileAds sharedInstance].applicationMuted = muted;
 }
 
+void PoingGodotAdMob::set_gad_has_consent_for_cookies(bool enabled) {
+    [[NSUserDefaults standardUserDefaults] setInteger:(enabled ? 1 : 0) forKey:@"gad_has_consent_for_cookies"];
+}
+
+bool PoingGodotAdMob::get_gad_has_consent_for_cookies() {
+    id val = [[NSUserDefaults standardUserDefaults] objectForKey:@"gad_has_consent_for_cookies"];
+    if (val == nil) {
+        return true;
+    }
+    return [val integerValue] == 1;
+}
+
+void PoingGodotAdMob::disable_sdk_crash_reporting() {
+    [[GADMobileAds sharedInstance] disableSDKCrashReporting];
+}
+
+String PoingGodotAdMob::get_platform_version() {
+    GADVersionNumber versionNumber = [GADMobileAds sharedInstance].versionNumber;
+    NSString *versionString = [NSString stringWithFormat:@"%ld.%ld.%ld", (long)versionNumber.majorVersion, (long)versionNumber.minorVersion, (long)versionNumber.patchVersion];
+    return String([versionString UTF8String]);
+}
+
 void PoingGodotAdMob::_bind_methods() {
     ADD_SIGNAL(MethodInfo("on_initialization_complete", PropertyInfo(Variant::DICTIONARY, "initialization_status_dictionary")));
 
@@ -100,4 +122,8 @@ void PoingGodotAdMob::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_ios_app_pause_on_background"), &PoingGodotAdMob::set_ios_app_pause_on_background);
     ClassDB::bind_method(D_METHOD("set_app_volume"), &PoingGodotAdMob::set_app_volume);
     ClassDB::bind_method(D_METHOD("set_app_muted"), &PoingGodotAdMob::set_app_muted);
+    ClassDB::bind_method(D_METHOD("set_gad_has_consent_for_cookies"), &PoingGodotAdMob::set_gad_has_consent_for_cookies);
+    ClassDB::bind_method(D_METHOD("get_gad_has_consent_for_cookies"), &PoingGodotAdMob::get_gad_has_consent_for_cookies);
+    ClassDB::bind_method(D_METHOD("disable_sdk_crash_reporting"), &PoingGodotAdMob::disable_sdk_crash_reporting);
+    ClassDB::bind_method(D_METHOD("get_platform_version"), &PoingGodotAdMob::get_platform_version);
 };

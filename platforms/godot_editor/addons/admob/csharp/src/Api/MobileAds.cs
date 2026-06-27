@@ -91,6 +91,41 @@ namespace PoingStudios.AdMob.Api
             }
         }
 
+        public static void SetGadHasConsentForCookies(bool enabled)
+        {
+            if (_plugin != null)
+            {
+                _plugin.Call("set_gad_has_consent_for_cookies", enabled);
+            }
+        }
+
+        public static bool GetGadHasConsentForCookies()
+        {
+            if (_plugin == null) return true;
+
+            return (bool)_plugin.Call("get_gad_has_consent_for_cookies");
+        }
+
+        public static void DisableSdkCrashReporting()
+        {
+            if (_plugin != null && OS.GetName() == "iOS")
+            {
+                _plugin.Call("disable_sdk_crash_reporting");
+            }
+        }
+
+        public static string GetVersion()
+        {
+            return PoingStudios.AdMob.Core.PluginVersion.Current;
+        }
+
+        public static string GetPlatformVersion()
+        {
+            if (_plugin == null) return "";
+
+            return (string)_plugin.Call("get_platform_version");
+        }
+
         private static void OnInitializationComplete(Dictionary statusDict)
         {
             var status = InitializationStatus.Create(statusDict);

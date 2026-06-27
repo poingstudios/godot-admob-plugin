@@ -28,6 +28,7 @@ var _is_initialized := false
 var _volume := 1.0
 var _muted := false
 var _request_configuration := {}
+var _gad_has_consent_for_cookies := true
 
 func initialize() -> void:
 	if _is_initialized:
@@ -64,3 +65,18 @@ func set_app_volume(volume: float) -> void:
 
 func set_app_muted(muted: bool) -> void:
 	_muted = muted
+
+func set_gad_has_consent_for_cookies(enabled: bool) -> void:
+	_gad_has_consent_for_cookies = enabled
+
+func get_gad_has_consent_for_cookies() -> bool:
+	return _gad_has_consent_for_cookies
+
+func disable_sdk_crash_reporting() -> void:
+	pass
+
+func get_version() -> String:
+	return "1.0.0-mock"
+
+func get_platform_version() -> String:
+	return "1.0.0-mock"
