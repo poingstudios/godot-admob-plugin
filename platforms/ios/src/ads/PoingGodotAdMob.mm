@@ -96,7 +96,11 @@ void PoingGodotAdMob::set_gad_has_consent_for_cookies(bool enabled) {
 }
 
 bool PoingGodotAdMob::get_gad_has_consent_for_cookies() {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:@"gad_has_consent_for_cookies"] == 1;
+    id val = [[NSUserDefaults standardUserDefaults] objectForKey:@"gad_has_consent_for_cookies"];
+    if (val == nil) {
+        return true;
+    }
+    return [val integerValue] == 1;
 }
 
 void PoingGodotAdMob::disable_sdk_crash_reporting() {
