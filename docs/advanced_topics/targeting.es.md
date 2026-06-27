@@ -120,6 +120,40 @@ El siguiente código demuestra cómo configurar un objeto "RequestConfiguration"
     MobileAds.SetRequestConfiguration(requestConfiguration);
     ```
 
+## AdRequest
+
+`AdRequest` recopila información de segmentación que se enviará con una solicitud de anuncio individual.
+
+### Agregar extras de red
+
+Los extras de red son detalles adicionales que se envían con una solicitud de anuncio y que son específicos de una única fuente de anuncios.
+
+Para enviar un parámetro adicional a Google (por ejemplo, una clave de `collapsible` con un valor de `bottom` para solicitar un [Banner Colapsable](../../guides/ad_formats/banner/collapsible/)), complete el diccionario `extras`:
+
+=== "GDScript"
+
+    ```gdscript
+    var ad_request := AdRequest.new()
+    ad_request.extras = {
+        "collapsible": "bottom"
+    }
+    # Luego cargue el anuncio con la solicitud, ej.:
+    # ad_view.load_ad(ad_request)
+    ```
+
+=== "C#"
+
+    ```csharp
+    var adRequest = new AdRequest();
+    adRequest.Extras = new Godot.Collections.Dictionary
+    {
+        { "collapsible", "bottom" }
+    };
+    // Luego cargue el anuncio con la solicitud, ej.:
+    // adView.LoadAd(adRequest);
+    ```
+
+
 Más información sobre:
 
 - [Establecer la clasificación máxima de contenido para cada solicitud de anuncio](https://support.google.com/admob/answer/10477886)

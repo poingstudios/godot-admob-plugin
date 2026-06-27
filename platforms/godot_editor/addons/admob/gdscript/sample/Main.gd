@@ -63,6 +63,8 @@ func _ready() -> void:
 	_support_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_console_output.text = tr("GAD_LogsStart")
 	log_message("Main initialized")
+	log_message("Plugin Version: " + MobileAds.get_version())
+	log_message("Platform SDK Version: " + MobileAds.get_platform_version())
 
 	$Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportLabel.text = tr("GAD_SupportProject")
 

@@ -71,6 +71,32 @@ static func set_app_muted(muted: bool) -> void:
 		_plugin.set_app_muted(muted)
 
 
+static func set_gad_has_consent_for_cookies(enabled: bool) -> void:
+	if _plugin:
+		_plugin.set_gad_has_consent_for_cookies(enabled)
+
+
+static func get_gad_has_consent_for_cookies() -> bool:
+	if _plugin:
+		return _plugin.get_gad_has_consent_for_cookies()
+	return true
+
+
+static func disable_sdk_crash_reporting() -> void:
+	if _plugin and OS.get_name() == "iOS":
+		_plugin.disable_sdk_crash_reporting()
+
+
+static func get_version() -> String:
+	return preload("res://addons/admob/internal/version/plugin_version.gd").current
+
+
+static func get_platform_version() -> String:
+	if _plugin:
+		return _plugin.get_platform_version()
+	return ""
+
+
 static func _on_initialization_complete(admob_initialization_status: Dictionary) -> void:
 	var initialization_status := InitializationStatus.create(admob_initialization_status)
 	_current_on_initialization_complete_listener.on_initialization_complete.call_deferred(

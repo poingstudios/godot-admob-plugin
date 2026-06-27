@@ -30,9 +30,6 @@ namespace PoingStudios.AdMob.Api.Core
 {
     public class AdRequest
     {
-        private const string PluginConfigPath = "res://addons/admob/plugin.cfg";
-        private const string FallbackPluginVersion = "v4.0.0";
-
         public List<string> Keywords { get; set; } = new List<string>();
         public List<MediationExtras> MediationExtrasList { get; set; } = new List<MediationExtras>();
         public Godot.Collections.Dictionary Extras { get; set; } = new Godot.Collections.Dictionary();
@@ -43,7 +40,7 @@ namespace PoingStudios.AdMob.Api.Core
             {
                 { "mediation_extras", TransformMediationExtrasToDictionary() },
                 { "extras", Extras },
-                { "google_request_agent", "Godot-PoingStudios-" + GetFormattedVersion() }
+                { "google_request_agent", "Godot-PoingStudios-" + PoingStudios.AdMob.Core.PluginVersion.Formatted }
             };
         }
 
@@ -65,17 +62,6 @@ namespace PoingStudios.AdMob.Api.Core
                 };
             }
             return dict;
-        }
-
-        private static string GetFormattedVersion()
-        {
-            var configFile = new ConfigFile();
-            if (configFile.Load(PluginConfigPath) == Error.Ok)
-            {
-                string version = (string)configFile.GetValue("plugin", "version", FallbackPluginVersion);
-                return version.TrimStart('v');
-            }
-            return FallbackPluginVersion.TrimStart('v');
         }
     }
 }

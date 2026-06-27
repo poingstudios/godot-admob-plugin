@@ -34,6 +34,7 @@ namespace PoingStudios.AdMob.Core
 		private float _volume = 1.0f;
 		private bool _muted = false;
 		private Dictionary _requestConfiguration = new Dictionary();
+		private bool _gadHasConsentForCookies = true;
 
 		public void initialize()
 		{
@@ -86,6 +87,30 @@ namespace PoingStudios.AdMob.Core
 		public void set_app_muted(bool muted)
 		{
 			_muted = muted;
+		}
+
+		public void set_gad_has_consent_for_cookies(bool enabled)
+		{
+			_gadHasConsentForCookies = enabled;
+		}
+
+		public bool get_gad_has_consent_for_cookies()
+		{
+			return _gadHasConsentForCookies;
+		}
+
+		public void disable_sdk_crash_reporting()
+		{
+		}
+
+		public string get_version()
+		{
+			return "1.0.0-mock";
+		}
+
+		public string get_platform_version()
+		{
+			return "1.0.0-mock";
 		}
 	}
 }

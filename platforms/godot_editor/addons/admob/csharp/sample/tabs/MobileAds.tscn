@@ -65,6 +65,12 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
+[node name="ConsentCookies" type="CheckButton" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Consent for Cookies (Limited Ads)"
+alignment = 1
+
 [node name="AdMuted" type="CheckButton" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2

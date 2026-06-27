@@ -120,6 +120,40 @@
     MobileAds.SetRequestConfiguration(requestConfiguration);
     ```
 
+## AdRequest
+
+`AdRequest` 收集要随单个广告请求发送的定向信息。
+
+### 添加网络附加信息 (Network Extras)
+
+网络附加信息是随广告请求发送的、特定于单个广告源的额外详细信息。
+
+要向 Google 发送额外参数（例如，将键 `collapsible` 的值设为 `bottom` 以请求[折叠式横幅广告](../../guides/ad_formats/banner/collapsible/)），请填充 `extras` 字典：
+
+=== "GDScript"
+
+    ```gdscript
+    var ad_request := AdRequest.new()
+    ad_request.extras = {
+        "collapsible": "bottom"
+    }
+    # 然后使用该请求加载广告，例如：
+    # ad_view.load_ad(ad_request)
+    ```
+
+=== "C#"
+
+    ```csharp
+    var adRequest = new AdRequest();
+    adRequest.Extras = new Godot.Collections.Dictionary
+    {
+        { "collapsible", "bottom" }
+    };
+    // 然后使用该请求加载广告，例如：
+    // adView.LoadAd(adRequest);
+    ```
+
+
 了解更多关于：
 
 - [为每次广告请求设置最高内容分级](https://support.google.com/admob/answer/10477886)

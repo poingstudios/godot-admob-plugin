@@ -303,11 +303,10 @@ plugins:
 
 nav:
   - Guides:
-    - index.md
-    - editor_mock_ads.md
-    - enable_test_ads.md
-    - ios_pause_background.md
-    - volume_controls.md
+    - Get Started: index.md
+    - Enable test ads: enable_test_ads.md
+    - Preview Mock Ads in Editor: editor_mock_ads.md
+    - iOS Pause Background: ios_pause_background.md
     - 'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': ai_skills.md
     - Ad formats:
       - App Open: ad_formats/app_open.md
@@ -350,10 +349,12 @@ nav:
         - Get Started: privacy/user_messaging_tools/get_started.md
         - GDPR IAB support: privacy/user_messaging_tools/gdpr_iab_support.md
         - IDFA support: privacy/user_messaging_tools/idfa_support.md
-    - Advanced topics:
-      - Targeting: advanced_topics/targeting.md
-      - Impression-Level Ad Revenue: advanced_topics/impression_level_ad_revenue.md
+    - Troubleshoot:
       - Response Info: advanced_topics/response_info.md
+    - Optimize:
+      - Global settings: global_settings.md
+      - Impression-Level Ad Revenue: advanced_topics/impression_level_ad_revenue.md
+      - Targeting: advanced_topics/targeting.md
   - Reference:
     - Overview: reference/index.md
     - Classes:

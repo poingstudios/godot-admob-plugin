@@ -120,7 +120,41 @@
     MobileAds.SetRequestConfiguration(requestConfiguration);
     ```
 
+## AdRequest
+
+`AdRequest` は、個々の広告リクエストとともに送信されるターゲティング情報を収集します。
+
+### ネットワーク エクストラの追加
+
+ネットワーク エクストラは、単一の広告ソースに固有の、広告リクエストとともに送信される追加の詳細情報です。
+
+Google に追加のパラメータを送信するには（たとえば、[折りたたみ式バナー](../../guides/ad_formats/banner/collapsible/) をリクエストするためにキー `collapsible` に値 `bottom` を設定する場合）、`extras` ディレクトリにデータを入力します。
+
+=== "GDScript"
+
+    ```gdscript
+    var ad_request := AdRequest.new()
+    ad_request.extras = {
+        "collapsible": "bottom"
+    }
+    # その後、リクエストを使って広告を読み込みます。例:
+    # ad_view.load_ad(ad_request)
+    ```
+
+=== "C#"
+
+    ```csharp
+    var adRequest = new AdRequest();
+    adRequest.Extras = new Godot.Collections.Dictionary
+    {
+        { "collapsible", "bottom" }
+    };
+    // その後、リクエストを使って広告を読み込みます。例:
+    // adView.LoadAd(adRequest);
+    ```
+
+
 詳細については以下を参照してください。
 
 - [広告リクエストごとの最大コンテンツ レーティングの設定](https://support.google.com/admob/answer/10477886)
-- [アプリまたはアカウントの広告の最大コンテンツ レーティングの設定](https://support.google.com/admob/answer/7562142)
+- [アプリまたはアカウント of 広告の最大コンテンツ レーティングの設定](https://support.google.com/admob/answer/7562142)

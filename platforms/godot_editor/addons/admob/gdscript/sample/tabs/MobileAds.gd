@@ -28,12 +28,15 @@ const Registry = preload("res://addons/admob/internal/sample_registry.gd")
 @onready var _mute_music_check: CheckButton = $MuteMusic
 @onready var _music_player: AudioStreamPlayer = $MusicPlayer
 @onready var _ad_volume_slider: HSlider = $AdVolumeCard/AdVolumeContainer/AdVolumeSlider
+@onready var _consent_cookies_check: CheckButton = $ConsentCookies
 @onready var _ad_muted_check: CheckButton = $AdMuted
 @onready var _language_button: OptionButton = %LanguageButton
 
 
 
 func _ready() -> void:
+	_consent_cookies_check.set_pressed_no_signal(MobileAds.get_gad_has_consent_for_cookies())
+
 	_language_button.add_item("English", 0)
 	_language_button.set_item_metadata(0, "en")
 	_language_button.add_item("Português (Brasil)", 1)
@@ -108,6 +111,11 @@ func _on_mute_music_pressed(is_muted: bool) -> void:
 func _on_ad_volume_changed(value: float) -> void:
 	_log("Setting ad volume: " + str(value))
 	MobileAds.set_app_volume(value)
+
+
+func _on_consent_cookies_toggled(button_pressed: bool) -> void:
+	_log("Setting consent for cookies: " + str(button_pressed))
+	MobileAds.set_gad_has_consent_for_cookies(button_pressed)
 
 
 func _on_ad_muted_pressed(is_muted: bool) -> void:

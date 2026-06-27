@@ -72,6 +72,8 @@ public partial class MainCSharpExample : Control, ISampleLogger
 		
 		SampleRegistry.Logger = this;
 		LogMessage("Main initialized");
+		LogMessage("Plugin Version: " + PoingStudios.AdMob.Api.MobileAds.GetVersion());
+		LogMessage("Platform SDK Version: " + PoingStudios.AdMob.Api.MobileAds.GetPlatformVersion());
 
 		GetNode<Label>("Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportLabel").Text = Tr("GAD_SupportProject");
 
