@@ -73,7 +73,10 @@ def main():
     existing_reviews = fetch_existing_reviews(cfg.REPO, cfg.PR_NUMBER, cfg.GITHUB_TOKEN)
 
     # Check if already reviewed
-    is_re_request = cfg.TRIGGER_ACTION in ("review_requested", "workflow_dispatch")
+    is_re_request = (
+        cfg.TRIGGER_ACTION in ("review_requested", "workflow_dispatch") or
+        "/review" in cfg.COMMENT_BODY.lower()
+    )
     bot_reviews = [
         r for r in existing_reviews
         if r.get("user", {}).get("login") == cfg.BOT_LOGIN and r.get("state") != "PENDING"
