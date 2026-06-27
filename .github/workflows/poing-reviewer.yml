@@ -120,27 +120,20 @@ jobs:
     permissions:
       issues: write
     steps:
-      - name: 1. Generate App Token
-        id: app-token
-        uses: actions/create-github-app-token@v1
-        with:
-          app-id: ${{ secrets.APP_ID }}
-          private-key: ${{ secrets.APP_PRIVATE_KEY }}
-
-      - name: 2. Checkout Code
+      - name: 1. Checkout Code
         uses: actions/checkout@v4
 
-      - name: 3. Setup Python
+      - name: 2. Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: 4. Install Dependencies
+      - name: 3. Install Dependencies
         run: pip install -r .github/scripts/requirements.txt
 
-      - name: 5. Run Triage
+      - name: 4. Run Triage
         env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
           MODE: triage
           ISSUE_NUMBER: ${{ github.event.issue.number || inputs.number }}
