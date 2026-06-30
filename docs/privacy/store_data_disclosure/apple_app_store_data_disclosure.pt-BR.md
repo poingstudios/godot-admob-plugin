@@ -3,7 +3,7 @@
 A Apple exige que os desenvolvedores que publicam aplicativos na App Store forneçam [certas informações](https://developer.apple.com/app-store/app-privacy-details/) sobre o uso de dados de seus aplicativos. Este guia explica as práticas de coleta de dados do SDK do Google Mobile Ads para facilitar os desenvolvedores AdMob a responderem às perguntas no App Store Connect.
 
 !!! note
-    **Importante**: Como desenvolvedor do aplicativo, você é o único responsável por decidir como responder às perguntas de privacidade do App Store Connect regarding as práticas de coleta e uso de dados do seu aplicativo.
+    **Importante**: Como desenvolvedor do aplicativo, você é o único responsável por decidir como responder às perguntas de privacidade do App Store Connect em relação às práticas de coleta e uso de dados do seu aplicativo.
 
 Este documento é baseado em:
 

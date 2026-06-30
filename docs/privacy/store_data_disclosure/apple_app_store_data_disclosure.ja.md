@@ -1,6 +1,6 @@
 # Apple App Store データ開示
 
-Appleは、App Storeでアプリを公開する開発者に対して、アプリのデータ使用に関する[ certain information](https://developer.apple.com/app-store/app-privacy-details/)の提供を要求しています。このガイドは、Google Mobile Ads SDKのデータ収集慣行を説明し、AdMob開発者がApp Store Connectの質問に答えることを容易にします。
+Appleは、App Storeでアプリを公開する開発者に対して、アプリのデータ使用に関する[特定の情報](https://developer.apple.com/app-store/app-privacy-details/)の提供を要求しています。このガイドは、Google Mobile Ads SDKのデータ収集慣行を説明し、AdMob開発者がApp Store Connectの質問に答えることを容易にします。
 
 !!! note
     **重要**: アプリ開発者として、App Store Connectのプライバシー質問に対し、アプリのデータ収集および使用慣行に関して回答方法を決定する全責任を負います。
@@ -11,7 +11,7 @@ Appleは、App Storeでアプリを公開する開発者に対して、アプリ
 
 ## Google Mobile Ads SDKによって収集されるデータ
 
-AdMobのパフォーマンスを改善するために、Google Mobile Ads SDKはアプリから certain information を収集する場合があります：
+AdMobのパフォーマンスを改善するために、Google Mobile Ads SDKはアプリから特定の情報を収集する場合があります：
 
 | データタイプ | 目的 |
 |-------------|------|

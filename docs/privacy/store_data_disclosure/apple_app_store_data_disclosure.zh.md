@@ -1,6 +1,6 @@
 # Apple App Store 数据披露
 
-Apple 要求在 App Store 上发布应用的开发者提供有关其应用数据使用的[ certain information](https://developer.apple.com/app-store/app-privacy-details/)。本指南解释了 Google Mobile Ads SDK 的数据收集实践，以帮助 AdMob 开发者回答 App Store Connect 中的问题。
+Apple 要求在 App Store 上发布应用的开发者提供有关其应用数据使用的[某些信息](https://developer.apple.com/app-store/app-privacy-details/)。本指南解释了 Google Mobile Ads SDK 的数据收集实践，以帮助 AdMob 开发者回答 App Store Connect 中的问题。
 
 !!! note
     **重要**：作为应用开发者，您有责任决定如何响应 App Store Connect 关于您应用数据收集和使用实践的隐私问题。

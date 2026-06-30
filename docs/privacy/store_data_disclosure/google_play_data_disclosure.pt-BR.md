@@ -5,7 +5,7 @@ Em maio de 2021, o Google Play [anunciou a nova seção de Segurança de dados](
 Esta página pode ajudá-lo a completar os requisitos para essa divulgação de dados em relação ao seu uso do Plugin Godot AdMob. Nesta página, você pode encontrar informações sobre se e como o SDK do Google Mobile Ads lida com dados do usuário final, incluindo quaisquer configurações ou opções aplicáveis que você pode controlar como desenvolvedor do aplicativo.
 
 !!! note
-    **Importante**: Como desenvolvedor do aplicativo, você é o único responsável por decidir como responder ao formulário de Segurança de dados do Google Play regarding as práticas de coleta, compartilhamento e segurança de dados do seu aplicativo.
+    **Importante**: Como desenvolvedor do aplicativo, você é o único responsável por decidir como responder ao formulário de Segurança de dados do Google Play em relação às práticas de coleta, compartilhamento e segurança de dados do seu aplicativo.
 
 Este documento é baseado em:
 
