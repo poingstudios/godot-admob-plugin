@@ -1,0 +1,28 @@
+[config]
+name="AdMob"
+binary="admob/bin/admob.a"
+
+initialization="register_admob_types"
+deinitialization="unregister_admob_types"
+
+[dependencies]
+linked=[
+    "admob/lib/nanopb.xcframework", 
+    "admob/lib/GoogleAppMeasurement.xcframework", 
+    "admob/lib/GoogleMobileAds.xcframework",
+    "admob/lib/GoogleUtilities.xcframework",
+    "admob/lib/UserMessagingPlatform.xcframework",
+    "admob/lib/PromisesObjC.xcframework"]
+    
+embedded=[]
+system=["JavaScriptCore.framework"]
+
+capabilities=[]
+asdasds
+files=[]
+
+linker_flags=["-ObjC"]
+
+[plist]
+NSUserTrackingUsageDescription="This identifier will be used to deliver personalized ads to you."
+GADApplicationIdentifier="ca-app-pub-3940256099942544~1458002511"

@@ -1,0 +1,113 @@
+site_name: Godot AdMob Plugin - Poing Studios
+site_url: https://poingstudios.github.io/godot-admob-plugin/
+extra_css:
+  - stylesheets/extra.css
+extra_javascript:
+  - javascripts/extra.js
+theme:
+  features:
+    - content.tabs.link
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.annotation
+    - content.code.copy
+    - navigation.tabs
+  name: material
+  custom_dir: docs/overrides
+  favicon: assets/icon.ico
+  logo: assets/icon.ico
+  language: en
+  palette:
+    - scheme: default
+      toggle:
+        icon: material/toggle-switch-off-outline 
+        name: Switch to dark mode
+      primary: blue
+      accent: blue 
+    - scheme: slate 
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode    
+      primary: blue
+      accent: blue
+markdown_extensions:
+  - md_in_html
+  - toc
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true 
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - admonition
+  - pymdownx.arithmatex:
+      generic: true
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.mark
+  - attr_list
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+extra:
+  version:
+    provider: mike
+    default: stable
+  social:
+    - icon: fontawesome/brands/discord
+      link: https://discord.com/invite/YEPvYjSSMk
+    - icon: fontawesome/brands/github
+      link: https://github.com/poingstudios
+copyright: |
+  &copy; 2023-{current_year} <a href="https://github.com/poingstudios/godot-admob-plugin"  target="_blank" rel="noopener">Poing Studios</a> | Portions of this page are modifications based on work created and <a href="https://developers.google.com/terms/site-policies"  target="_blank" rel="noopener">shared by Google</a> and used according to terms described in the <a href="https://creativecommons.org/licenses/by/4.0/"  target="_blank" rel="noopener">Creative Commons 4.0 Attribution License</a>.
+
+plugins:
+  - search
+  - i18n:
+      reconfigure_material: true
+      languages:
+        - locale: en
+          name: English
+          default: true
+        - locale: pt-BR
+          name: Português (Brasil)
+          nav_translations:
+            Guides: Guias
+            Get Started: Começar
+            Enable test ads: Habilitar anúncios de teste
+            Preview Mock Ads in Editor: Visualizar anúncios mock no Editor
+            iOS Pause Background: Pausar em segundo plano no iOS
+            Ad formats: Formatos de anúncios
+            Banner: Banner
+            Interstitial: Intersticial
+            Rewarded: Premiado
+            Rewarded Interstitial: Intersticial Premiado
+            Privacy & User Consent: Privacidade e Consentimento do Usuário
+            Reference: Referência
+            Overview: Visão Geral
+            API: API
+            Enums: Enums
+
+nav:
+  - Guides:
+    - Get Started: index.md
+    - Enable test ads: enable_test_ads.md
+    - Preview Mock Ads in Editor: editor_mock_ads.md
+    - iOS Pause Background: ios_pause_background.md
+    - Ad formats:
+      - Banner: ad_formats/banner.md
+      - Interstitial: ad_formats/interstitial.md
+      - Rewarded: ad_formats/rewarded.md
+      - Rewarded Interstitial: ad_formats/rewarded_interstitial.md
+    - Privacy & User Consent: privacy.md
+  - Reference:
+    - Overview: reference/index.md
+    - API: reference/api.md
+    - Enums: reference/enums.md
+
+hooks:
+  - docs/hooks.py

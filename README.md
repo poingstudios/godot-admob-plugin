@@ -1,104 +1,202 @@
-[![Download Asset Library](https://img.shields.io/badge/Download-Asset%20Library-darkgreen?style=for-the-badge)](https://godotengine.org/asset-library/asset/1108)
-![Stars](https://img.shields.io/github/stars/Poing-Studios/godot-admob-editor?style=for-the-badge)
-![License](https://img.shields.io/github/license/Poing-Studios/godot-admob-editor?style=for-the-badge)
+<div align="center">
+  <h1>
+    <img src="https://i.imgur.com/T3Beai0.png" width="40" style="vertical-align: middle;"> Godot AdMob Plugin (Godot 3)
+  </h1>
 
-# Godot AdMob Editor Plugin
+  [![VersionBadge]][Releases] [![StarsBadge]][Stargazers] [![DiscordBadge]][DiscordLink] [![LicenseBadge]][LicenseLink] <br>
+  [![DownloadsBadge]][Releases] [![AssetStoreBadge]][AssetStore] <br>
+  [![AndroidBadge]][AndroidPlatform] [![iOSBadge]][iOSPlatform] [![GDScriptBadge]][DocumentationLink] [![CSharpBadge]][DocumentationLink]
 
-This addon provides an easy and beautiful way to configure AdMob directly through the editor. Supports [godot-admob-android](https://github.com/Poing-Studios/godot-admob-android) and [godot-admob-ios](https://github.com/Poing-Studios/godot-admob-ios).
+  **The complete solution for AdMob integration in Godot 3 using GDScript or C#.**  
+  Supports Android and iOS natively.
 
-### [Installation and Usage Tutorial](https://www.youtube.com/watch?v=ZnlH3INcAGs)
+  ![Plugin Usage](docs/assets/usage.webp)
 
-# Installation
+  [🎬 Watch Video Tutorial](https://www.youtube.com/watch?v=ZnlH3INcAGs) • [📖 Read Documentation][DocumentationLink]
 
-Godot Asset Library (recommended):
-1. Find the AdMob plugin by `poing.studios` \
-   <img height=100 src="static/asset_library.png">
-2. Click Download and Install
-3. Enable in Project→Project Settings→Plugins
-4. Install [godot-admob-android](https://github.com/Poing-Studios/godot-admob-android) and/or [godot-admob-ios](https://github.com/Poing-Studios/godot-admob-ios)
+  ---
 
-Manual install for custom versions:
-1. Pick a [specific version](https://github.com/Poing-Studios/godot-admob-editor/tags) from tags
-2. Download and extract as a `.zip` or `.tar.gz`
-3. Copy the extracted `addons/admob` folder into `res://addons` on your project
-4. Install [godot-admob-android](https://github.com/Poing-Studios/godot-admob-android) and/or [godot-admob-ios](https://github.com/Poing-Studios/godot-admob-ios)
+  [📦 Installation](#-installation) • [📋 Examples](#-examples) • [🙏 Support](#-support)
+</div>
 
-# Usage
+## 📦 Installation
 
-After installation, the singleton `MobileAds` will be available. Try it out by calling `MobileAds.load_banner()`!
+### Godot Asset Library (Recommended)
+1. Open the AssetLib tab inside your Godot 3 project.
+2. Search for `AdMob` by `Poing Studios`.
+3. Download and Install the plugin.
+4. Enable the plugin under **Project -> Project Settings -> Plugins**.
+5. Use the AdMob Editor panel (**Project -> Tools -> AdMob Manager**) to download the iOS/Android platform templates.
 
-# API
+---
 
-### Methods:
+## 📋 Examples
 
-```gdscript
-void load_banner(ad_unit_name = "standard")
-void load_interstitial(ad_unit_name = "standard")
-void load_rewarded(ad_unit_name = "standard")
-void load_rewarded_interstitial(ad_unit_name = "standard")
+### 🏁 Initialize AdMob
 
-void destroy_banner()
-void show_banner()
-void hide_banner()
-void show_interstitial()
-void show_rewarded()
-void show_rewarded_interstitial()
+Prior to loading ads, you must initialize the SDK.
 
-void request_user_consent()
-void reset_consent_state(will_request_user_consent = false)
+=== "GDScript"
 
-int get_banner_width()
-int get_banner_width_in_pixels()
-int get_banner_height()
-int get_banner_height_in_pixels()
-bool get_is_banner_loaded()
-bool get_is_interstitial_loaded()
-bool get_is_rewarded_loaded()
-bool get_is_rewarded_interstitial_loaded()
-```
+    ```gdscript
+    func _ready() -> void:
+        # Connect to initialization signal
+        MobileAds.connect("initialization_complete", self, "_on_AdMob_initialization_complete")
+        MobileAds.initialize()
 
-### Signals:
+    func _on_AdMob_initialization_complete(status: int, adapter_name: String) -> void:
+        print("AdMob Initialized: ", status)
+    ```
 
-```gdscript
-initialization_complete(status, adapter_name)
+=== "C#"
 
-consent_form_dismissed()
-consent_status_changed(consent_status_message)
-consent_form_load_failure(error_code, error_message)
-consent_info_update_success(consent_status_message)
-consent_info_update_failure(error_code, error_message)
+    ```csharp
+    public override void _Ready()
+    {
+        MobileAds.Connect("initialization_complete", this, nameof(_on_AdMob_initialization_complete));
+        MobileAds.Call("initialize");
+    }
 
-banner_loaded()
-banner_failed_to_load(error_code)
-banner_opened()
-banner_clicked()
-banner_closed()
-banner_recorded_impression()
-banner_destroyed()
+    private void _on_AdMob_initialization_complete(int status, string adapterName)
+    {
+        GD.Print("AdMob Initialized: " + status);
+    }
+    ```
 
-interstitial_failed_to_load(error_code)
-interstitial_loaded()
-interstitial_failed_to_show(error_code)
-interstitial_opened()
-interstitial_clicked()
-interstitial_closed()
-interstitial_recorded_impression()
+---
 
-rewarded_ad_failed_to_load(error_code)
-rewarded_ad_loaded()
-rewarded_ad_failed_to_show(error_code)
-rewarded_ad_opened()
-rewarded_ad_clicked()
-rewarded_ad_closed()
-rewarded_ad_recorded_impression()
+### 📱 Banner Ads
 
-rewarded_interstitial_ad_failed_to_load(error_code)
-rewarded_interstitial_ad_loaded()
-rewarded_interstitial_ad_failed_to_show(error_code)
-rewarded_interstitial_ad_opened()
-rewarded_interstitial_ad_clicked()
-rewarded_interstitial_ad_closed()
-rewarded_interstitial_ad_recorded_impression()
+=== "GDScript"
 
-user_earned_rewarded(currency, amount)
-```
+    ```gdscript
+    func load_and_show_banner() -> void:
+        MobileAds.connect("banner_loaded", self, "_on_banner_loaded")
+        MobileAds.load_banner()
+
+    func _on_banner_loaded() -> void:
+        MobileAds.show_banner()
+    ```
+
+=== "C#"
+
+    ```csharp
+    public void LoadAndShowBanner()
+    {
+        MobileAds.Connect("banner_loaded", this, nameof(_on_banner_loaded));
+        MobileAds.Call("load_banner");
+    }
+
+    private void _on_banner_loaded()
+    {
+        MobileAds.Call("show_banner");
+    }
+    ```
+
+---
+
+### 🎬 Interstitial Ads
+
+=== "GDScript"
+
+    ```gdscript
+    func show_interstitial_ad() -> void:
+        MobileAds.connect("interstitial_loaded", self, "_on_interstitial_loaded")
+        MobileAds.load_interstitial()
+
+    func _on_interstitial_loaded() -> void:
+        MobileAds.show_interstitial()
+    ```
+
+=== "C#"
+
+    ```csharp
+    public void ShowInterstitialAd()
+    {
+        MobileAds.Connect("interstitial_loaded", this, nameof(_on_interstitial_loaded));
+        MobileAds.Call("load_interstitial");
+    }
+
+    private void _on_interstitial_loaded()
+    {
+        MobileAds.Call("show_interstitial");
+    }
+    ```
+
+---
+
+### 🎁 Rewarded Video Ads
+
+=== "GDScript"
+
+    ```gdscript
+    func show_rewarded_ad() -> void:
+        MobileAds.connect("rewarded_ad_loaded", self, "_on_rewarded_ad_loaded")
+        MobileAds.connect("user_earned_rewarded", self, "_on_user_earned_rewarded")
+        MobileAds.load_rewarded()
+
+    func _on_rewarded_ad_loaded() -> void:
+        MobileAds.show_rewarded()
+
+    func _on_user_earned_rewarded(currency: String, amount: int) -> void:
+        print("Rewarded! Type: ", currency, ", Amount: ", amount)
+    ```
+
+=== "C#"
+
+    ```csharp
+    public void ShowRewardedAd()
+    {
+        MobileAds.Connect("rewarded_ad_loaded", this, nameof(_on_rewarded_ad_loaded));
+        MobileAds.Connect("user_earned_rewarded", this, nameof(_on_user_earned_rewarded));
+        MobileAds.Call("load_rewarded");
+    }
+
+    private void _on_rewarded_ad_loaded()
+    {
+        MobileAds.Call("show_rewarded");
+    }
+
+    private void _on_user_earned_rewarded(string currency, int amount)
+    {
+        GD.Print("Rewarded! Type: " + currency + ", Amount: " + amount);
+    }
+    ```
+
+For the complete list of methods and signals, check out the [API Reference][DocumentationLink].
+
+---
+
+## 🙏 Support
+
+If you find our work valuable and would like to support us, consider contributing via these platforms:
+
+[![PatreonBadge]][PatreonLink]
+[![KofiBadge]][KofiLink]
+[![PaypalBadge]][PaypalLink]
+
+[VersionBadge]: https://badgen.net/github/release/poingstudios/godot-admob-plugin/stable?label=Version
+[StarsBadge]: https://badgen.net/github/stars/poingstudios/godot-admob-plugin
+[DiscordBadge]: https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord
+[LicenseBadge]: https://badgen.net/github/license/poingstudios/godot-admob-plugin?label=License
+[DownloadsBadge]: https://badgen.net/github/assets-dl/poingstudios/godot-admob-plugin?label=Downloads&color=green
+[AssetStoreBadge]: https://badgen.net/badge/Download/Asset%20Store/green
+[AndroidBadge]: https://badgen.net/badge/_/Android/3DDC84?label=&icon=android
+[iOSBadge]: https://badgen.net/badge/_/iOS/000000?label=&icon=apple
+[GDScriptBadge]: https://badgen.net/badge/_/GDScript/478CBF?label=&icon=godotengine
+[CSharpBadge]: https://badgen.net/badge/_/C%23/239120?label=&icon=csharp
+[PatreonBadge]: https://badgen.net/badge/Support%20us%20on/Patreon/orange?icon=patreon
+[KofiBadge]: https://badgen.net/badge/Buy%20us%20a/coffee/yellow?icon=kofi
+[PaypalBadge]: https://badgen.net/badge/Donate/via%20Paypal/blue?icon=paypal
+
+[DocumentationLink]: https://poingstudios.github.io/godot-admob-plugin/v1/
+[Releases]: https://github.com/poingstudios/godot-admob-plugin/releases
+[Stargazers]: https://github.com/poingstudios/godot-admob-plugin/stargazers
+[DiscordLink]: https://discord.com/invite/YEPvYjSSMk
+[LicenseLink]: https://github.com/poingstudios/godot-admob-plugin/blob/v1/LICENSE
+[AssetStore]: https://store.godotengine.org/asset/poingstudios/admob/
+[AndroidPlatform]: https://github.com/poingstudios/godot-admob-plugin/tree/v1/platforms/android
+[iOSPlatform]: https://github.com/poingstudios/godot-admob-plugin/tree/v1/platforms/ios
+[PatreonLink]: https://patreon.com/poingstudios
+[KofiLink]: https://ko-fi.com/poingstudios
+[PaypalLink]: https://www.paypal.com/donate/?hosted_button_id=EBUVPEGF4BUR8
