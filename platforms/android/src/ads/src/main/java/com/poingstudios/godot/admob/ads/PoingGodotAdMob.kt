@@ -55,6 +55,7 @@ class PoingGodotAdMob(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(
     override fun getPluginSignals(): MutableSet<SignalInfo> {
         val signals: MutableSet<SignalInfo> = ArraySet()
         signals.add(SignalInfo("on_initialization_complete", Dictionary::class.java))
+        signals.add(SignalInfo("on_ad_inspector_closed", Dictionary::class.java))
         return signals
     }
 
@@ -114,5 +115,20 @@ class PoingGodotAdMob(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(
     @UsedByGodot
     fun get_platform_version(): String {
         return MobileAds.getVersion().toString()
+    }
+
+    @UsedByGodot
+    fun open_ad_inspector() {
+        aActivity.runOnUiThread {
+            MobileAds.openAdInspector(aActivity) { adInspectorError ->
+                val resultDictionary = Dictionary()
+                if (adInspectorError != null) {
+                    resultDictionary["code"] = adInspectorError.code
+                    resultDictionary["message"] = adInspectorError.message ?: ""
+                    resultDictionary["domain"] = adInspectorError.domain ?: ""
+                }
+                emitSignal("on_ad_inspector_closed", resultDictionary)
+            }
+        }
     }
 }

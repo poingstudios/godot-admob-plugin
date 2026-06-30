@@ -36,6 +36,10 @@ namespace PoingStudios.AdMob.Api
         private static readonly Callable _onInitCompleteCallable =
             Callable.From<Dictionary>(OnInitializationComplete);
 
+        private static AdInspectorClosedListener _currentAdInspectorListener;
+        private static readonly Callable _onAdInspectorClosedCallable =
+            Callable.From<Dictionary>(OnAdInspectorClosed);
+
         public static void Initialize(OnInitializationCompleteListener listener = null)
         {
             if (_plugin == null) return;
@@ -114,6 +118,20 @@ namespace PoingStudios.AdMob.Api
             }
         }
 
+        public static void OpenAdInspector(AdInspectorClosedListener listener = null)
+        {
+            if (_plugin == null) return;
+
+            _plugin.Call("open_ad_inspector");
+
+            if (listener != null)
+            {
+                _currentAdInspectorListener = listener;
+                SafeConnect(_plugin, "on_ad_inspector_closed",
+                    _onAdInspectorClosedCallable, (uint)GodotObject.ConnectFlags.OneShot);
+            }
+        }
+
         public static string GetVersion()
         {
             return PoingStudios.AdMob.Core.PluginVersion.Current;
@@ -130,6 +148,11 @@ namespace PoingStudios.AdMob.Api
         {
             var status = InitializationStatus.Create(statusDict);
             Callable.From(() => _currentListener?.OnInitializationComplete?.Invoke(status)).CallDeferred();
+        }
+
+        private static void OnAdInspectorClosed(Dictionary errorDict)
+        {
+            Callable.From(() => _currentAdInspectorListener?.OnAdInspectorClosed?.Invoke(errorDict)).CallDeferred();
         }
     }
 }

@@ -174,11 +174,12 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
             seen.add(key)
             unique_findings.append(f)
 
-    findings_rows = ""
-    for f in unique_findings:
-        findings_rows += f"| {f['severity']} | `{f['file']}` | {f['finding']} |\n"
-    if not findings_rows:
-        findings_rows = "| | | No issues found. ✅ |\n"
+    if unique_findings:
+        findings_section = "| Severity | File | Finding |\n| :---: | :--- | :--- |\n"
+        for f in unique_findings:
+            findings_section += f"| {f['severity']} | `{f['file']}` | {f['finding']} |\n"
+    else:
+        findings_section = "No issues found. ✅"
 
     combined_summary = " | ".join(s for s in summaries if s)
     verdict_str = VERDICT_MAP.get(combined_verdict, "**🟡 Comment**")
@@ -189,9 +190,8 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
 
 ## 🔍 Findings
 
-| | File | Finding |
-|---|---|---|
-{findings_rows}
+{findings_section}
+
 ## 📌 Verdict
 
 {verdict_str}

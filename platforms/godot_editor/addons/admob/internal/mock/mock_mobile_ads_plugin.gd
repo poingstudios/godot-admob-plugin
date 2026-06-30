@@ -23,6 +23,7 @@
 extends Node
 
 signal on_initialization_complete(initialization_status_dictionary: Dictionary)
+signal on_ad_inspector_closed(error_dictionary: Dictionary)
 
 var _is_initialized := false
 var _volume := 1.0
@@ -80,3 +81,9 @@ func get_version() -> String:
 
 func get_platform_version() -> String:
 	return "1.0.0-mock"
+
+func open_ad_inspector() -> void:
+	var timer := (Engine.get_main_loop() as SceneTree).create_timer(0.5)
+	timer.timeout.connect(func():
+		on_ad_inspector_closed.emit({})
+	)

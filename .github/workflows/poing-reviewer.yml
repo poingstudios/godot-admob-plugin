@@ -75,10 +75,10 @@ jobs:
       - name: Set PR Env (workflow_dispatch or issue_comment)
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'issue_comment'
         run: |
-          pr_data=$(gh pr view ${{ github.event.issue.number || inputs.number }} --json baseRef,number,title,headRefName,headRefOid --repo ${{ github.repository }})
+          pr_data=$(gh pr view ${{ github.event.issue.number || inputs.number }} --json baseRefName,number,title,headRefName,headRefOid --repo ${{ github.repository }})
           echo "PR_NUMBER=$(echo $pr_data | jq -r '.number')" >> $GITHUB_ENV
           echo "PR_TITLE=$(echo $pr_data | jq -r '.title')" >> $GITHUB_ENV
-          echo "BASE_REF=$(echo $pr_data | jq -r '.baseRef')" >> $GITHUB_ENV
+          echo "BASE_REF=$(echo $pr_data | jq -r '.baseRefName')" >> $GITHUB_ENV
           echo "PR_HEAD_SHA=$(echo $pr_data | jq -r '.headRefOid')" >> $GITHUB_ENV
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
@@ -117,12 +117,14 @@ jobs:
 
   triage:
     if: >
+      (github.event_name == 'pull_request') ||
       (github.event_name == 'issues') ||
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '/triage')) ||
       (github.event_name == 'workflow_dispatch' && inputs.mode == 'triage')
     runs-on: ubuntu-latest
     permissions:
       issues: write
+      pull-requests: write
     steps:
       - name: 1. Checkout Code
         uses: actions/checkout@v4
@@ -140,10 +142,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
           MODE: triage
-          ISSUE_NUMBER: ${{ github.event.issue.number || inputs.number }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number || inputs.number }}
           REPO: ${{ github.repository }}
-          ISSUE_TITLE: ${{ github.event.issue.title || '' }}
-          ISSUE_BODY: ${{ github.event.issue.body || '' }}
+          ISSUE_TITLE: ${{ github.event.issue.title || github.event.pull_request.title || '' }}
+          ISSUE_BODY: ${{ github.event.issue.body || github.event.pull_request.body || '' }}
           ISSUE_ACTION: ${{ github.event.action || 'workflow_dispatch' }}
           COMMENT_BODY: ${{ github.event.comment.body || '' }}
           IS_MAINTAINER: ${{ contains(github.event.comment.author_association, 'MEMBER') || contains(github.event.comment.author_association, 'OWNER') }}

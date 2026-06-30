@@ -130,7 +130,13 @@ plugins:
             Get Started: Começar
             GDPR IAB support: Suporte ao GDPR IAB
             IDFA support: Suporte ao IDFA
-            Advanced topics: Tópicos Avançados
+            Manage Ad Inspector: Gerenciar inspecionador de anúncios
+            Launch ad inspector: Iniciar o inspecionador de anúncios
+            Verify adapter integrations: Verificar integrações de adaptadores
+            Test ad units: Testar blocos de anúncios
+            Troubleshoot ad units: Solucionar problemas de blocos de anúncios
+            Troubleshoot privacy settings: Solucionar problemas de configurações de privacidade
+            Copy troubleshooting output: Copiar saída de diagnóstico
             Targeting: Segmentação (Targeting)
             Impression-Level Ad Revenue: Receita de Anúncios a Nível de Impressão
             Response Info: Informações de Resposta
@@ -185,6 +191,13 @@ plugins:
             GDPR IAB support: Soporte GDPR IAB
             IDFA support: Soporte IDFA
             Advanced topics: Temas avanzados
+            Manage Ad Inspector: Administrar el inspector de anuncios
+            Launch ad inspector: Iniciar el inspector de anuncios
+            Verify adapter integrations: Verificar las integraciones de los adaptadores
+            Test ad units: Probar bloques de anuncios
+            Troubleshoot ad units: Solucionar problemas de bloques de anuncios
+            Troubleshoot privacy settings: Solucionar problemas de la configuración de privacidad
+            Copy troubleshooting output: Copiar los resultados de la solución de problemas
             Targeting: Segmentación (Targeting)
             Impression-Level Ad Revenue: Ingresos de anuncios a nivel de impresión
             Response Info: Información de respuesta
@@ -239,6 +252,13 @@ plugins:
             GDPR IAB support: GDPR IAB 支持
             IDFA support: IDFA 支持
             Advanced topics: 高级主题
+            Manage Ad Inspector: 管理广告检查器
+            Launch ad inspector: 启动广告检查器
+            Verify adapter integrations: 验证适配器集成
+            Test ad units: 测试广告单元
+            Troubleshoot ad units: 排查广告单元问题
+            Troubleshoot privacy settings: 排查隐私设置问题
+            Copy troubleshooting output: 复制诊断输出
             Targeting: 定向 (Targeting)
             Impression-Level Ad Revenue: 展示级广告收入
             Response Info: 响应信息
@@ -293,6 +313,13 @@ plugins:
             GDPR IAB support: GDPR IAB サポート
             IDFA support: IDFA サポート
             Advanced topics: 高度なトピック
+            Manage Ad Inspector: 広告インスペクターの管理
+            Launch ad inspector: 広告インスペクターの起動
+            Verify adapter integrations: アダプター統合の確認
+            Test ad units: 広告ユニットのテスト
+            Troubleshoot ad units: 広告ユニットのトラブルシューティング
+            Troubleshoot privacy settings: プライバシー設定のトラブルシューティング
+            Copy troubleshooting output: 診断出力のコピー
             Targeting: ターゲティング (Targeting)
             Impression-Level Ad Revenue: インプレッションレベルの広告収益
             Response Info: レスポンス情報
@@ -350,6 +377,14 @@ nav:
         - GDPR IAB support: privacy/user_messaging_tools/gdpr_iab_support.md
         - IDFA support: privacy/user_messaging_tools/idfa_support.md
     - Troubleshoot:
+      - Manage Ad Inspector:
+        - Overview: advanced_topics/ad_inspector/overview.md
+        - Launch ad inspector: advanced_topics/ad_inspector/launch.md
+        - Verify adapter integrations: advanced_topics/ad_inspector/verify_adapters.md
+        - Test ad units: advanced_topics/ad_inspector/test_ad_units.md
+        - Troubleshoot ad units: advanced_topics/ad_inspector/troubleshoot_ad_units.md
+        - Troubleshoot privacy settings: advanced_topics/ad_inspector/troubleshoot_privacy.md
+        - Copy troubleshooting output: advanced_topics/ad_inspector/copy_output.md
       - Response Info: advanced_topics/response_info.md
     - Optimize:
       - Global settings: global_settings.md

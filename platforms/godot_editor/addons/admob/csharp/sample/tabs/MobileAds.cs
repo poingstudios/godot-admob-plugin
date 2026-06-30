@@ -22,6 +22,7 @@
 
 using Godot;
 using PoingStudios.AdMob.Api;
+using PoingStudios.AdMob.Api.Listeners;
 using PoingStudios.AdMob.Sample;
 
 public partial class MobileAds : BaseTab
@@ -54,6 +55,9 @@ public partial class MobileAds : BaseTab
 
 		var initBtn = GetNode<Button>("GetInitStatus");
 		initBtn.Pressed += OnGetInitializationStatusPressed;
+
+		var openAdInspectorBtn = GetNode<Button>("OpenAdInspector");
+		openAdInspectorBtn.Pressed += OnOpenAdInspectorPressed;
 
 		var langBtn = GetNode<OptionButton>("LanguageCard/LanguageContainer/LanguageButton");
 		langBtn.AddItem("English", 0);
@@ -157,6 +161,29 @@ public partial class MobileAds : BaseTab
 	{
 		Log(string.Format("Muting ads: {0}", isMuted));
 		PoingStudios.AdMob.Api.MobileAds.SetAppMuted(isMuted);
+	}
+
+	private void OnOpenAdInspectorPressed()
+	{
+		Log("Opening Ad Inspector...");
+		var listener = new AdInspectorClosedListener
+		{
+			OnAdInspectorClosed = (error) =>
+			{
+				if (error.Count == 0)
+				{
+					Log("Ad Inspector closed. Result: OK");
+				}
+				else
+				{
+					Log(string.Format("Ad Inspector closed. Error code: {0} | message: {1} | domain: {2}",
+						error.ContainsKey("code") ? error["code"] : -1,
+						error.ContainsKey("message") ? (string)error["message"] : "",
+						error.ContainsKey("domain") ? (string)error["domain"] : ""));
+				}
+			}
+		};
+		PoingStudios.AdMob.Api.MobileAds.OpenAdInspector(listener);
 	}
 
 	private void Log(string message)
