@@ -239,7 +239,7 @@ namespace PoingStudios.AdMob.Core
 			viewportSize.X = Mathf.Max(1f, viewportSize.X);
 			viewportSize.Y = Mathf.Max(1f, viewportSize.Y);
 
-			float scaleFactor = Mathf.Min(viewportSize.X, viewportSize.Y) / 360.0f;
+			float scaleFactor = Mathf.Min(viewportSize.X / 360f, viewportSize.Y / 640f);
 			if (scaleFactor <= 0.0f)
 			{
 				scaleFactor = 1.0f;

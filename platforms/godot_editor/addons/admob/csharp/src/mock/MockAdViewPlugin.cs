@@ -74,16 +74,9 @@ namespace PoingStudios.AdMob.Core
 
 			var ui = new ColorRect
 			{
-				Color = Colors.DarkGray
+				Color = Colors.White
 			};
 			ui.Hide();
-
-			var bg_color = new ColorRect
-			{
-				Color = Colors.White,
-			};
-			bg_color.SetAnchorsPreset(Control.LayoutPreset.FullRect);
-			ui.AddChild(bg_color);
 
 			Godot.Collections.Dictionary adSize = adViewDictionary.TryGetValue("ad_size", out var sizeVar) 
 				? sizeVar.AsGodotDictionary()
@@ -362,7 +355,7 @@ namespace PoingStudios.AdMob.Core
 			var children = ad.Ui.GetChildren();
 			foreach (var child in children)
 			{
-				if (child is ColorRect || child == ad.ToggleBtn || child == ad.CloseBtn) continue;
+				if (child == ad.ToggleBtn || child == ad.CloseBtn) continue;
 				child.QueueFree();
 			}
 
@@ -452,10 +445,11 @@ namespace PoingStudios.AdMob.Core
 				hbox.AddChild(spacer2);
 
 				var admobLogo = new TextureRect { Texture = ResourceLoader.Load<Texture2D>("res://addons/admob/assets/icon-120.png"), ExpandMode = TextureRect.ExpandModeEnum.IgnoreSize, StretchMode = TextureRect.StretchModeEnum.KeepAspectCentered, CustomMinimumSize = new Vector2(30 * scaleFactor, 30 * scaleFactor) };
+				admobLogo.SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter;
 				admobLogo.SizeFlagsVertical = Control.SizeFlags.ShrinkCenter;
 				
 				var rightMargin = new MarginContainer();
-				rightMargin.AddThemeConstantOverride("margin_right", (int)Mathf.Round(15 * scaleFactor));
+				rightMargin.AddThemeConstantOverride("margin_right", (int)Mathf.Round(45 * scaleFactor));
 				rightMargin.AddChild(admobLogo);
 				hbox.AddChild(rightMargin);
 			}
@@ -554,15 +548,49 @@ namespace PoingStudios.AdMob.Core
 		public int get_width_in_pixels(int uid)
 		{
 			if (!_ads.TryGetValue(uid, out AdData ad)) return 0;
-			float screenScale = DisplayServer.ScreenGetScale(DisplayServer.WindowGetCurrentScreen());
-			return (int)(get_width(uid) * screenScale);
+			if (ad.IsHidden) return 0;
+
+			var viewportSize = GetViewport().GetVisibleRect().Size;
+			var windowSize = DisplayServer.WindowGetSize();
+			float guiScaleFactor = 1.0f;
+			if (windowSize.Y > 0)
+			{
+				guiScaleFactor = viewportSize.Y / (float)windowSize.Y;
+			}
+
+			float scaleFactor = Mathf.Min(viewportSize.X, viewportSize.Y) / 360f;
+			if (scaleFactor <= 0.0f)
+			{
+				scaleFactor = 1.0f;
+			}
+
+			float widthInViewport = ad.IsAdaptive ? viewportSize.X : ad.Width * scaleFactor;
+			return (int)Mathf.Round(widthInViewport / guiScaleFactor);
 		}
 
 		public int get_height_in_pixels(int uid)
 		{
 			if (!_ads.TryGetValue(uid, out AdData ad)) return 0;
-			float screenScale = DisplayServer.ScreenGetScale(DisplayServer.WindowGetCurrentScreen());
-			return (int)(get_height(uid) * screenScale);
+			if (ad.IsHidden) return 0;
+
+			var viewportSize = GetViewport().GetVisibleRect().Size;
+			var windowSize = DisplayServer.WindowGetSize();
+			float guiScaleFactor = 1.0f;
+			if (windowSize.Y > 0)
+			{
+				guiScaleFactor = viewportSize.Y / (float)windowSize.Y;
+			}
+
+			float scaleFactor = Mathf.Min(viewportSize.X, viewportSize.Y) / 360f;
+			if (scaleFactor <= 0.0f)
+			{
+				scaleFactor = 1.0f;
+			}
+
+			bool isExpanded = ad.IsCollapsible && !ad.IsCollapsed;
+			int heightDp = isExpanded ? 250 : ad.Height;
+			float heightInViewport = heightDp * scaleFactor;
+			return (int)Mathf.Round(heightInViewport / guiScaleFactor);
 		}
 
 		public bool is_collapsible(int uid) => _ads.TryGetValue(uid, out AdData ad) && ad.IsCollapsible;
