@@ -45,13 +45,8 @@ func create(ad_view_dictionary: Dictionary) -> int:
 	var uid := _uid_counter
 
 	var ui := ColorRect.new()
-	ui.color = Color.DARK_GRAY
+	ui.color = Color.WHITE
 	ui.hide()
-
-	var bg_color := ColorRect.new()
-	bg_color.color = Color.WHITE
-	bg_color.set_anchors_preset(Control.PRESET_FULL_RECT)
-	ui.add_child(bg_color)
 
 	var ad_size: Dictionary = ad_view_dictionary.get("ad_size", {"width": 320, "height": 50})
 	var width: int = ad_size.get("width", 320)
@@ -194,13 +189,39 @@ func get_height(uid: int) -> int:
 
 func get_width_in_pixels(uid: int) -> int:
 	if not _ads.has(uid): return 0
-	var screen_scale := DisplayServer.screen_get_scale(DisplayServer.window_get_current_screen())
-	return int(get_width(uid) * screen_scale)
+	var is_hidden: bool = _ads[uid].get("is_hidden", false)
+	if is_hidden:
+		return 0
+	var viewport_size := get_viewport().get_visible_rect().size
+	var window_size := DisplayServer.window_get_size()
+	var gui_scale_factor := 1.0
+	if window_size.y > 0:
+		gui_scale_factor = viewport_size.y / float(window_size.y)
+	var is_adaptive: bool = _ads[uid].get("is_adaptive", false)
+	var scale_factor: float = min(viewport_size.x, viewport_size.y) / 360.0
+	if scale_factor <= 0.0:
+		scale_factor = 1.0
+	var width_in_viewport = viewport_size.x if is_adaptive else _ads[uid]["width"] * scale_factor
+	return int(round(width_in_viewport / gui_scale_factor))
 
 func get_height_in_pixels(uid: int) -> int:
 	if not _ads.has(uid): return 0
-	var screen_scale := DisplayServer.screen_get_scale(DisplayServer.window_get_current_screen())
-	return int(get_height(uid) * screen_scale)
+	var is_hidden: bool = _ads[uid].get("is_hidden", false)
+	if is_hidden:
+		return 0
+	var viewport_size := get_viewport().get_visible_rect().size
+	var window_size := DisplayServer.window_get_size()
+	var gui_scale_factor := 1.0
+	if window_size.y > 0:
+		gui_scale_factor = viewport_size.y / float(window_size.y)
+
+	var is_expanded: bool = _ads[uid].get("is_collapsible", false) and not _ads[uid].get("is_collapsed", false)
+	var height_dp: int = 250 if is_expanded else _ads[uid]["height"]
+	var scale_factor: float = min(viewport_size.x, viewport_size.y) / 360.0
+	if scale_factor <= 0.0:
+		scale_factor = 1.0
+	var height_in_viewport = height_dp * scale_factor
+	return int(round(height_in_viewport / gui_scale_factor))
 
 func is_collapsible(uid: int) -> bool:
 	return _ads[uid].get("is_collapsible", false) if _ads.has(uid) else false
@@ -336,7 +357,7 @@ func _update_size(uid: int) -> void:
 		btn.add_theme_font_size_override("font_size", max(1, int(round(14 * scale_factor))))
 
 	for child in ad["ui"].get_children():
-		if child is ColorRect or child == ad.get("toggle_btn") or child == ad.get("close_btn"): continue
+		if child == ad.get("toggle_btn") or child == ad.get("close_btn"): continue
 		child.queue_free()
 
 
@@ -454,10 +475,11 @@ func _update_size(uid: int) -> void:
 		admob_logo.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		admob_logo.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		admob_logo.custom_minimum_size = Vector2(30 * scale_factor, 30 * scale_factor)
+		admob_logo.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		admob_logo.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 
 		var right_margin := MarginContainer.new()
-		right_margin.add_theme_constant_override("margin_right", int(round(15 * scale_factor)))
+		right_margin.add_theme_constant_override("margin_right", int(round(45 * scale_factor)))
 		right_margin.add_child(admob_logo)
 		hbox.add_child(right_margin)
 
