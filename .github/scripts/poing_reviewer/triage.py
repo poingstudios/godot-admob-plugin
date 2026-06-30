@@ -165,19 +165,6 @@ def run_triage(cfg):
     if new_labels:
         add_labels_to_issue(cfg.REPO, cfg.ISSUE_NUMBER, new_labels, cfg.GITHUB_TOKEN)
 
-    summary = result.get("summary", "")
-    is_duplicate = result.get("is_duplicate", False)
 
-    if summary:
-        comment_body = "## 🏷️ Auto-Triage Results\n\n"
-        comment_body += f"**Labels applied:** {', '.join(f'`{l}`' for l in labels_to_add)}\n\n"
-        comment_body += f"**Priority:** {priority}\n\n"
-        if summary:
-            comment_body += f"**Summary:** {summary}\n"
-        if is_duplicate:
-            comment_body += "\n⚠️ **Note:** This issue may be a duplicate of an existing issue."
-        comment_body += TRIAGE_FOOTER
-
-        add_comment(cfg.REPO, cfg.ISSUE_NUMBER, comment_body, cfg.GITHUB_TOKEN)
 
     print(f"Issue #{cfg.ISSUE_NUMBER} triaged successfully.", file=sys.stderr)

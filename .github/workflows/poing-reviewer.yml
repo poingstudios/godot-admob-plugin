@@ -117,12 +117,14 @@ jobs:
 
   triage:
     if: >
+      (github.event_name == 'pull_request') ||
       (github.event_name == 'issues') ||
       (github.event_name == 'issue_comment' && contains(github.event.comment.body, '/triage')) ||
       (github.event_name == 'workflow_dispatch' && inputs.mode == 'triage')
     runs-on: ubuntu-latest
     permissions:
       issues: write
+      pull-requests: write
     steps:
       - name: 1. Checkout Code
         uses: actions/checkout@v4
@@ -140,10 +142,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
           MODE: triage
-          ISSUE_NUMBER: ${{ github.event.issue.number || inputs.number }}
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number || inputs.number }}
           REPO: ${{ github.repository }}
-          ISSUE_TITLE: ${{ github.event.issue.title || '' }}
-          ISSUE_BODY: ${{ github.event.issue.body || '' }}
+          ISSUE_TITLE: ${{ github.event.issue.title || github.event.pull_request.title || '' }}
+          ISSUE_BODY: ${{ github.event.issue.body || github.event.pull_request.body || '' }}
           ISSUE_ACTION: ${{ github.event.action || 'workflow_dispatch' }}
           COMMENT_BODY: ${{ github.event.comment.body || '' }}
           IS_MAINTAINER: ${{ contains(github.event.comment.author_association, 'MEMBER') || contains(github.event.comment.author_association, 'OWNER') }}
