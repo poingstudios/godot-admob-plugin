@@ -114,7 +114,7 @@ class PoingGodotAdMob(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(
 
     @UsedByGodot
     fun set_publisher_first_party_id_enabled(enabled: Boolean) {
-        MobileAds.setPublisherFirstPartyIDEnabled(enabled)
+        MobileAds.putPublisherFirstPartyIdEnabled(enabled)
     }
 
     @UsedByGodot
