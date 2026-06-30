@@ -30,5 +30,4 @@ Publisher first-party ID is enabled by default, but you can disable it using the
     MobileAds.SetPublisherFirstPartyIDEnabled(false);
     ```
 
-!!! note
-    **Tip:** Publisher first-party ID requires Google Mobile Ads SDK version 22.6.0 or higher for Android, and 10.14.0 or higher for iOS.
+

@@ -30,5 +30,4 @@ O ID de primeira parte do editor está habilitado por padrão, mas você pode de
     MobileAds.SetPublisherFirstPartyIDEnabled(false);
     ```
 
-!!! note
-    **Dica:** O ID de primeira parte do editor requer o SDK do Google Mobile Ads versão 22.6.0 ou superior para Android, e 10.14.0 ou superior para iOS.
+
