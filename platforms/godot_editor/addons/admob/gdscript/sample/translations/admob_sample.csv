@@ -27,6 +27,7 @@ GAD_SetiOSAppPauseOnBackground,"Set iOS App Pause On Background","Pausar App iOS
 GAD_MuteMusic,"Mute Music","Silenciar Música","Silenciar Música","静音音乐","音楽をミュート"
 GAD_AdVolume,"Ad Volume","Volume do Anúncio","Volumen del Anuncio","广告音量","広告の音量"
 GAD_MuteAds,"Mute Ads","Silenciar Anúncios","Silenciar Anuncios","静音广告","広告をミュート"
+GAD_OpenAdInspector,"Open Ad Inspector","Abrir Inspetor de Anúncios","Abrir Inspector de Anuncios","打开广告检查器","広告インスペクターを開く"
 GAD_GetConsentStatus,"Get Consent Status","Obter Status de Consentimento","Obtener Estado de Consentimiento","获取同意状态","同意ステータスを取得"
 GAD_ResetConsentInformation,"Reset Consent Information","Redefinir Informações de Consentimento","Restablecer Información de Consentimiento","重置同意信息","同意情報をリセット"
 GAD_ShowPrivacyOptionsForm,"Show Privacy Options Form","Mostrar Formulário de Opções de Privacidade","Mostrar Formulario de Opciones de Privacidad","显示隐私选项表单","プライバシーオプションフォームを表示"

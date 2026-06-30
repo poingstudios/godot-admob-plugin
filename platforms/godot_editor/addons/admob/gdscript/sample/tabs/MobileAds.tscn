@@ -77,6 +77,11 @@ layout_mode = 2
 text = "GAD_MuteAds"
 alignment = 1
 
+[node name="OpenAdInspector" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "GAD_OpenAdInspector"
+
 [node name="LanguageCard" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
@@ -108,3 +113,4 @@ autoplay = true
 [connection signal="value_changed" from="AdVolumeCard/AdVolumeContainer/AdVolumeSlider" to="." method="_on_ad_volume_changed"]
 [connection signal="toggled" from="ConsentCookies" to="." method="_on_consent_cookies_toggled"]
 [connection signal="toggled" from="AdMuted" to="." method="_on_ad_muted_pressed"]
+[connection signal="pressed" from="OpenAdInspector" to="." method="_on_open_ad_inspector_pressed"]

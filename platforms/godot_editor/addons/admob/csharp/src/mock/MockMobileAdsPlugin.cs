@@ -30,6 +30,9 @@ namespace PoingStudios.AdMob.Core
 		[Signal]
 		public delegate void on_initialization_completeEventHandler(Dictionary initializationStatusDictionary);
 
+		[Signal]
+		public delegate void on_ad_inspector_closedEventHandler(Dictionary errorDictionary);
+
 		private bool _isInitialized = false;
 		private float _volume = 1.0f;
 		private bool _muted = false;
@@ -111,6 +114,15 @@ namespace PoingStudios.AdMob.Core
 		public string get_platform_version()
 		{
 			return "1.0.0-mock";
+		}
+
+		public void open_ad_inspector()
+		{
+			var timer = ((SceneTree)Engine.GetMainLoop()).CreateTimer(0.5f);
+			timer.Connect(SceneTreeTimer.SignalName.Timeout, Callable.From(() =>
+			{
+				EmitSignal(SignalName.on_ad_inspector_closed, new Dictionary());
+			}));
 		}
 	}
 }

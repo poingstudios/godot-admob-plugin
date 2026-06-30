@@ -77,6 +77,11 @@ layout_mode = 2
 text = "GAD_MuteAds"
 alignment = 1
 
+[node name="OpenAdInspector" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "GAD_OpenAdInspector"
+
 [node name="LanguageCard" type="PanelContainer" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
