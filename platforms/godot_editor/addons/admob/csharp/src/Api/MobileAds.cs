@@ -95,6 +95,14 @@ namespace PoingStudios.AdMob.Api
             }
         }
 
+        public static void SetPublisherFirstPartyIDEnabled(bool enabled)
+        {
+            if (_plugin != null)
+            {
+                _plugin.Call("set_publisher_first_party_id_enabled", enabled);
+            }
+        }
+
         public static void SetGadHasConsentForCookies(bool enabled)
         {
             if (_plugin != null)

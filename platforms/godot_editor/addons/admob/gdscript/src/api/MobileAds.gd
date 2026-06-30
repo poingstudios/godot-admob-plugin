@@ -72,6 +72,11 @@ static func set_app_muted(muted: bool) -> void:
 		_plugin.set_app_muted(muted)
 
 
+static func set_publisher_first_party_id_enabled(enabled: bool) -> void:
+	if _plugin:
+		_plugin.set_publisher_first_party_id_enabled(enabled)
+
+
 static func set_gad_has_consent_for_cookies(enabled: bool) -> void:
 	if _plugin:
 		_plugin.set_gad_has_consent_for_cookies(enabled)

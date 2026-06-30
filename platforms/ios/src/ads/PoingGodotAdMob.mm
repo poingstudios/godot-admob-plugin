@@ -91,6 +91,10 @@ void PoingGodotAdMob::set_app_muted(bool muted) {
     [GADMobileAds sharedInstance].applicationMuted = muted;
 }
 
+void PoingGodotAdMob::set_publisher_first_party_id_enabled(bool enabled) {
+    [[GADMobileAds sharedInstance].requestConfiguration setPublisherFirstPartyIDEnabled:enabled];
+}
+
 void PoingGodotAdMob::set_gad_has_consent_for_cookies(bool enabled) {
     [[NSUserDefaults standardUserDefaults] setInteger:(enabled ? 1 : 0) forKey:@"gad_has_consent_for_cookies"];
 }
@@ -136,6 +140,7 @@ void PoingGodotAdMob::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_ios_app_pause_on_background"), &PoingGodotAdMob::set_ios_app_pause_on_background);
     ClassDB::bind_method(D_METHOD("set_app_volume"), &PoingGodotAdMob::set_app_volume);
     ClassDB::bind_method(D_METHOD("set_app_muted"), &PoingGodotAdMob::set_app_muted);
+    ClassDB::bind_method(D_METHOD("set_publisher_first_party_id_enabled"), &PoingGodotAdMob::set_publisher_first_party_id_enabled);
     ClassDB::bind_method(D_METHOD("set_gad_has_consent_for_cookies"), &PoingGodotAdMob::set_gad_has_consent_for_cookies);
     ClassDB::bind_method(D_METHOD("get_gad_has_consent_for_cookies"), &PoingGodotAdMob::get_gad_has_consent_for_cookies);
     ClassDB::bind_method(D_METHOD("disable_sdk_crash_reporting"), &PoingGodotAdMob::disable_sdk_crash_reporting);

@@ -126,6 +126,7 @@ plugins:
             Privacy: Privacidade
             Regulatory solutions: Soluções regulatórias
             US states privacy laws: Leis de privacidade dos estados dos EUA
+            Strategies: Estratégias
             Data disclosure: Divulgação de dados
             Google Play data disclosure: Divulgação de dados do Google Play
             Apple App Store data disclosure: Divulgação de dados da Apple App Store
@@ -189,6 +190,7 @@ plugins:
             Privacy: Privacidad
             Regulatory solutions: Soluciones regulatorias
             US states privacy laws: Leyes de privacidad de estados de EE. UU.
+            Strategies: Estrategias
             Data disclosure: Divulgación de datos
             Google Play data disclosure: Divulgación de datos de Google Play
             Apple App Store data disclosure: Divulgación de datos de la Apple App Store
@@ -253,6 +255,7 @@ plugins:
             Privacy: 隐私
             Regulatory solutions: 监管解决方案
             US states privacy laws: 美国各州隐私法
+            Strategies: 策略
             Data disclosure: 数据披露
             Google Play data disclosure: Google Play 数据披露
             Apple App Store data disclosure: Apple App Store 数据披露
@@ -317,6 +320,7 @@ plugins:
             Privacy: プライバシー
             Regulatory solutions: 規制対応ソリューション
             US states privacy laws: 米国各州のプライバシー法
+            Strategies: ストラテジー
             Data disclosure: データ開示
             Google Play data disclosure: Google Play データ開示
             Apple App Store data disclosure: Apple App Store データ開示
@@ -384,6 +388,7 @@ nav:
     - Privacy:
       - Regulatory solutions:
         - US states privacy laws: privacy/regulatory_solutions/us_states_privacy_laws.md
+      - Strategies: privacy/strategies/strategies.md
       - Data disclosure:
         - Google Play data disclosure: privacy/store_data_disclosure/google_play_data_disclosure.md
         - Apple App Store data disclosure: privacy/store_data_disclosure/apple_app_store_data_disclosure.md

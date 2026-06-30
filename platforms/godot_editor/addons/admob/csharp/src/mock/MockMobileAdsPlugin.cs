@@ -36,6 +36,7 @@ namespace PoingStudios.AdMob.Core
 		private bool _isInitialized = false;
 		private float _volume = 1.0f;
 		private bool _muted = false;
+		private bool _publisherFirstPartyIdEnabled = true;
 		private Dictionary _requestConfiguration = new Dictionary();
 		private bool _gadHasConsentForCookies = true;
 
@@ -90,6 +91,11 @@ namespace PoingStudios.AdMob.Core
 		public void set_app_muted(bool muted)
 		{
 			_muted = muted;
+		}
+
+		public void set_publisher_first_party_id_enabled(bool enabled)
+		{
+			_publisherFirstPartyIdEnabled = enabled;
 		}
 
 		public void set_gad_has_consent_for_cookies(bool enabled)
