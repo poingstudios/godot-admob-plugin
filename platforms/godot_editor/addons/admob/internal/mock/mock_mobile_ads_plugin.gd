@@ -28,6 +28,7 @@ signal on_ad_inspector_closed(error_dictionary: Dictionary)
 var _is_initialized := false
 var _volume := 1.0
 var _muted := false
+var _publisher_first_party_id_enabled := true
 var _request_configuration := {}
 var _gad_has_consent_for_cookies := true
 
@@ -66,6 +67,9 @@ func set_app_volume(volume: float) -> void:
 
 func set_app_muted(muted: bool) -> void:
 	_muted = muted
+
+func set_publisher_first_party_id_enabled(enabled: bool) -> void:
+	_publisher_first_party_id_enabled = enabled
 
 func set_gad_has_consent_for_cookies(enabled: bool) -> void:
 	_gad_has_consent_for_cookies = enabled
