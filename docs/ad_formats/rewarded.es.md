@@ -1,0 +1,94 @@
+# Anuncios Recompensados
+
+Los anuncios recompensados ofrecen a los usuarios la opción de interactuar con ellos a cambio de recompensas dentro de la aplicación (por ejemplo, vidas extra, moneda del juego, etc.).
+
+---
+
+## Implementar Anuncios Recompensados
+
+=== "GDScript"
+
+    ```gdscript
+    func _ready() -> void:
+        MobileAds.connect("rewarded_ad_loaded", self, "_on_rewarded_ad_loaded")
+        MobileAds.connect("rewarded_ad_failed_to_load", self, "_on_rewarded_ad_failed_to_load")
+        MobileAds.connect("rewarded_ad_closed", self, "_on_rewarded_ad_closed")
+        MobileAds.connect("user_earned_rewarded", self, "_on_user_earned_rewarded")
+        
+        # Cargar el anuncio recompensado
+        MobileAds.load_rewarded()
+
+    func _on_rewarded_ad_loaded() -> void:
+        print("Rewarded ad loaded successfully!")
+        MobileAds.show_rewarded()
+
+    func _on_rewarded_ad_failed_to_load(error_code: int) -> void:
+        print("Rewarded ad failed to load: ", error_code)
+
+    func _on_rewarded_ad_closed() -> void:
+        print("Rewarded ad closed.")
+        # Recargar siguiente anuncio
+        MobileAds.load_rewarded()
+
+    func _on_user_earned_rewarded(currency: String, amount: int) -> void:
+        print("User rewarded! Type: ", currency, ", Amount: ", amount)
+        # Otorgar recompensa al jugador aquí
+    ```
+
+=== "C#"
+
+    ```csharp
+    public override void _Ready()
+    {
+        MobileAds.Connect("rewarded_ad_loaded", this, nameof(_on_rewarded_ad_loaded));
+        MobileAds.Connect("rewarded_ad_failed_to_load", this, nameof(_on_rewarded_ad_failed_to_load));
+        MobileAds.Connect("rewarded_ad_closed", this, nameof(_on_rewarded_ad_closed));
+        MobileAds.Connect("user_earned_rewarded", this, nameof(_on_user_earned_rewarded));
+        
+        MobileAds.Call("load_rewarded");
+    }
+
+    private void _on_rewarded_ad_loaded()
+    {
+        GD.Print("Rewarded ad loaded!");
+        MobileAds.Call("show_rewarded");
+    }
+
+    private void _on_rewarded_ad_failed_to_load(int errorCode)
+    {
+        GD.Print("Rewarded ad failed to load: " + errorCode);
+    }
+
+    private void _on_rewarded_ad_closed()
+    {
+        GD.Print("Rewarded ad closed.");
+        MobileAds.Call("load_rewarded");
+    }
+
+    private void _on_user_earned_rewarded(string currency, int amount)
+    {
+        GD.Print("User rewarded: " + amount + " " + currency);
+    }
+    ```
+
+---
+
+## Verificación
+
+Puedes consultar si el anuncio recompensado está cargado antes de mostrarlo:
+
+=== "GDScript"
+
+    ```gdscript
+    if MobileAds.get_is_rewarded_loaded():
+        MobileAds.show_rewarded()
+    ```
+
+=== "C#"
+
+    ```csharp
+    if ((bool)MobileAds.Call("get_is_rewarded_loaded"))
+    {
+        MobileAds.Call("show_rewarded");
+    }
+    ```

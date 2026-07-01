@@ -91,6 +91,60 @@ plugins:
             Overview: Visão Geral
             API: API
             Enums: Enums
+        - locale: es
+          name: Español
+          nav_translations:
+            Guides: Guías
+            Get Started: Primeros Pasos
+            Enable test ads: Habilitar Anuncios de Prueba
+            Preview Mock Ads in Editor: Vista Previa de Anuncios Mock en el Editor
+            iOS Pause Background: Pausa en Segundo Plano de iOS
+            Ad formats: Formatos de Anuncio
+            Banner: Banner
+            Interstitial: Intersticial
+            Rewarded: Recompensado
+            Rewarded Interstitial: Intersticial Recompensado
+            Privacy & User Consent: Privacidad y Consentimiento del Usuario
+            Reference: Referencia
+            Overview: Descripción General
+            API: API
+            Enums: Enums
+        - locale: zh
+          name: 简体中文
+          nav_translations:
+            Guides: 指南
+            Get Started: 入门指南
+            Enable test ads: 启用测试广告
+            Preview Mock Ads in Editor: 在编辑器中预览模拟广告
+            iOS Pause Background: iOS 后台暂停
+            Ad formats: 广告格式
+            Banner: 横幅
+            Interstitial: 插页
+            Rewarded: 激励
+            Rewarded Interstitial: 激励插页
+            Privacy & User Consent: 隐私和用户同意
+            Reference: 参考
+            Overview: 概述
+            API: API
+            Enums: 枚举
+        - locale: ja
+          name: 日本語
+          nav_translations:
+            Guides: ガイド
+            Get Started: はじめに
+            Enable test ads: テスト広告を有効にする
+            Preview Mock Ads in Editor: エディタでのモック広告のプレビュー
+            iOS Pause Background: iOS バックグラウンドの一時停止
+            Ad formats: 広告フォーマット
+            Banner: バナー
+            Interstitial: インタースティシャル
+            Rewarded: リワード
+            Rewarded Interstitial: リワードインタースティシャル
+            Privacy & User Consent: プライバシーとユーザー同意
+            Reference: リファレンス
+            Overview: 概要
+            API: API
+            Enums: 列挙型
 
 nav:
   - Guides:
