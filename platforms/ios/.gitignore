@@ -1,0 +1,53 @@
+# Godot-specific ignores
+.import/
+export.cfg
+export_presets.cfg
+
+# Mono-specific ignores
+.mono/
+data_*/
+*.pyc
+
+extracted_headers
+godot
+bin
+plugin/admob/lib
+
+
+.DS_Store
+
+*.idea
+*.gradle
+build/
+local.properties
+*.aar
+
+*.a
+*.o
+*.d
+*.hmap
+*.yaml
+*.dia
+*.xcbuild
+*.db
+*.LinkFileList
+*BuildDescriptionCacheIndex*
+*.xcuserstate
+*.dblite
+*ios*.zip
+
+.sconsign.dblite
+
+
+*.tar.xz
+
+# v3 folder
+PoingGodotAdMob/ 
+
+# v2 folder
+# v2 folder
+plugin/Pods/
+
+# SPM
+.build/
+Package.resolved

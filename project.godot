@@ -8,16 +8,6 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Object",
-"class": "PoingAdMobVersionHelper",
-"language": "GDScript",
-"path": "res://addons/admob/version_helper.gd"
-} ]
-_global_script_class_icons={
-"PoingAdMobVersionHelper": ""
-}
-
 [admob]
 
 config={
@@ -97,7 +87,11 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/admob/plugin.cfg" )
+enabled=PoolStringArray(  )
+
+[mono]
+
+project/assembly_name="AdMobAddon"
 
 [physics]
 
