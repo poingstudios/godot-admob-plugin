@@ -188,10 +188,10 @@ public class Example : Control
 		ShowBanner.Disabled = false;
 		HideBanner.Disabled = false;
 		_add_text_Advice_Node("Banner loaded");
-		_add_text_Advice_Node("Banner width: " + MobileAds.Call("get_banner_width"));
-		_add_text_Advice_Node("Banner height: " + MobileAds.Call("get_banner_height"));
-		_add_text_Advice_Node("Banner width in pixels: " + MobileAds.Call("get_banner_width_in_pixels"));
-		_add_text_Advice_Node("Banner height in pixels: " + MobileAds.Call("get_banner_height_in_pixels"));
+		_add_text_Advice_Node("Banner width: " + System.Convert.ToInt32(MobileAds.Call("get_banner_width")));
+		_add_text_Advice_Node("Banner height: " + System.Convert.ToInt32(MobileAds.Call("get_banner_height")));
+		_add_text_Advice_Node("Banner width in pixels: " + System.Convert.ToInt32(MobileAds.Call("get_banner_width_in_pixels")));
+		_add_text_Advice_Node("Banner height in pixels: " + System.Convert.ToInt32(MobileAds.Call("get_banner_height_in_pixels")));
 	}
 
 	private void _on_EnableBanner_pressed()
