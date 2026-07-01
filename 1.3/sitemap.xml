@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/editor_mock_ads/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/editor_mock_ads/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/enable_test_ads/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/enable_test_ads/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ios_pause_background/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ios_pause_background/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/privacy/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/privacy/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ad_formats/banner/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/banner/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ad_formats/interstitial/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/interstitial/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ad_formats/rewarded/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/rewarded/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ad_formats/rewarded_interstitial/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/rewarded_interstitial/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/reference/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3/reference/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/reference/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/reference/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/reference/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/reference/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/reference/api/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/reference/api/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/reference/enums/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/reference/enums/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/editor_mock_ads/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/editor_mock_ads/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/enable_test_ads/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/enable_test_ads/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/ios_pause_background/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ios_pause_background/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/privacy/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3privacy/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/privacy/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/ad_formats/banner/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/banner/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/ad_formats/interstitial/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/interstitial/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/ad_formats/rewarded/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/rewarded/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/ad_formats/rewarded_interstitial/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/rewarded_interstitial/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/reference/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/reference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3reference/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/reference/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/reference/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/reference/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/reference/api/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/reference/api/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/reference/enums/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3/pt-BR/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/reference/enums/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/es/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3/es/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/es/editor_mock_ads/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3/es/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/editor_mock_ads/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/es/enable_test_ads/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3/es/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/enable_test_ads/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/es/ios_pause_background/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3/es/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ios_pause_background/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/es/privacy/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3/es/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3privacy/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/privacy/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/es/ad_formats/banner/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3/es/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/banner/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/es/ad_formats/interstitial/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3/es/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/interstitial/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/es/ad_formats/rewarded/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3/es/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/rewarded/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/es/ad_formats/rewarded_interstitial/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3/es/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/rewarded_interstitial/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/es/reference/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3/es/reference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3reference/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/reference/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/reference/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/reference/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/es/reference/api/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3/es/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/reference/api/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/es/reference/enums/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3/es/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/reference/enums/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/zh/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3/zh/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/zh/editor_mock_ads/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3/zh/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/editor_mock_ads/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/zh/enable_test_ads/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3/zh/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/enable_test_ads/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/zh/ios_pause_background/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3/zh/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ios_pause_background/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/zh/privacy/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3/zh/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3privacy/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/privacy/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/zh/ad_formats/banner/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3/zh/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/banner/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/zh/ad_formats/interstitial/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3/zh/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/interstitial/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/zh/ad_formats/rewarded/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3/zh/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/rewarded/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/zh/ad_formats/rewarded_interstitial/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3/zh/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/rewarded_interstitial/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/zh/reference/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3/zh/reference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3reference/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/reference/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/reference/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/reference/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/zh/reference/api/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3/zh/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/reference/api/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/zh/reference/enums/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3/zh/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3ja/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/reference/enums/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ja/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ja/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ja/editor_mock_ads/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ja/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/editor_mock_ads/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/editor_mock_ads/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ja/enable_test_ads/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ja/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/enable_test_ads/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/enable_test_ads/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ja/ios_pause_background/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ja/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ios_pause_background/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ios_pause_background/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ja/privacy/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ja/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3privacy/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/privacy/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/privacy/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ja/ad_formats/banner/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ja/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/banner/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/banner/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ja/ad_formats/interstitial/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ja/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/interstitial/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ja/ad_formats/rewarded/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ja/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/rewarded/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/rewarded/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ja/ad_formats/rewarded_interstitial/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ja/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/ad_formats/rewarded_interstitial/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/ad_formats/rewarded_interstitial/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ja/reference/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ja/reference/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3reference/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/reference/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/reference/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/reference/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ja/reference/api/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ja/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/reference/api/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/reference/api/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/1.3/ja/reference/enums/</loc>
+        <lastmod>2026-07-01</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/1.3/ja/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/1.3reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/1.3es/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/1.3pt-BR/reference/enums/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/1.3zh/reference/enums/"/>
+    </url>
+</urlset>
