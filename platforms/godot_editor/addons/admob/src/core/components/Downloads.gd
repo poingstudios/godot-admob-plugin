@@ -23,6 +23,14 @@
 tool
 extends VBoxContainer
 
+const GITHUB_RELEASES_URL = (
+	"https://github.com/poingstudios/godot-admob-plugin/releases"
+)
+const GITHUB_ISSUES_URL = (
+	"https://github.com/poingstudios/godot-admob-plugin/issues"
+)
+const DISCORD_URL = "https://discord.gg/CKkYqCzK"
+
 var actual_downloading_file : String = ""
 var downloaded_plugin_version : String = ""
 var version_support : Dictionary
@@ -47,14 +55,9 @@ var download_failed_message = (
 	+ "- No internet connection\n"
 	+ "- GitHub rate limit exceeded\n"
 	+ "- Version not available for your Godot version\n\n"
-	+ "What you can do:\n"
-	+ "- Check your internet connection\n"
-	+ "- Try again in a few minutes\n"
-	+ "- Check the GitHub page for available versions:\n"
-	+ "  https://github.com/poingstudios/godot-admob-plugin/releases\n\n"
-	+ "Need help?\n"
-	+ "- Open an issue: https://github.com/poingstudios/godot-admob-plugin/issues\n"
-	+ "- Join our Discord: https://discord.gg/CKkYqCzK"
+	+ "The releases page will open in your browser.\n"
+	+ "Check the available versions and try again.\n\n"
+	+ "Need more help? Open an issue on GitHub or join our Discord."
 )
 
 onready var ad_mob_editor : Control = find_parent("AdMobEditor")
@@ -118,6 +121,8 @@ func _on_HTTPRequest_request_completed(
 		set_process(false)
 		set_buttons_disabled(false)
 		$AdviceAcceptDialog.popup_centered()
+		yield($AdviceAcceptDialog, "confirmed")
+		OS.shell_open(GITHUB_ISSUES_URL)
 	else:
 		var filepath = $TabContainer/HTTPRequest.download_file
 		if actual_downloading_file.begins_with("android-template"):
