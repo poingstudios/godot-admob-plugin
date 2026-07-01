@@ -3,6 +3,12 @@ on:
   push:
     tags:
       - 'v*-godot3'
+  workflow_run:
+    workflows: ["CD - Build and Release"]
+    types:
+      - completed
+    branches:
+      - v1
 
 permissions:
   contents: write
@@ -10,6 +16,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
         with:
