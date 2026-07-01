@@ -248,6 +248,7 @@ jobs:
         VERSION: ${{ needs.initialize.outputs.version }}
       run: |
         gh release create "$VERSION" release-artifacts/* --title "$VERSION" --generate-notes --latest=false
+        gh release edit "$VERSION" --latest=false
 
     - name: Set up Python
       uses: actions/setup-python@v4
