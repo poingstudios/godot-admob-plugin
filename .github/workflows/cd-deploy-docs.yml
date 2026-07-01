@@ -42,9 +42,5 @@ jobs:
           CLEAN_VERSION=$(echo "$BASE_VERSION" | sed 's/^v//')
           VERSION=$(echo "$CLEAN_VERSION" | cut -d. -f1,2)
           
-          # Delete obsolete/incorrect versions from gh-pages if they exist
-          mike delete latest-godot3 --push || true
-          mike delete 1.3-godot3 --push || true
-          
           # Deploy versioned folder (e.g. 1.3)
           mike deploy --push --update-aliases $VERSION
