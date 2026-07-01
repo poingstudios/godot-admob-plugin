@@ -1,17 +1,17 @@
 # MIT License
-# 
+#
 # Copyright (c) 2023-present Poing Studios
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -40,6 +40,21 @@ var current_dir_download_label = (
 )
 var download_complete_message = (
 	"Download of %s completed! \n%s"
+)
+var download_failed_message = (
+	"Download failed with response code: %d\n\n"
+	+ "Possible causes:\n"
+	+ "- No internet connection\n"
+	+ "- GitHub rate limit exceeded\n"
+	+ "- Version not available for your Godot version\n\n"
+	+ "What you can do:\n"
+	+ "- Check your internet connection\n"
+	+ "- Try again in a few minutes\n"
+	+ "- Check the GitHub page for available versions:\n"
+	+ "  https://github.com/poingstudios/godot-admob-plugin/releases\n\n"
+	+ "Need help?\n"
+	+ "- Open an issue: https://github.com/poingstudios/godot-admob-plugin/issues\n"
+	+ "- Join our Discord: https://discord.gg/CKkYqCzK"
 )
 
 onready var ad_mob_editor : Control = find_parent("AdMobEditor")
@@ -92,11 +107,13 @@ func set_buttons_disabled(disabled: bool):
 	$TabContainer/Android/DownloadAndroidTemplate.disabled = disabled
 	$TabContainer/iOS/DownloadiOSTemplate.disabled = disabled
 
+
+
 func _on_HTTPRequest_request_completed(
 	_result, response_code, _headers, _body
 ):
 	if response_code != 200:
-		$AdviceAcceptDialog.dialog_text = "!!!DOWNLOAD FAILED!!!"
+		$AdviceAcceptDialog.dialog_text = download_failed_message % response_code
 		$ProgressBar.value = 0
 		set_process(false)
 		set_buttons_disabled(false)
@@ -226,7 +243,7 @@ func _on_DownloadiOSTemplate_pressed():
 		+ "/" + file_name
 	)
 	$TabContainer/HTTPRequest.request(
-		"https://github.com/Poing-Studios/"
+		"https://github.com/poingstudios/"
 		+ "godot-admob-plugin/releases/download/"
 		+ plugin_version + "/" + file_name
 	)
@@ -248,7 +265,7 @@ func _on_DownloadAndroidTemplate_pressed():
 		+ "/" + file_name
 	)
 	$TabContainer/HTTPRequest.request(
-		"https://github.com/Poing-Studios/"
+		"https://github.com/poingstudios/"
 		+ "godot-admob-plugin/releases/download/"
 		+ plugin_version + "/" + file_name
 	)

@@ -35,7 +35,7 @@ margin_top = 104.0
 margin_right = 500.0
 margin_bottom = 162.0
 popup_exclusive = true
-window_title = "Alerta!"
+window_title = "AdMob Alert!"
 dialog_text = "Download of %s completed! \\n%s"
 __meta__ = {
 "_edit_use_anchors_": false
