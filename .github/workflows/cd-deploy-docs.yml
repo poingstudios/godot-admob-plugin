@@ -1,6 +1,8 @@
 name: "[CD] Deploy Documentation (v1)"
 on:
   push:
+    branches:
+      - v1
     tags:
       - 'v*-godot3'
 
