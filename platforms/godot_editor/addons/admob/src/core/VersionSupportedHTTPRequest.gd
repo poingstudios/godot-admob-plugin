@@ -6,11 +6,10 @@ signal supported_version_changed(value_dictionary)
 var AdMobGlobals = preload("res://addons/admob/src/utils/AdMobGlobals.gd")
 
 func _ready():
-	request("https://raw.githubusercontent.com/Poing-Studios/godot-admob-versions/" + AdMobGlobals.get_plugin_version() + "/versions.json")
+	var plugin_version := AdMobGlobals.get_plugin_version() + "-godot3"
+	var version_support := {
+		"android": plugin_version,
+		"ios": plugin_version
+	}
+	call_deferred("emit_signal", "supported_version_changed", version_support)
 
-
-func _on_VersionSupportedHTTPRequest_request_completed(result, response_code, headers, body):
-	var json = JSON.parse(body.get_string_from_utf8())
-	
-	var version_support : Dictionary = json.result
-	emit_signal("supported_version_changed", version_support)

@@ -1,0 +1,297 @@
+name: "CD - Build and Release"
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Every day at midnight UTC
+  workflow_dispatch:
+    inputs:
+      type:
+        description: 'Build Type'
+        required: true
+        type: choice
+        options:
+          - 'Release'
+          - 'Nightly'
+        default: 'Release'
+      force:
+        description: 'Force nightly build even if no new commits exist?'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write # Required to create/delete GitHub releases and tags
+
+jobs:
+  initialize:
+    name: Determine Build Type and Version
+    runs-on: ubuntu-latest
+    if: github.repository == 'poingstudios/godot-admob-plugin' || github.event_name == 'workflow_dispatch'
+    outputs:
+      should_build: ${{ steps.setup.outputs.should_build }}
+      build_type: ${{ steps.setup.outputs.build_type }}
+      version: ${{ steps.setup.outputs.version }}
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+
+    - name: Setup and Validation
+      id: setup
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        if [ "${{ github.event_name }}" = "schedule" ]; then
+          BUILD_TYPE="Nightly"
+        else
+          BUILD_TYPE="${{ github.event.inputs.type }}"
+        fi
+
+        echo "build_type=$BUILD_TYPE" >> $GITHUB_OUTPUT
+        echo "Build type determined: $BUILD_TYPE"
+
+        BASE_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        VERSION_TAG="${BASE_VERSION}-godot3"
+
+        if [ "$BUILD_TYPE" = "Release" ]; then
+          if gh api "repos/${{ github.repository }}/releases/tags/${VERSION_TAG}" > /dev/null 2>&1; then
+            echo "::error::Release ${VERSION_TAG} already exists. Bump the version in plugin.cfg before releasing."
+            exit 1
+          fi
+          echo "Release ${VERSION_TAG} does not exist. Proceeding with release build."
+          echo "should_build=true" >> $GITHUB_OUTPUT
+          echo "version=${VERSION_TAG}" >> $GITHUB_OUTPUT
+        else
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          NIGHTLY_VERSION="${VERSION_TAG}-nightly.${SHORT_SHA}"
+          echo "version=$NIGHTLY_VERSION" >> $GITHUB_OUTPUT
+
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            echo "Force build requested."
+            echo "should_build=true" >> $GITHUB_OUTPUT
+          elif gh release view "$NIGHTLY_VERSION" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            echo "Nightly release $NIGHTLY_VERSION already exists. Skipping build."
+            echo "should_build=false" >> $GITHUB_OUTPUT
+          else
+            echo "Nightly release $NIGHTLY_VERSION does not exist. Starting build."
+            echo "should_build=true" >> $GITHUB_OUTPUT
+          fi
+        fi
+
+  android-template:
+    name: Compiling Android (Godot ${{matrix.GODOT_VERSIONS}})
+    needs: initialize
+    if: needs.initialize.outputs.should_build == 'true'
+    runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        GODOT_VERSIONS: ["3.5", "3.5.1", "3.5.2", "3.5.3", "3.6"]
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Cache Gradle
+      uses: actions/cache@v3
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: android-gradle-${{ matrix.GODOT_VERSIONS }}-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
+        restore-keys: |
+          android-gradle-${{ matrix.GODOT_VERSIONS }}-
+          android-gradle-
+
+    - name: Build Plugins
+      working-directory: platforms/android
+      run: |
+        chmod +x ./scripts/unix/download_godot.sh
+        ./scripts/unix/download_godot.sh ${{matrix.GODOT_VERSIONS}}
+        chmod +x ./gradlew
+        ./gradlew build -PgodotVersion=${{matrix.GODOT_VERSIONS}}
+
+    - name: Compress the artifact output
+      working-directory: platforms/android
+      run: |
+        mkdir -p .output
+        cd admob
+        zip -r ../.output/android-template-v${{matrix.GODOT_VERSIONS}}.zip AdMob.gdap build/outputs/aar/admob-release.aar build/outputs/aar/admob-debug.aar
+
+    - name: Upload binaries to artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: android-${{matrix.GODOT_VERSIONS}}
+        path: platforms/android/.output/android-template-v${{matrix.GODOT_VERSIONS}}.zip
+        if-no-files-found: error
+        retention-days: 1
+
+  ios-template:
+    name: Compiling iOS (Godot ${{matrix.GODOT_VERSIONS}})
+    needs: initialize
+    if: needs.initialize.outputs.should_build == 'true'
+    runs-on: "macos-latest"
+    strategy:
+      matrix:
+        GODOT_VERSIONS: ["3.5", "3.5.1", "3.5.2", "3.5.3", "3.6", "3.6.1", "3.6.2"]
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Verify matrix
+      run: |
+        CV=${{matrix.GODOT_VERSIONS}}
+        if [ ${#CV} -eq 1 ]; then CV="${CV}.0"; fi
+        echo "CURRENT_GODOT_VERSION=${CV}" >> $GITHUB_ENV
+
+    - name: Cache & Load Python/SPM
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Install scons
+      run: python -m pip install scons
+
+    - name: Load .scons_cache directory
+      uses: actions/cache@v3
+      with:
+        path: ${{ github.workspace }}/platforms/ios/godot/.scons_cache/
+        key: scons-ios-${{ env.CURRENT_GODOT_VERSION }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/scripts/**') }}
+        restore-keys: |
+          scons-ios-${{ env.CURRENT_GODOT_VERSION }}-
+          scons-ios-
+
+    - name: Cache SPM dependencies
+      uses: actions/cache@v3
+      with:
+        path: platforms/ios/.build
+        key: spm-${{ hashFiles('platforms/ios/Package.swift', 'platforms/ios/Package.resolved') }}
+        restore-keys: |
+          spm-
+
+    - name: Compiles the Source Code
+      working-directory: platforms/ios
+      env:
+        SCONS_CACHE: ${{ github.workspace }}/platforms/ios/godot/.scons_cache/
+      run: |
+        chmod +x ./scripts/lib/download_godot.sh
+        ./scripts/lib/download_godot.sh ${{matrix.GODOT_VERSIONS}}
+        chmod +x ./scripts/resolve_spm_deps.sh
+        ./scripts/resolve_spm_deps.sh
+        chmod +x ./scripts/generate_headers.sh
+        ./scripts/generate_headers.sh 3.x
+        chmod +x ./scripts/release_static_library.sh
+        chmod +x ./scripts/generate_static_library.sh
+        ./scripts/release_static_library.sh 3.x
+
+    - name: Compress the artifact output
+      working-directory: platforms/ios/bin/release/admob
+      run: |
+        mkdir -p ../.output
+        zip -r ../.output/ios-template-v${{matrix.GODOT_VERSIONS}}.zip admob.gdip admob
+
+    - name: Upload binaries to artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-${{matrix.GODOT_VERSIONS}}
+        path: platforms/ios/bin/release/.output/ios-template-v${{matrix.GODOT_VERSIONS}}.zip
+        if-no-files-found: error
+        retention-days: 1
+
+  godot_editor:
+    name: Compiling Godot Editor Plugin
+    needs: initialize
+    if: needs.initialize.outputs.should_build == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set nightly version in plugin.cfg
+      if: needs.initialize.outputs.build_type == 'Nightly'
+      run: |
+        NIGHTLY_VERSION="${{ needs.initialize.outputs.version }}"
+        BASE_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        sed -i "s/version=\"$BASE_VERSION\"/version=\"$NIGHTLY_VERSION\"/g" platforms/godot_editor/addons/admob/plugin.cfg
+        cat platforms/godot_editor/addons/admob/plugin.cfg
+
+    - name: Compress Godot Editor Plugin
+      run: |
+        cd platforms/godot_editor
+        zip -r ../../godot-admob-editor-plugin.zip addons/
+
+    - name: Upload zip to artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: godot-editor
+        path: godot-admob-editor-plugin.zip
+        if-no-files-found: error
+        retention-days: 1
+
+  release-finalize:
+    name: "🚀 Finalize and Publish Release"
+    needs: [initialize, android-template, ios-template, godot_editor]
+    if: needs.initialize.outputs.should_build == 'true' && needs.initialize.outputs.build_type == 'Release'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: release-artifacts
+        merge-multiple: true
+
+    - name: Create Dummy iOS Google Ads SDK Zip
+      run: |
+        echo "Google Mobile Ads SDK is resolved automatically via SPM (Swift Package Manager) during export. You do not need to download this manually." > GAD_SDK_SPM_README.txt
+        zip release-artifacts/googlemobileadssdkios.zip GAD_SDK_SPM_README.txt
+
+    - name: Publish Release
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VERSION: ${{ needs.initialize.outputs.version }}
+      run: |
+        gh release create "$VERSION" release-artifacts/* --title "$VERSION" --generate-notes --make-current=false
+
+  release-nightly:
+    name: "🌙 Finalize and Publish Nightly"
+    needs: [initialize, android-template, ios-template, godot_editor]
+    if: needs.initialize.outputs.should_build == 'true' && needs.initialize.outputs.build_type == 'Nightly'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: release-artifacts
+        merge-multiple: true
+
+    - name: Create Dummy iOS Google Ads SDK Zip
+      run: |
+        echo "Google Mobile Ads SDK is resolved automatically via SPM (Swift Package Manager) during export. You do not need to download this manually." > GAD_SDK_SPM_README.txt
+        zip release-artifacts/googlemobileadssdkios.zip GAD_SDK_SPM_README.txt
+
+    - name: Delete previous nightly release
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        EXISTING=$(gh api repos/${{ github.repository }}/releases --paginate -q '.[] | select(.prerelease == true and (.tag_name | contains("-nightly."))) | .tag_name' | head -n 1 || true)
+        if [ -n "$EXISTING" ]; then
+          echo "Deleting previous nightly release: $EXISTING"
+          gh release delete "$EXISTING" --cleanup-tag -y || true
+        else
+          echo "No previous nightly release found."
+        fi
+
+    - name: Publish Nightly Release
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VERSION: ${{ needs.initialize.outputs.version }}
+      run: |
+        gh release create "$VERSION" release-artifacts/* \
+          --prerelease \
+          --make-current=false \
+          --title "$VERSION (Nightly Build)" \
+          --notes "Nightly build from branch \`${{ github.ref_name }}\`. Generated on $(date -u +'%Y-%m-%d %H:%M:%S UTC'). Commit: ${{ github.sha }}"

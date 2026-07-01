@@ -59,7 +59,7 @@ func _on_DownloadGoogleMobileAdsSdkiOS_pressed():
 	var file_name = "googlemobileadssdkios.zip"
 	var plugin_version = version_support.ios
 	$TabContainer/HTTPRequest.download_file = ios_dictionary.download_directory + "/" + file_name
-	$TabContainer/HTTPRequest.request("https://github.com/Poing-Studios/godot-admob-ios/releases/download/" + plugin_version + "/" + file_name)
+	$TabContainer/HTTPRequest.request("https://github.com/Poing-Studios/godot-admob-plugin/releases/download/" + plugin_version + "/" + file_name)
 	actual_downloading_file = file_name
 	downloaded_plugin_version = "iOS Plugin Version: " + plugin_version
 
@@ -69,7 +69,7 @@ func _on_DownloadiOSTemplate_pressed():
 	var file_name = "ios-template-" + godot_version + ".zip"
 	var plugin_version = version_support.ios
 	$TabContainer/HTTPRequest.download_file = ios_dictionary.download_directory + "/" + file_name
-	$TabContainer/HTTPRequest.request("https://github.com/Poing-Studios/godot-admob-ios/releases/download/" + plugin_version + "/" + file_name)
+	$TabContainer/HTTPRequest.request("https://github.com/Poing-Studios/godot-admob-plugin/releases/download/" + plugin_version + "/" + file_name)
 	actual_downloading_file = file_name
 	downloaded_plugin_version = "iOS Plugin Version: " + plugin_version
 	
@@ -79,7 +79,7 @@ func _on_DownloadAndroidTemplate_pressed():
 	var file_name = "android-template-" + godot_version + ".zip"
 	var plugin_version = version_support.android
 	$TabContainer/HTTPRequest.download_file = android_dictionary.download_directory + "/" + file_name
-	$TabContainer/HTTPRequest.request("https://github.com/Poing-Studios/godot-admob-android/releases/download/" + plugin_version + "/" + file_name)
+	$TabContainer/HTTPRequest.request("https://github.com/Poing-Studios/godot-admob-plugin/releases/download/" + plugin_version + "/" + file_name)
 	actual_downloading_file = file_name
 	
 	downloaded_plugin_version = "Android Plugin Version: " + plugin_version
