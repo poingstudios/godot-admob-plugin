@@ -1,8 +1,16 @@
 name: "[CD] Deploy Documentation (v1)"
 on:
   push:
+    branches:
+      - v1
     tags:
       - 'v*-godot3'
+  workflow_run:
+    workflows: ["CD - Build and Release"]
+    types:
+      - completed
+    branches:
+      - v1
 
 permissions:
   contents: write
@@ -10,6 +18,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -33,6 +42,5 @@ jobs:
           CLEAN_VERSION=$(echo "$BASE_VERSION" | sed 's/^v//')
           VERSION=$(echo "$CLEAN_VERSION" | cut -d. -f1,2)
           
-
           # Deploy versioned folder (e.g. 1.3)
           mike deploy --push --update-aliases $VERSION
