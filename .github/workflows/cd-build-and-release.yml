@@ -242,11 +242,6 @@ jobs:
         path: release-artifacts
         merge-multiple: true
 
-    - name: Create Dummy iOS Google Ads SDK Zip
-      run: |
-        echo "Google Mobile Ads SDK is resolved automatically via SPM (Swift Package Manager) during export. You do not need to download this manually." > GAD_SDK_SPM_README.txt
-        zip release-artifacts/googlemobileadssdkios.zip GAD_SDK_SPM_README.txt
-
     - name: Publish Release
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -267,11 +262,6 @@ jobs:
       with:
         path: release-artifacts
         merge-multiple: true
-
-    - name: Create Dummy iOS Google Ads SDK Zip
-      run: |
-        echo "Google Mobile Ads SDK is resolved automatically via SPM (Swift Package Manager) during export. You do not need to download this manually." > GAD_SDK_SPM_README.txt
-        zip release-artifacts/googlemobileadssdkios.zip GAD_SDK_SPM_README.txt
 
     - name: Delete previous nightly release
       env:

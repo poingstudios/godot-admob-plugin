@@ -110,25 +110,42 @@ public class Example : Control
 
 	private void _on_MobileAds_initialization_complete(int status, String _adapter_name)
 	{
-		if (status == (int)((IDictionary) ((Godot.Object)MobileAds.Get("AdMobSettings")).Get("INITIALIZATION_STATUS"))["READY"])
+		try
 		{
-			MobileAds.Call("load_interstitial");
-			MobileAds.Call("load_rewarded");
-			MobileAds.Call("load_rewarded_interstitial");
-			
-			_add_text_Advice_Node("AdMob initialized on C#! With parameters:");
-			_add_text_Advice_Node("is_for_child_directed_treatment: " + ((IDictionary) config["general"])["is_for_child_directed_treatment"].ToString());
-			_add_text_Advice_Node("is_test_europe_user_consent: " + ((IDictionary) config["general"])["is_test_europe_user_consent"].ToString());
-			_add_text_Advice_Node("max_ad_content_rating: " + ((IDictionary) config["general"])["max_ad_content_rating"].ToString());
-			_add_text_Advice_Node("instance_id: " + GetInstanceId().ToString());
-			EnableBanner.Disabled = false;
-			BannerPosition.Disabled = false;
-			RequestUserConsent.Disabled = false;
-			ResetConsentState.Disabled = false;
+			IDictionary initStatus = (IDictionary) ((Godot.Object)MobileAds.Get("AdMobSettings")).Get("INITIALIZATION_STATUS");
+			if (initStatus != null && initStatus.Contains("READY") && status == (int)initStatus["READY"])
+			{
+				MobileAds.Call("load_interstitial");
+				MobileAds.Call("load_rewarded");
+				MobileAds.Call("load_rewarded_interstitial");
+				
+				_add_text_Advice_Node("AdMob initialized on C#! With parameters:");
+
+				IDictionary generalConfig = config.Contains("general") ? (IDictionary) config["general"] : null;
+				if (generalConfig != null)
+				{
+					if (generalConfig.Contains("is_for_child_directed_treatment"))
+						_add_text_Advice_Node("is_for_child_directed_treatment: " + generalConfig["is_for_child_directed_treatment"].ToString());
+					if (generalConfig.Contains("is_test_europe_user_consent"))
+						_add_text_Advice_Node("is_test_europe_user_consent: " + generalConfig["is_test_europe_user_consent"].ToString());
+					if (generalConfig.Contains("max_ad_content_rating"))
+						_add_text_Advice_Node("max_ad_content_rating: " + generalConfig["max_ad_content_rating"].ToString());
+				}
+
+				_add_text_Advice_Node("instance_id: " + GetInstanceId().ToString());
+				EnableBanner.Disabled = false;
+				BannerPosition.Disabled = false;
+				RequestUserConsent.Disabled = false;
+				ResetConsentState.Disabled = false;
+			}
+			else
+			{
+				_add_text_Advice_Node("AdMob not initialized, check your configuration");
+			}
 		}
-		else
+		catch (Exception e)
 		{
-			_add_text_Advice_Node("AdMob not initialized, check your configuration");
+			_add_text_Advice_Node("Error during initialization: " + e.Message);
 		}
 		_add_text_Advice_Node("---------------------------------------------------");
 	}

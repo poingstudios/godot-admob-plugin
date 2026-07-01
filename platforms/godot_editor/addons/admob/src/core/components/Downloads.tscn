@@ -143,12 +143,6 @@ margin_right = 683.0
 margin_bottom = 44.0
 text = "Download iOS Template"
 
-[node name="DownloadGoogleMobileAdsSdkiOS" type="Button" parent="TabContainer/iOS"]
-margin_top = 48.0
-margin_right = 683.0
-margin_bottom = 68.0
-text = "Download GoogleMobileAdsSdkiOS"
-
 [node name="DontHaveConnectionPanelContainer" type="PanelContainer" parent="."]
 visible = false
 margin_top = 219.0
@@ -184,7 +178,6 @@ autostart = true
 [connection signal="pressed" from="TabContainer/iOS/ChangeDirectoryHBoxContainer/iOSOpenDirectoryButton" to="." method="_on_iOSOpenDirectoryButton_pressed"]
 [connection signal="dir_selected" from="TabContainer/iOS/ChangeDirectoryHBoxContainer/iOSChangeDirectoryFileDialog" to="." method="_on_iOSChangeDirectoryFileDialog_dir_selected"]
 [connection signal="pressed" from="TabContainer/iOS/DownloadiOSTemplate" to="." method="_on_DownloadiOSTemplate_pressed"]
-[connection signal="pressed" from="TabContainer/iOS/DownloadGoogleMobileAdsSdkiOS" to="." method="_on_DownloadGoogleMobileAdsSdkiOS_pressed"]
 [connection signal="network_status_changed" from="VerifyNetworkGithub" to="." method="_on_VerifyNetworkGithub_network_status_changed"]
 [connection signal="request_completed" from="VerifyNetworkGithub" to="VerifyNetworkGithub" method="_on_VerifyNetworkGithub_request_completed"]
 [connection signal="timeout" from="VerifyNetworkGithub/VerifyAgainTimer" to="VerifyNetworkGithub" method="_on_VerifyAgainTimer_timeout"]
