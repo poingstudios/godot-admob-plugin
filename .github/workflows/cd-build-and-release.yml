@@ -84,7 +84,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        GODOT_VERSIONS: ["3.5", "3.5.1", "3.5.2", "3.5.3", "3.6"]
+        GODOT_VERSIONS: ["3.5", "3.5.1", "3.5.2", "3.5.3", "3.6", "3.6.1", "3.6.2"]
     steps:
     - uses: actions/checkout@v3
 
