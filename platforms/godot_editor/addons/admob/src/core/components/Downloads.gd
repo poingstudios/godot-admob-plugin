@@ -125,10 +125,11 @@ func _on_HTTPRequest_request_completed(
 		OS.shell_open(GITHUB_ISSUES_URL)
 	else:
 		var filepath = $TabContainer/HTTPRequest.download_file
+		var success := false
 		if actual_downloading_file.begins_with("android-template"):
-			_extract_android_zip(filepath)
+			success = _extract_android_zip(filepath)
 		elif actual_downloading_file.begins_with("ios-template"):
-			_extract_ios_zip(filepath)
+			success = _extract_ios_zip(filepath)
 
 		$AdviceAcceptDialog.dialog_text = download_complete_message % [
 			actual_downloading_file,
@@ -137,7 +138,8 @@ func _on_HTTPRequest_request_completed(
 		set_process(false)
 		set_buttons_disabled(false)
 		$AdviceAcceptDialog.popup_centered()
-		_check_and_auto_download()
+		if success:
+			_check_and_auto_download()
 
 func _copy_virtual_file(
 	src_path: String, dest_path: String
@@ -169,9 +171,10 @@ func _copy_virtual_file(
 	f_dest.close()
 	return true
 
-func _extract_android_zip(zip_path: String) -> void:
+func _extract_android_zip(zip_path: String) -> bool:
+	var success = false
 	if ProjectSettings.load_resource_pack(zip_path):
-		var success = true
+		success = true
 		success = success and _copy_virtual_file(
 			"res://AdMob.gdap",
 			"res://android/plugins/AdMob.gdap"
@@ -197,10 +200,12 @@ func _extract_android_zip(zip_path: String) -> void:
 			"AdMob Error: Failed to load "
 			+ "Android resource pack: " + zip_path
 		)
+	return success
 
-func _extract_ios_zip(zip_path: String) -> void:
+func _extract_ios_zip(zip_path: String) -> bool:
+	var success = false
 	if ProjectSettings.load_resource_pack(zip_path):
-		var success = true
+		success = true
 		success = success and _copy_virtual_file(
 			"res://admob.gdip",
 			"res://ios/plugins/admob.gdip"
@@ -226,6 +231,7 @@ func _extract_ios_zip(zip_path: String) -> void:
 			"AdMob Error: Failed to load "
 			+ "iOS resource pack: " + zip_path
 		)
+	return success
 
 func _check_and_auto_download():
 	if is_processing() or version_support.empty():
