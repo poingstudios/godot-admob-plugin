@@ -5,7 +5,7 @@
     <div class="announcement-wrapper">
       <script>
         if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' && !window.location.pathname.includes('/latest/')) {
-          var banner = document.currentScript.closest('[data-md-component="banner"]');
+          var banner = document.currentScript.closest('.md-banner');
           if (banner) {
             banner.style.display = 'none';
           }
@@ -29,6 +29,13 @@
         </div>
       </div>
     </div>
+  {% else %}
+    <script>
+      var banner = document.currentScript.closest('.md-banner');
+      if (banner) {
+        banner.style.display = 'none';
+      }
+    </script>
   {% endif %}
 {% endblock %}
 
