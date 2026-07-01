@@ -247,7 +247,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VERSION: ${{ needs.initialize.outputs.version }}
       run: |
-        gh release create "$VERSION" release-artifacts/* --title "$VERSION" --generate-notes --make-current=false
+        gh release create "$VERSION" release-artifacts/* --title "$VERSION" --generate-notes --latest=false
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -300,6 +300,6 @@ jobs:
       run: |
         gh release create "$VERSION" release-artifacts/* \
           --prerelease \
-          --make-current=false \
+          --latest=false \
           --title "$VERSION (Nightly Build)" \
           --notes "Nightly build from branch \`${{ github.ref_name }}\`. Generated on $(date -u +'%Y-%m-%d %H:%M:%S UTC'). Commit: ${{ github.sha }}"
