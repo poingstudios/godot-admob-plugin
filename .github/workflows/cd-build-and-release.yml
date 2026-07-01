@@ -249,6 +249,24 @@ jobs:
       run: |
         gh release create "$VERSION" release-artifacts/* --title "$VERSION" --generate-notes --make-current=false
 
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    - name: Install requests
+      run: pip install requests
+
+    - name: Upload to Godot Asset Library
+      env:
+        ASSET_LIB_USER: ${{ secrets.ASSET_LIBRARY_USERNAME }}
+        ASSET_LIB_PASS: ${{ secrets.ASSET_LIBRARY_PASSWORD }}
+        VERSION: ${{ needs.initialize.outputs.version }}
+        COMMIT_HASH: ${{ github.sha }}
+        GITHUB_REPOSITORY: ${{ github.repository }}
+      run: |
+        python3 .github/scripts/push.py
+
   release-nightly:
     name: "🌙 Finalize and Publish Nightly"
     needs: [initialize, android-template, ios-template, godot_editor]

@@ -1,29 +1,33 @@
 tool
 extends VBoxContainer
 
-onready var AdMobEditor : Control = find_parent("AdMobEditor")
-onready var DebugOnRelease : Control = $TabContainer/Release/DebugOnRelease
-onready var IsReal : Control = $TabContainer/Release/IsReal
-onready var TestEuropeUserConsent : Control = $TabContainer/General/TestEuropeUserConsent
+onready var ad_mob_editor : Control = find_parent("AdMobEditor")
+onready var debug_on_release : Control = $TabContainer/Release/DebugOnRelease
+onready var is_real : Control = $TabContainer/Release/IsReal
+onready var test_europe_user_consent : Control = $TabContainer/General/TestEuropeUserConsent
 
 func _ready():
-	DebugOnRelease.pressed = AdMobEditor.AdMobSettings.config.debug.is_debug_on_release
-	IsReal.pressed = AdMobEditor.AdMobSettings.config.debug.is_real
-	TestEuropeUserConsent.pressed = AdMobEditor.AdMobSettings.config.debug.is_test_europe_user_consent
+	var debug_config = ad_mob_editor.ad_mob_settings.config.debug
+	debug_on_release.pressed = debug_config.is_debug_on_release
+	is_real.pressed = debug_config.is_real
+	test_europe_user_consent.pressed = (
+		debug_config.is_test_europe_user_consent
+	)
 
-	IsReal.disabled = not DebugOnRelease.pressed
+	is_real.disabled = not debug_on_release.pressed
 
 
 func _on_DebugOnRelease_pressed():
-	AdMobEditor.AdMobSettings.config.debug.is_debug_on_release = DebugOnRelease.pressed
-	if DebugOnRelease.pressed:
-		IsReal.disabled = false
+	ad_mob_editor.ad_mob_settings.config.debug.is_debug_on_release = debug_on_release.pressed
+	if debug_on_release.pressed:
+		is_real.disabled = false
 	else:
-		IsReal.disabled = true
+		is_real.disabled = true
 
 func _on_IsReal_pressed():
-	AdMobEditor.AdMobSettings.config.debug.is_real = IsReal.pressed
+	ad_mob_editor.ad_mob_settings.config.debug.is_real = is_real.pressed
 
 func _on_TestEuropeUserConsent_pressed():
-	AdMobEditor.AdMobSettings.config.debug.is_test_europe_user_consent = TestEuropeUserConsent.pressed
-
+	ad_mob_editor.ad_mob_settings.config.debug.is_test_europe_user_consent = (
+		test_europe_user_consent.pressed
+	)

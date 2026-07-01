@@ -239,6 +239,6 @@ align = 2
 script = ExtResource( 15 )
 
 [connection signal="pressed" from="TopPanel/Icons/AndroidButton" to="." method="_on_AndroidButton_pressed"]
-[connection signal="pressed" from="TopPanel/Icons/iOSButton" to="." method="_on_iOSButton_pressed"]
+[connection signal="pressed" from="TopPanel/Icons/iOSButton" to="." method="_on_ios_button_pressed"]
 [connection signal="pressed" from="TopPanel/Icons/AdMobButton" to="." method="_on_AdMobButton_pressed"]
 [connection signal="pressed" from="TopPanel/Icons/PoingButton" to="." method="_on_PoingButton_pressed"]

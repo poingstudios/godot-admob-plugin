@@ -1,12 +1,19 @@
-var AdMobLoad = preload("res://addons/admob/src/utils/AdMobLoad.gd")
-var AdMobSave = preload("res://addons/admob/src/utils/AdMobSave.gd")
+enum InitializationStatus {NOT_READY, READY}
+enum Position {BOTTOM, TOP}
 
-enum INITIALIZATION_STATUS {NOT_READY, READY}
 const PATH_ADMOB_PROJECT_SETTINGS = "admob/config"
-
-const BANNER_SIZE : Array = ["BANNER", "MEDIUM_RECTANGLE", "FULL_BANNER", "LEADERBOARD", "ADAPTIVE", "SMART_BANNER"] 
+const BANNER_SIZE : Array = [
+	"BANNER", "MEDIUM_RECTANGLE", "FULL_BANNER",
+	"LEADERBOARD", "ADAPTIVE", "SMART_BANNER"
+]
 const MAX_AD_RATING : Array = ["G", "PG", "T", "MA"]
-enum POSITION {BOTTOM, TOP}
+
+var ad_mob_load = preload(
+	"res://addons/admob/src/utils/AdMobLoad.gd"
+)
+var ad_mob_save = preload(
+	"res://addons/admob/src/utils/AdMobSave.gd"
+)
 
 
 var config : Dictionary = {
@@ -21,7 +28,7 @@ var config : Dictionary = {
 		"is_test_europe_user_consent": false
 	},
 	"banner": {
-		"position": POSITION.TOP,
+		"position": Position.TOP,
 		"respect_safe_area" : true,
 		"show_instantly": true,
 		"size": BANNER_SIZE[0],
@@ -67,13 +74,15 @@ var config : Dictionary = {
 } setget set_config
 
 func _init():
-	var config_project_settings : Dictionary = AdMobLoad.load_config(PATH_ADMOB_PROJECT_SETTINGS)
+	var config_project_settings : Dictionary = (
+		ad_mob_load.load_config(PATH_ADMOB_PROJECT_SETTINGS)
+	)
 	merge_dir(config, config_project_settings)
 	if Engine.editor_hint:
 		save_config()
 
 func save_config():
-	AdMobSave.save_config(PATH_ADMOB_PROJECT_SETTINGS, self.config)
+	ad_mob_save.save_config(PATH_ADMOB_PROJECT_SETTINGS, self.config)
 
 func set_config(value : Dictionary):
 	config = value
@@ -98,6 +107,6 @@ static func pascal2snake(string : String) -> String:
 		if ch == ch.to_lower():
 			result.append(ch)
 		else:
-			result.append('_'+ch.to_lower())
+			result.append('_' + ch.to_lower())
 	result[0] = result[0][1]
 	return result.join('')

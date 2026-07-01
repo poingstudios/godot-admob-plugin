@@ -42,9 +42,11 @@ signal rewarded_interstitial_ad_recorded_impression()
 
 signal user_earned_rewarded(currency, amount)
 
-var AdMobSettings = preload("res://addons/admob/src/utils/AdMobSettings.gd").new()
-onready var config = AdMobSettings.config
+var ad_mob_settings = preload(
+	"res://addons/admob/src/utils/AdMobSettings.gd"
+).new()
 var _plugin : Object
+onready var config = ad_mob_settings.config
 
 func _ready() -> void:
 	if config.general.is_enabled:
@@ -61,143 +63,333 @@ func get_is_initialized() -> bool:
 func initialize() -> void:
 	if _plugin:
 		var is_release : bool = OS.has_feature("release")
-		
-		var is_debug_on_release : bool = config.debug.is_debug_on_release
+
+		var is_debug_on_release : bool = (
+			config.debug.is_debug_on_release
+		)
 
 		var is_real : bool = false
-		var is_test_europe_user_consent : bool = config.debug.is_test_europe_user_consent
+		var is_test_europe_user_consent : bool = (
+			config.debug.is_test_europe_user_consent
+		)
 
 		if is_release:
 			is_real = true
 			is_test_europe_user_consent = false
 
 			if is_debug_on_release:
-				is_real = config.debug.is_real 
-				is_test_europe_user_consent = config.debug.is_test_europe_user_consent
-		
-		var google_request_agent := "Godot-PoingStudios-"+PoingAdMobVersionHelper.new().version_formated
-		_plugin.initialize(config.general.is_for_child_directed_treatment, config.general.max_ad_content_rating, is_real, is_test_europe_user_consent, google_request_agent)
+				is_real = config.debug.is_real
+				is_test_europe_user_consent = (
+					config.debug.is_test_europe_user_consent
+				)
 
-
+		var google_request_agent := (
+			"Godot-PoingStudios-"
+			+ PoingAdMobVersionHelper.new().version_formated
+		)
+		_plugin.initialize(
+			config.general.is_for_child_directed_treatment,
+			config.general.max_ad_content_rating,
+			is_real,
+			is_test_europe_user_consent,
+			google_request_agent
+		)
 
 
 func _connect_signals() -> void:
-	_plugin.connect("initialization_complete", self, "_on_AdMob_initialization_complete")
+	_plugin.connect(
+		"initialization_complete", self,
+		"_on_AdMob_initialization_complete"
+	)
 
-	_plugin.connect("consent_form_dismissed", self, "_on_AdMob_consent_form_dismissed")
-	_plugin.connect("consent_status_changed", self, "_on_AdMob_consent_status_changed")
-	_plugin.connect("consent_form_load_failure", self, "_on_AdMob_consent_form_load_failure")
-	_plugin.connect("consent_info_update_success", self, "_on_AdMob_consent_info_update_success")
-	_plugin.connect("consent_info_update_failure", self, "_on_AdMob_consent_info_update_failure")
+	_plugin.connect(
+		"consent_form_dismissed", self,
+		"_on_AdMob_consent_form_dismissed"
+	)
+	_plugin.connect(
+		"consent_status_changed", self,
+		"_on_AdMob_consent_status_changed"
+	)
+	_plugin.connect(
+		"consent_form_load_failure", self,
+		"_on_AdMob_consent_form_load_failure"
+	)
+	_plugin.connect(
+		"consent_info_update_success", self,
+		"_on_AdMob_consent_info_update_success"
+	)
+	_plugin.connect(
+		"consent_info_update_failure", self,
+		"_on_AdMob_consent_info_update_failure"
+	)
 
-	_plugin.connect("banner_loaded", self, "_on_AdMob_banner_loaded")
-	_plugin.connect("banner_failed_to_load", self, "_on_AdMob_banner_failed_to_load")
-	_plugin.connect("banner_opened", self, "_on_AdMob_banner_opened")
-	_plugin.connect("banner_clicked", self, "_on_AdMob_banner_clicked")
-	_plugin.connect("banner_closed", self, "_on_AdMob_banner_closed")
-	_plugin.connect("banner_recorded_impression", self, "_on_AdMob_banner_recorded_impression")
-	_plugin.connect("banner_destroyed", self, "_on_AdMob_banner_destroyed")
+	_plugin.connect(
+		"banner_loaded", self,
+		"_on_AdMob_banner_loaded"
+	)
+	_plugin.connect(
+		"banner_failed_to_load", self,
+		"_on_AdMob_banner_failed_to_load"
+	)
+	_plugin.connect(
+		"banner_opened", self,
+		"_on_AdMob_banner_opened"
+	)
+	_plugin.connect(
+		"banner_clicked", self,
+		"_on_AdMob_banner_clicked"
+	)
+	_plugin.connect(
+		"banner_closed", self,
+		"_on_AdMob_banner_closed"
+	)
+	_plugin.connect(
+		"banner_recorded_impression", self,
+		"_on_AdMob_banner_recorded_impression"
+	)
+	_plugin.connect(
+		"banner_destroyed", self,
+		"_on_AdMob_banner_destroyed"
+	)
 
-	_plugin.connect("interstitial_failed_to_load", self, "_on_AdMob_interstitial_failed_to_load")
-	_plugin.connect("interstitial_loaded", self, "_on_AdMob_interstitial_loaded")
-	_plugin.connect("interstitial_failed_to_show", self, "_on_AdMob_interstitial_failed_to_show")
-	_plugin.connect("interstitial_opened", self, "_on_AdMob_interstitial_opened")
-	_plugin.connect("interstitial_clicked", self, "_on_AdMob_interstitial_clicked")
-	_plugin.connect("interstitial_closed", self, "_on_AdMob_interstitial_closed")
-	_plugin.connect("interstitial_recorded_impression", self, "_on_AdMob_interstitial_recorded_impression")
+	_plugin.connect(
+		"interstitial_failed_to_load", self,
+		"_on_AdMob_interstitial_failed_to_load"
+	)
+	_plugin.connect(
+		"interstitial_loaded", self,
+		"_on_AdMob_interstitial_loaded"
+	)
+	_plugin.connect(
+		"interstitial_failed_to_show", self,
+		"_on_AdMob_interstitial_failed_to_show"
+	)
+	_plugin.connect(
+		"interstitial_opened", self,
+		"_on_AdMob_interstitial_opened"
+	)
+	_plugin.connect(
+		"interstitial_clicked", self,
+		"_on_AdMob_interstitial_clicked"
+	)
+	_plugin.connect(
+		"interstitial_closed", self,
+		"_on_AdMob_interstitial_closed"
+	)
+	_plugin.connect(
+		"interstitial_recorded_impression", self,
+		"_on_AdMob_interstitial_recorded_impression"
+	)
 
-	_plugin.connect("rewarded_ad_failed_to_load", self, "_on_AdMob_rewarded_ad_failed_to_load")
-	_plugin.connect("rewarded_ad_loaded", self, "_on_AdMob_rewarded_ad_loaded")
-	_plugin.connect("rewarded_ad_failed_to_show", self, "_on_AdMob_rewarded_ad_failed_to_show")
-	_plugin.connect("rewarded_ad_opened", self, "_on_AdMob_rewarded_ad_opened")
-	_plugin.connect("rewarded_ad_clicked", self, "_on_AdMob_rewarded_ad_clicked")
-	_plugin.connect("rewarded_ad_closed", self, "_on_AdMob_rewarded_ad_closed")
-	_plugin.connect("rewarded_ad_recorded_impression", self, "_on_AdMob_rewarded_ad_recorded_impression")
+	_plugin.connect(
+		"rewarded_ad_failed_to_load", self,
+		"_on_AdMob_rewarded_ad_failed_to_load"
+	)
+	_plugin.connect(
+		"rewarded_ad_loaded", self,
+		"_on_AdMob_rewarded_ad_loaded"
+	)
+	_plugin.connect(
+		"rewarded_ad_failed_to_show", self,
+		"_on_AdMob_rewarded_ad_failed_to_show"
+	)
+	_plugin.connect(
+		"rewarded_ad_opened", self,
+		"_on_AdMob_rewarded_ad_opened"
+	)
+	_plugin.connect(
+		"rewarded_ad_clicked", self,
+		"_on_AdMob_rewarded_ad_clicked"
+	)
+	_plugin.connect(
+		"rewarded_ad_closed", self,
+		"_on_AdMob_rewarded_ad_closed"
+	)
+	_plugin.connect(
+		"rewarded_ad_recorded_impression", self,
+		"_on_AdMob_rewarded_ad_recorded_impression"
+	)
 
-	_plugin.connect("rewarded_interstitial_ad_failed_to_load", self, "_on_AdMob_rewarded_interstitial_ad_failed_to_load")
-	_plugin.connect("rewarded_interstitial_ad_loaded", self, "_on_AdMob_rewarded_interstitial_ad_loaded")
-	_plugin.connect("rewarded_interstitial_ad_failed_to_show", self, "_on_AdMob_rewarded_interstitial_ad_failed_to_show")
-	_plugin.connect("rewarded_interstitial_ad_opened", self, "_on_AdMob_rewarded_interstitial_ad_opened")
-	_plugin.connect("rewarded_interstitial_ad_clicked", self, "_on_AdMob_rewarded_interstitial_ad_clicked")
-	_plugin.connect("rewarded_interstitial_ad_closed", self, "_on_AdMob_rewarded_interstitial_ad_closed")
-	_plugin.connect("rewarded_interstitial_ad_recorded_impression", self, "_on_AdMob_rewarded_interstitial_ad_recorded_impression")
+	_plugin.connect(
+		"rewarded_interstitial_ad_failed_to_load", self,
+		"_on_AdMob_rewarded_interstitial_ad_failed_to_load"
+	)
+	_plugin.connect(
+		"rewarded_interstitial_ad_loaded", self,
+		"_on_AdMob_rewarded_interstitial_ad_loaded"
+	)
+	_plugin.connect(
+		"rewarded_interstitial_ad_failed_to_show", self,
+		"_on_AdMob_rewarded_interstitial_ad_failed_to_show"
+	)
+	_plugin.connect(
+		"rewarded_interstitial_ad_opened", self,
+		"_on_AdMob_rewarded_interstitial_ad_opened"
+	)
+	_plugin.connect(
+		"rewarded_interstitial_ad_clicked", self,
+		"_on_AdMob_rewarded_interstitial_ad_clicked"
+	)
+	_plugin.connect(
+		"rewarded_interstitial_ad_closed", self,
+		"_on_AdMob_rewarded_interstitial_ad_closed"
+	)
+	_plugin.connect(
+		"rewarded_interstitial_ad_recorded_impression",
+		self,
+		"_on_AdMob_rewarded_interstitial_ad_recorded_impression"
+	)
 
-	_plugin.connect("user_earned_rewarded", self, "_on_AdMob_user_earned_rewarded")
+	_plugin.connect(
+		"user_earned_rewarded", self,
+		"_on_AdMob_user_earned_rewarded"
+	)
 
 
-func _on_AdMob_initialization_complete(status : int, adapter_name : String) -> void:
+func _on_AdMob_initialization_complete(
+	status : int, adapter_name : String
+) -> void:
 	emit_signal("initialization_complete", status, adapter_name)
 
 func _on_AdMob_consent_form_dismissed() -> void:
 	emit_signal("consent_form_dismissed")
-func _on_AdMob_consent_status_changed(consent_status_message : String) -> void:
+
+func _on_AdMob_consent_status_changed(
+	consent_status_message : String
+) -> void:
 	emit_signal("consent_status_changed", consent_status_message)
-func _on_AdMob_consent_form_load_failure(error_code : int, error_message: String) -> void:
-	emit_signal("consent_form_load_failure", error_code, error_message)
-func _on_AdMob_consent_info_update_success(consent_status_message : String) -> void:
-	emit_signal("consent_info_update_success", consent_status_message)
-func _on_AdMob_consent_info_update_failure(error_code : int, error_message : String) -> void:
-	emit_signal("consent_info_update_failure", error_code, error_message)
+
+func _on_AdMob_consent_form_load_failure(
+	error_code : int, error_message : String
+) -> void:
+	emit_signal(
+		"consent_form_load_failure",
+		error_code,
+		error_message
+	)
+
+func _on_AdMob_consent_info_update_success(
+	consent_status_message : String
+) -> void:
+	emit_signal(
+		"consent_info_update_success",
+		consent_status_message
+	)
+
+func _on_AdMob_consent_info_update_failure(
+	error_code : int, error_message : String
+) -> void:
+	emit_signal(
+		"consent_info_update_failure",
+		error_code,
+		error_message
+	)
 
 func _on_AdMob_banner_loaded() -> void:
 	emit_signal("banner_loaded")
+
 func _on_AdMob_banner_failed_to_load(error_code : int) -> void:
 	emit_signal("banner_failed_to_load", error_code)
+
 func _on_AdMob_banner_opened() -> void:
 	emit_signal("banner_loaded")
+
 func _on_AdMob_banner_clicked() -> void:
 	emit_signal("banner_clicked")
+
 func _on_AdMob_banner_closed() -> void:
 	emit_signal("banner_closed")
+
 func _on_AdMob_banner_recorded_impression() -> void:
 	emit_signal("banner_recorded_impression")
+
 func _on_AdMob_banner_destroyed() -> void:
 	emit_signal("banner_destroyed")
 
-func _on_AdMob_interstitial_failed_to_load(error_code : int) -> void:
+func _on_AdMob_interstitial_failed_to_load(
+	error_code : int
+) -> void:
 	emit_signal("interstitial_failed_to_load", error_code)
+
 func _on_AdMob_interstitial_loaded() -> void:
 	emit_signal("interstitial_loaded")
-func _on_AdMob_interstitial_failed_to_show(error_code : int) -> void:
+
+func _on_AdMob_interstitial_failed_to_show(
+	error_code : int
+) -> void:
 	emit_signal("interstitial_failed_to_show", error_code)
+
 func _on_AdMob_interstitial_opened() -> void:
 	emit_signal("interstitial_opened")
+
 func _on_AdMob_interstitial_clicked() -> void:
 	emit_signal("interstitial_clicked")
+
 func _on_AdMob_interstitial_closed() -> void:
 	emit_signal("interstitial_closed")
+
 func _on_AdMob_interstitial_recorded_impression() -> void:
 	emit_signal("interstitial_recorded_impression")
 
-func _on_AdMob_rewarded_ad_failed_to_load(error_code : int) -> void:
+func _on_AdMob_rewarded_ad_failed_to_load(
+	error_code : int
+) -> void:
 	emit_signal("rewarded_ad_failed_to_load", error_code)
+
 func _on_AdMob_rewarded_ad_loaded() -> void:
 	emit_signal("rewarded_ad_loaded")
-func _on_AdMob_rewarded_ad_failed_to_show(error_code : int) -> void:
+
+func _on_AdMob_rewarded_ad_failed_to_show(
+	error_code : int
+) -> void:
 	emit_signal("rewarded_ad_failed_to_show", error_code)
+
 func _on_AdMob_rewarded_ad_opened() -> void:
 	emit_signal("rewarded_ad_opened")
+
 func _on_AdMob_rewarded_ad_clicked() -> void:
 	emit_signal("rewarded_ad_clicked")
+
 func _on_AdMob_rewarded_ad_closed() -> void:
 	emit_signal("rewarded_ad_closed")
+
 func _on_AdMob_rewarded_ad_recorded_impression() -> void:
 	emit_signal("rewarded_ad_recorded_impression")
 
-func _on_AdMob_rewarded_interstitial_ad_failed_to_load(error_code : int) -> void:
-	emit_signal("rewarded_interstitial_ad_failed_to_load", error_code)
+func _on_AdMob_rewarded_interstitial_ad_failed_to_load(
+	error_code : int
+) -> void:
+	emit_signal(
+		"rewarded_interstitial_ad_failed_to_load",
+		error_code
+	)
+
 func _on_AdMob_rewarded_interstitial_ad_loaded() -> void:
 	emit_signal("rewarded_interstitial_ad_loaded")
-func _on_AdMob_rewarded_interstitial_ad_failed_to_show(error_code : int) -> void:
-	emit_signal("rewarded_interstitial_ad_failed_to_show", error_code)
+
+func _on_AdMob_rewarded_interstitial_ad_failed_to_show(
+	error_code : int
+) -> void:
+	emit_signal(
+		"rewarded_interstitial_ad_failed_to_show",
+		error_code
+	)
+
 func _on_AdMob_rewarded_interstitial_ad_opened() -> void:
 	emit_signal("rewarded_interstitial_ad_opened")
+
 func _on_AdMob_rewarded_interstitial_ad_clicked() -> void:
 	emit_signal("rewarded_interstitial_ad_clicked")
+
 func _on_AdMob_rewarded_interstitial_ad_closed() -> void:
 	emit_signal("rewarded_interstitial_ad_closed")
-func _on_AdMob_rewarded_interstitial_ad_recorded_impression() -> void:
-	emit_signal("rewarded_interstitial_ad_recorded_impression")
 
-func _on_AdMob_user_earned_rewarded(currency : String, amount : int) -> void:
+func _on_AdMob_rewarded_interstitial_ad_recorded_impression() -> void:
+	emit_signal(
+		"rewarded_interstitial_ad_recorded_impression"
+	)
+
+func _on_AdMob_user_earned_rewarded(
+	currency : String, amount : int
+) -> void:
 	emit_signal("user_earned_rewarded", currency, amount)

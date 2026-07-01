@@ -82,7 +82,7 @@ public class Example : Control
 		OS.CenterWindow();
 		Music.Play();
 
-		foreach(String banner_size in (IEnumerable) ((Godot.Object)MobileAds.Get("AdMobSettings")).Get("BANNER_SIZE"))
+		foreach(String banner_size in (IEnumerable) ((Godot.Object)MobileAds.Get("ad_mob_settings")).Get("BANNER_SIZE"))
 		{
 			BannerSizes.AddItem(banner_size);
 		}
@@ -112,7 +112,7 @@ public class Example : Control
 	{
 		try
 		{
-			IDictionary initStatus = (IDictionary) ((Godot.Object)MobileAds.Get("AdMobSettings")).Get("INITIALIZATION_STATUS");
+			IDictionary initStatus = (IDictionary) ((Godot.Object)MobileAds.Get("ad_mob_settings")).Get("InitializationStatus");
 			if (initStatus != null && initStatus.Contains("READY") && status == (int)initStatus["READY"])
 			{
 				MobileAds.Call("load_interstitial");

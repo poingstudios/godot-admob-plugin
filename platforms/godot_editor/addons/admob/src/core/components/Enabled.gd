@@ -1,10 +1,10 @@
 tool
 extends CheckBox
 
-onready var AdMobEditor : Control = find_parent("AdMobEditor")
+onready var ad_mob_editor : Control = find_parent("AdMobEditor")
 
 func _ready() -> void:
-	pressed = AdMobEditor.AdMobSettings.config.general.is_enabled
+	pressed = ad_mob_editor.ad_mob_settings.config.general.is_enabled
 
 
 func _on_Enabled_pressed():
@@ -12,9 +12,9 @@ func _on_Enabled_pressed():
 		pressed = true
 		$ConfirmationDialog.show()
 	else:
-		AdMobEditor.AdMobSettings.config.general.is_enabled = pressed
+		ad_mob_editor.ad_mob_settings.config.general.is_enabled = pressed
 
 
 func _on_ConfirmationDialog_confirmed() -> void:
 	pressed = false
-	AdMobEditor.AdMobSettings.config.general.is_enabled = pressed
+	ad_mob_editor.ad_mob_settings.config.general.is_enabled = pressed

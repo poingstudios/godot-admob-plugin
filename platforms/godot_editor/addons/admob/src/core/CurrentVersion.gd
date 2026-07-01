@@ -1,7 +1,7 @@
 tool
 extends Label
 
-var AdMobGlobals = preload("res://addons/admob/src/utils/AdMobGlobals.gd")
+var ad_mob_globals = preload("res://addons/admob/src/utils/AdMobGlobals.gd")
 
 func _ready():
-	text = "Version: " + AdMobGlobals.get_plugin_version()
+	text = "Version: " + ad_mob_globals.get_plugin_version()

@@ -1,7 +1,8 @@
 tool
 extends EditorPlugin
 
-var AdMobEditor: Control
+var _ad_mob_editor: Control
+var _exporter := PoingAdMobEditorExportPlugin.new()
 
 class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 	const CFG_FILE_PATH := "res://addons/admob/plugin.cfg"
@@ -10,7 +11,7 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 	var _export_path := ""
 	var _is_ios := false
 
-	func _export_begin(features: PoolStringArray, is_debug: bool, path: String, flags: int) -> void:
+	func _export_begin(features: PoolStringArray, _is_debug: bool, path: String, _flags: int) -> void:
 		print("AdMob Exporter: _export_begin started. Path: ", path, " Features: ", features)
 		var file := File.new()
 
@@ -107,16 +108,37 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 					version_rule = 'from: "%s"' % dep.version
 				package_deps_str += '        .package(url: "%s", %s),\n' % [url, version_rule]
 
-			if not processed_products.has(product):
-				processed_products.append(product)
-				target_deps_str += '                .product(name: "%s", package: "%s"),\n' % [product, package_name]
+				if not processed_products.has(product):
+					processed_products.append(product)
+					target_deps_str += (
+						'                .product(name: "%s", package: "%s"),\n'
+						% [product, package_name]
+					)
 
 		var content := (
-			'// swift-tools-version:5.9\nimport PackageDescription\n\nlet package = Package(\n    name: "PoingGodotAdMobDeps",\n    platforms: [.iOS(.v14)],\n    products: [\n        .library(\n            name: "PoingGodotAdMobDeps",\n            targets: ["PoingGodotAdMobDeps"]),\n    ],\n    dependencies: [\n'
+			'// swift-tools-version:5.9\n'
+			+ 'import PackageDescription\n\n'
+			+ 'let package = Package(\n'
+			+ '    name: "PoingGodotAdMobDeps",\n'
+			+ '    platforms: [.iOS(.v14)],\n'
+			+ '    products: [\n'
+			+ '        .library(\n'
+			+ '            name: "PoingGodotAdMobDeps",\n'
+			+ '            targets: ["PoingGodotAdMobDeps"]),\n'
+			+ '    ],\n'
+			+ '    dependencies: [\n'
 			+ package_deps_str
-			+'    ],\n    targets: [\n        .target(\n            name: "PoingGodotAdMobDeps",\n            dependencies: [\n'
+			+ '    ],\n'
+			+ '    targets: [\n'
+			+ '        .target(\n'
+			+ '            name: "PoingGodotAdMobDeps",\n'
+			+ '            dependencies: [\n'
 			+ target_deps_str
-			+'            ],\n            path: "PoingGodotAdMobDeps"\n        )\n    ]\n)\n'
+			+ '            ],\n'
+			+ '            path: "PoingGodotAdMobDeps"\n'
+			+ '        )\n'
+			+ '    ]\n'
+			+ ')\n'
 		)
 
 		var file = File.new()
@@ -131,7 +153,13 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 		if not dir.dir_exists(source_dir):
 			dir.make_dir_recursive(source_dir)
 
-		var content := "// Dummy\nimport Foundation\n\npublic struct PoingGodotAdMobDeps {\n    public init() {}\n}\n"
+		var content := (
+			"// Dummy\n"
+			+ "import Foundation\n\n"
+			+ "public struct PoingGodotAdMobDeps {\n"
+			+ "    public init() {}\n"
+			+ "}\n"
+		)
 		var file = File.new()
 		if file.open(source_dir + "/Dummy.swift", File.WRITE) == OK:
 			file.store_string(content)
@@ -175,19 +203,25 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 		if content.find("/* Begin XCLocalSwiftPackageReference section */") == -1:
 			content = content.replace(
 				"/* End PBXGroup section */",
-				"/* End PBXGroup section */\n\n/* Begin XCLocalSwiftPackageReference section */\n/* End XCLocalSwiftPackageReference section */"
+				"/* End PBXGroup section */\n\n"
+				+ "/* Begin XCLocalSwiftPackageReference section */\n"
+				+ "/* End XCLocalSwiftPackageReference section */"
 			)
 
 		if content.find("/* Begin XCSwiftPackageProductDependency section */") == -1:
 			content = content.replace(
 				"/* End XCLocalSwiftPackageReference section */",
-				"/* End XCLocalSwiftPackageReference section */\n\n/* Begin XCSwiftPackageProductDependency section */\n/* End XCSwiftPackageProductDependency section */"
+				"/* End XCLocalSwiftPackageReference section */\n\n"
+				+ "/* Begin XCSwiftPackageProductDependency section */\n"
+				+ "/* End XCSwiftPackageProductDependency section */"
 			)
 
 		var local_ref_def := (
-			"		"
-			+ local_ref_id
-			+' /* XCLocalSwiftPackageReference "admob_spm" */ = {\n			isa = XCLocalSwiftPackageReference;\n			relativePath = "admob_spm";\n		};\n'
+			"		" + local_ref_id
+			+ ' /* XCLocalSwiftPackageReference "admob_spm" */ = {\n'
+			+ '\t\t\tisa = XCLocalSwiftPackageReference;\n'
+			+ '\t\t\trelativePath = "admob_spm";\n'
+			+ '\t\t};\n'
 		)
 		content = content.replace(
 			"/* End XCLocalSwiftPackageReference section */",
@@ -195,11 +229,13 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 		)
 
 		var product_dep_def := (
-			"		"
-			+ product_dep_id
-			+" /* PoingGodotAdMobDeps */ = {\n			isa = XCSwiftPackageProductDependency;\n			package = "
-			+ local_ref_id
-			+' /* XCLocalSwiftPackageReference "admob_spm" */;\n			productName = "PoingGodotAdMobDeps";\n		};\n'
+			"		" + product_dep_id
+			+ " /* PoingGodotAdMobDeps */ = {\n"
+			+ '\t\t\tisa = XCSwiftPackageProductDependency;\n'
+			+ '\t\t\tpackage = ' + local_ref_id
+			+ ' /* XCLocalSwiftPackageReference "admob_spm" */;\n'
+			+ '\t\t\tproductName = "PoingGodotAdMobDeps";\n'
+			+ '\t\t};\n'
 		)
 		content = content.replace(
 			"/* End XCSwiftPackageProductDependency section */",
@@ -207,11 +243,11 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 		)
 
 		var build_file_def := (
-			"		"
-			+ build_file_id
-			+" /* PoingGodotAdMobDeps in Frameworks */ = {isa = PBXBuildFile; productRef = "
+			"		" + build_file_id
+			+ " /* PoingGodotAdMobDeps in Frameworks */"
+			+ " = {isa = PBXBuildFile; productRef = "
 			+ product_dep_id
-			+" /* PoingGodotAdMobDeps */; };\n"
+			+ " /* PoingGodotAdMobDeps */; };\n"
 		)
 		content = content.replace(
 			"/* Begin PBXBuildFile section */", "/* Begin PBXBuildFile section */\n" + build_file_def
@@ -279,28 +315,26 @@ class PoingAdMobEditorExportPlugin extends EditorExportPlugin:
 	func _get_name() -> String:
 		return "PoingAdMob"
 
-var _exporter := PoingAdMobEditorExportPlugin.new()
-
 func _enter_tree():
 	add_export_plugin(_exporter)
-	
+
 	add_autoload_singleton("MobileAds", "res://addons/admob/src/singletons/MobileAds.gd")
-	AdMobEditor = load("res://addons/admob/src/core/AdMobEditor.tscn").instance()
-	get_editor_interface().get_editor_viewport().add_child(AdMobEditor)
-	AdMobEditor.hide()
+	_ad_mob_editor = load("res://addons/admob/src/core/AdMobEditor.tscn").instance()
+	get_editor_interface().get_editor_viewport().add_child(_ad_mob_editor)
+	_ad_mob_editor.hide()
 
 func _exit_tree():
 	remove_export_plugin(_exporter)
-	
+
 	remove_autoload_singleton("MobileAds")
-	get_editor_interface().get_editor_viewport().remove_child(AdMobEditor)
-	AdMobEditor.queue_free()
-	
+	get_editor_interface().get_editor_viewport().remove_child(_ad_mob_editor)
+	_ad_mob_editor.queue_free()
+
 func has_main_screen():
 	return true
 
 func make_visible(visible):
-	AdMobEditor.visible = visible
+	_ad_mob_editor.visible = visible
 
 func get_plugin_name():
 	return "AdMob"
