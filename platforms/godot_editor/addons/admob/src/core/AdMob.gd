@@ -342,8 +342,14 @@ func _enter_tree():
 
 	add_autoload_singleton("MobileAds", "res://addons/admob/src/singletons/MobileAds.gd")
 	_ad_mob_editor = load("res://addons/admob/src/core/AdMobEditor.tscn").instance()
+	var downloads = _ad_mob_editor.get_node("MiddleScrollContainer/TabContainer/Downloads")
+	downloads.connect("files_extracted", self, "_on_files_extracted")
 	get_editor_interface().get_editor_viewport().add_child(_ad_mob_editor)
 	_ad_mob_editor.hide()
+
+func _on_files_extracted():
+	get_editor_interface().get_resource_filesystem().scan()
+	get_editor_interface().get_resource_filesystem().scan_sources()
 
 func _exit_tree():
 	remove_export_plugin(_exporter)
