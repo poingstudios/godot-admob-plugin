@@ -23,6 +23,8 @@
 tool
 extends VBoxContainer
 
+signal files_extracted
+
 const GITHUB_RELEASES_URL = (
 	"https://github.com/poingstudios/godot-admob-plugin/releases"
 )
@@ -139,7 +141,14 @@ func _on_HTTPRequest_request_completed(
 		set_buttons_disabled(false)
 		$AdviceAcceptDialog.popup_centered()
 		if success:
+			emit_signal("files_extracted")
 			_check_and_auto_download()
+		else:
+			if actual_downloading_file.begins_with("android-template"):
+				var ios_file = "res://ios/plugins/admob.gdip"
+				var dir = Directory.new()
+				if not dir.file_exists(ios_file):
+					_on_DownloadiOSTemplate_pressed()
 
 func _copy_virtual_file(
 	src_path: String, dest_path: String
@@ -171,66 +180,141 @@ func _copy_virtual_file(
 	f_dest.close()
 	return true
 
-func _extract_android_zip(zip_path: String) -> bool:
-	var success = false
+func _extract_zip(zip_path: String, mappings: Dictionary) -> bool:
 	if ProjectSettings.load_resource_pack(zip_path):
-		success = true
-		success = success and _copy_virtual_file(
-			"res://AdMob.gdap",
-			"res://android/plugins/AdMob.gdap"
-		)
-		success = success and _copy_virtual_file(
-			"res://build/outputs/aar/admob-release.aar",
-			"res://android/plugins/admob-release.aar"
-		)
-		success = success and _copy_virtual_file(
-			"res://build/outputs/aar/admob-debug.aar",
-			"res://android/plugins/admob-debug.aar"
-		)
-
+		var success = true
+		for virtual_path in mappings.keys():
+			var physical_path = mappings[virtual_path]
+			success = success and _copy_virtual_file(virtual_path, physical_path)
 		var dir = Directory.new()
 		dir.remove(zip_path)
+		return success
 
-		if success:
-			print("AdMob: Android templates extracted successfully!")
+	return _extract_zip_manual(zip_path, mappings)
+
+func _extract_zip_manual(zip_path: String, mappings: Dictionary) -> bool:
+	var file = File.new()
+	if file.open(zip_path, File.READ) != OK:
+		return false
+
+	var needed := {}
+	for virtual_path in mappings.keys():
+		needed[virtual_path.replace("res://", "")] = mappings[virtual_path]
+
+	var found := 0
+	var success := true
+
+	while file.get_position() < file.get_len() - 4:
+		var sig = file.get_32()
+		if sig != 0x04034b50:
+			break
+
+		file.get_16()
+		file.get_16()
+		var method = file.get_16()
+		file.get_16()
+		file.get_16()
+		var crc = file.get_32()
+		var comp_size = file.get_32()
+		var uncomp_size = file.get_32()
+		var name_len = file.get_16()
+		var extra_len = file.get_16()
+
+		var entry_name = file.get_buffer(name_len).get_string_from_utf8()
+		if extra_len > 0:
+			file.get_buffer(extra_len)
+
+		if entry_name.ends_with("/"):
+			continue
+
+		if entry_name in needed:
+			var raw = file.get_buffer(comp_size)
+			var output = PoolByteArray()
+
+			if method == 0:
+				output = raw
+			elif method == 8:
+				output = _inflate_raw(raw, uncomp_size, crc)
+
+			if output.size() == uncomp_size:
+				success = success and _write_extracted_file(
+					needed[entry_name], output
+				)
+				found += 1
+			else:
+				success = false
+
+			if found >= needed.size():
+				break
 		else:
-			print("AdMob: Android template extraction failed.")
+			if comp_size > 0:
+				file.seek(file.get_position() + comp_size)
+
+	file.close()
+	var dir = Directory.new()
+	dir.remove(zip_path)
+	return success and found == needed.size()
+
+func _inflate_raw(
+	data: PoolByteArray, uncomp_size: int, crc32: int
+) -> PoolByteArray:
+	var gzip = PoolByteArray()
+	gzip.append(0x1F)
+	gzip.append(0x8B)
+	gzip.append(0x08)
+	gzip.append(0x00)
+	gzip.append_array(PoolByteArray([0, 0, 0, 0]))
+	gzip.append(0x00)
+	gzip.append(0xFF)
+	gzip.append_array(data)
+	gzip.append(crc32 & 0xFF)
+	gzip.append((crc32 >> 8) & 0xFF)
+	gzip.append((crc32 >> 16) & 0xFF)
+	gzip.append((crc32 >> 24) & 0xFF)
+	gzip.append(uncomp_size & 0xFF)
+	gzip.append((uncomp_size >> 8) & 0xFF)
+	gzip.append((uncomp_size >> 16) & 0xFF)
+	gzip.append((uncomp_size >> 24) & 0xFF)
+	return gzip.decompress(uncomp_size, File.COMPRESSION_GZIP)
+
+func _write_extracted_file(
+	res_path: String, data: PoolByteArray
+) -> bool:
+	var dir = Directory.new()
+	var dir_path = res_path.get_base_dir()
+	if not dir.dir_exists(dir_path):
+		dir.make_dir_recursive(dir_path)
+	var f = File.new()
+	if f.open(res_path, File.WRITE) != OK:
+		return false
+	f.store_buffer(data)
+	f.close()
+	return true
+
+func _extract_android_zip(zip_path: String) -> bool:
+	var mappings = {
+		"res://AdMob.gdap": "res://android/plugins/AdMob.gdap",
+		"res://build/outputs/aar/admob-release.aar": "res://android/plugins/admob-release.aar",
+		"res://build/outputs/aar/admob-debug.aar": "res://android/plugins/admob-debug.aar"
+	}
+	var success = _extract_zip(zip_path, mappings)
+	if success:
+		print("AdMob: Android templates extracted successfully!")
 	else:
-		print(
-			"AdMob Error: Failed to load "
-			+ "Android resource pack: " + zip_path
-		)
+		print("AdMob Error: Failed to extract Android templates from " + zip_path)
 	return success
 
 func _extract_ios_zip(zip_path: String) -> bool:
-	var success = false
-	if ProjectSettings.load_resource_pack(zip_path):
-		success = true
-		success = success and _copy_virtual_file(
-			"res://admob.gdip",
-			"res://ios/plugins/admob.gdip"
-		)
-		success = success and _copy_virtual_file(
-			"res://admob/bin/admob.release.a",
-			"res://ios/plugins/admob/bin/admob.release.a"
-		)
-		success = success and _copy_virtual_file(
-			"res://admob/bin/admob.debug.a",
-			"res://ios/plugins/admob/bin/admob.debug.a"
-		)
-
-		var dir = Directory.new()
-		dir.remove(zip_path)
-
-		if success:
-			print("AdMob: iOS templates extracted successfully!")
-		else:
-			print("AdMob: iOS template extraction failed.")
+	var mappings = {
+		"res://admob.gdip": "res://ios/plugins/admob.gdip",
+		"res://admob/bin/admob.release.a": "res://ios/plugins/admob/bin/admob.release.a",
+		"res://admob/bin/admob.debug.a": "res://ios/plugins/admob/bin/admob.debug.a"
+	}
+	var success = _extract_zip(zip_path, mappings)
+	if success:
+		print("AdMob: iOS templates extracted successfully!")
 	else:
-		print(
-			"AdMob Error: Failed to load "
-			+ "iOS resource pack: " + zip_path
-		)
+		print("AdMob Error: Failed to extract iOS templates from " + zip_path)
 	return success
 
 func _check_and_auto_download():
