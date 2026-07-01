@@ -5,7 +5,10 @@
     <div class="announcement-wrapper">
       <script>
         if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1' && !window.location.pathname.includes('/latest/')) {
-          document.currentScript.parentElement.style.display = 'none';
+          var banner = document.currentScript.closest('[data-md-component="banner"]');
+          if (banner) {
+            banner.style.display = 'none';
+          }
         }
       </script>
       <div class="announcement-content">
