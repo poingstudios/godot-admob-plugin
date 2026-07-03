@@ -46,10 +46,6 @@ func _export_begin(features: PackedStringArray, is_debug: bool, path: String, fl
 
 func _end_generate_apple_embedded_project(path: String, _will_build_archive: bool) -> void:
 	print("AdMob iOS: _end_generate_apple_embedded_project CALLED with path='%s'" % path)
-	var platform := get_export_platform()
-	if not platform or platform.get_os_name() != "iOS":
-		print("AdMob iOS: Platform not supported, returning early.")
-		return
 	_apply_spm(path, false)
 
 
