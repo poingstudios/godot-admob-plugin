@@ -26,10 +26,9 @@ const ExportService := preload("res://addons/admob/internal/services/export_serv
 const PbxprojService := preload("res://addons/admob/internal/services/pbxproj_service.gd")
 const PLUGIN_CONFIG_DIR := "res://ios/plugins/"
 
-var _export_path := ""
-var _is_ios := false
+var _spm_applied := false
+var _pending_export_path := ""
 var _spm_dependencies: Array[Dictionary] = []
-var _patched := false
 
 
 func _get_name() -> String:
@@ -41,39 +40,57 @@ func _supports_platform(platform: EditorExportPlatform) -> bool:
 
 
 func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
-	_export_path = path
-	_is_ios = features.has("ios")
-	_patched = false
+	_spm_applied = false
+	_pending_export_path = path
 
 
 func _end_generate_apple_embedded_project(path: String, _will_build_archive: bool) -> void:
-	if not _is_ios or path.is_empty():
+	print("AdMob iOS: _end_generate_apple_embedded_project CALLED with path='%s'" % path)
+	var platform := get_export_platform()
+	if not platform or platform.get_os_name() != "iOS":
+		print("AdMob iOS: Platform not supported, returning early.")
 		return
-	_apply_spm_patch(path)
+	_apply_spm(path, false)
 
 
 func _export_end() -> void:
-	if _patched or not _is_ios or _export_path.is_empty():
+	if _spm_applied or _pending_export_path.is_empty():
 		return
-	_apply_spm_patch(_export_path)
+	print("AdMob iOS: _export_end fallback (pre-4.7 engine) with path='%s'" % _pending_export_path)
+	_apply_spm(_pending_export_path, true)
 
 
-func _apply_spm_patch(path: String) -> void:
+func _apply_spm(path: String, defer_patch: bool) -> void:
+	_spm_applied = true
 	var activated_plugins := ExportService.get_activated_plugins("iOS")
 	if activated_plugins.is_empty():
+		print("AdMob iOS: No activated plugins found.")
 		return
 
 	_spm_dependencies = _collect_spm_dependencies(activated_plugins)
 	if _spm_dependencies.is_empty():
+		print("AdMob iOS: No SPM dependencies collected.")
 		return
 
 	var export_dir := path.get_base_dir()
 	_generate_package_swift(export_dir, _spm_dependencies)
+	print("AdMob iOS: Package.swift generated.")
 	_generate_dummy_source(export_dir)
+	print("AdMob iOS: Dummy.swift generated.")
 
+	if defer_patch:
+		print("AdMob iOS: Deferring Xcode project patch...")
+		_defer_pbxproj_patch.call_deferred(export_dir, path)
+	else:
+		_patch_xcodeproj(export_dir, path)
+		print("AdMob iOS: Xcode project patched.")
+		_spm_dependencies.clear()
+
+
+func _defer_pbxproj_patch(export_dir: String, path: String) -> void:
 	_patch_xcodeproj(export_dir, path)
+	print("AdMob iOS: Deferred Xcode project patch applied.")
 	_spm_dependencies.clear()
-	_patched = true
 
 
 func _patch_xcodeproj(export_dir: String, path: String) -> void:
