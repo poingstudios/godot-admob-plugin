@@ -13,7 +13,10 @@ response = json.loads(login_response.text)
 token = response["token"]
 
 # Use release download URL for the editor plugin zip
-download_url = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/releases/download/{os.environ['VERSION']}/godot-admob-editor-plugin.zip"
+version = os.environ["VERSION"]
+# Strip the version suffix (e.g. -godot3) to match the zip filename
+base_version = version.split("-")[0]
+download_url = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/releases/download/{version}/poing-godot-admob-{base_version}.zip"
 
 asset_data = {
     "token": token,

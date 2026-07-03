@@ -29,19 +29,24 @@ Once enabled, the plugin automatically registers the `MobileAds` autoload single
 
 ## Download Platform Templates
 
-Open the AdMob Manager inside the Godot editor (**Project -> Tools -> AdMob Manager** or click the **AdMob** panel tab).
+After enabling the plugin, the **AdMob** tab will appear in the main workspace tabs (next to **2D**, **3D**, **AssetLib**, etc.) at the top of the editor. Open it to access the AdMob Manager.
 
-* **Android**: Select **Download Android Template** to fetch and extract the `.aar` and `.gdap` files into your `res://android/plugins/` folder.
-* **iOS**: Select **Download iOS Template** to fetch and extract the `.gdip` and library files into your `res://ios/plugins/` folder.
+* **Android**: Select **Download Android Template**. The plugin will automatically download and extract the required template files (`.aar` and `.gdap`) directly into your `res://android/plugins/` folder (no manual zip extraction required).
+* **iOS**: Select **Download iOS Template**. The plugin will automatically download and extract the required template files (`.gdip` and library files) directly into your `res://ios/plugins/` folder (no manual zip extraction required).
 
 ---
 
 ## Configuration
 
-In the AdMob Editor panel:
-1. Set up your **AdMob App IDs** (e.g. `ca-app-pub-3940256099942544~1458002511`).
-2. Input your **Ad Unit IDs** for the formats you wish to use (Banner, Interstitial, Rewarded, Rewarded Interstitial).
-3. Toggle whether ads are enabled, and configure default behaviors like Banner position and size.
+Click the **AdMob** tab (next to **AssetLib** at the top of the editor) to open the configuration panel. Configure the following:
+
+| Option | Description |
+|--------|-------------|
+| **App ID** | Your AdMob App ID (e.g. `ca-app-pub-3940256099942544~1458002511`). |
+| **Ad Unit IDs** | IDs for each ad format you plan to use (Banner, Interstitial, Rewarded, Rewarded Interstitial). |
+| **Is Enabled** | Toggle to enable/disable ads globally. |
+| **Banner Position** | Choose where the banner appears (Top, Bottom, Custom). |
+| **Banner Size** | Select banner size (Banner, Large Banner, Medium Rectangle, etc.). |
 
 ---
 
@@ -79,11 +84,62 @@ If you prefer to initialize manually, or want to monitor completion, connect to 
 
 ---
 
-## Select an Ad Format
+## Select an ad format
 
-Now that the SDK is initialized, you can select and implement the ad formats that best fit your game's layout:
+The Google Mobile Ads SDK is now successfully imported, and you are prepared to integrate an ad into your app. AdMob provides a variety of ad formats, allowing you to select the one that aligns best with your app's user experience.
 
-* [Banner Ads](ad_formats/banner.md)
-* [Interstitial Ads](ad_formats/interstitial.md)
-* [Rewarded Video Ads](ad_formats/rewarded.md)
-* [Rewarded Interstitial Ads](ad_formats/rewarded_interstitial.md)
+### Banner
+<div class="image-text-container" markdown="1">
+
+![banner](assets/ad_formats/banner.png)
+
+Banner ads are rectangular advertisements, consisting of either images or text, that are integrated into an app's layout. These ads remain on the screen while users engage with the app and can automatically refresh after a designated time interval. If you're new to mobile advertising, banner ads provide an excellent starting point for your ad implementation journey.
+
+</div>
+
+[Implement banner ads](ad_formats/banner.md){ .md-button .md-button--primary }
+
+### Interstitial
+<div class="image-text-container" markdown="1">
+
+![interstitial](assets/ad_formats/interstitial.png)
+
+Interstitial ads are expansive, full-screen advertisements that overlay an app's interface and persist until they are closed by the user. They are most effective when strategically placed during natural pauses in the app's execution, such as between levels of a game or immediately after the completion of a task.
+
+</div>
+
+[Implement interstitial ads](ad_formats/interstitial.md){ .md-button .md-button--primary }
+
+### Rewarded
+<div class="image-text-container" markdown="1">
+
+![rewarded](assets/ad_formats/rewarded.png)
+
+Rewarded video ads are immersive, full-screen video advertisements that provide users with the choice to watch them entirely. In return for their time and attention, users receive in-app rewards or benefits.
+
+</div>
+
+[Implement rewarded ads](ad_formats/rewarded.md){ .md-button .md-button--primary }
+
+### Rewarded Interstitial
+<div class="image-text-container" markdown="1">
+
+![rewarded_interstitial](assets/ad_formats/rewarded_interstitial.png)
+
+A Rewarded Interstitial is a specific form of incentivized ad format that allows you to provide rewards in exchange for ads that appear automatically during natural app transitions. Unlike regular rewarded ads, users are not obligated to actively opt in to view a Rewarded Interstitial; they are seamlessly integrated into the app experience.
+
+</div>
+
+[Implement rewarded interstitial ads](ad_formats/rewarded_interstitial.md){ .md-button .md-button--primary }
+
+<style>
+  .image-text-container {
+    display: flex;
+    align-items: center;
+  }
+  .image-text-container img {
+    margin-right: 20px;
+    max-width: 130px;
+    height: auto;
+  }
+</style>
