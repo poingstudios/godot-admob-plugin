@@ -11,6 +11,8 @@ else:
     def decode_utf8(x):
         return codecs.utf_8_decode(x)[0]
 
+
+
 # Most of the settings are taken from https://github.com/BastiaanOlij/gdnative_cpp_example
 
 opts = Variables([], ARGUMENTS)
@@ -24,7 +26,7 @@ opts.Add(EnumVariable('arch', "Compilation Architecture", '', ['', 'arm64', 'arm
 opts.Add(BoolVariable('simulator', "Compilation platform", 'no'))
 opts.Add(BoolVariable('use_llvm', "Use the LLVM / Clang compiler", 'no'))
 opts.Add(PathVariable('target_path', 'The path where the lib is installed.', 'bin/static_libraries/'))
-opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource']))
+opts.Add(EnumVariable('plugin', 'Plugin to build', '', ['', 'ads', 'meta', 'vungle', 'ironsource', 'applovin', 'bidmachine', 'unity_ads', 'chartboost', 'line', 'maio', 'moloco', 'inmobi', 'imobile', 'dtexchange', 'mintegral', 'mytarget', 'pangle', 'pubmatic']))
 
 # Updates the environment with the option variables.
 opts.Update(env)
@@ -45,7 +47,7 @@ if env['plugin'] == '':
 # For the reference:
 # - CCFLAGS are compilation flags shared between C and C++
 # - CFLAGS are for C-specific compilation flags
-# - CXXFLAGS are for C++-specific compilation flags
+# - CXXFLAGS are for C-specific compilation flags
 # - CPPFLAGS are for pre-processor flags
 # - CPPDEFINES are for pre-processor defines
 # - LINKFLAGS are for linking flags
@@ -69,6 +71,7 @@ else:
 spm_artifacts = '.build/artifacts'
 env.Append(FRAMEWORKPATH=[spm_artifacts + '/swift-package-manager-google-mobile-ads/GoogleMobileAds/GoogleMobileAds.xcframework/' + xcframework_directory])
 
+
 if env['plugin'] == 'ads':
     env.Append(FRAMEWORKPATH=[spm_artifacts + '/swift-package-manager-google-user-messaging-platform/UserMessagingPlatform/UserMessagingPlatform.xcframework/' + xcframework_directory])
 elif env['plugin'] == 'meta':
@@ -82,6 +85,86 @@ elif env['plugin'] == 'ironsource':
         spm_artifacts + '/googleads-mobile-ios-mediation-ironsource/IronSourceAdapter/IronSourceAdapter.xcframework/' + xcframework_directory,
         spm_artifacts + '/unity-mediation-iads-swift-package/IronSourceSDK/IronSource.xcframework/' + xcframework_directory,
         spm_artifacts + '/unity-ad-quality-swift-package/AdQuality/IronSourceAdQualitySDK.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'applovin':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-applovin/AppLovinAdapter/AppLovinAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/applovin-max-swift-package/AppLovinSDK/AppLovinSDK.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'bidmachine':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-bidmachine/BidMachineAdapter/GoogleBidMachineAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/bidmachine-spm/BidMachine/BidMachine.xcframework/' + xcframework_directory,
+        spm_artifacts + '/omsdk-appodeal-ios-package/OMSDK_Appodeal/OMSDK_Appodeal.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'unity_ads':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-unity/UnityAdapter/UnityAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/googleads-mobile-ios-mediation-unity/UnityAds/UnityAds.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'chartboost':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-chartboost/ChartboostAdapter/ChartboostAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/googleads-mobile-ios-mediation-chartboost/ChartboostSDK/ChartboostSDK.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'line':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-line/LineAdapter/LineAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/swift-package-manager-fivead/FiveAd/FiveAd.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'maio':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-maio/MaioAdapter/MaioAdapter.xcframework/' + xcframework_directory,
+        '.build/checkouts/MaioSDK-v2-iOS/Maio.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'moloco':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-moloco/MolocoAdapter/MolocoAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/moloco-sdk-ios-spm/MolocoSDK/MolocoSDK.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'inmobi':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-inmobi/InMobiAdapter/InMobiAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/googleads-mobile-ios-mediation-inmobi/InMobi-iOS-SDK/InMobiSDK.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'imobile':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-imobile/IMobileAdapter/IMobileAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/googleads-mobile-ios-mediation-imobile/IMobileSDK/ImobileSdkAds.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'dtexchange':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-dtexchange/DTExchangeAdapter/DTExchangeAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/dtexchangesdk-ios-spm/IASDKCore/IASDKCore.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'mintegral':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-mintegral/MintegralAdapter/MintegralAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDK/MTGSDK.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKBanner/MTGSDKBanner.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKNativeAdvanced/MTGSDKNativeAdvanced.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKReward/MTGSDKReward.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKInterstitialVideo/MTGSDKInterstitialVideo.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKBidding/MTGSDKBidding.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKNewInterstitial/MTGSDKNewInterstitial.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mintegraladsdk-swift-package/MTGSDKSplash/MTGSDKSplash.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'mytarget':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-mytarget/MyTargetAdapter/MyTargetAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mytarget-ios-spm/MyTargetSDK/MyTargetSDK.xcframework/' + xcframework_directory,
+        spm_artifacts + '/mytracker-ios-spm/MyTrackerSDK/MyTrackerSDK.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'pangle':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-pangle/PangleAdapter/PangleAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/pangle-ios-sdk-spm/PAGAdSDK.xcframework/' + xcframework_directory
+    ])
+elif env['plugin'] == 'pubmatic':
+    env.Append(FRAMEWORKPATH=[
+        spm_artifacts + '/googleads-mobile-ios-mediation-pubmatic/PubMaticAdapter/PubMaticAdapter.xcframework/' + xcframework_directory,
+        spm_artifacts + '/OpenWrapSDK-Swift-Package/OpenWrapSDK.xcframework/' + xcframework_directory,
+        spm_artifacts + '/OpenWrapSDK-Swift-Package/OMSDK_Pubmatic.xcframework/' + xcframework_directory
     ])
 
 try:

@@ -1,48 +1,112 @@
-name: "[Manual] Release All Platforms"
+name: "CD - Build and Release"
 
-on: workflow_dispatch
+on:
+  schedule:
+    - cron: '0 0 * * *' # Every day at midnight UTC
+  workflow_dispatch:
+    inputs:
+      type:
+        description: 'Build Type'
+        required: true
+        type: choice
+        options:
+          - 'Release'
+          - 'Nightly'
+        default: 'Release'
+      force:
+        description: 'Force nightly build even if no new commits exist?'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write # Required to create/delete GitHub releases and tags
 
 jobs:
-  check-release:
-    name: Check if release already exists
+  initialize:
+    name: Determine Build Type and Version
     runs-on: ubuntu-latest
+    if: github.repository == 'poingstudios/godot-admob-plugin' || github.event_name == 'workflow_dispatch'
+    outputs:
+      should_build: ${{ steps.setup.outputs.should_build }}
+      build_type: ${{ steps.setup.outputs.build_type }}
+      version: ${{ steps.setup.outputs.version }}
     steps:
     - uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
 
-    - name: Set plugin version
-      run: |
-        RAW_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
-        echo "PLUGIN_TAG=v${RAW_VERSION#v}" >> $GITHUB_ENV
-
-    - name: Fail if release already exists
+    - name: Setup and Validation
+      id: setup
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        if gh api "repos/${{ github.repository }}/releases/tags/${{ env.PLUGIN_TAG }}" > /dev/null 2>&1; then
-          echo "::error::Release ${{ env.PLUGIN_TAG }} already exists. Bump the version before releasing."
-          exit 1
+        # Determine build type
+        if [ "${{ github.event_name }}" = "schedule" ]; then
+          BUILD_TYPE="Nightly"
+        else
+          BUILD_TYPE="${{ github.event.inputs.type }}"
         fi
-        echo "No existing release found for ${{ env.PLUGIN_TAG }}. Proceeding..."
+
+        echo "build_type=$BUILD_TYPE" >> $GITHUB_OUTPUT
+        echo "Build type determined: $BUILD_TYPE"
+
+        # Fetch base version from plugin.cfg
+        BASE_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        VERSION_TAG="v${BASE_VERSION#v}"
+
+        if [ "$BUILD_TYPE" = "Release" ]; then
+          if gh api "repos/${{ github.repository }}/releases/tags/${VERSION_TAG}" > /dev/null 2>&1; then
+            echo "::error::Release ${VERSION_TAG} already exists. Bump the version in plugin.cfg before releasing."
+            exit 1
+          fi
+          echo "Release ${VERSION_TAG} does not exist. Proceeding with release build."
+          echo "should_build=true" >> $GITHUB_OUTPUT
+          echo "version=${VERSION_TAG}" >> $GITHUB_OUTPUT
+        else
+          # Nightly
+          SHORT_SHA=$(git rev-parse --short HEAD)
+          NIGHTLY_VERSION="${VERSION_TAG}-nightly.${SHORT_SHA}"
+          echo "version=$NIGHTLY_VERSION" >> $GITHUB_OUTPUT
+
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            echo "Force build requested."
+            echo "should_build=true" >> $GITHUB_OUTPUT
+          elif gh release view "$NIGHTLY_VERSION" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            echo "Nightly release $NIGHTLY_VERSION already exists. Skipping build."
+            echo "should_build=false" >> $GITHUB_OUTPUT
+          else
+            echo "Nightly release $NIGHTLY_VERSION does not exist. Starting build."
+            echo "should_build=true" >> $GITHUB_OUTPUT
+          fi
+        fi
 
   android-template:
     name: Compiling Android (Godot ${{matrix.GODOT_VERSIONS}})
-    needs: check-release
+    needs: initialize
+    if: needs.initialize.outputs.should_build == 'true'
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        GODOT_VERSIONS: ["4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.5.2", "4.6.0", "4.6.1"]
-
+        GODOT_VERSIONS: ["4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.5.2", "4.6.0", "4.6.1", "4.6.2", "4.6.3", "4.7.0"]
     steps:
     - uses: actions/checkout@v6
 
-    - name: Set plugin version
-      run: |
-        RAW_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
-        echo "PLUGIN_TAG=v${RAW_VERSION#v}" >> $GITHUB_ENV
+    - name: Cache Gradle
+      uses: actions/cache@v4
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: android-gradle-${{ matrix.GODOT_VERSIONS }}-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
+        restore-keys: |
+          android-gradle-${{ matrix.GODOT_VERSIONS }}-
+          android-gradle-
 
     - name: Build Plugins
       working-directory: platforms/android
       run: |
+        chmod +x ./scripts/unix/download_godot.sh
+        ./scripts/unix/download_godot.sh ${{matrix.GODOT_VERSIONS}}
         chmod +x ./gradlew
         ./gradlew build -PgodotVersion=${{matrix.GODOT_VERSIONS}}
 
@@ -61,19 +125,14 @@ jobs:
 
   ios-template:
     name: Compiling iOS (Godot ${{matrix.GODOT_VERSIONS}})
-    needs: check-release
+    needs: initialize
+    if: needs.initialize.outputs.should_build == 'true'
     runs-on: "macos-latest"
     strategy:
       matrix:
-        GODOT_VERSIONS: ["4.1.0", "4.1.1", "4.1.2", "4.1.3", "4.1.4", "4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.5.2", "4.6.0", "4.6.1"]
-
+        GODOT_VERSIONS: ["4.1.0", "4.1.1", "4.1.2", "4.1.3", "4.1.4", "4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.5.2", "4.6.0", "4.6.1", "4.6.2", "4.6.3", "4.7.0"]
     steps:
     - uses: actions/checkout@v6
-
-    - name: Set plugin version
-      run: |
-        RAW_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
-        echo "PLUGIN_TAG=v${RAW_VERSION#v}" >> $GITHUB_ENV
 
     - name: Verify matrix
       run: |
@@ -89,86 +148,53 @@ jobs:
     - name: Install scons
       run: python -m pip install scons
 
+    - name: Load .scons_cache directory
+      uses: actions/cache@v5
+      with:
+        path: ${{ github.workspace }}/platforms/ios/godot/.scons_cache/
+        key: scons-ios-${{ env.CURRENT_GODOT_VERSION }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/scripts/**') }}
+        restore-keys: |
+          scons-ios-${{ env.CURRENT_GODOT_VERSION }}-
+          scons-ios-
+
+    - name: Cache SPM dependencies
+      uses: actions/cache@v5
+      with:
+        path: platforms/ios/.build
+        key: spm-${{ hashFiles('platforms/ios/Package.swift', 'platforms/ios/Package.resolved') }}
+        restore-keys: |
+          spm-
+
     - name: Compiles the Source Code
       working-directory: platforms/ios
+      env:
+        SCONS_CACHE: ${{ github.workspace }}/platforms/ios/godot/.scons_cache/
       run: |
         ./scripts/build.sh ${{env.CURRENT_GODOT_VERSION}}
-
-    - name: Download Godot
-      run: |
-        curl -LO https://github.com/godotengine/godot/releases/download/${{env.CURRENT_GODOT_VERSION}}-stable/Godot_v${{env.CURRENT_GODOT_VERSION}}-stable_macos.universal.zip
-        unzip Godot_v${{env.CURRENT_GODOT_VERSION}}-stable_macos.universal.zip
-        mv Godot.app /Applications/Godot.app
-
-    - name: Prepare Plugin in Sample Project
-      run: |
-        mkdir -p platforms/godot_editor/addons/admob/bin/ios
-        cp -R platforms/ios/bin/xcframeworks/ads/poing-godot-admob-ads.release.xcframework platforms/godot_editor/addons/admob/bin/ios/
-        cp -R platforms/ios/bin/xcframeworks/meta/poing-godot-admob-meta.release.xcframework platforms/godot_editor/addons/admob/bin/ios/
-        cp -R platforms/ios/bin/xcframeworks/vungle/poing-godot-admob-vungle.release.xcframework platforms/godot_editor/addons/admob/bin/ios/
-        cp platforms/ios/src/ads/config/poing-godot-admob-ads.gdip platforms/godot_editor/addons/admob/bin/ios/
-        cp platforms/ios/src/mediation/vungle/config/poing-godot-admob-vungle.gdip platforms/godot_editor/addons/admob/bin/ios/
-        cp platforms/ios/src/mediation/meta/config/poing-godot-admob-meta.gdip platforms/godot_editor/addons/admob/bin/ios/
-
-    - name: Export Godot Sample Project
-      run: |
-        mkdir -p platforms/godot_editor/exports/ios
-        /Applications/Godot.app/Contents/MacOS/Godot --headless --path platforms/godot_editor --export-release "iOS" exports/ios/AdMobSample.xcodeproj
-
-    - name: Patch Xcode Project for SPM
-      run: |
-        cat << 'EOF' > patch_pbxproj.py
-        import sys
-        import os
-        def patch_pbxproj(path):
-            with open(path, "r") as f: content = f.read()
-            if "AD0000000000000000000001" in content: return
-            local_ref_id, product_dep_id, build_file_id = "AD0000000000000000000001", "AD0000000000000000000002", "AD0000000000000000000003"
-            if "/* Begin XCLocalSwiftPackageReference section */" not in content:
-                content = content.replace("/* End PBXGroup section */", "/* End PBXGroup section */\n\n/* Begin XCLocalSwiftPackageReference section */\n/* End XCLocalSwiftPackageReference section */")
-            if "/* Begin XCSwiftPackageProductDependency section */" not in content:
-                content = content.replace("/* End XCLocalSwiftPackageReference section */", "/* End XCLocalSwiftPackageReference section */\n\n/* Begin XCSwiftPackageProductDependency section */\n/* End XCSwiftPackageProductDependency section */")
-            content = content.replace("/* End XCLocalSwiftPackageReference section */", f'\t\t{local_ref_id} /* XCLocalSwiftPackageReference "." */ = {{isa = XCLocalSwiftPackageReference; relativePath = "."; }};\n' + "/* End XCLocalSwiftPackageReference section */")
-            content = content.replace("/* End XCSwiftPackageProductDependency section */", f'\t\t{product_dep_id} /* PoingGodotAdMobDeps */ = {{isa = XCSwiftPackageProductDependency; package = {local_ref_id} /* XCLocalSwiftPackageReference "." */; productName = "PoingGodotAdMobDeps"; }};\n' + "/* End XCSwiftPackageProductDependency section */")
-            content = content.replace("/* Begin PBXBuildFile section */", "/* Begin PBXBuildFile section */\n" + f"\t\t{build_file_id} /* PoingGodotAdMobDeps in Frameworks */ = {{isa = PBXBuildFile; productRef = {product_dep_id} /* PoingGodotAdMobDeps */; }};\n")
-            content = content.replace("productRefGroup =", f"packageReferences = (\n\t\t\t\t{local_ref_id} /* XCLocalSwiftPackageReference \".\" */,\n\t\t\t);\n\t\t\tproductRefGroup =")
-            content = content.replace("buildRules = (", f"packageProductDependencies = (\n\t\t\t\t{product_dep_id} /* PoingGodotAdMobDeps */,\n\t\t\t);\n\t\t\tbuildRules = (")
-            fw_start = content.find("isa = PBXFrameworksBuildPhase;")
-            if fw_start != -1:
-                files_start = content.find("files = (", fw_start)
-                if files_start != -1: content = content[:files_start + 9] + f"\n\t\t\t\t{build_file_id} /* PoingGodotAdMobDeps in Frameworks */," + content[files_start+9:]
-            with open(path, "w") as f: f.write(content)
-        if __name__ == "__main__": patch_pbxproj(sys.argv[1])
-        EOF
-        python3 patch_pbxproj.py platforms/godot_editor/exports/ios/AdMobSample.xcodeproj/project.pbxproj
-
-    - name: Build and Package Test IPA
-      working-directory: platforms/godot_editor/exports/ios
-      run: |
-        xcodebuild build -project AdMobSample.xcodeproj -scheme AdMobSample -configuration Debug -sdk iphoneos -derivedDataPath build_output CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" AD_HOC_CODE_SIGNING_ALLOWED=YES
-        mkdir -p Payload
-        APP_PATH=$(find build_output/Build/Products/Debug-iphoneos -name "*.app" -type d | head -n 1)
-        if [ -n "$APP_PATH" ]; then
-          cp -r "$APP_PATH" Payload/
-          zip -qr "AdMobSample-Test-v${{env.CURRENT_GODOT_VERSION}}.ipa" Payload/
-        fi
 
     - name: Upload binaries to artifact
       uses: actions/upload-artifact@v4
       with:
         name: ios-${{matrix.GODOT_VERSIONS}}
-        path: |
-          platforms/ios/bin/release/*.zip
-          platforms/godot_editor/exports/ios/*.ipa
+        path: platforms/ios/bin/release/*.zip
         if-no-files-found: error
         retention-days: 1
 
   godot_editor:
     name: Compiling Godot Editor Plugin
-    needs: check-release
+    needs: initialize
+    if: needs.initialize.outputs.should_build == 'true'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
+
+    - name: Set nightly version in plugin.cfg
+      if: needs.initialize.outputs.build_type == 'Nightly'
+      run: |
+        NIGHTLY_VERSION="${{ needs.initialize.outputs.version }}"
+        BASE_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
+        sed -i "s/version=\"$BASE_VERSION\"/version=\"$NIGHTLY_VERSION\"/g" platforms/godot_editor/addons/admob/plugin.cfg
+        cat platforms/godot_editor/addons/admob/plugin.cfg
 
     - name: Compress Godot Editor Plugin
       run: ./.github/scripts/compress_editor_plugin.sh
@@ -183,15 +209,11 @@ jobs:
 
   release-finalize:
     name: "🚀 Finalize and Publish Release"
-    needs: [android-template, ios-template, godot_editor]
+    needs: [initialize, android-template, ios-template, godot_editor]
+    if: needs.initialize.outputs.should_build == 'true' && needs.initialize.outputs.build_type == 'Release'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
-
-    - name: Set plugin version
-      run: |
-        RAW_VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2)
-        echo "PLUGIN_TAG=v${RAW_VERSION#v}" >> $GITHUB_ENV
 
     - name: Download all artifacts
       uses: actions/download-artifact@v4
@@ -199,11 +221,12 @@ jobs:
         path: release-artifacts
         merge-multiple: true
 
-    - name: Finalize and Generate Release Notes
+    - name: Publish Release
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VERSION: ${{ needs.initialize.outputs.version }}
       run: |
-        gh release create ${{ env.PLUGIN_TAG }} release-artifacts/* --title "${{ env.PLUGIN_TAG }}" --generate-notes
+        gh release create "$VERSION" release-artifacts/* --title "$VERSION" --generate-notes
 
     - name: Set up Python
       uses: actions/setup-python@v6
@@ -212,13 +235,49 @@ jobs:
 
     - name: Install requests
       run: pip install requests
-      
+
     - name: Upload to Godot Asset Library
       env:
         ASSET_LIB_USER: ${{ secrets.ASSET_LIBRARY_USERNAME }}
         ASSET_LIB_PASS: ${{ secrets.ASSET_LIBRARY_PASSWORD }}
-        VERSION: ${{ env.PLUGIN_TAG }}
+        VERSION: ${{ needs.initialize.outputs.version }}
         COMMIT_HASH: ${{ github.sha }}
         GITHUB_REPOSITORY: ${{ github.repository }}
       run: |
         python3 .github/scripts/push.py
+
+  release-nightly:
+    name: "🌙 Finalize and Publish Nightly"
+    needs: [initialize, android-template, ios-template, godot_editor]
+    if: needs.initialize.outputs.should_build == 'true' && needs.initialize.outputs.build_type == 'Nightly'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Download all artifacts
+      uses: actions/download-artifact@v4
+      with:
+        path: release-artifacts
+        merge-multiple: true
+
+    - name: Delete previous nightly release
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        EXISTING=$(gh api repos/${{ github.repository }}/releases --paginate -q '.[] | select(.prerelease == true and (.tag_name | contains("-nightly."))) | .tag_name' | head -n 1 || true)
+        if [ -n "$EXISTING" ]; then
+          echo "Deleting previous nightly release: $EXISTING"
+          gh release delete "$EXISTING" --cleanup-tag -y || true
+        else
+          echo "No previous nightly release found."
+        fi
+
+    - name: Publish Nightly Release
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        VERSION: ${{ needs.initialize.outputs.version }}
+      run: |
+        gh release create "$VERSION" release-artifacts/* \
+          --prerelease \
+          --title "$VERSION (Nightly Build)" \
+          --notes "Nightly build from branch \`master\`. Generated on $(date -u +'%Y-%m-%d %H:%M:%S UTC'). Commit: ${{ github.sha }}"

@@ -26,6 +26,7 @@ extends MobileSingletonPlugin
 static var _plugin := _get_plugin("PoingGodotAdMob")
 
 static var _current_on_initialization_complete_listener: OnInitializationCompleteListener = null
+static var _current_on_ad_inspector_closed_listener: AdInspectorClosedListener = null
 
 
 static func initialize(
@@ -71,8 +72,56 @@ static func set_app_muted(muted: bool) -> void:
 		_plugin.set_app_muted(muted)
 
 
+static func set_publisher_first_party_id_enabled(enabled: bool) -> void:
+	if _plugin:
+		_plugin.set_publisher_first_party_id_enabled(enabled)
+
+
+static func set_gad_has_consent_for_cookies(enabled: bool) -> void:
+	if _plugin:
+		_plugin.set_gad_has_consent_for_cookies(enabled)
+
+
+static func get_gad_has_consent_for_cookies() -> bool:
+	if _plugin:
+		return _plugin.get_gad_has_consent_for_cookies()
+	return true
+
+
+static func disable_sdk_crash_reporting() -> void:
+	if _plugin and OS.get_name() == "iOS":
+		_plugin.disable_sdk_crash_reporting()
+
+
+static func open_ad_inspector(ad_inspector_closed_listener: AdInspectorClosedListener = null) -> void:
+	if _plugin:
+		_plugin.open_ad_inspector()
+
+		if ad_inspector_closed_listener:
+			_current_on_ad_inspector_closed_listener = ad_inspector_closed_listener
+			safe_connect(
+				_plugin, "on_ad_inspector_closed", _on_ad_inspector_closed, CONNECT_ONE_SHOT
+			)
+
+
+static func get_version() -> String:
+	return preload("res://addons/admob/internal/version/plugin_version.gd").current
+
+
+static func get_platform_version() -> String:
+	if _plugin:
+		return _plugin.get_platform_version()
+	return ""
+
+
 static func _on_initialization_complete(admob_initialization_status: Dictionary) -> void:
 	var initialization_status := InitializationStatus.create(admob_initialization_status)
 	_current_on_initialization_complete_listener.on_initialization_complete.call_deferred(
 		initialization_status
+	)
+
+
+static func _on_ad_inspector_closed(error_dictionary: Dictionary) -> void:
+	_current_on_ad_inspector_closed_listener.on_ad_inspector_closed.call_deferred(
+		error_dictionary
 	)

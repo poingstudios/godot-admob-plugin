@@ -30,10 +30,15 @@ namespace PoingStudios.AdMob.Core
 		[Signal]
 		public delegate void on_initialization_completeEventHandler(Dictionary initializationStatusDictionary);
 
+		[Signal]
+		public delegate void on_ad_inspector_closedEventHandler(Dictionary errorDictionary);
+
 		private bool _isInitialized = false;
 		private float _volume = 1.0f;
 		private bool _muted = false;
+		private bool _publisherFirstPartyIdEnabled = true;
 		private Dictionary _requestConfiguration = new Dictionary();
+		private bool _gadHasConsentForCookies = true;
 
 		public void initialize()
 		{
@@ -86,6 +91,44 @@ namespace PoingStudios.AdMob.Core
 		public void set_app_muted(bool muted)
 		{
 			_muted = muted;
+		}
+
+		public void set_publisher_first_party_id_enabled(bool enabled)
+		{
+			_publisherFirstPartyIdEnabled = enabled;
+		}
+
+		public void set_gad_has_consent_for_cookies(bool enabled)
+		{
+			_gadHasConsentForCookies = enabled;
+		}
+
+		public bool get_gad_has_consent_for_cookies()
+		{
+			return _gadHasConsentForCookies;
+		}
+
+		public void disable_sdk_crash_reporting()
+		{
+		}
+
+		public string get_version()
+		{
+			return "1.0.0-mock";
+		}
+
+		public string get_platform_version()
+		{
+			return "1.0.0-mock";
+		}
+
+		public void open_ad_inspector()
+		{
+			var timer = ((SceneTree)Engine.GetMainLoop()).CreateTimer(0.5f);
+			timer.Connect(SceneTreeTimer.SignalName.Timeout, Callable.From(() =>
+			{
+				EmitSignal(SignalName.on_ad_inspector_closed, new Dictionary());
+			}));
 		}
 	}
 }

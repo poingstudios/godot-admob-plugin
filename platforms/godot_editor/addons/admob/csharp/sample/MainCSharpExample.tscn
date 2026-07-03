@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://crsq604yi2nck" path="res://addons/admob/csharp/sample/MainCSharpExample.cs" id="1_csharp"]
 [ext_resource type="Script" uid="uid://cvbn0gnkvgbiq" path="res://addons/admob/csharp/sample/SafeArea.cs" id="2_safe"]
 [ext_resource type="Texture2D" uid="uid://to8hnfn5fmrl" path="res://addons/admob/assets/icon-76.png" id="3_icon"]
-[ext_resource type="FontFile" uid="uid://ctd0my3oi3sl7" path="res://addons/admob/assets/fonts/arial.ttf" id="4_arial"]
 [ext_resource type="Texture2D" uid="uid://b04npsmf70fhr" path="res://addons/admob/assets/donate/Patreon_logo_with_wordmark.svg" id="5_patreon"]
 [ext_resource type="Texture2D" uid="uid://c1p3ju4a5gwe3" path="res://addons/admob/assets/donate/Ko-fi_Logo_RGB_ColorBg.png" id="6_kofi"]
 [ext_resource type="Texture2D" uid="uid://jksg4sbkq0p7" path="res://addons/admob/assets/donate/PayPal.svg" id="7_paypal"]
@@ -85,20 +84,33 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="AppIcon" type="TextureRect" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer" unique_id=571629929]
-custom_minimum_size = Vector2(50, 50)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 texture = ExtResource("3_icon")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="AppTitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer" unique_id=1933940773]
+[node name="TitleContainer" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="AppTitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer" unique_id=1933940773]
 layout_mode = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.2)
 theme_override_constants/shadow_offset_x = 1
 theme_override_constants/shadow_offset_y = 1
-theme_override_fonts/font = ExtResource("4_arial")
-theme_override_font_sizes/font_size = 35
-text = "AdMob Plugin (C#) - Poing Studios"
+theme_override_font_sizes/font_size = 26
+text = "GAD_MainTitleCS"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 0
+
+[node name="AppSubtitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 0.9)
+theme_override_font_sizes/font_size = 14
+text = "© Poing Studios"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SupportCard" type="PanelContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox" unique_id=1632407447]
@@ -109,23 +121,22 @@ theme_type_variation = &"SupportCard"
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="SupportLabel" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=1316534474]
-clip_contents = false
+[node name="SupportLabel" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=1316534474]
 layout_mode = 2
-theme_override_colors/default_color = Color(0.2, 0.2, 0.2, 0.8)
-theme_override_fonts/normal_font = ExtResource("4_arial")
-theme_override_font_sizes/normal_font_size = 16
-bbcode_enabled = true
-text = "[center][b]S U P P O R T   T H E   P R O J E C T[/b][/center]"
-fit_content = true
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 0.8)
+theme_override_font_sizes/font_size = 16
+text = "GAD_SupportProject"
+horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="SupportButtons" type="HBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox" unique_id=1448736378]
 layout_mode = 2
-theme_override_constants/separation = 30
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="Patreon" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=365765314]
-custom_minimum_size = Vector2(180, 55)
+custom_minimum_size = Vector2(96, 29)
 layout_mode = 2
 texture_normal = ExtResource("5_patreon")
 ignore_texture_size = true
@@ -133,7 +144,7 @@ stretch_mode = 5
 script = SubResource("GDScript_1vvio")
 
 [node name="Ko-fi" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=1547503384]
-custom_minimum_size = Vector2(140, 55)
+custom_minimum_size = Vector2(76, 29)
 layout_mode = 2
 texture_normal = ExtResource("6_kofi")
 ignore_texture_size = true
@@ -141,7 +152,7 @@ stretch_mode = 5
 script = SubResource("GDScript_hcar3")
 
 [node name="PayPal" type="TextureButton" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons" unique_id=2032058188]
-custom_minimum_size = Vector2(150, 55)
+custom_minimum_size = Vector2(80, 29)
 layout_mode = 2
 texture_normal = ExtResource("7_paypal")
 ignore_texture_size = true
@@ -244,16 +255,20 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="ConsolePanel" type="PanelContainer" parent="Background/SafeArea/LayoutContainer" unique_id=405248162]
-custom_minimum_size = Vector2(0, 250)
 layout_mode = 2
+custom_minimum_size = Vector2(0, 80)
 theme_type_variation = &"GlassPanel"
 
 [node name="ConsoleOutput" type="RichTextLabel" parent="Background/SafeArea/LayoutContainer/ConsolePanel" unique_id=214134769]
 layout_mode = 2
 size_flags_vertical = 3
 bbcode_enabled = true
-text = "--- LOGS START ---"
+text = "GAD_LogsStart"
 scroll_following = true
+
+[node name="ResizeTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" method="_on_pressed"]
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Ko-fi" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Ko-fi" method="_on_pressed"]

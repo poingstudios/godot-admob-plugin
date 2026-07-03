@@ -7,7 +7,7 @@ This document is based on:
 - [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/targeting)
 
 ## Prerequisites
-- Complete the [Get started guide](../README.md)
+- Complete the [Get started guide](../index.md)
 
 
 ## RequestConfiguration
@@ -119,6 +119,40 @@ The following code demonstrates how to configure a `RequestConfiguration` object
     requestConfiguration.MaxAdContentRating = RequestConfiguration.MaxAdContentRatingG;
     MobileAds.SetRequestConfiguration(requestConfiguration);
     ```
+
+## AdRequest
+
+`AdRequest` collects targeting information to be sent with an individual ad request.
+
+### Add network extras
+
+Network extras are extra details sent with an ad request that are specific to a single ad source.
+
+To send an extra parameter to Google (for example, a key of `collapsible` with a value of `bottom` to request a [Collapsible Banner](../../guides/mediate/banner/#collapsible-banners)), populate the `extras` dictionary:
+
+=== "GDScript"
+
+    ```gdscript
+    var ad_request := AdRequest.new()
+    ad_request.extras = {
+        "collapsible": "bottom"
+    }
+    # Then load the ad with the request, e.g.:
+    # ad_view.load_ad(ad_request)
+    ```
+
+=== "C#"
+
+    ```csharp
+    var adRequest = new AdRequest();
+    adRequest.Extras = new Godot.Collections.Dictionary
+    {
+        { "collapsible", "bottom" }
+    };
+    // Then load the ad with the request, e.g.:
+    // adView.LoadAd(adRequest);
+    ```
+
 
 Learn more about:
 

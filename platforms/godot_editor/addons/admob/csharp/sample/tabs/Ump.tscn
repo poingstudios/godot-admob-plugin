@@ -6,8 +6,6 @@
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
@@ -16,15 +14,14 @@ script = ExtResource("1_script")
 [node name="GetConsentStatus" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "GetConsentStatus"
+text = "GAD_GetConsentStatus"
 
 [node name="ResetConsentInformation" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "ResetConsentInformation"
+text = "GAD_ResetConsentInformation"
 
 [node name="ShowPrivacyOptionsForm" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "ShowPrivacyOptionsForm"
-
+text = "GAD_ShowPrivacyOptionsForm"

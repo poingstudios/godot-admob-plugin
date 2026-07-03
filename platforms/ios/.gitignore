@@ -39,7 +39,7 @@ local.properties
 plugin/Pods/
 
 extracted_headers
-godot
+godot*
 bin
 plugin/admob/lib
 

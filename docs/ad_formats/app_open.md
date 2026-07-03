@@ -15,7 +15,7 @@ App open ads automatically show a small branding area so users know they're in y
 
 Before you continue, do the following:
 
-- Complete the [Get started guide](../README.md).
+- Complete the [Get started guide](../index.md).
 
 ## Always test with test ads
 

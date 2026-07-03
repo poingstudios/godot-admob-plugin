@@ -21,8 +21,6 @@ shadow_offset = Vector2(0, 2)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -20.0
-offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 15
@@ -31,18 +29,18 @@ script = ExtResource("1_mads")
 [node name="GetInitStatus" type="Button" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Get Initialization Status"
+text = "GAD_GetInitializationStatus"
 
 [node name="iOSAppPause" type="CheckButton" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Set iOS App Pause On Background"
+text = "GAD_SetiOSAppPauseOnBackground"
 alignment = 1
 
 [node name="MuteMusic" type="CheckButton" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Mute Music"
+text = "GAD_MuteMusic"
 alignment = 1
 
 [node name="AdVolumeCard" type="PanelContainer" parent="."]
@@ -57,7 +55,7 @@ alignment = 1
 [node name="AdVolumeLabel" type="Label" parent="AdVolumeCard/AdVolumeContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Ad Volume"
+text = "GAD_AdVolume"
 
 [node name="AdVolumeSlider" type="HSlider" parent="AdVolumeCard/AdVolumeContainer"]
 custom_minimum_size = Vector2(200, 30)
@@ -67,10 +65,41 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
+[node name="ConsentCookies" type="CheckButton" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "Consent for Cookies (Limited Ads)"
+alignment = 1
+
 [node name="AdMuted" type="CheckButton" parent="."]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
-text = "Mute Ads"
+text = "GAD_MuteAds"
+alignment = 1
+
+[node name="OpenAdInspector" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "GAD_OpenAdInspector"
+
+[node name="LanguageCard" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_card")
+
+[node name="LanguageContainer" type="HBoxContainer" parent="LanguageCard"]
+layout_mode = 2
+alignment = 1
+
+[node name="LanguageLabel" type="Label" parent="LanguageCard/LanguageContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Language"
+
+[node name="LanguageButton" type="OptionButton" parent="LanguageCard/LanguageContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
 [node name="MusicPlayer" type="AudioStreamPlayer" parent="."]

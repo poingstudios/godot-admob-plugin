@@ -24,6 +24,8 @@
 package com.poingstudios.godot.admob.ads
 
 import android.app.Activity
+import android.content.Context
+import android.preference.PreferenceManager
 import android.util.ArraySet
 import android.view.View
 import android.widget.FrameLayout
@@ -53,6 +55,7 @@ class PoingGodotAdMob(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(
     override fun getPluginSignals(): MutableSet<SignalInfo> {
         val signals: MutableSet<SignalInfo> = ArraySet()
         signals.add(SignalInfo("on_initialization_complete", Dictionary::class.java))
+        signals.add(SignalInfo("on_ad_inspector_closed", Dictionary::class.java))
         return signals
     }
 
@@ -95,5 +98,42 @@ class PoingGodotAdMob(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(
     @UsedByGodot
     fun set_app_muted(muted: Boolean) {
         MobileAds.setAppMuted(muted)
+    }
+
+    @UsedByGodot
+    fun set_gad_has_consent_for_cookies(enabled: Boolean) {
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(aActivity)
+        sharedPrefs.edit().putInt("gad_has_consent_for_cookies", if (enabled) 1 else 0).apply()
+    }
+
+    @UsedByGodot
+    fun get_gad_has_consent_for_cookies(): Boolean {
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(aActivity)
+        return sharedPrefs.getInt("gad_has_consent_for_cookies", 1) == 1
+    }
+
+    @UsedByGodot
+    fun set_publisher_first_party_id_enabled(enabled: Boolean) {
+        MobileAds.putPublisherFirstPartyIdEnabled(enabled)
+    }
+
+    @UsedByGodot
+    fun get_platform_version(): String {
+        return MobileAds.getVersion().toString()
+    }
+
+    @UsedByGodot
+    fun open_ad_inspector() {
+        aActivity.runOnUiThread {
+            MobileAds.openAdInspector(aActivity) { adInspectorError ->
+                val resultDictionary = Dictionary()
+                if (adInspectorError != null) {
+                    resultDictionary["code"] = adInspectorError.code
+                    resultDictionary["message"] = adInspectorError.message ?: ""
+                    resultDictionary["domain"] = adInspectorError.domain ?: ""
+                }
+                emitSignal("on_ad_inspector_closed", resultDictionary)
+            }
+        }
     }
 }

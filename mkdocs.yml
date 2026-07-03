@@ -1,4 +1,5 @@
 site_name: Godot AdMob Plugin - Poing Studios
+site_url: https://poingstudios.github.io/godot-admob-plugin/
 extra_css:
   - stylesheets/extra.css
 extra_javascript:
@@ -6,15 +7,13 @@ extra_javascript:
 theme:
   features:
     - content.tabs.link
-    - navigation.instant
-    - navigation.instant.prefetch
-    - navigation.indexes
     - navigation.sections
     - navigation.top
     - search.suggest
     - search.highlight
     - content.code.annotation
     - content.code.copy
+    - navigation.tabs
   name: material
   custom_dir: docs/overrides
   favicon: assets/icon.ico
@@ -34,8 +33,8 @@ theme:
       primary: blue
       accent: blue
 markdown_extensions:
-  - toc:
-      title: On this page
+  - md_in_html
+  - toc
   - pymdownx.superfences
   - pymdownx.tabbed:
       alternate_style: true 
@@ -55,6 +54,17 @@ markdown_extensions:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
 extra:
+  announcement: |
+    <div class='announcement-bg-shapes'>
+      <div class='shape shape-1'>⚠️</div>
+      <div class='shape shape-2'>⚠️</div>
+      <div class='shape shape-3'>⚠️</div>
+    </div>
+    <span class='announcement-title'>⚠️ EXPERIMENTAL DOCUMENTATION</span>
+    <div class='announcement-text'>
+      You are viewing the <a href='https://github.com/poingstudios/godot-admob-plugin/tree/master' class='announcement-badge'>Master Branch</a> (latest).<br>
+      For stable releases, please see the <a href='https://poingstudios.github.io/godot-admob-plugin/stable/' class='announcement-link'>stable version</a>.
+    </div>
   version:
     provider: mike
     default: stable
@@ -68,7 +78,343 @@ copyright: |
 
 plugins:
   - search
-  - awesome-pages
+  - i18n:
+      reconfigure_material: true
+      languages:
+        - locale: en
+          name: English
+          default: true
+        - locale: pt-BR
+          name: Português (Brasil)
+          nav_translations:
+            Guides: Guias
+            Reference: Referência
+            'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades do AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
+            Ad formats: Formatos de Anúncios
+            App Open: App Open
+            Banner: Banner
+            Set up banner ads: Configurar anúncios de banner
+            Use collapsible banners: Usar banners colapsáveis
+            Sizes: Tamanhos
+            Anchored adaptive banners: Banners adaptativos ancorados
+            'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': 'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>'
+            Interstitial: Intersticial
+            Native Overlay: Native Overlay
+            Rewarded: Premiado (Rewarded)
+            'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': 'Intersticial Premiado <span class="modern-icon" title="Beta">🧪</span>'
+            Mediate: Mediação
+            First Steps: Primeiros Passos
+            Integrate partner networks: Integrar redes parceiras
+            AppLovin: AppLovin
+            BidMachine: BidMachine
+            IronSource: IronSource
+            Meta: Meta
+            Vungle: Vungle
+            UnityAds: Unity Ads
+            Chartboost: Chartboost
+            DTExchange: DT Exchange
+            iMobile: i-mobile
+            InMobi: InMobi
+            Line: Line
+            Maio: Maio
+            Mintegral: Mintegral
+            Moloco: Moloco
+            myTarget: myTarget
+            Pangle: Pangle
+            PubMatic: PubMatic
+            Vpon: Vpon
+            Privacy: Privacidade
+            Regulatory solutions: Soluções regulatórias
+            US states privacy laws: Leis de privacidade dos estados dos EUA
+            Strategies: Estratégias
+            Data disclosure: Divulgação de dados
+            Google Play data disclosure: Divulgação de dados do Google Play
+            Apple App Store data disclosure: Divulgação de dados da Apple App Store
+            User messaging tools: Ferramentas de mensagens de usuários
+            Get Started: Começar
+            GDPR IAB support: Suporte ao GDPR IAB
+            IDFA support: Suporte ao IDFA
+            Manage Ad Inspector: Gerenciar inspecionador de anúncios
+            Launch ad inspector: Iniciar o inspecionador de anúncios
+            Verify adapter integrations: Verificar integrações de adaptadores
+            Test ad units: Testar blocos de anúncios
+            Troubleshoot ad units: Solucionar problemas de blocos de anúncios
+            Troubleshoot privacy settings: Solucionar problemas de configurações de privacidade
+            Copy troubleshooting output: Copiar saída de diagnóstico
+            Targeting: Segmentação (Targeting)
+            Impression-Level Ad Revenue: Receita de Anúncios a Nível de Impressão
+            Response Info: Informações de Resposta
+            Overview: Visão Geral
+            Classes: Classes
+            AdView: AdView
+            Enums: Enums
+        - locale: es
+          name: Español
+          nav_translations:
+            Guides: Guías
+            Reference: Referencia
+            'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades de AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
+            Ad formats: Formatos de anuncios
+            App Open: App Open
+            Banner: Banner
+            Set up banner ads: Configurar anuncios de banner
+            Use collapsible banners: Usar banners colapsables
+            Sizes: Tamaños
+            Anchored adaptive banners: Banners adaptativos anclados
+            'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': 'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>'
+            Interstitial: Intersticial
+            Native Overlay: Native Overlay
+            Rewarded: Bonificado (Rewarded)
+            'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': 'Intersticial Bonificado <span class="modern-icon" title="Beta">🧪</span>'
+            Mediate: Mediación
+            First Steps: Primeros Pasos
+            Integrate partner networks: Integrar redes asociadas
+            AppLovin: AppLovin
+            BidMachine: BidMachine
+            IronSource: IronSource
+            Meta: Meta
+            Vungle: Vungle
+            UnityAds: Unity Ads
+            Chartboost: Chartboost
+            DTExchange: DT Exchange
+            iMobile: i-mobile
+            InMobi: InMobi
+            Line: Line
+            Maio: Maio
+            Mintegral: Mintegral
+            Moloco: Moloco
+            myTarget: myTarget
+            Pangle: Pangle
+            PubMatic: PubMatic
+            Vpon: Vpon
+            Privacy: Privacidad
+            Regulatory solutions: Soluciones regulatorias
+            US states privacy laws: Leyes de privacidad de estados de EE. UU.
+            Strategies: Estrategias
+            Data disclosure: Divulgación de datos
+            Google Play data disclosure: Divulgación de datos de Google Play
+            Apple App Store data disclosure: Divulgación de datos de la Apple App Store
+            User messaging tools: Herramientas de mensajería de usuarios
+            Get Started: Empezar
+            GDPR IAB support: Soporte GDPR IAB
+            IDFA support: Soporte IDFA
+            Advanced topics: Temas avanzados
+            Manage Ad Inspector: Administrar el inspector de anuncios
+            Launch ad inspector: Iniciar el inspector de anuncios
+            Verify adapter integrations: Verificar las integraciones de los adaptadores
+            Test ad units: Probar bloques de anuncios
+            Troubleshoot ad units: Solucionar problemas de bloques de anuncios
+            Troubleshoot privacy settings: Solucionar problemas de la configuración de privacidad
+            Copy troubleshooting output: Copiar los resultados de la solución de problemas
+            Targeting: Segmentación (Targeting)
+            Impression-Level Ad Revenue: Ingresos de anuncios a nivel de impresión
+            Response Info: Información de respuesta
+            Overview: Descripción general
+            Classes: Clases
+            AdView: AdView
+            Enums: Enums
+        - locale: zh
+          name: 简体中文
+          nav_translations:
+            Guides: 指南
+            Reference: 参考
+            'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot 技能 <span class="modern-icon" title="Beta">🧪</span>'
+            Ad formats: 广告格式
+            App Open: 开屏广告
+            Banner: 横幅广告
+            Set up banner ads: 设置横幅广告
+            Use collapsible banners: 使用折叠式横幅广告
+            Sizes: 尺寸
+            Anchored adaptive banners: 锚定自适应横幅广告
+            'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': '智能横幅广告 <span class="modern-icon" title="Deprecated">🚫</span>'
+            Interstitial: 插屏广告
+            Native Overlay: 原生重叠广告
+            Rewarded: 激励广告
+            'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': '激励插屏广告 <span class="modern-icon" title="Beta">🧪</span>'
+            Mediate: 中介
+            First Steps: 第一步
+            Integrate partner networks: 集成合作伙伴网络
+            AppLovin: AppLovin
+            BidMachine: BidMachine
+            IronSource: IronSource
+            Meta: Meta
+            Vungle: Vungle
+            UnityAds: Unity Ads
+            Chartboost: Chartboost
+            DTExchange: DT Exchange
+            iMobile: i-mobile
+            InMobi: InMobi
+            Line: Line
+            Maio: Maio
+            Mintegral: Mintegral
+            Moloco: Moloco
+            myTarget: myTarget
+            Pangle: Pangle
+            PubMatic: PubMatic
+            Vpon: Vpon
+            Privacy: 隐私
+            Regulatory solutions: 监管解决方案
+            US states privacy laws: 美国各州隐私法
+            Strategies: 策略
+            Data disclosure: 数据披露
+            Google Play data disclosure: Google Play 数据披露
+            Apple App Store data disclosure: Apple App Store 数据披露
+            User messaging tools: 用户消息工具
+            Get Started: 开始使用
+            GDPR IAB support: GDPR IAB 支持
+            IDFA support: IDFA 支持
+            Advanced topics: 高级主题
+            Manage Ad Inspector: 管理广告检查器
+            Launch ad inspector: 启动广告检查器
+            Verify adapter integrations: 验证适配器集成
+            Test ad units: 测试广告单元
+            Troubleshoot ad units: 排查广告单元问题
+            Troubleshoot privacy settings: 排查隐私设置问题
+            Copy troubleshooting output: 复制诊断输出
+            Targeting: 定向 (Targeting)
+            Impression-Level Ad Revenue: 展示级广告收入
+            Response Info: 响应信息
+            Overview: 概览
+            Classes: 类
+            AdView: AdView
+            Enums: 枚举
+        - locale: ja
+          name: 日本語
+          nav_translations:
+            Guides: ガイド
+            Reference: リファレンス
+            'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot スキル <span class="modern-icon" title="Beta">🧪</span>'
+            Ad formats: 広告フォーマット
+            App Open: アプリ起動時広告 (App Open)
+            Banner: バナー広告 (Banner)
+            Set up banner ads: バナー広告のセットアップ
+            Use collapsible banners: 折りたたみ式バナーの使用
+            Sizes: サイズ
+            Anchored adaptive banners: アンカー付きアダプティブバナー
+            'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': 'スマートバナー <span class="modern-icon" title="Deprecated">🚫</span>'
+            Interstitial: インタースティシャル広告 (Interstitial)
+            Native Overlay: ネイティブオーバーレイ広告 (Native Overlay)
+            Rewarded: リワード広告 (Rewarded)
+            'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': 'リワードインタースティシャル広告 <span class="modern-icon" title="Beta">🧪</span>'
+            Mediate: メディエーション (Mediation)
+            First Steps: はじめに
+            Integrate partner networks: パートナーネットワークの統合
+            AppLovin: AppLovin
+            BidMachine: BidMachine
+            IronSource: IronSource
+            Meta: Meta
+            Vungle: Vungle
+            UnityAds: Unity Ads
+            Chartboost: Chartboost
+            DTExchange: DT Exchange
+            iMobile: i-mobile
+            InMobi: InMobi
+            Line: Line
+            Maio: Maio
+            Mintegral: Mintegral
+            Moloco: Moloco
+            myTarget: myTarget
+            Pangle: Pangle
+            PubMatic: PubMatic
+            Vpon: Vpon
+            Privacy: プライバシー
+            Regulatory solutions: 規制対応ソリューション
+            US states privacy laws: 米国各州のプライバシー法
+            Strategies: ストラテジー
+            Data disclosure: データ開示
+            Google Play data disclosure: Google Play データ開示
+            Apple App Store data disclosure: Apple App Store データ開示
+            User messaging tools: ユーザーメッセージングツール
+            Get Started: はじめに
+            GDPR IAB support: GDPR IAB サポート
+            IDFA support: IDFA サポート
+            Advanced topics: 高度なトピック
+            Manage Ad Inspector: 広告インスペクターの管理
+            Launch ad inspector: 広告インスペクターの起動
+            Verify adapter integrations: アダプター統合の確認
+            Test ad units: 広告ユニットのテスト
+            Troubleshoot ad units: 広告ユニットのトラブルシューティング
+            Troubleshoot privacy settings: プライバシー設定のトラブルシューティング
+            Copy troubleshooting output: 診断出力のコピー
+            Targeting: ターゲティング (Targeting)
+            Impression-Level Ad Revenue: インプレッションレベルの広告収益
+            Response Info: レスポンス情報
+            Overview: 概要
+            Classes: クラス
+            AdView: AdView
+            Enums: 列挙型 (Enums)
+
+nav:
+  - Guides:
+    - Get Started: index.md
+    - Enable test ads: enable_test_ads.md
+    - Preview Mock Ads in Editor: editor_mock_ads.md
+    - iOS Pause Background: ios_pause_background.md
+    - 'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': ai_skills.md
+    - Ad formats:
+      - App Open: ad_formats/app_open.md
+      - Banner:
+        - Set up banner ads: ad_formats/banner/get_started.md
+        - Use collapsible banners: ad_formats/banner/collapsible.md
+        - Sizes:
+          - Anchored adaptive banners: ad_formats/banner/sizes/anchored_adaptive.md
+          - 'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': ad_formats/banner/sizes/smart_banner.md
+      - Interstitial: ad_formats/interstitial.md
+      - Native Overlay: ad_formats/native_overlay.md
+      - Rewarded: ad_formats/rewarded.md
+      - 'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': ad_formats/rewarded_interstitial.md
+    - Mediate:
+      - First Steps: mediate/get_started.md
+      - Integrate partner networks:
+        - AppLovin: mediate/integrate_partner_networks/applovin.md
+        - BidMachine: mediate/integrate_partner_networks/bidmachine.md
+        - IronSource: mediate/integrate_partner_networks/ironsource.md
+        - Meta: mediate/integrate_partner_networks/meta.md
+        - Vungle: mediate/integrate_partner_networks/vungle.md
+        - Unity Ads: mediate/integrate_partner_networks/unity_ads.md
+        - Chartboost: mediate/integrate_partner_networks/chartboost.md
+        - DT Exchange: mediate/integrate_partner_networks/dtexchange.md
+        - i-mobile: mediate/integrate_partner_networks/imobile.md
+        - InMobi: mediate/integrate_partner_networks/inmobi.md
+        - Line: mediate/integrate_partner_networks/line.md
+        - Maio: mediate/integrate_partner_networks/maio.md
+        - Mintegral: mediate/integrate_partner_networks/mintegral.md
+        - Moloco: mediate/integrate_partner_networks/moloco.md
+        - myTarget: mediate/integrate_partner_networks/mytarget.md
+        - Pangle: mediate/integrate_partner_networks/pangle.md
+        - PubMatic: mediate/integrate_partner_networks/pubmatic.md
+        - Vpon: mediate/integrate_partner_networks/vpon.md
+        - Zucks: mediate/integrate_partner_networks/zucks.md
+    - Privacy:
+      - Regulatory solutions:
+        - US states privacy laws: privacy/regulatory_solutions/us_states_privacy_laws.md
+      - Strategies: privacy/strategies/strategies.md
+      - Data disclosure:
+        - Google Play data disclosure: privacy/store_data_disclosure/google_play_data_disclosure.md
+        - Apple App Store data disclosure: privacy/store_data_disclosure/apple_app_store_data_disclosure.md
+      - User messaging tools:
+        - Get Started: privacy/user_messaging_tools/get_started.md
+        - GDPR IAB support: privacy/user_messaging_tools/gdpr_iab_support.md
+        - IDFA support: privacy/user_messaging_tools/idfa_support.md
+    - Troubleshoot:
+      - Manage Ad Inspector:
+        - Overview: advanced_topics/ad_inspector/overview.md
+        - Launch ad inspector: advanced_topics/ad_inspector/launch.md
+        - Verify adapter integrations: advanced_topics/ad_inspector/verify_adapters.md
+        - Test ad units: advanced_topics/ad_inspector/test_ad_units.md
+        - Troubleshoot ad units: advanced_topics/ad_inspector/troubleshoot_ad_units.md
+        - Troubleshoot privacy settings: advanced_topics/ad_inspector/troubleshoot_privacy.md
+        - Copy troubleshooting output: advanced_topics/ad_inspector/copy_output.md
+      - Response Info: advanced_topics/response_info.md
+    - Optimize:
+      - Global settings: global_settings.md
+      - Impression-Level Ad Revenue: advanced_topics/impression_level_ad_revenue.md
+      - Targeting: advanced_topics/targeting.md
+  - Reference:
+    - Overview: reference/index.md
+    - Classes:
+      - AdView: reference/classes/AdView.md
+    - Enums: reference/enums.md
 
 hooks:
   - docs/hooks.py

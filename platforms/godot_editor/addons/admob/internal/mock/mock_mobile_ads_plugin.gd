@@ -23,11 +23,14 @@
 extends Node
 
 signal on_initialization_complete(initialization_status_dictionary: Dictionary)
+signal on_ad_inspector_closed(error_dictionary: Dictionary)
 
 var _is_initialized := false
 var _volume := 1.0
 var _muted := false
+var _publisher_first_party_id_enabled := true
 var _request_configuration := {}
+var _gad_has_consent_for_cookies := true
 
 func initialize() -> void:
 	if _is_initialized:
@@ -64,3 +67,27 @@ func set_app_volume(volume: float) -> void:
 
 func set_app_muted(muted: bool) -> void:
 	_muted = muted
+
+func set_publisher_first_party_id_enabled(enabled: bool) -> void:
+	_publisher_first_party_id_enabled = enabled
+
+func set_gad_has_consent_for_cookies(enabled: bool) -> void:
+	_gad_has_consent_for_cookies = enabled
+
+func get_gad_has_consent_for_cookies() -> bool:
+	return _gad_has_consent_for_cookies
+
+func disable_sdk_crash_reporting() -> void:
+	pass
+
+func get_version() -> String:
+	return "1.0.0-mock"
+
+func get_platform_version() -> String:
+	return "1.0.0-mock"
+
+func open_ad_inspector() -> void:
+	var timer := (Engine.get_main_loop() as SceneTree).create_timer(0.5)
+	timer.timeout.connect(func():
+		on_ad_inspector_closed.emit({})
+	)

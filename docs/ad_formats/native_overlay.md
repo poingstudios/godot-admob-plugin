@@ -9,7 +9,7 @@ Native Overlay ads are a specialized ad format that allows you to display a [Nat
 
 Before you continue, do the following:
 
-- Complete the [Get started guide](../README.md).
+- Complete the [Get started guide](../index.md).
 
 ## Always test with test ads
 

@@ -24,8 +24,7 @@ extends MarginContainer
 
 const Registry = preload("res://addons/admob/internal/sample_registry.gd")
 
-var _ad_margin_top := 0.0
-var _ad_margin_bottom := 0.0
+var _active_ad_view: AdView = null
 
 
 func _ready() -> void:
@@ -35,32 +34,12 @@ func _ready() -> void:
 
 
 func update_ad_overlap(ad_view: AdView) -> void:
-	reset_ad_overlap()
-
-	if not ad_view:
-		return
-
-	var pos := ad_view.ad_position
-	var height := float(ad_view.get_height_in_pixels())
-
-	# Mapping AdPosition enum values to top/bottom margins
-	if (
-		pos.value
-		in [AdPosition.Values.TOP, AdPosition.Values.TOP_LEFT, AdPosition.Values.TOP_RIGHT]
-	):
-		_ad_margin_top = height
-	elif (
-		pos.value
-		in [AdPosition.Values.BOTTOM, AdPosition.Values.BOTTOM_LEFT, AdPosition.Values.BOTTOM_RIGHT]
-	):
-		_ad_margin_bottom = height
-
+	_active_ad_view = ad_view
 	_update_safe_area()
 
 
 func reset_ad_overlap() -> void:
-	_ad_margin_top = 0.0
-	_ad_margin_bottom = 0.0
+	_active_ad_view = null
 	_update_safe_area()
 
 
@@ -81,6 +60,23 @@ func _update_safe_area() -> void:
 	if is_nan(scale_factor) or is_inf(scale_factor) or scale_factor <= 0.0:
 		scale_factor = 1.0
 
+	var ad_margin_top := 0.0
+	var ad_margin_bottom := 0.0
+
+	if _active_ad_view and is_instance_valid(_active_ad_view):
+		var pos := _active_ad_view.ad_position
+		var height := float(_active_ad_view.get_height_in_pixels())
+		if (
+			pos.value
+			in [AdPosition.Values.TOP, AdPosition.Values.TOP_LEFT, AdPosition.Values.TOP_RIGHT]
+		):
+			ad_margin_top = height
+		elif (
+			pos.value
+			in [AdPosition.Values.BOTTOM, AdPosition.Values.BOTTOM_LEFT, AdPosition.Values.BOTTOM_RIGHT]
+		):
+			ad_margin_bottom = height
+
 	# DisplayServer returns physical screen coordinates for the safe area
 	var safe_top := 0.0
 	var safe_left := 0.0
@@ -95,9 +91,9 @@ func _update_safe_area() -> void:
 
 	# Apply final margins scaled to the viewport
 	_apply_margins(
-		max(0.0, (safe_top + _ad_margin_top) * scale_factor),
+		max(0.0, (safe_top + ad_margin_top) * scale_factor),
 		max(0.0, safe_left * scale_factor),
-		max(0.0, (safe_bottom + _ad_margin_bottom) * scale_factor),
+		max(0.0, (safe_bottom + ad_margin_bottom) * scale_factor),
 		max(0.0, safe_right * scale_factor)
 	)
 

@@ -10,7 +10,21 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://cboost.jfrog.io/artifactory/chartboost-mediation' }
+        maven { url 'https://cboost.jfrog.io/artifactory/chartboost-core' }
+        maven { url 'https://cboost.jfrog.io/artifactory/chartboost-ads/' }
         maven { url 'https://android-sdk.is.com/' }
+        maven { url "https://artifactory.bidmachine.io/bidmachine" }
+        maven { url "https://imobile-maio.github.io/maven" }
+        maven { url "https://imobile.github.io/adnw-sdk-android" }
+        maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" }
+        maven { url "https://artifact.bytedance.com/repository/pangle/" }
+        maven { url "https://repo.pubmatic.com/artifactory/public-repos" }
+        maven { url "https://m.vpon.com/sdk/android/maven" }
+        maven { url "https://raw.githubusercontent.com/zucks/ZucksAdNetworkSDK-Maven/admob-6.1.0.1" }
+        flatDir {
+            dirs 'godot-lib'
+        }
     }
 }
 
@@ -20,3 +34,19 @@ include ':src:ads'
 include ':src:mediation:vungle'
 include ':src:mediation:meta'
 include ':src:mediation:ironsource'
+include ':src:mediation:applovin'
+include ':src:mediation:bidmachine'
+include ':src:mediation:unity_ads'
+include ':src:mediation:chartboost'
+include ':src:mediation:dtexchange'
+include ':src:mediation:imobile'
+include ':src:mediation:inmobi'
+include ':src:mediation:line'
+include ':src:mediation:maio'
+include ':src:mediation:mintegral'
+include ':src:mediation:moloco'
+include ':src:mediation:mytarget'
+include ':src:mediation:pangle'
+include ':src:mediation:pubmatic'
+include ':src:mediation:vpon'
+include ':src:mediation:zucks'

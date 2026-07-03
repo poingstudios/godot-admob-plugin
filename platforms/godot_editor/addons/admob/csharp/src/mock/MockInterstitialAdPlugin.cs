@@ -117,7 +117,7 @@ namespace PoingStudios.AdMob.Core
 			viewportSize.X = Mathf.Max(1f, viewportSize.X);
 			viewportSize.Y = Mathf.Max(1f, viewportSize.Y);
 
-			float scaleFactor = Mathf.Min(viewportSize.X, viewportSize.Y) / 360.0f;
+			float scaleFactor = Mathf.Min(viewportSize.X / 360f, viewportSize.Y / 640f);
 			if (scaleFactor <= 0.0f)
 			{
 				scaleFactor = 1.0f;
@@ -165,7 +165,7 @@ namespace PoingStudios.AdMob.Core
 
 			var testAdLbl = new Label
 			{
-				Text = "Test Ad",
+				Text = "Mock Ad",
 				HorizontalAlignment = HorizontalAlignment.Center,
 				VerticalAlignment = VerticalAlignment.Center
 			};
@@ -252,7 +252,7 @@ namespace PoingStudios.AdMob.Core
 
 			var titleLbl = new Label
 			{
-				Text = "This is an\ninterstitial test ad.",
+				Text = "This is an\ninterstitial mock ad.",
 				HorizontalAlignment = HorizontalAlignment.Center
 			};
 			titleLbl.AddThemeColorOverride("font_color", new Color(0.12f, 0.12f, 0.12f));

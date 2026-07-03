@@ -27,8 +27,7 @@ using PoingStudios.AdMob.Sample;
 
 public partial class SafeArea : MarginContainer
 {
-	private float _ad_margin_top = 0.0f;
-	private float _ad_margin_bottom = 0.0f;
+	private AdView _activeAdView = null;
 
 	public override void _Ready()
 	{
@@ -39,33 +38,13 @@ public partial class SafeArea : MarginContainer
 
 	public void UpdateAdOverlap(AdView adView)
 	{
-		ResetAdOverlap();
-
-		if (adView == null)
-		{
-			return;
-		}
-
-		var pos = adView.Position.Value;
-		var height = (float)adView.GetHeightInPixels();
-
-		// Mapping AdPosition enum values to top/bottom margins
-		if (pos == AdPosition.Values.Top || pos == AdPosition.Values.TopLeft || pos == AdPosition.Values.TopRight)
-		{
-			_ad_margin_top = height;
-		}
-		else if (pos == AdPosition.Values.Bottom || pos == AdPosition.Values.BottomLeft || pos == AdPosition.Values.BottomRight)
-		{
-			_ad_margin_bottom = height;
-		}
-
+		_activeAdView = adView;
 		UpdateSafeArea();
 	}
 
 	public void ResetAdOverlap()
 	{
-		_ad_margin_top = 0.0f;
-		_ad_margin_bottom = 0.0f;
+		_activeAdView = null;
 		UpdateSafeArea();
 	}
 
@@ -92,6 +71,23 @@ public partial class SafeArea : MarginContainer
 			scaleFactor = 1.0f;
 		}
 
+		float adMarginTop = 0f;
+		float adMarginBottom = 0f;
+
+		if (_activeAdView != null)
+		{
+			var pos = _activeAdView.Position.Value;
+			var height = (float)_activeAdView.GetHeightInPixels();
+			if (pos == AdPosition.Values.Top || pos == AdPosition.Values.TopLeft || pos == AdPosition.Values.TopRight)
+			{
+				adMarginTop = height;
+			}
+			else if (pos == AdPosition.Values.Bottom || pos == AdPosition.Values.BottomLeft || pos == AdPosition.Values.BottomRight)
+			{
+				adMarginBottom = height;
+			}
+		}
+
 		// DisplayServer returns physical screen coordinates for the safe area
 		var safeTop = 0f;
 		var safeLeft = 0f;
@@ -108,9 +104,9 @@ public partial class SafeArea : MarginContainer
 
 		// Apply final margins scaled to the viewport
 		ApplyMargins(
-			Mathf.Max(0f, (safeTop + _ad_margin_top) * scaleFactor),
+			Mathf.Max(0f, (safeTop + adMarginTop) * scaleFactor),
 			Mathf.Max(0f, safeLeft * scaleFactor),
-			Mathf.Max(0f, (safeBottom + _ad_margin_bottom) * scaleFactor),
+			Mathf.Max(0f, (safeBottom + adMarginBottom) * scaleFactor),
 			Mathf.Max(0f, safeRight * scaleFactor)
 		);
 	}

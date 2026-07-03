@@ -33,6 +33,7 @@ const IOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd
 # UI Components
 const AndroidMenu := preload("res://addons/admob/internal/editor/components/android_menu.gd")
 const IOSMenu := preload("res://addons/admob/internal/editor/components/ios_menu.gd")
+const AIMenu := preload("res://addons/admob/internal/editor/components/ai_menu.gd")
 const DocumentsMenu := preload("res://addons/admob/internal/editor/components/documents_menu.gd")
 const HelpMenu := preload("res://addons/admob/internal/editor/components/help_menu.gd")
 const SupportMenu := preload("res://addons/admob/internal/editor/components/support_menu.gd")
@@ -68,6 +69,7 @@ func _setup_menu() -> void:
 	# Add Submenus
 	_add_submenu(AndroidMenu.new(_android_handler))
 	_add_submenu(IOSMenu.new(_ios_handler))
+	_add_submenu(AIMenu.new(_dialog_service))
 	_add_submenu(DocumentsMenu.new())
 	_add_submenu(HelpMenu.new())
 	_add_submenu(SupportMenu.new())

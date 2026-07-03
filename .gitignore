@@ -1,6 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 .import/
+.skills/
 export.cfg
 export_presets.cfg
 
@@ -48,3 +49,7 @@ tmp/
 .antigravitycli/
 platforms/godot_editor/addons/admob/csharp/.gdignore
 
+# MkDocs local development version helper
+docs/versions.json
+
+android/

@@ -602,7 +602,7 @@ If you appreciate our work, don't forget to give us a star on GitHub! ⭐
 
 ![Star History Chart](https://api.star-history.com/svg?repos=poingstudios/godot-admob-plugin&type=Date)
 
-[VersionBadge]: https://badgen.net/github/release/poingstudios/godot-admob-plugin?label=Version
+[VersionBadge]: https://img.shields.io/github/v/release/poingstudios/godot-admob-plugin
 [StarsBadge]: https://badgen.net/github/stars/poingstudios/godot-admob-plugin
 [DiscordBadge]: https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord
 [LicenseBadge]: https://badgen.net/github/license/poingstudios/godot-admob-plugin?label=License

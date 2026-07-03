@@ -170,7 +170,7 @@ func _generate_package_swift(export_dir: String, dependencies: Array[Dictionary]
 			)
 
 	var content := (
-		'// swift-tools-version:5.9\nimport PackageDescription\n\nlet package = Package(\n    name: "PoingGodotAdMobDeps",\n    platforms: [.iOS(.v13)],\n    products: [\n        .library(\n            name: "PoingGodotAdMobDeps",\n            targets: ["PoingGodotAdMobDeps"]),\n    ],\n    dependencies: [\n'
+		'// swift-tools-version:5.9\nimport PackageDescription\n\nlet package = Package(\n    name: "PoingGodotAdMobDeps",\n    platforms: [.iOS(.v14)],\n    products: [\n        .library(\n            name: "PoingGodotAdMobDeps",\n            targets: ["PoingGodotAdMobDeps"]),\n    ],\n    dependencies: [\n'
 		+ package_deps_str
 		+ '    ],\n    targets: [\n        .target(\n            name: "PoingGodotAdMobDeps",\n            dependencies: [\n'
 		+ target_deps_str
