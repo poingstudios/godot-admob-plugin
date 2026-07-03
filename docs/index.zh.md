@@ -31,17 +31,22 @@
 
 在Godot编辑器内打开AdMob管理器（**项目 -> 工具 -> AdMob管理器**或点击**AdMob**面板标签）。
 
-* **Android**：选择**下载Android模板**，将`.aar`和`.gdap`文件获取并解压到`res://android/plugins/`文件夹。
-* **iOS**：选择**下载iOS模板**，将`.gdip`和库文件获取并解压到`res://ios/plugins/`文件夹。
+* **Android**：选择**下载Android模板**。插件将自动下载所需的模板文件（`.aar` 和 `.gdap`）并解压到您的 `res://android/plugins/` 文件夹中（无需手动解压 zip 压缩包）。
+* **iOS**：选择**下载iOS模板**。插件将自动下载所需的模板文件（`.gdip` 和库文件）并解压到您的 `res://ios/plugins/` 文件夹中（无需手动解压 zip 压缩包）。
 
 ---
 
 ## 配置
 
-在AdMob编辑器面板中：
-1. 设置您的**AdMob应用ID**（例如`ca-app-pub-3940256099942544~1458002511`）。
-2. 输入您要使用的格式（横幅、插页、激励、激励插页）的**广告单元ID**。
-3. 切换广告是否启用，并配置默认行为如横幅位置和大小。
+在 **AdMob 编辑器面板**（`项目 -> 工具 -> AdMob 管理器`）中，配置以下选项：
+
+| 选项 | 说明 |
+|------|------|
+| **App ID** | 您的 AdMob 应用 ID（例如 `ca-app-pub-3940256099942544~1458002511`）。 |
+| **Ad Unit IDs** | 您计划使用的每种广告格式的 ID（横幅、插页、激励、激励插页）。 |
+| **Is Enabled** | 全局启用或禁用广告。 |
+| **Banner Position** | 选择横幅显示位置（顶部、底部、自定义）。 |
+| **Banner Size** | 选择横幅尺寸（横幅、大横幅、中矩形等）。 |
 
 ---
 
@@ -81,9 +86,60 @@
 
 ## 选择广告格式
 
-SDK初始化后，您可以选择并实现最适合游戏布局的广告格式：
+Google Mobile Ads SDK 已成功导入，您可以开始将广告集成到您的应用中。AdMob 提供多种广告格式，您可以选择最适合您应用用户体验的格式。
 
-* [横幅广告](ad_formats/banner.zh.md)
-* [插页广告](ad_formats/interstitial.zh.md)
-* [激励视频广告](ad_formats/rewarded.zh.md)
-* [激励插页广告](ad_formats/rewarded_interstitial.zh.md)
+### 横幅广告
+<div class="image-text-container" markdown="1">
+
+![banner](assets/ad_formats/banner.png)
+
+横幅广告是由图片或文字组成的矩形广告，集成在应用的布局中。在用户与应用互动时，它们会停留在屏幕上，并可按设定时间间隔自动刷新。
+
+</div>
+
+[实现横幅广告](ad_formats/banner.zh.md){ .md-button .md-button--primary }
+
+### 插页广告
+<div class="image-text-container" markdown="1">
+
+![interstitial](assets/ad_formats/interstitial.png)
+
+插页广告是一种覆盖应用界面的全屏广告，在用户关闭前会一直显示。在应用运行的自然停顿点（如游戏关卡之间）放置效果最佳。
+
+</div>
+
+[实现插页广告](ad_formats/interstitial.zh.md){ .md-button .md-button--primary }
+
+### 激励广告
+<div class="image-text-container" markdown="1">
+
+![rewarded](assets/ad_formats/rewarded.png)
+
+激励视频广告是一种沉浸式全屏视频广告，用户可选择完整观看。作为回报，用户将获得应用内奖励或福利。
+
+</div>
+
+[实现激励广告](ad_formats/rewarded.zh.md){ .md-button .md-button--primary }
+
+### 激励插页广告
+<div class="image-text-container" markdown="1">
+
+![rewarded_interstitial](assets/ad_formats/rewarded_interstitial.png)
+
+激励插页广告是一种激励型广告格式，通过在应用自然过渡期间自动展示广告来提供奖励。
+
+</div>
+
+[实现激励插页广告](ad_formats/rewarded_interstitial.zh.md){ .md-button .md-button--primary }
+
+<style>
+  .image-text-container {
+    display: flex;
+    align-items: center;
+  }
+  .image-text-container img {
+    margin-right: 20px;
+    max-width: 130px;
+    height: auto;
+  }
+</style>

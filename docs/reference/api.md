@@ -1,12 +1,26 @@
-# API Reference
+# MobileAds API Reference
 
-This page contains the complete lists of methods and signals provided by the `MobileAds` singleton in the Godot AdMob Plugin (Godot 3).
+This page documents the `MobileAds` singleton, the main interface for interacting with the Google Mobile Ads SDK in Godot 3. All ad operations are performed through this autoload singleton.
+
+---
+
+## Overview
+
+The `MobileAds` singleton is automatically registered when the plugin is enabled. Use it to load, show, and manage ads across all supported formats.
+
+```gdscript
+# Access the singleton directly
+MobileAds.initialize()
+MobileAds.load_banner()
+MobileAds.show_interstitial()
+```
 
 ---
 
 ## Methods
 
 ```gdscript
+void initialize()
 void load_banner(ad_unit_name = "standard")
 void load_interstitial(ad_unit_name = "standard")
 void load_rewarded(ad_unit_name = "standard")
@@ -30,6 +44,7 @@ bool get_is_banner_loaded()
 bool get_is_interstitial_loaded()
 bool get_is_rewarded_loaded()
 bool get_is_rewarded_interstitial_loaded()
+bool get_is_initialized()
 ```
 
 ---

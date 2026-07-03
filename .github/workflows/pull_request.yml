@@ -40,15 +40,16 @@ jobs:
       run: |
         REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE='(?<=version=")[^"]+'
 
-        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{env.TAG_PREFIX}}${{ steps.version.outputs.version }}/g" addons/admob/plugin.cfg
+        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{env.TAG_PREFIX}}${{ steps.version.outputs.version }}/g" platforms/godot_editor/addons/admob/plugin.cfg
 
     - name: Compress .zip
       run: |
-        git archive --format=zip --output compress.zip `git stash create`
+        ./.github/scripts/compress_editor_plugin.sh
 
     - name: Uncompress .zip to Artifact
       run: |
-        unzip compress.zip -d zip_extract_folder/
+        mkdir -p zip_extract_folder/
+        unzip "platforms/godot_editor/${{ env.ZIP_NAME }}" -d zip_extract_folder/
 
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.1.1

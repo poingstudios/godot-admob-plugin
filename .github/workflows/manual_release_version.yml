@@ -49,9 +49,9 @@ jobs:
       run: |
         REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE='(?<=version=")[^"]+'
 
-        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{env.PLUGIN_VERSION}}/g" addons/admob/plugin.cfg
+        perl -pi -e "s/$REGEX_FIND_VERSION_TO_CHANGE_CONTENT_MD_FILE/${{env.PLUGIN_VERSION}}/g" platforms/godot_editor/addons/admob/plugin.cfg
 
-        cat addons/admob/plugin.cfg
+        cat platforms/godot_editor/addons/admob/plugin.cfg
 
     - name: Git Auto Commit
       run: |

@@ -31,17 +31,22 @@ Una vez habilitado, el complemento registra automáticamente el singleton `Mobil
 
 Abre el Administrador de AdMob dentro del editor de Godot (**Proyecto -> Herramientas -> Administrador de AdMob** o haz clic en la pestaña del panel **AdMob**).
 
-* **Android**: Selecciona **Descargar Plantilla Android** para obtener y extraer los archivos `.aar` y `.gdap` en tu carpeta `res://android/plugins/`.
-* **iOS**: Selecciona **Descargar Plantilla iOS** para obtener y extraer los archivos `.gdip` y bibliotecas en tu carpeta `res://ios/plugins/`.
+* **Android**: Selecciona **Descargar Plantilla Android**. El complemento descargará y extraerá automáticamente los archivos de plantilla necesarios (`.aar` y `.gdap`) directamente en tu carpeta `res://android/plugins/` (no es necesario extraer el archivo zip manualmente).
+* **iOS**: Selecciona **Descargar Plantilla iOS**. El complemento descargará y extraerá automáticamente los archivos de plantilla necesarios (`.gdip` y bibliotecas) directamente en tu carpeta `res://ios/plugins/` (no es necesario extraer el archivo zip manualmente).
 
 ---
 
 ## Configuración
 
-En el panel del Editor de AdMob:
-1. Configura tus **ID de Aplicación de AdMob** (por ejemplo, `ca-app-pub-3940256099942544~1458002511`).
-2. Ingresa tus **ID de Unidad de Anuncio** para los formatos que deseas usar (Banner, Intersticial, Recompensado, Intersticial Recompensado).
-3. Activa o desactiva si los anuncios están habilitados y configura comportamientos predeterminados como posición y tamaño del banner.
+En el **panel del Editor de AdMob** (`Proyecto -> Herramientas -> Administrador de AdMob`), configure las siguientes opciones:
+
+| Opción | Descripción |
+|--------|-------------|
+| **App ID** | Su ID de aplicación de AdMob (ej: `ca-app-pub-3940256099942544~1458002511`). |
+| **Ad Unit IDs** | IDs para cada formato de anuncio que planea usar (Banner, Intersticial, Recompensado, Intersticial Recompensado). |
+| **Is Enabled** | Active/desactive los anuncios globalmente. |
+| **Banner Position** | Elija dónde aparece el banner (Superior, Inferior, Personalizado). |
+| **Banner Size** | Seleccione el tamaño del banner (Banner, Banner Grande, Rectángulo Mediano, etc.). |
 
 ---
 
@@ -81,9 +86,60 @@ Si prefieres inicializar manualmente o quieres monitorear la finalización, con�
 
 ## Seleccionar un Formato de Anuncio
 
-Ahora que el SDK está inicializado, puedes seleccionar e implementar los formatos de anuncio que mejor se adapten al diseño de tu juego:
+El SDK de Google Mobile Ads se ha importado correctamente y ya está listo para integrar anuncios en su aplicación. AdMob ofrece una variedad de formatos de anuncios, lo que le permite seleccionar el que mejor se alinee con la experiencia de usuario de su aplicación.
 
-* [Anuncios Banner](ad_formats/banner.es.md)
-* [Anuncios Intersticiales](ad_formats/interstitial.es.md)
-* [Anuncios de Video Recompensado](ad_formats/rewarded.es.md)
-* [Anuncios Intersticiales Recompensados](ad_formats/rewarded_interstitial.es.md)
+### Banner
+<div class="image-text-container" markdown="1">
+
+![banner](assets/ad_formats/banner.png)
+
+Los anuncios de banner son rectangulares, compuestos por imágenes o texto, integrados en el diseño de la aplicación. Permanecen en pantalla mientras los usuarios interactúan con la aplicación y pueden actualizarse automáticamente.
+
+</div>
+
+[Implementar anuncios de banner](ad_formats/banner.es.md){ .md-button .md-button--primary }
+
+### Intersticial
+<div class="image-text-container" markdown="1">
+
+![interstitial](assets/ad_formats/interstitial.png)
+
+Los anuncios intersticiales son anuncios expansivos a pantalla completa que cubren la interfaz de la aplicación hasta que el usuario los cierra. Son más efectivos cuando se colocan en pausas naturales, como entre niveles de un juego.
+
+</div>
+
+[Implementar anuncios intersticiales](ad_formats/interstitial.es.md){ .md-button .md-button--primary }
+
+### Recompensado
+<div class="image-text-container" markdown="1">
+
+![rewarded](assets/ad_formats/rewarded.png)
+
+Los anuncios de video recompensado son anuncios inmersivos a pantalla completa que ofrecen a los usuarios la opción de verlos por completo. A cambio, los usuarios reciben recompensas o beneficios dentro de la aplicación.
+
+</div>
+
+[Implementar anuncios recompensados](ad_formats/rewarded.es.md){ .md-button .md-button--primary }
+
+### Intersticial Recompensado
+<div class="image-text-container" markdown="1">
+
+![rewarded_interstitial](assets/ad_formats/rewarded_interstitial.png)
+
+El Intersticial Recompensado es un formato de anuncio incentivado que ofrece recompensas a cambio de anuncios que aparecen automáticamente durante las transiciones naturales de la aplicación.
+
+</div>
+
+[Implementar anuncios intersticiales recompensados](ad_formats/rewarded_interstitial.es.md){ .md-button .md-button--primary }
+
+<style>
+  .image-text-container {
+    display: flex;
+    align-items: center;
+  }
+  .image-text-container img {
+    margin-right: 20px;
+    max-width: 130px;
+    height: auto;
+  }
+</style>

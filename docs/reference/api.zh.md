@@ -1,12 +1,28 @@
-# API参考
+# MobileAds API 参考
 
-本页包含Godot AdMob插件（Godot 3）中`MobileAds`单例提供的方法和信号的完整列表。
+本页介绍 `MobileAds` 单例，这是在 Godot 3 中与 Google Mobile Ads SDK 交互的主要接口。所有广告操作都通过此单例（自动加载）执行。
+
+---
+
+## 概述
+
+`MobileAds` 单例在插件启用时自动注册。使用它可以加载、显示和管理所有支持的广告格式。
+
+```gdscript
+# 直接访问单例
+MobileAds.initialize()
+MobileAds.load_banner()
+MobileAds.show_interstitial()
+```
+
+---
 
 ---
 
 ## 方法
 
 ```gdscript
+void initialize()
 void load_banner(ad_unit_name = "standard")
 void load_interstitial(ad_unit_name = "standard")
 void load_rewarded(ad_unit_name = "standard")
@@ -30,6 +46,7 @@ bool get_is_banner_loaded()
 bool get_is_interstitial_loaded()
 bool get_is_rewarded_loaded()
 bool get_is_rewarded_interstitial_loaded()
+bool get_is_initialized()
 ```
 
 ---
