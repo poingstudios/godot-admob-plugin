@@ -540,6 +540,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Seleccionar un Formato de Anuncio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#banner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banner
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersticial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intersticial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recompensado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recompensado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersticial-recompensado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intersticial Recompensado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1078,6 +1128,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Seleccionar un Formato de Anuncio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#banner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banner
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersticial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intersticial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#recompensado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Recompensado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intersticial-recompensado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Intersticial Recompensado
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1123,15 +1223,42 @@
 <h2 id="descargar-plantillas-de-plataforma">Descargar Plantillas de Plataforma</h2>
 <p>Abre el Administrador de AdMob dentro del editor de Godot (<strong>Proyecto -&gt; Herramientas -&gt; Administrador de AdMob</strong> o haz clic en la pestaña del panel <strong>AdMob</strong>).</p>
 <ul>
-<li><strong>Android</strong>: Selecciona <strong>Descargar Plantilla Android</strong> para obtener y extraer los archivos <code>.aar</code> y <code>.gdap</code> en tu carpeta <code>res://android/plugins/</code>.</li>
-<li><strong>iOS</strong>: Selecciona <strong>Descargar Plantilla iOS</strong> para obtener y extraer los archivos <code>.gdip</code> y bibliotecas en tu carpeta <code>res://ios/plugins/</code>.</li>
+<li><strong>Android</strong>: Selecciona <strong>Descargar Plantilla Android</strong>. El complemento descargará y extraerá automáticamente los archivos de plantilla necesarios (<code>.aar</code> y <code>.gdap</code>) directamente en tu carpeta <code>res://android/plugins/</code> (no es necesario extraer el archivo zip manualmente).</li>
+<li><strong>iOS</strong>: Selecciona <strong>Descargar Plantilla iOS</strong>. El complemento descargará y extraerá automáticamente los archivos de plantilla necesarios (<code>.gdip</code> y bibliotecas) directamente en tu carpeta <code>res://ios/plugins/</code> (no es necesario extraer el archivo zip manualmente).</li>
 </ul>
 <hr />
 <h2 id="configuracion">Configuración</h2>
-<p>En el panel del Editor de AdMob:
-1. Configura tus <strong>ID de Aplicación de AdMob</strong> (por ejemplo, <code>ca-app-pub-3940256099942544~1458002511</code>).
-2. Ingresa tus <strong>ID de Unidad de Anuncio</strong> para los formatos que deseas usar (Banner, Intersticial, Recompensado, Intersticial Recompensado).
-3. Activa o desactiva si los anuncios están habilitados y configura comportamientos predeterminados como posición y tamaño del banner.</p>
+<p>En el <strong>panel del Editor de AdMob</strong> (<code>Proyecto -&gt; Herramientas -&gt; Administrador de AdMob</code>), configure las siguientes opciones:</p>
+<table>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>App ID</strong></td>
+<td>Su ID de aplicación de AdMob (ej: <code>ca-app-pub-3940256099942544~1458002511</code>).</td>
+</tr>
+<tr>
+<td><strong>Ad Unit IDs</strong></td>
+<td>IDs para cada formato de anuncio que planea usar (Banner, Intersticial, Recompensado, Intersticial Recompensado).</td>
+</tr>
+<tr>
+<td><strong>Is Enabled</strong></td>
+<td>Active/desactive los anuncios globalmente.</td>
+</tr>
+<tr>
+<td><strong>Banner Position</strong></td>
+<td>Elija dónde aparece el banner (Superior, Inferior, Personalizado).</td>
+</tr>
+<tr>
+<td><strong>Banner Size</strong></td>
+<td>Seleccione el tamaño del banner (Banner, Banner Grande, Rectángulo Mediano, etc.).</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="inicializar-el-sdk">Inicializar el SDK</h2>
 <p>Antes de cargar anuncios, el SDK de Google Mobile Ads debe ser inicializado. Si <strong>Está Habilitado</strong> está activo en tu configuración, el complemento se inicializará automáticamente al iniciar.</p>
@@ -1164,13 +1291,42 @@
 </div>
 <hr />
 <h2 id="seleccionar-un-formato-de-anuncio">Seleccionar un Formato de Anuncio</h2>
-<p>Ahora que el SDK está inicializado, puedes seleccionar e implementar los formatos de anuncio que mejor se adapten al diseño de tu juego:</p>
-<ul>
-<li><a href="ad_formats/banner/">Anuncios Banner</a></li>
-<li><a href="ad_formats/interstitial/">Anuncios Intersticiales</a></li>
-<li><a href="ad_formats/rewarded/">Anuncios de Video Recompensado</a></li>
-<li><a href="ad_formats/rewarded_interstitial/">Anuncios Intersticiales Recompensados</a></li>
-</ul>
+<p>El SDK de Google Mobile Ads se ha importado correctamente y ya está listo para integrar anuncios en su aplicación. AdMob ofrece una variedad de formatos de anuncios, lo que le permite seleccionar el que mejor se alinee con la experiencia de usuario de su aplicación.</p>
+<h3 id="banner">Banner</h3>
+<div class="image-text-container">
+<p><img alt="banner" src="../assets/ad_formats/banner.png" /></p>
+<p>Los anuncios de banner son rectangulares, compuestos por imágenes o texto, integrados en el diseño de la aplicación. Permanecen en pantalla mientras los usuarios interactúan con la aplicación y pueden actualizarse automáticamente.</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/banner/">Implementar anuncios de banner</a></p>
+<h3 id="intersticial">Intersticial</h3>
+<div class="image-text-container">
+<p><img alt="interstitial" src="../assets/ad_formats/interstitial.png" /></p>
+<p>Los anuncios intersticiales son anuncios expansivos a pantalla completa que cubren la interfaz de la aplicación hasta que el usuario los cierra. Son más efectivos cuando se colocan en pausas naturales, como entre niveles de un juego.</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/interstitial/">Implementar anuncios intersticiales</a></p>
+<h3 id="recompensado">Recompensado</h3>
+<div class="image-text-container">
+<p><img alt="rewarded" src="../assets/ad_formats/rewarded.png" /></p>
+<p>Los anuncios de video recompensado son anuncios inmersivos a pantalla completa que ofrecen a los usuarios la opción de verlos por completo. A cambio, los usuarios reciben recompensas o beneficios dentro de la aplicación.</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/rewarded/">Implementar anuncios recompensados</a></p>
+<h3 id="intersticial-recompensado">Intersticial Recompensado</h3>
+<div class="image-text-container">
+<p><img alt="rewarded_interstitial" src="../assets/ad_formats/rewarded_interstitial.png" /></p>
+<p>El Intersticial Recompensado es un formato de anuncio incentivado que ofrece recompensas a cambio de anuncios que aparecen automáticamente durante las transiciones naturales de la aplicación.</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/rewarded_interstitial/">Implementar anuncios intersticiales recompensados</a></p>
+<style>
+  .image-text-container {
+    display: flex;
+    align-items: center;
+  }
+  .image-text-container img {
+    margin-right: 20px;
+    max-width: 130px;
+    height: auto;
+  }
+</style>
 
 
 

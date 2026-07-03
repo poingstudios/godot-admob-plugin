@@ -540,6 +540,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="选择广告格式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        横幅广告
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        插页广告
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        激励广告
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        激励插页广告
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1078,6 +1128,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="选择广告格式">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        横幅广告
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        插页广告
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        激励广告
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        激励插页广告
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1123,15 +1223,42 @@
 <h2 id="_4">下载平台模板</h2>
 <p>在Godot编辑器内打开AdMob管理器（<strong>项目 -&gt; 工具 -&gt; AdMob管理器</strong>或点击<strong>AdMob</strong>面板标签）。</p>
 <ul>
-<li><strong>Android</strong>：选择<strong>下载Android模板</strong>，将<code>.aar</code>和<code>.gdap</code>文件获取并解压到<code>res://android/plugins/</code>文件夹。</li>
-<li><strong>iOS</strong>：选择<strong>下载iOS模板</strong>，将<code>.gdip</code>和库文件获取并解压到<code>res://ios/plugins/</code>文件夹。</li>
+<li><strong>Android</strong>：选择<strong>下载Android模板</strong>。插件将自动下载所需的模板文件（<code>.aar</code> 和 <code>.gdap</code>）并解压到您的 <code>res://android/plugins/</code> 文件夹中（无需手动解压 zip 压缩包）。</li>
+<li><strong>iOS</strong>：选择<strong>下载iOS模板</strong>。插件将自动下载所需的模板文件（<code>.gdip</code> 和库文件）并解压到您的 <code>res://ios/plugins/</code> 文件夹中（无需手动解压 zip 压缩包）。</li>
 </ul>
 <hr />
 <h2 id="_5">配置</h2>
-<p>在AdMob编辑器面板中：
-1. 设置您的<strong>AdMob应用ID</strong>（例如<code>ca-app-pub-3940256099942544~1458002511</code>）。
-2. 输入您要使用的格式（横幅、插页、激励、激励插页）的<strong>广告单元ID</strong>。
-3. 切换广告是否启用，并配置默认行为如横幅位置和大小。</p>
+<p>在 <strong>AdMob 编辑器面板</strong>（<code>项目 -&gt; 工具 -&gt; AdMob 管理器</code>）中，配置以下选项：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>App ID</strong></td>
+<td>您的 AdMob 应用 ID（例如 <code>ca-app-pub-3940256099942544~1458002511</code>）。</td>
+</tr>
+<tr>
+<td><strong>Ad Unit IDs</strong></td>
+<td>您计划使用的每种广告格式的 ID（横幅、插页、激励、激励插页）。</td>
+</tr>
+<tr>
+<td><strong>Is Enabled</strong></td>
+<td>全局启用或禁用广告。</td>
+</tr>
+<tr>
+<td><strong>Banner Position</strong></td>
+<td>选择横幅显示位置（顶部、底部、自定义）。</td>
+</tr>
+<tr>
+<td><strong>Banner Size</strong></td>
+<td>选择横幅尺寸（横幅、大横幅、中矩形等）。</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="sdk">初始化SDK</h2>
 <p>在加载广告之前，必须初始化Google Mobile Ads SDK。如果配置中<strong>已启用</strong>处于活动状态，插件将在启动时自动初始化。</p>
@@ -1164,13 +1291,42 @@
 </div>
 <hr />
 <h2 id="_6">选择广告格式</h2>
-<p>SDK初始化后，您可以选择并实现最适合游戏布局的广告格式：</p>
-<ul>
-<li><a href="ad_formats/banner/">横幅广告</a></li>
-<li><a href="ad_formats/interstitial/">插页广告</a></li>
-<li><a href="ad_formats/rewarded/">激励视频广告</a></li>
-<li><a href="ad_formats/rewarded_interstitial/">激励插页广告</a></li>
-</ul>
+<p>Google Mobile Ads SDK 已成功导入，您可以开始将广告集成到您的应用中。AdMob 提供多种广告格式，您可以选择最适合您应用用户体验的格式。</p>
+<h3 id="_7">横幅广告</h3>
+<div class="image-text-container">
+<p><img alt="banner" src="../assets/ad_formats/banner.png" /></p>
+<p>横幅广告是由图片或文字组成的矩形广告，集成在应用的布局中。在用户与应用互动时，它们会停留在屏幕上，并可按设定时间间隔自动刷新。</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/banner/">实现横幅广告</a></p>
+<h3 id="_8">插页广告</h3>
+<div class="image-text-container">
+<p><img alt="interstitial" src="../assets/ad_formats/interstitial.png" /></p>
+<p>插页广告是一种覆盖应用界面的全屏广告，在用户关闭前会一直显示。在应用运行的自然停顿点（如游戏关卡之间）放置效果最佳。</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/interstitial/">实现插页广告</a></p>
+<h3 id="_9">激励广告</h3>
+<div class="image-text-container">
+<p><img alt="rewarded" src="../assets/ad_formats/rewarded.png" /></p>
+<p>激励视频广告是一种沉浸式全屏视频广告，用户可选择完整观看。作为回报，用户将获得应用内奖励或福利。</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/rewarded/">实现激励广告</a></p>
+<h3 id="_10">激励插页广告</h3>
+<div class="image-text-container">
+<p><img alt="rewarded_interstitial" src="../assets/ad_formats/rewarded_interstitial.png" /></p>
+<p>激励插页广告是一种激励型广告格式，通过在应用自然过渡期间自动展示广告来提供奖励。</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/rewarded_interstitial/">实现激励插页广告</a></p>
+<style>
+  .image-text-container {
+    display: flex;
+    align-items: center;
+  }
+  .image-text-container img {
+    margin-right: 20px;
+    max-width: 130px;
+    height: auto;
+  }
+</style>
 
 
 

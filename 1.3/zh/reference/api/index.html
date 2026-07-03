@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#api" class="md-skip">
+        <a href="#mobileads-api" class="md-skip">
           跳转至
         </a>
       
@@ -881,7 +881,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方法
+        概述
       
     </span>
   </a>
@@ -890,6 +890,17 @@
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         信号
@@ -973,7 +984,7 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        方法
+        概述
       
     </span>
   </a>
@@ -982,6 +993,17 @@
       
         <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        方法
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         信号
@@ -1008,77 +1030,88 @@
 
 
 
-<h1 id="api">API参考</h1>
-<p>本页包含Godot AdMob插件（Godot 3）中<code>MobileAds</code>单例提供的方法和信号的完整列表。</p>
+<h1 id="mobileads-api">MobileAds API 参考</h1>
+<p>本页介绍 <code>MobileAds</code> 单例，这是在 Godot 3 中与 Google Mobile Ads SDK 交互的主要接口。所有广告操作都通过此单例（自动加载）执行。</p>
 <hr />
-<h2 id="_1">方法</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">load_banner</span><span class="p">(</span><span class="n">ad_unit_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;standard&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">load_interstitial</span><span class="p">(</span><span class="n">ad_unit_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;standard&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">load_rewarded</span><span class="p">(</span><span class="n">ad_unit_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;standard&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">load_rewarded_interstitial</span><span class="p">(</span><span class="n">ad_unit_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;standard&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">destroy_banner</span><span class="p">()</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">show_banner</span><span class="p">()</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">hide_banner</span><span class="p">()</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">show_interstitial</span><span class="p">()</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">show_rewarded</span><span class="p">()</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">show_rewarded_interstitial</span><span class="p">()</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">request_user_consent</span><span class="p">()</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">reset_consent_state</span><span class="p">(</span><span class="n">will_request_user_consent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">false</span><span class="p">)</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="nb nb-Type">int</span><span class="w"> </span><span class="n">get_banner_width</span><span class="p">()</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="nb nb-Type">int</span><span class="w"> </span><span class="n">get_banner_width_in_pixels</span><span class="p">()</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="nb nb-Type">int</span><span class="w"> </span><span class="n">get_banner_height</span><span class="p">()</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="nb nb-Type">int</span><span class="w"> </span><span class="n">get_banner_height_in_pixels</span><span class="p">()</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="nb nb-Type">bool</span><span class="w"> </span><span class="n">get_is_banner_loaded</span><span class="p">()</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="nb nb-Type">bool</span><span class="w"> </span><span class="n">get_is_interstitial_loaded</span><span class="p">()</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="nb nb-Type">bool</span><span class="w"> </span><span class="n">get_is_rewarded_loaded</span><span class="p">()</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="nb nb-Type">bool</span><span class="w"> </span><span class="n">get_is_rewarded_interstitial_loaded</span><span class="p">()</span>
+<h2 id="_1">概述</h2>
+<p><code>MobileAds</code> 单例在插件启用时自动注册。使用它可以加载、显示和管理所有支持的广告格式。</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># 直接访问单例</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">MobileAds</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">MobileAds</span><span class="o">.</span><span class="n">load_banner</span><span class="p">()</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">MobileAds</span><span class="o">.</span><span class="n">show_interstitial</span><span class="p">()</span>
 </code></pre></div>
 <hr />
-<h2 id="_2">信号</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">initialization_complete</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">adapter_name</span><span class="p">)</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">consent_form_dismissed</span><span class="p">()</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">consent_status_changed</span><span class="p">(</span><span class="n">consent_status_message</span><span class="p">)</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="n">consent_form_load_failure</span><span class="p">(</span><span class="n">error_code</span><span class="p">,</span><span class="w"> </span><span class="n">error_message</span><span class="p">)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">consent_info_update_success</span><span class="p">(</span><span class="n">consent_status_message</span><span class="p">)</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">consent_info_update_failure</span><span class="p">(</span><span class="n">error_code</span><span class="p">,</span><span class="w"> </span><span class="n">error_message</span><span class="p">)</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">banner_loaded</span><span class="p">()</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">banner_failed_to_load</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">banner_opened</span><span class="p">()</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">banner_clicked</span><span class="p">()</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">banner_closed</span><span class="p">()</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">banner_recorded_impression</span><span class="p">()</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="n">banner_destroyed</span><span class="p">()</span>
+<hr />
+<h2 id="_2">方法</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">initialize</span><span class="p">()</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">load_banner</span><span class="p">(</span><span class="n">ad_unit_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;standard&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">load_interstitial</span><span class="p">(</span><span class="n">ad_unit_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;standard&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">load_rewarded</span><span class="p">(</span><span class="n">ad_unit_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;standard&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">load_rewarded_interstitial</span><span class="p">(</span><span class="n">ad_unit_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;standard&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">destroy_banner</span><span class="p">()</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">show_banner</span><span class="p">()</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">hide_banner</span><span class="p">()</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">show_interstitial</span><span class="p">()</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">show_rewarded</span><span class="p">()</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">show_rewarded_interstitial</span><span class="p">()</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">request_user_consent</span><span class="p">()</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="nb nb-Type">void</span><span class="w"> </span><span class="n">reset_consent_state</span><span class="p">(</span><span class="n">will_request_user_consent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="bp">false</span><span class="p">)</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="n">interstitial_failed_to_load</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">interstitial_loaded</span><span class="p">()</span>
-<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">interstitial_failed_to_show</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">interstitial_opened</span><span class="p">()</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">interstitial_clicked</span><span class="p">()</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="n">interstitial_closed</span><span class="p">()</span>
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="n">interstitial_recorded_impression</span><span class="p">()</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="n">rewarded_ad_failed_to_load</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
-<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="n">rewarded_ad_loaded</span><span class="p">()</span>
-<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="n">rewarded_ad_failed_to_show</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
-<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="n">rewarded_ad_opened</span><span class="p">()</span>
-<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="n">rewarded_ad_clicked</span><span class="p">()</span>
-<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="n">rewarded_ad_closed</span><span class="p">()</span>
-<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="n">rewarded_ad_recorded_impression</span><span class="p">()</span>
-<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>
-<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a><span class="n">rewarded_interstitial_ad_failed_to_load</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
-<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="n">rewarded_interstitial_ad_loaded</span><span class="p">()</span>
-<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a><span class="n">rewarded_interstitial_ad_failed_to_show</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
-<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a><span class="n">rewarded_interstitial_ad_opened</span><span class="p">()</span>
-<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="n">rewarded_interstitial_ad_clicked</span><span class="p">()</span>
-<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="n">rewarded_interstitial_ad_closed</span><span class="p">()</span>
-<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a><span class="n">rewarded_interstitial_ad_recorded_impression</span><span class="p">()</span>
-<a id="__codelineno-1-40" name="__codelineno-1-40" href="#__codelineno-1-40"></a>
-<a id="__codelineno-1-41" name="__codelineno-1-41" href="#__codelineno-1-41"></a><span class="n">user_earned_rewarded</span><span class="p">(</span><span class="n">currency</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nb nb-Type">int</span><span class="w"> </span><span class="n">get_banner_width</span><span class="p">()</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="nb nb-Type">int</span><span class="w"> </span><span class="n">get_banner_width_in_pixels</span><span class="p">()</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="nb nb-Type">int</span><span class="w"> </span><span class="n">get_banner_height</span><span class="p">()</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="nb nb-Type">int</span><span class="w"> </span><span class="n">get_banner_height_in_pixels</span><span class="p">()</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="nb nb-Type">bool</span><span class="w"> </span><span class="n">get_is_banner_loaded</span><span class="p">()</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="nb nb-Type">bool</span><span class="w"> </span><span class="n">get_is_interstitial_loaded</span><span class="p">()</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="nb nb-Type">bool</span><span class="w"> </span><span class="n">get_is_rewarded_loaded</span><span class="p">()</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="nb nb-Type">bool</span><span class="w"> </span><span class="n">get_is_rewarded_interstitial_loaded</span><span class="p">()</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="nb nb-Type">bool</span><span class="w"> </span><span class="n">get_is_initialized</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h2 id="_3">信号</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">initialization_complete</span><span class="p">(</span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="n">adapter_name</span><span class="p">)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">consent_form_dismissed</span><span class="p">()</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="n">consent_status_changed</span><span class="p">(</span><span class="n">consent_status_message</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="n">consent_form_load_failure</span><span class="p">(</span><span class="n">error_code</span><span class="p">,</span><span class="w"> </span><span class="n">error_message</span><span class="p">)</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="n">consent_info_update_success</span><span class="p">(</span><span class="n">consent_status_message</span><span class="p">)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="n">consent_info_update_failure</span><span class="p">(</span><span class="n">error_code</span><span class="p">,</span><span class="w"> </span><span class="n">error_message</span><span class="p">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="n">banner_loaded</span><span class="p">()</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">banner_failed_to_load</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="n">banner_opened</span><span class="p">()</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="n">banner_clicked</span><span class="p">()</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="n">banner_closed</span><span class="p">()</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="n">banner_recorded_impression</span><span class="p">()</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="n">banner_destroyed</span><span class="p">()</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="n">interstitial_failed_to_load</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="n">interstitial_loaded</span><span class="p">()</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="n">interstitial_failed_to_show</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="n">interstitial_opened</span><span class="p">()</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="n">interstitial_clicked</span><span class="p">()</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="n">interstitial_closed</span><span class="p">()</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="n">interstitial_recorded_impression</span><span class="p">()</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="n">rewarded_ad_failed_to_load</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="n">rewarded_ad_loaded</span><span class="p">()</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="n">rewarded_ad_failed_to_show</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="n">rewarded_ad_opened</span><span class="p">()</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="n">rewarded_ad_clicked</span><span class="p">()</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="n">rewarded_ad_closed</span><span class="p">()</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="n">rewarded_ad_recorded_impression</span><span class="p">()</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="n">rewarded_interstitial_ad_failed_to_load</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="n">rewarded_interstitial_ad_loaded</span><span class="p">()</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="n">rewarded_interstitial_ad_failed_to_show</span><span class="p">(</span><span class="n">error_code</span><span class="p">)</span>
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="n">rewarded_interstitial_ad_opened</span><span class="p">()</span>
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="n">rewarded_interstitial_ad_clicked</span><span class="p">()</span>
+<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="n">rewarded_interstitial_ad_closed</span><span class="p">()</span>
+<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="n">rewarded_interstitial_ad_recorded_impression</span><span class="p">()</span>
+<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>
+<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="n">user_earned_rewarded</span><span class="p">(</span><span class="n">currency</span><span class="p">,</span><span class="w"> </span><span class="n">amount</span><span class="p">)</span>
 </code></pre></div>
 
 

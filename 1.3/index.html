@@ -535,10 +535,60 @@
   <a href="#select-an-ad-format" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Select an Ad Format
+        Select an ad format
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Select an ad format">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#banner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banner
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interstitial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interstitial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewarded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewarded
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewarded-interstitial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewarded Interstitial
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1073,10 +1123,60 @@
   <a href="#select-an-ad-format" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Select an Ad Format
+        Select an ad format
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Select an ad format">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#banner" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Banner
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interstitial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interstitial
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewarded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewarded
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rewarded-interstitial" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rewarded Interstitial
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1121,17 +1221,44 @@
 <p>Once enabled, the plugin automatically registers the <code>MobileAds</code> autoload singleton into your project.</p>
 <hr />
 <h2 id="download-platform-templates">Download Platform Templates</h2>
-<p>Open the AdMob Manager inside the Godot editor (<strong>Project -&gt; Tools -&gt; AdMob Manager</strong> or click the <strong>AdMob</strong> panel tab).</p>
+<p>After enabling the plugin, the <strong>AdMob</strong> tab will appear in the main workspace tabs (next to <strong>2D</strong>, <strong>3D</strong>, <strong>AssetLib</strong>, etc.) at the top of the editor. Open it to access the AdMob Manager.</p>
 <ul>
-<li><strong>Android</strong>: Select <strong>Download Android Template</strong> to fetch and extract the <code>.aar</code> and <code>.gdap</code> files into your <code>res://android/plugins/</code> folder.</li>
-<li><strong>iOS</strong>: Select <strong>Download iOS Template</strong> to fetch and extract the <code>.gdip</code> and library files into your <code>res://ios/plugins/</code> folder.</li>
+<li><strong>Android</strong>: Select <strong>Download Android Template</strong>. The plugin will automatically download and extract the required template files (<code>.aar</code> and <code>.gdap</code>) directly into your <code>res://android/plugins/</code> folder (no manual zip extraction required).</li>
+<li><strong>iOS</strong>: Select <strong>Download iOS Template</strong>. The plugin will automatically download and extract the required template files (<code>.gdip</code> and library files) directly into your <code>res://ios/plugins/</code> folder (no manual zip extraction required).</li>
 </ul>
 <hr />
 <h2 id="configuration">Configuration</h2>
-<p>In the AdMob Editor panel:
-1. Set up your <strong>AdMob App IDs</strong> (e.g. <code>ca-app-pub-3940256099942544~1458002511</code>).
-2. Input your <strong>Ad Unit IDs</strong> for the formats you wish to use (Banner, Interstitial, Rewarded, Rewarded Interstitial).
-3. Toggle whether ads are enabled, and configure default behaviors like Banner position and size.</p>
+<p>Click the <strong>AdMob</strong> tab (next to <strong>AssetLib</strong> at the top of the editor) to open the configuration panel. Configure the following:</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>App ID</strong></td>
+<td>Your AdMob App ID (e.g. <code>ca-app-pub-3940256099942544~1458002511</code>).</td>
+</tr>
+<tr>
+<td><strong>Ad Unit IDs</strong></td>
+<td>IDs for each ad format you plan to use (Banner, Interstitial, Rewarded, Rewarded Interstitial).</td>
+</tr>
+<tr>
+<td><strong>Is Enabled</strong></td>
+<td>Toggle to enable/disable ads globally.</td>
+</tr>
+<tr>
+<td><strong>Banner Position</strong></td>
+<td>Choose where the banner appears (Top, Bottom, Custom).</td>
+</tr>
+<tr>
+<td><strong>Banner Size</strong></td>
+<td>Select banner size (Banner, Large Banner, Medium Rectangle, etc.).</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="initialize-the-sdk">Initialize the SDK</h2>
 <p>Prior to loading ads, the Google Mobile Ads SDK must be initialized. If <strong>Is Enabled</strong> is active in your configuration, the plugin will initialize itself automatically on startup.</p>
@@ -1163,14 +1290,43 @@
 </div>
 </div>
 <hr />
-<h2 id="select-an-ad-format">Select an Ad Format</h2>
-<p>Now that the SDK is initialized, you can select and implement the ad formats that best fit your game's layout:</p>
-<ul>
-<li><a href="ad_formats/banner/">Banner Ads</a></li>
-<li><a href="ad_formats/interstitial/">Interstitial Ads</a></li>
-<li><a href="ad_formats/rewarded/">Rewarded Video Ads</a></li>
-<li><a href="ad_formats/rewarded_interstitial/">Rewarded Interstitial Ads</a></li>
-</ul>
+<h2 id="select-an-ad-format">Select an ad format</h2>
+<p>The Google Mobile Ads SDK is now successfully imported, and you are prepared to integrate an ad into your app. AdMob provides a variety of ad formats, allowing you to select the one that aligns best with your app's user experience.</p>
+<h3 id="banner">Banner</h3>
+<div class="image-text-container">
+<p><img alt="banner" src="assets/ad_formats/banner.png" /></p>
+<p>Banner ads are rectangular advertisements, consisting of either images or text, that are integrated into an app's layout. These ads remain on the screen while users engage with the app and can automatically refresh after a designated time interval. If you're new to mobile advertising, banner ads provide an excellent starting point for your ad implementation journey.</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/banner/">Implement banner ads</a></p>
+<h3 id="interstitial">Interstitial</h3>
+<div class="image-text-container">
+<p><img alt="interstitial" src="assets/ad_formats/interstitial.png" /></p>
+<p>Interstitial ads are expansive, full-screen advertisements that overlay an app's interface and persist until they are closed by the user. They are most effective when strategically placed during natural pauses in the app's execution, such as between levels of a game or immediately after the completion of a task.</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/interstitial/">Implement interstitial ads</a></p>
+<h3 id="rewarded">Rewarded</h3>
+<div class="image-text-container">
+<p><img alt="rewarded" src="assets/ad_formats/rewarded.png" /></p>
+<p>Rewarded video ads are immersive, full-screen video advertisements that provide users with the choice to watch them entirely. In return for their time and attention, users receive in-app rewards or benefits.</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/rewarded/">Implement rewarded ads</a></p>
+<h3 id="rewarded-interstitial">Rewarded Interstitial</h3>
+<div class="image-text-container">
+<p><img alt="rewarded_interstitial" src="assets/ad_formats/rewarded_interstitial.png" /></p>
+<p>A Rewarded Interstitial is a specific form of incentivized ad format that allows you to provide rewards in exchange for ads that appear automatically during natural app transitions. Unlike regular rewarded ads, users are not obligated to actively opt in to view a Rewarded Interstitial; they are seamlessly integrated into the app experience.</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/rewarded_interstitial/">Implement rewarded interstitial ads</a></p>
+<style>
+  .image-text-container {
+    display: flex;
+    align-items: center;
+  }
+  .image-text-container img {
+    margin-right: 20px;
+    max-width: 130px;
+    height: auto;
+  }
+</style>
 
 
 

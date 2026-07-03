@@ -540,6 +540,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="広告フォーマットの選択">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        バナー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        インタースティシャル
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        リワード
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        リワードインタースティシャル
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1078,6 +1128,56 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="広告フォーマットの選択">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        バナー
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        インタースティシャル
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        リワード
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        リワードインタースティシャル
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -1123,15 +1223,42 @@
 <h2 id="_4">プラットフォームテンプレートのダウンロード</h2>
 <p>Godotエディタ内でAdMobマネージャーを開きます（<strong>プロジェクト -&gt; ツール -&gt; AdMobマネージャー</strong>または<strong>AdMob</strong>パネルタブをクリック）。</p>
 <ul>
-<li><strong>Android</strong>: <strong>Androidテンプレートをダウンロード</strong>を選択し、<code>.aar</code>ファイルと<code>.gdap</code>ファイルを<code>res://android/plugins/</code>フォルダに取得・展開。</li>
-<li><strong>iOS</strong>: <strong>iOSテンプレートをダウンロード</strong>を選択し、<code>.gdip</code>ファイルとライブラリファイルを<code>res://ios/plugins/</code>フォルダに取得・展開。</li>
+<li><strong>Android</strong>: <strong>Androidテンプレートをダウンロード</strong>を選択します。プラグインが自動的に必要なテンプレートファイル（<code>.aar</code>および<code>.gdap</code>）をダウンロードし、<code>res://android/plugins/</code>フォルダに直接展開します（手動でのzip解凍は不要です）。</li>
+<li><strong>iOS</strong>: <strong>iOSテンプレートをダウンロード</strong>を選択します。プラグインが自動的に必要なテンプレート文件（<code>.gdip</code>およびライブラリファイル）をダウンロードし、<code>res://ios/plugins/</code>フォルダに直接展開します（手動でのzip解凍は不要です）。</li>
 </ul>
 <hr />
 <h2 id="_5">設定</h2>
-<p>AdMobエディタパネルで：
-1. <strong>AdMobアプリID</strong>を設定（例：<code>ca-app-pub-3940256099942544~1458002511</code>）。
-2. 使用するフォーマット（バナー、インタースティシャル、リワード、リワードインタースティシャル）の<strong>広告ユニットID</strong>を入力。
-3. 広告の有効/無効を切り替え、バナーの位置やサイズなどのデフォルト動作を設定。</p>
+<p><strong>AdMobエディタパネル</strong>（<code>プロジェクト -&gt; ツール -&gt; AdMobマネージャー</code>）で、以下のオプションを設定します：</p>
+<table>
+<thead>
+<tr>
+<th>オプション</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>App ID</strong></td>
+<td>AdMobアプリID（例：<code>ca-app-pub-3940256099942544~1458002511</code>）。</td>
+</tr>
+<tr>
+<td><strong>Ad Unit IDs</strong></td>
+<td>使用する各広告フォーマットのID（バナー、インタースティシャル、リワード、リワードインタースティシャル）。</td>
+</tr>
+<tr>
+<td><strong>Is Enabled</strong></td>
+<td>広告の有効/無効をグローバルに切り替えます。</td>
+</tr>
+<tr>
+<td><strong>Banner Position</strong></td>
+<td>バナーの表示位置（上部、下部、カスタム）。</td>
+</tr>
+<tr>
+<td><strong>Banner Size</strong></td>
+<td>バナーのサイズ（バナー、大バナー、中矩形など）。</td>
+</tr>
+</tbody>
+</table>
 <hr />
 <h2 id="sdk">SDKの初期化</h2>
 <p>広告を読み込む前に、Google Mobile Ads SDKを初期化する必要があります。設定で<strong>有効</strong>がアクティブな場合、プラグインは起動時に自動的に初期化されます。</p>
@@ -1164,13 +1291,42 @@
 </div>
 <hr />
 <h2 id="_6">広告フォーマットの選択</h2>
-<p>SDKが初期化されたら、ゲームのレイアウトに最適な広告フォーマットを選択して実装できます：</p>
-<ul>
-<li><a href="ad_formats/banner/">バナー広告</a></li>
-<li><a href="ad_formats/interstitial/">インタースティシャル広告</a></li>
-<li><a href="ad_formats/rewarded/">リワード動画広告</a></li>
-<li><a href="ad_formats/rewarded_interstitial/">リワードインタースティシャル広告</a></li>
-</ul>
+<p>Google Mobile Ads SDKが正常にインポートされました。アプリに広告を統合する準備ができました。AdMobはさまざまな広告フォーマットを提供しており、アプリのユーザーエクスペリエンスに最適なものを選択できます。</p>
+<h3 id="_7">バナー</h3>
+<div class="image-text-container">
+<p><img alt="banner" src="../assets/ad_formats/banner.png" /></p>
+<p>バナー広告は、画像またはテキストで構成される長方形の広告で、アプリのレイアウトに統合されます。ユーザーがアプリを操作している間、画面に表示され続け、一定時間ごとに自動的に更新されます。</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/banner/">バナー広告を実装する</a></p>
+<h3 id="_8">インタースティシャル</h3>
+<div class="image-text-container">
+<p><img alt="interstitial" src="../assets/ad_formats/interstitial.png" /></p>
+<p>インタースティシャル広告は、アプリのインターフェースを覆う全画面広告で、ユーザーが閉じるまで表示され続けます。ゲームのレベル間など、アプリの自然な区切り目に配置するのが最も効果的です。</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/interstitial/">インタースティシャル広告を実装する</a></p>
+<h3 id="_9">リワード</h3>
+<div class="image-text-container">
+<p><img alt="rewarded" src="../assets/ad_formats/rewarded.png" /></p>
+<p>リワード動画広告は、ユーザーが最後まで視聴することを選択できる没入型の全画面動画広告です。視聴の対価として、ユーザーはアプリ内で特典や報酬を受け取ります。</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/rewarded/">リワード広告を実装する</a></p>
+<h3 id="_10">リワードインタースティシャル</h3>
+<div class="image-text-container">
+<p><img alt="rewarded_interstitial" src="../assets/ad_formats/rewarded_interstitial.png" /></p>
+<p>リワードインタースティシャルは、アプリの自然な遷移中に自動的に表示される広告と引き換えに報酬を提供するインセンティブ付き広告フォーマットです。</p>
+</div>
+<p><a class="md-button md-button--primary" href="ad_formats/rewarded_interstitial/">リワードインタースティシャル広告を実装する</a></p>
+<style>
+  .image-text-container {
+    display: flex;
+    align-items: center;
+  }
+  .image-text-container img {
+    margin-right: 20px;
+    max-width: 130px;
+    height: auto;
+  }
+</style>
 
 
 
