@@ -577,6 +577,10 @@ jobs:
             if fw_start != -1:
                 files_start = content.find("files = (", fw_start)
                 if files_start != -1: content = content[:files_start + 9] + f"\n\t\t\t\t{build_file_id} /* PoingGodotAdMobDeps in Frameworks */," + content[files_start+9:]
+            
+            # Enable Swift support and search paths in all build configurations to link Swift runtimes and SPM dependencies
+            content = content.replace("buildSettings = {", 'buildSettings = {\n\t\t\t\tSWIFT_VERSION = 5.0;\n\t\t\t\tLIBRARY_SEARCH_PATHS = (\n\t\t\t\t\t"$(inherited)",\n\t\t\t\t\t"$(SDKROOT)/usr/lib/swift",\n\t\t\t\t\t"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)",\n\t\t\t\t);')
+            
             with open(path, "w") as f: f.write(content)
         if __name__ == "__main__": patch_pbxproj(sys.argv[1])
         EOF

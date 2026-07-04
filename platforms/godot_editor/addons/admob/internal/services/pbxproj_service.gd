@@ -133,8 +133,14 @@ static func patch(path: String) -> void:
 				"\n				" + build_file_id + " /* PoingGodotAdMobDeps in Frameworks */,"
 			)
 
+	# Enable Swift support and search paths in all build configurations to link Swift runtimes and SPM dependencies
+	content = content.replace(
+		"buildSettings = {",
+		"buildSettings = {\n				SWIFT_VERSION = 5.0;\n				LIBRARY_SEARCH_PATHS = (\n					\"$(inherited)\",\n					\"$(SDKROOT)/usr/lib/swift\",\n					\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\",\n				);"
+	)
+
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file:
 		file.store_string(content)
 		file.close()
-		print("AdMob: Patched project.pbxproj with SPM dependencies")
+		print("AdMob: Patched project.pbxproj with SPM dependencies and Swift support")
