@@ -16,7 +16,7 @@
 - 部署 iOS：
 	- 使用 Godot v4.1 或更高版本
 	- 使用 Xcode 26.2 或更高版本
-	- 目标 iOS 16.0 或更高版本
+	- 目标 iOS 14.0 或更高版本
 - 推荐：[创建 AdMob 账号](https://support.google.com/admob/answer/7356219) 并 [注册应用](https://support.google.com/admob/answer/9989980)。
 
 ## 从 Poing Studios 下载 Godot AdMob 插件
