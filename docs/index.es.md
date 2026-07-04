@@ -1,5 +1,9 @@
 # Primeros Pasos
 
+!!! note "Documentación Godot 3 (v1)"
+    Esta documentación es para el plugin **v1**, que solo es compatible con **Godot 3.x**.
+    Para **Godot 4.2+**, consulte la [documentación estable](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 Integrar el complemento AdMob en tu proyecto de Godot para **Godot 3** te permite mostrar fácilmente anuncios de Google Mobile Ads en dispositivos Android e iOS.
 
 ---
@@ -7,13 +11,17 @@ Integrar el complemento AdMob en tu proyecto de Godot para **Godot 3** te permit
 ## Prerrequisitos
 
 - **Godot Engine 3.x Mono/Standard Edition** (v3.3 o superior).
-- **Para exportación a Android**:
-  - Plantilla de compilación de Android habilitada.
-  - Versión objetivo del SDK de Android configurada.
-- **Para exportación a iOS**:
-  - Máquina macOS con Xcode instalado.
-  - Cuenta de desarrollador de Apple activa.
 - **Recomendado**: Una [Cuenta de AdMob](https://admob.google.com/) activa con aplicaciones Android/iOS registradas.
+
+=== "Android"
+
+    - Plantilla de compilación de Android habilitada.
+    - Versión objetivo del SDK de Android configurada.
+
+=== "iOS"
+
+    - Máquina macOS con Xcode instalado.
+    - Cuenta de desarrollador de Apple activa.
 
 ---
 
@@ -31,8 +39,13 @@ Una vez habilitado, el complemento registra automáticamente el singleton `Mobil
 
 Abre el Administrador de AdMob dentro del editor de Godot (**Proyecto -> Herramientas -> Administrador de AdMob** o haz clic en la pestaña del panel **AdMob**).
 
-* **Android**: Selecciona **Descargar Plantilla Android**. El complemento descargará y extraerá automáticamente los archivos de plantilla necesarios (`.aar` y `.gdap`) directamente en tu carpeta `res://android/plugins/` (no es necesario extraer el archivo zip manualmente).
-* **iOS**: Selecciona **Descargar Plantilla iOS**. El complemento descargará y extraerá automáticamente los archivos de plantilla necesarios (`.gdip` y bibliotecas) directamente en tu carpeta `res://ios/plugins/` (no es necesario extraer el archivo zip manualmente).
+=== "Android"
+
+    Selecciona **Descargar Plantilla Android**. El complemento descargará y extraerá automáticamente los archivos de plantilla necesarios (`.aar` y `.gdap`) directamente en tu carpeta `res://android/plugins/` (no es necesario extraer el archivo zip manualmente).
+
+=== "iOS"
+
+    Selecciona **Descargar Plantilla iOS**. El complemento descargará y extraerá automáticamente los archivos de plantilla necesarios (`.gdip` y bibliotecas) directamente en tu carpeta `res://ios/plugins/` (no es necesario extraer el archivo zip manualmente).
 
 ---
 

@@ -1,5 +1,8 @@
 # Rewarded Ads
 
+!!! note "Godot 3 (v1) Documentation"
+    This page is for **Godot 3.x**. For **Godot 4.2+**, see the [latest documentation](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 Rewarded ads provide users with the option to engage with them in exchange for in-app rewards (e.g. extra lives, in-game currency, etc.).
 
 ---

@@ -1,5 +1,8 @@
 # 插页广告
 
+!!! note "Godot 3 (v1) 文档"
+    本页面适用于 **Godot 3.x**。如需 **Godot 4.2+**，请查看[稳定文档](https://poingstudios.github.io/godot-admob-plugin/stable/)。
+
 插页广告是全屏广告，覆盖其主应用的界面。通常在应用流程中的自然过渡点显示，例如在活动之间或游戏关卡之间的暂停期间。
 
 ---

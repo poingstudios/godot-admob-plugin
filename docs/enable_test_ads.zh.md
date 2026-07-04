@@ -1,5 +1,8 @@
 # 启用测试广告
 
+!!! note "Godot 3 (v1) 文档"
+    本页面适用于 **Godot 3.x**。如需 **Godot 4.2+**，请查看[稳定文档](https://poingstudios.github.io/godot-admob-plugin/stable/)。
+
 在开发期间，使用测试广告至关重要，以避免产生无效流量并冒着AdMob账户被暂停的风险。
 
 ---

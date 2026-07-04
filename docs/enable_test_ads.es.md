@@ -1,5 +1,8 @@
 # Habilitar Anuncios de Prueba
 
+!!! note "Documentación Godot 3 (v1)"
+    Esta página es para **Godot 3.x**. Para **Godot 4.2+**, consulte la [documentación estable](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 Durante el desarrollo, es crucial usar anuncios de prueba para evitar generar tráfico inválido y arriesgar la suspensión de tu cuenta de AdMob.
 
 ---

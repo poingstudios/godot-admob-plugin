@@ -1,5 +1,8 @@
 # MobileAds APIリファレンス
 
+!!! note "Godot 3 (v1) ドキュメント"
+    このページは **Godot 3.x** 用です。**Godot 4.2+** については、[安定版ドキュメント](https://poingstudios.github.io/godot-admob-plugin/stable/) をご覧ください。
+
 このページでは、Godot 3でGoogle Mobile Ads SDKと対話するためのメインインターフェースである`MobileAds`シングルトンについて説明します。すべての広告操作は、このシングルトン（オートロード）を介して実行されます。
 
 ---

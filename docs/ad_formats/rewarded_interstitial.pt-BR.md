@@ -1,5 +1,8 @@
 # Anúncios Intersticiais Premiados
 
+!!! note "Documentação Godot 3 (v1)"
+    Esta página é para **Godot 3.x**. Para **Godot 4.2+**, veja a [documentação estável](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 O intersticial premiado é um formato de anúncio incentivado que permite oferecer recompensas para anúncios que aparecem automaticamente durante transições naturais do aplicativo. Diferente dos anúncios premiados tradicionais, os usuários não precisam aceitar explicitamente para visualizar.
 
 ---

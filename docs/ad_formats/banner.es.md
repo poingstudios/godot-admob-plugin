@@ -1,5 +1,8 @@
 # Anuncios Banner
 
+!!! note "Documentación Godot 3 (v1)"
+    Esta página es para **Godot 3.x**. Para **Godot 4.2+**, consulte la [documentación estable](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 Los anuncios banner ocupan un lugar dentro del diseño de una aplicación, ya sea en la parte superior o inferior de la pantalla. Permanecen en pantalla mientras los usuarios interactúan con la aplicación.
 
 ---

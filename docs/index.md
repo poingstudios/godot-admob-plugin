@@ -1,5 +1,9 @@
 # Get Started
 
+!!! note "Godot 3 (v1) Documentation"
+    This documentation is for the **v1** plugin, which supports **Godot 3.x** only.
+    For **Godot 4.2+**, see the [latest documentation](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 Integrating the AdMob plugin into your Godot project for **Godot 3** allows you to easily display Google Mobile Ads on Android and iOS devices.
 
 ---
@@ -7,13 +11,17 @@ Integrating the AdMob plugin into your Godot project for **Godot 3** allows you 
 ## Prerequisites
 
 - **Godot Engine 3.x Mono/Standard Edition** (v3.3 or higher).
-- **For Android Export**:
-  - Godot Android Build Template enabled.
-  - Target Android SDK version configured.
-- **For iOS Export**:
-  - macOS machine with Xcode installed.
-  - Active Apple Developer account.
 - **Recommended**: An active [AdMob Account](https://admob.google.com/) with registered Android/iOS apps.
+
+=== "Android"
+
+    - Godot Android Build Template enabled.
+    - Target Android SDK version configured.
+
+=== "iOS"
+
+    - macOS machine with Xcode installed.
+    - Active Apple Developer account.
 
 ---
 
@@ -31,8 +39,13 @@ Once enabled, the plugin automatically registers the `MobileAds` autoload single
 
 After enabling the plugin, the **AdMob** tab will appear in the main workspace tabs (next to **2D**, **3D**, **AssetLib**, etc.) at the top of the editor. Open it to access the AdMob Manager.
 
-* **Android**: Select **Download Android Template**. The plugin will automatically download and extract the required template files (`.aar` and `.gdap`) directly into your `res://android/plugins/` folder (no manual zip extraction required).
-* **iOS**: Select **Download iOS Template**. The plugin will automatically download and extract the required template files (`.gdip` and library files) directly into your `res://ios/plugins/` folder (no manual zip extraction required).
+=== "Android"
+
+    Select **Download Android Template**. The plugin will automatically download and extract the required template files (`.aar` and `.gdap`) directly into your `res://android/plugins/` folder (no manual zip extraction required).
+
+=== "iOS"
+
+    Select **Download iOS Template**. The plugin will automatically download and extract the required template files (`.gdip` and library files) directly into your `res://ios/plugins/` folder (no manual zip extraction required).
 
 ---
 

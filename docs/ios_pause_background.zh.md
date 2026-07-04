@@ -1,5 +1,8 @@
 # iOS 后台暂停
 
+!!! note "Godot 3 (v1) 文档"
+    本页面适用于 **Godot 3.x**。如需 **Godot 4.2+**，请查看[稳定文档](https://poingstudios.github.io/godot-admob-plugin/stable/)。
+
 此步骤仅适用于iOS。它指示当全屏广告（如插页、激励或激励插页）处于活动状态时，您的Godot游戏是否应暂停。
 
 在Android上，当显示全屏广告时，游戏会自动暂停（由操作系统控制，无法配置）。向此方法传递`true`可在iOS上复制此行为。在iOS上，默认值为`false`。

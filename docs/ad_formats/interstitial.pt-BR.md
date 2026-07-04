@@ -1,5 +1,8 @@
 # Anúncios Intersticiais
 
+!!! note "Documentação Godot 3 (v1)"
+    Esta página é para **Godot 3.x**. Para **Godot 4.2+**, veja a [documentação estável](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 Anúncios intersticiais são anúncios em tela cheia que cobrem a interface do aplicativo. Eles geralmente são exibidos em pontos de transição natural no fluxo do jogo, como entre fases ou após a conclusão de uma tarefa.
 
 ---

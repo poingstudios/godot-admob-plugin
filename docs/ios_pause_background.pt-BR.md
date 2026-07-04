@@ -1,5 +1,8 @@
 # Pausar em Segundo Plano no iOS
 
+!!! note "Documentação Godot 3 (v1)"
+    Esta página é para **Godot 3.x**. Para **Godot 4.2+**, veja a [documentação estável](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 Esta etapa é apenas para iOS. Ela indica se o seu jogo em Godot deve ser pausado ou não quando um anúncio em tela cheia (como Intersticial, Premiado ou Intersticial Premiado) estiver sendo exibido.
 
 No Android, seu jogo é pausado automaticamente quando um anúncio em tela cheia é exibido (comportamento controlado pelo sistema operacional e que não pode ser alterado). Passar `true` para este método replica esse comportamento no iOS. No iOS, o valor padrão é `false`.

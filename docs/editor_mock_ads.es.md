@@ -1,5 +1,8 @@
 # Vista Previa de Anuncios Mock en el Editor
 
+!!! note "Documentación Godot 3 (v1)"
+    Esta página es para **Godot 3.x**. Para **Godot 4.2+**, consulte la [documentación estable](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 El complemento incluye un sistema de Anuncios Mock integrado. Esto te permite probar los diseños visuales y el flujo lógico de tu integración de anuncios directamente dentro del Editor de Godot sin desplegar en un dispositivo físico.
 
 Los anuncios mock simulan comportamientos de anuncios y disparan las mismas callbacks del ciclo de vida (como carga, muestra, clics y descartes) que los SDKs móviles reales.

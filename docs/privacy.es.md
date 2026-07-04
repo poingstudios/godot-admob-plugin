@@ -1,5 +1,8 @@
 # Privacidad y Consentimiento del Usuario (UMP)
 
+!!! note "Documentación Godot 3 (v1)"
+    Esta página es para **Godot 3.x**. Para **Godot 4.2+**, consulte la [documentación estable](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 Según las Políticas de Publicación de Google, los editores deben cumplir con la Política de Consentimiento de Usuario de Google de la UE al servir anuncios a usuarios en el Espacio Económico Europeo (EEE) y el Reino Unido. La plataforma de Mensajes del Usuario (UMP) SDK simplifica la recopilación del consentimiento del usuario.
 
 ---

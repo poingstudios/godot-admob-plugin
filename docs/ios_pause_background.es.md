@@ -1,5 +1,8 @@
 # Pausa en Segundo Plano de iOS
 
+!!! note "Documentación Godot 3 (v1)"
+    Esta página es para **Godot 3.x**. Para **Godot 4.2+**, consulte la [documentación estable](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 Este paso es solo para iOS. Indica si tu juego de Godot debe pausarse cuando un anuncio de pantalla completa (como Intersticial, Recompensado o Intersticial Recompensado) está activo.
 
 En Android, tu juego se pausa automáticamente cuando se muestra un anuncio de pantalla completa (esto está controlado por el OS y no se puede configurar). Pasar `true` a este método replica este comportamiento en iOS. En iOS, el valor predeterminado es `false`.

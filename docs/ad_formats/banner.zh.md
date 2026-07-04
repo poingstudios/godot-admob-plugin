@@ -1,5 +1,8 @@
 # 横幅广告
 
+!!! note "Godot 3 (v1) 文档"
+    本页面适用于 **Godot 3.x**。如需 **Godot 4.2+**，请查看[稳定文档](https://poingstudios.github.io/godot-admob-plugin/stable/)。
+
 横幅广告占据应用布局中的一个位置，位于屏幕顶部或底部。用户与应用交互时，广告会持续显示在屏幕上。
 
 ---
