@@ -16,7 +16,7 @@ This document is based on:
 - Deploy iOS:
 	- Use Godot v4.1 or higher
 	- Use Xcode 26.2 or higher
-	- Target iOS 16.0 or higher
+	- Target iOS 14.0 or higher
 - Recommended: [Create an AdMob account](https://support.google.com/admob/answer/7356219?visit_id=638286911958663013-3847536692&rd=1) and [register an app](https://support.google.com/admob/answer/9989980?visit_id=638286911964685099-3190075945&rd=1).
 
 ## Download the Godot AdMob Plugin from Poing Studios

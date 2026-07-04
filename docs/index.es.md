@@ -16,7 +16,7 @@ Este documento se basa en:
 - Implementar iOS:
 	- Utilice Godot v4.1 o superior
 	- Utilice Xcode 26.2 o superior
-	- Apunte a iOS 16.0 o superior
+	- Apunte a iOS 14.0 o superior
 - Recomendado: [Crear una cuenta de AdMob](https://support.google.com/admob/answer/7356219?visit_id=638286911958663013-3847536692&rd=1) y [registrar una aplicación](https://support.google.com/admob/answer/9989980?visit_id=638286911964685099-3190075945&rd=1).
 
 ## Descargue el complemento Godot AdMob de Poing Studios
