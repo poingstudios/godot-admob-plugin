@@ -543,14 +543,12 @@ jobs:
     - name: Export Godot Sample Project
       working-directory: platforms/godot_editor
       env:
-        XCODE_XCCONFIG_FILE: ${{ github.workspace }}/ci_no_sign.xcconfig
+        CODE_SIGNING_ALLOWED: "NO"
+        CODE_SIGNING_REQUIRED: "NO"
+        CODE_SIGN_IDENTITY: ""
+        PROVISIONING_PROFILE_SPECIFIER: ""
+        AD_HOC_CODE_SIGNING_ALLOWED: "YES"
       run: |
-        cat > "$XCODE_XCCONFIG_FILE" << 'XCCONFIG'
-        CODE_SIGNING_ALLOWED = NO
-        CODE_SIGNING_REQUIRED = NO
-        CODE_SIGN_IDENTITY =
-        PROVISIONING_PROFILE_SPECIFIER =
-        XCCONFIG
         mkdir -p exports/ios
         /Applications/Godot.app/Contents/MacOS/Godot --headless --export-debug "iOS" exports/ios/AdMobSample.xcodeproj || true
         test -d exports/ios/AdMobSample.xcodeproj || { echo "::error::Xcode project was not generated"; exit 1; }
