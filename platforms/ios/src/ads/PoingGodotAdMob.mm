@@ -122,7 +122,7 @@ void PoingGodotAdMob::open_ad_inspector() {
     [[GADMobileAds sharedInstance] presentAdInspectorFromViewController:rootViewController completionHandler:^(NSError *error){
         Dictionary resultDictionary;
         if (error != nil) {
-            resultDictionary["code"] = [error code];
+            resultDictionary["code"] = (int64_t)[error code];
             resultDictionary["message"] = String([[error localizedDescription] UTF8String]);
             resultDictionary["domain"] = String([[error domain] UTF8String]);
         }

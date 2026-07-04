@@ -533,6 +533,7 @@ jobs:
         application/bundle_identifier="com.poingstudios.admob"
         plugins_plist/GADApplicationIdentifier="ca-app-pub-3940256099942544~1458002511"
         plugins/AdMob=true
+        application/export_project_only=true
         EOF
 
     - name: Import Project Resources
