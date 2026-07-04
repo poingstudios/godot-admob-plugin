@@ -27,8 +27,6 @@ on:
     types: [opened, review_requested]
   issues:
     types: [opened]
-  issue_comment:
-    types: [created]
   workflow_dispatch:
     inputs:
       mode:
@@ -47,7 +45,6 @@ jobs:
   review:
     if: >
       github.event_name == 'pull_request' ||
-      (github.event_name == 'issue_comment' && github.event.issue.pull_request && contains(github.event.comment.body, '/review')) ||
       (github.event_name == 'workflow_dispatch' && inputs.mode == 'review')
     runs-on: ubuntu-latest
     permissions:
@@ -66,16 +63,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout PR (workflow_dispatch or issue_comment)
-        if: github.event_name == 'workflow_dispatch' || github.event_name == 'issue_comment'
-        run: gh pr checkout ${{ github.event.issue.number || inputs.number }}
+      - name: Checkout PR (workflow_dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        run: gh pr checkout ${{ inputs.number }}
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
-      - name: Set PR Env (workflow_dispatch or issue_comment)
-        if: github.event_name == 'workflow_dispatch' || github.event_name == 'issue_comment'
+      - name: Set PR Env (workflow_dispatch)
+        if: github.event_name == 'workflow_dispatch'
         run: |
-          pr_data=$(gh pr view ${{ github.event.issue.number || inputs.number }} --json baseRefName,number,title,headRefName,headRefOid --repo ${{ github.repository }})
+          pr_data=$(gh pr view ${{ inputs.number }} --json baseRefName,number,title,headRefName,headRefOid --repo ${{ github.repository }})
           echo "PR_NUMBER=$(echo $pr_data | jq -r '.number')" >> $GITHUB_ENV
           echo "PR_TITLE=$(echo $pr_data | jq -r '.title')" >> $GITHUB_ENV
           echo "BASE_REF=$(echo $pr_data | jq -r '.baseRefName')" >> $GITHUB_ENV
@@ -119,7 +116,6 @@ jobs:
     if: >
       (github.event_name == 'pull_request') ||
       (github.event_name == 'issues') ||
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '/triage')) ||
       (github.event_name == 'workflow_dispatch' && inputs.mode == 'triage')
     runs-on: ubuntu-latest
     permissions:
@@ -147,7 +143,5 @@ jobs:
           ISSUE_TITLE: ${{ github.event.issue.title || github.event.pull_request.title || '' }}
           ISSUE_BODY: ${{ github.event.issue.body || github.event.pull_request.body || '' }}
           ISSUE_ACTION: ${{ github.event.action || 'workflow_dispatch' }}
-          COMMENT_BODY: ${{ github.event.comment.body || '' }}
-          IS_MAINTAINER: ${{ contains(github.event.comment.author_association, 'MEMBER') || contains(github.event.comment.author_association, 'OWNER') }}
           MODEL_NAME: gemini-3.5-flash
         run: python .github/scripts/poing_reviewer.py
