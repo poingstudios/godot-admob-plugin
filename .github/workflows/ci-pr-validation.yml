@@ -533,6 +533,7 @@ jobs:
         application/bundle_identifier="com.poingstudios.admob"
         plugins_plist/GADApplicationIdentifier="ca-app-pub-3940256099942544~1458002511"
         plugins/AdMob=true
+        application/export_project_only=true
         EOF
 
     - name: Import Project Resources
@@ -542,12 +543,6 @@ jobs:
 
     - name: Export Godot Sample Project
       working-directory: platforms/godot_editor
-      env:
-        CODE_SIGNING_ALLOWED: "NO"
-        CODE_SIGNING_REQUIRED: "NO"
-        CODE_SIGN_IDENTITY: ""
-        PROVISIONING_PROFILE_SPECIFIER: ""
-        AD_HOC_CODE_SIGNING_ALLOWED: "YES"
       run: |
         mkdir -p exports/ios
         /Applications/Godot.app/Contents/MacOS/Godot --headless --export-debug "iOS" exports/ios/AdMobSample.xcodeproj || true
