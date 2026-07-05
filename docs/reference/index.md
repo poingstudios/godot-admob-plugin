@@ -39,13 +39,14 @@ This page lists the classes, enums, and callbacks provided by the Godot AdMob Pl
 
 | Enum | Description |
 | :--- | :--- |
-| [AdChoicesPlacement](enums.md#adchoicesplacement) | Corner placement for the AdChoices icon. |
-| [NativeMediaAspectRatio](enums.md#nativemediaaspectratio) | Media aspect ratio preference for native ads. |
-| [NativeTemplateFontStyle](enums.md#nativetemplatefontstyle) | Typographical font weights for native ad text fields. |
-| [AdValue.PrecisionType](enums.md#advalueprecisiontype) | Precision level of the ad revenue value. |
-| [AdapterStatus.InitializationState](enums.md#adapterstatusinitializationstate) | Indicates whether a mediation adapter is ready. |
-| [RequestConfiguration.TagForChildDirectedTreatment](enums.md#requestconfigurationtagforchilddirectedtreatment) | Child-directed treatment for COPPA compliance. |
-| [RequestConfiguration.TagForUnderAgeOfConsent](enums.md#requestconfigurationtagforunderageofconsent) | Under age of consent for GDPR compliance. |
+| [AdPosition](enums/AdPosition.md) | Screen alignment preset values for banner and native overlay ads. |
+| [AdChoicesPlacement](enums/AdChoicesPlacement.md) | Corner placement for the AdChoices icon. |
+| [NativeMediaAspectRatio](enums/NativeMediaAspectRatio.md) | Media aspect ratio preference for native ads. |
+| [NativeTemplateFontStyle](enums/NativeTemplateFontStyle.md) | Typographical font weights for native ad text fields. |
+| [AdValue.PrecisionType](enums/AdValue.PrecisionType.md) | Precision level of the ad revenue value. |
+| [AdapterStatus.InitializationState](enums/AdapterStatus.InitializationState.md) | Indicates whether a mediation adapter is ready. |
+| [RequestConfiguration.TagForChildDirectedTreatment](enums/RequestConfiguration.TagForChildDirectedTreatment.md) | Child-directed treatment for COPPA compliance. |
+| [RequestConfiguration.TagForUnderAgeOfConsent](enums/RequestConfiguration.TagForUnderAgeOfConsent.md) | Under age of consent for GDPR compliance. |
 
 ## Interfaces / Callbacks
 

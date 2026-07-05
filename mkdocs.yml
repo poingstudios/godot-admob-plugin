@@ -476,7 +476,14 @@ nav:
         - RewardedAdLoadCallback: reference/listeners/RewardedAdLoadCallback.md
         - RewardedInterstitialAdLoadCallback: reference/listeners/RewardedInterstitialAdLoadCallback.md
       - Enums:
-        - Overview: reference/enums.md
+        - AdPosition: reference/enums/AdPosition.md
+        - AdChoicesPlacement: reference/enums/AdChoicesPlacement.md
+        - NativeMediaAspectRatio: reference/enums/NativeMediaAspectRatio.md
+        - NativeTemplateFontStyle: reference/enums/NativeTemplateFontStyle.md
+        - AdValue.PrecisionType: reference/enums/AdValue.PrecisionType.md
+        - AdapterStatus.InitializationState: reference/enums/AdapterStatus.InitializationState.md
+        - RequestConfiguration.TagForChildDirectedTreatment: reference/enums/RequestConfiguration.TagForChildDirectedTreatment.md
+        - RequestConfiguration.TagForUnderAgeOfConsent: reference/enums/RequestConfiguration.TagForUnderAgeOfConsent.md
 
 hooks:
   - docs/hooks.py
