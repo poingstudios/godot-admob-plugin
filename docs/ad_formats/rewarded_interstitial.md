@@ -37,7 +37,7 @@ The code sample below demonstrates how to utilize the Rewarded interstitial. In 
 
 
 ### Load an ad
-To load an rewarded interstitial ad, utilize the `RewardedInterstitialAdLoader` class. Pass in an `RewardedInterstitialAdLoadCallback` to receive the loaded ad or any potential errors. It's worth noting that, similar to other format load callbacks, the `RewardedInterstitialAdLoadCallback` leverages `LoadAdError` to provide comprehensive error details.
+To load an rewarded interstitial ad, utilize the [`RewardedInterstitialAdLoader`](../reference/classes/RewardedInterstitialAdLoader.md) class. Pass in an [`RewardedInterstitialAdLoadCallback`](../reference/listeners/RewardedInterstitialAdLoadCallback.md) to receive the loaded [`RewardedInterstitialAd`](../reference/classes/RewardedInterstitialAd.md) or any potential errors. It's worth noting that, similar to other format load callbacks, the [`RewardedInterstitialAdLoadCallback`](../reference/listeners/RewardedInterstitialAdLoadCallback.md) leverages [`LoadAdError`](../reference/classes/LoadAdError.md) to provide comprehensive error details.
 
 === "GDScript"
 
@@ -125,7 +125,7 @@ To load an rewarded interstitial ad, utilize the `RewardedInterstitialAdLoader` 
 
 
 ### [Optional] Validate server-side verification (SSV) callbacks
-For apps that necessitate additional data in server-side verification [Android](https://developers.google.com/admob/android/ssv)/[iOS](https://developers.google.com/admob/ios/ssv) callbacks, the custom data feature of rewarded ads can be employed. Any string value assigned to a rewarded ad object is transmitted to the `custom_data` query parameter of the SSV callback. If no custom data is set, the `custom_data` query parameter will be absent in the SSV callback.
+For apps that necessitate additional data in server-side verification [Android](https://developers.google.com/admob/android/ssv)/[iOS](https://developers.google.com/admob/ios/ssv) callbacks, the custom data feature of rewarded ads can be configured using [`ServerSideVerificationOptions`](../reference/classes/ServerSideVerificationOptions.md). Any string value assigned to a rewarded ad object is transmitted to the `custom_data` query parameter of the SSV callback. If no custom data is set, the `custom_data` query parameter will be absent in the SSV callback.
 
 The following code snippet illustrates how to establish custom data on a rewarded interstitial ad object before soliciting an ad:
 
@@ -163,7 +163,7 @@ The following code snippet illustrates how to establish custom data on a rewarde
     The custom reward string is [percent escaped](https://en.wikipedia.org/wiki/Percent-encoding) and might require decoding when parsed from the SSV callback.
 
 ### Configure the FullScreenContentCallback
-The `FullScreenContentCallback` manages events associated with the display of your `RewardedInterstitialAd`. Before presenting the `RewardedInterstitialAd`, ensure that you configure the callback:
+The [`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) manages events associated with the display of your [`RewardedInterstitialAd`](../reference/classes/RewardedInterstitialAd.md). Before presenting the [`RewardedInterstitialAd`](../reference/classes/RewardedInterstitialAd.md), ensure that you configure the callback:
 
 === "GDScript"
 
@@ -246,7 +246,7 @@ The `FullScreenContentCallback` manages events associated with the display of yo
 
 ### Show the ad
 
-When presenting a rewarded interstitial ad, you'll employ an `OnUserEarnedRewardListener` object to manage reward-related events.
+When presenting a rewarded interstitial ad, you'll employ an [`OnUserEarnedRewardListener`](../reference/listeners/OnUserEarnedRewardListener.md) object to manage reward-related events.
 
 === "GDScript"
 

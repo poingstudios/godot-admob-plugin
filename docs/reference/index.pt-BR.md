@@ -7,4 +7,4 @@ Selecione uma classe na barra lateral para visualizar os detalhes de implementa�
 ## Seções Disponíveis
 
 *   **[Classes](classes/AdView.md)**: Especificações técnicas para as classes da API do Godot AdMob, como `AdView`.
-*   **[Enums](enums.md)**: Lista de enums de configurações globais, direcionamento e layout.
+*   **[Enums](enums/AdPosition.md)**: Lista de enums de configurações globais, direcionamento e layout.

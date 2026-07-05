@@ -116,7 +116,7 @@ Create a new class (e.g., `AppOpenAdManager`) to load the ad. This class control
 
 ### Load the app open ad
 
-Loading an app open ad is accomplished using the `load()` method on the `AppOpenAdLoader` class. The load method requires an ad unit ID, an `AdRequest` object, and a completion handler which gets called when ad loading succeeds or fails. The loaded `AppOpenAd` object is provided as a parameter in the completion handler.
+Loading an app open ad is accomplished using the `load()` method on the [`AppOpenAdLoader`](../reference/classes/AppOpenAdLoader.md) class. The load method requires an ad unit ID, an [`AdRequest`](../reference/classes/AdRequest.md) object, and a completion handler which gets called when ad loading succeeds or fails. The loaded [`AppOpenAd`](../reference/classes/AppOpenAd.md) object is provided as a parameter in the completion handler.
 
 === "GDScript"
 
@@ -184,7 +184,7 @@ Loading an app open ad is accomplished using the `load()` method on the `AppOpen
 
 ### Listen to app open ad events
 
-To further customize the behavior of your ad, you can hook into a number of events in the ad's lifecycle: opening, closing, and so on. Listen for these events by registering a delegate as shown below.
+To further customize the behavior of your ad, you can hook into a number of events in the ad's lifecycle: opening, closing, and so on. Listen for these events by registering a [`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) and setting the `on_ad_paid` / `OnAdPaid` property callback receiving [`AdValue`](../reference/classes/AdValue.md) as shown below.
 
 === "GDScript"
 

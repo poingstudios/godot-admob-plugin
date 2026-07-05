@@ -1,10 +1,72 @@
 # API Reference
 
-This section contains the technical reference for classes, methods, properties, and enums provided by the Godot AdMob Plugin. 
+This page lists the classes, enums, and callbacks provided by the Godot AdMob Plugin.
 
-Select a class from the sidebar to view its implementation details for both **GDScript** and **C#**.
+## Classes
 
-## Available Sections
+| Class | Description |
+| :--- | :--- |
+| [MobileAds](classes/MobileAds.md) | Global configurations and SDK initialization entry point. |
+| [RequestConfiguration](classes/RequestConfiguration.md) | Configuration settings applied globally to all ad requests. |
+| [AdRequest](classes/AdRequest.md) | Request parameters used to load ads. |
+| [AdSize](classes/AdSize.md) | Width and height definitions for Banner ads. |
+| [AdPosition](classes/AdPosition.md) | Screen alignment layout for banner and native overlay ads. |
+| [AdView](classes/AdView.md) | A Godot node that loads and displays banner ads. |
+| [AdVideoOptions](classes/AdVideoOptions.md) | Playback behavior for video elements inside native ads. |
+| [AppOpenAd](classes/AppOpenAd.md) | Full-screen ad format shown when users open the app. |
+| [AppOpenAdLoader](classes/AppOpenAdLoader.md) | Loader class responsible for fetching App Open Ads. |
+| [InterstitialAd](classes/InterstitialAd.md) | Full-screen interstitial ad format. |
+| [InterstitialAdLoader](classes/InterstitialAdLoader.md) | Loader class responsible for fetching Interstitial Ads. |
+| [RewardedAd](classes/RewardedAd.md) | Full-screen rewarded ad format. |
+| [RewardedAdLoader](classes/RewardedAdLoader.md) | Loader class responsible for fetching Rewarded Ads. |
+| [RewardedInterstitialAd](classes/RewardedInterstitialAd.md) | Rewarded Interstitial ad format (semi-transparent overlay). |
+| [RewardedInterstitialAdLoader](classes/RewardedInterstitialAdLoader.md) | Loader class responsible for fetching Rewarded Interstitial Ads. |
+| [NativeOverlayAd](classes/NativeOverlayAd.md) | Native ad format overlaid on top of Godot scenes. |
+| [NativeAdOptions](classes/NativeAdOptions.md) | Preferences for rendering native overlay ads. |
+| [NativeTemplateStyle](classes/NativeTemplateStyle.md) | Visual styling template for native overlay ads. |
+| [NativeTemplateTextStyle](classes/NativeTemplateTextStyle.md) | Font and color configuration for text elements. |
+| [ResponseInfo](classes/ResponseInfo.md) | Contains metadata and adapter response info for loaded ads. |
+| [AdapterResponseInfo](classes/AdapterResponseInfo.md) | Metadata from a specific mediation network adapter. |
+| [AdError](classes/AdError.md) | Information about errors occurring during ad display. |
+| [LoadAdError](classes/LoadAdError.md) | Information about errors occurring during ad loading. |
+| [AdValue](classes/AdValue.md) | Represents the monetary value of an ad impression. |
+| [RewardedItem](classes/RewardedItem.md) | Represents a reward earned by the user (amount and type). |
+| [InitializationStatus](classes/InitializationStatus.md) | Contains initialization status details for MobileAds. |
+| [AdapterStatus](classes/AdapterStatus.md) | Represents initialization status for a single mediation adapter. |
+| [ServerSideVerificationOptions](classes/ServerSideVerificationOptions.md) | Security configurations for server-side rewarded callbacks. |
+| [UserMessagingPlatform](classes/UserMessagingPlatform.md) | Entry point for GDPR and privacy consent flows. |
+| [ConsentInformation](classes/ConsentInformation.md) | Checks and updates the user's consent status. |
+| [ConsentForm](classes/ConsentForm.md) | Consent form that can be shown to the user. |
+| [ConsentRequestParameters](classes/ConsentRequestParameters.md) | Parameters for requesting consent information updates. |
+| [ConsentDebugSettings](classes/ConsentDebugSettings.md) | Testing configuration for the consent flow. |
+| [FormError](classes/FormError.md) | Error information for consent form operations. |
 
-*   **[Classes](classes/AdView.md)**: Technical specifications for Godot AdMob API classes like `AdView`.
-*   **[Enums](enums.md)**: Listing of global configurations, targeting, and layout enums.
+## Enums
+
+| Enum | Description |
+| :--- | :--- |
+| [AdPosition](enums/AdPosition.md) | Screen alignment preset values for banner and native overlay ads. |
+| [AdChoicesPlacement](enums/AdChoicesPlacement.md) | Corner placement for the AdChoices icon. |
+| [NativeMediaAspectRatio](enums/NativeMediaAspectRatio.md) | Media aspect ratio preference for native ads. |
+| [NativeTemplateFontStyle](enums/NativeTemplateFontStyle.md) | Typographical font weights for native ad text fields. |
+| [AdValue.PrecisionType](enums/AdValue.PrecisionType.md) | Precision level of the ad revenue value. |
+| [AdapterStatus.InitializationState](enums/AdapterStatus.InitializationState.md) | Indicates whether a mediation adapter is ready. |
+| [RequestConfiguration.TagForChildDirectedTreatment](enums/RequestConfiguration.TagForChildDirectedTreatment.md) | Child-directed treatment for COPPA compliance. |
+| [RequestConfiguration.TagForUnderAgeOfConsent](enums/RequestConfiguration.TagForUnderAgeOfConsent.md) | Under age of consent for GDPR compliance. |
+| [DebugGeography](enums/DebugGeography.md) | Debug geography for testing consent flow. |
+| [ConsentInformation.ConsentStatus](enums/ConsentInformation.ConsentStatus.md) | User's consent status for privacy regulations. |
+| [ConsentInformation.PrivacyOptionsRequirementStatus](enums/ConsentInformation.PrivacyOptionsRequirementStatus.md) | Whether privacy options are required. |
+
+## Interfaces / Callbacks
+
+| Callback | Description |
+| :--- | :--- |
+| [OnInitializationCompleteListener](listeners/OnInitializationCompleteListener.md) | Callback triggered when the SDK initialization completes. |
+| [AdListener](listeners/AdListener.md) | Receives banner and overlay events. |
+| [FullScreenContentCallback](listeners/FullScreenContentCallback.md) | Receives presentation events for full-screen formats. |
+| [OnUserEarnedRewardListener](listeners/OnUserEarnedRewardListener.md) | Receives event when user earns a reward. |
+| [AppOpenAdLoadCallback](listeners/AppOpenAdLoadCallback.md) | Handles loading outcomes for App Open Ads. |
+| [InterstitialAdLoadCallback](listeners/InterstitialAdLoadCallback.md) | Handles loading outcomes for Interstitial Ads. |
+| [RewardedAdLoadCallback](listeners/RewardedAdLoadCallback.md) | Handles loading outcomes for Rewarded Ads. |
+| [RewardedInterstitialAdLoadCallback](listeners/RewardedInterstitialAdLoadCallback.md) | Handles loading outcomes for Rewarded Interstitial Ads. |
+| [AdInspectorClosedListener](listeners/AdInspectorClosedListener.md) | Triggers when the native Ad Inspector is closed. |

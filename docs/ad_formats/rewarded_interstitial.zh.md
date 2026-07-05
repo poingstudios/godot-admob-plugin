@@ -36,7 +36,7 @@
 
 
 ### 加载广告
-要加载插页式激励广告，请使用 `RewardedInterstitialAdLoader` 类。传入 `RewardedInterstitialAdLoadCallback` 以接收加载好的广告或任何可能的错误。值得注意的是，与其他格式的加载回调类似，`RewardedInterstitialAdLoadCallback` 利用 `LoadAdError` 来提供详细的错误信息。
+要加载插页式激励广告，请使用 [`RewardedInterstitialAdLoader`](../reference/classes/RewardedInterstitialAdLoader.md) 类。传入 [`RewardedInterstitialAdLoadCallback`](../reference/listeners/RewardedInterstitialAdLoadCallback.md) 以接收加载好的 [`RewardedInterstitialAd`](../reference/classes/RewardedInterstitialAd.md) 或任何可能的错误。值得注意的是，与其他格式的加载回调类似，[`RewardedInterstitialAdLoadCallback`](../reference/listeners/RewardedInterstitialAdLoadCallback.md) 利用 [`LoadAdError`](../reference/classes/LoadAdError.md) 来提供详细的错误信息。
 
 === "GDScript"
 
@@ -124,7 +124,7 @@
 
 
 ### [可选] 验证服务器端验证 (SSV) 回调
-对于在服务器端验证（[Android](https://developers.google.com/admob/android/ssv) / [iOS](https://developers.google.com/admob/ios/ssv)）回调中需要额外数据的应用，可以使用激励广告的自定义数据功能。分配给激励广告对象的任何字符串值都会传输到 SSV 回调的 `custom_data` 查询参数中。如果未设置自定义数据，则 SSV 回调中将不存在 `custom_data` 查询参数。
+对于在服务器端验证（[Android](https://developers.google.com/admob/android/ssv) / [iOS](https://developers.google.com/admob/ios/ssv)）回调中需要额外数据的应用，可以使用 [`ServerSideVerificationOptions`](../reference/classes/ServerSideVerificationOptions.md) 进行配置。分配给激励广告对象的任何字符串值都会传输到 SSV 回调的 `custom_data` 查询参数中。如果未设置自定义数据，则 SSV 回调中将不存在 `custom_data` 查询参数。
 
 以下代码片段说明了如何在请求广告之前在插页式激励广告对象上建立自定义数据：
 
@@ -162,7 +162,7 @@
     自定义奖励字符串是经过[百分号编码](https://en.wikipedia.org/wiki/Percent-encoding)的，在从 SSV 回调中解析时可能需要进行解码。
 
 ### 配置 FullScreenContentCallback
-`FullScreenContentCallback` 管理与 `RewardedInterstitialAd` 显示相关的事件。在展示 `RewardedInterstitialAd` 之前，请确保配置了该回调：
+[`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) 管理与 [`RewardedInterstitialAd`](../reference/classes/RewardedInterstitialAd.md) 显示相关的事件。在展示 [`RewardedInterstitialAd`](../reference/classes/RewardedInterstitialAd.md) 之前，请确保配置了该回调：
 
 === "GDScript"
 
@@ -245,7 +245,7 @@
 
 ### 展示广告
 
-在展示插页式激励广告时，您将使用 `OnUserEarnedRewardListener` 对象来管理与奖励相关的事件。
+在展示插页式激励广告时，您将使用 [`OnUserEarnedRewardListener`](../reference/listeners/OnUserEarnedRewardListener.md) 对象来管理与奖励相关的事件。
 
 === "GDScript"
 

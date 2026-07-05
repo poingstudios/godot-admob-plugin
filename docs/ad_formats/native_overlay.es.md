@@ -42,7 +42,7 @@ Los pasos principales para integrar anuncios superpuestos nativos son:
 
 ### Cargar el anuncio nativo
 
-La carga de un anuncio nativo se realiza utilizando el método `load()` en la clase `NativeOverlayAd`. Debe proporcionar un ID de bloque de anuncios, una "AdRequest", "NativeAdOptions" y una devolución de llamada de finalización.
+La carga de un anuncio nativo se realiza utilizando el método `load()` en la clase [`NativeOverlayAd`](../reference/classes/NativeOverlayAd.md). Debe proporcionar un ID de bloque de anuncios, un [`AdRequest`](../reference/classes/AdRequest.md), [`NativeAdOptions`](../reference/classes/NativeAdOptions.md) y una devolución de llamada de finalización.
 
 === "GDScript"
 
@@ -117,7 +117,7 @@ La carga de un anuncio nativo se realiza utilizando el método `load()` en la cl
 
 ### Definir el estilo de la plantilla
 
-Puede utilizar `NativeTemplateStyle` para personalizar el aspecto del anuncio. Hay dos plantillas principales disponibles: `PEQUEÑA` y `MEDIA`.
+Puede utilizar [`NativeTemplateStyle`](../reference/classes/NativeTemplateStyle.md) y [`NativeTemplateTextStyle`](../reference/classes/NativeTemplateTextStyle.md) para personalizar el aspecto del anuncio. Hay dos plantillas principales disponibles: `PEQUEÑA` y `MEDIA`.
 
 === "GDScript"
 
@@ -173,7 +173,7 @@ Puede utilizar `NativeTemplateStyle` para personalizar el aspecto del anuncio. H
 
 ### Posiciones de anuncios
 
-Puede colocar el anuncio en varias posiciones predefinidas o en una coordenada XY personalizada utilizando la clase `AdPosition`.
+Puede colocar el anuncio en varias posiciones predefinidas o en una coordenada XY personalizada utilizando los alineamientos predefinidos de [`AdPosition`](../reference/classes/AdPosition.md).
 
 - `PosiciónAd.TOP`
 - `Posición del anuncio.BOTTOM`
@@ -184,7 +184,7 @@ Puede colocar el anuncio en varias posiciones predefinidas o en una coordenada X
 
 ### Escuche eventos publicitarios
 
-Para manejar las interacciones del usuario, puede utilizar la propiedad `ad_listener` de la instancia `NativeOverlayAd`.
+Para manejar las interacciones del usuario, puede utilizar la propiedad `ad_listener` de la instancia [`NativeOverlayAd`](../reference/classes/NativeOverlayAd.md), que acepta un [`AdListener`](../reference/listeners/AdListener.md).
 
 === "GDScript"
 

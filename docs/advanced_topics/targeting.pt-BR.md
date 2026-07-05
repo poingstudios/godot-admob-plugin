@@ -13,7 +13,7 @@ Este documento é baseado em:
 
 ## RequestConfiguration
 
-`RequestConfiguration` é uma entidade usada para reunir detalhes de direcionamento que podem ser aplicados globalmente por meio de um método estático dentro de `MobileAds`. E é aplicada por `MobileAds.set_request_configuration(request_configuration)`
+[`RequestConfiguration`](../reference/classes/RequestConfiguration.md) é uma entidade usada para reunir detalhes de direcionamento que podem ser aplicados globalmente por meio de um método estático dentro de [`MobileAds`](../reference/classes/MobileAds.md). E é aplicada por `MobileAds.set_request_configuration(request_configuration)`
 
 ### Configuração direcionada a crianças {: #configuracao-direcionada-a-criancas }
 
@@ -21,7 +21,7 @@ Para cumprir a [Lei de Proteção da Privacidade Online das Crianças (COPPA)](h
 
 Como desenvolvedor de aplicativos, você pode indicar se o seu conteúdo é direcionado a crianças ao fazer solicitações de anúncios. Quando você especifica que seu conteúdo é direcionado a crianças, o Google tomará medidas para desativar a Publicidade Baseada em Interesses (IBA) e os anúncios de remarketing para essa solicitação de anúncio específica.
 
-Para implementar essa configuração, você pode usar `RequestConfiguration.new().tag_for_child_directed_treatment = int` com as seguintes opções:
+Para implementar essa configuração, você pode usar `RequestConfiguration.new().tag_for_child_directed_treatment = int` com as seguintes opções [`RequestConfiguration.TagForChildDirectedTreatment`](../reference/enums/RequestConfiguration.TagForChildDirectedTreatment.md):
 
 - Use `tag_for_child_directed_treatment` com `RequestConfiguration.TagForChildDirectedTreatment.TRUE` para indicar que seu conteúdo deve ser tratado como direcionado a crianças para conformidade com a COPPA. Isso impedirá a transmissão do identificador de publicidade do Android (AAID) e do Identificador de Publicidade do iOS, IDFA.
 
@@ -56,7 +56,7 @@ Você pode configurar suas solicitações de anúncios para receber tratamento p
 
 Ao usar este recurso, uma solicitação de anúncio conterá um parâmetro "Tag For Users under the Age of Consent in Europe" (TFUA). Este parâmetro desativa a publicidade personalizada, incluindo remarketing, para todas as solicitações de anúncios. Ele também impede solicitações a fornecedores de anúncios terceirizados, como pixels de medição de anúncios e servidores de anúncios terceirizados.
 
-Semelhante às configurações direcionadas a crianças, você pode utilizar a propriedade na classe `RequestConfiguration.new()` para definir o parâmetro TFUA: `tag_for_under_age_of_consent = int`. Ela oferece as seguintes opções:
+Semelhante às configurações direcionadas a crianças, você pode utilizar a propriedade na classe [`RequestConfiguration`](../reference/classes/RequestConfiguration.md) para definir o parâmetro TFUA: `tag_for_under_age_of_consent = int`. Ela oferece as seguintes opções [`RequestConfiguration.TagForUnderAgeOfConsent`](../reference/enums/RequestConfiguration.TagForUnderAgeOfConsent.md):
 
 - Use `tag_for_under_age_of_consent` com `RequestConfiguration.TagForUnderAgeOfConsent.TRUE` para indicar que você deseja que a solicitação de anúncio receba tratamento para usuários no Espaço Econômico Europeu (EEE) abaixo da idade de consentimento. Isso também impedirá a transmissão do identificador de publicidade do Android (AAID) e do Identificador de Publicidade do iOS, IDFA.
 

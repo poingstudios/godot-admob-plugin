@@ -89,6 +89,7 @@ plugins:
           nav_translations:
             Guides: Guias
             Reference: Referência
+            'API Reference': 'Referência da API'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades do AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
             Ad formats: Formatos de Anúncios
             App Open: App Open
@@ -150,12 +151,14 @@ plugins:
             Overview: Visão Geral
             Classes: Classes
             AdView: AdView
+            Listeners: Listeners
             Enums: Enums
         - locale: es
           name: Español
           nav_translations:
             Guides: Guías
             Reference: Referencia
+            'API Reference': 'Referencia de la API'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades de AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
             Ad formats: Formatos de anuncios
             App Open: App Open
@@ -218,12 +221,14 @@ plugins:
             Overview: Descripción general
             Classes: Clases
             AdView: AdView
+            Listeners: Listeners
             Enums: Enums
         - locale: zh
           name: 简体中文
           nav_translations:
             Guides: 指南
             Reference: 参考
+            'API Reference': 'API 参考'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot 技能 <span class="modern-icon" title="Beta">🧪</span>'
             Ad formats: 广告格式
             App Open: 开屏广告
@@ -286,12 +291,14 @@ plugins:
             Overview: 概览
             Classes: 类
             AdView: AdView
+            Listeners: 监听器
             Enums: 枚举
         - locale: ja
           name: 日本語
           nav_translations:
             Guides: ガイド
             Reference: リファレンス
+            'API Reference': 'API リファレンス'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot スキル <span class="modern-icon" title="Beta">🧪</span>'
             Ad formats: 広告フォーマット
             App Open: アプリ起動時広告 (App Open)
@@ -354,6 +361,7 @@ plugins:
             Overview: 概要
             Classes: クラス
             AdView: AdView
+            Listeners: リスナー
             Enums: 列挙型 (Enums)
 
 nav:
@@ -426,10 +434,65 @@ nav:
       - Impression-Level Ad Revenue: advanced_topics/impression_level_ad_revenue.md
       - Targeting: advanced_topics/targeting.md
   - Reference:
-    - Overview: reference/index.md
-    - Classes:
-      - AdView: reference/classes/AdView.md
-    - Enums: reference/enums.md
+    - API Reference:
+      - Overview: reference/index.md
+      - Classes:
+        - AdError: reference/classes/AdError.md
+        - AdPosition: reference/classes/AdPosition.md
+        - AdRequest: reference/classes/AdRequest.md
+        - AdSize: reference/classes/AdSize.md
+        - AdValue: reference/classes/AdValue.md
+        - AdVideoOptions: reference/classes/AdVideoOptions.md
+        - AdView: reference/classes/AdView.md
+        - AdapterResponseInfo: reference/classes/AdapterResponseInfo.md
+        - AdapterStatus: reference/classes/AdapterStatus.md
+        - AppOpenAd: reference/classes/AppOpenAd.md
+        - AppOpenAdLoader: reference/classes/AppOpenAdLoader.md
+        - ConsentDebugSettings: reference/classes/ConsentDebugSettings.md
+        - ConsentForm: reference/classes/ConsentForm.md
+        - ConsentInformation: reference/classes/ConsentInformation.md
+        - ConsentRequestParameters: reference/classes/ConsentRequestParameters.md
+        - FormError: reference/classes/FormError.md
+        - InitializationStatus: reference/classes/InitializationStatus.md
+        - InterstitialAd: reference/classes/InterstitialAd.md
+        - InterstitialAdLoader: reference/classes/InterstitialAdLoader.md
+        - LoadAdError: reference/classes/LoadAdError.md
+        - MobileAds: reference/classes/MobileAds.md
+        - NativeAdOptions: reference/classes/NativeAdOptions.md
+        - NativeOverlayAd: reference/classes/NativeOverlayAd.md
+        - NativeTemplateStyle: reference/classes/NativeTemplateStyle.md
+        - NativeTemplateTextStyle: reference/classes/NativeTemplateTextStyle.md
+        - RequestConfiguration: reference/classes/RequestConfiguration.md
+        - ResponseInfo: reference/classes/ResponseInfo.md
+        - RewardedAd: reference/classes/RewardedAd.md
+        - RewardedAdLoader: reference/classes/RewardedAdLoader.md
+        - RewardedInterstitialAd: reference/classes/RewardedInterstitialAd.md
+        - RewardedInterstitialAdLoader: reference/classes/RewardedInterstitialAdLoader.md
+        - RewardedItem: reference/classes/RewardedItem.md
+        - ServerSideVerificationOptions: reference/classes/ServerSideVerificationOptions.md
+        - UserMessagingPlatform: reference/classes/UserMessagingPlatform.md
+      - Listeners:
+        - AdInspectorClosedListener: reference/listeners/AdInspectorClosedListener.md
+        - AdListener: reference/listeners/AdListener.md
+        - AppOpenAdLoadCallback: reference/listeners/AppOpenAdLoadCallback.md
+        - FullScreenContentCallback: reference/listeners/FullScreenContentCallback.md
+        - InterstitialAdLoadCallback: reference/listeners/InterstitialAdLoadCallback.md
+        - OnInitializationCompleteListener: reference/listeners/OnInitializationCompleteListener.md
+        - OnUserEarnedRewardListener: reference/listeners/OnUserEarnedRewardListener.md
+        - RewardedAdLoadCallback: reference/listeners/RewardedAdLoadCallback.md
+        - RewardedInterstitialAdLoadCallback: reference/listeners/RewardedInterstitialAdLoadCallback.md
+      - Enums:
+        - AdChoicesPlacement: reference/enums/AdChoicesPlacement.md
+        - AdPosition: reference/enums/AdPosition.md
+        - AdValue.PrecisionType: reference/enums/AdValue.PrecisionType.md
+        - AdapterStatus.InitializationState: reference/enums/AdapterStatus.InitializationState.md
+        - ConsentInformation.ConsentStatus: reference/enums/ConsentInformation.ConsentStatus.md
+        - ConsentInformation.PrivacyOptionsRequirementStatus: reference/enums/ConsentInformation.PrivacyOptionsRequirementStatus.md
+        - DebugGeography: reference/enums/DebugGeography.md
+        - NativeMediaAspectRatio: reference/enums/NativeMediaAspectRatio.md
+        - NativeTemplateFontStyle: reference/enums/NativeTemplateFontStyle.md
+        - RequestConfiguration.TagForChildDirectedTreatment: reference/enums/RequestConfiguration.TagForChildDirectedTreatment.md
+        - RequestConfiguration.TagForUnderAgeOfConsent: reference/enums/RequestConfiguration.TagForUnderAgeOfConsent.md
 
 hooks:
   - docs/hooks.py

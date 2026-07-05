@@ -110,7 +110,7 @@ O plugin AdMob para Godot está convenientemente disponível através da Asset S
 <div id="initialize-the-google-mobile-ads-sdk"></div>
 <div id="inicializar-o-google-mobile-ads-sdk"></div>
 ## Inicializar o Google Mobile Ads SDK
-Antes de carregar anúncios, certifique-se de que seu aplicativo inicialize o Google Mobile Ads SDK. Você pode fazer isso chamando MobileAds.initialize(). Esta função inicializa o SDK e aciona um listener de conclusão assim que o processo de inicialização for concluído, ou se exceder um tempo limite de 30 segundos. É importante destacar que essa inicialização deve ocorrer apenas uma vez, idealmente durante a fase de inicialização do aplicativo.
+Antes de carregar anúncios, certifique-se de que seu aplicativo inicialize o Google Mobile Ads SDK. Você pode fazer isso chamando [`MobileAds`](reference/classes/MobileAds.md).initialize(). Esta função inicializa o SDK e aciona um listener de conclusão assim que o processo de inicialização for concluído, ou se exceder um tempo limite de 30 segundos. É importante destacar que essa inicialização deve ocorrer apenas uma vez, idealmente durante a fase de inicialização do aplicativo.
 
 === "GDScript"
 

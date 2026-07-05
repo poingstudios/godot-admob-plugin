@@ -12,14 +12,14 @@ This document is based on:
 
 ## RequestConfiguration
 
-`RequestConfiguration` is an entity used to gather targeting details that can be globally applied through a static method within `MobileAds`. And is applied by `MobileAds.set_request_configuration(request_configuration)`
+[`RequestConfiguration`](../reference/classes/RequestConfiguration.md) is an entity used to gather targeting details that can be globally applied through a static method within [`MobileAds`](../reference/classes/MobileAds.md). And is applied by `MobileAds.set_request_configuration(request_configuration)`
 
 ### Child-directed setting {: #child-directed-setting }
 To comply with [Children's Online Privacy Protection Act (COPPA)](https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children%27s-privacy), you can set the "tag for child-directed treatment" option. This signifies that you want your content to be treated as child-directed for COPPA purposes. It's important to ensure that you have the authority to make this decision on behalf of the app owner. Please be aware that misusing this setting can lead to the termination of your Google account.
 
 As an app developer, you can indicate whether your content is child-directed when making ad requests. When you specify that your content is child-directed, Google will take steps to disable Interest-Based Advertising (IBA) and remarketing ads for that particular ad request.
 
-To implement this setting, you can use `RequestConfiguration.new().tag_for_child_directed_treatment = int` with the following options:
+To implement this setting, you can use `RequestConfiguration.new().tag_for_child_directed_treatment = int` with the following [`RequestConfiguration.TagForChildDirectedTreatment`](../reference/enums/RequestConfiguration.TagForChildDirectedTreatment.md) options:
 
 - Use `tag_for_child_directed_treatment` with `RequestConfiguration.TagForChildDirectedTreatment.TRUE` to indicate that your content should be treated as child-directed for COPPA compliance. This will prevent the transmission of the Android advertising identifier (AAID). This will prevent the transmission of the Advertising Identifier, IDFA.
 
@@ -54,7 +54,7 @@ You can configure your ad requests to receive treatment for users in the Europea
 
 When using this feature, an ad request will contain a "Tag For Users under the Age of Consent in Europe" (TFUA) parameter. This parameter deactivates personalized advertising, including remarketing, for all ad requests. It also prevents requests to third-party ad vendors like ad measurement pixels and third-party ad servers.
 
-Similar to the child-directed settings, you can utilize the property in `RequestConfiguration.new()` class to set the TFUA parameter: `tag_for_under_age_of_consent = int`. It offers the following options:
+Similar to the child-directed settings, you can utilize the property in [`RequestConfiguration`](../reference/classes/RequestConfiguration.md) class to set the TFUA parameter: `tag_for_under_age_of_consent = int`. It offers the following [`RequestConfiguration.TagForUnderAgeOfConsent`](../reference/enums/RequestConfiguration.TagForUnderAgeOfConsent.md) options:
 
 - Use `tag_for_under_age_of_consent` with `RequestConfiguration.TagForUnderAgeOfConsent.TRUE` to indicate that you want the ad request to receive treatment for users in the European Economic Area (EEA) under the age of consent. This will also prevent the transmission of the Android advertising identifier (AAID). This will also prevent the transmission of the Advertising Identifier, IDFA.
 

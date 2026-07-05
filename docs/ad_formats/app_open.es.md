@@ -117,7 +117,7 @@ Si bien no es estrictamente necesario, se recomienda agregar este script como **
 
 ### Cargue el anuncio abierto de la aplicación
 
-La carga de un anuncio abierto de aplicación se logra utilizando el método `load()` en la clase `AppOpenAdLoader`. El método de carga requiere un ID de bloque de anuncios, un objeto "AdRequest" y un controlador de finalización que se llama cuando la carga del anuncio se realiza correctamente o falla. El objeto `AppOpenAd` cargado se proporciona como parámetro en el controlador de finalización.
+La carga de un anuncio abierto de aplicación se logra utilizando el método `load()` en la clase [`AppOpenAdLoader`](../reference/classes/AppOpenAdLoader.md). El método de carga requiere un ID de bloque de anuncios, un objeto [`AdRequest`](../reference/classes/AdRequest.md) y un controlador de finalización que se llama cuando la carga del anuncio se realiza correctamente o falla. El objeto [`AppOpenAd`](../reference/classes/AppOpenAd.md) cargado se proporciona como parámetro en el controlador de finalización.
 
 === "GDScript"
 
@@ -185,7 +185,7 @@ Se desaconseja encarecidamente intentar cargar un nuevo anuncio desde el bloque 
 
 ### Escuche eventos de anuncios abiertos de aplicaciones
 
-Para personalizar aún más el comportamiento de su anuncio, puede vincularse a una serie de eventos en el ciclo de vida del anuncio: apertura, cierre, etc. Escuche estos eventos registrando a un delegado como se muestra a continuación.
+Para personalizar aún más el comportamiento de su anuncio, puede vincularse a una serie de eventos en el ciclo de vida del anuncio: apertura, cierre, etc. Escuche estos eventos registrando un [`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) y configurando la propiedad de callback `on_ad_paid` / `OnAdPaid` que recibe un [`AdValue`](../reference/classes/AdValue.md) como se muestra a continuación.
 
 === "GDScript"
 

@@ -8,7 +8,7 @@ Los anuncios simulados simulan el comportamiento de los anuncios, las devolucion
 
 El complemento detecta automáticamente cuando su juego se está ejecutando en una plataforma de escritorio (Windows, macOS o Linux) dentro del Editor Godot (`OS.has_feature("editor")`). En lugar de fallar debido a la falta de singletons nativos de Android o iOS, el complemento crea instancias de singletons y nodos simulados automáticamente.
 
-No necesita cambiar nada de su código o configuración GDScript o C# para usar anuncios simulados. Todas las API estándar de `MobileAds` y formatos de anuncios funcionan exactamente de la misma manera.
+No necesita cambiar nada de su código o configuración GDScript o C# para usar anuncios simulados. Todas las API estándar de [`MobileAds`](reference/classes/MobileAds.md) y formatos de anuncios funcionan exactamente de la misma manera.
 
 ## Beneficios de utilizar anuncios simulados
 
@@ -24,7 +24,7 @@ El sistema simulado simula la apariencia visual y las interacciones de cada form
 
 ### Banners
 - Muestra un contenedor en la pantalla que coincide con el tamaño estándar seleccionado (por ejemplo, banner estándar, banner grande, rectángulo mediano, tabla de clasificación) o tamaño personalizado.
-- Admite posiciones de pantalla personalizadas (`AdPosition.custom(x, y)`).
+- Admite posiciones de pantalla personalizadas ([`AdPosition`](reference/classes/AdPosition.md).custom(x, y)).
 - **Banners plegables**: si especifica "contraíble" en los extras de la solicitud de anuncio, el banner simulado mostrará un botón de alternancia para contraer/expandir (`^`), lo que le permitirá probar los ajustes de diseño y las devoluciones de llamada cuando el banner se contraiga.
 - Representa un botón de cierre (`×`) para simular despidos.
 

@@ -8,7 +8,7 @@
 
 该插件会自动检测您的游戏是否在 Godot 编辑器内的桌面平台（Windows、macOS 或 Linux）上运行（`OS.has_feature("editor")`）。该插件不会因为缺少 Android 或 iOS 原生单例而失败，而是会自动实例化模拟单例和节点。
 
-您无需更改任何 GDScript 或 C# 代码或配置即可使用模拟广告。所有标准的 `MobileAds` 和广告格式 API 的工作方式完全相同。
+您无需更改任何 GDScript 或 C# 代码或配置即可使用模拟广告。所有标准的 [`MobileAds`](reference/classes/MobileAds.md) 和广告格式 API 的工作方式完全相同。
 
 ## 使用模拟广告的好处
 
@@ -24,7 +24,7 @@
 
 ### 横幅广告 (Banners)
 - 在屏幕上渲染一个与您选择的标准尺寸（例如标准横幅、大横幅、中等矩形、排行榜）或自定义尺寸相匹配的容器。
-- 支持自定义屏幕位置（`AdPosition.custom(x, y)`）。
+- 支持自定义屏幕位置（[`AdPosition`](reference/classes/AdPosition.md).custom(x, y)）。
 - **折叠式横幅广告**：如果在广告请求的 extras 中指定了 `collapsible`，模拟横幅将显示一个折叠/展开切换按钮（`^`），让您测试横幅折叠时的布局调整和回调。
 - 渲染一个关闭按钮（`×`）以模拟关闭行为。
 

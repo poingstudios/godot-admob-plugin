@@ -35,7 +35,7 @@
 下面的代码示例演示了如何使用插屏广告。在此示例中，您将创建一个插屏广告的实例，使用 AdRequest 向其加载广告，并通过处理各种生命周期事件来增强功能。
 
 ### 加载广告
-要加载插屏广告，请使用 `InterstitialAdLoader` 类。传入一个 `InterstitialAdLoadCallback` 以接收加载成功的广告或任何潜在的错误。值得注意的是，与其他格式的加载回调类似，`InterstitialAdLoadCallback` 利用 `LoadAdError` 来提供详细的错误信息。
+要加载插屏广告，请使用 [`InterstitialAdLoader`](../reference/classes/InterstitialAdLoader.md) 类。传入一个 [`InterstitialAdLoadCallback`](../reference/listeners/InterstitialAdLoadCallback.md) 以接收加载成功的 [`InterstitialAd`](../reference/classes/InterstitialAd.md) 或任何潜在的错误。值得注意的是，与其他格式的加载回调类似，[`InterstitialAdLoadCallback`](../reference/listeners/InterstitialAdLoadCallback.md) 利用 [`LoadAdError`](../reference/classes/LoadAdError.md) 来提供详细的错误信息。
 
 === "GDScript"
 
@@ -122,7 +122,7 @@
     ```
 
 ### 配置 FullScreenContentCallback
-`FullScreenContentCallback` 管理与展示您的 `InterstitialAd` 相关的事件。在呈现 `InterstitialAd` 之前，请确保配置了回调：
+[`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) 管理与展示您的 [`InterstitialAd`](../reference/classes/InterstitialAd.md) 相关的事件。在呈现 [`InterstitialAd`](../reference/classes/InterstitialAd.md) 之前，请确保配置了回调：
 
 === "GDScript"
 

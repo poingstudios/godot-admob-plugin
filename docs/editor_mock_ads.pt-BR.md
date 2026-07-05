@@ -8,7 +8,7 @@ Os anúncios simulados (mock ads) simulam o comportamento dos anúncios, os call
 
 O plugin detecta automaticamente quando seu jogo está sendo executado em uma plataforma desktop (Windows, macOS ou Linux) dentro do Editor do Godot (`OS.has_feature("editor")`). Em vez de falhar devido à ausência dos singletons nativos do Android ou iOS, o plugin instancia singletons e nós simulados automaticamente.
 
-Você não precisa alterar nenhum código GDScript ou C# ou configuração para usar os anúncios simulados. Todas as APIs padrão do `MobileAds` e dos formatos de anúncios funcionam exatamente da mesma maneira.
+Você não precisa alterar nenhum código GDScript ou C# ou configuração para usar os anúncios simulados. Todas as APIs padrão do [`MobileAds`](reference/classes/MobileAds.md) e dos formatos de anúncios funcionam exatamente da mesma maneira.
 
 ## Benefícios de usar anúncios simulados
 
@@ -24,7 +24,7 @@ O sistema simulado simula a aparência visual e as interações de cada um dos p
 
 ### Banners
 - Renderiza um contêiner na tela que corresponde ao tamanho padrão selecionado (por exemplo, banner padrão, banner grande, retângulo médio, leaderboard) ou tamanho personalizado.
-- Suporta posições de tela personalizadas (`AdPosition.custom(x, y)`).
+- Suporta posições de tela personalizadas ([`AdPosition`](reference/classes/AdPosition.md).custom(x, y)).
 - **Banners Retráteis (Collapsible Banners)**: Se você especificar `collapsible` nos extras da solicitação de anúncio, o banner simulado exibirá um botão de alternância para recolher/expandir (`^`), permitindo testar os ajustes de layout e os callbacks quando o banner for recolhido.
 - Renderiza um botão de fechar (`×`) para simular o encerramento do anúncio.
 

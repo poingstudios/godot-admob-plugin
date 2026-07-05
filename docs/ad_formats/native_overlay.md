@@ -40,7 +40,7 @@ The main steps to integrate native overlay ads are:
 
 ### Load the native ad
 
-Loading a native ad is accomplished using the `load()` method on the `NativeOverlayAd` class. You need to provide an ad unit ID, an `AdRequest`, `NativeAdOptions`, and a completion callback.
+Loading a native ad is accomplished using the `load()` method on the [`NativeOverlayAd`](../reference/classes/NativeOverlayAd.md) class. You need to provide an ad unit ID, an [`AdRequest`](../reference/classes/AdRequest.md), [`NativeAdOptions`](../reference/classes/NativeAdOptions.md), and a completion callback.
 
 === "GDScript"
 
@@ -115,7 +115,7 @@ Loading a native ad is accomplished using the `load()` method on the `NativeOver
 
 ### Define the template style
 
-You can use `NativeTemplateStyle` to customize how the ad looks. There are two main templates available: `SMALL` and `MEDIUM`.
+You can use [`NativeTemplateStyle`](../reference/classes/NativeTemplateStyle.md) and [`NativeTemplateTextStyle`](../reference/classes/NativeTemplateTextStyle.md) to customize how the ad looks. There are two main templates available: `SMALL` and `MEDIUM`.
 
 === "GDScript"
 
@@ -171,7 +171,7 @@ You can use `NativeTemplateStyle` to customize how the ad looks. There are two m
 
 ### Ad Positions
 
-You can place the ad in several predefined positions or a custom XY coordinate using the `AdPosition` class.
+You can place the ad in several predefined positions or a custom XY coordinate using the [`AdPosition`](../reference/classes/AdPosition.md) preset alignments.
 
 - `AdPosition.TOP`
 - `AdPosition.BOTTOM`
@@ -182,7 +182,7 @@ You can place the ad in several predefined positions or a custom XY coordinate u
 
 ### Listen to ad events
 
-To handle user interactions, you can use the `ad_listener` property of the `NativeOverlayAd` instance.
+To handle user interactions, you can use the `ad_listener` property of the [`NativeOverlayAd`](../reference/classes/NativeOverlayAd.md) instance, which accepts an [`AdListener`](../reference/listeners/AdListener.md).
 
 === "GDScript"
 

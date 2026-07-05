@@ -17,7 +17,7 @@
 
 ## 支払われたイベントハンドラ（Paid Event Handler）の実装
 
-各広告フォーマットには、`on_ad_paid`（C# では `OnAdPaid`）イベントがあります。広告イベントのライフサイクル中に、Godot AdMob プラグインはインプレッション イベントを監視し、獲得した価値を表す `AdValue` を使用してハンドラを呼び出します。
+各広告フォーマットには、`on_ad_paid`（C# では `OnAdPaid`）イベントがあります。広告イベントのライフサイクル中に、Godot AdMob プラグインはインプレッション イベントを監視し、獲得した価値を表す [`AdValue`](../reference/classes/AdValue.md) を使用してハンドラを呼び出します。この値の精度タイプは [`AdValue.PrecisionType`](../reference/enums/AdValue.PrecisionType.md) によって定義されます。
 
 以下の例は、リワード広告の支払われたイベントを処理します。
 

@@ -37,7 +37,7 @@ El siguiente código de ejemplo demuestra cómo utilizar el Intersticial. En est
 
 
 ### Cargar un anuncio
-Para cargar un anuncio intersticial, utilice la clase `InterstitialAdLoader`. Pase un `InterstitialAdLoadCallback` para recibir el anuncio cargado o cualquier posible error. Vale la pena señalar que, al igual que otras devoluciones de llamada de carga de formato, `InterstitialAdLoadCallback` aprovecha `LoadAdError` para proporcionar detalles completos del error.
+Para cargar un anuncio intersticial, utilice la clase [`InterstitialAdLoader`](../reference/classes/InterstitialAdLoader.md). Pase un [`InterstitialAdLoadCallback`](../reference/listeners/InterstitialAdLoadCallback.md) para recibir el [`InterstitialAd`](../reference/classes/InterstitialAd.md) cargado o cualquier posible error. Vale la pena señalar que, al igual que otras devoluciones de llamada de carga de formato, [`InterstitialAdLoadCallback`](../reference/listeners/InterstitialAdLoadCallback.md) aprovecha [`LoadAdError`](../reference/classes/LoadAdError.md) para proporcionar detalles completos del error.
 
 === "GDScript"
 
@@ -124,7 +124,7 @@ Para cargar un anuncio intersticial, utilice la clase `InterstitialAdLoader`. Pa
     ```
 
 ### Configurar FullScreenContentCallback
-`FullScreenContentCallback` gestiona los eventos asociados con la visualización de su `InterstitialAd`. Antes de presentar el `InterstitialAd`, asegúrese de configurar la devolución de llamada:
+[`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) gestiona los eventos asociados con la visualización de su [`InterstitialAd`](../reference/classes/InterstitialAd.md). Antes de presentar el [`InterstitialAd`](../reference/classes/InterstitialAd.md), asegúrese de configurar la devolución de llamada:
 
 === "GDScript"
 

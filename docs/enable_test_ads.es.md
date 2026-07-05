@@ -97,7 +97,7 @@ Si desea probar anuncios dentro de su aplicación durante la fase de desarrollo 
         ```
 Copie la ID de su dispositivo de prueba en su portapapeles.
 
-3. Actualice su código para incluir los ID de los dispositivos de prueba dentro de su matriz `RequestConfiguration.test_device_ids` de esta manera:
+3. Actualice su código para incluir los ID de los dispositivos de prueba dentro de su matriz [`RequestConfiguration`](reference/classes/RequestConfiguration.md).test_device_ids de esta manera:
 
 === "GDScript"
 
@@ -141,4 +141,4 @@ Los bloques de anuncios de muestra de Google muestran exclusivamente Google Ads.
 
 Los anuncios mediados NO exhiben una etiqueta de "Anuncio de prueba". En consecuencia, es su responsabilidad asegurarse de que los anuncios de prueba estén habilitados para cada una de sus redes de mediación para evitar que estas redes marquen su cuenta por actividad no válida. Consulte la información individual de cada red [guía de mediación](mediate/get_started.md) para obtener instrucciones detalladas.
 
-Si no está seguro de si un adaptador de red de anuncios de mediación admite anuncios de prueba, es recomendable abstenerse de hacer clic en anuncios de esa red durante la fase de desarrollo. Puedes utilizar el [ResponseInfo.mediation_adapter_class_name](https://github.com/poingstudios/godot-admob-plugin/blob/master/addons/admob/src/api/core/ResponseInfo.gd) propiedad dentro de cualquiera de los formatos de anuncios para determinar qué red publicitaria publicó el anuncio actual.
+Si no está seguro de si un adaptador de red de anuncios de mediación admite anuncios de prueba, es recomendable abstenerse de hacer clic en anuncios de esa red durante la fase de desarrollo. Puedes utilizar la propiedad [`ResponseInfo.mediation_adapter_class_name`](reference/classes/ResponseInfo.md#mediation_adapter_class_name) dentro de cualquiera de los formatos de anuncios para determinar qué red publicitaria publicó el anuncio actual.

@@ -8,7 +8,7 @@ Mock ads simulate ad behavior, lifecycle callbacks (such as load, show, clicks, 
 
 The plugin automatically detects when your game is running on a desktop platform (Windows, macOS, or Linux) inside the Godot Editor (`OS.has_feature("editor")`). Instead of failing due to missing Android or iOS native singletons, the plugin instantiates mock singletons and nodes automatically.
 
-You do not need to change any of your GDScript or C# code or configuration to use mock ads. All standard `MobileAds` and ad format APIs work exactly the same way.
+You do not need to change any of your GDScript or C# code or configuration to use mock ads. All standard [`MobileAds`](reference/classes/MobileAds.md) and ad format APIs work exactly the same way.
 
 ## Benefits of using mock ads
 
@@ -24,7 +24,7 @@ The mock system simulates the visual appearance and interactions for each major 
 
 ### Banners
 - Renders a container on screen matching your selected standard size (e.g., standard banner, large banner, medium rectangle, leaderboard) or custom size.
-- Supports custom screen positions (`AdPosition.custom(x, y)`).
+- Supports custom screen positions ([`AdPosition`](reference/classes/AdPosition.md).custom(x, y)).
 - **Collapsible Banners**: If you specify `collapsible` in the ad request's extras, the mock banner will display a collapse/expand toggle button (`^`), letting you test the layout adjustments and callbacks when the banner collapses.
 - Renders a close button (`×`) to simulate dismissals.
 

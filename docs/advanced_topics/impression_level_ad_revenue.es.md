@@ -17,7 +17,7 @@ Esta guía está destinada a ayudarle a implementar la captura de datos de ingre
 
 ## Implementación de un controlador de eventos pago
 
-Cada formato de anuncio tiene un evento `on_ad_paid` (`OnAdPaid` en C#). Durante el ciclo de vida de un evento publicitario, el complemento Godot AdMob monitorea los eventos de impresión e invoca al controlador con un `AdValue` que representa el valor ganado.
+Cada formato de anuncio tiene un evento `on_ad_paid` (`OnAdPaid` en C#). Durante el ciclo de vida de un evento publicitario, el complemento Godot AdMob monitorea los eventos de impresión e invoca al controlador con un [`AdValue`](../reference/classes/AdValue.md) que representa el valor ganado. El tipo de precisión de este valor se define mediante [`AdValue.PrecisionType`](../reference/enums/AdValue.PrecisionType.md).
 
 El siguiente ejemplo maneja eventos pagos para un anuncio recompensado:
 

@@ -12,14 +12,14 @@
 
 ## RequestConfiguration
 
-`RequestConfiguration` は、ターゲティングの詳細を収集するために使用されるエンティティであり、`MobileAds` 内の静的メソッドを通じてグローバルに適用できます。これは `MobileAds.set_request_configuration(request_configuration)` によって適用されます。
+[`RequestConfiguration`](../reference/classes/RequestConfiguration.md) は、ターゲティングの詳細を収集するために使用されるエンティティであり、[`MobileAds`](../reference/classes/MobileAds.md) 内の静的メソッドを通じてグローバルに適用できます。これは `MobileAds.set_request_configuration(request_configuration)` によって適用されます。
 
 ### 子供向け設定 {: #child-directed-setting }
 [児童オンラインプライバシー保護法 (COPPA)](https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children%27s-privacy) に準拠するため、「子供向けコンテンツとしての取扱いタグ（tag for child-directed treatment）」オプションを設定できます。これは、COPPA の目的においてコンテンツを子供向けとして処理させたいことを意味します。この決定をアプリ所有者に代わって行う権限があることを確認することが重要です。この設定を悪用すると、Google アカウントが停止される可能性がありますのでご注意ください。
 
 アプリ開発者は、広告リクエストの際にコンテンツが子供向けかどうかを指定できます。コンテンツが子供向けであることを指定すると、Google はその特定の広告リクエストに対して、インタレストベース広告（IBA）およびリマーケティング広告を無効にする措置を講じます。
 
-この設定を実装するには、`RequestConfiguration.new().tag_for_child_directed_treatment = int` を使用し、以下のオプションを指定します。
+この設定を実装するには、`RequestConfiguration.new().tag_for_child_directed_treatment = int` を使用し、以下の [`RequestConfiguration.TagForChildDirectedTreatment`](../reference/enums/RequestConfiguration.TagForChildDirectedTreatment.md) オプションを指定します。
 
 - COPPA 準拠のためにコンテンツを子供向けとして処理する必要があることを示すには、`tag_for_child_directed_treatment` に `RequestConfiguration.TagForChildDirectedTreatment.TRUE` を使用します。これにより、Android 広告識別子（AAID）および iOS 広告識別子（IDFA）の送信が防止されます。
 
@@ -54,7 +54,7 @@
 
 この機能を使用すると、広告リクエストに「同意年齢未満の欧州ユーザー向けのタグ（Tag For Users under the Age of Consent in Europe: TFUA）」パラメータが含まれます。このパラメータは、すべての広告リクエストについてリマーケティングを含むパーソナライズ広告を無効にします。また、広告測定ピクセルやサードパーティの広告サーバーなどのサードパーティ広告ベンダーへのリクエストも無効になります。
 
-子供向け設定と同様に、`RequestConfiguration.new()` クラスのプロパティ `tag_for_under_age_of_consent = int` を使用して TFUA パラメータを設定できます。これには以下のオプションがあります。
+子供向け設定と同様に、[`RequestConfiguration`](../reference/classes/RequestConfiguration.md) クラスのプロパティ `tag_for_under_age_of_consent = int` を使用して TFUA パラメータを設定できます。これには以下の [`RequestConfiguration.TagForUnderAgeOfConsent`](../reference/enums/RequestConfiguration.TagForUnderAgeOfConsent.md) オプションがあります。
 
 - 同意年齢未満の欧州経済領域（EEA）のユーザーとして広告リクエストを処理したい場合は、`tag_for_under_age_of_consent` に `RequestConfiguration.TagForUnderAgeOfConsent.TRUE` を使用します。これにより、Android 広告識別子（AAID）および iOS 広告識別子（IDFA）の送信も防止されます。
 

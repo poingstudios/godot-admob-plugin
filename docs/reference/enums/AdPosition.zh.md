@@ -1,14 +1,13 @@
-# Enums
+# AdPosition
 
-This page lists the public enums used by the Godot AdMob Plugin.
+定义横幅和原生叠加广告的屏幕对齐方式。由 [`AdView`](../classes/AdView.md)、[`NativeOverlayAd`](../classes/NativeOverlayAd.md) 和 [`AdPosition`](../classes/AdPosition.md) 类使用。
 
-## AdPosition
-
-Defines the position of the ad banner on the screen.
+## 值
 
 === "GDScript"
     ```gdscript
-    enum AdPosition {
+    # Access via AdPosition.Values
+    enum Values {
         TOP = 0,
         BOTTOM = 1,
         LEFT = 2,
@@ -17,13 +16,14 @@ Defines the position of the ad banner on the screen.
         TOP_RIGHT = 5,
         BOTTOM_LEFT = 6,
         BOTTOM_RIGHT = 7,
-        CENTER = 8
+        CENTER = 8,
+        CUSTOM = -1
     }
     ```
 
 === "C#"
     ```csharp
-    public enum AdPosition
+    public enum Values
     {
         Top = 0,
         Bottom = 1,
@@ -33,6 +33,7 @@ Defines the position of the ad banner on the screen.
         TopRight = 5,
         BottomLeft = 6,
         BottomRight = 7,
-        Center = 8
+        Center = 8,
+        Custom = -1
     }
     ```
