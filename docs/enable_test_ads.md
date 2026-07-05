@@ -1,5 +1,8 @@
 # Enable Test Ads
 
+!!! note "Godot 3 (v1) Documentation"
+    This page is for **Godot 3.x**. For **Godot 4.2+**, see the [stable documentation](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 During development, it is crucial to use test ads to avoid generating invalid traffic and risking your AdMob account suspension.
 
 ---

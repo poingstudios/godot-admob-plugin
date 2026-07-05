@@ -1,5 +1,8 @@
 # 隐私和用户同意（UMP）
 
+!!! note "Godot 3 (v1) 文档"
+    本页面适用于 **Godot 3.x**。如需 **Godot 4.2+**，请查看[稳定文档](https://poingstudios.github.io/godot-admob-plugin/stable/)。
+
 根据Google发布商政策，向欧洲经济区（EEA）和英国的用户提供广告时，发布商必须遵守Google的欧盟用户同意政策。用户消息平台（UMP）SDK简化了用户同意的收集。
 
 ---

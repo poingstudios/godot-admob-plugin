@@ -1,5 +1,8 @@
 # API参考
 
+!!! note "Godot 3 (v1) 文档"
+    本页面适用于 **Godot 3.x**。如需 **Godot 4.2+**，请查看[稳定文档](https://poingstudios.github.io/godot-admob-plugin/stable/)。
+
 本节包含Godot AdMob插件提供的类、方法、属性和枚举的技术参考。
 
 ---

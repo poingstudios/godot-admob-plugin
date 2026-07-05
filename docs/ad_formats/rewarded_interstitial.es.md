@@ -1,5 +1,8 @@
 # Anuncios Intersticiales Recompensados
 
+!!! note "Documentación Godot 3 (v1)"
+    Esta página es para **Godot 3.x**. Para **Godot 4.2+**, consulte la [documentación estable](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 El intersticial recompensado es un tipo de formato de anuncio incentivado que te permite ofrecer una recompensa por anuncios que aparecen automáticamente durante transiciones naturales de la aplicación. A diferencia de los anuncios recompensados tradicionales, los usuarios no necesitan optar por ver un intersticial recompensado.
 
 ---

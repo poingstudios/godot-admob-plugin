@@ -1,5 +1,9 @@
 # 入门指南
 
+!!! note "Godot 3 (v1) 文档"
+    本文档适用于 **v1** 插件，仅支持 **Godot 3.x**。
+    如需 **Godot 4.2+**，请查看[稳定文档](https://poingstudios.github.io/godot-admob-plugin/stable/)。
+
 将AdMob插件集成到您的Godot 3项目中，可以轻松地在Android和iOS设备上展示Google移动广告。
 
 ---
@@ -7,13 +11,17 @@
 ## 前提条件
 
 - **Godot Engine 3.x Mono/Standard Edition**（v3.3或更高版本）。
-- **Android导出**：
-  - 启用Godot Android构建模板。
-  - 配置目标Android SDK版本。
-- **iOS导出**：
-  - 安装了Xcode的macOS机器。
-  - 活跃的Apple Developer账户。
 - **建议**：拥有已注册Android/iOS应用的活跃[AdMob账户](https://admob.google.com/)。
+
+=== "Android"
+
+    - 启用Godot Android构建模板。
+    - 配置目标Android SDK版本。
+
+=== "iOS"
+
+    - 安装了Xcode的macOS机器。
+    - 活跃的Apple Developer账户。
 
 ---
 
@@ -31,8 +39,13 @@
 
 在Godot编辑器内打开AdMob管理器（**项目 -> 工具 -> AdMob管理器**或点击**AdMob**面板标签）。
 
-* **Android**：选择**下载Android模板**。插件将自动下载所需的模板文件（`.aar` 和 `.gdap`）并解压到您的 `res://android/plugins/` 文件夹中（无需手动解压 zip 压缩包）。
-* **iOS**：选择**下载iOS模板**。插件将自动下载所需的模板文件（`.gdip` 和库文件）并解压到您的 `res://ios/plugins/` 文件夹中（无需手动解压 zip 压缩包）。
+=== "Android"
+
+    选择**下载Android模板**。插件将自动下载所需的模板文件（`.aar` 和 `.gdap`）并解压到您的 `res://android/plugins/` 文件夹中（无需手动解压 zip 压缩包）。
+
+=== "iOS"
+
+    选择**下载iOS模板**。插件将自动下载所需的模板文件（`.gdip` 和库文件）并解压到您的 `res://ios/plugins/` 文件夹中（无需手动解压 zip 压缩包）。
 
 ---
 

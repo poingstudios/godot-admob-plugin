@@ -1,5 +1,8 @@
 # 激励广告
 
+!!! note "Godot 3 (v1) 文档"
+    本页面适用于 **Godot 3.x**。如需 **Godot 4.2+**，请查看[稳定文档](https://poingstudios.github.io/godot-admob-plugin/stable/)。
+
 激励广告为用户提供与其互动以换取应用内奖励（例如额外生命、游戏内货币等）的选项。
 
 ---

@@ -1,5 +1,8 @@
 # Enums e Configurações
 
+!!! note "Documentação Godot 3 (v1)"
+    Esta página é para **Godot 3.x**. Para **Godot 4.2+**, veja a [documentação estável](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 Esta página lista os enums e configurações públicas utilizados pelo Plugin AdMob no Godot 3.
 
 ---
@@ -8,8 +11,8 @@ Esta página lista os enums e configurações públicas utilizados pelo Plugin A
 
 Define o status de prontidão do SDK do Google Mobile Ads.
 
-*   `NOT_READY` = `0`
-*   `READY` = `1`
+- `NOT_READY` = `0`
+- `READY` = `1`
 
 ---
 
@@ -17,8 +20,8 @@ Define o status de prontidão do SDK do Google Mobile Ads.
 
 Define o posicionamento físico do banner na tela.
 
-*   `BOTTOM` = `0` (Parte inferior)
-*   `TOP` = `1` (Parte superior)
+- `BOTTOM` = `0` (Parte inferior)
+- `TOP` = `1` (Parte superior)
 
 ---
 
@@ -26,9 +29,9 @@ Define o posicionamento físico do banner na tela.
 
 Tamanhos de banner configurados nas preferências do AdMob Editor no painel do Godot:
 
-*   `"BANNER"` (Banner padrão: 320x50)
-*   `"MEDIUM_RECTANGLE"` (Retângulo médio: 300x250)
-*   `"FULL_BANNER"` (Banner completo: 468x60)
-*   `"LEADERBOARD"` (Leaderboard: 728x90)
-*   `"ADAPTIVE"` (Banner adaptativo ancorado)
-*   `"SMART_BANNER"` (Smart banner: depreciado)
+- `"BANNER"` (Banner padrão: 320x50)
+- `"MEDIUM_RECTANGLE"` (Retângulo médio: 300x250)
+- `"FULL_BANNER"` (Banner completo: 468x60)
+- `"LEADERBOARD"` (Leaderboard: 728x90)
+- `"ADAPTIVE"` (Banner adaptativo ancorado)
+- `"SMART_BANNER"` (Smart banner: depreciado)

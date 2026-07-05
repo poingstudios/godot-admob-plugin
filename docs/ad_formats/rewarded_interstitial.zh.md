@@ -1,5 +1,8 @@
 # 激励插页广告
 
+!!! note "Godot 3 (v1) 文档"
+    本页面适用于 **Godot 3.x**。如需 **Godot 4.2+**，请查看[稳定文档](https://poingstudios.github.io/godot-admob-plugin/stable/)。
+
 激励插页是一种激励广告格式，允许您为在应用自然过渡期间自动出现的广告提供奖励。与传统激励广告不同，用户不需要选择观看激励插页。
 
 ---

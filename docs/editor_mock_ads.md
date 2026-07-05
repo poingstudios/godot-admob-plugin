@@ -1,5 +1,8 @@
 # Preview Mock Ads in Editor
 
+!!! note "Godot 3 (v1) Documentation"
+    This page is for **Godot 3.x**. For **Godot 4.2+**, see the [stable documentation](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 The plugin comes with a built-in Mock Ad system. This allows you to test your ad integration visual layouts and logic flow directly inside the Godot Editor without deploying to a physical device.
 
 Mock ads simulate ad behaviors and fire the exact same lifecycle callbacks (such as load, show, clicks, and dismissals) as the real mobile SDKs.

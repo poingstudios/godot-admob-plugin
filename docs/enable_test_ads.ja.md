@@ -1,5 +1,8 @@
 # テスト広告を有効にする
 
+!!! note "Godot 3 (v1) ドキュメント"
+    このページは **Godot 3.x** 用です。**Godot 4.2+** については、[安定版ドキュメント](https://poingstudios.github.io/godot-admob-plugin/stable/) をご覧ください。
+
 開発中は、無効なトラフィックを生成し、AdMobアカウントの停止リスクを避けるために、テスト広告を使用することが重要です。
 
 ---

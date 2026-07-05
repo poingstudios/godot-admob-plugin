@@ -1,5 +1,8 @@
 # Anuncios Recompensados
 
+!!! note "Documentación Godot 3 (v1)"
+    Esta página es para **Godot 3.x**. Para **Godot 4.2+**, consulte la [documentación estable](https://poingstudios.github.io/godot-admob-plugin/stable/).
+
 Los anuncios recompensados ofrecen a los usuarios la opción de interactuar con ellos a cambio de recompensas dentro de la aplicación (por ejemplo, vidas extra, moneda del juego, etc.).
 
 ---
