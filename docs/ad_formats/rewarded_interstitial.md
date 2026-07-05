@@ -1,7 +1,7 @@
 # Rewarded Interstitial Ads
 
 !!! note "Godot 3 (v1) Documentation"
-    This page is for **Godot 3.x**. For **Godot 4.2+**, see the [latest documentation](https://poingstudios.github.io/godot-admob-plugin/stable/).
+    This page is for **Godot 3.x**. For **Godot 4.2+**, see the [stable documentation](https://poingstudios.github.io/godot-admob-plugin/stable/).
 
 Rewarded interstitial is a type of incentivized ad format that allows you to offer a reward for ads that appear automatically during natural app transitions. Unlike traditional rewarded ads, users aren't required to opt in to view a rewarded interstitial.
 

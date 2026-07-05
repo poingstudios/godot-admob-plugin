@@ -1,7 +1,7 @@
 # Enums & Configurations
 
 !!! note "Godot 3 (v1) Documentation"
-    This page is for **Godot 3.x**. For **Godot 4.2+**, see the [latest documentation](https://poingstudios.github.io/godot-admob-plugin/stable/).
+    This page is for **Godot 3.x**. For **Godot 4.2+**, see the [stable documentation](https://poingstudios.github.io/godot-admob-plugin/stable/).
 
 This page lists the public enums and configurations used by the Godot AdMob Plugin in Godot 3.
 

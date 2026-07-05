@@ -2,7 +2,7 @@
 
 !!! note "Godot 3 (v1) Documentation"
     This documentation is for the **v1** plugin, which supports **Godot 3.x** only.
-    For **Godot 4.2+**, see the [latest documentation](https://poingstudios.github.io/godot-admob-plugin/stable/).
+    For **Godot 4.2+**, see the [stable documentation](https://poingstudios.github.io/godot-admob-plugin/stable/).
 
 Integrating the AdMob plugin into your Godot project for **Godot 3** allows you to easily display Google Mobile Ads on Android and iOS devices.
 
