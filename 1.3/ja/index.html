@@ -1198,19 +1198,34 @@
 
 
 <h1 id="_1">はじめに</h1>
+<div class="admonition note">
+<p class="admonition-title">Godot 3 (v1) ドキュメント</p>
+<p>このドキュメントは <strong>v1</strong> プラグイン用で、<strong>Godot 3.x</strong> のみをサポートしています。
+<strong>Godot 4.2+</strong> については、<a href="https://poingstudios.github.io/godot-admob-plugin/stable/">安定版ドキュメント</a> をご覧ください。</p>
+</div>
 <p>Godot 3用のAdMobプラグインを統合すると、AndroidおよびiOSデバイスでGoogleモバイル広告を簡単に表示できます。</p>
 <hr />
 <h2 id="_2">前提条件</h2>
 <ul>
 <li><strong>Godot Engine 3.x Mono/Standard Edition</strong>（v3.3以上）。</li>
-<li><strong>Android エクスポートの場合</strong>:</li>
-<li>Godot Androidビルドテンプレートが有効。</li>
-<li>ターゲットAndroid SDKバージョンが設定済み。</li>
-<li><strong>iOS エクスポートの場合</strong>:</li>
-<li>XcodeがインストールされたmacOSマシン。</li>
-<li>アクティブなApple Developerアカウント。</li>
 <li><strong>推奨</strong>: 登録済みのAndroid/iOSアプリを持つアクティブな<a href="https://admob.google.com/">AdMobアカウント</a>。</li>
 </ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Android</label><label for="__tabbed_1_2">iOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>Godot Androidビルドテンプレートが有効。</li>
+<li>ターゲットAndroid SDKバージョンが設定済み。</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>XcodeがインストールされたmacOSマシン。</li>
+<li>アクティブなApple Developerアカウント。</li>
+</ul>
+</div>
+</div>
+</div>
 <hr />
 <h2 id="_3">プラグインのダウンロードとインポート</h2>
 <ol>
@@ -1222,10 +1237,16 @@
 <hr />
 <h2 id="_4">プラットフォームテンプレートのダウンロード</h2>
 <p>Godotエディタ内でAdMobマネージャーを開きます（<strong>プロジェクト -&gt; ツール -&gt; AdMobマネージャー</strong>または<strong>AdMob</strong>パネルタブをクリック）。</p>
-<ul>
-<li><strong>Android</strong>: <strong>Androidテンプレートをダウンロード</strong>を選択します。プラグインが自動的に必要なテンプレートファイル（<code>.aar</code>および<code>.gdap</code>）をダウンロードし、<code>res://android/plugins/</code>フォルダに直接展開します（手動でのzip解凍は不要です）。</li>
-<li><strong>iOS</strong>: <strong>iOSテンプレートをダウンロード</strong>を選択します。プラグインが自動的に必要なテンプレート文件（<code>.gdip</code>およびライブラリファイル）をダウンロードし、<code>res://ios/plugins/</code>フォルダに直接展開します（手動でのzip解凍は不要です）。</li>
-</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Android</label><label for="__tabbed_2_2">iOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p><strong>Androidテンプレートをダウンロード</strong>を選択します。プラグインが自動的に必要なテンプレートファイル（<code>.aar</code>および<code>.gdap</code>）をダウンロードし、<code>res://android/plugins/</code>フォルダに直接展開します（手動でのzip解凍は不要です）。</p>
+</div>
+<div class="tabbed-block">
+<p><strong>iOSテンプレートをダウンロード</strong>を選択します。プラグインが自動的に必要なテンプレート文件（<code>.gdip</code>およびライブラリファイル）をダウンロードし、<code>res://ios/plugins/</code>フォルダに直接展開します（手動でのzip解凍は不要です）。</p>
+</div>
+</div>
+</div>
 <hr />
 <h2 id="_5">設定</h2>
 <p><strong>AdMobエディタパネル</strong>（<code>プロジェクト -&gt; ツール -&gt; AdMobマネージャー</code>）で、以下のオプションを設定します：</p>
@@ -1263,7 +1284,7 @@
 <h2 id="sdk">SDKの初期化</h2>
 <p>広告を読み込む前に、Google Mobile Ads SDKを初期化する必要があります。設定で<strong>有効</strong>がアクティブな場合、プラグインは起動時に自動的に初期化されます。</p>
 <p>手動で初期化したい場合、または完了を監視したい場合は、<code>initialization_complete</code>シグナルに接続：</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">GDScript</label><label for="__tabbed_1_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>

@@ -1198,19 +1198,34 @@
 
 
 <h1 id="_1">入门指南</h1>
+<div class="admonition note">
+<p class="admonition-title">Godot 3 (v1) 文档</p>
+<p>本文档适用于 <strong>v1</strong> 插件，仅支持 <strong>Godot 3.x</strong>。
+如需 <strong>Godot 4.2+</strong>，请查看<a href="https://poingstudios.github.io/godot-admob-plugin/stable/">稳定文档</a>。</p>
+</div>
 <p>将AdMob插件集成到您的Godot 3项目中，可以轻松地在Android和iOS设备上展示Google移动广告。</p>
 <hr />
 <h2 id="_2">前提条件</h2>
 <ul>
 <li><strong>Godot Engine 3.x Mono/Standard Edition</strong>（v3.3或更高版本）。</li>
-<li><strong>Android导出</strong>：</li>
-<li>启用Godot Android构建模板。</li>
-<li>配置目标Android SDK版本。</li>
-<li><strong>iOS导出</strong>：</li>
-<li>安装了Xcode的macOS机器。</li>
-<li>活跃的Apple Developer账户。</li>
 <li><strong>建议</strong>：拥有已注册Android/iOS应用的活跃<a href="https://admob.google.com/">AdMob账户</a>。</li>
 </ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Android</label><label for="__tabbed_1_2">iOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>启用Godot Android构建模板。</li>
+<li>配置目标Android SDK版本。</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>安装了Xcode的macOS机器。</li>
+<li>活跃的Apple Developer账户。</li>
+</ul>
+</div>
+</div>
+</div>
 <hr />
 <h2 id="_3">下载并导入插件</h2>
 <ol>
@@ -1222,10 +1237,16 @@
 <hr />
 <h2 id="_4">下载平台模板</h2>
 <p>在Godot编辑器内打开AdMob管理器（<strong>项目 -&gt; 工具 -&gt; AdMob管理器</strong>或点击<strong>AdMob</strong>面板标签）。</p>
-<ul>
-<li><strong>Android</strong>：选择<strong>下载Android模板</strong>。插件将自动下载所需的模板文件（<code>.aar</code> 和 <code>.gdap</code>）并解压到您的 <code>res://android/plugins/</code> 文件夹中（无需手动解压 zip 压缩包）。</li>
-<li><strong>iOS</strong>：选择<strong>下载iOS模板</strong>。插件将自动下载所需的模板文件（<code>.gdip</code> 和库文件）并解压到您的 <code>res://ios/plugins/</code> 文件夹中（无需手动解压 zip 压缩包）。</li>
-</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Android</label><label for="__tabbed_2_2">iOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>选择<strong>下载Android模板</strong>。插件将自动下载所需的模板文件（<code>.aar</code> 和 <code>.gdap</code>）并解压到您的 <code>res://android/plugins/</code> 文件夹中（无需手动解压 zip 压缩包）。</p>
+</div>
+<div class="tabbed-block">
+<p>选择<strong>下载iOS模板</strong>。插件将自动下载所需的模板文件（<code>.gdip</code> 和库文件）并解压到您的 <code>res://ios/plugins/</code> 文件夹中（无需手动解压 zip 压缩包）。</p>
+</div>
+</div>
+</div>
 <hr />
 <h2 id="_5">配置</h2>
 <p>在 <strong>AdMob 编辑器面板</strong>（<code>项目 -&gt; 工具 -&gt; AdMob 管理器</code>）中，配置以下选项：</p>
@@ -1263,7 +1284,7 @@
 <h2 id="sdk">初始化SDK</h2>
 <p>在加载广告之前，必须初始化Google Mobile Ads SDK。如果配置中<strong>已启用</strong>处于活动状态，插件将在启动时自动初始化。</p>
 <p>如果您希望手动初始化或监控完成情况，请连接到<code>initialization_complete</code>信号：</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">GDScript</label><label for="__tabbed_1_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>

@@ -1198,19 +1198,34 @@
 
 
 <h1 id="comecar">Começar</h1>
+<div class="admonition note">
+<p class="admonition-title">Documentação Godot 3 (v1)</p>
+<p>Esta documentação é para o plugin <strong>v1</strong>, que suporta apenas <strong>Godot 3.x</strong>.
+Para <strong>Godot 4.2+</strong>, veja a <a href="https://poingstudios.github.io/godot-admob-plugin/stable/">documentação estável</a>.</p>
+</div>
 <p>A integração do plugin AdMob da Poing Studios no seu projeto Godot 3 permite exibir anúncios do Google Mobile Ads em dispositivos Android e iOS de forma simples.</p>
 <hr />
 <h2 id="pre-requisitos">Pré-requisitos</h2>
 <ul>
 <li><strong>Godot Engine 3.x Mono/Standard Edition</strong> (v3.3 ou superior).</li>
-<li><strong>Para Exportação Android</strong>:</li>
-<li>Template de Build Android habilitado.</li>
-<li>SDK Android configurado.</li>
-<li><strong>Para Exportação iOS</strong>:</li>
-<li>Computador macOS com Xcode instalado.</li>
-<li>Conta de desenvolvedor Apple ativa.</li>
 <li><strong>Recomendado</strong>: Uma conta ativa no <a href="https://admob.google.com/">AdMob</a> com aplicativos Android/iOS registrados.</li>
 </ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">Android</label><label for="__tabbed_1_2">iOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ul>
+<li>Template de Build Android habilitado.</li>
+<li>SDK Android configurado.</li>
+</ul>
+</div>
+<div class="tabbed-block">
+<ul>
+<li>Computador macOS com Xcode instalado.</li>
+<li>Conta de desenvolvedor Apple ativa.</li>
+</ul>
+</div>
+</div>
+</div>
 <hr />
 <h2 id="download-e-importacao-do-plugin">Download e Importação do Plugin</h2>
 <ol>
@@ -1222,10 +1237,16 @@
 <hr />
 <h2 id="baixar-templates-de-plataforma">Baixar Templates de Plataforma</h2>
 <p>Após habilitar o plugin, a aba <strong>AdMob</strong> aparecerá nas abas principais do editor (ao lado de <strong>2D</strong>, <strong>3D</strong>, <strong>AssetLib</strong>, etc.) no topo do editor. Abra-a para acessar o gerenciador AdMob.</p>
-<ul>
-<li><strong>Android</strong>: Selecione <strong>Download Android Template</strong>. O plugin irá baixar e extrair automaticamente os arquivos de template necessários (<code>.aar</code> e <code>.gdap</code>) diretamente na sua pasta <code>res://android/plugins/</code> (não é necessário extrair o zip manualmente).</li>
-<li><strong>iOS</strong>: Selecione <strong>Download iOS Template</strong>. O plugin irá baixar e extrair automaticamente os arquivos de template necessários (<code>.gdip</code> e arquivos de biblioteca) diretamente na sua pasta <code>res://ios/plugins/</code> (não é necessário extrair o zip manualmente).</li>
-</ul>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Android</label><label for="__tabbed_2_2">iOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Selecione <strong>Download Android Template</strong>. O plugin irá baixar e extrair automaticamente os arquivos de template necessários (<code>.aar</code> e <code>.gdap</code>) diretamente na sua pasta <code>res://android/plugins/</code> (não é necessário extrair o zip manualmente).</p>
+</div>
+<div class="tabbed-block">
+<p>Selecione <strong>Download iOS Template</strong>. O plugin irá baixar e extrair automaticamente os arquivos de template necessários (<code>.gdip</code> e arquivos de biblioteca) diretamente na sua pasta <code>res://ios/plugins/</code> (não é necessário extrair o zip manualmente).</p>
+</div>
+</div>
+</div>
 <hr />
 <h2 id="configuracao">Configuração</h2>
 <p>No <strong>painel do AdMob</strong> (<code>Projeto -&gt; Ferramentas -&gt; AdMob Manager</code>), configure as seguintes opções:</p>
@@ -1263,7 +1284,7 @@
 <h2 id="inicializar-o-sdk">Inicializar o SDK</h2>
 <p>Antes de carregar anúncios, o SDK do Google Mobile Ads deve ser inicializado. Se a opção <strong>Is Enabled</strong> estiver ativa na sua configuração, o plugin se inicializará automaticamente ao iniciar.</p>
 <p>Se preferir inicializar manualmente, ou quiser monitorar a conclusão, conecte-se ao sinal <code>initialization_complete</code>:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">GDScript</label><label for="__tabbed_1_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
