@@ -1,0 +1,209 @@
+# MIT License
+
+# Copyright (c) 2026-present Poing Studios
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+extends EditorExportPlugin
+
+const ExportService := preload("res://addons/admob/internal/services/export_service.gd")
+const PbxprojService := preload("res://addons/admob/internal/services/pbxproj_service.gd")
+const PLUGIN_CONFIG_DIR := "res://ios/plugins/"
+
+var _spm_applied := false
+var _pending_export_path := ""
+var _spm_dependencies: Array[Dictionary] = []
+
+
+func _get_name() -> String:
+	return "PoingAdMobIOS"
+
+
+func _supports_platform(platform: EditorExportPlatform) -> bool:
+	return platform.get_os_name() == "iOS"
+
+
+func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
+	_spm_applied = false
+	_pending_export_path = path
+
+
+func _end_generate_apple_embedded_project(path: String, _will_build_archive: bool) -> void:
+	print("AdMob iOS: _end_generate_apple_embedded_project CALLED with path='%s'" % path)
+	_apply_spm(path, false)
+
+
+func _export_end() -> void:
+	if _spm_applied or _pending_export_path.is_empty():
+		return
+	print("AdMob iOS: _export_end fallback (pre-4.7 engine) with path='%s'" % _pending_export_path)
+	_apply_spm(_pending_export_path, true)
+
+
+func _apply_spm(path: String, defer_patch: bool) -> void:
+	var version_info := Engine.get_version_info()
+	var is_lower_than_4_8 := (version_info.major < 4) or (version_info.major == 4 and version_info.minor < 8)
+	if not is_lower_than_4_8:
+		print("AdMob iOS: Godot 4.8+ detected, utilizing native SPM support. Skipping custom SPM export pipeline.")
+		return
+
+	_spm_applied = true
+	var activated_plugins := ExportService.get_activated_plugins("iOS")
+	if activated_plugins.is_empty():
+		print("AdMob iOS: No activated plugins found.")
+		return
+
+	_spm_dependencies = _collect_spm_dependencies(activated_plugins)
+	if _spm_dependencies.is_empty():
+		print("AdMob iOS: No SPM dependencies collected.")
+		return
+
+	var export_dir := path.get_base_dir()
+	_generate_package_swift(export_dir, _spm_dependencies)
+	print("AdMob iOS: Package.swift generated.")
+	_generate_dummy_source(export_dir)
+	print("AdMob iOS: Dummy.swift generated.")
+
+	if defer_patch:
+		print("AdMob iOS: Deferring Xcode project patch...")
+		_defer_pbxproj_patch.call_deferred(export_dir, path)
+	else:
+		_patch_xcodeproj(export_dir, path)
+		print("AdMob iOS: Xcode project patched.")
+		_spm_dependencies.clear()
+
+
+func _defer_pbxproj_patch(export_dir: String, path: String) -> void:
+	_patch_xcodeproj(export_dir, path)
+	print("AdMob iOS: Deferred Xcode project patch applied.")
+	_spm_dependencies.clear()
+
+
+func _patch_xcodeproj(export_dir: String, path: String) -> void:
+	var project_name := path.get_file().get_basename()
+	var pbxproj_path := export_dir.path_join(project_name + ".xcodeproj/project.pbxproj")
+
+	if FileAccess.file_exists(pbxproj_path):
+		PbxprojService.patch(pbxproj_path)
+		return
+
+	var dir := DirAccess.open(export_dir)
+	if not dir:
+		push_warning("AdMob: Could not open export directory: %s" % export_dir)
+		return
+
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while file_name != "":
+		if file_name.ends_with(".xcodeproj"):
+			var found_path := export_dir.path_join(file_name).path_join("project.pbxproj")
+			if FileAccess.file_exists(found_path):
+				PbxprojService.patch(found_path)
+			else:
+				push_warning("AdMob: project.pbxproj not found at: %s" % found_path)
+			break
+		file_name = dir.get_next()
+
+
+func _collect_spm_dependencies(activated_plugins: Array[String]) -> Array[Dictionary]:
+	var deps: Array[Dictionary] = []
+	var dir := DirAccess.open(PLUGIN_CONFIG_DIR)
+	if not dir:
+		return deps
+
+	dir.list_dir_begin()
+	var file_name := dir.get_next()
+	while file_name != "":
+		if not dir.current_is_dir() and file_name.ends_with(".gdip"):
+			var config := ConfigFile.new()
+			var err := config.load(PLUGIN_CONFIG_DIR.path_join(file_name))
+			if err == OK:
+				var plugin_name := config.get_value("config", "name", "")
+				if activated_plugins.has(plugin_name):
+					if config.has_section_key("dependencies", "spm_packages"):
+						var packages: Array = config.get_value("dependencies", "spm_packages", [])
+						for pkg: Dictionary in packages:
+							var url: String = pkg.get("url", "")
+							var version: String = pkg.get("version", "")
+							var products: Array = pkg.get("products", [])
+							for product: String in products:
+								var dep := {
+									"url": url,
+									"version": version,
+									"kind": "exact",
+									"product": product
+								}
+								deps.append(dep)
+		file_name = dir.get_next()
+	return deps
+
+
+func _generate_package_swift(export_dir: String, dependencies: Array[Dictionary]) -> void:
+	var package_dir := export_dir.path_join("admob_spm")
+	if not DirAccess.dir_exists_absolute(package_dir):
+		DirAccess.make_dir_recursive_absolute(package_dir)
+
+	var package_deps_str := ""
+	var target_deps_str := ""
+	var processed_urls := []
+	var processed_products := []
+
+	for dep in dependencies:
+		var url: String = dep.url
+		var product: String = dep.product
+		var package_name: String = url.get_file().trim_suffix(".git")
+
+		if not processed_urls.has(url):
+			processed_urls.append(url)
+			var version_rule := (
+				'exact: "%s"' % dep.version if dep.kind == "exact" else 'from: "%s"' % dep.version
+			)
+			package_deps_str += '        .package(url: "%s", %s),\n' % [url, version_rule]
+
+		if not processed_products.has(product):
+			processed_products.append(product)
+			target_deps_str += (
+				'                .product(name: "%s", package: "%s"),\n' % [product, package_name]
+			)
+
+	var content := (
+		'// swift-tools-version:5.9\nimport PackageDescription\n\nlet package = Package(\n    name: "PoingGodotAdMobDeps",\n    platforms: [.iOS(.v14)],\n    products: [\n        .library(\n            name: "PoingGodotAdMobDeps",\n            targets: ["PoingGodotAdMobDeps"]),\n    ],\n    dependencies: [\n'
+		+ package_deps_str
+		+ '    ],\n    targets: [\n        .target(\n            name: "PoingGodotAdMobDeps",\n            dependencies: [\n'
+		+ target_deps_str
+		+ '            ],\n            path: "PoingGodotAdMobDeps"\n        )\n    ]\n)\n'
+	)
+
+	var file := FileAccess.open(package_dir.path_join("Package.swift"), FileAccess.WRITE)
+	if file:
+		file.store_string(content)
+		file.close()
+		print("AdMob: Generated Package.swift at %s" % package_dir)
+
+
+func _generate_dummy_source(export_dir: String) -> void:
+	var source_dir := export_dir.path_join("admob_spm/PoingGodotAdMobDeps")
+	if not DirAccess.dir_exists_absolute(source_dir):
+		DirAccess.make_dir_recursive_absolute(source_dir)
+
+	var content := "// Dummy\nimport Foundation\n\npublic struct PoingGodotAdMobDeps {\n    public init() {}\n}\n"
+	var file := FileAccess.open(source_dir.path_join("Dummy.swift"), FileAccess.WRITE)
+	if file:
+		file.store_string(content)
+		file.close()
