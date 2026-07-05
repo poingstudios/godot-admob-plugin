@@ -89,6 +89,7 @@ plugins:
           nav_translations:
             Guides: Guias
             Reference: Referência
+            'API Reference': 'Referência da API'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades do AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
             Ad formats: Formatos de Anúncios
             App Open: App Open
@@ -157,6 +158,7 @@ plugins:
           nav_translations:
             Guides: Guías
             Reference: Referencia
+            'API Reference': 'Referencia de la API'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades de AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
             Ad formats: Formatos de anuncios
             App Open: App Open
@@ -226,6 +228,7 @@ plugins:
           nav_translations:
             Guides: 指南
             Reference: 参考
+            'API Reference': 'API 参考'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot 技能 <span class="modern-icon" title="Beta">🧪</span>'
             Ad formats: 广告格式
             App Open: 开屏广告
@@ -295,6 +298,7 @@ plugins:
           nav_translations:
             Guides: ガイド
             Reference: リファレンス
+            'API Reference': 'API リファレンス'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot スキル <span class="modern-icon" title="Beta">🧪</span>'
             Ad formats: 広告フォーマット
             App Open: アプリ起動時広告 (App Open)
@@ -430,20 +434,22 @@ nav:
       - Impression-Level Ad Revenue: advanced_topics/impression_level_ad_revenue.md
       - Targeting: advanced_topics/targeting.md
   - Reference:
-    - Overview: reference/index.md
-    - Classes:
-      - AdError: reference/classes/AdError.md
-      - AdPosition: reference/classes/AdPosition.md
-      - AdRequest: reference/classes/AdRequest.md
-      - AdSize: reference/classes/AdSize.md
-      - AdValue: reference/classes/AdValue.md
-      - AdView: reference/classes/AdView.md
-      - AdapterResponseInfo: reference/classes/AdapterResponseInfo.md
-      - LoadAdError: reference/classes/LoadAdError.md
-      - ResponseInfo: reference/classes/ResponseInfo.md
-    - Listeners:
-      - AdListener: reference/listeners/AdListener.md
-    - Enums: reference/enums.md
+    - API Reference:
+      - Overview: reference/index.md
+      - Classes:
+        - AdError: reference/classes/AdError.md
+        - AdPosition: reference/classes/AdPosition.md
+        - AdRequest: reference/classes/AdRequest.md
+        - AdSize: reference/classes/AdSize.md
+        - AdValue: reference/classes/AdValue.md
+        - AdView: reference/classes/AdView.md
+        - AdapterResponseInfo: reference/classes/AdapterResponseInfo.md
+        - LoadAdError: reference/classes/LoadAdError.md
+        - ResponseInfo: reference/classes/ResponseInfo.md
+      - Listeners:
+        - AdListener: reference/listeners/AdListener.md
+      - Enums:
+        - Overview: reference/enums.md
 
 hooks:
   - docs/hooks.py
