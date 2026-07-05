@@ -444,10 +444,32 @@ nav:
         - AdValue: reference/classes/AdValue.md
         - AdView: reference/classes/AdView.md
         - AdapterResponseInfo: reference/classes/AdapterResponseInfo.md
+        - AdapterStatus: reference/classes/AdapterStatus.md
+        - AppOpenAd: reference/classes/AppOpenAd.md
+        - AppOpenAdLoader: reference/classes/AppOpenAdLoader.md
+        - InitializationStatus: reference/classes/InitializationStatus.md
+        - InterstitialAd: reference/classes/InterstitialAd.md
+        - InterstitialAdLoader: reference/classes/InterstitialAdLoader.md
         - LoadAdError: reference/classes/LoadAdError.md
+        - MobileAds: reference/classes/MobileAds.md
+        - NativeOverlayAd: reference/classes/NativeOverlayAd.md
+        - RequestConfiguration: reference/classes/RequestConfiguration.md
         - ResponseInfo: reference/classes/ResponseInfo.md
+        - RewardedAd: reference/classes/RewardedAd.md
+        - RewardedAdLoader: reference/classes/RewardedAdLoader.md
+        - RewardedInterstitialAd: reference/classes/RewardedInterstitialAd.md
+        - RewardedInterstitialAdLoader: reference/classes/RewardedInterstitialAdLoader.md
+        - RewardedItem: reference/classes/RewardedItem.md
       - Listeners:
+        - AdInspectorClosedListener: reference/listeners/AdInspectorClosedListener.md
         - AdListener: reference/listeners/AdListener.md
+        - AppOpenAdLoadCallback: reference/listeners/AppOpenAdLoadCallback.md
+        - FullScreenContentCallback: reference/listeners/FullScreenContentCallback.md
+        - InterstitialAdLoadCallback: reference/listeners/InterstitialAdLoadCallback.md
+        - OnInitializationCompleteListener: reference/listeners/OnInitializationCompleteListener.md
+        - OnUserEarnedRewardListener: reference/listeners/OnUserEarnedRewardListener.md
+        - RewardedAdLoadCallback: reference/listeners/RewardedAdLoadCallback.md
+        - RewardedInterstitialAdLoadCallback: reference/listeners/RewardedInterstitialAdLoadCallback.md
       - Enums:
         - Overview: reference/enums.md
 
