@@ -442,6 +442,7 @@ nav:
         - AdRequest: reference/classes/AdRequest.md
         - AdSize: reference/classes/AdSize.md
         - AdValue: reference/classes/AdValue.md
+        - AdVideoOptions: reference/classes/AdVideoOptions.md
         - AdView: reference/classes/AdView.md
         - AdapterResponseInfo: reference/classes/AdapterResponseInfo.md
         - AdapterStatus: reference/classes/AdapterStatus.md
@@ -452,7 +453,10 @@ nav:
         - InterstitialAdLoader: reference/classes/InterstitialAdLoader.md
         - LoadAdError: reference/classes/LoadAdError.md
         - MobileAds: reference/classes/MobileAds.md
+        - NativeAdOptions: reference/classes/NativeAdOptions.md
         - NativeOverlayAd: reference/classes/NativeOverlayAd.md
+        - NativeTemplateStyle: reference/classes/NativeTemplateStyle.md
+        - NativeTemplateTextStyle: reference/classes/NativeTemplateTextStyle.md
         - RequestConfiguration: reference/classes/RequestConfiguration.md
         - ResponseInfo: reference/classes/ResponseInfo.md
         - RewardedAd: reference/classes/RewardedAd.md
@@ -460,6 +464,7 @@ nav:
         - RewardedInterstitialAd: reference/classes/RewardedInterstitialAd.md
         - RewardedInterstitialAdLoader: reference/classes/RewardedInterstitialAdLoader.md
         - RewardedItem: reference/classes/RewardedItem.md
+        - ServerSideVerificationOptions: reference/classes/ServerSideVerificationOptions.md
       - Listeners:
         - AdInspectorClosedListener: reference/listeners/AdInspectorClosedListener.md
         - AdListener: reference/listeners/AdListener.md
