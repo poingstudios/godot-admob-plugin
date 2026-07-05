@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="pt" class="no-js">
+<html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
@@ -8,37 +8,41 @@
       
       
       
-        <link rel="canonical" href="https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/mediate/integrate_partner_networks/vpon.pt-br/">
+        <link rel="canonical" href="https://poingstudios.github.io/godot-admob-plugin/latest/privacy/ad_serving_modes/ad_serving_modes/">
       
       
+        <link rel="prev" href="../../strategies/strategies/">
+      
+      
+        <link rel="next" href="../../store_data_disclosure/google_play_data_disclosure/">
       
       
         
-          <link rel="alternate" href="../../../../mediate/integrate_partner_networks/vpon.pt-br/" hreflang="en">
+          <link rel="alternate" href="./" hreflang="en">
         
-          <link rel="alternate" href="./" hreflang="pt-BR">
+          <link rel="alternate" href="../../../pt-BR/privacy/ad_serving_modes/ad_serving_modes/" hreflang="pt-BR">
         
-          <link rel="alternate" href="../../../../es/mediate/integrate_partner_networks/vpon.pt-br/" hreflang="es">
+          <link rel="alternate" href="../../../es/privacy/ad_serving_modes/ad_serving_modes/" hreflang="es">
         
-          <link rel="alternate" href="../../../../zh/mediate/integrate_partner_networks/vpon.pt-br/" hreflang="zh">
+          <link rel="alternate" href="../../../zh/privacy/ad_serving_modes/ad_serving_modes/" hreflang="zh">
         
-          <link rel="alternate" href="../../../../ja/mediate/integrate_partner_networks/vpon.pt-br/" hreflang="ja">
+          <link rel="alternate" href="../../../ja/privacy/ad_serving_modes/ad_serving_modes/" hreflang="ja">
         
       
       
-      <link rel="icon" href="../../../../assets/icon.ico">
+      <link rel="icon" href="../../../assets/icon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>Vpon - Godot AdMob Plugin - Poing Studios</title>
+        <title>Ad serving modes - Godot AdMob Plugin - Poing Studios</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -57,9 +61,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -84,8 +88,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#vpon" class="md-skip">
-          Pular para conteúdo
+        <a href="#ad-serving-modes" class="md-skip">
+          Skip to content
         </a>
       
     </div>
@@ -111,12 +115,12 @@
           <div class='shape shape-2'>⚠️</div>
           <div class='shape shape-3'>⚠️</div>
         </div>
-        <span class='announcement-title'>⚠️ DOCUMENTAÇÃO EXPERIMENTAL</span>
+        <span class='announcement-title'>⚠️ EXPERIMENTAL DOCUMENTATION</span>
         <div class='announcement-text'>
-          Você está visualizando a
-          <a href="https://github.com/poingstudios/godot-admob-plugin/tree/master" target="_blank" rel="noopener" class="announcement-badge">Branch Master</a>
-          (mais recente).<br>Para versões estáveis, por favor veja a
-          <a href="https://poingstudios.github.io/godot-admob-plugin/stable/" class="announcement-link">versão estável</a>.
+          You are viewing the
+          <a href="https://github.com/poingstudios/godot-admob-plugin/tree/master" target="_blank" rel="noopener" class="announcement-badge">Master Branch</a>
+          (latest).<br>For stable releases, please see the
+          <a href="https://poingstudios.github.io/godot-admob-plugin/stable/" class="announcement-link">stable version</a>.
         </div>
       </div>
     </div>
@@ -136,10 +140,10 @@
       
 
 <header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
-    <a href="../../../" title="Godot AdMob Plugin - Poing Studios" class="md-header__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Godot AdMob Plugin - Poing Studios" class="md-header__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
       
-  <img src="../../../../assets/icon.ico" alt="logo">
+  <img src="../../../assets/icon.ico" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -156,7 +160,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Vpon
+              Ad serving modes
             
           </span>
         </div>
@@ -196,38 +200,38 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="Selecione o idioma">
+    <button class="md-header__button md-icon" aria-label="Select language">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="../../../../mediate/integrate_partner_networks/vpon.pt-br/" hreflang="en" class="md-select__link">
+            <a href="./" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="pt-BR" class="md-select__link">
+            <a href="../../../pt-BR/privacy/ad_serving_modes/ad_serving_modes/" hreflang="pt-BR" class="md-select__link">
               Português (Brasil)
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../es/mediate/integrate_partner_networks/vpon.pt-br/" hreflang="es" class="md-select__link">
+            <a href="../../../es/privacy/ad_serving_modes/ad_serving_modes/" hreflang="es" class="md-select__link">
               Español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../zh/mediate/integrate_partner_networks/vpon.pt-br/" hreflang="zh" class="md-select__link">
+            <a href="../../../zh/privacy/ad_serving_modes/ad_serving_modes/" hreflang="zh" class="md-select__link">
               简体中文
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../../ja/mediate/integrate_partner_networks/vpon.pt-br/" hreflang="ja" class="md-select__link">
+            <a href="../../../ja/privacy/ad_serving_modes/ad_serving_modes/" hreflang="ja" class="md-select__link">
               日本語
             </a>
           </li>
@@ -248,16 +252,16 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Pesquisar">
+      <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -270,7 +274,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Inicializando busca
+            Initializing search
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -291,7 +295,7 @@
         
           
             
-<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -299,15 +303,17 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../../" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../.." class="md-tabs__link">
           
   
   
-  Guias
+  Guides
 
         </a>
       </li>
@@ -327,7 +333,7 @@
           
   
   
-  Referência
+  Reference
 
         </a>
       </li>
@@ -355,11 +361,11 @@
   
 
 
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../../" title="Godot AdMob Plugin - Poing Studios" class="md-nav__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
+    <a href="../../.." title="Godot AdMob Plugin - Poing Studios" class="md-nav__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
       
-  <img src="../../../../assets/icon.ico" alt="logo">
+  <img src="../../../assets/icon.ico" alt="logo">
 
     </a>
     Godot AdMob Plugin - Poing Studios
@@ -371,33 +377,38 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
         
           
-          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Guias
+    Guides
   
 
     
@@ -408,12 +419,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Guias
+    Guides
   
 
           </label>
@@ -426,14 +437,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Começar
+    Get Started
   
 
     
@@ -545,7 +556,7 @@
   <span class="md-ellipsis">
     
   
-    Habilidades do AI Copilot <span class="modern-icon" title="Beta">🧪</span>
+    AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>
   
 
     
@@ -572,24 +583,27 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_6" >
         
           
-          <label class="md-nav__link" for="__nav_1_6" id="__nav_1_6_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_1_6" id="__nav_1_6_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Formatos de Anúncios
+    Ad formats
   
 
     
@@ -605,7 +619,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Formatos de Anúncios
+    Ad formats
   
 
           </label>
@@ -705,7 +719,7 @@
   <span class="md-ellipsis">
     
   
-    Configurar anúncios de banner
+    Set up banner ads
   
 
     
@@ -733,7 +747,7 @@
   <span class="md-ellipsis">
     
   
-    Usar banners colapsáveis
+    Use collapsible banners
   
 
     
@@ -777,7 +791,7 @@
   <span class="md-ellipsis">
     
   
-    Tamanhos
+    Sizes
   
 
     
@@ -793,7 +807,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Tamanhos
+    Sizes
   
 
           </label>
@@ -813,7 +827,7 @@
   <span class="md-ellipsis">
     
   
-    Banners adaptativos ancorados
+    Anchored adaptive banners
   
 
     
@@ -885,7 +899,7 @@
   <span class="md-ellipsis">
     
   
-    Intersticial
+    Interstitial
   
 
     
@@ -941,7 +955,7 @@
   <span class="md-ellipsis">
     
   
-    Premiado (Rewarded)
+    Rewarded
   
 
     
@@ -969,7 +983,7 @@
   <span class="md-ellipsis">
     
   
-    Intersticial Premiado <span class="modern-icon" title="Beta">🧪</span>
+    Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>
   
 
     
@@ -1004,24 +1018,27 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7" >
         
           
-          <label class="md-nav__link" for="__nav_1_7" id="__nav_1_7_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_1_7" id="__nav_1_7_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Mediação
+    Mediate
   
 
     
@@ -1037,7 +1054,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Mediação
+    Mediate
   
 
           </label>
@@ -1050,14 +1067,98 @@
   
   
     <li class="md-nav__item">
-      <a href="../../get_started/" class="md-nav__link">
+      <a href="../../../mediate/get_started/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Primeiros Passos
+    First Steps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mediate/choose_networks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Choose ad sources
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mediate/custom_events/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Custom events
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../mediate/troubleshoot_bidding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshoot bidding
   
 
     
@@ -1091,17 +1192,17 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_7_5" >
         
           
-          <label class="md-nav__link" for="__nav_1_7_2" id="__nav_1_7_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_1_7_5" id="__nav_1_7_5_label" tabindex="0">
             
   
   
   <span class="md-ellipsis">
     
   
-    Integrar redes parceiras
+    Integrate partner networks
   
 
     
@@ -1112,12 +1213,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_7_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_7_2">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_7_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_7_5">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Integrar redes parceiras
+    Integrate partner networks
   
 
           </label>
@@ -1130,7 +1231,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../applovin/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/applovin/" class="md-nav__link">
         
   
   
@@ -1158,7 +1259,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../bidmachine/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/bidmachine/" class="md-nav__link">
         
   
   
@@ -1186,7 +1287,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../ironsource/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/ironsource/" class="md-nav__link">
         
   
   
@@ -1214,7 +1315,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../meta/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/meta/" class="md-nav__link">
         
   
   
@@ -1242,7 +1343,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vungle/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/vungle/" class="md-nav__link">
         
   
   
@@ -1270,7 +1371,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../unity_ads/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/unity_ads/" class="md-nav__link">
         
   
   
@@ -1298,7 +1399,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../chartboost/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/chartboost/" class="md-nav__link">
         
   
   
@@ -1326,7 +1427,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dtexchange/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/dtexchange/" class="md-nav__link">
         
   
   
@@ -1354,7 +1455,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../imobile/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/imobile/" class="md-nav__link">
         
   
   
@@ -1382,7 +1483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../inmobi/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/inmobi/" class="md-nav__link">
         
   
   
@@ -1410,7 +1511,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../line/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/line/" class="md-nav__link">
         
   
   
@@ -1438,7 +1539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../maio/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/maio/" class="md-nav__link">
         
   
   
@@ -1466,7 +1567,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mintegral/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/mintegral/" class="md-nav__link">
         
   
   
@@ -1494,7 +1595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../moloco/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/moloco/" class="md-nav__link">
         
   
   
@@ -1522,7 +1623,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../mytarget/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/mytarget/" class="md-nav__link">
         
   
   
@@ -1550,7 +1651,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../pangle/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/pangle/" class="md-nav__link">
         
   
   
@@ -1578,7 +1679,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../pubmatic/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/pubmatic/" class="md-nav__link">
         
   
   
@@ -1606,7 +1707,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../vpon/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/vpon/" class="md-nav__link">
         
   
   
@@ -1634,7 +1735,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../zucks/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/zucks/" class="md-nav__link">
         
   
   
@@ -1675,33 +1776,38 @@
                 
   
   
+    
   
   
+  
     
     
     
     
       
       
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8" >
         
           
-          <label class="md-nav__link" for="__nav_1_8" id="__nav_1_8_label" tabindex="0">
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1_8" id="__nav_1_8_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    Privacidade
+    Privacy
   
 
     
@@ -1712,12 +1818,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_8_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_1_8_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_1_8">
             <span class="md-nav__icon md-icon"></span>
             
   
-    Privacidade
+    Privacy
   
 
           </label>
@@ -1753,7 +1859,7 @@
   <span class="md-ellipsis">
     
   
-    Soluções regulatórias
+    Regulatory solutions
   
 
     
@@ -1769,7 +1875,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Soluções regulatórias
+    Regulatory solutions
   
 
           </label>
@@ -1782,14 +1888,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../privacy/regulatory_solutions/us_states_privacy_laws/" class="md-nav__link">
+      <a href="../../regulatory_solutions/us_states_privacy_laws/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Leis de privacidade dos estados dos EUA
+    US states privacy laws
   
 
     
@@ -1818,14 +1924,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../privacy/strategies/strategies/" class="md-nav__link">
+      <a href="../../strategies/strategies/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Estratégias
+    Strategies
   
 
     
@@ -1843,33 +1949,26 @@
                 
   
   
+    
   
   
-    
-    
-    
-    
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
       
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
       
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_3" >
-        
+        <label class="md-nav__link md-nav__link--active" for="__toc">
           
-          <label class="md-nav__link" for="__nav_1_8_3" id="__nav_1_8_3_label" tabindex="0">
-            
   
   
   <span class="md-ellipsis">
     
   
-    Divulgação de dados
+    Ad serving modes
   
 
     
@@ -1877,35 +1976,17 @@
   
   
 
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_8_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_1_8_3">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Divulgação de dados
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../privacy/store_data_disclosure/google_play_data_disclosure/" class="md-nav__link">
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    Divulgação de dados do Google Play
+    Ad serving modes
   
 
     
@@ -1914,41 +1995,58 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../privacy/store_data_disclosure/apple_app_store_data_disclosure/" class="md-nav__link">
+      
         
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
-  <span class="md-ellipsis">
+  
     
   
-    Divulgação de dados da Apple App Store
   
-
-    
-  </span>
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#personalized-ads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Personalized ads
+      
+    </span>
+  </a>
   
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#non-personalized-ads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Non-personalized ads
+      
+    </span>
+  </a>
   
-
-      </a>
-    </li>
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limited-ads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Limited ads
+      
+    </span>
+  </a>
   
-
-              
-            
-          </ul>
-        </nav>
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1985,7 +2083,7 @@
   <span class="md-ellipsis">
     
   
-    Ferramentas de mensagens de usuários
+    Data disclosure
   
 
     
@@ -2001,7 +2099,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Ferramentas de mensagens de usuários
+    Data disclosure
   
 
           </label>
@@ -2014,14 +2112,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../privacy/user_messaging_tools/get_started/" class="md-nav__link">
+      <a href="../../store_data_disclosure/google_play_data_disclosure/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Começar
+    Google Play data disclosure
   
 
     
@@ -2042,14 +2140,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../privacy/user_messaging_tools/gdpr_iab_support/" class="md-nav__link">
+      <a href="../../store_data_disclosure/apple_app_store_data_disclosure/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Suporte ao GDPR IAB
+    Apple App Store data disclosure
   
 
     
@@ -2058,42 +2156,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../privacy/user_messaging_tools/idfa_support/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Suporte ao IDFA
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -2127,10 +2189,165 @@
       
         
         
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_8_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_1_8_5" id="__nav_1_8_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User messaging tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_1_8_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1_8_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    User messaging tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_messaging_tools/get_started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_messaging_tools/gdpr_iab_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GDPR IAB support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../user_messaging_tools/idfa_support/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    IDFA support
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_9" >
         
           
-          <label class="md-nav__link" for="__nav_1_9" id="__nav_1_9_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_1_9" id="__nav_1_9_label" tabindex="">
             
   
   
@@ -2189,7 +2406,7 @@
   <span class="md-ellipsis">
     
   
-    Gerenciar inspecionador de anúncios
+    Manage Ad Inspector
   
 
     
@@ -2205,7 +2422,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Gerenciar inspecionador de anúncios
+    Manage Ad Inspector
   
 
           </label>
@@ -2225,7 +2442,7 @@
   <span class="md-ellipsis">
     
   
-    Visão Geral
+    Overview
   
 
     
@@ -2253,7 +2470,7 @@
   <span class="md-ellipsis">
     
   
-    Iniciar o inspecionador de anúncios
+    Launch ad inspector
   
 
     
@@ -2281,7 +2498,7 @@
   <span class="md-ellipsis">
     
   
-    Verificar integrações de adaptadores
+    Verify adapter integrations
   
 
     
@@ -2309,7 +2526,7 @@
   <span class="md-ellipsis">
     
   
-    Testar blocos de anúncios
+    Test ad units
   
 
     
@@ -2337,7 +2554,7 @@
   <span class="md-ellipsis">
     
   
-    Solucionar problemas de blocos de anúncios
+    Troubleshoot ad units
   
 
     
@@ -2365,7 +2582,7 @@
   <span class="md-ellipsis">
     
   
-    Solucionar problemas de configurações de privacidade
+    Troubleshoot privacy settings
   
 
     
@@ -2393,7 +2610,7 @@
   <span class="md-ellipsis">
     
   
-    Copiar saída de diagnóstico
+    Copy troubleshooting output
   
 
     
@@ -2429,7 +2646,7 @@
   <span class="md-ellipsis">
     
   
-    Informações de Resposta
+    Response Info
   
 
     
@@ -2464,17 +2681,20 @@
       
       
         
+          
+          
+        
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
         <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1_10" >
         
           
-          <label class="md-nav__link" for="__nav_1_10" id="__nav_1_10_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_1_10" id="__nav_1_10_label" tabindex="">
             
   
   
@@ -2545,7 +2765,7 @@
   <span class="md-ellipsis">
     
   
-    Receita de Anúncios a Nível de Impressão
+    Impression-Level Ad Revenue
   
 
     
@@ -2573,7 +2793,7 @@
   <span class="md-ellipsis">
     
   
-    Segmentação (Targeting)
+    Targeting
   
 
     
@@ -2632,7 +2852,7 @@
   <span class="md-ellipsis">
     
   
-    Referência
+    Reference
   
 
     
@@ -2648,7 +2868,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Referência
+    Reference
   
 
           </label>
@@ -2668,7 +2888,7 @@
   <span class="md-ellipsis">
     
   
-    Visão Geral
+    Overview
   
 
     
@@ -2818,7 +3038,7 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Índice">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
@@ -2827,15 +3047,15 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Índice
+      Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#integracoes-suportadas" class="md-nav__link">
+  <a href="#personalized-ads" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Integrações Suportadas
+        Personalized ads
       
     </span>
   </a>
@@ -2843,86 +3063,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#passos-de-integracao" class="md-nav__link">
+  <a href="#non-personalized-ads" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Passos de Integração
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Passos de Integração">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#android" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Android
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Android">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-ativar-vpon-nas-configuracoes-do-projeto" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Ativar Vpon nas Configurações do Projeto
+        Non-personalized ads
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#2-configurar-mediacao-no-console-do-admob" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#limited-ads" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Configurar Mediação no Console do AdMob
+        Limited ads
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ios" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        iOS
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="iOS">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-configurar-mediacao-no-console-do-admob" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Configurar Mediação no Console do AdMob
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2943,59 +3101,108 @@
 
 
 
-<h1 id="vpon">Vpon</h1>
-<p>O adaptador de mediação da Vpon permite integrar anúncios da Vpon no seu jogo Godot usando a mediação do AdMob.</p>
-<h2 id="integracoes-suportadas">Integrações Suportadas</h2>
+<h1 id="ad-serving-modes">Ad serving modes</h1>
+<p>Under Google's <a href="https://www.google.com/about/company/user-consent-policy.html">EU User Consent Policy</a>, you must make certain disclosures to your users in the European Economic Area (EEA) and the UK, and obtain their consent for the use of cookies or other local storage where legally required, and for the collection, sharing, and use of personal data for ads personalization. This policy reflects the requirements of the EU ePrivacy Directive and the General Data Protection Regulation (GDPR). To comply with this policy, publishers are required to adopt a <a href="https://support.google.com/admob/answer/13554116">Google-certified consent management platform</a> (CMP) that has integrated with the <a href="https://iabeurope.eu/transparency-consent-framework/">TCF framework</a> such as the <a href="../../user_messaging_tools/get_started/">User Messaging Platform SDK</a>. Once adopted, the CMP presents consent choices, known as purposes, in your mobile app.</p>
+<p>This document is based on:</p>
+<ul>
+<li><a href="https://developers.google.com/admob/android/privacy/ad-serving-modes">Google Mobile Ads SDK Android - Ad serving modes</a></li>
+<li><a href="https://developers.google.com/admob/ios/privacy/ad-serving-modes">Google Mobile Ads SDK iOS - Ad serving modes</a></li>
+</ul>
+<p>The exact UI for the consent choices is kept up-to-date by Google, but here's an earlier version for reference:</p>
+<p><img alt="Consent choices sample image" src="https://developers.google.com/static/admob/images/privacy/consent-form-purposes.png" /></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>Important:</strong> In addition to collecting purposes consent, you also need to collect vendor consent. Both purposes consent and vendor consent are required for any vendor, such as Google, to serve appropriate ads.</p>
+</div>
+<p>The different types of ads that can be served are:</p>
+<ul>
+<li><a href="#personalized-ads">Personalized ads</a></li>
+<li><a href="#non-personalized-ads">Non-personalized ads</a></li>
+<li><a href="#limited-ads">Limited ads</a></li>
+</ul>
+<h2 id="personalized-ads">Personalized ads</h2>
+<p><a href="https://support.google.com/admob/answer/7676680">Personalized ads</a> are ads that make inferences about a user's interests based on the sites they visit or the apps they use. Google considers ads to be personalized when they are based on previously collected or historical data to determine or influence ad selection.</p>
+<p>Google will serve personalized ads when all of the following criteria are met. For more information, read <a href="https://support.google.com/admob/answer/9760862#consent-policies">requirements for personalized ads</a>.</p>
+<p><strong>Legend:</strong> ✅ Consent &nbsp;&nbsp;&nbsp;&nbsp; ✔ Legitimate interest</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">Formato de Anúncio</th>
-<th style="text-align: left;">Bidding</th>
-<th style="text-align: left;">Waterfall</th>
+<th>Purpose</th>
+<th>User consent choice</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align: left;"><strong>Banner</strong></td>
-<td style="text-align: left;">❌</td>
-<td style="text-align: left;"></td>
+<td>Purpose 1</td>
+<td>✅</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Interstitial</strong></td>
-<td style="text-align: left;">❌</td>
-<td style="text-align: left;"></td>
+<td>Purpose 2</td>
+<td>✔ or ✅</td>
 </tr>
 <tr>
-<td style="text-align: left;"><strong>Rewarded</strong></td>
-<td style="text-align: left;">❌</td>
-<td style="text-align: left;"></td>
+<td>Purpose 3</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Purpose 4</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Purpose 7</td>
+<td>✔ or ✅</td>
+</tr>
+<tr>
+<td>Purpose 9</td>
+<td>✔ or ✅</td>
+</tr>
+<tr>
+<td>Purpose 10</td>
+<td>✔ or ✅</td>
 </tr>
 </tbody>
 </table>
-<h2 id="passos-de-integracao">Passos de Integração</h2>
-<h3 id="android">Android</h3>
-<h4 id="1-ativar-vpon-nas-configuracoes-do-projeto">1. Ativar Vpon nas Configurações do Projeto</h4>
+<h2 id="non-personalized-ads">Non-personalized ads</h2>
+<p><a href="https://support.google.com/admob/answer/7676680">Non-personalized ads</a> are not based on a user's past behavior. Although non-personalized ads don't use cookies or mobile ad identifiers for ad targeting, these ads do still use cookies or mobile ad identifiers for frequency capping and aggregated ad reporting.</p>
+<p>Google will serve non-personalized ads when all of the following criteria are met. For more information, see <a href="https://support.google.com/admob/answer/9760862#consent-policies">Requirements for non-personalized ads</a>.</p>
+<p><strong>Legend:</strong> ✅ Consent &nbsp;&nbsp;&nbsp;&nbsp; ✔ Legitimate interest &nbsp;&nbsp;&nbsp;&nbsp; 🚫 No consent</p>
+<table>
+<thead>
+<tr>
+<th>Purpose</th>
+<th>User consent choice</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Purpose 1</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Purpose 2</td>
+<td>✔ or ✅</td>
+</tr>
+<tr>
+<td>Purpose 7</td>
+<td>✔ or ✅</td>
+</tr>
+<tr>
+<td>Purpose 9</td>
+<td>✔ or ✅</td>
+</tr>
+<tr>
+<td>Purpose 10</td>
+<td>✔ or ✅</td>
+</tr>
+</tbody>
+</table>
+<h2 id="limited-ads">Limited ads</h2>
+<p><a href="https://support.google.com/admob/answer/10105530">Limited ads (LTD)</a> disable all personalization and features that require using a local identifier.</p>
+<p>Google serves limited ads when all of the following criteria are met. For more information, read <a href="https://support.google.com/admob/answer/10105530#limited-ads-update">Launched: Limited ads 2.0</a>.</p>
 <ul>
-<li>Ative o <strong>Vpon</strong> em <code>admob/android/mediation/vpon</code> nas Configurações do Projeto do Godot.</li>
+<li>Special Purposes: 1, 2</li>
+<li>Legitimate Interest: 7 (optional only)</li>
 </ul>
-<h4 id="2-configurar-mediacao-no-console-do-admob">2. Configurar Mediação no Console do AdMob</h4>
-<p>Configure a Vpon como parceira de mediação no console do AdMob:
-1. Faça login na sua <strong>conta AdMob</strong>.
-2. Navegue até <strong>Mediação</strong> e crie ou edite um <strong>Grupo de Mediação</strong>.
-3. Na cascata de redes de anúncios, adicione a Vpon como um <strong>Evento Personalizado</strong>.
-4. <strong>Nome da Classe</strong>: Insira <code>com.vpadn.mediation.VpadnAdapter</code>.
-5. <strong>Parâmetro</strong>: Insira sua Chave de Licença Vpon.</p>
-<hr />
-<h3 id="ios">iOS</h3>
-<p>Como a Vpon é integrada via Eventos Personalizados no iOS, os desenvolvedores devem adicionar os arquivos do SDK da Vpon e do adaptador AdMob às configurações de build do Xcode durante a exportação.</p>
-<h4 id="1-configurar-mediacao-no-console-do-admob">1. Configurar Mediação no Console do AdMob</h4>
-<ol>
-<li>Faça login na sua <strong>conta AdMob</strong>.</li>
-<li>Navegue até <strong>Mediação</strong> e crie ou edite um <strong>Grupo de Mediação</strong>.</li>
-<li>Na cascata de redes de anúncios, adicione a Vpon como um <strong>Evento Personalizado</strong>.</li>
-<li><strong>Nome da Classe</strong>: Insira <code>VponAdMobAdapter</code>.</li>
-<li><strong>Parâmetro</strong>: Insira sua Chave de Licença Vpon / ID da Unidade de Anúncio.</li>
-</ol>
 
 
 
@@ -3021,7 +3228,7 @@
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  Voltar para o topo
+  Back to top
 </button>
         
       </main>
@@ -3037,15 +3244,15 @@
   
     <div class="md-copyright__highlight">
       &copy; 2023-2026 <a href="https://github.com/poingstudios/godot-admob-plugin" target="_blank" rel="noopener">Poing Studios</a>
-      | Partes desta página são modificações baseadas no trabalho criado e
-      <a href="https://developers.google.com/terms/site-policies" target="_blank" rel="noopener">compartilhado pelo Google</a>
-      e usadas de acordo com os termos descritos na
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Licença de Atribuição Creative Commons 4.0</a>.
+      | Portions of this page are modifications based on work created and
+      <a href="https://developers.google.com/terms/site-policies" target="_blank" rel="noopener">shared by Google</a>
+      and used according to terms described in the
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Creative Commons 4.0 Attribution License</a>.
     </div>
   
   
     <div class="md-copyright__generator">
-      Feito com
+      Made with
       <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
         Material for MkDocs
       </a>
@@ -3093,13 +3300,13 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.tabs.link", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.annotation", "content.code.copy", "navigation.tabs"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"default": "stable", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.tabs.link", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.annotation", "content.code.copy", "navigation.tabs"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "stable", "provider": "mike"}}</script>
     
     
   
-      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../../javascripts/extra.js"></script>
+        <script src="../../../javascripts/extra.js"></script>
       
     
   <script>
