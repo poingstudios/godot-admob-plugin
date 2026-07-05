@@ -128,7 +128,7 @@
 
 ネットワーク エクストラは、単一の広告ソースに固有の、広告リクエストとともに送信される追加の詳細情報です。
 
-Google に追加のパラメータを送信するには（たとえば、[折りたたみ式バナー](../../guides/ad_formats/banner/collapsible/) をリクエストするためにキー `collapsible` に値 `bottom` を設定する場合）、`extras` ディレクトリにデータを入力します。
+Google に追加のパラメータを送信するには（たとえば、[折りたたみ式バナー](../ad_formats/banner/collapsible.md) をリクエストするためにキー `collapsible` に値 `bottom` を設定する場合）、`extras` ディレクトリにデータを入力します。
 
 === "GDScript"
 

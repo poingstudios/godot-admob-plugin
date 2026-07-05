@@ -127,6 +127,7 @@ plugins:
             Regulatory solutions: Soluções regulatórias
             US states privacy laws: Leis de privacidade dos estados dos EUA
             Strategies: Estratégias
+            Ad serving modes: Modos de veiculação de anúncios
             Data disclosure: Divulgação de dados
             Google Play data disclosure: Divulgação de dados do Google Play
             Apple App Store data disclosure: Divulgação de dados da Apple App Store
@@ -191,6 +192,7 @@ plugins:
             Regulatory solutions: Soluciones regulatorias
             US states privacy laws: Leyes de privacidad de estados de EE. UU.
             Strategies: Estrategias
+            Ad serving modes: Modos de publicación de anuncios
             Data disclosure: Divulgación de datos
             Google Play data disclosure: Divulgación de datos de Google Play
             Apple App Store data disclosure: Divulgación de datos de la Apple App Store
@@ -256,6 +258,7 @@ plugins:
             Regulatory solutions: 监管解决方案
             US states privacy laws: 美国各州隐私法
             Strategies: 策略
+            Ad serving modes: 广告投放模式
             Data disclosure: 数据披露
             Google Play data disclosure: Google Play 数据披露
             Apple App Store data disclosure: Apple App Store 数据披露
@@ -321,6 +324,7 @@ plugins:
             Regulatory solutions: 規制対応ソリューション
             US states privacy laws: 米国各州のプライバシー法
             Strategies: ストラテジー
+            Ad serving modes: 広告配信モード
             Data disclosure: データ開示
             Google Play data disclosure: Google Play データ開示
             Apple App Store data disclosure: Apple App Store データ開示
@@ -365,6 +369,9 @@ nav:
       - 'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': ad_formats/rewarded_interstitial.md
     - Mediate:
       - First Steps: mediate/get_started.md
+      - Choose ad sources: mediate/choose_networks.md
+      - Custom events: mediate/custom_events.md
+      - Troubleshoot bidding: mediate/troubleshoot_bidding.md
       - Integrate partner networks:
         - AppLovin: mediate/integrate_partner_networks/applovin.md
         - BidMachine: mediate/integrate_partner_networks/bidmachine.md
@@ -389,6 +396,7 @@ nav:
       - Regulatory solutions:
         - US states privacy laws: privacy/regulatory_solutions/us_states_privacy_laws.md
       - Strategies: privacy/strategies/strategies.md
+      - Ad serving modes: privacy/ad_serving_modes/ad_serving_modes.md
       - Data disclosure:
         - Google Play data disclosure: privacy/store_data_disclosure/google_play_data_disclosure.md
         - Apple App Store data disclosure: privacy/store_data_disclosure/apple_app_store_data_disclosure.md

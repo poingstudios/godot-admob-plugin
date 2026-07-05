@@ -15,7 +15,7 @@ Este documento se basa en:
 ## Requisitos previos
 - Completa la [Guía de introducción](index.md)
 
-## Bloques de anuncios de muestra
+## Bloques de anuncios de muestra {: #sample-ad-units }
 
 El método más conveniente para permitir las pruebas es emplear los bloques de anuncios de prueba proporcionados por Google. Estos bloques de anuncios están separados de su cuenta de AdMob, lo que garantiza que no haya riesgo de que su cuenta de generar tráfico no válido mientras los usa.
 
@@ -56,7 +56,7 @@ Si bien los bloques de anuncios estándar anteriores se pueden usar agregando pa
 
 
 
-## Habilitar dispositivos de prueba
+## Habilitar dispositivos de prueba {: #enable-test-devices }
 Para realizar pruebas más exhaustivas con anuncios similares a los de producción, puede configurar su dispositivo como dispositivo de prueba y utilizar sus propios ID de bloques de anuncios creados en la interfaz de usuario de AdMob. Puede agregar dispositivos de prueba a través de la interfaz de usuario de AdMob o mediante programación mediante el SDK de anuncios de Google para móviles.
 
 Estos son los pasos para agregar su dispositivo como dispositivo de prueba:
