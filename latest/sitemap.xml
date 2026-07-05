@@ -261,16 +261,6 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/mediate/choose_networks/"/>
     </url>
     <url>
-        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/mediate/custom_events/</loc>
-        <lastmod>2026-07-05</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latest/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/mediate/custom_events/"/>
-    </url>
-    <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/mediate/get_started/</loc>
         <lastmod>2026-07-05</lastmod>
         <changefreq>daily</changefreq>
@@ -849,16 +839,6 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/mediate/choose_networks/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/mediate/choose_networks/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/mediate/choose_networks/"/>
-    </url>
-    <url>
-        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/mediate/custom_events/</loc>
-        <lastmod>2026-07-05</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestmediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/mediate/custom_events/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/mediate/get_started/</loc>
@@ -1441,16 +1421,6 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/mediate/choose_networks/"/>
     </url>
     <url>
-        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/es/mediate/custom_events/</loc>
-        <lastmod>2026-07-05</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latest/es/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestmediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/mediate/custom_events/"/>
-    </url>
-    <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/es/mediate/get_started/</loc>
         <lastmod>2026-07-05</lastmod>
         <changefreq>daily</changefreq>
@@ -2031,16 +2001,6 @@
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/mediate/choose_networks/"/>
     </url>
     <url>
-        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/zh/mediate/custom_events/</loc>
-        <lastmod>2026-07-05</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latest/zh/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestmediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/mediate/custom_events/"/>
-    </url>
-    <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/zh/mediate/get_started/</loc>
         <lastmod>2026-07-05</lastmod>
         <changefreq>daily</changefreq>
@@ -2619,16 +2579,6 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/mediate/choose_networks/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/mediate/choose_networks/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/mediate/choose_networks/"/>
-    </url>
-    <url>
-        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ja/mediate/custom_events/</loc>
-        <lastmod>2026-07-05</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latest/ja/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestmediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/mediate/custom_events/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/mediate/custom_events/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ja/mediate/get_started/</loc>
