@@ -1,6 +1,6 @@
 # NativeMediaAspectRatio
 
-Configures the aspect ratio preference for media content in native ads.
+Configures the aspect ratio preference for media content in native ads. Used by [`NativeAdOptions`](../classes/NativeAdOptions.md).
 
 ## Values
 

@@ -6,7 +6,7 @@ The `InterstitialAd` class represents a full-screen interstitial ad format that 
 
 ### `full_screen_content_callback` / `FullScreenContentCallback`
 
-The callback listener to receive events about presentation, dismissal, or failure to show.
+The callback listener to receive events about presentation, dismissal, or failure to show. See [`FullScreenContentCallback`](../listeners/FullScreenContentCallback.md).
 
 === "GDScript"
     ```gdscript
@@ -20,7 +20,7 @@ The callback listener to receive events about presentation, dismissal, or failur
 
 ### `on_ad_paid` / `OnAdPaid`
 
-Triggered when an ad impression is recorded and revenue has been generated.
+Triggered when an ad impression is recorded and revenue has been generated. Receives an [`AdValue`](AdValue.md).
 
 === "GDScript"
     ```gdscript

@@ -1,6 +1,6 @@
 # RewardedInterstitialAdLoader
 
-The `RewardedInterstitialAdLoader` class is responsible for executing asynchronous ad requests to load `RewardedInterstitialAd` instances.
+The `RewardedInterstitialAdLoader` class is responsible for executing asynchronous ad requests to load [`RewardedInterstitialAd`](RewardedInterstitialAd.md) instances.
 
 ## Methods
 

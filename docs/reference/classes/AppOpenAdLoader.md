@@ -1,6 +1,6 @@
 # AppOpenAdLoader
 
-The `AppOpenAdLoader` class is responsible for executing asynchronous ad requests to load `AppOpenAd` instances.
+The `AppOpenAdLoader` class is responsible for executing asynchronous ad requests to load [`AppOpenAd`](AppOpenAd.md) instances.
 
 ## Methods
 

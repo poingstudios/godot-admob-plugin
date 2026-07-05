@@ -1,12 +1,12 @@
 # RewardedInterstitialAdLoadCallback
 
-The `RewardedInterstitialAdLoadCallback` class is used to listen to the load outcome of a `RewardedInterstitialAd` load request.
+The `RewardedInterstitialAdLoadCallback` class is used to listen to the load outcome of a [`RewardedInterstitialAd`](../classes/RewardedInterstitialAd.md) load request.
 
 ## Properties
 
 ### `on_ad_loaded` / `OnAdLoaded`
 
-Triggered when the ad is loaded successfully. Receives the loaded `RewardedInterstitialAd` instance.
+Triggered when the ad is loaded successfully. Receives the loaded [`RewardedInterstitialAd`](../classes/RewardedInterstitialAd.md) instance.
 
 === "GDScript"
     ```gdscript
@@ -20,7 +20,7 @@ Triggered when the ad is loaded successfully. Receives the loaded `RewardedInter
 
 ### `on_ad_failed_to_load` / `OnAdFailedToLoad`
 
-Triggered when the load request fails. Receives a `LoadAdError` detailing the load error.
+Triggered when the load request fails. Receives a [`LoadAdError`](../classes/LoadAdError.md) detailing the load error.
 
 === "GDScript"
     ```gdscript

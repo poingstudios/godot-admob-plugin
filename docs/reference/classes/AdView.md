@@ -34,7 +34,7 @@ Initializes a new instance of the `AdView` class.
 
 ### `ad_listener` / `AdListener`
 
-The listener object that receives various ad loading and lifecycle callbacks.
+The listener object that receives various ad loading and lifecycle callbacks. See [`AdListener`](../listeners/AdListener.md).
 
 === "GDScript"
     ```gdscript
@@ -61,7 +61,7 @@ The listener object that receives various ad loading and lifecycle callbacks.
 
 ### `on_ad_paid` / `OnAdPaid`
 
-Callback triggered when an impression has occurred and the ad value (revenue) is calculated.
+Callback triggered when an impression has occurred and the ad value (revenue) is calculated. Receives an [`AdValue`](AdValue.md).
 
 === "GDScript"
     ```gdscript

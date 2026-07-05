@@ -1,6 +1,6 @@
 # AdPosition
 
-Defines the screen alignment for banner and native overlay ads.
+Defines the screen alignment for banner and native overlay ads. Used by [`AdView`](../classes/AdView.md), [`NativeOverlayAd`](../classes/NativeOverlayAd.md), and the [`AdPosition`](../classes/AdPosition.md) class.
 
 ## Values
 

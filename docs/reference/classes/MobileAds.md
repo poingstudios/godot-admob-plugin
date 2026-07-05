@@ -6,7 +6,7 @@ The `MobileAds` class provides global configurations and initialization entry po
 
 ### `initialize` / `Initialize`
 
-Initializes the Google Mobile Ads SDK.
+Initializes the Google Mobile Ads SDK. Takes an optional [`OnInitializationCompleteListener`](../listeners/OnInitializationCompleteListener.md) to be notified when initialization finishes.
 
 === "GDScript"
     ```gdscript
@@ -187,7 +187,7 @@ Returns whether consent for cookies has been declared.
 
 ### `open_ad_inspector` / `OpenAdInspector`
 
-Opens the in-app Ad Inspector overlay to verify ad sources and troubleshoot mediation.
+Opens the in-app Ad Inspector overlay to verify ad sources and troubleshoot mediation. Takes an optional [`AdInspectorClosedListener`](../listeners/AdInspectorClosedListener.md) to be notified when the inspector is dismissed.
 
 === "GDScript"
     ```gdscript

@@ -1,6 +1,6 @@
 # FullScreenContentCallback
 
-The `FullScreenContentCallback` class registers triggers for events related to showing full-screen ad formats (App Open, Interstitial, Rewarded, and Rewarded Interstitial).
+The `FullScreenContentCallback` class registers triggers for events related to showing full-screen ad formats ([App Open](../classes/AppOpenAd.md), [Interstitial](../classes/InterstitialAd.md), [Rewarded](../classes/RewardedAd.md), and [Rewarded Interstitial](../classes/RewardedInterstitialAd.md)).
 
 ## Properties
 
@@ -34,7 +34,7 @@ Triggered when the ad is closed/dismissed and the user returns to the applicatio
 
 ### `on_ad_failed_to_show_full_screen_content` / `OnAdFailedToShowFullScreenContent`
 
-Triggered when the ad fails to present. Receives an `AdError` detailing the presentation error.
+Triggered when the ad fails to present. Receives an [`AdError`](../classes/AdError.md) detailing the presentation error.
 
 === "GDScript"
     ```gdscript

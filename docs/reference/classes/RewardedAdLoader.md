@@ -1,6 +1,6 @@
 # RewardedAdLoader
 
-The `RewardedAdLoader` class is responsible for executing asynchronous ad requests to load `RewardedAd` instances.
+The `RewardedAdLoader` class is responsible for executing asynchronous ad requests to load [`RewardedAd`](RewardedAd.md) instances.
 
 ## Methods
 

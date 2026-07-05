@@ -1,6 +1,6 @@
 # AdListener
 
-The `AdListener` class allows you to listen to lifecycle events for banner ads loaded via `AdView`.
+The `AdListener` class allows you to listen to lifecycle events for banner ads loaded via [`AdView`](../classes/AdView.md) and native overlay ads loaded via [`NativeOverlayAd`](../classes/NativeOverlayAd.md).
 
 ## Properties
 
@@ -36,7 +36,7 @@ Triggered when the user closes the overlay of an ad or returns to the applicatio
 
 ### `on_ad_failed_to_load` / `OnAdFailedToLoad`
 
-Triggered when the ad fails to load. Receives a `LoadAdError` detailing the error.
+Triggered when the ad fails to load. Receives a [`LoadAdError`](../classes/LoadAdError.md) detailing the error.
 
 === "GDScript"
     ```gdscript

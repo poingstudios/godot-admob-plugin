@@ -1,6 +1,6 @@
 # NativeTemplateFontStyle
 
-Defines the font weight styles for native overlay text fields.
+Defines the font weight styles for native overlay text fields. Used by [`NativeTemplateTextStyle`](../classes/NativeTemplateTextStyle.md).
 
 ## Values
 

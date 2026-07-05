@@ -1,6 +1,6 @@
 # InterstitialAdLoader
 
-The `InterstitialAdLoader` class is responsible for executing asynchronous ad requests to load `InterstitialAd` instances.
+The `InterstitialAdLoader` class is responsible for executing asynchronous ad requests to load [`InterstitialAd`](InterstitialAd.md) instances.
 
 ## Methods
 

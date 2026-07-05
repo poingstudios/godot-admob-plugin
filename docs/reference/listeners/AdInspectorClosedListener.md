@@ -1,6 +1,6 @@
 # AdInspectorClosedListener
 
-The `AdInspectorClosedListener` class is used to listen to the closure event of the native Ad Inspector.
+The `AdInspectorClosedListener` class is used to listen to the closure event of the native Ad Inspector, which is opened via [`MobileAds.open_ad_inspector()`](../classes/MobileAds.md#open_ad_inspector-openadinspector).
 
 ## Properties
 

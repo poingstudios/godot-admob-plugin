@@ -1,6 +1,6 @@
 # AdChoicesPlacement
 
-Defines the corner placement of the AdChoices overlay icon on native ads.
+Defines the corner placement of the AdChoices overlay icon on native ads. Used by [`NativeAdOptions`](../classes/NativeAdOptions.md).
 
 ## Values
 

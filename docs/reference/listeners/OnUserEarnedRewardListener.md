@@ -6,7 +6,7 @@ The `OnUserEarnedRewardListener` class registers callbacks for when the user has
 
 ### `on_user_earned_reward` / `OnUserEarnedReward`
 
-Triggered when the user completes the rewarded ad and earns the reward. Receives a `RewardedItem` containing reward parameters.
+Triggered when the user completes the rewarded ad and earns the reward. Receives a [`RewardedItem`](../classes/RewardedItem.md) containing reward parameters.
 
 === "GDScript"
     ```gdscript
