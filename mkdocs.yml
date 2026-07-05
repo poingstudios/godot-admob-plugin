@@ -150,6 +150,7 @@ plugins:
             Overview: Visão Geral
             Classes: Classes
             AdView: AdView
+            Listeners: Listeners
             Enums: Enums
         - locale: es
           name: Español
@@ -218,6 +219,7 @@ plugins:
             Overview: Descripción general
             Classes: Clases
             AdView: AdView
+            Listeners: Listeners
             Enums: Enums
         - locale: zh
           name: 简体中文
@@ -286,6 +288,7 @@ plugins:
             Overview: 概览
             Classes: 类
             AdView: AdView
+            Listeners: 监听器
             Enums: 枚举
         - locale: ja
           name: 日本語
@@ -354,6 +357,7 @@ plugins:
             Overview: 概要
             Classes: クラス
             AdView: AdView
+            Listeners: リスナー
             Enums: 列挙型 (Enums)
 
 nav:
@@ -428,7 +432,17 @@ nav:
   - Reference:
     - Overview: reference/index.md
     - Classes:
+      - AdError: reference/classes/AdError.md
+      - AdPosition: reference/classes/AdPosition.md
+      - AdRequest: reference/classes/AdRequest.md
+      - AdSize: reference/classes/AdSize.md
+      - AdValue: reference/classes/AdValue.md
       - AdView: reference/classes/AdView.md
+      - AdapterResponseInfo: reference/classes/AdapterResponseInfo.md
+      - LoadAdError: reference/classes/LoadAdError.md
+      - ResponseInfo: reference/classes/ResponseInfo.md
+    - Listeners:
+      - AdListener: reference/listeners/AdListener.md
     - Enums: reference/enums.md
 
 hooks:
