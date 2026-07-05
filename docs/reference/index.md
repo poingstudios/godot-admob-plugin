@@ -34,6 +34,12 @@ This page lists the classes, enums, and callbacks provided by the Godot AdMob Pl
 | [InitializationStatus](classes/InitializationStatus.md) | Contains initialization status details for MobileAds. |
 | [AdapterStatus](classes/AdapterStatus.md) | Represents initialization status for a single mediation adapter. |
 | [ServerSideVerificationOptions](classes/ServerSideVerificationOptions.md) | Security configurations for server-side rewarded callbacks. |
+| [UserMessagingPlatform](classes/UserMessagingPlatform.md) | Entry point for GDPR and privacy consent flows. |
+| [ConsentInformation](classes/ConsentInformation.md) | Checks and updates the user's consent status. |
+| [ConsentForm](classes/ConsentForm.md) | Consent form that can be shown to the user. |
+| [ConsentRequestParameters](classes/ConsentRequestParameters.md) | Parameters for requesting consent information updates. |
+| [ConsentDebugSettings](classes/ConsentDebugSettings.md) | Testing configuration for the consent flow. |
+| [FormError](classes/FormError.md) | Error information for consent form operations. |
 
 ## Enums
 
@@ -47,6 +53,9 @@ This page lists the classes, enums, and callbacks provided by the Godot AdMob Pl
 | [AdapterStatus.InitializationState](enums/AdapterStatus.InitializationState.md) | Indicates whether a mediation adapter is ready. |
 | [RequestConfiguration.TagForChildDirectedTreatment](enums/RequestConfiguration.TagForChildDirectedTreatment.md) | Child-directed treatment for COPPA compliance. |
 | [RequestConfiguration.TagForUnderAgeOfConsent](enums/RequestConfiguration.TagForUnderAgeOfConsent.md) | Under age of consent for GDPR compliance. |
+| [DebugGeography](enums/DebugGeography.md) | Debug geography for testing consent flow. |
+| [ConsentInformation.ConsentStatus](enums/ConsentInformation.ConsentStatus.md) | User's consent status for privacy regulations. |
+| [ConsentInformation.PrivacyOptionsRequirementStatus](enums/ConsentInformation.PrivacyOptionsRequirementStatus.md) | Whether privacy options are required. |
 
 ## Interfaces / Callbacks
 
