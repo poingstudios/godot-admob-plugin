@@ -17,6 +17,7 @@ The following static properties provide standard placement alignment presets:
 | `AdPosition.BOTTOM_LEFT` | `AdPosition.BottomLeft` | Bottom Left corner of the screen |
 | `AdPosition.BOTTOM_RIGHT` | `AdPosition.BottomRight` | Bottom Right corner of the screen |
 | `AdPosition.CENTER` | `AdPosition.Center` | Perfect Center of the screen |
+| `AdPosition.CUSTOM` | `AdPosition.Custom` | Custom offset position via `AdPosition.custom(x, y)` |
 
 !!! tip
     Always use the static presets listed above (e.g., `AdPosition.Bottom` or `AdPosition.Custom(x, y)`) when positioning ads. The inner `Values` enum is used internally by the plugin for native serialization.

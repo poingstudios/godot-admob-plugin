@@ -8,6 +8,7 @@ The following static properties provide standard banner size presets:
 
 | Property (GDScript) | Property (C#) | Dimensions (WxH) | Description |
 | :--- | :--- | :--- | :--- |
+| `AdSize.FULL_WIDTH` | `AdSize.FullWidth` | `-1` | Constant that requests an ad to fill the full available width (used with adaptive banners). |
 | `AdSize.BANNER` | `AdSize.Banner` | 320x50 | Standard Banner (Phones) |
 | `AdSize.LARGE_BANNER` | `AdSize.LargeBanner` | 320x100 | Large Banner |
 | `AdSize.MEDIUM_RECTANGLE` | `AdSize.MediumRectangle` | 300x250 | IAB Medium Rectangle |

@@ -68,7 +68,8 @@ Asynchronously requests and loads a native template overlay ad.
         print("Native ad loaded successfully!")
         
         # Render the native ad at the bottom of the screen with a Medium template style
-        var template_style := NativeTemplateStyle.new(NativeTemplateStyle.TemplateType.MEDIUM)
+        var template_style := NativeTemplateStyle.new()
+        template_style.template_id = NativeTemplateStyle.MEDIUM
         ad.render_template(template_style, AdPosition.BOTTOM)
     ```
 
@@ -105,7 +106,8 @@ Asynchronously requests and loads a native template overlay ad.
         GD.Print("Native ad loaded successfully!");
 
         // Render the native ad at the bottom of the screen with a Medium template style
-        NativeTemplateStyle style = new NativeTemplateStyle(NativeTemplateStyle.TemplateType.Medium);
+        NativeTemplateStyle style = new NativeTemplateStyle();
+        style.TemplateId = NativeTemplateStyle.Medium;
         ad.RenderTemplate(style, AdPosition.Bottom);
     }
     ```
@@ -206,4 +208,36 @@ Temporarily hides the native template ad from view without destroying it.
 === "C#"
     ```csharp
     public void Hide()
+    ```
+
+---
+
+### `get_template_width_in_pixels` / `GetTemplateWidthInPixels`
+
+Returns the rendered native template width in physical pixels.
+
+=== "GDScript"
+    ```gdscript
+    func get_template_width_in_pixels() -> float
+    ```
+
+=== "C#"
+    ```csharp
+    public float GetTemplateWidthInPixels()
+    ```
+
+---
+
+### `get_template_height_in_pixels` / `GetTemplateHeightInPixels`
+
+Returns the rendered native template height in physical pixels.
+
+=== "GDScript"
+    ```gdscript
+    func get_template_height_in_pixels() -> float
+    ```
+
+=== "C#"
+    ```csharp
+    public float GetTemplateHeightInPixels()
     ```

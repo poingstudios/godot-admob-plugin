@@ -125,3 +125,107 @@ Defines the font weight styles for native overlay text fields.
         Monospace = 3
     }
     ```
+
+---
+
+## AdValue.PrecisionType
+
+Specifies the precision of the monetary value reported for an ad impression. Defined inside the [`AdValue`](classes/AdValue.md) class.
+
+=== "GDScript"
+    ```gdscript
+    # Access via AdValue.PrecisionType
+    enum PrecisionType {
+        UNKNOWN = 0,
+        ESTIMATED = 1,
+        PUBLISHER_PROVIDED = 2,
+        PRECISE = 3
+    }
+    ```
+
+=== "C#"
+    ```csharp
+    public enum PrecisionType
+    {
+        Unknown = 0,
+        Estimated = 1,
+        PublisherProvided = 2,
+        Precise = 3
+    }
+    ```
+
+---
+
+## AdapterStatus.InitializationState
+
+Indicates whether a mediation adapter is ready to serve ads. Defined inside the [`AdapterStatus`](classes/AdapterStatus.md) class.
+
+=== "GDScript"
+    ```gdscript
+    # Access via AdapterStatus.InitializationState
+    enum InitializationState {
+        NOT_READY = 0,
+        READY = 1
+    }
+    ```
+
+=== "C#"
+    ```csharp
+    public enum InitializationState
+    {
+        NotReady = 0,
+        Ready = 1
+    }
+    ```
+
+---
+
+## RequestConfiguration.TagForChildDirectedTreatment
+
+Indicates whether ad requests should be treated as child-directed for COPPA compliance. Defined inside the [`RequestConfiguration`](classes/RequestConfiguration.md) class.
+
+=== "GDScript"
+    ```gdscript
+    # Access via RequestConfiguration.TagForChildDirectedTreatment
+    enum TagForChildDirectedTreatment {
+        UNSPECIFIED = -1,
+        FALSE = 0,
+        TRUE = 1
+    }
+    ```
+
+=== "C#"
+    ```csharp
+    public enum TagForChildDirectedTreatment
+    {
+        Unspecified = -1,
+        False = 0,
+        True = 1
+    }
+    ```
+
+---
+
+## RequestConfiguration.TagForUnderAgeOfConsent
+
+Indicates whether ad requests should be treated as targeting users under the age of consent for GDPR compliance. Defined inside the [`RequestConfiguration`](classes/RequestConfiguration.md) class.
+
+=== "GDScript"
+    ```gdscript
+    # Access via RequestConfiguration.TagForUnderAgeOfConsent
+    enum TagForUnderAgeOfConsent {
+        UNSPECIFIED = -1,
+        FALSE = 0,
+        TRUE = 1
+    }
+    ```
+
+=== "C#"
+    ```csharp
+    public enum TagForUnderAgeOfConsent
+    {
+        Unspecified = -1,
+        False = 0,
+        True = 1
+    }
+    ```
