@@ -102,27 +102,29 @@ plugins:
             Native Overlay: Native Overlay
             Rewarded: Premiado (Rewarded)
             'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': 'Intersticial Premiado <span class="modern-icon" title="Beta">🧪</span>'
-            Mediate: Mediação
-            First Steps: Primeiros Passos
-            Integrate partner networks: Integrar redes parceiras
+            'Integrate AdMob Mediation': 'Integrar Mediação do AdMob'
+            'Set up AdMob Mediation': 'Configurar Mediação do AdMob'
+            'Integrate ad sources': 'Integrar fontes de anúncios'
             AppLovin: AppLovin
             BidMachine: BidMachine
-            IronSource: IronSource
-            Meta: Meta
-            Vungle: Vungle
-            UnityAds: Unity Ads
             Chartboost: Chartboost
-            DTExchange: DT Exchange
-            iMobile: i-mobile
+            'DT Exchange (previously Fyber)': 'DT Exchange (anteriormente Fyber)'
+            i-mobile: i-mobile
             InMobi: InMobi
-            Line: Line
-            Maio: Maio
+            ironSource: ironSource
+            'Liftoff Monetize (previously Vungle)': 'Liftoff Monetize (anteriormente Vungle)'
+            'LY Ads Network (previously Line Ads Network)': 'LY Ads Network (anteriormente Line Ads Network)'
+            maio: maio
+            'Meta Audience Network (previously Facebook)': 'Meta Audience Network (anteriormente Facebook)'
             Mintegral: Mintegral
             Moloco: Moloco
             myTarget: myTarget
             Pangle: Pangle
-            PubMatic: PubMatic
+            'PubMatic OpenWrap': 'PubMatic OpenWrap'
+            'Unity Ads': Unity Ads
             Vpon: Vpon
+            Zucks: Zucks
+            'Troubleshoot bidding': 'Solucionar problemas de lances'
             Privacy: Privacidade
             Regulatory solutions: Soluções regulatórias
             US states privacy laws: Leis de privacidade dos estados dos EUA
@@ -167,27 +169,29 @@ plugins:
             Native Overlay: Native Overlay
             Rewarded: Bonificado (Rewarded)
             'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': 'Intersticial Bonificado <span class="modern-icon" title="Beta">🧪</span>'
-            Mediate: Mediación
-            First Steps: Primeros Pasos
-            Integrate partner networks: Integrar redes asociadas
+            'Integrate AdMob Mediation': 'Integrar mediación de AdMob'
+            'Set up AdMob Mediation': 'Configurar la mediación de AdMob'
+            'Integrate ad sources': 'Integrar fuentes de anuncios'
             AppLovin: AppLovin
             BidMachine: BidMachine
-            IronSource: IronSource
-            Meta: Meta
-            Vungle: Vungle
-            UnityAds: Unity Ads
             Chartboost: Chartboost
-            DTExchange: DT Exchange
-            iMobile: i-mobile
+            'DT Exchange (previously Fyber)': 'DT Exchange (anteriormente Fyber)'
+            i-mobile: i-mobile
             InMobi: InMobi
-            Line: Line
-            Maio: Maio
+            ironSource: ironSource
+            'Liftoff Monetize (previously Vungle)': 'Liftoff Monetize (anteriormente Vungle)'
+            'LY Ads Network (previously Line Ads Network)': 'LY Ads Network (anteriormente Line Ads Network)'
+            maio: maio
+            'Meta Audience Network (previously Facebook)': 'Meta Audience Network (anteriormente Facebook)'
             Mintegral: Mintegral
             Moloco: Moloco
             myTarget: myTarget
             Pangle: Pangle
-            PubMatic: PubMatic
+            'PubMatic OpenWrap': 'PubMatic OpenWrap'
+            'Unity Ads': Unity Ads
             Vpon: Vpon
+            Zucks: Zucks
+            'Troubleshoot bidding': 'Solucionar problemas de ofertas'
             Privacy: Privacidad
             Regulatory solutions: Soluciones regulatorias
             US states privacy laws: Leyes de privacidad de estados de EE. UU.
@@ -233,27 +237,29 @@ plugins:
             Native Overlay: 原生重叠广告
             Rewarded: 激励广告
             'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': '激励插屏广告 <span class="modern-icon" title="Beta">🧪</span>'
-            Mediate: 中介
-            First Steps: 第一步
-            Integrate partner networks: 集成合作伙伴网络
+            'Integrate AdMob Mediation': '集成 AdMob 中介'
+            'Set up AdMob Mediation': '设置 AdMob 中介'
+            'Integrate ad sources': '集成广告来源'
             AppLovin: AppLovin
             BidMachine: BidMachine
-            IronSource: IronSource
-            Meta: Meta
-            Vungle: Vungle
-            UnityAds: Unity Ads
             Chartboost: Chartboost
-            DTExchange: DT Exchange
-            iMobile: i-mobile
+            'DT Exchange (previously Fyber)': 'DT Exchange（之前称为 Fyber）'
+            i-mobile: i-mobile
             InMobi: InMobi
-            Line: Line
-            Maio: Maio
+            ironSource: ironSource
+            'Liftoff Monetize (previously Vungle)': 'Liftoff Monetize（之前称为 Vungle）'
+            'LY Ads Network (previously Line Ads Network)': 'LY Ads Network（之前称为 Line Ads Network）'
+            maio: maio
+            'Meta Audience Network (previously Facebook)': 'Meta Audience Network（之前称为 Facebook）'
             Mintegral: Mintegral
             Moloco: Moloco
             myTarget: myTarget
             Pangle: Pangle
-            PubMatic: PubMatic
+            'PubMatic OpenWrap': 'PubMatic OpenWrap'
+            'Unity Ads': Unity Ads
             Vpon: Vpon
+            Zucks: Zucks
+            'Troubleshoot bidding': '排查竞价问题'
             Privacy: 隐私
             Regulatory solutions: 监管解决方案
             US states privacy laws: 美国各州隐私法
@@ -299,27 +305,29 @@ plugins:
             Native Overlay: ネイティブオーバーレイ広告 (Native Overlay)
             Rewarded: リワード広告 (Rewarded)
             'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': 'リワードインタースティシャル広告 <span class="modern-icon" title="Beta">🧪</span>'
-            Mediate: メディエーション (Mediation)
-            First Steps: はじめに
-            Integrate partner networks: パートナーネットワークの統合
+            'Integrate AdMob Mediation': 'AdMob メディエーションを統合する'
+            'Set up AdMob Mediation': 'AdMob メディエーションを設定する'
+            'Integrate ad sources': '広告ソースを統合する'
             AppLovin: AppLovin
             BidMachine: BidMachine
-            IronSource: IronSource
-            Meta: Meta
-            Vungle: Vungle
-            UnityAds: Unity Ads
             Chartboost: Chartboost
-            DTExchange: DT Exchange
-            iMobile: i-mobile
+            'DT Exchange (previously Fyber)': 'DT Exchange（以前の Fyber）'
+            i-mobile: i-mobile
             InMobi: InMobi
-            Line: Line
-            Maio: Maio
+            ironSource: ironSource
+            'Liftoff Monetize (previously Vungle)': 'Liftoff Monetize（以前の Vungle）'
+            'LY Ads Network (previously Line Ads Network)': 'LY Ads Network（以前の Line Ads Network）'
+            maio: maio
+            'Meta Audience Network (previously Facebook)': 'Meta Audience Network（以前の Facebook）'
             Mintegral: Mintegral
             Moloco: Moloco
             myTarget: myTarget
             Pangle: Pangle
-            PubMatic: PubMatic
+            'PubMatic OpenWrap': 'PubMatic OpenWrap'
+            'Unity Ads': Unity Ads
             Vpon: Vpon
+            Zucks: Zucks
+            'Troubleshoot bidding': '入札のトラブルシューティング'
             Privacy: プライバシー
             Regulatory solutions: 規制対応ソリューション
             US states privacy laws: 米国各州のプライバシー法
@@ -367,31 +375,30 @@ nav:
       - Native Overlay: ad_formats/native_overlay.md
       - Rewarded: ad_formats/rewarded.md
       - 'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': ad_formats/rewarded_interstitial.md
-    - Mediate:
-      - First Steps: mediate/get_started.md
+    - Integrate AdMob Mediation:
+      - Set up AdMob Mediation: mediate/get_started.md
       - Choose ad sources: mediate/choose_networks.md
-      - Custom events: mediate/custom_events.md
-      - Troubleshoot bidding: mediate/troubleshoot_bidding.md
-      - Integrate partner networks:
+      - Integrate ad sources:
         - AppLovin: mediate/integrate_partner_networks/applovin.md
         - BidMachine: mediate/integrate_partner_networks/bidmachine.md
-        - IronSource: mediate/integrate_partner_networks/ironsource.md
-        - Meta: mediate/integrate_partner_networks/meta.md
-        - Vungle: mediate/integrate_partner_networks/vungle.md
-        - Unity Ads: mediate/integrate_partner_networks/unity_ads.md
         - Chartboost: mediate/integrate_partner_networks/chartboost.md
-        - DT Exchange: mediate/integrate_partner_networks/dtexchange.md
+        - 'DT Exchange (previously Fyber)': mediate/integrate_partner_networks/dtexchange.md
         - i-mobile: mediate/integrate_partner_networks/imobile.md
         - InMobi: mediate/integrate_partner_networks/inmobi.md
-        - Line: mediate/integrate_partner_networks/line.md
-        - Maio: mediate/integrate_partner_networks/maio.md
+        - ironSource: mediate/integrate_partner_networks/ironsource.md
+        - 'Liftoff Monetize (previously Vungle)': mediate/integrate_partner_networks/vungle.md
+        - 'LY Ads Network (previously Line Ads Network)': mediate/integrate_partner_networks/line.md
+        - maio: mediate/integrate_partner_networks/maio.md
+        - 'Meta Audience Network (previously Facebook)': mediate/integrate_partner_networks/meta.md
         - Mintegral: mediate/integrate_partner_networks/mintegral.md
         - Moloco: mediate/integrate_partner_networks/moloco.md
         - myTarget: mediate/integrate_partner_networks/mytarget.md
         - Pangle: mediate/integrate_partner_networks/pangle.md
-        - PubMatic: mediate/integrate_partner_networks/pubmatic.md
+        - 'PubMatic OpenWrap': mediate/integrate_partner_networks/pubmatic.md
+        - Unity Ads: mediate/integrate_partner_networks/unity_ads.md
         - Vpon: mediate/integrate_partner_networks/vpon.md
         - Zucks: mediate/integrate_partner_networks/zucks.md
+      - Troubleshoot bidding: mediate/troubleshoot_bidding.md
     - Privacy:
       - Regulatory solutions:
         - US states privacy laws: privacy/regulatory_solutions/us_states_privacy_laws.md

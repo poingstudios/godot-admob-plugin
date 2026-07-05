@@ -1,4 +1,4 @@
-# 入门指南
+# 设置 AdMob 中介
 
 AdMob 中介（Mediation）是一项极具价值的功能，允许您向您的应用程序投放来自各种来源的广告。这些来源包括 AdMob 网络、第三方广告网络以及 [AdMob 广告系列](https://support.google.com/admob/answer/6162747)。AdMob 中介的主要目标是优化您的填充率并增强您的变现效果。它通过将广告请求分发到多个网络来实现这一点，从而确保您的应用使用最合适的可用网络来展示广告。这种方法的优势在[案例研究](https://admob.google.com/home/resources/cookapps-grows-ad-revenue-86-times-with-admob-rewarded-ads-and-mediation/)中得到了印证。
 

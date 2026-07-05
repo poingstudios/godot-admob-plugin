@@ -1,4 +1,4 @@
-# Primeiros Passos
+# Configurar Mediação do AdMob
 
 A mediação do AdMob é um recurso valioso que permite entregar anúncios para seus aplicativos a partir de várias fontes. Essas fontes abrangem a Rede AdMob, redes de anúncios de terceiros e [campanhas do AdMob](https://support.google.com/admob/answer/6162747). O principal objetivo da mediação do AdMob é otimizar sua taxa de preenchimento (fill rate) e aprimorar seus esforços de monetização. Ela consegue isso direcionando solicitações de anúncios para várias redes, garantindo que seu aplicativo utilize a rede mais adequada disponível para veicular anúncios. Essa abordagem é exemplificada por meio de um [estudo de caso](https://admob.google.com/home/resources/cookapps-grows-ad-revenue-86-times-with-admob-rewarded-ads-and-mediation/).
 
