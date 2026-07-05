@@ -448,6 +448,11 @@ nav:
         - AdapterStatus: reference/classes/AdapterStatus.md
         - AppOpenAd: reference/classes/AppOpenAd.md
         - AppOpenAdLoader: reference/classes/AppOpenAdLoader.md
+        - ConsentDebugSettings: reference/classes/ConsentDebugSettings.md
+        - ConsentForm: reference/classes/ConsentForm.md
+        - ConsentInformation: reference/classes/ConsentInformation.md
+        - ConsentRequestParameters: reference/classes/ConsentRequestParameters.md
+        - FormError: reference/classes/FormError.md
         - InitializationStatus: reference/classes/InitializationStatus.md
         - InterstitialAd: reference/classes/InterstitialAd.md
         - InterstitialAdLoader: reference/classes/InterstitialAdLoader.md
@@ -465,6 +470,7 @@ nav:
         - RewardedInterstitialAdLoader: reference/classes/RewardedInterstitialAdLoader.md
         - RewardedItem: reference/classes/RewardedItem.md
         - ServerSideVerificationOptions: reference/classes/ServerSideVerificationOptions.md
+        - UserMessagingPlatform: reference/classes/UserMessagingPlatform.md
       - Listeners:
         - AdInspectorClosedListener: reference/listeners/AdInspectorClosedListener.md
         - AdListener: reference/listeners/AdListener.md
@@ -476,12 +482,15 @@ nav:
         - RewardedAdLoadCallback: reference/listeners/RewardedAdLoadCallback.md
         - RewardedInterstitialAdLoadCallback: reference/listeners/RewardedInterstitialAdLoadCallback.md
       - Enums:
-        - AdPosition: reference/enums/AdPosition.md
         - AdChoicesPlacement: reference/enums/AdChoicesPlacement.md
-        - NativeMediaAspectRatio: reference/enums/NativeMediaAspectRatio.md
-        - NativeTemplateFontStyle: reference/enums/NativeTemplateFontStyle.md
+        - AdPosition: reference/enums/AdPosition.md
         - AdValue.PrecisionType: reference/enums/AdValue.PrecisionType.md
         - AdapterStatus.InitializationState: reference/enums/AdapterStatus.InitializationState.md
+        - ConsentInformation.ConsentStatus: reference/enums/ConsentInformation.ConsentStatus.md
+        - ConsentInformation.PrivacyOptionsRequirementStatus: reference/enums/ConsentInformation.PrivacyOptionsRequirementStatus.md
+        - DebugGeography: reference/enums/DebugGeography.md
+        - NativeMediaAspectRatio: reference/enums/NativeMediaAspectRatio.md
+        - NativeTemplateFontStyle: reference/enums/NativeTemplateFontStyle.md
         - RequestConfiguration.TagForChildDirectedTreatment: reference/enums/RequestConfiguration.TagForChildDirectedTreatment.md
         - RequestConfiguration.TagForUnderAgeOfConsent: reference/enums/RequestConfiguration.TagForUnderAgeOfConsent.md
 
