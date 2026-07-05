@@ -48,11 +48,11 @@ show_help() {
     echo "  --help        Show this help message"
     echo ""
     echo "Arguments:"
-    echo "  [godot_version]  Optional. The Godot version (e.g., 4.6.1 or 4.7-beta1). Auto-detected if omitted."
+    echo "  [godot_version]  Optional. The Godot version (e.g., 4.7 or 4.7-beta1). Auto-detected if omitted."
     echo ""
     echo "Examples:"
     echo "  ./scripts/build.sh                   # Incremental build using detected version"
-    echo "  ./scripts/build.sh 4.6.1             # Incremental build for specific version"
+    echo "  ./scripts/build.sh 4.7             # Incremental build for specific version"
     echo "  ./scripts/build.sh 4.7-beta1         # Incremental build for pre-release version"
     echo "  ./scripts/build.sh --clean           # Clean build using detected version"
     echo "  ./scripts/build.sh --sdk             # Build plugin and generate SDK dependencies"
@@ -119,9 +119,9 @@ ensure_dir "$RELEASE_DIR"
 ensure_dir "./bin/static_libraries"
 ensure_dir "./bin/xcframeworks"
 
-if [ ! -d "$SPM_BUILD_DIR" ]; then
-    ./scripts/lib/resolve_spm_deps.sh || exit 1
-fi
+# Always resolve SPM dependencies to ensure all binary targets (even lazy-loaded ones) are present,
+# especially when restoring the .build folder from CI cache.
+./scripts/lib/resolve_spm_deps.sh || exit 1
 
 # --- INTERNAL BUILD ---
 log_info "--- Building Internal Plugin ---"

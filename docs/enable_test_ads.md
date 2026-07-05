@@ -13,9 +13,9 @@ This document is based on:
 - [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/test-ads)
 
 ## Prerequisites
-- Complete the [Get started guide](README.md)
+- Complete the [Get started guide](index.md)
 
-## Sample ad units
+## Sample ad units {: #sample-ad-units }
 
 The most expedient method to enable testing is by employing Google's provided test ad units. These ad units are separate from your AdMob account, ensuring there is no risk of your account generating invalid traffic while using them.
 
@@ -57,7 +57,7 @@ While the standard ad units above can be used by adding extra parameters (like `
 
 
 
-## Enable test devices
+## Enable test devices {: #enable-test-devices }
 To conduct more thorough testing with production-like ads, you can configure your device as a test device and utilize your own ad unit IDs created in the AdMob UI. You can add test devices either through the AdMob UI or programmatically using the Google Mobile Ads SDK.
 
 Here are the steps to add your device as a test device:
@@ -100,7 +100,7 @@ If you wish to test ads within your app during the development phase and want to
         ```
 Copy your test device ID to your clipboard.
 
-3. Update your code to include the test device IDs within your `RequestConfiguration.test_device_ids` array like this:
+3. Update your code to include the test device IDs within your [`RequestConfiguration`](reference/classes/RequestConfiguration.md).test_device_ids array like this:
 
 === "GDScript"
 
@@ -146,4 +146,4 @@ Google's sample ad units exclusively display Google Ads. To test your mediation 
 
 Mediated ads do NOT exhibit a "Test Ad" label. Consequently, it is your responsibility to ensure that test ads are enabled for each of your mediation networks to prevent these networks from flagging your account for invalid activity. Refer to each network's individual [mediation guide](mediate/get_started.md) for detailed instructions.
 
-If you are uncertain about whether a mediation ad network adapter supports test ads, it is advisable to refrain from clicking on ads from that network during the development phase. You can utilize the [ResponseInfo.mediation_adapter_class_name](https://github.com/poingstudios/godot-admob-plugin/blob/master/addons/admob/src/api/core/ResponseInfo.gd) property within any of the ad formats to determine which ad network served the current ad.
+If you are uncertain about whether a mediation ad network adapter supports test ads, it is advisable to refrain from clicking on ads from that network during the development phase. You can utilize the [`ResponseInfo.mediation_adapter_class_name`](reference/classes/ResponseInfo.md#mediation_adapter_class_name) property within any of the ad formats to determine which ad network served the current ad.

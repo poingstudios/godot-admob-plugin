@@ -29,25 +29,7 @@ body {
   padding: 0 !important;
 }
 
-/* 💫 ACCESSIBLE FLUID FOCUS (High Contrast & Compact) */
-.md-option:focus + .md-header__button,
-.md-option:focus-visible + .md-header__button,
-.md-option:focus ~ .md-header__button,
-.md-option:focus-visible ~ .md-header__button,
-.md-header__button:hover,
-.md-header__button:focus-within,
-.md-header__button:focus,
-[data-md-color-scheme="slate"] .md-option:focus + .md-header__button,
-[data-md-color-scheme="slate"] .md-option:focus ~ .md-header__button {
-  background-color: rgba(255, 255, 255, 0.35) !important;
-  color: #fff !important;
-  border-radius: 50% !important;
-  transition: all 0.2s ease-in-out !important;
-  outline: none !important;
-  /* High visibility AdMob Yellow, 25% more compact (3px) */
-  box-shadow: 0 0 0 3px #FBBC04 !important; 
-  z-index: 10 !important;
-}
+
 
 
 
@@ -135,10 +117,8 @@ body {
 /* 🐭 HOVER INTERACTION (Desktop Only) */
 @media (hover: hover) {
   .announcement-wrapper:hover .shape {
-    opacity: 0.4 !important;
-    /* Subtle boost */
-    filter: blur(0px);
-    transform: translate(0, -10px) scale(1.15) !important;
+    opacity: 0.45 !important;
+    filter: blur(2px);
   }
 
   .announcement-wrapper:hover::before {

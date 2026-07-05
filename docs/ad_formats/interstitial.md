@@ -7,7 +7,7 @@ This document is based on:
 - [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/interstitial)
 
 ## Prerequisites
-- Complete the [Get started guide](../README.md)
+- Complete the [Get started guide](../index.md)
 
 ## Always test with test ads
 
@@ -36,7 +36,7 @@ The code sample below demonstrates how to utilize the Interstitial. In this exam
 
 
 ### Load an ad
-To load an interstitial ad, utilize the `InterstitialAdLoader` class. Pass in an `InterstitialAdLoadCallback` to receive the loaded ad or any potential errors. It's worth noting that, similar to other format load callbacks, the `InterstitialAdLoadCallback` leverages `LoadAdError` to provide comprehensive error details.
+To load an interstitial ad, utilize the [`InterstitialAdLoader`](../reference/classes/InterstitialAdLoader.md) class. Pass in an [`InterstitialAdLoadCallback`](../reference/listeners/InterstitialAdLoadCallback.md) to receive the loaded [`InterstitialAd`](../reference/classes/InterstitialAd.md) or any potential errors. It's worth noting that, similar to other format load callbacks, the [`InterstitialAdLoadCallback`](../reference/listeners/InterstitialAdLoadCallback.md) leverages [`LoadAdError`](../reference/classes/LoadAdError.md) to provide comprehensive error details.
 
 === "GDScript"
 
@@ -123,7 +123,7 @@ To load an interstitial ad, utilize the `InterstitialAdLoader` class. Pass in an
     ```
 
 ### Configure the FullScreenContentCallback
-The `FullScreenContentCallback` manages events associated with the display of your `InterstitialAd`. Before presenting the `InterstitialAd`, ensure that you configure the callback:
+The [`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) manages events associated with the display of your [`InterstitialAd`](../reference/classes/InterstitialAd.md). Before presenting the [`InterstitialAd`](../reference/classes/InterstitialAd.md), ensure that you configure the callback:
 
 === "GDScript"
 

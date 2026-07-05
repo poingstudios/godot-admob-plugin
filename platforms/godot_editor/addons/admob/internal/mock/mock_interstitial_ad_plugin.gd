@@ -98,7 +98,7 @@ func _update_ui(uid: int) -> void:
 	viewport_size.x = max(1.0, viewport_size.x)
 	viewport_size.y = max(1.0, viewport_size.y)
 
-	var scale_factor: float = min(viewport_size.x, viewport_size.y) / 360.0
+	var scale_factor: float = min(viewport_size.x / 360.0, viewport_size.y / 640.0)
 	if scale_factor <= 0.0:
 		scale_factor = 1.0
 
@@ -142,7 +142,7 @@ func _update_ui(uid: int) -> void:
 	top_control.add_child(test_ad_pill)
 
 	var test_ad_lbl := Label.new()
-	test_ad_lbl.text = "Test Ad"
+	test_ad_lbl.text = "Mock Ad"
 	test_ad_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	test_ad_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	test_ad_lbl.add_theme_color_override("font_color", Color.WHITE)
@@ -218,7 +218,7 @@ func _update_ui(uid: int) -> void:
 	content_vbox.add_child(ad_image)
 
 	var title_lbl := Label.new()
-	title_lbl.text = "This is an\ninterstitial test ad."
+	title_lbl.text = "This is an\ninterstitial mock ad."
 	title_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	title_lbl.add_theme_color_override("font_color", Color(0.12, 0.12, 0.12))
 	title_lbl.add_theme_font_size_override("font_size", max(1, int(round(22 * scale_factor_y))))

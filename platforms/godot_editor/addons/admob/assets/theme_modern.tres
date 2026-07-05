@@ -1,8 +1,8 @@
 [gd_resource type="Theme" format=3 uid="uid://cax2scu7f6q4k"]
 
-[ext_resource type="FontFile" uid="uid://ctd0my3oi3sl7" path="res://addons/admob/assets/fonts/arial.ttf" id="1_arial"]
 [ext_resource type="Texture2D" uid="uid://cco8g2kg2bb1h" path="res://addons/admob/assets/arrow_left.svg" id="2_arrow_left"]
 [ext_resource type="Texture2D" uid="uid://dsl4ryirrswdy" path="res://addons/admob/assets/arrow_right.svg" id="3_arrow_right"]
+[ext_resource type="FontFile" uid="uid://sbrakpuoo3rd" path="res://addons/admob/assets/fonts/NotoSansSC-Regular.otf" id="4_noto"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_button_disabled"]
 content_margin_left = 30.0
@@ -108,10 +108,10 @@ shadow_size = 8
 shadow_offset = Vector2(0, 4)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_section_card"]
-content_margin_left = 15.0
-content_margin_top = 15.0
-content_margin_right = 15.0
-content_margin_bottom = 15.0
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
 bg_color = Color(1, 1, 1, 0.05)
 border_width_left = 2
 border_width_top = 2
@@ -156,10 +156,10 @@ shadow_size = 6
 shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tab_panel"]
-content_margin_left = 20.0
-content_margin_top = 20.0
-content_margin_right = 20.0
-content_margin_bottom = 20.0
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
 bg_color = Color(1, 1, 1, 0.15)
 corner_radius_top_left = 20
 corner_radius_top_right = 20
@@ -197,7 +197,7 @@ corner_radius_top_left = 15
 corner_radius_top_right = 15
 
 [resource]
-default_font = ExtResource("1_arial")
+default_font = ExtResource("4_noto")
 default_font_size = 20
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_disabled_color = Color(1, 1, 1, 0.4)

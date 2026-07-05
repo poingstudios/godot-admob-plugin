@@ -1,5 +1,5 @@
 [config]
-name="AdMob IronSource"
+name="AdMob Mediation IronSource"
 binary="poing-godot-admob/bin/poing-godot-admob-ironsource.xcframework"
 
 initialization="register_poing_godot_admob_ironsource_types"

@@ -30,77 +30,84 @@ theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="ActionsCard/VBox"]
 layout_mode = 2
-text = "BANNER CONTROLS"
+text = "GAD_BannerControls"
 horizontal_alignment = 1
 
 [node name="BannerActions" type="GridContainer" parent="ActionsCard/VBox"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 3
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="LoadBanner" type="Button" parent="ActionsCard/VBox/BannerActions"]
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_hover_color = Color(0.25, 0.75, 0.25, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.35, 0.1, 1)
 theme_override_colors/font_color = Color(0.15, 0.45, 0.15, 1)
-text = "Load"
+text = "GAD_Load"
 
 [node name="LoadBannerBackground" type="Button" parent="ActionsCard/VBox/BannerActions"]
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_hover_color = Color(0.25, 0.75, 0.25, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.35, 0.1, 1)
 theme_override_colors/font_color = Color(0.15, 0.45, 0.15, 1)
-text = "Load Background"
+text = "GAD_LoadBackground"
 
 [node name="ShowBanner" type="Button" parent="ActionsCard/VBox/BannerActions"]
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_disabled_color = Color(0.1, 0.25, 0.5, 0.4)
 theme_override_colors/font_hover_color = Color(0.25, 0.5, 0.9, 1)
 theme_override_colors/font_pressed_color = Color(0.05, 0.15, 0.3, 1)
 theme_override_colors/font_color = Color(0.1, 0.25, 0.5, 1)
 disabled = true
-text = "Show"
+text = "GAD_Show"
 
 [node name="HideBanner" type="Button" parent="ActionsCard/VBox/BannerActions"]
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_disabled_color = Color(0.5, 0.4, 0.1, 0.4)
 theme_override_colors/font_hover_color = Color(0.8, 0.7, 0.2, 1)
 theme_override_colors/font_pressed_color = Color(0.3, 0.2, 0.05, 1)
 theme_override_colors/font_color = Color(0.5, 0.4, 0.1, 1)
 disabled = true
-text = "Hide"
+text = "GAD_Hide"
 
 [node name="GetSize" type="Button" parent="ActionsCard/VBox/BannerActions"]
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_disabled_color = Color(0.3, 0.3, 0.3, 0.4)
 theme_override_colors/font_hover_color = Color(0.6, 0.6, 0.6, 1)
 theme_override_colors/font_pressed_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
 disabled = true
-text = "Get Size"
+text = "GAD_GetSize"
 
 [node name="DestroyBanner" type="Button" parent="ActionsCard/VBox/BannerActions"]
-custom_minimum_size = Vector2(160, 50)
+custom_minimum_size = Vector2(120, 50)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_colors/font_disabled_color = Color(0.6, 0.15, 0.15, 0.4)
 theme_override_colors/font_hover_color = Color(0.9, 0.3, 0.3, 1)
 theme_override_colors/font_pressed_color = Color(0.4, 0.05, 0.05, 1)
 theme_override_colors/font_color = Color(0.6, 0.15, 0.15, 1)
 disabled = true
-text = "Destroy"
+text = "GAD_Destroy"
 
 [node name="Collapsible" type="CheckButton" parent="ActionsCard/VBox/BannerActions"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Collapsible"
+text = "GAD_Collapsible"
+alignment = 1
 
 [node name="CustomCard" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -112,7 +119,7 @@ theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="CustomCard/VBox"]
 layout_mode = 2
-text = "CUSTOM POSITION (XY)"
+text = "GAD_CustomPosition"
 horizontal_alignment = 1
 
 [node name="HBox" type="HBoxContainer" parent="CustomCard/VBox"]
@@ -151,7 +158,7 @@ virtual_keyboard_type = 2
 [node name="ApplyCustom" type="Button" parent="CustomCard/VBox/HBox"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-text = "Update"
+text = "GAD_Update"
 
 [node name="SizeCard" type="PanelContainer" parent="."]
 layout_mode = 2
@@ -163,7 +170,7 @@ theme_override_constants/separation = 10
 
 [node name="Label" type="Label" parent="SizeCard/VBox"]
 layout_mode = 2
-text = "AD SIZE"
+text = "GAD_AdSize"
 horizontal_alignment = 1
 
 [node name="SizeOption" type="OptionButton" parent="SizeCard/VBox"]
@@ -171,23 +178,23 @@ unique_name_in_owner = true
 layout_mode = 2
 item_count = 9
 selected = 0
-popup/item_0/text = "Anchored Adaptive"
+popup/item_0/text = "GAD_AnchoredAdaptive"
 popup/item_0/id = 0
-popup/item_1/text = "BANNER (320x50)"
+popup/item_1/text = "GAD_SizeBanner"
 popup/item_1/id = 1
-popup/item_2/text = "FULL_BANNER (468x60)"
+popup/item_2/text = "GAD_SizeFullBanner"
 popup/item_2/id = 2
-popup/item_3/text = "LARGE_BANNER (320x100)"
+popup/item_3/text = "GAD_SizeLargeBanner"
 popup/item_3/id = 3
-popup/item_4/text = "LEADERBOARD (728x90)"
+popup/item_4/text = "GAD_SizeLeaderboard"
 popup/item_4/id = 4
-popup/item_5/text = "MEDIUM_RECTANGLE (300x250)"
+popup/item_5/text = "GAD_SizeMediumRectangle"
 popup/item_5/id = 5
-popup/item_6/text = "WIDE_SKYSCRAPER (160x600)"
+popup/item_6/text = "GAD_SizeWideSkyscraper"
 popup/item_6/id = 6
-popup/item_7/text = "SMART_BANNER"
+popup/item_7/text = "GAD_SmartBanner"
 popup/item_7/id = 7
-popup/item_8/text = "CUSTOM"
+popup/item_8/text = "GAD_Custom"
 popup/item_8/id = 8
 
 [node name="CustomSize" type="HBoxContainer" parent="SizeCard/VBox"]
@@ -235,7 +242,7 @@ theme_override_constants/separation = 15
 
 [node name="Label" type="Label" parent="PositionCard/VBox"]
 layout_mode = 2
-text = "PRESET POSITIONS"
+text = "GAD_PresetPositions"
 horizontal_alignment = 1
 
 [node name="PositionGrid" type="GridContainer" parent="PositionCard/VBox"]
@@ -246,64 +253,64 @@ theme_override_constants/v_separation = 15
 columns = 3
 
 [node name="TOP_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
-tooltip_text = "Top Left"
+tooltip_text = "GAD_TopLeft"
 icon = ExtResource("2_tl")
 expand_icon = true
 
 [node name="TOP" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
-tooltip_text = "Top"
+tooltip_text = "GAD_Top"
 icon = ExtResource("3_t")
 expand_icon = true
 
 [node name="TOP_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
-tooltip_text = "Top Right"
+tooltip_text = "GAD_TopRight"
 icon = ExtResource("4_tr")
 expand_icon = true
 
 [node name="LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
-tooltip_text = "Left"
+tooltip_text = "GAD_Left"
 icon = ExtResource("5_l")
 expand_icon = true
 
 [node name="CENTER" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
-tooltip_text = "Center"
+tooltip_text = "GAD_Center"
 icon = ExtResource("6_c")
 expand_icon = true
 
 [node name="RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
-tooltip_text = "Right"
+tooltip_text = "GAD_Right"
 icon = ExtResource("7_r")
 expand_icon = true
 
 [node name="BOTTOM_LEFT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
-tooltip_text = "Bottom Left"
+tooltip_text = "GAD_BottomLeft"
 icon = ExtResource("8_bl")
 expand_icon = true
 
 [node name="BOTTOM" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
-tooltip_text = "Bottom"
+tooltip_text = "GAD_Bottom"
 icon = ExtResource("9_b")
 expand_icon = true
 
 [node name="BOTTOM_RIGHT" type="Button" parent="PositionCard/VBox/PositionGrid"]
-custom_minimum_size = Vector2(100, 100)
+custom_minimum_size = Vector2(51, 51)
 layout_mode = 2
-tooltip_text = "Bottom Right"
+tooltip_text = "GAD_BottomRight"
 icon = ExtResource("10_br")
 expand_icon = true

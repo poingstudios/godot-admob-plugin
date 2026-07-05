@@ -13,3 +13,4 @@ local.properties
 
 *.aar
 *.zip
+/godot-lib/

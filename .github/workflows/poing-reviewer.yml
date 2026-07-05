@@ -1,0 +1,147 @@
+# MIT License
+#
+# Copyright (c) 2026 Poing Studios
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+name: Poing Reviewer
+
+on:
+  pull_request:
+    types: [opened, review_requested]
+  issues:
+    types: [opened]
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Mode: review or triage'
+        required: true
+        default: 'review'
+        type: choice
+        options:
+          - review
+          - triage
+      number:
+        description: 'PR or Issue number'
+        required: true
+
+jobs:
+  review:
+    if: >
+      github.event_name == 'pull_request' ||
+      (github.event_name == 'workflow_dispatch' && inputs.mode == 'review')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: 1. Generate App Token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
+      - name: 2. Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout PR (workflow_dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        run: gh pr checkout ${{ inputs.number }}
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+
+      - name: Set PR Env (workflow_dispatch)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          pr_data=$(gh pr view ${{ inputs.number }} --json baseRefName,number,title,headRefName,headRefOid --repo ${{ github.repository }})
+          echo "PR_NUMBER=$(echo $pr_data | jq -r '.number')" >> $GITHUB_ENV
+          echo "PR_TITLE=$(echo $pr_data | jq -r '.title')" >> $GITHUB_ENV
+          echo "BASE_REF=$(echo $pr_data | jq -r '.baseRefName')" >> $GITHUB_ENV
+          echo "PR_HEAD_SHA=$(echo $pr_data | jq -r '.headRefOid')" >> $GITHUB_ENV
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+
+      - name: Fetch Base Branch
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            git fetch origin "${{ github.event.pull_request.base.ref }}"
+          else
+            git fetch origin "$BASE_REF"
+          fi
+
+      - name: 3. Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 4. Install Dependencies
+        run: pip install -r .github/scripts/requirements.txt
+
+      - name: 5. Run Reviewer
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+          GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
+          MODE: review
+          PR_NUMBER: ${{ github.event.pull_request.number || env.PR_NUMBER }}
+          REPO: ${{ github.repository }}
+          BASE_REF: ${{ github.event.pull_request.base.ref || env.BASE_REF }}
+          PR_TITLE: ${{ github.event.pull_request.title || env.PR_TITLE }}
+          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || env.PR_HEAD_SHA }}
+          MODEL_NAME: gemini-3.5-flash
+          MAX_CHARS: 100000
+          TRIGGER_ACTION: ${{ github.event.action || 'workflow_dispatch' }}
+          COMMENT_BODY: ${{ github.event.comment.body || '' }}
+        run: python .github/scripts/poing_reviewer.py
+
+  triage:
+    if: >
+      (github.event_name == 'pull_request') ||
+      (github.event_name == 'issues') ||
+      (github.event_name == 'workflow_dispatch' && inputs.mode == 'triage')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - name: 1. Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 2. Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 3. Install Dependencies
+        run: pip install -r .github/scripts/requirements.txt
+
+      - name: 4. Run Triage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
+          MODE: triage
+          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number || inputs.number }}
+          REPO: ${{ github.repository }}
+          ISSUE_TITLE: ${{ github.event.issue.title || github.event.pull_request.title || '' }}
+          ISSUE_BODY: ${{ github.event.issue.body || github.event.pull_request.body || '' }}
+          ISSUE_ACTION: ${{ github.event.action || 'workflow_dispatch' }}
+          MODEL_NAME: gemini-3.5-flash
+        run: python .github/scripts/poing_reviewer.py

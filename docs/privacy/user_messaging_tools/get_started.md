@@ -11,7 +11,7 @@ This document is based on:
 
 ## Prerequisites
 
-- Complete the [Get started guide](../../README.md)
+- Complete the [Get started guide](../../index.md)
 - If you're working on GDPR-related requirements, read [How IAB requirements affect EU consent messages](https://support.google.com/admob/answer/10207733).
 
 ## Create a message type
@@ -168,6 +168,7 @@ To load the form, use the static `load_consent_form()` function on the `UserMess
     }
     ```
 
+<span id="present-form"></span>
 ## Present the form if required
 After you’ve determined the form's availability and loaded it, use the `show()` function on the ConsentForm instance to present the form.
 

@@ -1,4 +1,4 @@
-# Get started
+# Set up AdMob Mediation
 
 AdMob mediation is a valuable feature that allows you to deliver ads to your applications from various sources. These sources encompass the AdMob Network, third-party ad networks, and [AdMob campaigns](https://support.google.com/admob/answer/6162747). The primary goal of AdMob mediation is to optimize your fill rate and enhance your monetization efforts. It achieves this by directing ad requests to multiple networks, ensuring that your app utilizes the most suitable network available to serve ads. This approach is exemplified through a [case study](https://admob.google.com/home/resources/cookapps-grows-ad-revenue-86-times-with-admob-rewarded-ads-and-mediation/).
 
@@ -23,7 +23,7 @@ This document is based on:
 
 ## Initialize the Mobile Ads SDK
 
-The quick start guide provides instructions on how to [initialize the Mobile Ads SDK](../README.md#initialize-the-google-mobile-ads-sdk). During this initialization process, mediation and bidding adapters are also initialized. It's crucial to wait for this initialization to complete before loading ads to ensure that every ad network fully participates in the first ad request.
+The quick start guide provides instructions on how to [initialize the Mobile Ads SDK](../index.md#initialize-the-google-mobile-ads-sdk). During this initialization process, mediation and bidding adapters are also initialized. It's crucial to wait for this initialization to complete before loading ads to ensure that every ad network fully participates in the first ad request.
 
 The following sample code demonstrates how you can verify the initialization status of each adapter before initiating an ad request.
 

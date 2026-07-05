@@ -30,7 +30,7 @@ The AdMob mediation adapter for Vungle has the following capabilities:
 [^2]: For access to this feature, contact your Liftoff Monetize account manager.
 
 ## Prerequisites
-- Complete the [Get started guide](../../README.md)
+- Complete the [Get started guide](../../index.md)
 - Complete the mediation [Get started guide](../get_started.md)
 
 
@@ -56,7 +56,7 @@ We recommend following the tutorial for [Android](https://developers.google.com/
     ![android-vungle](../../assets/android/vungle.png)
 
 === "iOS"
-    The Liftoff Monetize (Vungle) adapter is **already included** in the standard iOS plugin download. If you followed the [iOS Installation guide](../../README.md#download-install), you should already have the necessary files (`poing-godot-admob-vungle.gdip` and related frameworks) in your `res://ios/plugins/` directory.
+    The Liftoff Monetize (Vungle) adapter is **already included** in the standard iOS plugin download. If you followed the [iOS Installation guide](../../index.md#download-install), you should already have the necessary files (`poing-godot-admob-vungle.gdip` and related frameworks) in your `res://ios/plugins/` directory.
 
 ## Step 4: Enable the plugin
 

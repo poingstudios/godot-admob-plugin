@@ -6,7 +6,7 @@ This guide is intended to help you implement the impression-level ad revenue dat
 
 ## Prerequisites
 - Make sure you have [turned on the impression-level ad revenue feature](https://support.google.com/admob/answer/11322405) in the AdMob UI.
-- Complete [Get Started](../README.md). Your Godot project should already have the Poing Studios AdMob plugin imported and configured.
+- Complete [Get Started](../index.md). Your Godot project should already have the Poing Studios AdMob plugin imported and configured.
 - Before you can receive any impression-level ad revenue data, you need to implement at least one ad format:
     - [App open](../ad_formats/app_open.md)
     - [Banner](../ad_formats/banner/get_started.md)
@@ -17,7 +17,7 @@ This guide is intended to help you implement the impression-level ad revenue dat
 
 ## Implementing a paid event handler
 
-Each ad format has an `on_ad_paid` (`OnAdPaid` in C#) event. During the lifecycle of an ad event, the Godot AdMob Plugin monitors impression events and invokes the handler with an `AdValue` representing the earned value.
+Each ad format has an `on_ad_paid` (`OnAdPaid` in C#) event callback property. During the lifecycle of an ad event, the Godot AdMob Plugin monitors impression events and invokes the handler with an [`AdValue`](../reference/classes/AdValue.md) representing the earned value. The precision type of this value is defined by [`AdValue.PrecisionType`](../reference/enums/AdValue.PrecisionType.md).
 
 The following example handles paid events for a rewarded ad:
 

@@ -10,9 +10,25 @@ config_version=5
 
 [admob]
 
-android/mediation/meta=true
-android/mediation/vungle=true
+android/mediation/applovin=true
+android/mediation/bidmachine=true
+android/mediation/chartboost=true
+android/mediation/dtexchange=true
+android/mediation/imobile=true
+android/mediation/inmobi=true
 android/mediation/ironsource=true
+android/mediation/line=true
+android/mediation/maio=true
+android/mediation/meta=true
+android/mediation/mintegral=true
+android/mediation/moloco=true
+android/mediation/mytarget=true
+android/mediation/pangle=true
+android/mediation/pubmatic=true
+android/mediation/vpon=true
+android/mediation/unity_ads=true
+android/mediation/vungle=true
+android/mediation/zucks=true
 
 [animation]
 
@@ -23,7 +39,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="AdMobAddon"
 config/tags=PackedStringArray("admob", "mobile", "plugin", "sample")
 run/main_scene="uid://0esyp38ds6yg"
-config/features=PackedStringArray("4.7", "GL Compatibility")
+config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="res://addons/admob/assets/icon-1024.png"
 
 [display]
@@ -47,6 +63,10 @@ enabled=PackedStringArray("res://addons/admob/plugin.cfg")
 [filesystem]
 
 import/blender/enabled=false
+
+[internationalization]
+
+locale/translations=PackedStringArray("res://addons/admob/gdscript/sample/translations/admob_sample.en.translation", "res://addons/admob/gdscript/sample/translations/admob_sample.pt_BR.translation", "res://addons/admob/gdscript/sample/translations/admob_sample.es.translation", "res://addons/admob/gdscript/sample/translations/admob_sample.zh_CN.translation", "res://addons/admob/gdscript/sample/translations/admob_sample.ja.translation")
 
 [physics]
 

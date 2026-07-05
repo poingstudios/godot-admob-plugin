@@ -43,9 +43,25 @@ static func register_settings() -> void:
 	var settings: Array[SettingDefinition] = [
 		SettingDefinition.new(ANDROID_ENABLED, TYPE_BOOL, true),
 		SettingDefinition.new(ANDROID_APP_ID, TYPE_STRING, DEFAULT_APP_ID),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "applovin", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "bidmachine", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "chartboost", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "dtexchange", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "imobile", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "inmobi", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "ironsource", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "line", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "maio", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "meta", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "mintegral", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "moloco", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "mytarget", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "pangle", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "pubmatic", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "vpon", TYPE_BOOL, false),
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "unity_ads", TYPE_BOOL, false),
 		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "vungle", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "ironsource", TYPE_BOOL, false)
+		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "zucks", TYPE_BOOL, false)
 	]
 
 	var active_names: Array[String] = []
@@ -61,10 +77,41 @@ static func register_settings() -> void:
 	if _cleanup_obsolete_settings(active_names):
 		modified = true
 
+	if _register_translations():
+		modified = true
+
 	if modified:
 		var err := ProjectSettings.save()
 		if err != OK:
 			push_error("AdMob: Failed to save project settings")
+
+
+static func _register_translations() -> bool:
+	var csv_path := "res://addons/admob/gdscript/sample/translations/admob_sample.csv"
+	if not FileAccess.file_exists(csv_path):
+		return false
+
+	var translations : Array[String] = [
+		"res://addons/admob/gdscript/sample/translations/admob_sample.en.translation",
+		"res://addons/admob/gdscript/sample/translations/admob_sample.pt_BR.translation",
+		"res://addons/admob/gdscript/sample/translations/admob_sample.es.translation",
+		"res://addons/admob/gdscript/sample/translations/admob_sample.zh_CN.translation",
+		"res://addons/admob/gdscript/sample/translations/admob_sample.ja.translation"
+	]
+
+	var current_translations := PackedStringArray()
+	if ProjectSettings.has_setting("internationalization/locale/translations"):
+		current_translations = ProjectSettings.get_setting("internationalization/locale/translations")
+
+	var modified := false
+	for t in translations:
+		if not t in current_translations:
+			current_translations.append(t)
+			modified = true
+
+	if modified:
+		ProjectSettings.set_setting("internationalization/locale/translations", current_translations)
+	return modified
 
 
 static func _cleanup_obsolete_settings(active_names: Array[String]) -> bool:

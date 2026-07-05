@@ -180,7 +180,7 @@ func _update_ui(uid: int) -> void:
 	viewport_size.x = max(1.0, viewport_size.x)
 	viewport_size.y = max(1.0, viewport_size.y)
 
-	var scale_factor: float = min(viewport_size.x, viewport_size.y) / 360.0
+	var scale_factor: float = min(viewport_size.x / 360.0, viewport_size.y / 640.0)
 	if scale_factor <= 0.0:
 		scale_factor = 1.0
 
@@ -224,7 +224,7 @@ func _update_ui(uid: int) -> void:
 	top_control.add_child(test_ad_pill)
 
 	var test_ad_lbl := Label.new()
-	test_ad_lbl.text = "Test Ad"
+	test_ad_lbl.text = "Mock Ad"
 	test_ad_lbl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	test_ad_lbl.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	test_ad_lbl.add_theme_color_override("font_color", Color.WHITE)

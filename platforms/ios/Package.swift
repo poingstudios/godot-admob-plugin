@@ -143,7 +143,7 @@ for gdipFile in gdipFiles {
 
 let package = Package(
     name: "PoingGodotAdMobDeps",
-    platforms: [.iOS(.v13)],
+    platforms: [.iOS(.v14)],
     products: [
         .library(
             name: "PoingGodotAdMobDeps",
@@ -163,3 +163,4 @@ let package = Package(
         )
     ]
 )
+// cache_bust: 1
