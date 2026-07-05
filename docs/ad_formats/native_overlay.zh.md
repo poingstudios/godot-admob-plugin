@@ -40,7 +40,7 @@
 
 ### 加载原生广告
 
-加载原生广告是通过使用 `NativeOverlayAd` 类上的 `load()` 方法完成的。您需要提供广告单元 ID、一个 `AdRequest`、`NativeAdOptions` 以及一个完成回调。
+加载原生广告是通过使用 [`NativeOverlayAd`](../reference/classes/NativeOverlayAd.md) 类上的 `load()` 方法完成的。您需要提供广告单元 ID、一个 [`AdRequest`](../reference/classes/AdRequest.md)、[`NativeAdOptions`](../reference/classes/NativeAdOptions.md) 以及一个完成回调。
 
 === "GDScript"
 
@@ -115,7 +115,7 @@
 
 ### 定义模板样式
 
-您可以使用 `NativeTemplateStyle` 来自定义广告的外观。有两种主要的模板可用：`SMALL` (小) 和 `MEDIUM` (中)。
+您可以使用 [`NativeTemplateStyle`](../reference/classes/NativeTemplateStyle.md) 和 [`NativeTemplateTextStyle`](../reference/classes/NativeTemplateTextStyle.md) 来自定义广告的外观。有两种主要的模板可用：`SMALL` (小) 和 `MEDIUM` (中)。
 
 === "GDScript"
 
@@ -171,7 +171,7 @@
 
 ### 广告位置
 
-您可以使用 `AdPosition` 类将广告放置在几个预定义的位置或自定义的 XY 坐标。
+您可以使用 [`AdPosition`](../reference/classes/AdPosition.md) 的预定义对齐方式将广告放置在几个预定义的位置或自定义的 XY 坐标。
 
 - `AdPosition.TOP`
 - `AdPosition.BOTTOM`
@@ -182,7 +182,7 @@
 
 ### 监听广告事件
 
-要处理用户交互，您可以使用 `NativeOverlayAd` 实例的 `ad_listener` 属性。
+要处理用户交互，您可以使用 [`NativeOverlayAd`](../reference/classes/NativeOverlayAd.md) 实例的 `ad_listener` 属性，该属性接受一个 [`AdListener`](../reference/listeners/AdListener.md)。
 
 === "GDScript"
 

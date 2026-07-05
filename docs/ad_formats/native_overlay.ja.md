@@ -41,7 +41,7 @@
 
 ### ネイティブ広告のロード
 
-ネイティブ広告のロードは、`NativeOverlayAd` クラスの `load()` メソッドを使用して行われます。広告ユニット ID、`AdRequest`、`NativeAdOptions`、および完了コールバックを提供する必要があります。
+ネイティブ広告のロードは、[`NativeOverlayAd`](../reference/classes/NativeOverlayAd.md) クラスの `load()` メソッドを使用して行われます。広告ユニット ID、[`AdRequest`](../reference/classes/AdRequest.md)、[`NativeAdOptions`](../reference/classes/NativeAdOptions.md)、および完了コールバックを提供する必要があります。
 
 === "GDScript"
 
@@ -116,7 +116,7 @@
 
 ### テンプレートスタイルの定義
 
-`NativeTemplateStyle` を使用して、広告の見た目をカスタマイズできます。主に `SMALL` と `MEDIUM` の 2 つのテンプレートを利用できます。
+[`NativeTemplateStyle`](../reference/classes/NativeTemplateStyle.md) と [`NativeTemplateTextStyle`](../reference/classes/NativeTemplateTextStyle.md) を使用して、広告の見た目をカスタマイズできます。主に `SMALL` と `MEDIUM` の 2 つのテンプレートを利用できます。
 
 === "GDScript"
 
@@ -172,7 +172,7 @@
 
 ### 広告の位置 (Ad Positions)
 
-`AdPosition` クラスを使用して、事前定義されたいくつかの位置、またはカスタムの XY 座標に広告を配置できます。
+[`AdPosition`](../reference/classes/AdPosition.md) の事前定義された配置を使用して、事前定義されたいくつかの位置、またはカスタムの XY 座標に広告を配置できます。
 
 - `AdPosition.TOP`
 - `AdPosition.BOTTOM`
@@ -183,7 +183,7 @@
 
 ### 広告イベントの監視
 
-ユーザーのインタラクションを処理するには、`NativeOverlayAd` インスタンスの `ad_listener` プロパティを使用します。
+ユーザーのインタラクションを処理するには、[`NativeOverlayAd`](../reference/classes/NativeOverlayAd.md) インスタンスの `ad_listener` プロパティを使用します。これは [`AdListener`](../reference/listeners/AdListener.md) を受け入れます。
 
 === "GDScript"
 

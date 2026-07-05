@@ -46,7 +46,7 @@
     public Dictionary ResponseExtras { get; set; }
     ```
 
-### `mediation_adapter_class_name` / `MediationAdapterClassName`
+### `mediation_adapter_class_name` / `MediationAdapterClassName` {: #mediation_adapter_class_name }
 
 加载广告的中介广告适配器的类名。
 

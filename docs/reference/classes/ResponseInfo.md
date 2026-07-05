@@ -46,7 +46,7 @@ A dictionary containing metadata extra fields populated by the ad server.
     public Dictionary ResponseExtras { get; set; }
     ```
 
-### `mediation_adapter_class_name` / `MediationAdapterClassName`
+### `mediation_adapter_class_name` / `MediationAdapterClassName` {: #mediation_adapter_class_name }
 
 The class name of the mediation ad adapter that loaded the ad.
 

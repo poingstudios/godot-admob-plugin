@@ -17,7 +17,7 @@
 
 ## 实现付费事件处理程序
 
-每种广告格式都有一个 `on_ad_paid`（C# 中为 `OnAdPaid`）事件。在广告事件的生命周期中，Godot AdMob 插件会监控展示事件，并使用代表所获价值的 `AdValue` 调用处理程序。
+每种广告格式都有一个 `on_ad_paid`（C# 中为 `OnAdPaid`）事件。在广告事件的生命周期中，Godot AdMob 插件会监控展示事件，并使用代表所获价值的 [`AdValue`](../reference/classes/AdValue.md) 调用处理程序。该值的精度类型由 [`AdValue.PrecisionType`](../reference/enums/AdValue.PrecisionType.md) 定义。
 
 以下示例处理了激励广告的付费事件：
 

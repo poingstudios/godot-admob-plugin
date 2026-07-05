@@ -46,7 +46,7 @@ Um dicionário contendo campos extras de metadados preenchidos pelo servidor de 
     public Dictionary ResponseExtras { get; set; }
     ```
 
-### `mediation_adapter_class_name` / `MediationAdapterClassName`
+### `mediation_adapter_class_name` / `MediationAdapterClassName` {: #mediation_adapter_class_name }
 
 O nome da classe do adaptador de anúncio de mediação que carregou o anúncio.
 

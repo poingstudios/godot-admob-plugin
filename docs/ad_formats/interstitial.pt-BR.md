@@ -36,7 +36,7 @@ O exemplo de código abaixo demonstra como utilizar o Intersticial. Neste exempl
 
 
 ### Carregar um anúncio
-Para carregar um anúncio intersticial, utilize a classe `InterstitialAdLoader`. Passe um `InterstitialAdLoadCallback` para receber o anúncio carregado ou quaisquer erros potenciais. Vale a pena notar que, semelhante aos callbacks de carregamento de outros formatos, o `InterstitialAdLoadCallback` aproveita o `LoadAdError` para fornecer detalhes abrangentes do erro.
+Para carregar um anúncio intersticial, utilize a classe [`InterstitialAdLoader`](../reference/classes/InterstitialAdLoader.md). Passe um [`InterstitialAdLoadCallback`](../reference/listeners/InterstitialAdLoadCallback.md) para receber o [`InterstitialAd`](../reference/classes/InterstitialAd.md) carregado ou quaisquer erros potenciais. Vale a pena notar que, semelhante aos callbacks de carregamento de outros formatos, o [`InterstitialAdLoadCallback`](../reference/listeners/InterstitialAdLoadCallback.md) aproveita o [`LoadAdError`](../reference/classes/LoadAdError.md) para fornecer detalhes abrangentes do erro.
 
 === "GDScript"
 
@@ -123,7 +123,7 @@ Para carregar um anúncio intersticial, utilize a classe `InterstitialAdLoader`.
     ```
 
 ### Configurar o FullScreenContentCallback
-O `FullScreenContentCallback` gerencia eventos associados à exibição do seu `InterstitialAd`. Antes de apresentar o `InterstitialAd`, certifique-se de configurar o callback:
+O [`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) gerencia eventos associados à exibição do seu [`InterstitialAd`](../reference/classes/InterstitialAd.md). Antes de apresentar o [`InterstitialAd`](../reference/classes/InterstitialAd.md), certifique-se de configurar o callback:
 
 === "GDScript"
 

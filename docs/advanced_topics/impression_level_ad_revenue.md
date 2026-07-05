@@ -17,7 +17,7 @@ This guide is intended to help you implement the impression-level ad revenue dat
 
 ## Implementing a paid event handler
 
-Each ad format has an `on_ad_paid` (`OnAdPaid` in C#) event. During the lifecycle of an ad event, the Godot AdMob Plugin monitors impression events and invokes the handler with an `AdValue` representing the earned value.
+Each ad format has an `on_ad_paid` (`OnAdPaid` in C#) event callback property. During the lifecycle of an ad event, the Godot AdMob Plugin monitors impression events and invokes the handler with an [`AdValue`](../reference/classes/AdValue.md) representing the earned value. The precision type of this value is defined by [`AdValue.PrecisionType`](../reference/enums/AdValue.PrecisionType.md).
 
 The following example handles paid events for a rewarded ad:
 

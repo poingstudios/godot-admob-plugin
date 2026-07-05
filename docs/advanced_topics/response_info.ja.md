@@ -1,10 +1,10 @@
 # 広告レスポンスに関する情報の取得
 
-デバッグおよびログ出力のために、正常にロードされた広告は `ResponseInfo` オブジェクトを提供します。このオブジェクトには、ロードされた広告に関する情報のほか、その広告のロードに使用されたメディエーションのウォーターフォールに関する情報が含まれています。
+デバッグおよびログ出力のために、正常にロードされた広告は [`ResponseInfo`](../reference/classes/ResponseInfo.md) オブジェクトを提供します。このオブジェクトには、ロードされた広告に関する情報のほか、その広告のロードに使用されたメディエーションのウォーターフォールに関する情報が含まれています。
 
-広告が正常にロードされ、インプレッション料金が支払われた場合、`on_ad_paid` コールバックから返される `AdValue.response_info`（C# では `AdValue.ResponseInfo`）プロパティを介してレスポンス情報を取得できます。また、`AppOpenAd` の場合は、`get_response_info()`（C# では `GetResponseInfo()`）メソッドを介して直接取得することもできます。
+広告が正常にロードされ、インプレッション料金が支払われた場合、`on_ad_paid` コールバックから返される `AdValue.response_info`（C# では `AdValue.ResponseInfo`）プロパティを介してレスポンス情報を取得できます。また、[`AppOpenAd`](../reference/classes/AppOpenAd.md) の場合は、`get_response_info()`（C# では `GetResponseInfo()`）メソッドを介して直接取得することもできます。
 
-広告のロードに失敗し、エラーのみが発生した場合は、`LoadAdError.response_info`（C# では `LoadAdError.ResponseInfo`）を介してレスポンス情報を取得できます。
+広告のロードに失敗し、エラーのみが発生した場合は、[`LoadAdError`](../reference/classes/LoadAdError.md).response_info（C# では `LoadAdError.ResponseInfo`）を介してレスポンス情報を取得できます。
 
 === "GDScript"
 
@@ -71,12 +71,12 @@
 }
 ```
 
-`ResponseInfo` オブジェクトのプロパティは以下のとおりです。
+[`ResponseInfo`](../reference/classes/ResponseInfo.md) オブジェクトのプロパティは以下のとおりです。
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| `adapter_responses` (`AdapterResponses`) | 広告レスポンスに含まれる各アダプターのメタデータを含む `AdapterResponseInfo` のリストを返します。ウォーターフォール メディエーションおよび入札の実行のデバッグに使用できます。リストの順序は、この広告リクエストのメディエーション ウォーターフォールの順序と一致します。詳細については、[アダプター応答情報](#adapter-response-info)を参照してください。 |
-| `loaded_adapter_response_info` (`LoadedAdapterResponseInfo`) | 広告をロードしたアダプターに対応する `AdapterResponseInfo` を返します。 |
+| `adapter_responses` (`AdapterResponses`) | 広告レスポンスに含まれる各アダプターのメタデータを含む [`AdapterResponseInfo`](../reference/classes/AdapterResponseInfo.md) のリストを返します。ウォーターフォール メディエーションおよび入札の実行のデバッグに使用できます。リストの順序は、この広告リクエストのメディエーション ウォーターフォールの順序と一致します。詳細については、[アダプター応答情報](#adapter-response-info)を参照してください。 |
+| `loaded_adapter_response_info` (`LoadedAdapterResponseInfo`) | 広告をロードしたアダプターに対応する [`AdapterResponseInfo`](../reference/classes/AdapterResponseInfo.md) を返します。 |
 | `mediation_adapter_class_name` (`MediationAdapterClassName`) | 広告をロードした広告ソースのメディエーション アダプター クラス名を返します。 |
 | `response_id` (`ResponseId`) | 広告レスポンスの一意の識別子。この識別子は、広告レビュー センター（ARC）で広告を特定し、ブロックするために使用できます。 |
 | `response_extras` (`ResponseExtras`) | 広告レスポンスに関する追加の情報を返します。追加情報には、次のキーが含まれる場合があります。<br> - `mediation_group_name`: メディエーション グループ名 <br> - `mediation_ab_test_name`: メディエーション A/B テスト名（該当する場合） <br> - `mediation_ab_test_variant`: メディエーション A/B テストのバリアント（該当する場合） |
@@ -119,7 +119,7 @@
 
 ## アダプター応答情報 {: #adapter-response-info }
 
-`AdapterResponseInfo` には、広告レスポンス内の個々の広告ソースに対する応答情報が含まれています。
+[`AdapterResponseInfo`](../reference/classes/AdapterResponseInfo.md) には、広告レスポンス内の個々の広告ソースに対する応答情報が含まれています。
 
 ロードされた広告のメタデータを示す `AdapterResponseInfo` の出力例は以下のとおりです。
 
@@ -136,11 +136,11 @@
 }
 ```
 
-各広告ソースに対して、`AdapterResponseInfo` は以下のプロパティを提供します。
+各広告ソースに対して、[`AdapterResponseInfo`](../reference/classes/AdapterResponseInfo.md) は以下のプロパティを提供します。
 
 | プロパティ | 説明 |
 | -------- | ----------- |
-| `ad_error` (`AdError`) | 広告ソースへのリクエストに関連付けられたエラーを取得します。広告ソースが正常に広告をロードした場合、または広告ソースが試行されなかった場合は `null` を返します。 |
+| `ad_error` ([`AdError`](../reference/classes/AdError.md)) | 広告ソースへのリクエストに関連付けられたエラーを取得します。広告ソースが正常に広告をロードした場合、または広告ソースが試行されなかった場合は `null` を返します。 |
 | `ad_source_id` (`AdSourceId`) | このアダプター応答に関連付けられた広告ソース ID を取得します。キャンペーンの場合、メディエーション広告キャンペーンの目標タイプに対しては `6060308706800320801` が返され、インプレッションおよびクリックの目標タイプに対しては `7068401028668408324` が返されます。 |
 | `ad_source_instance_id` (`AdSourceInstanceId`) | このアダプター応答に関連付けられた広告ソース インスタンス ID を取得します。 |
 | `ad_source_instance_name` (`AdSourceInstanceName`) | このアダプター応答に関連付けられた広告ソース インスタンス名を取得します。 |

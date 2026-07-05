@@ -37,7 +37,7 @@ El siguiente ejemplo de código demuestra cómo utilizar el intersticial recompe
 
 
 ### Cargar un anuncio
-Para cargar un anuncio intersticial recompensado, utilice la clase `RewardedInterstitialAdLoader`. Pase un `RewardedInterstitialAdLoadCallback` para recibir el anuncio cargado o cualquier posible error. Vale la pena señalar que, al igual que otras devoluciones de llamada de carga de formato, `RewardedInterstitialAdLoadCallback` aprovecha `LoadAdError` para proporcionar detalles completos del error.
+Para cargar un anuncio intersticial recompensado, utilice la clase [`RewardedInterstitialAdLoader`](../reference/classes/RewardedInterstitialAdLoader.md). Pase un [`RewardedInterstitialAdLoadCallback`](../reference/listeners/RewardedInterstitialAdLoadCallback.md) para recibir el [`RewardedInterstitialAd`](../reference/classes/RewardedInterstitialAd.md) cargado o cualquier posible error. Vale la pena señalar que, al igual que otras devoluciones de llamada de carga de formato, [`RewardedInterstitialAdLoadCallback`](../reference/listeners/RewardedInterstitialAdLoadCallback.md) aprovecha [`LoadAdError`](../reference/classes/LoadAdError.md) para proporcionar detalles completos del error.
 
 === "GDScript"
 
@@ -125,7 +125,7 @@ Para cargar un anuncio intersticial recompensado, utilice la clase `RewardedInte
 
 
 ### [Opcional] Validar las devoluciones de llamada de verificación del lado del servidor (SSV)
-Para aplicaciones que requieren datos adicionales en la verificación del lado del servidor [Android](https://developers.google.com/admob/android/ssv)/[iOS](https://developers.google.com/admob/ios/ssv)devoluciones de llamada, se puede emplear la función de datos personalizados de los anuncios recompensados. Cualquier valor de cadena asignado a un objeto publicitario recompensado se transmite al parámetro de consulta `custom_data` de la devolución de llamada SSV. Si no se establecen datos personalizados, el parámetro de consulta `custom_data` estará ausente en la devolución de llamada SSV.
+Para aplicaciones que requieren datos adicionales en la verificación del lado del servidor [Android](https://developers.google.com/admob/android/ssv)/[iOS](https://developers.google.com/admob/ios/ssv)devoluciones de llamada, se puede configurar usando [`ServerSideVerificationOptions`](../reference/classes/ServerSideVerificationOptions.md). Cualquier valor de cadena asignado a un objeto publicitario recompensado se transmite al parámetro de consulta `custom_data` de la devolución de llamada SSV. Si no se establecen datos personalizados, el parámetro de consulta `custom_data` estará ausente en la devolución de llamada SSV.
 
 El siguiente fragmento de código ilustra cómo establecer datos personalizados en un objeto de anuncio intersticial recompensado antes de solicitar un anuncio:
 
@@ -163,7 +163,7 @@ El siguiente fragmento de código ilustra cómo establecer datos personalizados 
 La cadena de recompensa personalizada es [porcentaje escapó](https://en.wikipedia.org/wiki/Percent-encoding)y puede requerir decodificación cuando se analiza desde la devolución de llamada SSV.
 
 ### Configurar FullScreenContentCallback
-`FullScreenContentCallback` gestiona los eventos asociados con la visualización de su `RewardedInterstitialAd`. Antes de presentar el `RewardedInterstitialAd`, asegúrese de configurar la devolución de llamada:
+[`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) gestiona los eventos asociados con la visualización de su [`RewardedInterstitialAd`](../reference/classes/RewardedInterstitialAd.md). Antes de presentar el [`RewardedInterstitialAd`](../reference/classes/RewardedInterstitialAd.md), asegúrese de configurar la devolución de llamada:
 
 === "GDScript"
 
@@ -246,7 +246,7 @@ La cadena de recompensa personalizada es [porcentaje escapó](https://en.wikiped
 
 ### Mostrar el anuncio
 
-Al presentar un anuncio intersticial recompensado, empleará un objeto "OnUserEarnedRewardListener" para administrar eventos relacionados con la recompensa.
+Al presentar un anuncio intersticial recompensado, empleará un objeto [`OnUserEarnedRewardListener`](../reference/listeners/OnUserEarnedRewardListener.md) para administrar eventos relacionados con la recompensa.
 
 === "GDScript"
 

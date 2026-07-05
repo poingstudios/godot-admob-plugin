@@ -1,10 +1,10 @@
 # Recuperar información sobre la respuesta al anuncio.
 
-Para fines de depuración y registro, los anuncios cargados correctamente proporcionan un objeto "ResponseInfo". Este objeto contiene información sobre el anuncio que cargó, además de información sobre la cascada de mediación utilizada para cargar el anuncio.
+Para fines de depuración y registro, los anuncios cargados correctamente proporcionan un objeto [`ResponseInfo`](../reference/classes/ResponseInfo.md). Este objeto contiene información sobre el anuncio que cargó, además de información sobre la cascada de mediación utilizada para cargar el anuncio.
 
-Para los casos en los que un anuncio se carga correctamente y se paga una impresión, la información de respuesta está disponible a través de la propiedad `AdValue.response_info` (`AdValue.ResponseInfo` en C#) devuelta por la devolución de llamada `on_ad_paid`. Además, específicamente para `AppOpenAd`, puede recuperarlo mediante el método `get_response_info()` (`GetResponseInfo()` en C#).
+Para los casos en los que un anuncio se carga correctamente y se paga una impresión, la información de respuesta está disponible a través de la propiedad `AdValue.response_info` (`AdValue.ResponseInfo` en C#) devuelta por la devolución de llamada `on_ad_paid`. Además, específicamente para [`AppOpenAd`](../reference/classes/AppOpenAd.md), puede recuperarlo mediante el método `get_response_info()` (`GetResponseInfo()` en C#).
 
-Para los casos en los que los anuncios no se cargan y solo hay un error disponible, la información de respuesta está disponible a través de `LoadAdError.response_info` (`LoadAdError.ResponseInfo` en C#).
+Para los casos en los que los anuncios no se cargan y solo hay un error disponible, la información de respuesta está disponible a través de [`LoadAdError`](../reference/classes/LoadAdError.md).response_info (`LoadAdError.ResponseInfo` en C#).
 
 === "GDScript"
 
@@ -71,12 +71,12 @@ A continuación se muestran datos de muestra (representación JSON) devueltos pa
 }
 ```
 
-Los métodos del objeto `ResponseInfo` incluyen lo siguiente:
+Los métodos del objeto [`ResponseInfo`](../reference/classes/ResponseInfo.md) incluyen lo siguiente:
 
  | Propiedad | Descripción | 
  | -------- | ----------- | 
- | `adapter_responses` (`AdapterResponses`) | Devuelve la lista de `AdapterResponseInfo` que contiene metadatos para cada adaptador incluido en la respuesta del anuncio. Se puede utilizar para depurar la mediación en cascada y la ejecución de ofertas. El orden de la lista coincide con el orden de la cascada de mediación para esta solicitud de anuncio. Ver [Información de respuesta del adaptador](#adapter-response-info)para más información. | 
- | `loaded_adapter_response_info` (`LoadedAdapterResponseInfo`) | Devuelve el `AdapterResponseInfo` correspondiente al adaptador que cargó el anuncio. | 
+ | `adapter_responses` (`AdapterResponses`) | Devuelve la lista de [`AdapterResponseInfo`](../reference/classes/AdapterResponseInfo.md) que contiene metadatos para cada adaptador incluido en la respuesta del anuncio. Se puede utilizar para depurar la mediación en cascada y la ejecución de ofertas. El orden de la lista coincide con el orden de la cascada de mediación para esta solicitud de anuncio. Ver [Información de respuesta del adaptador](#adapter-response-info)para más información. | 
+ | `loaded_adapter_response_info` (`LoadedAdapterResponseInfo`) | Devuelve el [`AdapterResponseInfo`](../reference/classes/AdapterResponseInfo.md) correspondiente al adaptador que cargó el anuncio. | 
  | `mediation_adapter_class_name` (`MediationAdapterClassName`) | Devuelve el nombre de clase del adaptador de mediación de la fuente de anuncios que cargó el anuncio. | 
  | `respuesta_id` (`RespuestaId`) | El identificador de respuesta es un identificador único para la respuesta del anuncio. Este identificador se puede utilizar para identificar y bloquear el anuncio en el Centro de revisión de anuncios (ARC). | 
  | `respuesta_extras` (`RespuestaExtras`) | Devuelve información adicional sobre la respuesta al anuncio. Los extras pueden devolver las siguientes claves: <br> - `mediation_group_name`: el nombre del grupo de mediación <br> - `mediation_ab_test_name`: el nombre de la prueba A/B de mediación, si corresponde <br> - `mediation_ab_test_variant`: la variante utilizada en la prueba A/B de mediación, si corresponde | 
@@ -119,9 +119,9 @@ Los métodos del objeto `ResponseInfo` incluyen lo siguiente:
 
 ## Información de respuesta del adaptador {: #adapter-response-info }
 
-`AdapterResponseInfo` contiene información de respuesta para una fuente publicitaria individual en una respuesta publicitaria.
+[`AdapterResponseInfo`](../reference/classes/AdapterResponseInfo.md) contiene información de respuesta para una fuente publicitaria individual en una respuesta publicitaria.
 
-El siguiente ejemplo de salida "AdapterResponseInfo" muestra los metadatos de un anuncio cargado:
+El siguiente ejemplo de salida `AdapterResponseInfo` muestra los metadatos de un anuncio cargado:
 
 ```json
 {
@@ -136,11 +136,11 @@ El siguiente ejemplo de salida "AdapterResponseInfo" muestra los metadatos de un
 }
 ```
 
-Para cada fuente publicitaria, `AdapterResponseInfo` proporciona las siguientes propiedades:
+Para cada fuente publicitaria, [`AdapterResponseInfo`](../reference/classes/AdapterResponseInfo.md) proporciona las siguientes propiedades:
 
  | Propiedad | Descripción | 
  | -------- | ----------- | 
- | `ad_error` (`AdError`) | Obtiene el error asociado con la solicitud al origen del anuncio. Devuelve "nulo" si la fuente del anuncio cargó correctamente un anuncio o si no se intentó cargar la fuente del anuncio. | 
+ | `ad_error` ([`AdError`](../reference/classes/AdError.md)) | Obtiene el error asociado con la solicitud al origen del anuncio. Devuelve "nulo" si la fuente del anuncio cargó correctamente un anuncio o si no se intentó cargar la fuente del anuncio. | 
  | `ad_source_id` (`AdSourceId`) | Obtiene el ID de la fuente de anuncios asociado con esta respuesta del adaptador. Para las campañas, se devuelve "6060308706800320801" para un tipo de objetivo de campaña de anuncios mediados y "7068401028668408324" para tipos de objetivos de impresión y clic. | 
  | `ad_source_instance_id` (`AdSourceInstanceId`) | Obtiene el ID de instancia de fuente de anuncios asociado con esta respuesta de adaptador. | 
  | `ad_source_instance_name` (`AdSourceInstanceName`) | Obtiene el nombre de la instancia de fuente de anuncios asociada con esta respuesta del adaptador. | 

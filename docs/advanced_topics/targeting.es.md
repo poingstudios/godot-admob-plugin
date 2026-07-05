@@ -12,14 +12,14 @@ Este documento se basa en:
 
 ## Solicitar configuración
 
-"RequestConfiguration" es una entidad utilizada para recopilar detalles de orientación que se pueden aplicar globalmente a través de un método estático dentro de "MobileAds". Y se aplica mediante `MobileAds.set_request_configuration(request_configuration)`
+[`RequestConfiguration`](../reference/classes/RequestConfiguration.md) es una entidad utilizada para recopilar detalles de orientación que se pueden aplicar globalmente a través de un método estático dentro de [`MobileAds`](../reference/classes/MobileAds.md). Y se aplica mediante `MobileAds.set_request_configuration(request_configuration)`
 
 ### Entorno dirigido a niños {: #child-directed-setting }
 Para cumplir con la [Ley de protección de la privacidad infantil en línea (COPPA)](https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children%27s-privacy), puede configurar la opción "etiqueta para tratamiento dirigido a niños". Esto significa que desea que su contenido sea tratado como dirigido a niños a efectos de la COPPA. Es importante asegurarse de tener la autoridad para tomar esta decisión en nombre del propietario de la aplicación. Tenga en cuenta que el uso indebido de esta configuración puede provocar la cancelación de su cuenta de Google.
 
 Como desarrollador de aplicaciones, puedes indicar si tu contenido está dirigido a niños al realizar solicitudes de anuncios. Cuando especifica que su contenido está dirigido a niños, Google tomará medidas para desactivar la publicidad basada en intereses (IBA) y los anuncios de remarketing para esa solicitud de anuncio en particular.
 
-Para implementar esta configuración, puede usar `RequestConfiguration.new().tag_for_child_directed_treatment = int` con las siguientes opciones:
+Para implementar esta configuración, puede usar `RequestConfiguration.new().tag_for_child_directed_treatment = int` con las siguientes opciones [`RequestConfiguration.TagForChildDirectedTreatment`](../reference/enums/RequestConfiguration.TagForChildDirectedTreatment.md):
 
 - Utilice `tag_for_child_directed_treatment` con `RequestConfiguration.TagForChildDirectedTreatment.TRUE` para indicar que su contenido debe tratarse como dirigido a niños para cumplir con COPPA. Esto evitará la transmisión del identificador de publicidad de Android (AAID). Esto evitará la transmisión del Identificador de Publicidad, IDFA.
 
@@ -54,7 +54,7 @@ Puede configurar sus solicitudes de anuncios para recibir tratamiento para los u
 
 Al utilizar esta función, una solicitud de anuncio contendrá un parámetro "Etiqueta para usuarios menores de la edad de consentimiento en Europa" (TFUA). Este parámetro desactiva la publicidad personalizada, incluido el remarketing, para todas las solicitudes de anuncios. También evita solicitudes a proveedores de publicidad de terceros, como píxeles de medición de publicidad y servidores de publicidad de terceros.
 
-De manera similar a la configuración dirigida a niños, puede utilizar la propiedad en la clase `RequestConfiguration.new()` para establecer el parámetro TFUA: `tag_for_under_age_of_consent = int`. Ofrece las siguientes opciones:
+De manera similar a la configuración dirigida a niños, puede utilizar la propiedad en la clase [`RequestConfiguration`](../reference/classes/RequestConfiguration.md) para establecer el parámetro TFUA: `tag_for_under_age_of_consent = int`. Ofrece las siguientes opciones [`RequestConfiguration.TagForUnderAgeOfConsent`](../reference/enums/RequestConfiguration.TagForUnderAgeOfConsent.md):
 
 - Utilice `tag_for_under_age_of_consent` con `RequestConfiguration.TagForUnderAgeOfConsent.TRUE` para indicar que desea que la solicitud de anuncio reciba tratamiento para usuarios en el Espacio Económico Europeo (EEE) menores de la edad de consentimiento. Esto también evitará la transmisión del identificador de publicidad de Android (AAID). Esto también impedirá la transmisión del Identificador de Publicidad, IDFA.
 

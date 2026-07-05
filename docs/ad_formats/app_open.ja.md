@@ -118,7 +118,7 @@
 
 ### アプリ起動時広告のロード
 
-アプリ起動時広告のロードは、`AppOpenAdLoader` クラスの `load()` メソッドを使用して行われます。ロードメソッドには、広告ユニット ID、`AdRequest` オブジェクト、および広告のロードが成功または失敗したときに呼び出される完了ハンドラーが必要です。ロードされた `AppOpenAd` オブジェクトは、完了ハンドラーのパラメータとして提供されます。
+アプリ起動時広告のロードは、[`AppOpenAdLoader`](../reference/classes/AppOpenAdLoader.md) クラスの `load()` メソッドを使用して行われます。ロードメソッドには、広告ユニット ID、[`AdRequest`](../reference/classes/AdRequest.md) オブジェクト、および広告のロードが成功または失敗したときに呼び出される完了ハンドラーが必要です。ロードされた [`AppOpenAd`](../reference/classes/AppOpenAd.md) オブジェクトは、完了ハンドラーのパラメータとして提供されます。
 
 === "GDScript"
 
@@ -187,7 +187,7 @@
 
 ### アプリ起動時広告イベントの監視
 
-広告の挙動をさらにカスタマイズするには、広告のライフサイクルにおける開く、閉じるなどのさまざまなイベントにフックできます。以下に示すように、デリゲートを登録してこれらのイベントをリッスンします。
+広告の挙動をさらにカスタマイズするには、広告のライフサイクルにおける開く、閉じるなどのさまざまなイベントにフックできます。[`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) を登録し、[`AdValue`](../reference/classes/AdValue.md) を受け取る `on_ad_paid` / `OnAdPaid` コールバックプロパティを設定して、以下のようにこれらのイベントをリッスンします。
 
 === "GDScript"
 

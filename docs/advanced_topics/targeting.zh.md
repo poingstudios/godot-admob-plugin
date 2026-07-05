@@ -12,14 +12,14 @@
 
 ## RequestConfiguration
 
-`RequestConfiguration` 是用于收集定向详细信息的实体，可以通过 `MobileAds` 内的静态方法进行全局应用。并且通过 `MobileAds.set_request_configuration(request_configuration)` 来应用。
+[`RequestConfiguration`](../reference/classes/RequestConfiguration.md) 是用于收集定向详细信息的实体，可以通过 [`MobileAds`](../reference/classes/MobileAds.md) 内的静态方法进行全局应用。并且通过 `MobileAds.set_request_configuration(request_configuration)` 来应用。
 
 ### 面向儿童的设置 (Child-directed setting) {: #child-directed-setting }
 为了遵守[儿童在线隐私保护法案 (COPPA)](https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children%27s-privacy)，您可以设置“面向儿童的评估标志”选项。这表示您希望根据 COPPA 的要求将您的内容视为面向儿童的内容。请务必确保您有权代表应用所有者做出此决定。请注意，滥用此设置可能会导致您的 Google 帐号被终止。
 
 作为应用开发者，您可以在进行广告请求时指示您的内容是否面向儿童。当您指定您的内容面向儿童时，Google 将采取步骤禁用该特定广告请求的兴趣个性化广告 (IBA) 和再营销广告。
 
-要实现此设置，您可以使用 `RequestConfiguration.new().tag_for_child_directed_treatment = int`，包含以下选项：
+要实现此设置，您可以使用 `RequestConfiguration.new().tag_for_child_directed_treatment = int`，包含以下 [`RequestConfiguration.TagForChildDirectedTreatment`](../reference/enums/RequestConfiguration.TagForChildDirectedTreatment.md) 选项：
 
 - 使用 `tag_for_child_directed_treatment` 配以 `RequestConfiguration.TagForChildDirectedTreatment.TRUE` 来指示您的内容应被视为面向儿童，以符合 COPPA。这将阻止传输 Android 广告标识符 (AAID)。同时也将阻止传输 iOS 广告标识符 (IDFA)。
 
@@ -54,7 +54,7 @@
 
 使用此功能时，广告请求将包含“欧洲未达到同意年龄的用户标志”（TFUA）参数。此参数会停用所有广告请求的个性化广告（包括再营销）。它还会阻止向第三方广告提供商（如广告测量像素和第三方广告服务器）发送请求。
 
-类似于面向儿童的设置，您可以使用 `RequestConfiguration` 类中的属性来设置 TFUA 参数：`tag_for_under_age_of_consent = int`。它提供以下选项：
+类似于面向儿童的设置，您可以使用 [`RequestConfiguration`](../reference/classes/RequestConfiguration.md) 类中的属性来设置 TFUA 参数：`tag_for_under_age_of_consent = int`。它提供以下 [`RequestConfiguration.TagForUnderAgeOfConsent`](../reference/enums/RequestConfiguration.TagForUnderAgeOfConsent.md) 选项：
 
 - 使用 `tag_for_under_age_of_consent` 配以 `RequestConfiguration.TagForUnderAgeOfConsent.TRUE` 来指示您希望针对欧洲经济区 (EEA) 内未达到同意年龄的用户处理该广告请求。这也会阻止传输 Android 广告标识符 (AAID)。同时也将阻止传输 iOS 广告标识符 (IDFA)。
 

@@ -17,7 +17,7 @@ Este guia destina-se a ajudá-lo a implementar a captura de dados de receita de 
 
 ## Implementando um manipulador de eventos pagos
 
-Cada formato de anúncio possui um evento `on_ad_paid` (`OnAdPaid` em C#). Durante o ciclo de vida de um evento de anúncio, o Godot AdMob Plugin monitora os eventos de impressão e invoca o manipulador com um `AdValue` representando o valor ganho.
+Cada formato de anúncio possui um evento `on_ad_paid` (`OnAdPaid` em C#). Durante o ciclo de vida de um evento de anúncio, o Godot AdMob Plugin monitora os eventos de impressão e invoca o manipulador com um [`AdValue`](../reference/classes/AdValue.md) representando o valor ganho. O tipo de precisão deste valor é definido por [`AdValue.PrecisionType`](../reference/enums/AdValue.PrecisionType.md).
 
 O exemplo a seguir gerencia eventos pagos para um anúncio premiado:
 

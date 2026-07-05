@@ -38,7 +38,7 @@ O exemplo de código abaixo demonstra como utilizar o Premiado (Rewarded). Neste
 
 
 ### Carregar um anúncio
-Para carregar um anúncio premiado, utilize a classe `RewardedAdLoader`. Passe um `RewardedAdLoadCallback` para receber o anúncio carregado ou quaisquer erros potenciais. Vale a pena notar que, semelhante aos callbacks de carregamento de outros formatos, o `RewardedAdLoadCallback` aproveita o `LoadAdError` para fornecer detalhes abrangentes do erro.
+Para carregar um anúncio premiado, utilize a classe [`RewardedAdLoader`](../reference/classes/RewardedAdLoader.md). Passe um [`RewardedAdLoadCallback`](../reference/listeners/RewardedAdLoadCallback.md) para receber o [`RewardedAd`](../reference/classes/RewardedAd.md) carregado ou quaisquer erros potenciais. Vale a pena notar que, semelhante aos callbacks de carregamento de outros formatos, o [`RewardedAdLoadCallback`](../reference/listeners/RewardedAdLoadCallback.md) aproveita [`LoadAdError`](../reference/classes/LoadAdError.md) para fornecer detalhes abrangentes do erro.
 
 === "GDScript"
 
@@ -125,7 +125,7 @@ Para carregar um anúncio premiado, utilize a classe `RewardedAdLoader`. Passe u
     ```
 
 ### [Opcional] Validar callbacks de verificação do lado do servidor (SSV)
-Para aplicativos que necessitam de dados adicionais nos callbacks de verificação do lado do servidor [Android](https://developers.google.com/admob/android/ssv)/[iOS](https://developers.google.com/admob/ios/ssv), o recurso de dados personalizados de anúncios premiados pode ser empregado. Qualquer valor de texto (string) atribuído a um objeto de anúncio premiado é transmitido para o parâmetro de consulta `custom_data` do callback SSV. Se nenhum dado personalizado for definido, o parâmetro de consulta `custom_data` estará ausente no callback SSV.
+Para aplicativos que necessitam de dados adicionais nos callbacks de verificação do lado do servidor [Android](https://developers.google.com/admob/android/ssv)/[iOS](https://developers.google.com/admob/ios/ssv), o recurso de dados personalizados de anúncios premiados pode ser configurado usando [`ServerSideVerificationOptions`](../reference/classes/ServerSideVerificationOptions.md). Qualquer valor de texto (string) atribuído a um objeto de anúncio premiado é transmitido para o parâmetro de consulta `custom_data` do callback SSV. Se nenhum dado personalizado for definido, o parâmetro de consulta `custom_data` estará ausente no callback SSV.
 
 O trecho de código a seguir ilustra como definir dados personalizados em um objeto de anúncio premiado antes de solicitar um anúncio:
 
@@ -163,7 +163,7 @@ O trecho de código a seguir ilustra como definir dados personalizados em um obj
     A string de recompensa personalizada é codificada com [percent-encoding](https://en.wikipedia.org/wiki/Percent-encoding) e pode exigir decodificação ao ser analisada a partir do callback SSV.
 
 ### Configurar o FullScreenContentCallback
-O `FullScreenContentCallback` gerencia eventos associados à exibição do seu `RewardedAd`. Antes de apresentar o `RewardedAd`, certifique-se de configurar o callback:
+O [`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) gerencia eventos associados à exibição do seu [`RewardedAd`](../reference/classes/RewardedAd.md). Antes de apresentar o [`RewardedAd`](../reference/classes/RewardedAd.md), certifique-se de configurar o callback:
 
 === "GDScript"
 
@@ -246,7 +246,7 @@ O `FullScreenContentCallback` gerencia eventos associados à exibição do seu `
 
 ### Exibir o anúncio
 
-Ao apresentar um anúncio premiado, você usará um objeto `OnUserEarnedRewardListener` para gerenciar eventos relacionados a recompensas.
+Ao apresentar um anúncio premiado, você usará um objeto [`OnUserEarnedRewardListener`](../reference/listeners/OnUserEarnedRewardListener.md) para gerenciar eventos relacionados a recompensas.
 
 === "GDScript"
 

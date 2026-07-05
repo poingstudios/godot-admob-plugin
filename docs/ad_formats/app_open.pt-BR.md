@@ -116,7 +116,7 @@ Crie uma nova classe (por exemplo, `AppOpenAdManager`) para carregar o anúncio.
 
 ### Carregar o anúncio de abertura de app
 
-O carregamento de um anúncio de abertura de app é realizado usando o método `load()` na classe `AppOpenAdLoader`. O método requer um ID de bloco de anúncios, um objeto `AdRequest` e um listener de conclusão que é chamado quando o carregamento do anúncio é bem-sucedido ou falha. O objeto `AppOpenAd` carregado é fornecido como um parâmetro no listener de conclusão.
+O carregamento de um anúncio de abertura de app é realizado usando o método `load()` na classe [`AppOpenAdLoader`](../reference/classes/AppOpenAdLoader.md). O método requer um ID de bloco de anúncios, um objeto [`AdRequest`](../reference/classes/AdRequest.md) e um listener de conclusão que é chamado quando o carregamento do anúncio é bem-sucedido ou falha. O objeto [`AppOpenAd`](../reference/classes/AppOpenAd.md) carregado é fornecido como um parâmetro no listener de conclusão.
 
 === "GDScript"
 
@@ -184,7 +184,7 @@ O carregamento de um anúncio de abertura de app é realizado usando o método `
 
 ### Escutar os eventos do anúncio de abertura de app
 
-Para personalizar ainda mais o comportamento do seu anúncio, você pode se conectar a uma série de eventos no ciclo de vida do anúncio: abertura, fechamento e assim por diante. Escute esses eventos registrando um delegate conforme mostrado abaixo.
+Para personalizar ainda mais o comportamento do seu anúncio, você pode se conectar a uma série de eventos no ciclo de vida do anúncio: abertura, fechamento e assim por diante. Escute esses eventos registrando um [`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) e configurando a propriedade `on_ad_paid` / `OnAdPaid` que recebe um [`AdValue`](../reference/classes/AdValue.md) conforme mostrado abaixo.
 
 === "GDScript"
 

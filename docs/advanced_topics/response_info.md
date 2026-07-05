@@ -1,10 +1,10 @@
 # Retrieve information about the ad response
 
-For debugging and logging purposes, successfully loaded ads provide a `ResponseInfo` object. This object contains information about the ad it loaded, in addition to information about the mediation waterfall used to load the ad.
+For debugging and logging purposes, successfully loaded ads provide a [`ResponseInfo`](../reference/classes/ResponseInfo.md) object. This object contains information about the ad it loaded, in addition to information about the mediation waterfall used to load the ad.
 
-For cases where an ad loads successfully and an impression is paid, the response info is available through the `AdValue.response_info` (`AdValue.ResponseInfo` in C#) property returned by the `on_ad_paid` callback. Additionally, for `AppOpenAd` specifically, you can retrieve it via the `get_response_info()` (`GetResponseInfo()` in C#) method.
+For cases where an ad loads successfully and an impression is paid, the response info is available through the `AdValue.response_info` (`AdValue.ResponseInfo` in C#) property returned by the `on_ad_paid` callback. Additionally, for [`AppOpenAd`](../reference/classes/AppOpenAd.md) specifically, you can retrieve it via the `get_response_info()` (`GetResponseInfo()` in C#) method.
 
-For cases where ads fail to load and only an error is available, the response info is available through `LoadAdError.response_info` (`LoadAdError.ResponseInfo` in C#).
+For cases where ads fail to load and only an error is available, the response info is available through [`LoadAdError`](../reference/classes/LoadAdError.md).response_info.
 
 === "GDScript"
 
@@ -71,12 +71,12 @@ Here is sample data (JSON representation) returned for a loaded ad:
 }
 ```
 
-Methods on the `ResponseInfo` object include the following:
+Methods on the [`ResponseInfo`](../reference/classes/ResponseInfo.md) object include the following:
 
 | Property | Description |
 | -------- | ----------- |
-| `adapter_responses` (`AdapterResponses`) | Returns the list of `AdapterResponseInfo` containing metadata for each adapter included in the ad response. Can be used to debug the waterfall mediation and bidding execution. The order of the list matches the order of the mediation waterfall for this ad request. See [Adapter response info](#adapter-response-info) for more information. |
-| `loaded_adapter_response_info` (`LoadedAdapterResponseInfo`) | Returns the `AdapterResponseInfo` corresponding to the adapter that loaded the ad. |
+| `adapter_responses` (`AdapterResponses`) | Returns the list of [`AdapterResponseInfo`](../reference/classes/AdapterResponseInfo.md) containing metadata for each adapter included in the ad response. Can be used to debug the waterfall mediation and bidding execution. The order of the list matches the order of the mediation waterfall for this ad request. See [Adapter response info](#adapter-response-info) for more information. |
+| `loaded_adapter_response_info` (`LoadedAdapterResponseInfo`) | Returns the [`AdapterResponseInfo`](../reference/classes/AdapterResponseInfo.md) corresponding to the adapter that loaded the ad. |
 | `mediation_adapter_class_name` (`MediationAdapterClassName`) | Returns the mediation adapter class name of the ad source that loaded the ad. |
 | `response_id` (`ResponseId`) | The response identifier is a unique identifier for the ad response. This identifier can be used to identify and block the ad in the Ad Review Center (ARC). |
 | `response_extras` (`ResponseExtras`) | Returns extra information about the ad response. Extras may return the following keys: <br> - `mediation_group_name`: The name of the mediation group <br> - `mediation_ab_test_name`: The name of the mediation A/B test, if applicable <br> - `mediation_ab_test_variant`: The variant used in the mediation A/B test, if applicable |
@@ -119,7 +119,7 @@ Methods on the `ResponseInfo` object include the following:
 
 ## Adapter response info
 
-`AdapterResponseInfo` contains response information for an individual ad source in an ad response.
+[`AdapterResponseInfo`](../reference/classes/AdapterResponseInfo.md) contains response information for an individual ad source in an ad response.
 
 The following sample `AdapterResponseInfo` output shows the metadata for a loaded ad:
 
@@ -136,11 +136,11 @@ The following sample `AdapterResponseInfo` output shows the metadata for a loade
 }
 ```
 
-For each ad source, `AdapterResponseInfo` provides the following properties:
+For each ad source, [`AdapterResponseInfo`](../reference/classes/AdapterResponseInfo.md) provides the following properties:
 
 | Property | Description |
 | -------- | ----------- |
-| `ad_error` (`AdError`) | Gets the error associated with the request to the ad source. Returns `null` if the ad source successfully loaded an ad or if the ad source was not attempted. |
+| `ad_error` ([`AdError`](../reference/classes/AdError.md)) | Gets the error associated with the request to the ad source. Returns `null` if the ad source successfully loaded an ad or if the ad source was not attempted. |
 | `ad_source_id` (`AdSourceId`) | Gets the ad source ID associated with this adapter response. For campaigns, `6060308706800320801` is returned for a mediated ads campaign goal type, and `7068401028668408324` is returned for impression and click goal types. |
 | `ad_source_instance_id` (`AdSourceInstanceId`) | Gets the ad source instance ID associated with this adapter response. |
 | `ad_source_instance_name` (`AdSourceInstanceName`) | Gets the ad source instance name associated with this adapter response. |

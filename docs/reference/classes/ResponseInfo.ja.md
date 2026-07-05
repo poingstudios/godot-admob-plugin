@@ -46,7 +46,7 @@
     public Dictionary ResponseExtras { get; set; }
     ```
 
-### `mediation_adapter_class_name` / `MediationAdapterClassName`
+### `mediation_adapter_class_name` / `MediationAdapterClassName` {: #mediation_adapter_class_name }
 
 広告をロードしたメディエーション広告アダプターのクラス名。
 

@@ -116,7 +116,7 @@
 
 ### 加载开屏广告
 
-加载开屏广告是通过使用 `AppOpenAdLoader` 类上的 `load()` 方法完成的。加载方法需要广告单元 ID、一个 `AdRequest` 对象以及一个在广告加载成功或失败时调用的完成回调。加载成功的 `AppOpenAd` 对象作为参数提供在完成回调中。
+加载开屏广告是通过使用 [`AppOpenAdLoader`](../reference/classes/AppOpenAdLoader.md) 类上的 `load()` 方法完成的。加载方法需要广告单元 ID、一个 [`AdRequest`](../reference/classes/AdRequest.md) 对象以及一个在广告加载成功或失败时调用的完成回调。加载成功的 [`AppOpenAd`](../reference/classes/AppOpenAd.md) 对象作为参数提供在完成回调中。
 
 === "GDScript"
 
@@ -184,7 +184,7 @@
 
 ### 监听开屏广告事件
 
-为了进一步自定义广告的行为，您可以挂接到广告生命周期中的许多事件：打开、关闭等。通过注册一个委托来监听这些事件，如下所示。
+为了进一步自定义广告的行为，您可以挂接到广告生命周期中的许多事件：打开、关闭等。通过注册一个 [`FullScreenContentCallback`](../reference/listeners/FullScreenContentCallback.md) 并设置接收 [`AdValue`](../reference/classes/AdValue.md) 的 `on_ad_paid` / `OnAdPaid` 回调属性来监听这些事件，如下所示。
 
 === "GDScript"
 
