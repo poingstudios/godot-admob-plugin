@@ -128,7 +128,7 @@
 
 网络附加信息是随广告请求发送的、特定于单个广告源的额外详细信息。
 
-要向 Google 发送额外参数（例如，将键 `collapsible` 的值设为 `bottom` 以请求[折叠式横幅广告](../../guides/ad_formats/banner/collapsible/)），请填充 `extras` 字典：
+要向 Google 发送额外参数（例如，将键 `collapsible` 的值设为 `bottom` 以请求[折叠式横幅广告](../ad_formats/banner/collapsible.md)），请填充 `extras` 字典：
 
 === "GDScript"
 

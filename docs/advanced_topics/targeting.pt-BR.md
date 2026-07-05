@@ -15,7 +15,7 @@ Este documento é baseado em:
 
 `RequestConfiguration` é uma entidade usada para reunir detalhes de direcionamento que podem ser aplicados globalmente por meio de um método estático dentro de `MobileAds`. E é aplicada por `MobileAds.set_request_configuration(request_configuration)`
 
-### Configuração direcionada a crianças
+### Configuração direcionada a crianças {: #configuracao-direcionada-a-criancas }
 
 Para cumprir a [Lei de Proteção da Privacidade Online das Crianças (COPPA)](https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children%27s-privacy), você pode definir a opção "tag para tratamento direcionado a crianças". Isso significa que você deseja que seu conteúdo seja tratado como direcionado a crianças para fins da COPPA. É importante garantir que você tenha autoridade para tomar essa decisão em nome do proprietário do aplicativo. Esteja ciente de que o uso indevido dessa configuração pode levar ao encerramento da sua conta do Google.
 
@@ -130,7 +130,7 @@ O `AdRequest` coleta informações de segmentação a serem enviadas com uma sol
 
 Os extras de rede são detalhes adicionais enviados com uma solicitação de anúncio que são específicos de uma única origem de anúncio.
 
-Para enviar um parâmetro extra ao Google (por exemplo, uma chave de `collapsible` com o valor de `bottom` para solicitar um [Banner Colapsável](../../guides/ad_formats/banner/collapsible/)), preencha o dicionário `extras`:
+Para enviar um parâmetro extra ao Google (por exemplo, uma chave de `collapsible` com o valor de `bottom` para solicitar um [Banner Colapsável](../ad_formats/banner/collapsible.md)), preencha o dicionário `extras`:
 
 === "GDScript"
 

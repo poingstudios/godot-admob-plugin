@@ -15,7 +15,7 @@ Este documento é baseado em:
 ## Pré-requisitos
 - Concluir o [Guia de Início Rápido](index.md)
 
-## Blocos de anúncios de exemplo
+## Blocos de anúncios de exemplo {: #blocos-de-anuncios-de-exemplo }
 
 O método mais rápido para ativar os testes é utilizar os blocos de anúncios de teste fornecidos pelo Google. Esses blocos não estão associados à sua conta do AdMob, garantindo que não haja risco de sua conta gerar tráfego inválido ao usá-los.
 
@@ -55,7 +55,7 @@ Embora os blocos de anúncios padrão acima possam ser usados adicionando parâm
 | :--- | :--- | :--- |
 | **Banners Retráteis (Collapsible)** | `ca-app-pub-3940256099942544/2014213617` | `ca-app-pub-3940256099942544/8388050270` |
 
-## Ativar dispositivos de teste
+## Ativar dispositivos de teste {: #ativar-dispositivos-de-teste }
 Para realizar testes mais detalhados com anúncios parecidos com os de produção, você pode configurar seu dispositivo físico como um dispositivo de teste e utilizar os seus próprios IDs de blocos de anúncios criados no painel do AdMob. Você pode adicionar dispositivos de teste através do painel do AdMob ou de forma programática usando o Google Mobile Ads SDK.
 
 Aqui estão as etapas para adicionar seu dispositivo como um dispositivo de teste:

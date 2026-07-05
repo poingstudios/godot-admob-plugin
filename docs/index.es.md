@@ -42,7 +42,7 @@ El complemento AdMob para Godot está convenientemente disponible a través de G
 7. Las bibliotecas de Android e iOS se descargarán e instalarán automáticamente.
 8. Con estos pasos, habrá integrado con éxito el complemento de AdMob en su proyecto Godot sin necesidad de importar archivos manualmente adicionales.
 
-## Descargar e instalar
+## Descargar e instalar {: #download-install }
 !!! info
     Esta sección normalmente **no es obligatoria**, ya que el complemento maneja las bibliotecas automáticamente. Siga estos pasos solo si la descarga automática falló.
 
@@ -105,7 +105,7 @@ El complemento AdMob para Godot está convenientemente disponible a través de G
     
     1. [Si está intentando ejecutar en Simulator y no funciona, lea esto](https://github.com/godotengine/godot/issues/44681#issuecomment-751399783).
 
-## Inicialice el SDK de anuncios de Google para móviles
+## Inicialice el SDK de anuncios de Google para móviles {: #initialize-the-google-mobile-ads-sdk }
 Antes de cargar anuncios, asegúrese de que su aplicación inicialice el SDK de anuncios de Google para móviles. Puede lograr esto llamando a MobileAds.initialize(). Esta función inicializa el SDK y activa un detector de finalización una vez que finaliza el proceso de inicialización o si excede un tiempo de espera de 30 segundos. Es importante tener en cuenta que esta inicialización debe ocurrir solo una vez, idealmente durante la fase de inicio de la aplicación.
 
 === "GDScript"

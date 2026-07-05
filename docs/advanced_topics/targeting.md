@@ -14,7 +14,7 @@ This document is based on:
 
 `RequestConfiguration` is an entity used to gather targeting details that can be globally applied through a static method within `MobileAds`. And is applied by `MobileAds.set_request_configuration(request_configuration)`
 
-### Child-directed setting
+### Child-directed setting {: #child-directed-setting }
 To comply with [Children's Online Privacy Protection Act (COPPA)](https://www.ftc.gov/tips-advice/business-center/privacy-and-security/children%27s-privacy), you can set the "tag for child-directed treatment" option. This signifies that you want your content to be treated as child-directed for COPPA purposes. It's important to ensure that you have the authority to make this decision on behalf of the app owner. Please be aware that misusing this setting can lead to the termination of your Google account.
 
 As an app developer, you can indicate whether your content is child-directed when making ad requests. When you specify that your content is child-directed, Google will take steps to disable Interest-Based Advertising (IBA) and remarketing ads for that particular ad request.
@@ -128,7 +128,7 @@ The following code demonstrates how to configure a `RequestConfiguration` object
 
 Network extras are extra details sent with an ad request that are specific to a single ad source.
 
-To send an extra parameter to Google (for example, a key of `collapsible` with a value of `bottom` to request a [Collapsible Banner](../../guides/mediate/banner/#collapsible-banners)), populate the `extras` dictionary:
+To send an extra parameter to Google (for example, a key of `collapsible` with a value of `bottom` to request a [Collapsible Banner](../ad_formats/banner/collapsible.md)), populate the `extras` dictionary:
 
 === "GDScript"
 

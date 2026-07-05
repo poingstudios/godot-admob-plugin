@@ -15,7 +15,7 @@ This document is based on:
 ## Prerequisites
 - Complete the [Get started guide](index.md)
 
-## Sample ad units
+## Sample ad units {: #sample-ad-units }
 
 The most expedient method to enable testing is by employing Google's provided test ad units. These ad units are separate from your AdMob account, ensuring there is no risk of your account generating invalid traffic while using them.
 
@@ -57,7 +57,7 @@ While the standard ad units above can be used by adding extra parameters (like `
 
 
 
-## Enable test devices
+## Enable test devices {: #enable-test-devices }
 To conduct more thorough testing with production-like ads, you can configure your device as a test device and utilize your own ad unit IDs created in the AdMob UI. You can add test devices either through the AdMob UI or programmatically using the Google Mobile Ads SDK.
 
 Here are the steps to add your device as a test device:

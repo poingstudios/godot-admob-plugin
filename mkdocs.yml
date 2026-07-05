@@ -365,6 +365,9 @@ nav:
       - 'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': ad_formats/rewarded_interstitial.md
     - Mediate:
       - First Steps: mediate/get_started.md
+      - Choose ad sources: mediate/choose_networks.md
+      - Custom events: mediate/custom_events.md
+      - Troubleshoot bidding: mediate/troubleshoot_bidding.md
       - Integrate partner networks:
         - AppLovin: mediate/integrate_partner_networks/applovin.md
         - BidMachine: mediate/integrate_partner_networks/bidmachine.md

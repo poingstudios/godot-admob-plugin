@@ -42,7 +42,7 @@ The AdMob plugin for Godot is conveniently available via the Godot Asset Store. 
 7. The Android and iOS libraries will be downloaded and installed automatically.
 8. With these steps, you'll have successfully integrated the AdMob plugin into your Godot project without the need for additional manual file imports.
 
-## Download & Install
+## Download & Install {: #download-install }
 !!! info
     This section is typically **not required**, as the plugin handles libraries automatically. Only follow these steps if the automatic download failed.
 
@@ -105,7 +105,7 @@ The AdMob plugin for Godot is conveniently available via the Godot Asset Store. 
     
     1. [If you are trying to run on Simulator and it is not working, read this](https://github.com/godotengine/godot/issues/44681#issuecomment-751399783).
 
-## Initialize the Google Mobile Ads SDK
+## Initialize the Google Mobile Ads SDK {: #initialize-the-google-mobile-ads-sdk }
 Prior to loading ads, ensure that your application initializes the Google Mobile Ads SDK. You can accomplish this by calling MobileAds.initialize(). This function initializes the SDK and triggers a completion listener once the initialization process is finished, or if it exceeds a 30-second timeout. It's important to note that this initialization should occur only once, ideally during the app's launch phase.
 
 === "GDScript"
