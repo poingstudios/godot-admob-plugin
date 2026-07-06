@@ -71,8 +71,9 @@ build_android() {
     chmod +x gradlew
     
     if [ "$CLEAN" = true ]; then
-        echo ">>> Cleaning Android build..."
+        echo ">>> Cleaning Android build and export directories..."
         ./gradlew clean || exit 1
+        rm -rf "$DEST/addons/admob/android/bin/"*
     fi
     
     ./gradlew build -PgodotVersion="$GODOT_VERSION" && \
@@ -84,6 +85,8 @@ build_ios() {
     BUILD_OPTS=""
     if [ "$CLEAN" = true ]; then
         BUILD_OPTS="--clean"
+        echo ">>> Cleaning iOS export directories..."
+        rm -rf "$DEST/ios/plugins/"*
     fi
     cd "$ROOT_DIR/platforms/ios" && ./scripts/build.sh $BUILD_OPTS "$GODOT_VERSION" || exit 1
     
