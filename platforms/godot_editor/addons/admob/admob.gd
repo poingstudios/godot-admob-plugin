@@ -32,9 +32,7 @@ const ProjectSettingsService := preload(
 )
 
 var _main_exporter := preload("res://addons/admob/internal/exporters/main_export_plugin.gd").new()
-var _android_exporter := (
-	preload("res://addons/admob/internal/exporters/android/export_plugin.gd").new()
-)
+var _android_exporter := preload("res://addons/admob/internal/exporters/android/export_plugin.gd").new()
 var _ios_exporter := preload("res://addons/admob/internal/exporters/ios/export_plugin.gd").new()
 
 

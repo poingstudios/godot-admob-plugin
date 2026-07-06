@@ -12,8 +12,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-meta.git@exact:6.20.100|MetaAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-meta.git",
+    "version": "6.20.100",
+    "products": ["MetaAdapterTarget"]
+  }
 ]
 
 [plist]

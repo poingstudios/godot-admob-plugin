@@ -55,8 +55,13 @@ func _export_end() -> void:
 	print("AdMob iOS: _export_end fallback (pre-4.7 engine) with path='%s'" % _pending_export_path)
 	_apply_spm(_pending_export_path, true)
 
-
 func _apply_spm(path: String, defer_patch: bool) -> void:
+	var version_info := Engine.get_version_info()
+	var is_lower_than_4_8: bool = (version_info.major < 4) or (version_info.major == 4 and version_info.minor < 8)
+	if not is_lower_than_4_8:
+		print("AdMob iOS: Godot 4.8+ detected, utilizing native SPM support. Skipping custom SPM export pipeline.")
+		return
+
 	_spm_applied = true
 	var activated_plugins := ExportService.get_activated_plugins("iOS")
 	if activated_plugins.is_empty():
@@ -130,26 +135,19 @@ func _collect_spm_dependencies(activated_plugins: Array[String]) -> Array[Dictio
 			if err == OK:
 				var plugin_name := config.get_value("config", "name", "")
 				if activated_plugins.has(plugin_name):
-					if config.has_section_key("dependencies", "admob_packages"):
-						var packages: Array = config.get_value("dependencies", "admob_packages", [])
-						for pkg_str: String in packages:
-							# url@mode:version|product
-							var main_parts := pkg_str.split("|")
-							var product := main_parts[1] if main_parts.size() > 1 else ""
-
-							var url_and_rules := main_parts[0].split("@")
-							var url := url_and_rules[0]
-
-							if url_and_rules.size() > 1:
-								var rules := url_and_rules[1].split(":")
-								if rules.size() > 1:
-									var dep := {
-										"url": url,
-										"version": rules[1],
-										"kind": rules[0],
-										"product": product
-									}
-									deps.append(dep)
+					if config.has_section_key("dependencies", "spm_packages"):
+						var packages: Array = config.get_value("dependencies", "spm_packages", [])
+						for pkg: Dictionary in packages:
+							var url: String = pkg.get("url", "")
+							var version: String = pkg.get("version", "")
+							var products: Array = pkg.get("products", [])
+							for product: String in products:
+								var dep := {
+									"url": url,
+									"version": version,
+									"product": product
+								}
+								deps.append(dep)
 		file_name = dir.get_next()
 	return deps
 
@@ -171,9 +169,7 @@ func _generate_package_swift(export_dir: String, dependencies: Array[Dictionary]
 
 		if not processed_urls.has(url):
 			processed_urls.append(url)
-			var version_rule := (
-				'exact: "%s"' % dep.version if dep.kind == "exact" else 'from: "%s"' % dep.version
-			)
+			var version_rule := 'exact: "%s"' % dep.version
 			package_deps_str += '        .package(url: "%s", %s),\n' % [url, version_rule]
 
 		if not processed_products.has(product):

@@ -12,8 +12,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-chartboost.git@exact:9.12.0|ChartboostAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-chartboost.git",
+    "version": "9.12.0",
+    "products": ["ChartboostAdapterTarget"]
+  }
 ]
 
 [plist]

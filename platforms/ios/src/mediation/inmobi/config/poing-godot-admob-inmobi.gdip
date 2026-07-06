@@ -12,8 +12,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-inmobi.git@exact:11.3.000|InMobiAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-inmobi.git",
+    "version": "11.3.000",
+    "products": ["InMobiAdapterTarget"]
+  }
 ]
 
 [plist]

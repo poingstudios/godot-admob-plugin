@@ -11,8 +11,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-pubmatic.git@exact:5.1.100|PubMaticAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-pubmatic.git",
+    "version": "5.1.100",
+    "products": ["PubMaticAdapterTarget"]
+  }
 ]
 
 [plist]

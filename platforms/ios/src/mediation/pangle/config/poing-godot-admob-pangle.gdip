@@ -11,8 +11,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-pangle.git@exact:8.1.00600|PangleAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-pangle.git",
+    "version": "8.1.00600",
+    "products": ["PangleAdapterTarget"]
+  }
 ]
 
 [plist]

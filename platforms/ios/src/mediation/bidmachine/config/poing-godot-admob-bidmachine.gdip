@@ -12,8 +12,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-bidmachine.git@exact:3.7.000|BidMachineAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-bidmachine.git",
+    "version": "3.7.000",
+    "products": ["BidMachineAdapterTarget"]
+  }
 ]
 
 [plist]
