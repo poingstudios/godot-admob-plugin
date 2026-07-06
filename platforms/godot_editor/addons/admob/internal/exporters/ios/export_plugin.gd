@@ -55,10 +55,9 @@ func _export_end() -> void:
 	print("AdMob iOS: _export_end fallback (pre-4.7 engine) with path='%s'" % _pending_export_path)
 	_apply_spm(_pending_export_path, true)
 
-
 func _apply_spm(path: String, defer_patch: bool) -> void:
 	var version_info := Engine.get_version_info()
-	var is_lower_than_4_8 := (version_info.major < 4) or (version_info.major == 4 and version_info.minor < 8)
+	var is_lower_than_4_8: bool = (version_info.major < 4) or (version_info.major == 4 and version_info.minor < 8)
 	if not is_lower_than_4_8:
 		print("AdMob iOS: Godot 4.8+ detected, utilizing native SPM support. Skipping custom SPM export pipeline.")
 		return
@@ -146,7 +145,6 @@ func _collect_spm_dependencies(activated_plugins: Array[String]) -> Array[Dictio
 								var dep := {
 									"url": url,
 									"version": version,
-									"kind": "exact",
 									"product": product
 								}
 								deps.append(dep)
@@ -171,9 +169,7 @@ func _generate_package_swift(export_dir: String, dependencies: Array[Dictionary]
 
 		if not processed_urls.has(url):
 			processed_urls.append(url)
-			var version_rule := (
-				'exact: "%s"' % dep.version if dep.kind == "exact" else 'from: "%s"' % dep.version
-			)
+			var version_rule := 'exact: "%s"' % dep.version
 			package_deps_str += '        .package(url: "%s", %s),\n' % [url, version_rule]
 
 		if not processed_products.has(product):

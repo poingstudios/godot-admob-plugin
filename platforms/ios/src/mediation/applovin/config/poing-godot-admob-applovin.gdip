@@ -12,8 +12,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-applovin.git@exact:13.6.300|AppLovinAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-applovin.git",
+    "version": "13.6.300",
+    "products": ["AppLovinAdapterTarget"]
+  }
 ]
 
 [plist]

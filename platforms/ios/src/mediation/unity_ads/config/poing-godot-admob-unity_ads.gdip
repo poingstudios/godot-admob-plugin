@@ -12,8 +12,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-unity.git@exact:4.18.100|UnityAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-unity.git",
+    "version": "4.18.100",
+    "products": ["UnityAdapterTarget"]
+  }
 ]
 
 [plist]

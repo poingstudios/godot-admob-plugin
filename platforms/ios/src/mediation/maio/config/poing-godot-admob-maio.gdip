@@ -12,8 +12,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-maio.git@exact:2.2.0|MaioAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-maio.git",
+    "version": "2.2.0",
+    "products": ["MaioAdapterTarget"]
+  }
 ]
 
 [plist]

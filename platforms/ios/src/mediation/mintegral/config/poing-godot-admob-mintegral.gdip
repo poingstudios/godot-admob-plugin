@@ -11,8 +11,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-mintegral.git@exact:8.1.500|MintegralAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-mintegral.git",
+    "version": "8.1.500",
+    "products": ["MintegralAdapterTarget"]
+  }
 ]
 
 [plist]

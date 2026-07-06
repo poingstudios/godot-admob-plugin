@@ -12,8 +12,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-moloco.git@exact:4.7.000|MolocoAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-moloco.git",
+    "version": "4.7.000",
+    "products": ["MolocoAdapterTarget"]
+  }
 ]
 
 [plist]

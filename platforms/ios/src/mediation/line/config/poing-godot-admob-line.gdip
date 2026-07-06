@@ -12,8 +12,12 @@ system=[]
 capabilities=[]
 files=[]
 linker_flags=[]
-admob_packages=[
-    "https://github.com/googleads/googleads-mobile-ios-mediation-line.git@exact:3.0.102|LineAdapterTarget"
+spm_packages=[
+  {
+    "url": "https://github.com/googleads/googleads-mobile-ios-mediation-line.git",
+    "version": "3.0.102",
+    "products": ["LineAdapterTarget"]
+  }
 ]
 
 [plist]
