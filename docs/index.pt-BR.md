@@ -85,27 +85,25 @@ O plugin AdMob para Godot está convenientemente disponível através da Asset S
 	    ![export](assets/android/export.png)
 
 === "iOS"
-    
-    1. Ao exportar seu projeto, atualize o `GADApplicationIdentifier` com seu [AdMob App ID](https://support.google.com/admob/answer/7356431) e certifique-se de que `Ad Mob` está ativado na seção de Plugins da janela de Exportação. Se você tiver Mediação, marque também `Ad Mob Meta`, etc...
-    
-        ![gadapplicationidentifier](assets/ios/gadapplicationidentifier.png)
-    
-        !!! tip "App ID vs Ad Unit ID"
-            - **App ID** (contém `~`): Usado para registro do aplicativo e configuração interna.
-            - **Ad Unit ID** (contém `/`): Usado para carregar formatos de anúncios específicos em seu código.
-    
-    2. **Pronto!** Como este plugin usa pacotes `.xcframework`, o Godot 4.2+ integrará automaticamente todas as bibliotecas e frameworks necessários no seu projeto do Xcode. Não são necessárias etapas de configuração do Xcode, CocoaPods ou comandos manuais no terminal.
-    
-    3. [Se você estiver enfrentando o erro "__swift_FORCE_LOAD_", leia isto](https://github.com/poingstudios/godot-admob-ios/issues/127).
 
-        1. Crie um arquivo `Untitled.swift` no seu projeto do Xcode.
-        2. O Xcode perguntará se deseja criar um Bridge Header → Aceite (`Create Bridge Header`).
-        3. Seu projeto agora deve compilar normalmente.
-            ![untitled.swift](assets/ios/untitled.swift.png)
-    
-    4. Execute o jogo.
-    
-    5. [Se você estiver tentando rodar no Simulador e não estiver funcionando, leia isto](https://github.com/godotengine/godot/issues/44681#issuecomment-751399783).
+	O plugin inclui um **iOS export plugin** que automatiza toda a configuração de exportação para iOS:
+
+	1. Configure suas configurações do AdMob em `Projeto → Configurações do Projeto... → Geral`:
+
+	    - Na barra lateral esquerda, sob a seção **Admob**, clique em **Geral**.
+	    - Sob a seção **iOS**, marque **Ativado** para ativar a plataforma e adicione seu [AdMob App ID](https://support.google.com/admob/answer/7356431) no campo **App Id**.
+	    - Para ativar redes de mediação, clique em **Mediação** na barra lateral esquerda e alterne as respectivas caixas de seleção (ex.: `Meta`, `Vungle`).
+
+	    !!! tip "App ID vs Ad Unit ID"
+	        - **App ID** (contém `~`): Usado para registro do aplicativo e configuração interna.
+	        - **Ad Unit ID** (contém `/`): Usado para carregar formatos de anúncios específicos em seu código.
+
+	    ![Project Settings](assets/general_settings.png)
+	    ![Mediation Settings](assets/mediation_settings.png)
+
+	1. Exporte seu projeto como de costume — nenhuma configuração manual do Xcode é necessária.
+	1. Execute o jogo.
+	1. [Se você estiver tentando rodar no Simulador e não estiver funcionando, leia isto](https://github.com/godotengine/godot/issues/44681#issuecomment-751399783).
 
 <div id="initialize-the-google-mobile-ads-sdk"></div>
 <div id="inicializar-o-google-mobile-ads-sdk"></div>
