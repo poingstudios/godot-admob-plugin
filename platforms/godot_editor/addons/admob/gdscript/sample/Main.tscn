@@ -89,7 +89,7 @@ texture = ExtResource("3_icon")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="TitleContainer" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer"]
+[node name="TitleContainer" type="VBoxContainer" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer" unique_id=381759551]
 layout_mode = 2
 theme_override_constants/separation = 2
 
@@ -102,9 +102,8 @@ theme_override_font_sizes/font_size = 26
 text = "GAD_MainTitleGDS"
 horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 0
 
-[node name="AppSubtitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer"]
+[node name="AppSubtitle" type="Label" parent="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer" unique_id=574236758]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 0.9)
 theme_override_font_sizes/font_size = 14
@@ -266,7 +265,7 @@ bbcode_enabled = true
 text = "GAD_LogsStart"
 scroll_following = true
 
-[node name="ResizeTimer" type="Timer" parent="."]
+[node name="ResizeTimer" type="Timer" parent="." unique_id=694152401]
 wait_time = 0.2
 one_shot = true
 

@@ -48,7 +48,7 @@ namespace PoingStudios.AdMob.Sample
 
         private static void OptimizeMouseFilter(Control control)
         {
-            bool isInteractive = control is Button ||
+            bool isInteractive = control is BaseButton ||
                                  control is LineEdit ||
                                  control is TextEdit ||
                                  control is RichTextLabel ||
@@ -65,7 +65,7 @@ namespace PoingStudios.AdMob.Sample
             }
             else if (isInteractive && control is BaseButton)
             {
-                control.MouseFilter = Control.MouseFilterEnum.Pass;
+                control.MouseFilter = Control.MouseFilterEnum.Stop;
             }
         }
 

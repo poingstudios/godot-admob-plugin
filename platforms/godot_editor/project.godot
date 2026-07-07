@@ -10,25 +10,25 @@ config_version=5
 
 [admob]
 
-android/mediation/applovin=true
-android/mediation/bidmachine=true
-android/mediation/chartboost=true
-android/mediation/dtexchange=true
-android/mediation/imobile=true
-android/mediation/inmobi=true
-android/mediation/ironsource=true
-android/mediation/line=true
-android/mediation/maio=true
-android/mediation/meta=true
-android/mediation/mintegral=true
-android/mediation/moloco=true
-android/mediation/mytarget=true
-android/mediation/pangle=true
-android/mediation/pubmatic=true
-android/mediation/vpon=true
-android/mediation/unity_ads=true
-android/mediation/vungle=true
-android/mediation/zucks=true
+mediation/applovin=true
+mediation/bidmachine=true
+mediation/chartboost=true
+mediation/dtexchange=true
+mediation/imobile=true
+mediation/inmobi=true
+mediation/ironsource=true
+mediation/line=true
+mediation/maio=true
+mediation/meta=true
+mediation/mintegral=true
+mediation/moloco=true
+mediation/mytarget=true
+mediation/pangle=true
+mediation/pubmatic=true
+mediation/unity_ads=true
+mediation/vungle=true
+mediation/vpon=true
+mediation/zucks=true
 
 [animation]
 
@@ -38,7 +38,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="AdMobAddon"
 config/tags=PackedStringArray("admob", "mobile", "plugin", "sample")
-run/main_scene="uid://0esyp38ds6yg"
+run/main_scene="uid://bshvjiqlgngc8"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
 config/icon="res://addons/admob/assets/icon-1024.png"
 

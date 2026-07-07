@@ -1,38 +1,61 @@
-[config]
-name="AdMob"
-binary="poing-godot-admob/bin/poing-godot-admob-ads.xcframework"
+# MIT License
 
-initialization="register_poing_godot_admob_ads_types"
-deinitialization="unregister_poing_godot_admob_ads_types"
+# Copyright (c) 2026-present Poing Studios
 
-[dependencies]
-linked=[]
-embedded=[]
-system=["AppTrackingTransparency.framework"]
-capabilities=[]
-files=["poing-godot-admob/res/GADTMediumTemplateView.xib", "poing-godot-admob/res/GADTSmallTemplateView.xib"]
-linker_flags=["-ObjC"]
-spm_packages=[
-  {
-    "url": "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
-    "version": "13.3.0",
-    "products": ["GoogleMobileAds"]
-  },
-  {
-    "url": "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git",
-    "version": "3.1.0",
-    "products": ["GoogleUserMessagingPlatform"]
-  }
-]
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
 
-[plist]
-;Warning: You will need to update the [plist] section every time you reinstall/upgrade the plugin!
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
 
-;@ IMPORTANT @: Replace with your app id: https://support.google.com/admob/answer/7356431
-GADApplicationIdentifier:string_input="ca-app-pub-3940256099942544~1458002511"
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
 
-;Warning: Select third-party buyer Mediators: https://developers.google.com/admob/ios/3p-skadnetworks
-SKAdNetworkItems:raw="
+extends EditorExportPlugin
+
+
+func get_plugin_name() -> String:
+	return "AdMob"
+
+
+func get_binary_path() -> String:
+	return "libs/poing-godot-admob-ads.xcframework"
+
+
+func get_initialization_method() -> String:
+	return "register_poing_godot_admob_ads_types"
+
+
+func get_deinitialization_method() -> String:
+	return "unregister_poing_godot_admob_ads_types"
+
+
+func get_system_dependencies() -> PackedStringArray:
+	return PackedStringArray(["AppTrackingTransparency.framework"])
+
+
+func get_files_to_copy() -> PackedStringArray:
+	return PackedStringArray([
+		"res/GADTMediumTemplateView.xib",
+		"res/GADTSmallTemplateView.xib"
+	])
+
+
+func get_linker_flags() -> PackedStringArray:
+	return PackedStringArray(["-ObjC"])
+
+
+func get_plist_content() -> String:
+	return """<key>SKAdNetworkItems</key>
 <array>
   <dict>
     <key>SKAdNetworkIdentifier</key>
@@ -234,5 +257,19 @@ SKAdNetworkItems:raw="
     <key>SKAdNetworkIdentifier</key>
     <string>3qcr597p9d.skadnetwork</string>
   </dict>
-</array>
-"
+</array>"""
+
+
+func get_spm_packages() -> Array[Dictionary]:
+	return [
+		{
+			"url": "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
+			"version": "13.3.0",
+			"products": ["GoogleMobileAds"]
+		},
+		{
+			"url": "https://github.com/googleads/swift-package-manager-google-user-messaging-platform.git",
+			"version": "3.1.0",
+			"products": ["GoogleUserMessagingPlatform"]
+		}
+	]

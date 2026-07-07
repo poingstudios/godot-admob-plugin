@@ -4,8 +4,7 @@
 !android/
 
 # iOS
-*.a
-*.gdip
+!ios/
 
 /downloads/*
 !/downloads/.gitkeep

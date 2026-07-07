@@ -39,7 +39,7 @@ static func scale_ui(node: Node, total_factor: float, scale_factor: float) -> vo
 
 static func _optimize_mouse_filter(control: Control) -> void:
 	var is_interactive := (
-		control is Button
+		control is BaseButton
 		or control is LineEdit
 		or control is TextEdit
 		or control is RichTextLabel
@@ -53,7 +53,7 @@ static func _optimize_mouse_filter(control: Control) -> void:
 	if not is_interactive and not (control is PanelContainer or control is ScrollContainer or control is TabContainer):
 		control.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	elif is_interactive and control is BaseButton:
-		control.mouse_filter = Control.MOUSE_FILTER_PASS
+		control.mouse_filter = Control.MOUSE_FILTER_STOP
 
 
 static func _apply_component_scaling(control: Control, total_factor: float) -> void:

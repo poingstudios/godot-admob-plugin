@@ -83,7 +83,12 @@ static func patch(path: String) -> void:
 		"/* Begin PBXBuildFile section */", "/* Begin PBXBuildFile section */\n" + build_file_def
 	)
 
-	if content.contains("packageReferences = ("):
+	if content.contains("$spm_packages"):
+		content = content.replace(
+			"$spm_packages",
+			local_ref_id + ' /* XCLocalSwiftPackageReference "admob_spm" */'
+		)
+	elif content.contains("packageReferences = ("):
 		content = content.replace(
 			"packageReferences = (",
 			(
@@ -132,6 +137,10 @@ static func patch(path: String) -> void:
 				files_start + 9,
 				"\n				" + build_file_id + " /* PoingGodotAdMobDeps in Frameworks */,"
 			)
+
+	# Remove $spm_package_refs and $spm_package_products if left unreplaced by older Godot engines
+	content = content.replace("$spm_package_refs", "")
+	content = content.replace("$spm_package_products", "")
 
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if file:
