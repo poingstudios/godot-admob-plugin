@@ -38,12 +38,14 @@ var _on_consent_form_dismissed_callback
 func show(on_consent_form_dismissed := func(form_error: FormError): pass) -> void:
 	if _plugin:
 		self._on_consent_form_dismissed_callback = on_consent_form_dismissed
+		UserMessagingPlatform.active_consent_form = self
 		_plugin.show(_uid)
 		safe_connect(_plugin, "on_consent_form_dismissed", _on_consent_form_dismissed)
 
 
 func _on_consent_form_dismissed(uid: int, form_error_dictionary: Dictionary) -> void:
 	if uid == _uid:
+		UserMessagingPlatform.active_consent_form = null
 		var formError: FormError = (
 			FormError.create(form_error_dictionary)
 			if not form_error_dictionary.is_empty()

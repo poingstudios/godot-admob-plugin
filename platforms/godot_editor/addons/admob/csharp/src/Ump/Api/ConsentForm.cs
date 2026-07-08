@@ -48,6 +48,7 @@ namespace PoingStudios.AdMob.Ump.Api
             if (_plugin == null) return;
 
             _onDismissedCallback = onConsentFormDismissed ?? ((_) => { });
+            UserMessagingPlatform.ActiveConsentForm = this;
             _plugin.Call("show", _uid);
             SafeConnect(_plugin, "on_consent_form_dismissed", _onDismissedCallable);
         }
@@ -56,6 +57,7 @@ namespace PoingStudios.AdMob.Ump.Api
         {
             if (uid != _uid) return;
 
+            UserMessagingPlatform.ActiveConsentForm = null;
             FormError formError = (errorDict != null && errorDict.Count > 0)
                 ? FormError.Create(errorDict)
                 : null;

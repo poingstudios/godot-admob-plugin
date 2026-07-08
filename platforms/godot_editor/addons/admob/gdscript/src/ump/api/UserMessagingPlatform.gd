@@ -27,6 +27,8 @@ static var _plugin := _get_plugin("PoingGodotAdMobUserMessagingPlatform")
 
 static var consent_information := ConsentInformation.new()
 
+static var active_consent_form: ConsentForm
+
 static var _on_consent_form_load_success_listener_callback
 static var _on_consent_form_load_failure_listener_callback
 static var _on_privacy_options_form_dismissed_callback
