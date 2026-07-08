@@ -34,6 +34,8 @@ namespace PoingStudios.AdMob.Ump.Api
 
         public static ConsentInformation ConsentInformation { get; } = new ConsentInformation();
 
+        public static ConsentForm ActiveConsentForm { get; set; }
+
         private static Action<ConsentForm> _onLoadSuccessCallback;
         private static Action<FormError> _onLoadFailureCallback;
         private static Action<FormError> _onPrivacyOptionsFormDismissedCallback;
