@@ -133,8 +133,6 @@ STAGING_INTERNAL="./bin/release/internal"
 # Check if we can skip the loop and zipping if all plugins are already built and staged
 # For simplicity, we just run the loop but rely on generate_static_library.sh's internal optimization
 
-mkdir -p "$STAGING_INTERNAL/poing-godot-admob/bin"
-
 for PLUGIN in "${ALL_PLUGINS[@]}"; do
     log_info "Processing $PLUGIN..."
     ./scripts/lib/generate_static_library.sh "$PLUGIN" release || exit 1
@@ -149,16 +147,23 @@ for PLUGIN in "${ALL_PLUGINS[@]}"; do
         mv "$XCF_DIR/poing-godot-admob-${PLUGIN}.release_debug.xcframework" "$DEBUG_XCF"
     fi
 
-    cp -R "$XCF_DIR/poing-godot-admob-${PLUGIN}.release.xcframework" "$STAGING_INTERNAL/poing-godot-admob/bin/"
-    cp -R "$XCF_DIR/poing-godot-admob-${PLUGIN}.debug.xcframework" "$STAGING_INTERNAL/poing-godot-admob/bin/"
+    # Create destination dirs matching Android structure
+    PLUGIN_DEST_DIR="$STAGING_INTERNAL/$PLUGIN"
+    mkdir -p "$PLUGIN_DEST_DIR/libs"
 
+    cp -R "$XCF_DIR/poing-godot-admob-${PLUGIN}.release.xcframework" "$PLUGIN_DEST_DIR/libs/"
+    cp -R "$XCF_DIR/poing-godot-admob-${PLUGIN}.debug.xcframework" "$PLUGIN_DEST_DIR/libs/"
+
+    # Copy the config script (e.g. poing_godot_admob_applovin.gd)
     CONFIG_DIR=$(get_plugin_config_dir "$PLUGIN")
-    cp "$CONFIG_DIR"/*.gdip "$STAGING_INTERNAL/"
-    cp "$CONFIG_DIR"/*.gd "$STAGING_INTERNAL/" 2>/dev/null || true
+    if [ -f "$CONFIG_DIR/poing_godot_admob_${PLUGIN}.gd" ]; then
+        cp "$CONFIG_DIR/poing_godot_admob_${PLUGIN}.gd" "$PLUGIN_DEST_DIR/poing_godot_admob_${PLUGIN}.gd"
+    fi
 
+    # Copy any resource bundle files if they exist (like .xib templates for ads)
     if [ "$PLUGIN" == "ads" ]; then
-        mkdir -p "$STAGING_INTERNAL/poing-godot-admob/res"
-        cp ./src/ads/helpers/NativeTemplates/*.xib "$STAGING_INTERNAL/poing-godot-admob/res/"
+        mkdir -p "$PLUGIN_DEST_DIR/res"
+        cp ./src/ads/helpers/NativeTemplates/*.xib "$PLUGIN_DEST_DIR/res/" 2>/dev/null || true
     fi
 done
 
@@ -167,7 +172,7 @@ if [ -z "$PLUGIN_VERSION" ]; then
     log_error "Could not extract version from $PLUGIN_CONFIG_PATH"
     exit 1
 fi
-echo -e "# This file is dynamically generated.\nconst VERSION := \"$PLUGIN_VERSION\"" > "$STAGING_INTERNAL/poing-godot-admob/package.gd"
+echo -e "# This file is dynamically generated.\nconst VERSION := \"$PLUGIN_VERSION\"" > "$STAGING_INTERNAL/package.gd"
 
 # Only create zip if staging is new or forced (we could optimize this further but the zip is fast compared to build)
 ./scripts/lib/create_zip.sh "plugin" "internal" "$GODOT_VERSION" || exit 1

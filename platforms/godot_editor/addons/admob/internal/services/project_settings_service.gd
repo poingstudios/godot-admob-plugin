@@ -22,10 +22,32 @@
 
 extends RefCounted
 
-const ANDROID_ENABLED := "admob/android/enabled"
-const ANDROID_APP_ID := "admob/android/app_id"
-const ANDROID_MEDIATION_PREFIX := "admob/android/mediation/"
-const DEFAULT_APP_ID := "ca-app-pub-3940256099942544~3347511713"
+const MEDIATION_PREFIX := "admob/mediation/"
+
+const ANDROID_DEFAULT_APP_ID := "ca-app-pub-3940256099942544~3347511713"
+const IOS_DEFAULT_APP_ID := "ca-app-pub-3940256099942544~1458002511"
+
+const MEDIATION_LIBS: Array[String] = [
+	"applovin",
+	"bidmachine",
+	"chartboost",
+	"dtexchange",
+	"imobile",
+	"inmobi",
+	"ironsource",
+	"line",
+	"maio",
+	"meta",
+	"mintegral",
+	"moloco",
+	"mytarget",
+	"pangle",
+	"pubmatic",
+	"unity_ads",
+	"vungle",
+	"vpon",
+	"zucks"
+]
 
 
 class SettingDefinition:
@@ -39,30 +61,21 @@ class SettingDefinition:
 		default_value = p_default
 
 
+static func get_setting_path(platform: String, setting_name: String) -> String:
+	return "admob/general/%s/%s" % [platform, setting_name]
+
+
 static func register_settings() -> void:
 	var settings: Array[SettingDefinition] = [
-		SettingDefinition.new(ANDROID_ENABLED, TYPE_BOOL, true),
-		SettingDefinition.new(ANDROID_APP_ID, TYPE_STRING, DEFAULT_APP_ID),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "applovin", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "bidmachine", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "chartboost", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "dtexchange", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "imobile", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "inmobi", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "ironsource", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "line", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "maio", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "meta", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "mintegral", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "moloco", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "mytarget", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "pangle", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "pubmatic", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "vpon", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "unity_ads", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "vungle", TYPE_BOOL, false),
-		SettingDefinition.new(ANDROID_MEDIATION_PREFIX + "zucks", TYPE_BOOL, false)
+		SettingDefinition.new(get_setting_path("android", "enabled"), TYPE_BOOL, true),
+		SettingDefinition.new(get_setting_path("android", "app_id"), TYPE_STRING, ANDROID_DEFAULT_APP_ID),
+
+		SettingDefinition.new(get_setting_path("ios", "enabled"), TYPE_BOOL, true),
+		SettingDefinition.new(get_setting_path("ios", "app_id"), TYPE_STRING, IOS_DEFAULT_APP_ID),
 	]
+
+	for lib_name in MEDIATION_LIBS:
+		settings.append(SettingDefinition.new(MEDIATION_PREFIX + lib_name, TYPE_BOOL, false))
 
 	var active_names: Array[String] = []
 	var modified := false

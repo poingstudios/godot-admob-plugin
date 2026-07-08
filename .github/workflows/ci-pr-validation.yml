@@ -502,8 +502,8 @@ jobs:
     - name: Extract and Prepare Plugin
       working-directory: platforms/godot_editor
       run: |
-        mkdir -p ios/plugins
-        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d ios/plugins/
+        mkdir -p addons/admob/ios/bin
+        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/ios/bin/
 
     - name: Generate Export Presets
       working-directory: platforms/godot_editor
@@ -661,8 +661,8 @@ jobs:
     - name: Extract and Prepare Plugin
       working-directory: platforms/godot_editor
       run: |
-        mkdir -p ios/plugins
-        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d ios/plugins/
+        mkdir -p addons/admob/ios/bin
+        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/ios/bin/
 
     - name: Generate Export Presets
       working-directory: platforms/godot_editor
