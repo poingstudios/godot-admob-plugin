@@ -20,8 +20,7 @@ dependencyResolutionManagement {
         maven { url "https://dl-maven-android.mintegral.com/repository/mbridge_android_sdk_oversea" }
         maven { url "https://artifact.bytedance.com/repository/pangle/" }
         maven { url "https://repo.pubmatic.com/artifactory/public-repos" }
-        maven { url "https://m.vpon.com/sdk/android/maven" }
-        maven { url "https://raw.githubusercontent.com/zucks/ZucksAdNetworkSDK-Maven/admob-6.1.0.1" }
+
         flatDir {
             dirs 'godot-lib'
         }
@@ -48,5 +47,3 @@ include ':src:mediation:moloco'
 include ':src:mediation:mytarget'
 include ':src:mediation:pangle'
 include ':src:mediation:pubmatic'
-include ':src:mediation:vpon'
-include ':src:mediation:zucks'

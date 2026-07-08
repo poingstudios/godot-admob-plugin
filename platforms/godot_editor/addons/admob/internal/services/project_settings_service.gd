@@ -44,9 +44,7 @@ const MEDIATION_LIBS: Array[String] = [
 	"pangle",
 	"pubmatic",
 	"unity_ads",
-	"vungle",
-	"vpon",
-	"zucks"
+	"vungle"
 ]
 
 
