@@ -1,56 +1,71 @@
 # Integrate Zucks with Mediation
 
-This guide explains how to utilize the Google Mobile Ads SDK to load and present ads from Zucks through [mediation](../get_started.md). It provides instructions on integrating Zucks into the mediation configuration of a Godot app and integrating the Zucks SDK and adapter.
+This guide is intended for publishers who are interested in using AdMob Mediation with Zucks. It walks you through getting a mediation adapter set up with your current Godot app and setting up additional request parameters.
 
 This document is based on:
 
 - [Google Mobile Ads SDK Android Documentation](https://developers.google.com/admob/android/mediation/zucks)
 - [Google Mobile Ads SDK iOS Documentation](https://developers.google.com/admob/ios/mediation/zucks)
 
-## Supported integrations and ad formats
+## Zucks Resources
 
-The AdMob mediation adapter for Zucks has the following capabilities:
-
-| Integration |   |
-|-------------|---|
-| Bidding     |   |
-| Waterfall   | ✅ |
-
-| Formats               |            |
-|-----------------------|------------|
-| Banner                | ✅          |
-| Interstitial          | ✅          |
-| Rewarded              |            |
-| Rewarded Interstitial |            |
-| Native                |            |
+- [Documentation](https://ms.zucksadnetwork.com/media/sdk/manual/admob-mediation/)
+- [SDK](https://ms.zucksadnetwork.com/media/sdk/manual/android/)
+- [Adapter](https://ms.zucksadnetwork.com/media/sdk/manual/admob-mediation/)
+- Customer support: support@zucksadnetwork.com
 
 ## Prerequisites
+
 - Complete the [Get started guide](../../index.md)
 - Complete the mediation [Get started guide](../get_started.md)
 
-## Step 1: Set up Zucks
-We recommend following the tutorial for [Android](https://developers.google.com/admob/android/mediation/zucks#step_1_set_up_zucks) or [iOS](https://developers.google.com/admob/ios/mediation/zucks#step_1_set_up_zucks), as it will be the same for both.
+### Helpful primers
 
-## Step 2: Configure mediation settings for your AdMob ad unit
-We recommend following the tutorial for [Android](https://developers.google.com/admob/android/mediation/zucks#step_2) or [iOS](https://developers.google.com/admob/ios/mediation/zucks#step_2), as it will be the same for both.
+The following Help Center articles provide background information on mediation:
 
-## Step 3: Import the Zucks SDK plugin
+- [About AdMob Mediation](https://support.google.com/admob/answer/1354562)
+- [Set up AdMob Mediation](https://support.google.com/admob/answer/3124703)
+- [Optimize AdMob Mediation](https://support.google.com/admob/answer/6162238)
 
-=== "Android"
-    1. Download the plugin for [Android](https://github.com/poingstudios/godot-admob-android/releases/latest).
-    2. Extract the `.zip` file. Inside, you will find a `zucks` folder.
-    3. Copy the contents of the `zucks` folder and paste them into the Android plugin folder at `res://addons/admob/android/bin/`.
+## Include network adapter and SDK
 
-=== "iOS"
-    As Zucks is integrated via Custom Events on iOS, developers must manually add the Zucks SDK and AdMob adapter framework files to their Xcode project after export.
+### Android
 
-## Step 4: Enable the plugin
+Zucks distributes both its SDK and AdMob Mediation Adapter exclusively via Maven. You do not need to download any local `.aar` or `.jar` files for Android.
 
-=== "Android"
-    Make sure to enable **Zucks** in **Project Settings** (under `Admob > Android > Mediation > Zucks`).
+1. Install the **Android Build Template** in your Godot project (under `Project > Install Android Build Template`).
+2. Open `android/build/build.gradle` in a text editor.
+3. Add the Zucks Maven repository inside the `allprojects > repositories` block (or `repositories` block):
+   ```groovy
+   repositories {
+       // ... other repositories
+       maven { url 'https://github.com/zucks/ZucksAdNetworkSDK-Maven/raw/master/' }
+   }
+   ```
+4. Add the Zucks mediation adapter dependency inside the `dependencies` block (this will transitively download the Zucks SDK as well):
+   ```groovy
+   dependencies {
+       // ... other dependencies
+       implementation 'net.zucks:zucks-ad-network-admob-adapter:6.1.0.1' // Replace with the latest adapter version
+   }
+   ```
 
-=== "iOS"
-    For iOS, there is no plugin checkbox in the Godot Export window. You just need to check the main `Ad Mob` plugin, export your project, and then manually link the Zucks frameworks in Xcode.
+---
 
-## Step 5: Optional steps (Regulatory Settings)
-Zucks does not require any additional custom code configuration for GDPR or CCPA settings via the Google Mobile Ads adapter API. Consent and privacy settings are managed through standard AdMob dashboard configuration or platform-level options.
+### iOS
+
+Include the mediated networks' SDKs and adapter files within the appropriate directory of your Godot project:
+
+- **iOS**: Xcode project (after export)
+
+After generating an Xcode project from Godot, include any frameworks, compiler flags, or linker flags that your chosen networks require.
+
+1. Download the latest **Zucks iOS SDK** and **Zucks AdMob Adapter** frameworks from the [Zucks Developer Page](https://developers.google.com/admob/ios/mediation/zucks).
+2. Export your Godot project as an iOS Xcode project.
+3. Open the exported project in Xcode.
+4. Drag and drop the downloaded Zucks SDK and Adapter framework files (`.xcframework` or `.framework`) into your Xcode project.
+5. Under the **General** tab of your app target, ensure these frameworks are listed under **Frameworks, Libraries, and Embedded Content** and set to **Embed & Sign**.
+
+---
+
+Your app need not call any third-party ad network code directly; Poing Godot AdMob Plugin interacts with the mediated network's adapter to fetch third-party ads on your behalf.
