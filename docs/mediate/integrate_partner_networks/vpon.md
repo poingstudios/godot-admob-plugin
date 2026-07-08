@@ -7,7 +7,7 @@ This guide is intended for publishers who are interested in using AdMob Mediatio
 - [Documentation](https://wiki.vpon.com/android/mediation/admob/)
 - [SDK](https://wiki.vpon.com/android/download/index.html)
 - [Adapter](https://wiki.vpon.com/android/download/#admob)
-- Customer support: fae@vpon.com
+- Customer support: [fae@vpon.com](mailto:fae@vpon.com)
 
 ## Prerequisites
 

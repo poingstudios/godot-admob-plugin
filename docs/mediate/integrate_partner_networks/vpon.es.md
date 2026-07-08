@@ -1,39 +1,61 @@
-# Vpon
+# Integrar Vpon con Mediación
 
-El adaptador de mediación de Vpon le permite integrar anuncios de Vpon en su juego de Godot utilizando la mediación de AdMob.
+Esta guía está destinada a editores que estén interesados en usar la mediación de AdMob con Vpon. Le guía a través de la configuración de un adaptador de mediación con su aplicación Godot actual y la configuración de parámetros de solicitud adicionales.
 
-## Integraciones Soportadas
+## Recursos de Vpon
 
-| Formato de Anuncio | Bidding | Waterfall |
-| :--- | :--- | :--- |
-| **Banner** | ❌ | |
-| **Interstitial** | ❌ | |
-| **Rewarded** | ❌ | |
+- [Documentación](https://wiki.vpon.com/android/mediation/admob/)
+- [SDK](https://wiki.vpon.com/android/download/index.html)
+- [Adaptador](https://wiki.vpon.com/android/download/#admob)
+- Soporte al cliente: [fae@vpon.com](mailto:fae@vpon.com)
 
-## Pasos de Integración
+## Requisitos previos
+
+- Complete la [Guía de inicio](../../index.md)
+- Complete la [Guía de inicio de mediación](../get_started.md)
+
+### Conceptos básicos útiles
+
+Los siguientes artículos del Centro de ayuda proporcionan información general sobre la mediación:
+
+- [Acerca de la mediación de AdMob](https://support.google.com/admob/answer/1354562)
+- [Configurar la mediación de AdMob](https://support.google.com/admob/answer/3124703)
+- [Optimizar la mediación de AdMob](https://support.google.com/admob/answer/6162238)
+
+## Incluir el adaptador de red y el SDK
 
 ### Android
 
-#### 1. Habilitar Vpon en la Configuración del Proyecto
-- Habilite **Vpon** en `admob/android/mediation/vpon` en la Configuración del Proyecto de Godot.
-
-#### 2. Configurar la Mediación en la Consola de AdMob
-Configure Vpon como un socio de mediación en su consola de AdMob:
-1. Inicie sesión en su **cuenta de AdMob**.
-2. Vaya a **Mediación** y cree o edite un **Grupo de mediación**.
-3. En el flujo de la red de anuncios (waterfall), agregue Vpon como un **Evento personalizado**.
-4. **Nombre de Clase (Class Name)**: Ingrese `com.vpadn.mediation.VpadnAdapter`.
-5. **Parámetro**: Ingrese su clave de licencia (License Key) de Vpon.
+1. Instale la **Plantilla de compilación de Android** en su proyecto de Godot (en `Proyecto > Instalar plantilla de compilación de Android`).
+2. Descargue el **SDK de Android de Vpon** y el **Adaptador de AdMob de Vpon** más recientes (archivos `.aar` o `.jar`) desde los enlaces en la sección de Recursos de Vpon.
+3. Copie los archivos descargados en el siguiente directorio dentro de su proyecto de Godot:
+   - `android/build/libs/`
+4. Abra `android/build/build.gradle` en un editor de texto.
+5. Agregue los archivos descargados como dependencias dentro del bloque `dependencies`:
+   ```groovy
+   dependencies {
+       // ... otras dependencias
+       implementation files('libs/admob-adapter-2.3.0.aar') // Reemplazar con el nombre exacto del archivo del adaptador descargado
+       implementation files('libs/vpon-sdk-5.8.0.aar') // Reemplazar con el nombre exacto del archivo del SDK descargado
+   }
+   ```
 
 ---
 
 ### iOS
 
-Dado que Vpon se integra a través de Eventos personalizados en iOS, los desarrolladores deben agregar el SDK de Vpon y los archivos del framework del adaptador de AdMob a sus configuraciones de compilación de Xcode durante la exportación.
+Incluya los SDKs de las redes de mediación y los archivos del adaptador en el directorio apropiado de su proyecto de Godot:
 
-#### 1. Configurar la Mediación en la Consola de AdMob
-1. Inicie sesión en su **cuenta de AdMob**.
-2. Vaya a **Mediación** y cree o edite un **Grupo de mediación**.
-3. En el flujo de la red de anuncios (waterfall), agregue Vpon como un **Evento personalizado**.
-4. **Nombre de Clase (Class Name)**: Ingrese `VponAdMobAdapter`.
-5. **Parámetro**: Ingrese su clave de licencia de Vpon / ID del bloque de anuncios (Ad Unit ID).
+- **iOS**: proyecto de Xcode (después de la exportación)
+
+Después de generar un proyecto de Xcode desde Godot, incluya cualquier framework, bandera de compilación o bandera de enlazador que requieran las redes seleccionadas.
+
+1. Descargue los frameworks más recientes del **SDK de iOS de Vpon** y del **Adaptador de AdMob de Vpon** desde la [Página de desarrollador de Vpon](https://developers.google.com/admob/ios/mediation/vpon).
+2. Exporte su proyecto de Godot como un proyecto de Xcode para iOS.
+3. Abra el proyecto exportado en Xcode.
+4. Arrastre y suelte los archivos de framework del SDK y Adaptador de Vpon descargados (`.xcframework` o `.framework`) en su proyecto de Xcode.
+5. En la pestaña **General** de su destino de aplicación, asegúrese de que estos frameworks estén listados en **Frameworks, Libraries, and Embedded Content** y configurados como **Embed & Sign**.
+
+---
+
+Su aplicación no necesita llamar directamente al código de ninguna red de anuncios de terceros; el Plugin de Godot AdMob de Poing interactúa con el adaptador de la red de mediación para obtener anuncios de terceros en su nombre.

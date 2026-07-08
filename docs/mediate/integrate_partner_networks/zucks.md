@@ -12,7 +12,7 @@ This document is based on:
 - [Documentation](https://ms.zucksadnetwork.com/media/sdk/manual/admob-mediation/)
 - [SDK](https://ms.zucksadnetwork.com/media/sdk/manual/android/)
 - [Adapter](https://ms.zucksadnetwork.com/media/sdk/manual/admob-mediation/)
-- Customer support: support@zucksadnetwork.com
+- Customer support: [support@zucksadnetwork.com](mailto:support@zucksadnetwork.com)
 
 ## Prerequisites
 
