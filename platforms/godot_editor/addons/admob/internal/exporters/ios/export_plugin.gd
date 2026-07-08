@@ -85,17 +85,11 @@ func _export_library(lib: Library, config: EditorExportPlugin, is_debug: bool) -
 	var file_name := binary_base.get_file().get_basename()
 	var extension := binary_base.get_extension()
 	var target_framework := base_dir.path_join(binary_base)
-	print("AdMob: Resolving framework for lib '%s' (is_debug=%s)" % [lib.path, is_debug])
-	print("  Expected path: %s" % target_framework)
-
 	if DirAccess.dir_exists_absolute(target_framework):
-		print("  Found direct framework at: %s" % target_framework)
 		_add_framework(target_framework)
 	else:
 		var target_variant := file_path.path_join(file_name + "." + ("debug" if is_debug else "release") + "." + extension)
-		print("  Direct framework not found. Checking variant: %s" % target_variant)
 		if DirAccess.dir_exists_absolute(target_variant):
-			print("  Found variant framework at: %s" % target_variant)
 			_add_framework(target_variant)
 		else:
 			push_error("AdMob: iOS library binary not found: " + target_framework)
