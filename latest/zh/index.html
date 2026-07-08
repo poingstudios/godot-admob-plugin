@@ -5062,27 +5062,30 @@
 </ol>
 </div>
 <div class="tabbed-block">
+<p>该插件包含一个 <strong>iOS 导出插件</strong>，可自动完成所有 iOS 导出配置：</p>
 <ol>
 <li>
-<p>导出项目时，使用您的 <a href="https://support.google.com/admob/answer/7356431">AdMob App ID</a> 更新 <code>GADApplicationIdentifier</code>，并确保在导出对话框的 Plugins 部分中启用了 <code>Ad Mob</code>。如果您有中介，也要勾选 <code>Ad Mob Meta</code> 等...</p>
+<p>在 <code>项目 → 项目设置... → 常规</code> 中配置您的 AdMob 设置：</p>
+<ul>
+<li>在左侧边栏的 <strong>Admob</strong> 部分下，单击 <strong>常规</strong>。</li>
+<li>在 <strong>iOS</strong> 部分下，勾选 <strong>已启用</strong> 以激活平台，并将您的 <a href="https://support.google.com/admob/answer/7356431">AdMob App ID</a> 添加到 <strong>App Id</strong> 字段。</li>
+<li>要启用中介网络，请单击左侧边栏中的 <strong>中介</strong>，然后切换相应的复选框（例如 <code>Meta</code>、<code>Vungle</code>）。</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">App ID 与 Ad Unit ID</p>
+<ul>
+<li><strong>App ID</strong>（包含 <code>~</code>）：用于应用注册和内部配置。</li>
+<li><strong>Ad Unit ID</strong>（包含 <code>/</code>）：用于在代码中加载特定广告格式。</li>
+</ul>
+</div>
+<p><img alt="Project Settings" src="../assets/general_settings.png" />
+<img alt="Mediation Settings" src="../assets/mediation_settings.png" /></p>
 </li>
 <li>
-<p><strong>这就完成了！</strong> 由于此插件使用 <code>.xcframework</code> 包，Godot 4.2+ 将自动将所有必需的库和框架集成到您的 Xcode 项目中。不需要手动的终端命令、CocoaPods 或 Xcode 配置步骤。</p>
+<p>像往常一样导出项目 — 无需手动 Xcode 配置。</p>
 </li>
-<li>
-<p><a href="https://github.com/poingstudios/godot-admob-ios/issues/127">如果您面临 "__swift_FORCE_LOAD_" 错误，请阅读此文</a>。</p>
-<ol>
-<li>在您的 Xcode 项目中创建一个 <code>Untitled.swift</code> 文件。</li>
-<li>Xcode 会询问您是否 <code>Create Bridge Header</code>，选择 <code>Accept</code>。</li>
-<li>您的项目现在应该可以正常构建了。</li>
-</ol>
-</li>
-<li>
-<p>运行游戏。</p>
-</li>
-<li>
-<p><a href="https://github.com/godotengine/godot/issues/44681#issuecomment-751399783">如果您尝试在模拟器上运行但无法运行，请阅读此文</a>。</p>
-</li>
+<li>运行游戏。</li>
+<li><a href="https://github.com/godotengine/godot/issues/44681#issuecomment-751399783">如果您尝试在模拟器上运行但无法运行，请阅读此文</a>。</li>
 </ol>
 </div>
 </div>

@@ -5065,10 +5065,15 @@
 </ol>
 </div>
 <div class="tabbed-block">
+<p>El plugin incluye un <strong>plugin de exportación para iOS</strong> que automatiza toda la configuración de exportación para iOS:</p>
 <ol>
 <li>
-<p>Al exportar su proyecto, actualice <code>GADApplicationIdentifier</code> con su <a href="https://support.google.com/admob/answer/7356431">ID de aplicación de AdMob</a> y asegúrese de que <code>Ad Mob</code> esté habilitado en la sección Complementos del cuadro de diálogo Exportar. Si tiene Mediación, marque también <code>Ad Mob Meta</code>, etc...</p>
-<p><img alt="gadapplicationidentifier" src="../assets/ios/gadapplicationidentifier.png" /></p>
+<p>Configure sus ajustes de AdMob en <code>Proyecto → Configuración del Proyecto... → General</code>:</p>
+<ul>
+<li>En la barra lateral izquierda, debajo de la sección <strong>Admob</strong>, haga clic en <strong>General</strong>.</li>
+<li>Debajo de la sección <strong>iOS</strong>, marque <strong>Activado</strong> para activar la plataforma y agregue su <a href="https://support.google.com/admob/answer/7356431">ID de aplicación de AdMob</a> en el campo <strong>App Id</strong>.</li>
+<li>Para activar redes de mediación, haga clic en <strong>Mediación</strong> en la barra lateral izquierda y alterne las casillas de verificación correspondientes (p. ej., <code>Meta</code>, <code>Vungle</code>).</li>
+</ul>
 <div class="admonition tip">
 <p class="admonition-title">ID de aplicación frente a ID de bloque de anuncios</p>
 <ul>
@@ -5076,25 +5081,14 @@
 <li><strong>ID del bloque de anuncios</strong> (contiene <code>/</code>): se utiliza para cargar formatos de anuncios específicos en su código.</li>
 </ul>
 </div>
+<p><img alt="Project Settings" src="../assets/general_settings.png" />
+<img alt="Mediation Settings" src="../assets/mediation_settings.png" /></p>
 </li>
 <li>
-<p><strong>¡Eso es todo!</strong> Dado que este complemento utiliza paquetes <code>.xcframework</code>, Godot 4.2+ integrará automáticamente todas las bibliotecas y marcos necesarios en su proyecto Xcode. No se requieren comandos de terminal manuales, CocoaPods o pasos de configuración de Xcode.</p>
+<p>Exporte su proyecto como de costumbre — no se requiere configuración manual de Xcode.</p>
 </li>
-<li>
-<p><a href="https://github.com/poingstudios/godot-admob-ios/issues/127">Si se enfrenta al error "__swift_FORCE_LOAD_", lea esto</a>.</p>
-<ol>
-<li>Cree un archivo <code>Untitled.swift</code> en su proyecto Xcode.</li>
-<li>Xcode le pedirá que <code>Crear encabezado de puente → Aceptar</code>.</li>
-<li>Su proyecto ahora debería construirse normalmente.
-    <img alt="untitled.swift" src="../assets/ios/untitled.swift.png" /></li>
-</ol>
-</li>
-<li>
-<p>Ejecute el juego.</p>
-</li>
-<li>
-<p><a href="https://github.com/godotengine/godot/issues/44681#issuecomment-751399783">Si está intentando ejecutar en Simulator y no funciona, lea esto</a>.</p>
-</li>
+<li>Ejecute el juego.</li>
+<li><a href="https://github.com/godotengine/godot/issues/44681#issuecomment-751399783">Si está intentando ejecutar en Simulator y no funciona, lea esto</a>.</li>
 </ol>
 </div>
 </div>

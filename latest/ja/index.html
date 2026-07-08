@@ -5065,10 +5065,15 @@
 </ol>
 </div>
 <div class="tabbed-block">
+<p>このプラグインには <strong>iOS エクスポートプラグイン</strong>が含まれており、iOS のエクスポート設定をすべて自動化します：</p>
 <ol>
 <li>
-<p>プロジェクトをエクスポートする際、<code>GADApplicationIdentifier</code> を自身の <a href="https://support.google.com/admob/answer/7356431">AdMob アプリ ID</a> で更新し、エクスポートダイアログのプラグインセクションで <code>Ad Mob</code> が有効になっていることを確認します。メディエーションを使用している場合は、<code>Ad Mob Meta</code> などもマークしてください。</p>
-<p><img alt="gadapplicationidentifier" src="../assets/ios/gadapplicationidentifier.png" /></p>
+<p>AdMob 設定を <code>プロジェクト → プロジェクト設定... → 一般</code> で構成します：</p>
+<ul>
+<li>左側のサイドバーの <strong>Admob</strong> セクションで、<strong>一般</strong> をクリックします。</li>
+<li><strong>iOS</strong> セクションで、<strong>有効</strong> をチェックしてプラットフォームを有効にし、自身の <a href="https://support.google.com/admob/answer/7356431">AdMob アプリ ID</a> を <strong>App Id</strong> フィールドに追加します。</li>
+<li>メディエーションネットワークを有効にするには、左側のサイドバーで <strong>メディエーション</strong> をクリックし、対応するチェックボックス（例：<code>Meta</code>、<code>Vungle</code>）を切り替えます。</li>
+</ul>
 <div class="admonition tip">
 <p class="admonition-title">アプリ ID と 広告ユニット ID の違い</p>
 <ul>
@@ -5076,25 +5081,14 @@
 <li><strong>広告ユニット ID</strong>（<code>/</code> を含む）: コード内で特定の広告フォーマットをロードするために使用されます。</li>
 </ul>
 </div>
+<p><img alt="Project Settings" src="../assets/general_settings.png" />
+<img alt="Mediation Settings" src="../assets/mediation_settings.png" /></p>
 </li>
 <li>
-<p><strong>これで完了です！</strong> このプラグインは <code>.xcframework</code> バンドルを使用しているため、Godot 4.2+ は必要なすべてのライブラリとフレームワークを Xcode プロジェクトに自動的に統合します。手動でのターミナルコマンド、CocoaPods、または Xcode 設定手順は必要ありません。</p>
+<p>通常通りプロジェクトをエクスポートします — 手動の Xcode 設定は必要ありません。</p>
 </li>
-<li>
-<p><a href="https://github.com/poingstudios/godot-admob-ios/issues/127">「__swift_FORCE_LOAD_」エラーが発生している場合は、こちらをお読みください</a>。</p>
-<ol>
-<li>Xcode プロジェクトに <code>Untitled.swift</code> ファイルを作成します。</li>
-<li>Xcode は <code>Create Bridge Header</code>（ブリッジングヘッダーを作成するか）と尋ねてくるので、<code>Accept</code>（同意）します。</li>
-<li>プロジェクトは正常にビルドできるようになります。
-    <img alt="untitled.swift" src="../assets/ios/untitled.swift.png" /></li>
-</ol>
-</li>
-<li>
-<p>ゲームを実行します。</p>
-</li>
-<li>
-<p><a href="https://github.com/godotengine/godot/issues/44681#issuecomment-751399783">シミュレータで実行しようとして動作しない場合は、こちらをお読みください</a>。</p>
-</li>
+<li>ゲームを実行します。</li>
+<li><a href="https://github.com/godotengine/godot/issues/44681#issuecomment-751399783">シミュレータで実行しようとして動作しない場合は、こちらをお読みください</a>。</li>
 </ol>
 </div>
 </div>

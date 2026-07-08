@@ -5031,7 +5031,7 @@
 <p>To integrate the required iOS library for AdMob in Godot, follow these steps:</p>
 <ol>
 <li>In Godot, navigate to <code>Project → Tools → AdMob Manager → iOS → Download &amp; Install</code>.</li>
-<li>This action will automatically download and install the required iOS library into your project at <code>res://ios/plugins/</code>.</li>
+<li>This action will automatically download and install the required iOS library into your project at <code>res://addons/admob/ios/bin/</code>.</li>
 </ol>
 <p>If you encounter any issues with the download, you can try downloading the library manually by clicking <a href="https://github.com/poingstudios/godot-admob-ios/releases/latest">here</a>.</p>
 </div>
@@ -5042,14 +5042,17 @@
 <div class="tabbed-content">
 <div class="tabbed-block">
 <ol>
-<li>Install the <a href="https://docs.godotengine.org/en/stable/tutorials/export/android_gradle_build.html">Android Build Template</a> by navigating to <code>Project → Install Android Build Template</code>.</li>
 <li>
+<p>Install the <a href="https://docs.godotengine.org/en/stable/tutorials/export/android_gradle_build.html">Android Build Template</a> by navigating to <code>Project → Install Android Build Template</code>.</p>
+<p><img alt="Install Android Build Template" src="assets/android/install_android_build_template.png" /></p>
+</li>
+<li>
+<p>Configure the AdMob settings in <code>Project → Project Settings... → General</code>:</p>
 <ul>
-<li>In the left sidebar, locate the <strong>Admob</strong> section and click on <strong>Android</strong>.</li>
-<li>Add your <a href="https://support.google.com/admob/answer/7356431">AdMob App ID</a> to the <code>App Id</code> field.</li>
-<li>Enable or disable <code>Enabled</code> and Mediation plugins (<code>Mediation/Meta</code>, <code>Mediation/Vungle</code>) by toggling the respective checkboxes.</li>
+<li>In the left sidebar under the <strong>Admob</strong> section, click on <strong>General</strong>.</li>
+<li>Under the <strong>Android</strong> section, check <strong>Enabled</strong> to activate the platform and add your <a href="https://support.google.com/admob/answer/7356431">AdMob App ID</a> to the <strong>App Id</strong> field.</li>
+<li>To enable mediation networks, click on <strong>Mediation</strong> in the left sidebar and toggle the respective checkboxes (e.g., <code>Meta</code>, <code>Vungle</code>).</li>
 </ul>
-<p>Configure the Android preset options in <code>Project → Project Settings... → General</code>:</p>
 <div class="admonition tip">
 <p class="admonition-title">App ID vs Ad Unit ID</p>
 <ul>
@@ -5057,6 +5060,8 @@
 <li><strong>Ad Unit ID</strong> (contains <code>/</code>): Used to load specific ad formats in your code.</li>
 </ul>
 </div>
+<p><img alt="Project Settings" src="assets/general_settings.png" />
+<img alt="Mediation Settings" src="assets/mediation_settings.png" /></p>
 </li>
 <li>
 <p>When exporting your project, select <code>Use Gradle Build</code>.</p>
@@ -5065,10 +5070,15 @@
 </ol>
 </div>
 <div class="tabbed-block">
+<p>The plugin includes an <strong>iOS export plugin</strong> that automates the entire iOS export configuration:</p>
 <ol>
 <li>
-<p>When exporting your project, update the <code>GADApplicationIdentifier</code> with your <a href="https://support.google.com/admob/answer/7356431">AdMob App ID</a> and ensure that <code>Ad Mob</code> is enabled in the Plugins section of the Export dialog. If you have Mediation, also mark <code>Ad Mob Meta</code>, etc...</p>
-<p><img alt="gadapplicationidentifier" src="assets/ios/gadapplicationidentifier.png" /></p>
+<p>Configure your AdMob settings in <code>Project → Project Settings... → General</code>:</p>
+<ul>
+<li>In the left sidebar under the <strong>Admob</strong> section, click on <strong>General</strong>.</li>
+<li>Under the <strong>iOS</strong> section, check <strong>Enabled</strong> to activate the platform and add your <a href="https://support.google.com/admob/answer/7356431">AdMob App ID</a> to the <strong>App Id</strong> field.</li>
+<li>To enable mediation networks, click on <strong>Mediation</strong> in the left sidebar and toggle the respective checkboxes (e.g., <code>Meta</code>, <code>Vungle</code>).</li>
+</ul>
 <div class="admonition tip">
 <p class="admonition-title">App ID vs Ad Unit ID</p>
 <ul>
@@ -5076,25 +5086,14 @@
 <li><strong>Ad Unit ID</strong> (contains <code>/</code>): Used to load specific ad formats in your code.</li>
 </ul>
 </div>
+<p><img alt="Project Settings" src="assets/general_settings.png" />
+<img alt="Mediation Settings" src="assets/mediation_settings.png" /></p>
 </li>
 <li>
-<p><strong>That's it!</strong> Since this plugin uses <code>.xcframework</code> bundles, Godot 4.2+ will automatically integrate all necessary libraries and frameworks into your Xcode project. No manual terminal commands, CocoaPods, or Xcode configuration steps are required.</p>
+<p>Export your project as usual — no manual Xcode configuration required.</p>
 </li>
-<li>
-<p><a href="https://github.com/poingstudios/godot-admob-ios/issues/127">If you are facing "__swift_FORCE_LOAD_" error, read this</a>.</p>
-<ol>
-<li>Create a <code>Untitled.swift</code> file in your Xcode project.</li>
-<li>Xcode will ask you to <code>Create Bridge Header → Accept</code>.</li>
-<li>Your project should now build normally.
-    <img alt="untitled.swift" src="assets/ios/untitled.swift.png" /></li>
-</ol>
-</li>
-<li>
-<p>Run the Game.</p>
-</li>
-<li>
-<p><a href="https://github.com/godotengine/godot/issues/44681#issuecomment-751399783">If you are trying to run on Simulator and it is not working, read this</a>.</p>
-</li>
+<li>Run the Game.</li>
+<li><a href="https://github.com/godotengine/godot/issues/44681#issuecomment-751399783">If you are trying to run on Simulator and it is not working, read this</a>.</li>
 </ol>
 </div>
 </div>
