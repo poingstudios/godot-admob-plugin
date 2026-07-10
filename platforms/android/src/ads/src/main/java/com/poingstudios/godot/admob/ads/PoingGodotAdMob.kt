@@ -63,15 +63,16 @@ class PoingGodotAdMob(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(
 
     @UsedByGodot
     fun initialize() {
-        Thread {
-            val appId = runCatching {
-                val applicationInfo = aActivity.packageManager.getApplicationInfo(aActivity.packageName, PackageManager.GET_META_DATA)
-                applicationInfo.metaData?.getString("com.google.android.gms.ads.APPLICATION_ID")
-            }.getOrNull()
+        val appId = runCatching {
+            val applicationInfo = aActivity.packageManager.getApplicationInfo(aActivity.packageName, PackageManager.GET_META_DATA)
+            applicationInfo.metaData?.getString("com.google.android.gms.ads.APPLICATION_ID")
+        }.getOrNull()
 
-            if (appId.isNullOrEmpty()) {
-                throw IllegalStateException("AdMob App ID (com.google.android.gms.ads.APPLICATION_ID) is missing or empty in AndroidManifest.xml. Please add it to your project export settings.")
-            }
+        if (appId.isNullOrEmpty()) {
+            throw IllegalStateException("AdMob App ID (com.google.android.gms.ads.APPLICATION_ID) is missing or empty in AndroidManifest.xml. Please add it to your project export settings.")
+        }
+
+        Thread {
             val config = InitializationConfig.Builder(appId).build()
             MobileAds.initialize(aActivity, config) { initializationStatus ->
                 val initializationStatusDictionary = initializationStatus.convertToGodotDictionary()

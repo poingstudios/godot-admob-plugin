@@ -296,7 +296,7 @@ fun Dictionary.convertToNativeAdRequest(keywords: Array<String>, adUnitId: Strin
 
 @Suppress("DEPRECATION")
 fun Dictionary.convertToRequestConfiguration(testDeviceIds: Array<String>): RequestConfiguration {
-    val maxAdContentRating = this["max_ad_content_rating"] as String
+    val maxAdContentRating = this["max_ad_content_rating"] as? String ?: ""
     val tagForChildDirectedTreatment = getInt("tag_for_child_directed_treatment", -1)
     val tagForUnderAgeOfConsent = getInt("tag_for_under_age_of_consent", -1)
 
