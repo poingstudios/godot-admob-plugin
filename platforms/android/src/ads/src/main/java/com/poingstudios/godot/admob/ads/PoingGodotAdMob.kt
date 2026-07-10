@@ -24,14 +24,16 @@
 package com.poingstudios.godot.admob.ads
 
 import android.app.Activity
-import android.content.Context
-import android.preference.PreferenceManager
 import android.util.ArraySet
 import android.view.View
 import android.widget.FrameLayout
-import com.google.android.gms.ads.*
+import android.content.pm.PackageManager
+import android.preference.PreferenceManager
+import androidx.core.content.edit
+import com.google.android.libraries.ads.mobile.sdk.MobileAds
+import com.google.android.libraries.ads.mobile.sdk.initialization.InitializationConfig
 import com.poingstudios.godot.admob.ads.converters.convertToGodotDictionary
-import com.poingstudios.godot.admob.core.utils.getInt
+import com.poingstudios.godot.admob.ads.converters.convertToRequestConfiguration
 import org.godotengine.godot.Dictionary
 import org.godotengine.godot.Godot
 import org.godotengine.godot.plugin.SignalInfo
@@ -62,7 +64,16 @@ class PoingGodotAdMob(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(
     @UsedByGodot
     fun initialize() {
         Thread {
-            MobileAds.initialize(aActivity) { initializationStatus ->
+            val appId = runCatching {
+                val applicationInfo = aActivity.packageManager.getApplicationInfo(aActivity.packageName, PackageManager.GET_META_DATA)
+                applicationInfo.metaData?.getString("com.google.android.gms.ads.APPLICATION_ID")
+            }.getOrNull()
+
+            if (appId.isNullOrEmpty()) {
+                throw IllegalStateException("AdMob App ID (com.google.android.gms.ads.APPLICATION_ID) is missing or empty in AndroidManifest.xml. Please add it to your project export settings.")
+            }
+            val config = InitializationConfig.Builder(appId).build()
+            MobileAds.initialize(aActivity, config) { initializationStatus ->
                 val initializationStatusDictionary = initializationStatus.convertToGodotDictionary()
                 emitSignal("on_initialization_complete", initializationStatusDictionary)
             }
@@ -71,41 +82,35 @@ class PoingGodotAdMob(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(
 
     @UsedByGodot
     fun set_request_configuration(requestConfigurationDictionary: Dictionary, testDeviceIds : Array<String>) {
-        val maxAdContentRating = requestConfigurationDictionary["max_ad_content_rating"] as String
-        val tagForChildDirectedTreatment = requestConfigurationDictionary.getInt("tag_for_child_directed_treatment", RequestConfiguration.TAG_FOR_CHILD_DIRECTED_TREATMENT_UNSPECIFIED)
-        val tagForUnderAgeOfConsent = requestConfigurationDictionary.getInt("tag_for_under_age_of_consent", RequestConfiguration.TAG_FOR_UNDER_AGE_OF_CONSENT_UNSPECIFIED)
-
-        val requestConfiguration = RequestConfiguration.Builder()
-            .setMaxAdContentRating(maxAdContentRating)
-            .setTagForChildDirectedTreatment(tagForChildDirectedTreatment)
-            .setTagForUnderAgeOfConsent(tagForUnderAgeOfConsent)
-            .setTestDeviceIds(testDeviceIds.toList())
-            .build()
-
+        val requestConfiguration = requestConfigurationDictionary.convertToRequestConfiguration(testDeviceIds)
         MobileAds.setRequestConfiguration(requestConfiguration)
     }
 
     @UsedByGodot
     fun get_initialization_status(): Dictionary {
-        return MobileAds.getInitializationStatus()!!.convertToGodotDictionary()
+        return MobileAds.getInitializationStatus().convertToGodotDictionary()
     }
 
     @UsedByGodot
     fun set_app_volume(volume: Float) {
-        MobileAds.setAppVolume(clampAppVolume(volume))
+        MobileAds.setUserControlledAppVolume(clampAppVolume(volume))
     }
 
     @UsedByGodot
     fun set_app_muted(muted: Boolean) {
-        MobileAds.setAppMuted(muted)
+        MobileAds.setUserMutedApp(muted)
     }
 
+    @Suppress("DEPRECATION")
     @UsedByGodot
     fun set_gad_has_consent_for_cookies(enabled: Boolean) {
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(aActivity)
-        sharedPrefs.edit().putInt("gad_has_consent_for_cookies", if (enabled) 1 else 0).apply()
+        sharedPrefs.edit {
+            putInt("gad_has_consent_for_cookies", if (enabled) 1 else 0)
+        }
     }
 
+    @Suppress("DEPRECATION")
     @UsedByGodot
     fun get_gad_has_consent_for_cookies(): Boolean {
         val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(aActivity)
@@ -125,12 +130,12 @@ class PoingGodotAdMob(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(
     @UsedByGodot
     fun open_ad_inspector() {
         aActivity.runOnUiThread {
-            MobileAds.openAdInspector(aActivity) { adInspectorError ->
+            MobileAds.openAdInspector { adInspectorError ->
                 val resultDictionary = Dictionary()
                 if (adInspectorError != null) {
                     resultDictionary["code"] = adInspectorError.code
-                    resultDictionary["message"] = adInspectorError.message ?: ""
-                    resultDictionary["domain"] = adInspectorError.domain ?: ""
+                    resultDictionary["message"] = adInspectorError.message
+                    resultDictionary["domain"] = ""
                 }
                 emitSignal("on_ad_inspector_closed", resultDictionary)
             }

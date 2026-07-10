@@ -25,11 +25,12 @@ package com.poingstudios.godot.admob.ads
 
 import android.app.Activity
 import android.util.ArraySet
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.rewarded.RewardedAd
-import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
+import com.google.android.libraries.ads.mobile.sdk.common.AdLoadCallback
+import com.google.android.libraries.ads.mobile.sdk.common.AdValue
+import com.google.android.libraries.ads.mobile.sdk.common.FullScreenContentError
+import com.google.android.libraries.ads.mobile.sdk.common.LoadAdError
+import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardedAd
+import com.google.android.libraries.ads.mobile.sdk.rewarded.RewardedAdEventCallback
 import com.poingstudios.godot.admob.ads.converters.convertToAdRequest
 import com.poingstudios.godot.admob.ads.converters.convertToGodotDictionary
 import com.poingstudios.godot.admob.ads.converters.convertToServerSideVerificationOptions
@@ -81,20 +82,15 @@ class PoingGodotAdMobRewardedAd(godot: Godot?) : org.godotengine.godot.plugin.Go
     fun load(adUnitId : String, adRequestDictionary : Dictionary, keywords : Array<String>, uid: Int){
         aActivity.runOnUiThread{
             Logger.debug("loading rewarded ad")
-            val adRequest = adRequestDictionary.convertToAdRequest(keywords)
+            val adRequest = adRequestDictionary.convertToAdRequest(keywords, adUnitId)
 
-            RewardedAd.load(aActivity,
-                adUnitId, adRequest, object : RewardedAdLoadCallback() {
-                    override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                        emitSignal("on_rewarded_ad_failed_to_load", uid, loadAdError.convertToGodotDictionary())
+            RewardedAd.load(adRequest, object : AdLoadCallback<RewardedAd> {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        emitSignal("on_rewarded_ad_failed_to_load", uid, adError.convertToGodotDictionary())
                     }
-                    override fun onAdLoaded(rewardedAd: RewardedAd) {
-                        rewardedAds[uid] = rewardedAd
-                        rewardedAd.setOnPaidEventListener { adValue ->
-                            val adValueDictionary = adValue.convertToGodotDictionary()
-                            emitSignal("on_rewarded_ad_paid", uid, adValueDictionary)
-                        }
-                        rewardedAd.fullScreenContentCallback = object: FullScreenContentCallback() {
+                    override fun onAdLoaded(ad: RewardedAd) {
+                        rewardedAds[uid] = ad
+                        ad.adEventCallback = object: RewardedAdEventCallback {
                             override fun onAdClicked() {
                                 Logger.debug("Ad was clicked.")
                                 emitSignal("on_rewarded_ad_clicked", uid)
@@ -106,10 +102,10 @@ class PoingGodotAdMobRewardedAd(godot: Godot?) : org.godotengine.godot.plugin.Go
                                 emitSignal("on_rewarded_ad_dismissed_full_screen_content", uid)
                             }
 
-                            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                            override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
                                 Logger.debug("Ad failed to show fullscreen content.")
                                 rewardedAds[uid] = null
-                                emitSignal("on_rewarded_ad_failed_to_show_full_screen_content", uid, adError.convertToGodotDictionary())
+                                emitSignal("on_rewarded_ad_failed_to_show_full_screen_content", uid, fullScreenContentError.convertToGodotDictionary())
                             }
 
                             override fun onAdImpression() {
@@ -120,6 +116,10 @@ class PoingGodotAdMobRewardedAd(godot: Godot?) : org.godotengine.godot.plugin.Go
                             override fun onAdShowedFullScreenContent() {
                                 Logger.debug("Ad showed fullscreen content.")
                                 emitSignal("on_rewarded_ad_showed_full_screen_content", uid)
+                            }
+
+                            override fun onAdPaid(value: AdValue) {
+                                emitSignal("on_rewarded_ad_paid", uid, value.convertToGodotDictionary())
                             }
                         }
                         emitSignal("on_rewarded_ad_loaded", uid)
@@ -156,7 +156,7 @@ class PoingGodotAdMobRewardedAd(godot: Godot?) : org.godotengine.godot.plugin.Go
 
     @UsedByGodot
     fun get_response_info(uid: Int) : Dictionary {
-        return rewardedAds[uid]?.responseInfo?.convertToGodotDictionary() ?: Dictionary()
+        return rewardedAds[uid]?.getResponseInfo()?.convertToGodotDictionary() ?: Dictionary()
     }
 
 }

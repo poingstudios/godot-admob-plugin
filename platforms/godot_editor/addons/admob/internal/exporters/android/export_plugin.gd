@@ -126,3 +126,36 @@ func _get_android_manifest_application_element_contents(
 	)
 
 	return "\n".join(content)
+
+
+func _export_begin(_features: PackedStringArray, _is_debug: bool, _path: String, _flags: int) -> void:
+	_patch_android_gradle_file()
+
+
+func _patch_android_gradle_file() -> void:
+	var gradle_path := "res://android/build/app/build.gradle"
+	if not FileAccess.file_exists(gradle_path):
+		gradle_path = "res://android/build/build.gradle"
+		if not FileAccess.file_exists(gradle_path):
+			return
+
+	var content := FileAccess.get_file_as_string(gradle_path)
+	if content.is_empty():
+		return
+
+	if 'exclude group: "com.google.android.gms", module: "play-services-ads"' in content:
+		return
+
+	var patch := """
+// Added by Poing Godot AdMob Plugin to support GMA Next-Gen SDK
+configurations.configureEach {
+    exclude group: "com.google.android.gms", module: "play-services-ads"
+    exclude group: "com.google.android.gms", module: "play-services-ads-lite"
+}
+"""
+	content += patch
+
+	var file := FileAccess.open(gradle_path, FileAccess.WRITE)
+	if file:
+		file.store_string(content)
+		file.close()

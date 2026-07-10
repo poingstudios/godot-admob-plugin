@@ -20,15 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@file:Suppress("FunctionName")
 package com.poingstudios.godot.admob.ads
 
 import android.app.Activity
 import android.util.ArraySet
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.appopen.AppOpenAd
-import com.google.android.gms.ads.appopen.AppOpenAd.AppOpenAdLoadCallback
+import com.google.android.libraries.ads.mobile.sdk.appopen.AppOpenAd
+import com.google.android.libraries.ads.mobile.sdk.appopen.AppOpenAdEventCallback
+import com.google.android.libraries.ads.mobile.sdk.common.AdLoadCallback
+import com.google.android.libraries.ads.mobile.sdk.common.AdValue
+import com.google.android.libraries.ads.mobile.sdk.common.FullScreenContentError
+import com.google.android.libraries.ads.mobile.sdk.common.LoadAdError
 import com.poingstudios.godot.admob.ads.converters.convertToAdRequest
 import com.poingstudios.godot.admob.ads.converters.convertToGodotDictionary
 import com.poingstudios.godot.admob.core.utils.Logger
@@ -41,6 +43,7 @@ import org.godotengine.godot.plugin.UsedByGodot
 class PoingGodotAdMobAppOpenAd(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(godot) {
     private lateinit var aActivity: Activity
     private val appOpenAds = mutableListOf<AppOpenAd?>()
+    private val adUnitIds = mutableMapOf<Int, String>()
 
     override fun getPluginName(): String {
         return this::class.simpleName.toString()
@@ -74,28 +77,25 @@ class PoingGodotAdMobAppOpenAd(godot: Godot?) : org.godotengine.godot.plugin.God
 
     @UsedByGodot
     fun load(adUnitId : String, adRequestDictionary : Dictionary, keywords : Array<String>, uid: Int){
+        adUnitIds[uid] = adUnitId
         aActivity.runOnUiThread {
             Logger.debug("loading app open ad")
-            val adRequest = adRequestDictionary.convertToAdRequest(keywords)
+            val adRequest = adRequestDictionary.convertToAdRequest(keywords, adUnitId)
 
-            AppOpenAd.load(aActivity, adUnitId, adRequest, object : AppOpenAdLoadCallback() {
+            AppOpenAd.load(adRequest, object : AdLoadCallback<AppOpenAd> {
                 override fun onAdLoaded(ad: AppOpenAd) {
                     appOpenAds[uid] = ad
-                    ad.setOnPaidEventListener { adValue ->
-                        val adValueDictionary = adValue.convertToGodotDictionary()
-                        emitSignal("on_app_open_ad_paid", uid, adValueDictionary)
-                    }
-                    ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+                    ad.adEventCallback = object : AppOpenAdEventCallback {
                         override fun onAdDismissedFullScreenContent() {
                             Logger.debug("Ad dismissed fullscreen content.")
                             appOpenAds[uid] = null
                             emitSignal("on_app_open_ad_dismissed_full_screen_content", uid)
                         }
 
-                        override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                        override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
                             Logger.debug("Ad failed to show fullscreen content.")
                             appOpenAds[uid] = null
-                            emitSignal("on_app_open_ad_failed_to_show_full_screen_content", uid, adError.convertToGodotDictionary())
+                            emitSignal("on_app_open_ad_failed_to_show_full_screen_content", uid, fullScreenContentError.convertToGodotDictionary())
                         }
 
                         override fun onAdShowedFullScreenContent() {
@@ -112,13 +112,17 @@ class PoingGodotAdMobAppOpenAd(godot: Godot?) : org.godotengine.godot.plugin.God
                             Logger.debug("Ad recorded an impression.")
                             emitSignal("on_app_open_ad_impression", uid)
                         }
+
+                        override fun onAdPaid(value: AdValue) {
+                            emitSignal("on_app_open_ad_paid", uid, value.convertToGodotDictionary())
+                        }
                     }
                     emitSignal("on_app_open_ad_loaded", uid)
                 }
 
-                override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                    Logger.debug("Ad failed to load: ${loadAdError.message}")
-                    emitSignal("on_app_open_ad_failed_to_load", uid, loadAdError.convertToGodotDictionary())
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Logger.debug("Ad failed to load: ${adError.message}")
+                    emitSignal("on_app_open_ad_failed_to_load", uid, adError.convertToGodotDictionary())
                 }
             })
         }
@@ -135,12 +139,12 @@ class PoingGodotAdMobAppOpenAd(godot: Godot?) : org.godotengine.godot.plugin.God
 
     @UsedByGodot
     fun get_ad_unit_id(uid: Int) : String {
-        return appOpenAds[uid]?.adUnitId ?: ""
+        return adUnitIds[uid] ?: ""
     }
 
     @UsedByGodot
     fun get_response_info(uid: Int) : Dictionary {
-        return appOpenAds[uid]?.responseInfo?.convertToGodotDictionary() ?: Dictionary()
+        return appOpenAds[uid]?.getResponseInfo()?.convertToGodotDictionary() ?: Dictionary()
     }
 
     @UsedByGodot

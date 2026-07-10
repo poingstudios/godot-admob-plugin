@@ -20,15 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+@file:Suppress("FunctionName")
 package com.poingstudios.godot.admob.ads
 
 import android.app.Activity
 import android.util.ArraySet
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.interstitial.InterstitialAd
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
+import com.google.android.libraries.ads.mobile.sdk.common.AdLoadCallback
+import com.google.android.libraries.ads.mobile.sdk.common.AdValue
+import com.google.android.libraries.ads.mobile.sdk.common.FullScreenContentError
+import com.google.android.libraries.ads.mobile.sdk.common.LoadAdError
+import com.google.android.libraries.ads.mobile.sdk.interstitial.InterstitialAd
+import com.google.android.libraries.ads.mobile.sdk.interstitial.InterstitialAdEventCallback
 import com.poingstudios.godot.admob.ads.converters.convertToAdRequest
 import com.poingstudios.godot.admob.ads.converters.convertToGodotDictionary
 import com.poingstudios.godot.admob.core.utils.Logger
@@ -77,20 +79,15 @@ class PoingGodotAdMobInterstitialAd(godot: Godot?) : org.godotengine.godot.plugi
     fun load(adUnitId : String, adRequestDictionary : Dictionary, keywords : Array<String>, uid: Int){
         aActivity.runOnUiThread{
             Logger.debug("loading interstitial ad")
-            val adRequest = adRequestDictionary.convertToAdRequest(keywords)
+            val adRequest = adRequestDictionary.convertToAdRequest(keywords, adUnitId)
 
-            InterstitialAd.load(aActivity,
-                adUnitId, adRequest, object : InterstitialAdLoadCallback() {
-                    override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                        emitSignal("on_interstitial_ad_failed_to_load", uid, loadAdError.convertToGodotDictionary())
+            InterstitialAd.load(adRequest, object : AdLoadCallback<InterstitialAd> {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        emitSignal("on_interstitial_ad_failed_to_load", uid, adError.convertToGodotDictionary())
                     }
-                    override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                        interstitials[uid] = interstitialAd
-                        interstitialAd.setOnPaidEventListener { adValue ->
-                            val adValueDictionary = adValue.convertToGodotDictionary()
-                            emitSignal("on_interstitial_ad_paid", uid, adValueDictionary)
-                        }
-                        interstitialAd.fullScreenContentCallback = object: FullScreenContentCallback() {
+                    override fun onAdLoaded(ad: InterstitialAd) {
+                        interstitials[uid] = ad
+                        ad.adEventCallback = object: InterstitialAdEventCallback {
                             override fun onAdClicked() {
                                 Logger.debug("Ad was clicked.")
                                 emitSignal("on_interstitial_ad_clicked", uid)
@@ -102,10 +99,10 @@ class PoingGodotAdMobInterstitialAd(godot: Godot?) : org.godotengine.godot.plugi
                                 emitSignal("on_interstitial_ad_dismissed_full_screen_content", uid)
                             }
 
-                            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                            override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
                                 Logger.debug("Ad failed to show fullscreen content.")
                                 interstitials[uid] = null
-                                emitSignal("on_interstitial_ad_failed_to_show_full_screen_content", uid, adError.convertToGodotDictionary())
+                                emitSignal("on_interstitial_ad_failed_to_show_full_screen_content", uid, fullScreenContentError.convertToGodotDictionary())
                             }
 
                             override fun onAdImpression() {
@@ -116,6 +113,10 @@ class PoingGodotAdMobInterstitialAd(godot: Godot?) : org.godotengine.godot.plugi
                             override fun onAdShowedFullScreenContent() {
                                 Logger.debug("Ad showed fullscreen content.")
                                 emitSignal("on_interstitial_ad_showed_full_screen_content", uid)
+                            }
+
+                            override fun onAdPaid(value: AdValue) {
+                                emitSignal("on_interstitial_ad_paid", uid, value.convertToGodotDictionary())
                             }
                         }
                         emitSignal("on_interstitial_ad_loaded", uid)
@@ -141,7 +142,7 @@ class PoingGodotAdMobInterstitialAd(godot: Godot?) : org.godotengine.godot.plugi
 
     @UsedByGodot
     fun get_response_info(uid: Int) : Dictionary {
-        return interstitials[uid]?.responseInfo?.convertToGodotDictionary() ?: Dictionary()
+        return interstitials[uid]?.getResponseInfo()?.convertToGodotDictionary() ?: Dictionary()
     }
 
 }

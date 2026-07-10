@@ -33,9 +33,9 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.google.android.gms.ads.nativead.MediaView
-import com.google.android.gms.ads.nativead.NativeAd
-import com.google.android.gms.ads.nativead.NativeAdView
+import com.google.android.libraries.ads.mobile.sdk.nativead.MediaView
+import com.google.android.libraries.ads.mobile.sdk.nativead.NativeAd
+import com.google.android.libraries.ads.mobile.sdk.nativead.NativeAdView
 import com.poingstudios.godot.admob.ads.R
 
 class TemplateView @JvmOverloads constructor(
@@ -150,7 +150,6 @@ class TemplateView @JvmOverloads constructor(
 
         nativeAdView?.callToActionView = callToActionView
         nativeAdView?.headlineView = primaryView
-        nativeAdView?.mediaView = mediaView
         secondaryView?.visibility = VISIBLE
 
         var secondaryText = ""
@@ -189,7 +188,7 @@ class TemplateView @JvmOverloads constructor(
             nativeAdView?.bodyView = tertiaryView
         }
 
-        nativeAdView?.setNativeAd(nativeAd)
+        nativeAdView?.registerNativeAd(nativeAd, mediaView)
     }
 
     fun destroyNativeAd() {
@@ -208,13 +207,5 @@ class TemplateView @JvmOverloads constructor(
         iconView = findViewById(R.id.ad_icon)
         mediaView = findViewById(R.id.media_view)
         backgroundLayout = findViewById(R.id.ad_background)
-    }
-
-    fun pause() {
-        // Additional pause logic if necessary
-    }
-
-    fun resume() {
-        // Additional resume logic if necessary
     }
 }

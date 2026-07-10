@@ -24,7 +24,7 @@ extends EditorExportPlugin
 
 const PLUGIN_NAME := "ads"
 var _dependency_library := [
-	"com.google.android.gms:play-services-ads:25.1.0",
+	"com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.2.1",
 	"androidx.constraintlayout:constraintlayout:2.2.0"
 ]
 

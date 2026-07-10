@@ -38,6 +38,7 @@ void PoingGodotAdMobNativeOverlayAd::_bind_methods() {
     ClassDB::bind_method(D_METHOD("update_custom_position", "uid", "x", "y"), &PoingGodotAdMobNativeOverlayAd::update_custom_position);
     ClassDB::bind_method(D_METHOD("get_width_in_pixels", "uid"), &PoingGodotAdMobNativeOverlayAd::get_width_in_pixels);
     ClassDB::bind_method(D_METHOD("get_height_in_pixels", "uid"), &PoingGodotAdMobNativeOverlayAd::get_height_in_pixels);
+    ClassDB::bind_method(D_METHOD("get_response_info", "uid"), &PoingGodotAdMobNativeOverlayAd::get_response_info);
 
     ADD_SIGNAL(MethodInfo("on_native_overlay_ad_loaded", PropertyInfo(Variant::INT, "uid")));
     ADD_SIGNAL(MethodInfo("on_native_overlay_ad_failed_to_load", PropertyInfo(Variant::INT, "uid"), PropertyInfo(Variant::DICTIONARY, "error")));

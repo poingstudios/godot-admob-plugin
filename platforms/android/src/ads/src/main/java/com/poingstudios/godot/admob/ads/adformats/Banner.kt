@@ -1,17 +1,17 @@
 // MIT License
-
+//
 // Copyright (c) 2023-present Poing Studios
-
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -28,15 +28,16 @@ import android.view.Gravity
 import android.view.View.OnLayoutChangeListener
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import com.google.ads.mediation.admob.AdMobAdapter
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.LoadAdError
+import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
+import com.google.android.libraries.ads.mobile.sdk.banner.AdView
+import com.google.android.libraries.ads.mobile.sdk.banner.BannerAd
+import com.google.android.libraries.ads.mobile.sdk.banner.BannerAdEventCallback
+import com.google.android.libraries.ads.mobile.sdk.common.AdLoadCallback
+import com.google.android.libraries.ads.mobile.sdk.common.AdValue
+import com.google.android.libraries.ads.mobile.sdk.common.LoadAdError
 import com.poingstudios.godot.admob.ads.converters.convertToAdSize
+import com.poingstudios.godot.admob.ads.converters.convertToBannerAdRequest
 import com.poingstudios.godot.admob.ads.converters.convertToGodotDictionary
-import com.poingstudios.godot.admob.core.utils.Logger
 import com.poingstudios.godot.admob.core.utils.getInt
 import org.godotengine.godot.Dictionary
 import org.godotengine.godot.Godot
@@ -56,6 +57,7 @@ class Banner(
     private lateinit var mAdView: AdView
     private var mAdSize: AdSize = (adViewDictionary["ad_size"] as Dictionary).convertToAdSize(activity)
     private var isHidden: Boolean = false
+    private var mAdUnitId: String = ""
 
     private fun extractPosition(dict: Dictionary): Position {
         val value =
@@ -88,48 +90,9 @@ class Banner(
     }
 
     init {
-        val adUnitId = adViewDictionary["ad_unit_id"] as String
+        mAdUnitId = adViewDictionary["ad_unit_id"] as String
         activity.runOnUiThread {
             mAdView = AdView(activity)
-            mAdView.adUnitId = adUnitId
-            mAdView.setAdSize(mAdSize)
-            mAdView.adListener =
-                    object : AdListener() {
-                        override fun onAdClicked() {
-                            emitSignal(godot, pluginName, SignalInfos.onAdClicked, uid)
-                        }
-
-                        override fun onAdClosed() {
-                            emitSignal(godot, pluginName, SignalInfos.onAdClosed, uid)
-                        }
-
-                        override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                            emitSignal(
-                                    godot,
-                                    pluginName,
-                                    SignalInfos.onAdFailedToLoad,
-                                    uid,
-                                    loadAdError.convertToGodotDictionary()
-                            )
-                        }
-
-                        override fun onAdImpression() {
-                            emitSignal(godot, pluginName, SignalInfos.onAdImpression, uid)
-                        }
-
-                        override fun onAdLoaded() {
-                            emitSignal(godot, pluginName, SignalInfos.onAdLoaded, uid)
-                        }
-
-                        override fun onAdOpened() {
-                            emitSignal(godot, pluginName, SignalInfos.onAdOpened, uid)
-                        }
-                    }
-
-            mAdView.setOnPaidEventListener { adValue ->
-                val adValueDictionary = adValue.convertToGodotDictionary()
-                emitSignal(godot, pluginName, SignalInfos.onAdPaid, uid, adValueDictionary)
-            }
 
             godotLayout.addView(mAdView)
             godotLayout.addOnLayoutChangeListener(mLayoutChangeListener)
@@ -204,9 +167,44 @@ class Banner(
         activity.runOnUiThread { updatePosition() }
     }
 
-    fun loadAd(adRequest: AdRequest) {
-        activity.runOnUiThread { mAdView.loadAd(adRequest) }
+    fun loadAd(adRequestDictionary: Dictionary, keywords: Array<String>) {
+        activity.runOnUiThread {
+            val request = adRequestDictionary.convertToBannerAdRequest(keywords, mAdUnitId, mAdSize)
+            mAdView.loadAd(request, object : AdLoadCallback<BannerAd> {
+                override fun onAdLoaded(ad: BannerAd) {
+                    mAdView.registerBannerAd(ad, activity)
+
+                    ad.adEventCallback = object : BannerAdEventCallback {
+                        override fun onAdClicked() {
+                            emitSignal(godot, pluginName, SignalInfos.onAdClicked, uid)
+                        }
+
+                        override fun onAdImpression() {
+                            emitSignal(godot, pluginName, SignalInfos.onAdImpression, uid)
+                        }
+
+                        override fun onAdPaid(value: AdValue) {
+                            val adValueDictionary = value.convertToGodotDictionary()
+                            emitSignal(godot, pluginName, SignalInfos.onAdPaid, uid, adValueDictionary)
+                        }
+                    }
+
+                    emitSignal(godot, pluginName, SignalInfos.onAdLoaded, uid)
+                }
+
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    emitSignal(
+                            godot,
+                            pluginName,
+                            SignalInfos.onAdFailedToLoad,
+                            uid,
+                            adError.convertToGodotDictionary()
+                    )
+                }
+            })
+        }
     }
+
     fun destroy() {
         activity.runOnUiThread {
             (mAdView.parent as? ViewGroup)?.removeView(mAdView)
@@ -217,7 +215,6 @@ class Banner(
     fun hide() {
         activity.runOnUiThread {
             mAdView.visibility = FrameLayout.GONE
-            mAdView.pause()
             isHidden = true
         }
     }
@@ -225,7 +222,6 @@ class Banner(
     fun show() {
         activity.runOnUiThread {
             mAdView.visibility = FrameLayout.VISIBLE
-            mAdView.resume()
             isHidden = false
             updatePosition()
         }
@@ -247,11 +243,13 @@ class Banner(
         return mAdSize.getHeightInPixels(activity)
     }
 
-    fun getResponseInfo(): Dictionary {
-        return mAdView.responseInfo?.convertToGodotDictionary() ?: Dictionary()
+    fun getBannerAdResponseInfo(): Dictionary {
+        val bannerAd = mAdView.getBannerAd()
+        return bannerAd?.getResponseInfo()?.convertToGodotDictionary() ?: Dictionary()
     }
 
-    fun isCollapsible(): Boolean {
-        return mAdView.isCollapsible
+    fun isBannerAdCollapsible(): Boolean {
+        val bannerAd = mAdView.getBannerAd()
+        return bannerAd?.isCollapsible() ?: false
     }
 }

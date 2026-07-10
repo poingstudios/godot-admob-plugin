@@ -72,12 +72,12 @@ build_android() {
     
     if [ "$CLEAN" = true ]; then
         echo ">>> Cleaning Android build and export directories..."
-        ./gradlew clean || exit 1
+        ./gradlew clean --no-configuration-cache || exit 1
         rm -rf "$DEST/addons/admob/android/bin/"*
     fi
     
-    ./gradlew build -PgodotVersion="$GODOT_VERSION" && \
-    ./gradlew exportFiles -PpluginExportPath="$DEST/addons/admob/android/bin" || exit 1
+    ./gradlew build -PgodotVersion="$GODOT_VERSION" --no-configuration-cache && \
+    ./gradlew exportFiles -PpluginExportPath="$DEST/addons/admob/android/bin" --no-configuration-cache || exit 1
 }
 
 build_ios() {

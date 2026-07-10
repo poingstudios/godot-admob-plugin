@@ -26,19 +26,18 @@ import android.graphics.Rect
 import android.view.Gravity
 import android.view.View.OnLayoutChangeListener
 import android.widget.FrameLayout
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.AdLoader
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.nativead.NativeAd
-import com.google.android.gms.ads.nativead.NativeAdOptions
-import com.google.android.gms.ads.VideoOptions
+import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
+import com.google.android.libraries.ads.mobile.sdk.common.AdValue
+import com.google.android.libraries.ads.mobile.sdk.common.LoadAdError
+import com.google.android.libraries.ads.mobile.sdk.nativead.NativeAd
+import com.google.android.libraries.ads.mobile.sdk.nativead.NativeAdEventCallback
+import com.google.android.libraries.ads.mobile.sdk.nativead.NativeAdLoader
+import com.google.android.libraries.ads.mobile.sdk.nativead.NativeAdLoaderCallback
 import com.poingstudios.godot.admob.ads.converters.convertToGodotDictionary
+import com.poingstudios.godot.admob.ads.converters.convertToNativeAdRequest
 import com.poingstudios.godot.admob.ads.converters.convertToNativeTemplateStyle
 import com.poingstudios.godot.admob.ads.nativetemplates.TemplateView
 import com.poingstudios.godot.admob.core.utils.Logger
-import com.poingstudios.godot.admob.core.utils.getBool
-import com.poingstudios.godot.admob.core.utils.getDictionary
 import com.poingstudios.godot.admob.core.utils.getInt
 import org.godotengine.godot.Dictionary
 import org.godotengine.godot.Godot
@@ -52,27 +51,21 @@ class NativeOverlayAd(
         godot: Godot,
         private val pluginName: String
 ) : AdFormatsBase(uid, activity, godot) {
-
     private var mNativeAd: NativeAd? = null
     private var mTemplateView: TemplateView? = null
     private var isHidden: Boolean = false
     private var mPosition: Position = Position(null, 0, 0)
-    private var mAdSize: com.google.android.gms.ads.AdSize? = null
+    private var mAdSize: AdSize? = null
     private var safeArea: Rect = getSafeArea()
 
     object SignalInfos {
+        val onAdClicked = SignalInfo("on_ad_clicked", Integer::class.java)
+        val onAdClosed = SignalInfo("on_ad_closed", Integer::class.java)
+        val onAdImpression = SignalInfo("on_ad_impression", Integer::class.java)
+        val onAdOpened = SignalInfo("on_ad_opened", Integer::class.java)
+        val onAdPaid = SignalInfo("on_ad_view_paid", Integer::class.java, Dictionary::class.java)
+        val onNativeOverlayAdFailedToLoad = SignalInfo("on_native_overlay_ad_failed_to_load", Integer::class.java, Dictionary::class.java)
         val onNativeOverlayAdLoaded = SignalInfo("on_native_overlay_ad_loaded", Integer::class.java)
-        val onNativeOverlayAdFailedToLoad =
-                SignalInfo(
-                        "on_native_overlay_ad_failed_to_load",
-                        Integer::class.java,
-                        Dictionary::class.java
-                )
-        val onAdClicked = SignalInfo("on_native_overlay_ad_clicked", Integer::class.java)
-        val onAdClosed = SignalInfo("on_native_overlay_ad_closed", Integer::class.java)
-        val onAdImpression = SignalInfo("on_native_overlay_ad_impression", Integer::class.java)
-        val onAdOpened = SignalInfo("on_native_overlay_ad_opened", Integer::class.java)
-        val onAdPaid = SignalInfo("on_native_overlay_ad_paid", Integer::class.java, Dictionary::class.java)
     }
 
     private val mLayoutChangeListener = OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
@@ -84,81 +77,47 @@ class NativeOverlayAd(
         }
     }
 
-    fun load(adUnitId: String, adRequest: AdRequest, optionsDict: Dictionary) {
+    fun load(adUnitId: String, requestDict: Dictionary, keywords: Array<String>, optionsDict: Dictionary) {
         activity.runOnUiThread {
-            val builder = AdLoader.Builder(activity, adUnitId)
+            val request = requestDict.convertToNativeAdRequest(keywords, adUnitId, optionsDict)
 
-            val optionsBuilder = NativeAdOptions.Builder()
-            val mediaAspectRatio = optionsDict.getInt("media_aspect_ratio")
-            if (mediaAspectRatio != 0) { // 0 is UNKNOWN
-                optionsBuilder.setMediaAspectRatio(mediaAspectRatio)
-            }
-            val adChoicesPlacement = optionsDict.getInt("ad_choices_placement")
-            optionsBuilder.setAdChoicesPlacement(adChoicesPlacement)
-
-            val videoOptionsDict = optionsDict.getDictionary("video_options")
-            val videoOptions = VideoOptions.Builder()
-                    .setStartMuted(videoOptionsDict.getBool("start_muted", true))
-                    .setCustomControlsRequested(videoOptionsDict.getBool("custom_controls_requested", false))
-                    .setClickToExpandRequested(videoOptionsDict.getBool("click_to_expand_requested", false))
-                    .build()
-            optionsBuilder.setVideoOptions(videoOptions)
-
-            builder.withNativeAdOptions(optionsBuilder.build())
-            builder.forNativeAd { nativeAd ->
-                if (mNativeAd != null) {
-                    mNativeAd?.destroy()
-                }
-                mNativeAd = nativeAd
-                nativeAd.setOnPaidEventListener { adValue ->
-                    val adValueDictionary = adValue.convertToGodotDictionary()
-                    emitSignal(godot, pluginName, SignalInfos.onAdPaid, uid, adValueDictionary)
-                }
-            }
-
-            builder.withAdListener(
-                    object : AdListener() {
-                        override fun onAdFailedToLoad(adError: LoadAdError) {
-                            emitSignal(
-                                    godot,
-                                    pluginName,
-                                    SignalInfos.onNativeOverlayAdFailedToLoad,
-                                    uid,
-                                    adError.convertToGodotDictionary()
-                            )
-                        }
-
+            NativeAdLoader.load(request, object : NativeAdLoaderCallback {
+                override fun onNativeAdLoaded(nativeAd: NativeAd) {
+                    if (mNativeAd != null) {
+                        mNativeAd?.destroy()
+                    }
+                    mNativeAd = nativeAd
+                    mNativeAd?.adEventCallback = object : NativeAdEventCallback {
                         override fun onAdClicked() {
                             emitSignal(godot, pluginName, SignalInfos.onAdClicked, uid)
-                        }
-
-                        override fun onAdClosed() {
-                            emitSignal(godot, pluginName, SignalInfos.onAdClosed, uid)
                         }
 
                         override fun onAdImpression() {
                             emitSignal(godot, pluginName, SignalInfos.onAdImpression, uid)
                         }
 
-                        override fun onAdOpened() {
-                            emitSignal(godot, pluginName, SignalInfos.onAdOpened, uid)
-                        }
-
-                        override fun onAdLoaded() {
-                            emitSignal(godot, pluginName, SignalInfos.onNativeOverlayAdLoaded, uid)
+                        override fun onAdPaid(value: AdValue) {
+                            emitSignal(godot, pluginName, SignalInfos.onAdPaid, uid, value.convertToGodotDictionary())
                         }
                     }
-            )
+                    emitSignal(godot, pluginName, SignalInfos.onNativeOverlayAdLoaded, uid)
+                }
 
-            val adLoader = builder.build()
-            adLoader.loadAd(adRequest)
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    emitSignal(godot, pluginName, SignalInfos.onNativeOverlayAdFailedToLoad, uid, adError.convertToGodotDictionary())
+                }
+
+                override fun onCustomNativeAdLoaded(customNativeAd: com.google.android.libraries.ads.mobile.sdk.nativead.CustomNativeAd) {
+                    Logger.debug("CustomNativeAd loaded - unsupported")
+                }
+            })
         }
     }
 
     fun renderTemplate(styleDict: Dictionary, position: Int, adSizeDict: Dictionary?) {
         mPosition = Position(position, 0, 0)
         mAdSize = if (adSizeDict != null && !adSizeDict.isEmpty()) {
-            com.google.android.gms.ads.AdSize(adSizeDict.getInt("width"), adSizeDict.getInt("height"))
+            AdSize(adSizeDict.getInt("width"), adSizeDict.getInt("height"))
         } else {
             null
         }
@@ -168,13 +127,14 @@ class NativeOverlayAd(
     fun renderTemplateCustomPosition(styleDict: Dictionary, x: Int, y: Int, adSizeDict: Dictionary?) {
         mPosition = Position(null, x, y)
         mAdSize = if (adSizeDict != null && !adSizeDict.isEmpty()) {
-            com.google.android.gms.ads.AdSize(adSizeDict.getInt("width"), adSizeDict.getInt("height"))
+            AdSize(adSizeDict.getInt("width"), adSizeDict.getInt("height"))
         } else {
             null
         }
         internalRenderTemplate(styleDict)
     }
 
+    @Suppress("DiscouragedApi")
     private fun internalRenderTemplate(styleDict: Dictionary) {
         activity.runOnUiThread {
             if (mNativeAd == null) return@runOnUiThread
@@ -297,6 +257,6 @@ class NativeOverlayAd(
     fun getHeightInPixels() = getHeight()
 
     fun getResponseInfo(): Dictionary {
-        return mNativeAd?.responseInfo?.convertToGodotDictionary() ?: Dictionary()
+        return mNativeAd?.getResponseInfo()?.convertToGodotDictionary() ?: Dictionary()
     }
 }

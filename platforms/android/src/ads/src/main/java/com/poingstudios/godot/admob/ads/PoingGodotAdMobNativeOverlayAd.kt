@@ -28,7 +28,6 @@ import android.util.ArraySet
 import android.view.View
 import android.widget.FrameLayout
 import com.poingstudios.godot.admob.ads.adformats.NativeOverlayAd
-import com.poingstudios.godot.admob.ads.converters.convertToAdRequest
 import org.godotengine.godot.Dictionary
 import org.godotengine.godot.Godot
 import org.godotengine.godot.plugin.SignalInfo
@@ -71,11 +70,10 @@ class PoingGodotAdMobNativeOverlayAd(godot: Godot?) : org.godotengine.godot.plug
 
     @UsedByGodot
     fun load(adUnitId: String, adRequestDictionary: Dictionary, keywords: Array<String>, optionsDictionary: Dictionary, uid: Int){
-        val adRequest = adRequestDictionary.convertToAdRequest(keywords)
         if (nativeAds[uid] == null) {
             nativeAds[uid] = NativeOverlayAd(uid, aActivity, aGodotLayout, godot, pluginName)
         }
-        nativeAds[uid]?.load(adUnitId, adRequest, optionsDictionary)
+        nativeAds[uid]?.load(adUnitId, adRequestDictionary, keywords, optionsDictionary)
     }
 
     @UsedByGodot

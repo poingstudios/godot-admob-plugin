@@ -28,7 +28,6 @@ import android.util.ArraySet
 import android.view.View
 import android.widget.FrameLayout
 import com.poingstudios.godot.admob.ads.adformats.Banner
-import com.poingstudios.godot.admob.ads.converters.convertToAdRequest
 import org.godotengine.godot.Dictionary
 import org.godotengine.godot.Godot
 import org.godotengine.godot.plugin.SignalInfo
@@ -73,10 +72,8 @@ class PoingGodotAdMobAdView(godot: Godot?) : org.godotengine.godot.plugin.GodotP
 
     @UsedByGodot
     fun load_ad(uid : Int, adRequestDictionary : Dictionary, keywords : Array<String>){
-        val adRequest = adRequestDictionary.convertToAdRequest(keywords)
-
         val banner = banners[uid]
-        banner?.loadAd(adRequest)
+        banner?.loadAd(adRequestDictionary, keywords)
     }
 
 
@@ -128,12 +125,12 @@ class PoingGodotAdMobAdView(godot: Godot?) : org.godotengine.godot.plugin.GodotP
 
     @UsedByGodot
     fun get_response_info(uid: Int) : Dictionary {
-        return banners[uid]?.getResponseInfo() ?: Dictionary()
+        return banners[uid]?.getBannerAdResponseInfo() ?: Dictionary()
     }
 
     @UsedByGodot
     fun is_collapsible(uid: Int): Boolean {
-        return banners[uid]?.isCollapsible() ?: false
+        return banners[uid]?.isBannerAdCollapsible() ?: false
     }
 }
 
