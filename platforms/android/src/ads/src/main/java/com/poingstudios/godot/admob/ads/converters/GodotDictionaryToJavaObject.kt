@@ -294,6 +294,7 @@ fun Dictionary.convertToNativeAdRequest(keywords: Array<String>, adUnitId: Strin
     return adRequestBuilder.build()
 }
 
+//TODO: Remove when iOS gets GAM Next-Gen
 @Suppress("DEPRECATION")
 fun Dictionary.convertToRequestConfiguration(testDeviceIds: Array<String>): RequestConfiguration {
     val maxAdContentRating = this["max_ad_content_rating"] as? String ?: ""

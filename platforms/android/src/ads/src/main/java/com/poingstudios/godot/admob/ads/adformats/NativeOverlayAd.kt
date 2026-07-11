@@ -59,11 +59,11 @@ class NativeOverlayAd(
     private var safeArea: Rect = getSafeArea()
 
     object SignalInfos {
-        val onAdClicked = SignalInfo("on_ad_clicked", Integer::class.java)
-        val onAdClosed = SignalInfo("on_ad_closed", Integer::class.java)
-        val onAdImpression = SignalInfo("on_ad_impression", Integer::class.java)
-        val onAdOpened = SignalInfo("on_ad_opened", Integer::class.java)
-        val onAdPaid = SignalInfo("on_ad_view_paid", Integer::class.java, Dictionary::class.java)
+        val onAdClicked = SignalInfo("on_native_overlay_ad_clicked", Integer::class.java)
+        val onAdClosed = SignalInfo("on_native_overlay_ad_closed", Integer::class.java)
+        val onAdImpression = SignalInfo("on_native_overlay_ad_impression", Integer::class.java)
+        val onAdOpened = SignalInfo("on_native_overlay_ad_opened", Integer::class.java)
+        val onAdPaid = SignalInfo("on_native_overlay_ad_paid", Integer::class.java, Dictionary::class.java)
         val onNativeOverlayAdFailedToLoad = SignalInfo("on_native_overlay_ad_failed_to_load", Integer::class.java, Dictionary::class.java)
         val onNativeOverlayAdLoaded = SignalInfo("on_native_overlay_ad_loaded", Integer::class.java)
     }

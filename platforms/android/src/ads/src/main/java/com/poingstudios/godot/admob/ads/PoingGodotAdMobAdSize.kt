@@ -46,6 +46,7 @@ class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotP
         return null
     }
 
+    //TODO: Remove when iOS gets GAM Next-Gen
     @UsedByGodot
     fun getCurrentOrientationAnchoredAdaptiveBannerAdSize(width: Int): Dictionary {
         Logger.debug("calling getCurrentOrientationAnchoredAdaptiveBannerAdSize")
@@ -57,6 +58,7 @@ class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotP
         return adSize.convertToGodotDictionary()
     }
 
+    //TODO: Remove when iOS gets GAM Next-Gen
     @UsedByGodot
     fun getPortraitAnchoredAdaptiveBannerAdSize(width: Int): Dictionary {
         Logger.debug("calling getPortraitAnchoredAdaptiveBannerAdSize")
@@ -67,6 +69,7 @@ class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotP
         return adSize.convertToGodotDictionary()
     }
 
+    //TODO: Remove when iOS gets GAM Next-Gen
     @UsedByGodot
     fun getLandscapeAnchoredAdaptiveBannerAdSize(width: Int): Dictionary {
         Logger.debug("calling getLandscapeAnchoredAdaptiveBannerAdSize")
@@ -77,11 +80,12 @@ class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotP
         return adSize.convertToGodotDictionary()
     }
 
+    //TODO: Remove when iOS gets GAM Next-Gen
     @UsedByGodot
     fun getSmartBannerAdSize(): Dictionary {
         Logger.debug("calling getSmartBannerAdSize")
 
-        return AdSize.FLUID.convertToGodotDictionary()
+        return AdSize.BANNER.convertToGodotDictionary()
     }
 
     @Suppress("DEPRECATION")
