@@ -16,6 +16,20 @@
 ## 前提条件
 - 完成 [开始使用指南](index.md)
 
+## 在 Godot 编辑器中测试
+
+您可以直接在 Godot 编辑器中测试您的广告。编辑器将显示模拟广告覆盖层，提供与移动平台上实际广告行为相似的体验。
+
+<video autoplay loop muted playsinline width="50%">
+  <source src="../assets/editor_test_ads.mp4" type="video/mp4">
+  您的浏览器不支持视频标签。
+</video>
+
+!!! note
+    由于模拟广告是使用 Godot Control 节点实现的，它们将在编辑器中您的游戏窗口内渲染。但是，当您导出到移动平台时，官方的 Google Mobile Ads SDK 会在所有游戏视图之上渲染原生广告。
+
+要了解有关模拟系统、视觉模板和回调模拟的更多信息，请参阅 [在编辑器中预览模拟广告](editor_mock_ads.md) 指南。
+
 ## 示例广告单元 {: #sample-ad-units }
 
 启用测试最简便的方法是使用 Google 提供的测试广告单元。这些广告单元与您的 AdMob 账号分离，从而确保在使用它们时您的账号不会产生无效流量的风险。

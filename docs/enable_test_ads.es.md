@@ -15,6 +15,20 @@ Este documento se basa en:
 ## Requisitos previos
 - Completa la [Guía de introducción](index.md)
 
+## Probando con el Editor Godot
+
+Puede probar sus anuncios directamente dentro del editor Godot. El editor mostrará superposiciones de anuncios simulados, brindando una experiencia similar a cómo se comportarán los anuncios reales en una plataforma móvil.
+
+<video autoplay loop muted playsinline width="50%">
+  <source src="../assets/editor_test_ads.mp4" type="video/mp4">
+  Su navegador no soporta la etiqueta de video.
+</video>
+
+!!! note
+    Debido a que los anuncios simulados se implementan utilizando nodos Control de Godot, se renderizarán dentro de la ventana del juego en el editor. Sin embargo, cuando exporte a una plataforma móvil, el SDK oficial de Google Mobile Ads renderiza anuncios nativos sobre todas las vistas del juego.
+
+Para obtener más información sobre el sistema de simulación, las plantillas visuales y las simulaciones de callbacks, consulte la guía [Vista previa de anuncios simulados en el editor](editor_mock_ads.md).
+
 ## Bloques de anuncios de muestra {: #sample-ad-units }
 
 El método más conveniente para permitir las pruebas es emplear los bloques de anuncios de prueba proporcionados por Google. Estos bloques de anuncios están separados de su cuenta de AdMob, lo que garantiza que no haya riesgo de que su cuenta de generar tráfico no válido mientras los usa.

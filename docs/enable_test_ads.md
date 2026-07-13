@@ -15,6 +15,20 @@ This document is based on:
 ## Prerequisites
 - Complete the [Get started guide](index.md)
 
+## Testing with the Godot Editor
+
+You can test your ads directly inside the Godot editor. The editor will display mock ads overlays giving a similar experience to how actual ads will behave on a mobile platform.
+
+<video autoplay loop muted playsinline width="50%">
+  <source src="../assets/editor_test_ads.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+!!! note
+    Because the mock ads are implemented using Godot Control nodes, they will render within your game window in the editor. When you export to a mobile platform, however, the official Google Mobile Ads SDK renders native ads on top of all game views.
+
+To learn more about the mock system, visual templates, and callback simulations, refer to the [Preview Mock Ads in Editor](editor_mock_ads.md) guide.
+
 ## Sample ad units {: #sample-ad-units }
 
 The most expedient method to enable testing is by employing Google's provided test ad units. These ad units are separate from your AdMob account, ensuring there is no risk of your account generating invalid traffic while using them.
