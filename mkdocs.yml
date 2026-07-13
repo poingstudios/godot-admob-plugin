@@ -1,5 +1,7 @@
 site_name: Godot AdMob Plugin - Poing Studios
 site_url: https://poingstudios.github.io/godot-admob-plugin/
+repo_name: poingstudios/godot-admob-plugin
+repo_url: https://github.com/poingstudios/godot-admob-plugin
 extra_css:
   - stylesheets/extra.css
 extra_javascript:
@@ -367,6 +369,7 @@ plugins:
 nav:
   - Guides:
     - Get Started: index.md
+    - Migrate SDK versions: migration.md
     - Enable test ads: enable_test_ads.md
     - Preview Mock Ads in Editor: editor_mock_ads.md
     - iOS Pause Background: ios_pause_background.md

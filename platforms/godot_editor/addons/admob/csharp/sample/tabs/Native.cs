@@ -43,7 +43,6 @@ namespace PoingStudios.AdMob.Sample
             Leaderboard,
             MediumRectangle,
             WideSkyscraper,
-            SmartBanner,
             Custom
         }
 
@@ -234,7 +233,6 @@ namespace PoingStudios.AdMob.Sample
                 case Preset.Leaderboard: return AdSize.Leaderboard;
                 case Preset.MediumRectangle: return AdSize.MediumRectangle;
                 case Preset.WideSkyscraper: return AdSize.WideSkyscraper;
-                case Preset.SmartBanner: return AdSize.SmartBanner;
                 case Preset.Custom:
                     if (int.TryParse(_widthValue.Text, out int w) && int.TryParse(_heightValue.Text, out int h))
                     {

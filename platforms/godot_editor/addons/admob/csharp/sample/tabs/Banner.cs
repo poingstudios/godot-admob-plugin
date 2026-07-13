@@ -61,7 +61,6 @@ public partial class Banner : BaseTab
 		Leaderboard,
 		MediumRectangle,
 		WideSkyscraper,
-		SmartBanner,
 		Custom
 	}
 
@@ -176,7 +175,6 @@ public partial class Banner : BaseTab
 			case Preset.Leaderboard: return AdSize.Leaderboard;
 			case Preset.MediumRectangle: return AdSize.MediumRectangle;
 			case Preset.WideSkyscraper: return AdSize.WideSkyscraper;
-			case Preset.SmartBanner: return AdSize.SmartBanner;
 			case Preset.Custom:
 				if (int.TryParse(_widthValue.Text, out int w) && int.TryParse(_heightValue.Text, out int h))
 				{

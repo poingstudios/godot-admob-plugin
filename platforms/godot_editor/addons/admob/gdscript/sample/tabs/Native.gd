@@ -59,7 +59,6 @@ enum Preset {
 	LEADERBOARD,
 	MEDIUM_RECTANGLE,
 	WIDE_SKYSCRAPER,
-	SMART_BANNER,
 	CUSTOM
 }
 
@@ -233,8 +232,6 @@ func _get_selected_ad_size() -> AdSize:
 			return AdSize.MEDIUM_RECTANGLE
 		Preset.WIDE_SKYSCRAPER:
 			return AdSize.WIDE_SKYSCRAPER
-		Preset.SMART_BANNER:
-			return AdSize.SMART_BANNER
 		Preset.CUSTOM:
 			return AdSize.new(int(_width_value.text), int(_height_value.text))
 	return null
