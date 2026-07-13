@@ -26,11 +26,6 @@ namespace PoingStudios.AdMob.Core
 {
 	public partial class MockAdSizePlugin : Node
 	{
-		public Godot.Collections.Dictionary getSmartBannerAdSize()
-		{
-			return new Godot.Collections.Dictionary { { "width", 320 }, { "height", 50 } };
-		}
-
 		public Godot.Collections.Dictionary getCurrentOrientationAnchoredAdaptiveBannerAdSize(int width)
 		{
 			return new Godot.Collections.Dictionary { { "width", width }, { "height", 50 } };

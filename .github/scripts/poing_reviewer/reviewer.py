@@ -181,7 +181,7 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
     else:
         findings_section = "No issues found. ✅"
 
-    combined_summary = " | ".join(s for s in summaries if s)
+    combined_summary = "\n\n".join(s for s in summaries if s)
     verdict_str = VERDICT_MAP.get(combined_verdict, "**🟡 Comment**")
 
     body_markdown = f"""## 📋 Summary

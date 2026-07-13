@@ -24,9 +24,6 @@
 extends Node
 
 
-func getSmartBannerAdSize() -> Dictionary:
-	return {"width": 320, "height": 50}
-
 
 func getCurrentOrientationAnchoredAdaptiveBannerAdSize(width: int) -> Dictionary:
 	return {"width": width, "height": 50}

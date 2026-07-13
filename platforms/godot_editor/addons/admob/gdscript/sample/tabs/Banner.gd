@@ -51,7 +51,6 @@ enum Preset {
 	LEADERBOARD,
 	MEDIUM_RECTANGLE,
 	WIDE_SKYSCRAPER,
-	SMART_BANNER,
 	CUSTOM
 }
 
@@ -85,17 +84,9 @@ func _update_ui_state(is_loaded: bool) -> void:
 
 
 func _get_ad_unit_id(is_collapsible: bool = false) -> String:
-	if is_collapsible:
-		return (
-			"ca-app-pub-3940256099942544/2014213617"
-			if OS.get_name() == "Android"
-			else "ca-app-pub-3940256099942544/8388050270"
-		)
-	return (
-		"ca-app-pub-3940256099942544/6300978111"
-		if OS.get_name() == "Android"
-		else "ca-app-pub-3940256099942544/2934735716"
-	)
+	if OS.get_name() == "Android":
+		return "ca-app-pub-3940256099942544/2014213617" if is_collapsible else "ca-app-pub-3940256099942544/9214589741"
+	return "ca-app-pub-3940256099942544/8388050270" if is_collapsible else "ca-app-pub-3940256099942544/2934735716"
 
 
 func _get_selected_ad_size() -> AdSize:
@@ -116,8 +107,6 @@ func _get_selected_ad_size() -> AdSize:
 			return AdSize.MEDIUM_RECTANGLE
 		Preset.WIDE_SKYSCRAPER:
 			return AdSize.WIDE_SKYSCRAPER
-		Preset.SMART_BANNER:
-			return AdSize.SMART_BANNER
 		Preset.CUSTOM:
 			return AdSize.new(int(_width_value.text), int(_height_value.text))
 	return AdSize.BANNER

@@ -25,11 +25,12 @@ package com.poingstudios.godot.admob.ads
 
 import android.app.Activity
 import android.util.ArraySet
-import com.google.android.gms.ads.AdError
-import com.google.android.gms.ads.FullScreenContentCallback
-import com.google.android.gms.ads.LoadAdError
-import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAd
-import com.google.android.gms.ads.rewardedinterstitial.RewardedInterstitialAdLoadCallback
+import com.google.android.libraries.ads.mobile.sdk.common.AdLoadCallback
+import com.google.android.libraries.ads.mobile.sdk.common.AdValue
+import com.google.android.libraries.ads.mobile.sdk.common.FullScreenContentError
+import com.google.android.libraries.ads.mobile.sdk.common.LoadAdError
+import com.google.android.libraries.ads.mobile.sdk.rewardedinterstitial.RewardedInterstitialAd
+import com.google.android.libraries.ads.mobile.sdk.rewardedinterstitial.RewardedInterstitialAdEventCallback
 import com.poingstudios.godot.admob.ads.converters.convertToAdRequest
 import com.poingstudios.godot.admob.ads.converters.convertToGodotDictionary
 import com.poingstudios.godot.admob.ads.converters.convertToServerSideVerificationOptions
@@ -81,20 +82,15 @@ class PoingGodotAdMobRewardedInterstitialAd(godot: Godot?) : org.godotengine.god
     fun load(adUnitId : String, adRequestDictionary : Dictionary, keywords : Array<String>, uid: Int){
         aActivity.runOnUiThread{
             Logger.debug("loading rewarded interstitial ad")
-            val adRequest = adRequestDictionary.convertToAdRequest(keywords)
+            val adRequest = adRequestDictionary.convertToAdRequest(keywords, adUnitId)
 
-            RewardedInterstitialAd.load(aActivity,
-                adUnitId, adRequest, object : RewardedInterstitialAdLoadCallback() {
-                    override fun onAdFailedToLoad(loadAdError: LoadAdError) {
-                        emitSignal("on_rewarded_interstitial_ad_failed_to_load", uid, loadAdError.convertToGodotDictionary())
+            RewardedInterstitialAd.load(adRequest, object : AdLoadCallback<RewardedInterstitialAd> {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        emitSignal("on_rewarded_interstitial_ad_failed_to_load", uid, adError.convertToGodotDictionary())
                     }
-                    override fun onAdLoaded(rewardedInterstitialAd: RewardedInterstitialAd) {
-                        rewardedInterstitialAds[uid] = rewardedInterstitialAd
-                        rewardedInterstitialAd.setOnPaidEventListener { adValue ->
-                            val adValueDictionary = adValue.convertToGodotDictionary()
-                emitSignal("on_rewarded_interstitial_ad_paid", uid, adValueDictionary)
-                        }
-                        rewardedInterstitialAd.fullScreenContentCallback = object: FullScreenContentCallback() {
+                    override fun onAdLoaded(ad: RewardedInterstitialAd) {
+                        rewardedInterstitialAds[uid] = ad
+                        ad.adEventCallback = object: RewardedInterstitialAdEventCallback {
                             override fun onAdClicked() {
                                 Logger.debug("Ad was clicked.")
                                 emitSignal("on_rewarded_interstitial_ad_clicked", uid)
@@ -106,10 +102,10 @@ class PoingGodotAdMobRewardedInterstitialAd(godot: Godot?) : org.godotengine.god
                                 emitSignal("on_rewarded_interstitial_ad_dismissed_full_screen_content", uid)
                             }
 
-                            override fun onAdFailedToShowFullScreenContent(adError: AdError) {
+                            override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
                                 Logger.debug("Ad failed to show fullscreen content.")
                                 rewardedInterstitialAds[uid] = null
-                                emitSignal("on_rewarded_interstitial_ad_failed_to_show_full_screen_content", uid, adError.convertToGodotDictionary())
+                                emitSignal("on_rewarded_interstitial_ad_failed_to_show_full_screen_content", uid, fullScreenContentError.convertToGodotDictionary())
                             }
 
                             override fun onAdImpression() {
@@ -120,6 +116,10 @@ class PoingGodotAdMobRewardedInterstitialAd(godot: Godot?) : org.godotengine.god
                             override fun onAdShowedFullScreenContent() {
                                 Logger.debug("Ad showed fullscreen content.")
                                 emitSignal("on_rewarded_interstitial_ad_showed_full_screen_content", uid)
+                            }
+
+                            override fun onAdPaid(value: AdValue) {
+                                emitSignal("on_rewarded_interstitial_ad_paid", uid, value.convertToGodotDictionary())
                             }
                         }
                         emitSignal("on_rewarded_interstitial_ad_loaded", uid)
@@ -156,7 +156,7 @@ class PoingGodotAdMobRewardedInterstitialAd(godot: Godot?) : org.godotengine.god
 
     @UsedByGodot
     fun get_response_info(uid: Int) : Dictionary {
-        return rewardedInterstitialAds[uid]?.responseInfo?.convertToGodotDictionary() ?: Dictionary()
+        return rewardedInterstitialAds[uid]?.getResponseInfo()?.convertToGodotDictionary() ?: Dictionary()
     }
 
 }

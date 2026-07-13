@@ -76,21 +76,6 @@ The height of the ad size.
     public int Height { get; set; }
     ```
 
-### `SMART_BANNER` / `SmartBanner`
-
-Returns the smart banner size matching the device's width.
-
-=== "GDScript"
-    ```gdscript
-    static var SMART_BANNER: AdSize # read-only
-    ```
-
-=== "C#"
-    ```csharp
-    public static AdSize SmartBanner { get; }
-    ```
-
----
 
 ## Static Methods
 

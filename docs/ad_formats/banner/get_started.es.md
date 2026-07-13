@@ -257,7 +257,6 @@ A continuación se muestra una tabla que presenta los tamaños de anuncios de ba
  | 468x60 | Banner de tamaño completo de IAB | tabletas | BANNER_COMPLETO | 
  | 728x90 | Tabla de clasificación de la IAB | tabletas | TABLA DE LÍDERES | 
  | Ancho proporcionado x alto adaptable | [Banner adaptable](sizes/anchored_adaptive.md) | Teléfonos y tabletas | N / A | 
- | Ancho de pantalla x 32/50/90 | [pancarta inteligente](sizes/smart_banner.md) | Teléfonos y tabletas | N / A | 
 
 ## Referencias adicionales
 

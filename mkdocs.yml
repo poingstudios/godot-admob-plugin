@@ -1,5 +1,7 @@
 site_name: Godot AdMob Plugin - Poing Studios
 site_url: https://poingstudios.github.io/godot-admob-plugin/
+repo_name: poingstudios/godot-admob-plugin
+repo_url: https://github.com/poingstudios/godot-admob-plugin
 extra_css:
   - stylesheets/extra.css
 extra_javascript:
@@ -88,6 +90,7 @@ plugins:
           name: Português (Brasil)
           nav_translations:
             Guides: Guias
+            Migrate SDK versions: Migrar versões do SDK
             Reference: Referência
             'API Reference': 'Referência da API'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades do AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
@@ -98,7 +101,6 @@ plugins:
             Use collapsible banners: Usar banners colapsáveis
             Sizes: Tamanhos
             Anchored adaptive banners: Banners adaptativos ancorados
-            'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': 'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>'
             Interstitial: Intersticial
             Native Overlay: Native Overlay
             Rewarded: Premiado (Rewarded)
@@ -157,6 +159,7 @@ plugins:
           name: Español
           nav_translations:
             Guides: Guías
+            Migrate SDK versions: Migrar versiones del SDK
             Reference: Referencia
             'API Reference': 'Referencia de la API'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades de AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
@@ -167,7 +170,6 @@ plugins:
             Use collapsible banners: Usar banners colapsables
             Sizes: Tamaños
             Anchored adaptive banners: Banners adaptativos anclados
-            'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': 'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>'
             Interstitial: Intersticial
             Native Overlay: Native Overlay
             Rewarded: Bonificado (Rewarded)
@@ -227,6 +229,7 @@ plugins:
           name: 简体中文
           nav_translations:
             Guides: 指南
+            Migrate SDK versions: 迁移 SDK 版本
             Reference: 参考
             'API Reference': 'API 参考'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot 技能 <span class="modern-icon" title="Beta">🧪</span>'
@@ -237,7 +240,6 @@ plugins:
             Use collapsible banners: 使用折叠式横幅广告
             Sizes: 尺寸
             Anchored adaptive banners: 锚定自适应横幅广告
-            'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': '智能横幅广告 <span class="modern-icon" title="Deprecated">🚫</span>'
             Interstitial: 插屏广告
             Native Overlay: 原生重叠广告
             Rewarded: 激励广告
@@ -297,6 +299,7 @@ plugins:
           name: 日本語
           nav_translations:
             Guides: ガイド
+            Migrate SDK versions: SDK バージョンの移行
             Reference: リファレンス
             'API Reference': 'API リファレンス'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot スキル <span class="modern-icon" title="Beta">🧪</span>'
@@ -307,7 +310,6 @@ plugins:
             Use collapsible banners: 折りたたみ式バナーの使用
             Sizes: サイズ
             Anchored adaptive banners: アンカー付きアダプティブバナー
-            'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': 'スマートバナー <span class="modern-icon" title="Deprecated">🚫</span>'
             Interstitial: インタースティシャル広告 (Interstitial)
             Native Overlay: ネイティブオーバーレイ広告 (Native Overlay)
             Rewarded: リワード広告 (Rewarded)
@@ -367,6 +369,7 @@ plugins:
 nav:
   - Guides:
     - Get Started: index.md
+    - Migrate SDK versions: migration.md
     - Enable test ads: enable_test_ads.md
     - Preview Mock Ads in Editor: editor_mock_ads.md
     - iOS Pause Background: ios_pause_background.md
@@ -378,7 +381,6 @@ nav:
         - Use collapsible banners: ad_formats/banner/collapsible.md
         - Sizes:
           - Anchored adaptive banners: ad_formats/banner/sizes/anchored_adaptive.md
-          - 'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': ad_formats/banner/sizes/smart_banner.md
       - Interstitial: ad_formats/interstitial.md
       - Native Overlay: ad_formats/native_overlay.md
       - Rewarded: ad_formats/rewarded.md

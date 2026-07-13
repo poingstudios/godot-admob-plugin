@@ -26,14 +26,14 @@ package com.poingstudios.godot.admob.ads
 import android.app.Activity
 import android.util.DisplayMetrics
 import android.view.Display
-import com.google.android.gms.ads.AdSize
+import com.google.android.libraries.ads.mobile.sdk.banner.AdSize
 import com.poingstudios.godot.admob.ads.converters.convertToGodotDictionary
 import com.poingstudios.godot.admob.core.utils.Logger
 import org.godotengine.godot.Dictionary
 import org.godotengine.godot.Godot
 import org.godotengine.godot.plugin.UsedByGodot
 
-@Suppress("unused") // Instantiated by Android via AndroidManifest (AAR / Godot plugin)
+@Suppress("unused", "DEPRECATION") // Instantiated by Android via AndroidManifest (AAR / Godot plugin)
 class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(godot) {
     private lateinit var aActivity: Activity
 
@@ -46,10 +46,11 @@ class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotP
         return null
     }
 
+    //TODO: Remove when iOS gets GAM Next-Gen
     @UsedByGodot
     fun getCurrentOrientationAnchoredAdaptiveBannerAdSize(width: Int): Dictionary {
         Logger.debug("calling getCurrentOrientationAnchoredAdaptiveBannerAdSize")
-        val currentWidth = if (width == AdSize.FULL_WIDTH) getAdWidth() else width
+        val currentWidth = if (width <= 0) getAdWidth() else width
         Logger.debug("currentWidth: $currentWidth")
 
         val adSize =
@@ -57,33 +58,29 @@ class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotP
         return adSize.convertToGodotDictionary()
     }
 
+    //TODO: Remove when iOS gets GAM Next-Gen
     @UsedByGodot
     fun getPortraitAnchoredAdaptiveBannerAdSize(width: Int): Dictionary {
         Logger.debug("calling getPortraitAnchoredAdaptiveBannerAdSize")
-        val currentWidth = if (width == AdSize.FULL_WIDTH) getAdWidth() else width
+        val currentWidth = if (width <= 0) getAdWidth() else width
         Logger.debug("currentWidth: $currentWidth")
 
         val adSize = AdSize.getPortraitAnchoredAdaptiveBannerAdSize(aActivity, currentWidth)
         return adSize.convertToGodotDictionary()
     }
 
+    //TODO: Remove when iOS gets GAM Next-Gen
     @UsedByGodot
     fun getLandscapeAnchoredAdaptiveBannerAdSize(width: Int): Dictionary {
         Logger.debug("calling getLandscapeAnchoredAdaptiveBannerAdSize")
-        val currentWidth = if (width == AdSize.FULL_WIDTH) getAdWidth() else width
+        val currentWidth = if (width <= 0) getAdWidth() else width
         Logger.debug("currentWidth: $currentWidth")
 
         val adSize = AdSize.getLandscapeAnchoredAdaptiveBannerAdSize(aActivity, currentWidth)
         return adSize.convertToGodotDictionary()
     }
 
-    @UsedByGodot
-    fun getSmartBannerAdSize(): Dictionary {
-        Logger.debug("calling getSmartBannerAdSize")
-
-        return AdSize.SMART_BANNER.convertToGodotDictionary()
-    }
-
+    @Suppress("DEPRECATION")
     private fun getAdWidth(): Int {
         val display: Display = aActivity.windowManager.defaultDisplay
         val outMetrics = DisplayMetrics()
