@@ -257,7 +257,6 @@ Below is a table presenting the standard banner ad sizes:
 | 468x60                           | IAB Full-Size Banner                          | Tablets            | FULL_BANNER      |
 | 728x90                           | IAB Leaderboard                               | Tablets            | LEADERBOARD      |
 | Provided width x Adaptive height | [Adaptive banner](sizes/anchored_adaptive.md) | Phones and Tablets | N/A              |
-| Screen width x 32/50/90          | [Smart banner](sizes/smart_banner.md)         | Phones and Tablets | N/A              |
 
 ## Further References
 

@@ -76,21 +76,6 @@
     public int Height { get; set; }
     ```
 
-### `SMART_BANNER` / `SmartBanner`
-
-返回与设备宽度匹配的智能横幅尺寸。
-
-=== "GDScript"
-    ```gdscript
-    static var SMART_BANNER: AdSize # read-only
-    ```
-
-=== "C#"
-    ```csharp
-    public static AdSize SmartBanner { get; }
-    ```
-
----
 
 ## 静态方法
 

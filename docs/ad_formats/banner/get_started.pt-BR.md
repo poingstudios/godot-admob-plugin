@@ -254,7 +254,6 @@ Abaixo está uma tabela com os tamanhos padrão de anúncios de banner:
 | 468x60                           | IAB Full-Size Banner                          | Tablets            | FULL_BANNER         |
 | 728x90                           | IAB Leaderboard                               | Tablets            | LEADERBOARD         |
 | Largura fornecida x Altura adapt.| [Banner adaptativo](sizes/anchored_adaptive.md) | Celulares e Tablets| N/A                 |
-| Largura da tela x 32/50/90       | [Smart banner](sizes/smart_banner.md)         | Celulares e Tablets| N/A                 |
 
 ## Outras Referências
 

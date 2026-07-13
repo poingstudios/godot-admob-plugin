@@ -76,21 +76,6 @@
     public int Height { get; set; }
     ```
 
-### `SMART_BANNER` / `SmartBanner`
-
-デバイスの幅に一致するスマートバナーサイズを返します。
-
-=== "GDScript"
-    ```gdscript
-    static var SMART_BANNER: AdSize # read-only
-    ```
-
-=== "C#"
-    ```csharp
-    public static AdSize SmartBanner { get; }
-    ```
-
----
 
 ## 静的メソッド
 

@@ -255,7 +255,6 @@ Godot 中 AdView 的构造函数具有以下参数：
 | 468x60                           | IAB 全尺寸横幅广告                           | 平板电脑           | FULL_BANNER      |
 | 728x90                           | IAB 排行榜横幅广告                           | 平板电脑           | LEADERBOARD      |
 | 提供宽度 x 自适应高度            | [自适应横幅广告](sizes/anchored_adaptive.md)  | 手机和平板电脑     | N/A              |
-| 屏幕宽度 x 32/50/90              | [智能横幅广告](sizes/smart_banner.md)        | 手机和平板电脑     | N/A              |
 
 ## 其他参考
 

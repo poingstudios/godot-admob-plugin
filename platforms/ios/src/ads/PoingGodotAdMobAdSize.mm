@@ -84,27 +84,6 @@ PoingGodotAdMobAdSize::getLandscapeAnchoredAdaptiveBannerAdSize(int width) {
 
   return dictionary;
 }
-Dictionary PoingGodotAdMobAdSize::getSmartBannerAdSize() {
-  NSLog(@"calling getCurrentOrientationAnchoredAdaptiveBannerAdSize");
-
-  GADAdSize adSize;
-
-  UIInterfaceOrientation orientation =
-      [DeviceOrientationHelper getDeviceOrientation];
-
-  if (UIInterfaceOrientationIsPortrait(orientation)) { // portrait
-    adSize = kGADAdSizeSmartBannerPortrait;
-    NSLog(@"UIDeviceOrientation: Portrait");
-  } else { // landscape
-    adSize = kGADAdSizeSmartBannerLandscape;
-    NSLog(@"UIDeviceOrientation: Landscape");
-  }
-
-  Dictionary dictionary =
-      [ObjectToGodotDictionary convertGADAdSizeToDictionary:adSize];
-
-  return dictionary;
-}
 
 void PoingGodotAdMobAdSize::_bind_methods() {
   ClassDB::bind_method(
@@ -117,8 +96,6 @@ void PoingGodotAdMobAdSize::_bind_methods() {
   ClassDB::bind_method(
       D_METHOD("getLandscapeAnchoredAdaptiveBannerAdSize"),
       &PoingGodotAdMobAdSize::getLandscapeAnchoredAdaptiveBannerAdSize);
-  ClassDB::bind_method(D_METHOD("getSmartBannerAdSize"),
-                       &PoingGodotAdMobAdSize::getSmartBannerAdSize);
 };
 
 CGFloat PoingGodotAdMobAdSize::getAdWidth() {

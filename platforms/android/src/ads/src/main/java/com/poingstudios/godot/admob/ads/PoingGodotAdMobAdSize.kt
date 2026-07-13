@@ -80,14 +80,6 @@ class PoingGodotAdMobAdSize(godot: Godot?) : org.godotengine.godot.plugin.GodotP
         return adSize.convertToGodotDictionary()
     }
 
-    //TODO: Remove when iOS gets GAM Next-Gen
-    @UsedByGodot
-    fun getSmartBannerAdSize(): Dictionary {
-        Logger.debug("calling getSmartBannerAdSize")
-
-        return AdSize.BANNER.convertToGodotDictionary()
-    }
-
     @Suppress("DEPRECATION")
     private fun getAdWidth(): Int {
         val display: Display = aActivity.windowManager.defaultDisplay

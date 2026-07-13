@@ -46,14 +46,15 @@ fun Dictionary.convertToAdSize(activity: Activity): AdSize {
     var width = getInt("width")
     val height = getInt("height")
 
-    if (width <= 0) {
+    if (width == -1 && height == -1) {
         val displayMetrics = activity.resources.displayMetrics
-        val deviceWidth = displayMetrics.widthPixels
-        width = (deviceWidth / displayMetrics.density).toInt()
+        val deviceWidth = (displayMetrics.widthPixels / displayMetrics.density).toInt()
+        return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, deviceWidth)
     }
 
-    if (width == -1 && height == -1) {
-        return AdSize.FLUID
+    if (width <= 0) {
+        val displayMetrics = activity.resources.displayMetrics
+        width = (displayMetrics.widthPixels / displayMetrics.density).toInt()
     }
 
     return AdSize(width, height)

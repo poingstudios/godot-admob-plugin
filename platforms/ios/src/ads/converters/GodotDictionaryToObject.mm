@@ -29,6 +29,19 @@
   int width = (int)adSizeDictionary["width"];
   int height = (int)adSizeDictionary["height"];
 
+  if (width == -1 && height == -1) {
+    CGRect screenBounds = [UIScreen mainScreen].bounds;
+    UIWindow *window = [WindowHelper getCurrentWindow];
+    if (window) {
+      if (@available(iOS 11.0, *)) {
+        screenBounds =
+            UIEdgeInsetsInsetRect(window.bounds, window.safeAreaInsets);
+      }
+    }
+    int deviceWidth = (int)CGRectGetWidth(screenBounds);
+    return GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(deviceWidth);
+  }
+
   if (width <= 0) {
     CGRect screenBounds = [UIScreen mainScreen].bounds;
     UIWindow *window = [WindowHelper getCurrentWindow];
@@ -39,10 +52,6 @@
       }
     }
     width = (int)CGRectGetWidth(screenBounds);
-  }
-
-  if (width == -1 && height == -1) {
-    return kGADAdSizeSmartBannerPortrait;
   }
 
   return GADAdSizeFromCGSize(CGSizeMake(width, height));

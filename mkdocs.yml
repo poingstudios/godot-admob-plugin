@@ -378,7 +378,6 @@ nav:
         - Use collapsible banners: ad_formats/banner/collapsible.md
         - Sizes:
           - Anchored adaptive banners: ad_formats/banner/sizes/anchored_adaptive.md
-          - 'Smart banners <span class="modern-icon" title="Deprecated">🚫</span>': ad_formats/banner/sizes/smart_banner.md
       - Interstitial: ad_formats/interstitial.md
       - Native Overlay: ad_formats/native_overlay.md
       - Rewarded: ad_formats/rewarded.md
