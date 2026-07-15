@@ -1,19 +1,24 @@
 # Migrar versiones del SDK
 
-Esta guía documenta los cambios de API necesarios al migrar tu proyecto de Godot de la v4 a la v5 del Godot AdMob Editor Plugin. 
+Esta página abarca migraciones para versiones actuales y anteriores.
 
-La v5 adopta las APIs del nuevo **GMA Next-Gen SDK** en Android. Aunque la API pública se ha mantenido altamente compatible para minimizar el esfuerzo de migración, se han eliminado algunas APIs heredadas.
+## Migrar de v4 a v5
 
----
+Las siguientes subsecciones describen cambios importantes y diferencias de comportamiento entre la versión principal 4 y 5 del Godot AdMob Editor Plugin.
 
-## Eliminación de Smart Banner
+### Eliminación de Smart Banner
 
-El formato heredado `Smart Banner` ha sido marcado como obsoleto por Google y se ha eliminado por completo del GMA Next-Gen SDK.
+El formato heredado `Smart Banner` ha sido marcado como obsoleto por Google y se ha eliminado por completo del plugin en v5.
+
+| Lenguaje | Propiedad Eliminada | Reemplazo |
+| :--- | :--- | :--- |
+| **GDScript** | `AdSize.SMART_BANNER` | [`AdSize.get_current_orientation_anchored_adaptive_banner_ad_size()`](reference/classes/AdSize.md#adaptive-banners) |
+| **C#** | `AdSize.SmartBanner` | [`AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize()`](reference/classes/AdSize.md#adaptive-banners) |
 
 !!! danger "Cambio Importante (Breaking Change)"
     La propiedad estática `AdSize.SMART_BANNER` (GDScript) y `AdSize.SmartBanner` (C#) se han eliminado por completo. Debes actualizar tus scripts para usar métodos de tamaño adaptativo.
 
-### Cómo Migrar
+#### Cómo Migrar
 Usa **Banners Adaptativos Anclados** en su lugar. Son el reemplazo moderno oficial, calculando dinámicamente la altura óptima según el ancho del dispositivo y la densidad de pantalla.
 
 !!! note "Retrocompatibilidad de Respaldo"
@@ -49,9 +54,7 @@ Usa **Banners Adaptativos Anclados** en su lugar. Son el reemplazo moderno ofici
         var adView = new AdView(unitId, adSize, AdPosition.Top);
         ```
 
----
-
-## Cambios en la Dependencia de Gradle
+### Cambios en la Dependencia de Gradle
 
 El plugin nativo de Android ahora incorpora el nuevo SDK Next-Gen:
 

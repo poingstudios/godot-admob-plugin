@@ -96,7 +96,3 @@ Your support helps us continue to improve and maintain this plugin. Thank you fo
 [![DISCORD](https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord)](https://discord.com/invite/YEPvYjSSMk)
 
 
-## ⭐ Star History
-If you appreciate our work, don't forget to give us a star on GitHub! ⭐
-
-![Star History Chart](https://api.star-history.com/svg?repos=poingstudios/godot-admob-ios&type=Date)

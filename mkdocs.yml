@@ -82,6 +82,7 @@ plugins:
   - search
   - i18n:
       reconfigure_material: true
+      build_only_locale: !ENV [BUILD_ONLY_LOCALE, null]
       languages:
         - locale: en
           name: English
@@ -91,10 +92,11 @@ plugins:
           nav_translations:
             Guides: Guias
             Migrate SDK versions: Migrar versões do SDK
+            Optimize initialization and ad loading: Otimizar inicialização e carregamento de anúncios
             Reference: Referência
             'API Reference': 'Referência da API'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades do AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
-            Ad formats: Formatos de Anúncios
+            Choose an ad format: Escolher um formato de anúncio
             App Open: App Open
             Banner: Banner
             Set up banner ads: Configurar anúncios de banner
@@ -160,10 +162,11 @@ plugins:
           nav_translations:
             Guides: Guías
             Migrate SDK versions: Migrar versiones del SDK
+            Optimize initialization and ad loading: Optimizar la inicialización y la carga de anuncios
             Reference: Referencia
             'API Reference': 'Referencia de la API'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades de AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
-            Ad formats: Formatos de anuncios
+            Choose an ad format: Elegir un formato de anuncio
             App Open: App Open
             Banner: Banner
             Set up banner ads: Configurar anuncios de banner
@@ -230,10 +233,11 @@ plugins:
           nav_translations:
             Guides: 指南
             Migrate SDK versions: 迁移 SDK 版本
+            Optimize initialization and ad loading: 优化初始化和广告加载
             Reference: 参考
             'API Reference': 'API 参考'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot 技能 <span class="modern-icon" title="Beta">🧪</span>'
-            Ad formats: 广告格式
+            Choose an ad format: 选择广告格式
             App Open: 开屏广告
             Banner: 横幅广告
             Set up banner ads: 设置横幅广告
@@ -300,10 +304,11 @@ plugins:
           nav_translations:
             Guides: ガイド
             Migrate SDK versions: SDK バージョンの移行
+            Optimize initialization and ad loading: 初期化と広告読み込みの最適化
             Reference: リファレンス
             'API Reference': 'API リファレンス'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot スキル <span class="modern-icon" title="Beta">🧪</span>'
-            Ad formats: 広告フォーマット
+            Choose an ad format: 広告フォーマットの選択
             App Open: アプリ起動時広告 (App Open)
             Banner: バナー広告 (Banner)
             Set up banner ads: バナー広告のセットアップ
@@ -372,9 +377,10 @@ nav:
     - Migrate SDK versions: migration.md
     - Enable test ads: enable_test_ads.md
     - Preview Mock Ads in Editor: editor_mock_ads.md
+    - Optimize initialization and ad loading: optimize_initialization.md
     - iOS Pause Background: ios_pause_background.md
     - 'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': ai_skills.md
-    - Ad formats:
+    - Choose an ad format:
       - App Open: ad_formats/app_open.md
       - Banner:
         - Set up banner ads: ad_formats/banner/get_started.md

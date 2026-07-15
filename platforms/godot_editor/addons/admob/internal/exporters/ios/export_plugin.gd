@@ -35,13 +35,13 @@ func _get_name() -> String:
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
-	var ios_enabled := _get_setting(ProjectSettingsService.get_setting_path("ios", "enabled"), true) as bool
+	var ios_enabled := _get_setting(ProjectSettingsService.get_ios_setting_path("enabled"), true) as bool
 	return platform is EditorExportPlatformIOS and ios_enabled
 
 
 func _get_enabled_libs() -> Array[Library]:
 	var enabled_libs: Array[Library] = []
-	var ios_enabled := _get_setting(ProjectSettingsService.get_setting_path("ios", "enabled"), true) as bool
+	var ios_enabled := _get_setting(ProjectSettingsService.get_ios_setting_path("enabled"), true) as bool
 	if not ios_enabled:
 		return enabled_libs
 
@@ -56,7 +56,7 @@ func _export_begin(features: PackedStringArray, is_debug: bool, path: String, fl
 	_pending_export_path = path
 	_spm_dependencies.clear()
 
-	var ios_enabled := _get_setting(ProjectSettingsService.get_setting_path("ios", "enabled"), true) as bool
+	var ios_enabled := _get_setting(ProjectSettingsService.get_ios_setting_path("enabled"), true) as bool
 	if not ios_enabled:
 		return
 
@@ -70,7 +70,7 @@ func _export_begin(features: PackedStringArray, is_debug: bool, path: String, fl
 			_export_library(lib, config, is_debug)
 
 	var app_id := _get_setting(
-		ProjectSettingsService.get_setting_path("ios", "app_id"),
+		ProjectSettingsService.get_ios_setting_path("app_id"),
 		ProjectSettingsService.IOS_DEFAULT_APP_ID
 	) as String
 	_add_plist_content("<key>GADApplicationIdentifier</key><string>%s</string>\n" % app_id)

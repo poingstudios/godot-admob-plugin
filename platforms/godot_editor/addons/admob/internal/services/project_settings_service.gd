@@ -59,18 +59,34 @@ class SettingDefinition:
 		default_value = p_default
 
 
-static func get_setting_path(platform: String, setting_name: String) -> String:
-	return "admob/general/%s/%s" % [platform, setting_name]
+static func get_android_setting_path(setting_name: String) -> String:
+	return "admob/general/android/%s" % setting_name
+
+
+static func get_ios_setting_path(setting_name: String) -> String:
+	return "admob/general/ios/%s" % setting_name
+
+
+static func _get_android_settings() -> Array[SettingDefinition]:
+	return [
+		SettingDefinition.new(get_android_setting_path("enabled"), TYPE_BOOL, true),
+		SettingDefinition.new(get_android_setting_path("app_id"), TYPE_STRING, ANDROID_DEFAULT_APP_ID),
+		SettingDefinition.new(get_android_setting_path("disable_initialization_optimization"), TYPE_BOOL, false),
+		SettingDefinition.new(get_android_setting_path("disable_ad_loading_optimization"), TYPE_BOOL, false),
+	]
+
+
+static func _get_ios_settings() -> Array[SettingDefinition]:
+	return [
+		SettingDefinition.new(get_ios_setting_path("enabled"), TYPE_BOOL, true),
+		SettingDefinition.new(get_ios_setting_path("app_id"), TYPE_STRING, IOS_DEFAULT_APP_ID),
+	]
 
 
 static func register_settings() -> void:
-	var settings: Array[SettingDefinition] = [
-		SettingDefinition.new(get_setting_path("android", "enabled"), TYPE_BOOL, true),
-		SettingDefinition.new(get_setting_path("android", "app_id"), TYPE_STRING, ANDROID_DEFAULT_APP_ID),
-
-		SettingDefinition.new(get_setting_path("ios", "enabled"), TYPE_BOOL, true),
-		SettingDefinition.new(get_setting_path("ios", "app_id"), TYPE_STRING, IOS_DEFAULT_APP_ID),
-	]
+	var settings: Array[SettingDefinition] = []
+	settings.append_array(_get_android_settings())
+	settings.append_array(_get_ios_settings())
 
 	for lib_name in MEDIATION_LIBS:
 		settings.append(SettingDefinition.new(MEDIATION_PREFIX + lib_name, TYPE_BOOL, false))

@@ -1,19 +1,24 @@
 # Migrate SDK versions
 
-This guide documents the API changes required when migrating your Godot project from v4 to v5 of the Godot AdMob Editor Plugin. 
+This page covers migrations for current and previous versions.
 
-v5 adopts the APIs of the new **GMA Next-Gen SDK** on Android. While the public API has been kept highly compatible to minimize migration effort, some legacy APIs have been removed.
+## Migrate from v4 to v5
 
----
+The following subsections describe breaking changes and behavior differences between major version 4 and 5 of the Godot AdMob Editor Plugin.
 
-## Smart Banner Removal
+### Removed Smart Banner
 
-The legacy `Smart Banner` format has been deprecated by Google and is completely removed from the GMA Next-Gen SDK.
+The legacy `Smart Banner` format has been deprecated by Google and is completely removed from the plugin in v5.
+
+| Language | Removed Property | Replacement |
+| :--- | :--- | :--- |
+| **GDScript** | `AdSize.SMART_BANNER` | [`AdSize.get_current_orientation_anchored_adaptive_banner_ad_size()`](reference/classes/AdSize.md#adaptive-banners) |
+| **C#** | `AdSize.SmartBanner` | [`AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize()`](reference/classes/AdSize.md#adaptive-banners) |
 
 !!! danger "Breaking Change"
     The static property `AdSize.SMART_BANNER` (GDScript) and `AdSize.SmartBanner` (C#) have been completely removed. You must update your scripts to use adaptive size methods.
 
-### How to Migrate
+#### How to Migrate
 Use **Anchored Adaptive Banners** instead. They are the official modern replacement, dynamically calculating the optimal height based on the device width and screen density.
 
 !!! note "Backward Compatibility Fallback"
@@ -49,9 +54,7 @@ Use **Anchored Adaptive Banners** instead. They are the official modern replacem
         var adView = new AdView(unitId, adSize, AdPosition.Top);
         ```
 
----
-
-## Gradle Dependency Changes
+### Gradle Dependency Changes
 
 The native Android plugin now pulls the new Next-Gen SDK:
 
