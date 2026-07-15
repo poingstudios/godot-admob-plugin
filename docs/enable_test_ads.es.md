@@ -35,31 +35,37 @@ El método más conveniente para permitir las pruebas es emplear los bloques de 
 
 Tenga en cuenta que debe seleccionar el bloque de anuncios de prueba proporcionado por Google adecuado según la plataforma que esté probando. Utilice un bloque de anuncios de prueba de iOS para realizar solicitudes de anuncios de prueba en iOS y un bloque de anuncios de prueba de Android para realizar solicitudes en Android.
 
-!!! note
-
-    **Nota importante**: antes de lanzar su aplicación, asegúrese de sustituir estos ID de prueba por su propio ID de bloque de anuncios.
+!!! warning "Advertencia"
+    Antes de publicar su aplicación, asegúrese de reemplazar estos ID con su propio ID de bloque de anuncios. Si ya ha publicado su aplicación, [habilite los dispositivos de prueba](#enable-test-devices).
     A continuación se muestran bloques de anuncios de muestra para cada formato disponible tanto en Android como en iOS:
 
 === "Android"
+=== "Android"
  | Formato de anuncio | ID de bloque de anuncios de muestra | 
  | ----------------------- | ---------------------------------------- | 
- | Banner | ca-app-pub-3940256099942544/6300978111 | 
- | Aplicación abierta | ca-app-pub-3940256099942544/9257395921 | 
- | Intersticial | ca-app-pub-3940256099942544/1033173712 | 
- | Recompensado | ca-app-pub-3940256099942544/5224354917 | 
- | Intersticial Recompensado | ca-app-pub-3940256099942544/5354046379 | 
- | Nativo | ca-app-pub-3940256099942544/2247696110 | 
+ | [[App Open](ad_formats/app_open.md) (Aplicación abierta)](ad_formats/app_open.md) | ca-app-pub-3940256099942544/9257395921 | 
+ | [Banner adaptativo anclado](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/9214589741 | 
+ | [Banner adaptativo en línea](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/9214589741 | 
+ | [Banner de tamaño fijo](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/6300978111 | 
+ | [Intersticial](ad_formats/interstitial.md) | ca-app-pub-3940256099942544/1033173712 | 
+ | [Anuncios recompensados](ad_formats/rewarded.md) | ca-app-pub-3940256099942544/5224354917 | 
+ | [Intersticial Recompensado](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/5354046379 | 
+ | [Nativo](ad_formats/native_overlay.md) | ca-app-pub-3940256099942544/2247696110 | 
+ | [Video nativo](ad_formats/native_overlay.md) | ca-app-pub-3940256099942544/1044960115 | 
 
 === "iOS"
 
  | Formato de anuncio | ID de bloque de anuncios de muestra | 
  | ----------------------- | ---------------------------------------- | 
- | Banner | ca-app-pub-3940256099942544/2934735716 | 
- | Aplicación abierta | ca-app-pub-3940256099942544/5575463023 | 
- | Intersticial | ca-app-pub-3940256099942544/4411468910 | 
- | Recompensado | ca-app-pub-3940256099942544/1712485313 | 
- | Intersticial Recompensado | ca-app-pub-3940256099942544/6978759866 | 
- | Nativo | ca-app-pub-3940256099942544/3986624511 | 
+ | [[App Open](ad_formats/app_open.md) (Aplicación abierta)](ad_formats/app_open.md) | ca-app-pub-3940256099942544/5575463023 | 
+ | [Banner adaptativo anclado](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2435281174 | 
+ | [Banner adaptativo en línea](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2435281174 | 
+ | [Banner de tamaño fijo](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2934735716 | 
+ | [Intersticial](ad_formats/interstitial.md) | ca-app-pub-3940256099942544/4411468910 | 
+ | [Anuncios recompensados](ad_formats/rewarded.md) | ca-app-pub-3940256099942544/1712485313 | 
+ | [Intersticial Recompensado](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/6978759866 | 
+ | [Nativo](ad_formats/native_overlay.md) | ca-app-pub-3940256099942544/3986624511 | 
+ | [Video nativo](ad_formats/native_overlay.md) | ca-app-pub-3940256099942544/2521693316 | 
 
 ### Identificadores de pruebas especializados
 Si bien los bloques de anuncios estándar anteriores se pueden usar agregando parámetros adicionales (como "contraíble"), los siguientes ID de bloques de anuncios especializados **garantizan** que se devuelven funciones específicas para probar su UI/UX:

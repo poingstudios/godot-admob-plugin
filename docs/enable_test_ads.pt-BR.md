@@ -35,32 +35,37 @@ O método mais rápido para ativar os testes é utilizar os blocos de anúncios 
 
 Lembre-se de selecionar o bloco de anúncios de teste adequado com base na plataforma em que está testando. Use um bloco de anúncios de teste do iOS para fazer solicitações de anúncios no iOS e um bloco do Android para solicitações no Android.
 
-!!! note
-
-    **Nota Importante**: Antes de lançar seu aplicativo, certifique-se de substituir esses IDs de teste pelos seus próprios IDs de blocos de anúncios de produção.
+!!! warning "Aviso"
+    Antes de publicar seu aplicativo, certifique-se de substituir esses IDs pelos seus próprios IDs de blocos de anúncios. Se você já publicou seu aplicativo, [ative os dispositivos de teste](#ativar-dispositivos-de-teste).
 
 Abaixo estão os blocos de anúncios de exemplo para cada formato disponível tanto no Android quanto no iOS:
 
 === "Android"
-    | Formato do anúncio    | ID do bloco de anúncio de exemplo      |
-    |-----------------------|----------------------------------------|
-    | Banner                | ca-app-pub-3940256099942544/6300978111 |
-    | App Open              | ca-app-pub-3940256099942544/9257395921 |
-    | Intersticial          | ca-app-pub-3940256099942544/1033173712 |
-    | Premiado (Rewarded)   | ca-app-pub-3940256099942544/5224354917 |
-    | Intersticial Premiado | ca-app-pub-3940256099942544/5354046379 |
-    | Nativo                | ca-app-pub-3940256099942544/2247696110 |
+    | Formato do anúncio        | ID do bloco de anúncio de exemplo      |
+    |---------------------------|----------------------------------------|
+    | [App Open](ad_formats/app_open.md)                  | ca-app-pub-3940256099942544/9257395921 |
+    | [Banner Adaptativo Ancorado](ad_formats/banner/get_started.md)| ca-app-pub-3940256099942544/9214589741 |
+    | [Banner Adaptativo Inline](ad_formats/banner/get_started.md)  | ca-app-pub-3940256099942544/9214589741 |
+    | [Banner de Tamanho Fixo](ad_formats/banner/get_started.md)    | ca-app-pub-3940256099942544/6300978111 |
+    | [Intersticial](ad_formats/interstitial.md)              | ca-app-pub-3940256099942544/1033173712 |
+    | [Premiado (Rewarded Ads)](ad_formats/rewarded.md)   | ca-app-pub-3940256099942544/5224354917 |
+    | [Intersticial Premiado](ad_formats/rewarded_interstitial.md)     | ca-app-pub-3940256099942544/5354046379 |
+    | [Nativo](ad_formats/native_overlay.md)                    | ca-app-pub-3940256099942544/2247696110 |
+    | [Vídeo Nativo](ad_formats/native_overlay.md)              | ca-app-pub-3940256099942544/1044960115 |
 
 === "iOS"
 
-    | Formato do anúncio    | ID do bloco de anúncio de exemplo      |
-    |-----------------------|----------------------------------------|
-    | Banner                | ca-app-pub-3940256099942544/2934735716 |
-    | App Open              | ca-app-pub-3940256099942544/5575463023 |
-    | Intersticial          | ca-app-pub-3940256099942544/4411468910 |
-    | Premiado (Rewarded)   | ca-app-pub-3940256099942544/1712485313 |
-    | Intersticial Premiado | ca-app-pub-3940256099942544/6978759866 |
-    | Nativo                | ca-app-pub-3940256099942544/3986624511 |
+    | Formato do anúncio        | ID do bloco de anúncio de exemplo      |
+    |---------------------------|----------------------------------------|
+    | [App Open](ad_formats/app_open.md)                  | ca-app-pub-3940256099942544/5575463023 |
+    | [Banner Adaptativo Ancorado](ad_formats/banner/get_started.md)| ca-app-pub-3940256099942544/2435281174 |
+    | [Banner Adaptativo Inline](ad_formats/banner/get_started.md)  | ca-app-pub-3940256099942544/2435281174 |
+    | [Banner de Tamanho Fixo](ad_formats/banner/get_started.md)    | ca-app-pub-3940256099942544/2934735716 |
+    | [Intersticial](ad_formats/interstitial.md)              | ca-app-pub-3940256099942544/4411468910 |
+    | [Premiado (Rewarded Ads)](ad_formats/rewarded.md)   | ca-app-pub-3940256099942544/1712485313 |
+    | [Intersticial Premiado](ad_formats/rewarded_interstitial.md)     | ca-app-pub-3940256099942544/6978759866 |
+    | [Nativo](ad_formats/native_overlay.md)                    | ca-app-pub-3940256099942544/3986624511 |
+    | [Vídeo Nativo](ad_formats/native_overlay.md)              | ca-app-pub-3940256099942544/2521693316 |
 
 ### Identificadores de Teste Especializados
 Embora os blocos de anúncios padrão acima possam ser usados adicionando parâmetros extras (como `collapsible`), os seguintes IDs de blocos de anúncios especializados **garantem** que recursos específicos sejam retornados para testar sua interface/experiência de usuário:

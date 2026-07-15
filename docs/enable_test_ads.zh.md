@@ -36,32 +36,37 @@
 
 请记住，您应根据测试的平台选择适当的 Google 提供的测试广告单元。在 iOS 上进行测试广告请求时使用 iOS 测试广告单元，在 Android 上进行请求时使用 Android 测试广告单元。
 
-!!! note "注意"
-
-    **重要提示**：在发布您的应用之前，请务必将这些测试 ID 替换为您自己的广告单元 ID。
+!!! warning "警告"
+    在发布您的应用之前，请务必将这些测试 ID 替换为您自己的广告单元 ID。如果您已发布应用，请[启用测试设备](#enable-test-devices)。
 
 以下是 Android 和 iOS 上每种可用格式的示例广告单元：
 
 === "Android"
     | 广告格式             | 示例广告单元 ID                         |
     |-----------------------|----------------------------------------|
-    | 横幅广告 (Banner)     | ca-app-pub-3940256099942544/6300978111 |
-    | 开屏广告 (App Open)   | ca-app-pub-3940256099942544/9257395921 |
-    | 插屏广告 (Interstitial) | ca-app-pub-3940256099942544/1033173712 |
-    | 激励广告 (Rewarded)   | ca-app-pub-3940256099942544/5224354917 |
-    | 激励插屏广告 (Rewarded Interstitial) | ca-app-pub-3940256099942544/5354046379 |
-    | 原生重叠广告 (Native) | ca-app-pub-3940256099942544/2247696110 |
+    | [开屏广告 (App Open)](ad_formats/app_open.md)        | ca-app-pub-3940256099942544/9257395921 |
+    | [锚定自适应横幅广告 (Anchored Adaptive Banner)](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/9214589741 |
+    | [内联自适应横幅广告 (Inline Adaptive Banner)](ad_formats/banner/get_started.md)     | ca-app-pub-3940256099942544/9214589741 |
+    | [固定大小横幅广告 (Fixed Size Banner)](ad_formats/banner/get_started.md)        | ca-app-pub-3940256099942544/6300978111 |
+    | [插屏广告 (Interstitial)](ad_formats/interstitial.md)     | ca-app-pub-3940256099942544/1033173712 |
+    | [激励广告 (Rewarded Ads)](ad_formats/rewarded.md)       | ca-app-pub-3940256099942544/5224354917 |
+    | [激励插屏广告 (Rewarded Interstitial)](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/5354046379 |
+    | [原生广告 (Native)](ad_formats/native_overlay.md)         | ca-app-pub-3940256099942544/2247696110 |
+    | [原生视频广告 (Native Video)](ad_formats/native_overlay.md)   | ca-app-pub-3940256099942544/1044960115 |
 
 === "iOS"
 
     | 广告格式             | 示例广告单元 ID                         |
     |-----------------------|----------------------------------------|
-    | 横幅广告 (Banner)     | ca-app-pub-3940256099942544/2934735716 |
-    | 开屏广告 (App Open)   | ca-app-pub-3940256099942544/5575463023 |
-    | 插屏广告 (Interstitial) | ca-app-pub-3940256099942544/4411468910 |
-    | 激励广告 (Rewarded)   | ca-app-pub-3940256099942544/1712485313 |
-    | 激励插屏广告 (Rewarded Interstitial) | ca-app-pub-3940256099942544/6978759866 |
-    | 原生重叠广告 (Native) | ca-app-pub-3940256099942544/3986624511 |
+    | [开屏广告 (App Open)](ad_formats/app_open.md)        | ca-app-pub-3940256099942544/5575463023 |
+    | [锚定自适应横幅广告 (Anchored Adaptive Banner)](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2435281174 |
+    | [内联自适应横幅广告 (Inline Adaptive Banner)](ad_formats/banner/get_started.md)     | ca-app-pub-3940256099942544/2435281174 |
+    | [固定大小横幅广告 (Fixed Size Banner)](ad_formats/banner/get_started.md)        | ca-app-pub-3940256099942544/2934735716 |
+    | [插屏广告 (Interstitial)](ad_formats/interstitial.md)     | ca-app-pub-3940256099942544/4411468910 |
+    | [激励广告 (Rewarded Ads)](ad_formats/rewarded.md)       | ca-app-pub-3940256099942544/1712485313 |
+    | [激励插屏广告 (Rewarded Interstitial)](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/6978759866 |
+    | [原生广告 (Native)](ad_formats/native_overlay.md)         | ca-app-pub-3940256099942544/3986624511 |
+    | [原生视频广告 (Native Video)](ad_formats/native_overlay.md)   | ca-app-pub-3940256099942544/2521693316 |
 
 ### 专用测试标识符
 虽然上述标准广告单元可以通过添加额外参数（如 `collapsible`）来使用，但以下专用广告单元 ID **保证**在测试您的 UI/UX 时返回特定功能：
