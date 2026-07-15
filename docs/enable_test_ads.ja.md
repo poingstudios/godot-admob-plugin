@@ -20,7 +20,7 @@
 
 Godot エディタ内で直接広告をテストできます。エディタはモック広告オーバーレイを表示し、モバイルプラットフォームでの実際の広告の動作に近い体験を提供します。
 
-<video autoplay loop muted playsinline width="50%">
+<video autoplay loop muted playsinline>
   <source src="../assets/editor_test_ads.mp4" type="video/mp4">
   お使いのブラウザはビデオタグをサポートしていません。
 </video>

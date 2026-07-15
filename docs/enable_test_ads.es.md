@@ -19,7 +19,7 @@ Este documento se basa en:
 
 Puede probar sus anuncios directamente dentro del editor Godot. El editor mostrará superposiciones de anuncios simulados, brindando una experiencia similar a cómo se comportarán los anuncios reales en una plataforma móvil.
 
-<video autoplay loop muted playsinline width="50%">
+<video autoplay loop muted playsinline>
   <source src="../assets/editor_test_ads.mp4" type="video/mp4">
   Su navegador no soporta la etiqueta de video.
 </video>

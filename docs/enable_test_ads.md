@@ -19,7 +19,7 @@ This document is based on:
 
 You can test your ads directly inside the Godot editor. The editor will display mock ads overlays giving a similar experience to how actual ads will behave on a mobile platform.
 
-<video autoplay loop muted playsinline width="50%">
+<video autoplay loop muted playsinline>
   <source src="../assets/editor_test_ads.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>

@@ -20,7 +20,7 @@
 
 您可以直接在 Godot 编辑器中测试您的广告。编辑器将显示模拟广告覆盖层，提供与移动平台上实际广告行为相似的体验。
 
-<video autoplay loop muted playsinline width="50%">
+<video autoplay loop muted playsinline>
   <source src="../assets/editor_test_ads.mp4" type="video/mp4">
   您的浏览器不支持视频标签。
 </video>
