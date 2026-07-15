@@ -571,7 +571,7 @@ private void OnShowPressed()
 
 - 🍎 [iOS Platform Setup][iOSPlatform]
 - 🤖 [Android Platform Setup][AndroidPlatform]
-- ⏳ [Legacy Support (Godot < 4.2)](https://github.com/poingstudios/godot-admob-plugin/tree/v3)
+- ⏳ [Godot 3 Support](https://github.com/poingstudios/godot-admob-plugin/tree/v1)
 
 ## 📄 Documentation
 
