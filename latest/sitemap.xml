@@ -111,6 +111,16 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/ad_formats/native_overlay/"/>
     </url>
     <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ad_formats/native_video/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latest/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/ad_formats/native_video/"/>
+    </url>
+    <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ad_formats/rewarded/</loc>
         <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
@@ -1239,6 +1249,16 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/ad_formats/native_overlay/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/ad_formats/native_overlay/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/ad_formats/native_overlay/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/ad_formats/native_video/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/ad_formats/native_video/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/ad_formats/rewarded/</loc>
@@ -2380,6 +2400,16 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/ad_formats/native_overlay/"/>
     </url>
     <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/es/ad_formats/native_video/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latest/es/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/ad_formats/native_video/"/>
+    </url>
+    <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/es/ad_formats/rewarded/</loc>
         <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
@@ -3519,6 +3549,16 @@
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/ad_formats/native_overlay/"/>
     </url>
     <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/zh/ad_formats/native_video/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latest/zh/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/ad_formats/native_video/"/>
+    </url>
+    <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/zh/ad_formats/rewarded/</loc>
         <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
@@ -4656,6 +4696,16 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/ad_formats/native_overlay/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/ad_formats/native_overlay/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/ad_formats/native_overlay/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ja/ad_formats/native_video/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latest/ja/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/ad_formats/native_video/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/ad_formats/native_video/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ja/ad_formats/rewarded/</loc>
