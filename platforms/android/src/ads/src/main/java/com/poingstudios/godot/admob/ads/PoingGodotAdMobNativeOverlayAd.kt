@@ -58,6 +58,11 @@ class PoingGodotAdMobNativeOverlayAd(godot: Godot?) : org.godotengine.godot.plug
         signals.add(NativeOverlayAd.SignalInfos.onAdImpression)
         signals.add(NativeOverlayAd.SignalInfos.onAdOpened)
         signals.add(NativeOverlayAd.SignalInfos.onAdPaid)
+        signals.add(NativeOverlayAd.SignalInfos.onNativeOverlayAdVideoStart)
+        signals.add(NativeOverlayAd.SignalInfos.onNativeOverlayAdVideoPlay)
+        signals.add(NativeOverlayAd.SignalInfos.onNativeOverlayAdVideoPause)
+        signals.add(NativeOverlayAd.SignalInfos.onNativeOverlayAdVideoEnd)
+        signals.add(NativeOverlayAd.SignalInfos.onNativeOverlayAdVideoMute)
         return signals
     }
 
@@ -138,4 +143,28 @@ class PoingGodotAdMobNativeOverlayAd(godot: Godot?) : org.godotengine.godot.plug
         return nativeAds[uid]?.getResponseInfo() ?: Dictionary()
     }
 
+    @UsedByGodot
+    fun has_video_content(uid: Int): Boolean {
+        return nativeAds[uid]?.hasVideoContent() ?: false
+    }
+
+    @UsedByGodot
+    fun get_video_duration(uid: Int): Float {
+        return nativeAds[uid]?.getVideoDuration() ?: 0f
+    }
+
+    @UsedByGodot
+    fun get_video_aspect_ratio(uid: Int): Float {
+        return nativeAds[uid]?.getVideoAspectRatio() ?: 0f
+    }
+
+    @UsedByGodot
+    fun is_video_muted(uid: Int): Boolean {
+        return nativeAds[uid]?.isVideoMuted() ?: true
+    }
+
+    @UsedByGodot
+    fun is_video_custom_controls_enabled(uid: Int): Boolean {
+        return nativeAds[uid]?.isVideoCustomControlsEnabled() ?: false
+    }
 }

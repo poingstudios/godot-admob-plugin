@@ -2,6 +2,7 @@ using System;
 using Godot;
 using PoingStudios.AdMob.Api;
 using PoingStudios.AdMob.Api.Core;
+using PoingStudios.AdMob.Api.Listeners;
 
 namespace PoingStudios.AdMob.Sample
 {
@@ -23,6 +24,7 @@ namespace PoingStudios.AdMob.Sample
         private HBoxContainer _customSize;
         private LineEdit _widthValue;
         private LineEdit _heightValue;
+        private CheckButton _videoToggle;
 
         private OptionButton _templateType;
         private Button _mainBgButton;
@@ -62,6 +64,7 @@ namespace PoingStudios.AdMob.Sample
             _customSize = GetNode<HBoxContainer>("%CustomSize");
             _widthValue = GetNode<LineEdit>("%WidthValue");
             _heightValue = GetNode<LineEdit>("%HeightValue");
+            _videoToggle = GetNode<CheckButton>("%Video");
 
             _sizeOption.ItemSelected += (index) =>
             {
@@ -99,10 +102,10 @@ namespace PoingStudios.AdMob.Sample
             picker.EditAlpha = false;
             picker.CustomMinimumSize = new Vector2(300, 400);
             popup.AddChild(picker);
-            AddChild(popup);
             popup.PopupCentered();
             picker.ColorChanged += (color) => callback(color);
             popup.PopupHide += () => popup.QueueFree();
+            AddChild(popup);
         }
 
         private void OnMainBgButtonPressed()
@@ -143,9 +146,13 @@ namespace PoingStudios.AdMob.Sample
             _hideButton.Disabled = !(isLoaded && !_isHidden);
         }
 
-        private string GetAdUnitId()
+        private string GetAdUnitId(bool isVideo = false)
         {
-            return OS.GetName() == "Android" ? "ca-app-pub-3940256099942544/2247696110" : "ca-app-pub-3940256099942544/3986624511";
+            if (OS.GetName() == "Android")
+            {
+                return isVideo ? "ca-app-pub-3940256099942544/1044960115" : "ca-app-pub-3940256099942544/2247696110";
+            }
+            return isVideo ? "ca-app-pub-3940256099942544/2521693316" : "ca-app-pub-3940256099942544/3986624511";
         }
 
         private void LoadNative(bool hideImmediately = false)
@@ -157,7 +164,8 @@ namespace PoingStudios.AdMob.Sample
             }
 
             UpdateUiState(false);
-            Log($"Loading native ad{(hideImmediately ? " in background" : string.Empty)}...");
+            bool isVideoRequest = _videoToggle.ButtonPressed;
+            Log($"Loading native ad{(hideImmediately ? " in background" : string.Empty)}{(isVideoRequest ? " (video)" : string.Empty)}...");
 
             _isHidden = hideImmediately;
             UpdateUiState(false);
@@ -168,7 +176,7 @@ namespace PoingStudios.AdMob.Sample
                 MediaAspectRatio = NativeMediaAspectRatio.Any
             };
 
-            NativeOverlayAd.Load(GetAdUnitId(), new AdRequest(), options, OnAdLoadFinished);
+            NativeOverlayAd.Load(GetAdUnitId(isVideoRequest), new AdRequest(), options, OnAdLoadFinished);
         }
 
         private void OnAdLoadFinished(NativeOverlayAd ad, LoadAdError error)
@@ -212,6 +220,29 @@ namespace PoingStudios.AdMob.Sample
             };
 
             _nativeOverlayAd.RenderTemplate(style, _adPosition, GetSelectedAdSize());
+
+            var mediaContent = ad.GetMediaContent();
+            if (mediaContent != null)
+            {
+                float aspectRatio = mediaContent.GetAspectRatio();
+                Log($"Media aspect ratio: {aspectRatio}");
+                if (mediaContent.HasVideoContent())
+                {
+                    float duration = mediaContent.GetDuration();
+                    Log($"Video ad duration: {duration}");
+                    var controller = mediaContent.GetVideoController();
+                    if (controller != null)
+                    {
+                        var callbacks = new VideoLifecycleCallbacks();
+                        callbacks.OnVideoStart = () => Log("Video started");
+                        callbacks.OnVideoPlay = () => Log("Video played");
+                        callbacks.OnVideoPause = () => Log("Video paused");
+                        callbacks.OnVideoEnd = () => Log("Video ended");
+                        callbacks.OnVideoMute = (isMuted) => Log($"Video isMuted: {isMuted}");
+                        controller.VideoLifecycleCallbacks = callbacks;
+                    }
+                }
+            }
 
             if (_isHidden)
             {

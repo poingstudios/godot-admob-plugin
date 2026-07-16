@@ -40,6 +40,7 @@ var _is_hidden := false
 @onready var _custom_size := %CustomSize as HBoxContainer
 @onready var _width_value: LineEdit = %WidthValue
 @onready var _height_value: LineEdit = %HeightValue
+@onready var _video_toggle: CheckButton = %Video
 
 @onready var _template_type: OptionButton = %TemplateType
 @onready var _main_bg_button: Button = %MainBGButton
@@ -133,12 +134,10 @@ func _update_ui_state(is_loaded: bool) -> void:
 	_hide_button.disabled = not (is_loaded and not _is_hidden)
 
 
-func _get_ad_unit_id() -> String:
-	return (
-		"ca-app-pub-3940256099942544/2247696110"
-		if OS.get_name() == "Android"
-		else "ca-app-pub-3940256099942544/3986624511"
-	)
+func _get_ad_unit_id(is_video: bool = false) -> String:
+	if OS.get_name() == "Android":
+		return "ca-app-pub-3940256099942544/1044960115" if is_video else "ca-app-pub-3940256099942544/2247696110"
+	return "ca-app-pub-3940256099942544/2521693316" if is_video else "ca-app-pub-3940256099942544/3986624511"
 
 
 func _load_native(hide_immediately: bool = false) -> void:
@@ -147,7 +146,16 @@ func _load_native(hide_immediately: bool = false) -> void:
 		_native_overlay_ad = null
 
 	_update_ui_state(false)
-	_log("Loading native ad%s..." % (" in background" if hide_immediately else ""))
+	var is_video_request := _video_toggle.button_pressed
+	_log(
+		(
+			"Loading native ad%s%s..."
+			% [
+				" in background" if hide_immediately else "",
+				" (video)" if is_video_request else ""
+			]
+		)
+	)
 
 	_is_hidden = hide_immediately
 	_update_ui_state(false)
@@ -156,7 +164,7 @@ func _load_native(hide_immediately: bool = false) -> void:
 	options.ad_choices_placement = AdChoicesPlacement.Values.TOP_RIGHT
 	options.media_aspect_ratio = NativeMediaAspectRatio.Values.ANY
 
-	NativeOverlayAd.load(_get_ad_unit_id(), AdRequest.new(), options, _on_ad_load_finished)
+	NativeOverlayAd.load(_get_ad_unit_id(is_video_request), AdRequest.new(), options, _on_ad_load_finished)
 
 
 func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
@@ -205,6 +213,23 @@ func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
 	style.call_to_action_text = cta_style
 
 	_native_overlay_ad.render_template(style, _ad_position, _get_selected_ad_size())
+
+	var media_content := ad.get_media_content()
+	if media_content:
+		var aspect_ratio := media_content.get_aspect_ratio()
+		_log("Media aspect ratio: %f" % aspect_ratio)
+		if media_content.has_video_content():
+			var duration := media_content.get_duration()
+			_log("Video ad duration: %f" % duration)
+			var controller := media_content.get_video_controller()
+			if controller:
+				var callbacks := VideoLifecycleCallbacks.new()
+				callbacks.on_video_start = func(): _log("Video started")
+				callbacks.on_video_play = func(): _log("Video played")
+				callbacks.on_video_pause = func(): _log("Video paused")
+				callbacks.on_video_end = func(): _log("Video ended")
+				callbacks.on_video_mute = func(is_muted: bool): _log("Video isMuted: %s" % is_muted)
+				controller.video_lifecycle_callbacks = callbacks
 
 	if _is_hidden:
 		_native_overlay_ad.hide()

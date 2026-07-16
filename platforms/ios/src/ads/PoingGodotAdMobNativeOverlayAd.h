@@ -32,6 +32,11 @@ public:
     void update_custom_position(int uid, int x, int y);
     float get_width_in_pixels(int uid);
     float get_height_in_pixels(int uid);
+    bool has_video_content(int uid);
+    float get_video_duration(int uid);
+    float get_video_aspect_ratio(int uid);
+    bool is_video_muted(int uid);
+    bool is_video_custom_controls_enabled(int uid);
 
     static PoingGodotAdMobNativeOverlayAd *get_singleton();
 

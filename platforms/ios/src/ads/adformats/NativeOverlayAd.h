@@ -7,7 +7,7 @@
 #import "AdFormatBase.h"
 #import "../helpers/NativeTemplates/GADTTemplateView.h"
 
-@interface NativeOverlayAd : AdFormatBase <GADNativeAdLoaderDelegate, GADNativeAdDelegate>
+@interface NativeOverlayAd : AdFormatBase <GADNativeAdLoaderDelegate, GADNativeAdDelegate, GADVideoControllerDelegate>
 
 @property (nonatomic, strong, readonly) GADNativeAd *nativeAd;
 
@@ -22,6 +22,11 @@
 - (void)show;
 - (float)getWidthInPixels;
 - (float)getHeightInPixels;
+- (BOOL)hasVideoContent;
+- (float)getVideoDuration;
+- (float)getVideoAspectRatio;
+- (BOOL)isVideoMuted;
+- (BOOL)isVideoCustomControlsEnabled;
 
 @end
 

@@ -52,7 +52,7 @@
     | [激励广告 (Rewarded Ads)](ad_formats/rewarded.md)       | ca-app-pub-3940256099942544/5224354917 |
     | [激励插屏广告 (Rewarded Interstitial)](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/5354046379 |
     | [原生广告 (Native)](ad_formats/native_overlay.md)         | ca-app-pub-3940256099942544/2247696110 |
-    | [原生视频广告 (Native Video)](ad_formats/native_overlay.md)   | ca-app-pub-3940256099942544/1044960115 |
+    | [原生视频广告 (Native Video)](ad_formats/native_video.md)   | ca-app-pub-3940256099942544/1044960115 |
 
 === "iOS"
 
@@ -66,7 +66,7 @@
     | [激励广告 (Rewarded Ads)](ad_formats/rewarded.md)       | ca-app-pub-3940256099942544/1712485313 |
     | [激励插屏广告 (Rewarded Interstitial)](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/6978759866 |
     | [原生广告 (Native)](ad_formats/native_overlay.md)         | ca-app-pub-3940256099942544/3986624511 |
-    | [原生视频广告 (Native Video)](ad_formats/native_overlay.md)   | ca-app-pub-3940256099942544/2521693316 |
+    | [原生视频广告 (Native Video)](ad_formats/native_video.md)   | ca-app-pub-3940256099942544/2521693316 |
 
 ### 专用测试标识符
 虽然上述标准广告单元可以通过添加额外参数（如 `collapsible`）来使用，但以下专用广告单元 ID **保证**在测试您的 UI/UX 时返回特定功能：

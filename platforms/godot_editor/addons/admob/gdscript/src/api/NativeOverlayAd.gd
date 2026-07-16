@@ -29,6 +29,7 @@ var ad_listener := AdListener.new()
 var on_ad_paid: Callable = func(_ad_value: AdValue): pass
 var _uid: int
 var _ad_load_callback: Callable
+var _media_content: MediaContent
 
 
 func _init(uid: int) -> void:
@@ -39,6 +40,15 @@ func _init(uid: int) -> void:
 		safe_connect(_plugin, "on_native_overlay_ad_impression", _on_ad_impression)
 		safe_connect(_plugin, "on_native_overlay_ad_opened", _on_ad_opened)
 		safe_connect(_plugin, "on_native_overlay_ad_paid", _on_ad_paid)
+		safe_connect(_plugin, "on_native_overlay_ad_video_start", _on_video_start)
+		safe_connect(_plugin, "on_native_overlay_ad_video_play", _on_video_play)
+		safe_connect(_plugin, "on_native_overlay_ad_video_pause", _on_video_pause)
+		safe_connect(_plugin, "on_native_overlay_ad_video_end", _on_video_end)
+		safe_connect(_plugin, "on_native_overlay_ad_video_mute", _on_video_mute)
+
+
+func get_media_content() -> MediaContent:
+	return _media_content
 
 
 ## Loads a native overlay ad.
@@ -50,8 +60,8 @@ static func load(
 	ad_unit_id: String, ad_request: AdRequest, options: NativeAdOptions, ad_load_callback: Callable
 ) -> void:
 	if _plugin:
-		var uid = _plugin.create()
-		var ad = NativeOverlayAd.new(uid)
+		var uid := _plugin.create() as int
+		var ad := NativeOverlayAd.new(uid)
 		ad._ad_load_callback = ad_load_callback
 		ad.reference()  # Keep alive until loaded or failed
 
@@ -146,6 +156,7 @@ func _on_ad_loaded(uid: int) -> void:
 	if uid == _uid:
 		safe_disconnect(_plugin, "on_native_overlay_ad_loaded", _on_ad_loaded)
 		safe_disconnect(_plugin, "on_native_overlay_ad_failed_to_load", _on_ad_failed_to_load)
+		_media_content = MediaContent.new(_uid, _plugin)
 		if _ad_load_callback.is_valid():
 			_ad_load_callback.call(self, null)
 		unreference.call_deferred()
@@ -183,4 +194,44 @@ func _on_ad_opened(uid: int) -> void:
 func _on_ad_paid(uid: int, ad_value_dictionary: Dictionary) -> void:
 	if uid == self._uid and on_ad_paid.is_valid():
 		on_ad_paid.call_deferred(AdValue.create(ad_value_dictionary))
+
+
+func _on_video_start(uid: int) -> void:
+	if uid == _uid and _media_content:
+		var controller := _media_content.get_video_controller()
+		if controller and controller.video_lifecycle_callbacks:
+			if controller.video_lifecycle_callbacks.on_video_start.is_valid():
+				controller.video_lifecycle_callbacks.on_video_start.call_deferred()
+
+
+func _on_video_play(uid: int) -> void:
+	if uid == _uid and _media_content:
+		var controller := _media_content.get_video_controller()
+		if controller and controller.video_lifecycle_callbacks:
+			if controller.video_lifecycle_callbacks.on_video_play.is_valid():
+				controller.video_lifecycle_callbacks.on_video_play.call_deferred()
+
+
+func _on_video_pause(uid: int) -> void:
+	if uid == _uid and _media_content:
+		var controller := _media_content.get_video_controller()
+		if controller and controller.video_lifecycle_callbacks:
+			if controller.video_lifecycle_callbacks.on_video_pause.is_valid():
+				controller.video_lifecycle_callbacks.on_video_pause.call_deferred()
+
+
+func _on_video_end(uid: int) -> void:
+	if uid == _uid and _media_content:
+		var controller := _media_content.get_video_controller()
+		if controller and controller.video_lifecycle_callbacks:
+			if controller.video_lifecycle_callbacks.on_video_end.is_valid():
+				controller.video_lifecycle_callbacks.on_video_end.call_deferred()
+
+
+func _on_video_mute(uid: int, is_muted: bool) -> void:
+	if uid == _uid and _media_content:
+		var controller := _media_content.get_video_controller()
+		if controller and controller.video_lifecycle_callbacks:
+			if controller.video_lifecycle_callbacks.on_video_mute.is_valid():
+				controller.video_lifecycle_callbacks.on_video_mute.call_deferred(is_muted)
 #endregion

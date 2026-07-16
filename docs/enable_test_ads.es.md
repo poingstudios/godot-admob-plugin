@@ -51,7 +51,7 @@ Tenga en cuenta que debe seleccionar el bloque de anuncios de prueba proporciona
  | [Anuncios recompensados](ad_formats/rewarded.md) | ca-app-pub-3940256099942544/5224354917 | 
  | [Intersticial Recompensado](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/5354046379 | 
  | [Nativo](ad_formats/native_overlay.md) | ca-app-pub-3940256099942544/2247696110 | 
- | [Video nativo](ad_formats/native_overlay.md) | ca-app-pub-3940256099942544/1044960115 | 
+ | [Video nativo](ad_formats/native_video.md) | ca-app-pub-3940256099942544/1044960115 | 
 
 === "iOS"
 
@@ -65,7 +65,7 @@ Tenga en cuenta que debe seleccionar el bloque de anuncios de prueba proporciona
  | [Anuncios recompensados](ad_formats/rewarded.md) | ca-app-pub-3940256099942544/1712485313 | 
  | [Intersticial Recompensado](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/6978759866 | 
  | [Nativo](ad_formats/native_overlay.md) | ca-app-pub-3940256099942544/3986624511 | 
- | [Video nativo](ad_formats/native_overlay.md) | ca-app-pub-3940256099942544/2521693316 | 
+ | [Video nativo](ad_formats/native_video.md) | ca-app-pub-3940256099942544/2521693316 | 
 
 ### Identificadores de pruebas especializados
 Si bien los bloques de anuncios estándar anteriores se pueden usar agregando parámetros adicionales (como "contraíble"), los siguientes ID de bloques de anuncios especializados **garantizan** que se devuelven funciones específicas para probar su UI/UX:
