@@ -479,6 +479,7 @@ nav:
         - AdRequest: reference/classes/AdRequest.md
         - AdSize: reference/classes/AdSize.md
         - AdValue: reference/classes/AdValue.md
+        - AdVideoController: reference/classes/AdVideoController.md
         - AdVideoOptions: reference/classes/AdVideoOptions.md
         - AdView: reference/classes/AdView.md
         - AdapterResponseInfo: reference/classes/AdapterResponseInfo.md
@@ -494,6 +495,7 @@ nav:
         - InterstitialAd: reference/classes/InterstitialAd.md
         - InterstitialAdLoader: reference/classes/InterstitialAdLoader.md
         - LoadAdError: reference/classes/LoadAdError.md
+        - MediaContent: reference/classes/MediaContent.md
         - MobileAds: reference/classes/MobileAds.md
         - NativeAdOptions: reference/classes/NativeAdOptions.md
         - NativeOverlayAd: reference/classes/NativeOverlayAd.md
@@ -518,6 +520,7 @@ nav:
         - OnUserEarnedRewardListener: reference/listeners/OnUserEarnedRewardListener.md
         - RewardedAdLoadCallback: reference/listeners/RewardedAdLoadCallback.md
         - RewardedInterstitialAdLoadCallback: reference/listeners/RewardedInterstitialAdLoadCallback.md
+        - VideoLifecycleCallbacks: reference/listeners/VideoLifecycleCallbacks.md
       - Enums:
         - AdChoicesPlacement: reference/enums/AdChoicesPlacement.md
         - AdPosition: reference/enums/AdPosition.md

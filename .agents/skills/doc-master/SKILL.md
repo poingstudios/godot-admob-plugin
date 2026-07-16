@@ -13,6 +13,7 @@ Keep all project documentation in sync with the codebase.
 - **Static Navigation**: All navigation structures must be defined statically in the `nav` block of `mkdocs.yml`. Avoid using `.pages` files to prevent plugin conflicts and 404 routing errors during i18n compilation.
 - **New Ad Format / Page**: Create the new `.md` file in the appropriate directory, add it to the `nav` section in `mkdocs.yml`, and add its translation key to `nav_translations` for each language.
 - **API Change**: Update the code blocks in the relevant `docs/` files for both GDScript and C#.
+- **Class Links**: When referencing plugin classes, resources, or enums (e.g. `AdPosition`, `AdSize`, `AdView`), always link them to their corresponding documentation in `reference/classes/<ClassName>.md` or `reference/enums/<EnumName>.md` to maintain documentation connectivity.
 - **Requirement Change**: If a plugin becomes mandatory/optional, update `AGENTS.md` and the error description files in `docs/errors/`.
 
 ### 2. Manual Installation
@@ -20,6 +21,7 @@ Keep all project documentation in sync with the codebase.
 
 ### 3. Cross-Platform Docs
 - Ensure Android and iOS setup steps are verified when a new dependency is added to `build.gradle` or `Package.swift`.
+- **SDK Version Changes**: When the Google Mobile Ads SDK or UMP version changes in Android Gradle or iOS Swift Package Manager configurations, you must update these version numbers in the Native SDK Versions list in `docs/index.md` (and all its localization files) and `AGENTS.md`.
 
 ### 4. Localization Parity
 - **Primary Source**: English (`en`) is the source of truth. All new pages and layout changes must start in English first before translating.
