@@ -291,6 +291,10 @@
     _nativeAd = nativeAd;
     _nativeAd.delegate = self;
 
+    if (_nativeAd.mediaContent.hasVideoContent) {
+        _nativeAd.mediaContent.videoController.delegate = self;
+    }
+
     __weak NativeOverlayAd *weakSelf = self;
     _nativeAd.paidEventHandler = ^(GADAdValue *_Nonnull value) {
         NativeOverlayAd *strongSelf = weakSelf;
@@ -320,6 +324,49 @@
 
 - (void)nativeAdDidDismissScreen:(GADNativeAd *)nativeAd {
     PoingGodotAdMobNativeOverlayAd::get_singleton()->emit_signal("on_native_overlay_ad_closed", [self.UID intValue]);
+}
+
+#pragma mark - GADVideoControllerDelegate
+- (void)videoControllerDidPlayVideo:(GADVideoController *)videoController {
+    PoingGodotAdMobNativeOverlayAd::get_singleton()->emit_signal("on_native_overlay_ad_video_start", [self.UID intValue]);
+    PoingGodotAdMobNativeOverlayAd::get_singleton()->emit_signal("on_native_overlay_ad_video_play", [self.UID intValue]);
+}
+
+- (void)videoControllerDidPauseVideo:(GADVideoController *)videoController {
+    PoingGodotAdMobNativeOverlayAd::get_singleton()->emit_signal("on_native_overlay_ad_video_pause", [self.UID intValue]);
+}
+
+- (void)videoControllerDidEndVideoPlayback:(GADVideoController *)videoController {
+    PoingGodotAdMobNativeOverlayAd::get_singleton()->emit_signal("on_native_overlay_ad_video_end", [self.UID intValue]);
+}
+
+- (void)videoControllerDidMuteVideo:(GADVideoController *)videoController {
+    PoingGodotAdMobNativeOverlayAd::get_singleton()->emit_signal("on_native_overlay_ad_video_mute", [self.UID intValue], true);
+}
+
+- (void)videoControllerDidUnmuteVideo:(GADVideoController *)videoController {
+    PoingGodotAdMobNativeOverlayAd::get_singleton()->emit_signal("on_native_overlay_ad_video_mute", [self.UID intValue], false);
+}
+
+#pragma mark - Video Getters
+- (BOOL)hasVideoContent {
+    return _nativeAd && _nativeAd.mediaContent && _nativeAd.mediaContent.hasVideoContent;
+}
+
+- (float)getVideoDuration {
+    return (_nativeAd && _nativeAd.mediaContent) ? _nativeAd.mediaContent.duration : 0.0f;
+}
+
+- (float)getVideoAspectRatio {
+    return (_nativeAd && _nativeAd.mediaContent) ? _nativeAd.mediaContent.aspectRatio : 0.0f;
+}
+
+- (BOOL)isVideoMuted {
+    return (_nativeAd && _nativeAd.mediaContent && _nativeAd.mediaContent.videoController) ? _nativeAd.mediaContent.videoController.isMuted : YES;
+}
+
+- (BOOL)isVideoCustomControlsEnabled {
+    return (_nativeAd && _nativeAd.mediaContent && _nativeAd.mediaContent.videoController) ? _nativeAd.mediaContent.videoController.customControlsEnabled : NO;
 }
 
 @end

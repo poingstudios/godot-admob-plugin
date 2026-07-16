@@ -66,6 +66,11 @@ class NativeOverlayAd(
         val onAdPaid = SignalInfo("on_native_overlay_ad_paid", Integer::class.java, Dictionary::class.java)
         val onNativeOverlayAdFailedToLoad = SignalInfo("on_native_overlay_ad_failed_to_load", Integer::class.java, Dictionary::class.java)
         val onNativeOverlayAdLoaded = SignalInfo("on_native_overlay_ad_loaded", Integer::class.java)
+        val onNativeOverlayAdVideoStart = SignalInfo("on_native_overlay_ad_video_start", Integer::class.java)
+        val onNativeOverlayAdVideoPlay = SignalInfo("on_native_overlay_ad_video_play", Integer::class.java)
+        val onNativeOverlayAdVideoPause = SignalInfo("on_native_overlay_ad_video_pause", Integer::class.java)
+        val onNativeOverlayAdVideoEnd = SignalInfo("on_native_overlay_ad_video_end", Integer::class.java)
+        val onNativeOverlayAdVideoMute = SignalInfo("on_native_overlay_ad_video_mute", Integer::class.java, java.lang.Boolean::class.java)
     }
 
     private val mLayoutChangeListener = OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
@@ -98,6 +103,31 @@ class NativeOverlayAd(
 
                         override fun onAdPaid(value: AdValue) {
                             emitSignal(godot, pluginName, SignalInfos.onAdPaid, uid, value.convertToGodotDictionary())
+                        }
+                    }
+                    nativeAd.mediaContent?.let { mediaContent ->
+                        mediaContent.videoController?.let { videoController ->
+                            videoController.videoLifecycleCallbacks = object : com.google.android.libraries.ads.mobile.sdk.common.VideoController.VideoLifecycleCallbacks {
+                                override fun onVideoStart() {
+                                    emitSignal(godot, pluginName, SignalInfos.onNativeOverlayAdVideoStart, uid)
+                                }
+
+                                override fun onVideoPlay() {
+                                    emitSignal(godot, pluginName, SignalInfos.onNativeOverlayAdVideoPlay, uid)
+                                }
+
+                                override fun onVideoPause() {
+                                    emitSignal(godot, pluginName, SignalInfos.onNativeOverlayAdVideoPause, uid)
+                                }
+
+                                override fun onVideoEnd() {
+                                    emitSignal(godot, pluginName, SignalInfos.onNativeOverlayAdVideoEnd, uid)
+                                }
+
+                                override fun onVideoMute(isMuted: Boolean) {
+                                    emitSignal(godot, pluginName, SignalInfos.onNativeOverlayAdVideoMute, uid, isMuted)
+                                }
+                            }
                         }
                     }
                     emitSignal(godot, pluginName, SignalInfos.onNativeOverlayAdLoaded, uid)
@@ -258,5 +288,25 @@ class NativeOverlayAd(
 
     fun getResponseInfo(): Dictionary {
         return mNativeAd?.getResponseInfo()?.convertToGodotDictionary() ?: Dictionary()
+    }
+
+    fun hasVideoContent(): Boolean {
+        return mNativeAd?.mediaContent?.hasVideoContent ?: false
+    }
+
+    fun getVideoDuration(): Float {
+        return mNativeAd?.mediaContent?.duration ?: 0f
+    }
+
+    fun getVideoAspectRatio(): Float {
+        return mNativeAd?.mediaContent?.aspectRatio ?: 0f
+    }
+
+    fun isVideoMuted(): Boolean {
+        return mNativeAd?.mediaContent?.videoController?.isMuted ?: true
+    }
+
+    fun isVideoCustomControlsEnabled(): Boolean {
+        return mNativeAd?.mediaContent?.videoController?.isCustomControlsEnabled ?: false
     }
 }

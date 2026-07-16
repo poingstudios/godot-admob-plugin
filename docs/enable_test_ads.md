@@ -51,7 +51,7 @@ Below are sample ad units for each format available on both Android and iOS:
     | [Rewarded Ads](ad_formats/rewarded.md)              | ca-app-pub-3940256099942544/5224354917 |
     | [Rewarded Interstitial](ad_formats/rewarded_interstitial.md)     | ca-app-pub-3940256099942544/5354046379 |
     | [Native](ad_formats/native_overlay.md)                    | ca-app-pub-3940256099942544/2247696110 |
-    | [Native Video](ad_formats/native_overlay.md)              | ca-app-pub-3940256099942544/1044960115 |
+    | [Native Video](ad_formats/native_video.md)              | ca-app-pub-3940256099942544/1044960115 |
 
 === "iOS"
 
@@ -65,7 +65,7 @@ Below are sample ad units for each format available on both Android and iOS:
     | [Rewarded Ads](ad_formats/rewarded.md)              | ca-app-pub-3940256099942544/1712485313 |
     | [Rewarded Interstitial](ad_formats/rewarded_interstitial.md)     | ca-app-pub-3940256099942544/6978759866 |
     | [Native](ad_formats/native_overlay.md)                    | ca-app-pub-3940256099942544/3986624511 |
-    | [Native Video](ad_formats/native_overlay.md)              | ca-app-pub-3940256099942544/2521693316 |
+    | [Native Video](ad_formats/native_video.md)              | ca-app-pub-3940256099942544/2521693316 |
 
 ### Specialized Test Identifiers
 While the standard ad units above can be used by adding extra parameters (like `collapsible`), the following specialized ad unit IDs **guarantee** that specific features are returned for testing your UI/UX:

@@ -39,6 +39,11 @@ void PoingGodotAdMobNativeOverlayAd::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_width_in_pixels", "uid"), &PoingGodotAdMobNativeOverlayAd::get_width_in_pixels);
     ClassDB::bind_method(D_METHOD("get_height_in_pixels", "uid"), &PoingGodotAdMobNativeOverlayAd::get_height_in_pixels);
     ClassDB::bind_method(D_METHOD("get_response_info", "uid"), &PoingGodotAdMobNativeOverlayAd::get_response_info);
+    ClassDB::bind_method(D_METHOD("has_video_content", "uid"), &PoingGodotAdMobNativeOverlayAd::has_video_content);
+    ClassDB::bind_method(D_METHOD("get_video_duration", "uid"), &PoingGodotAdMobNativeOverlayAd::get_video_duration);
+    ClassDB::bind_method(D_METHOD("get_video_aspect_ratio", "uid"), &PoingGodotAdMobNativeOverlayAd::get_video_aspect_ratio);
+    ClassDB::bind_method(D_METHOD("is_video_muted", "uid"), &PoingGodotAdMobNativeOverlayAd::is_video_muted);
+    ClassDB::bind_method(D_METHOD("is_video_custom_controls_enabled", "uid"), &PoingGodotAdMobNativeOverlayAd::is_video_custom_controls_enabled);
 
     ADD_SIGNAL(MethodInfo("on_native_overlay_ad_loaded", PropertyInfo(Variant::INT, "uid")));
     ADD_SIGNAL(MethodInfo("on_native_overlay_ad_failed_to_load", PropertyInfo(Variant::INT, "uid"), PropertyInfo(Variant::DICTIONARY, "error")));
@@ -47,6 +52,11 @@ void PoingGodotAdMobNativeOverlayAd::_bind_methods() {
     ADD_SIGNAL(MethodInfo("on_native_overlay_ad_impression", PropertyInfo(Variant::INT, "uid")));
     ADD_SIGNAL(MethodInfo("on_native_overlay_ad_opened", PropertyInfo(Variant::INT, "uid")));
     ADD_SIGNAL(MethodInfo("on_native_overlay_ad_paid", PropertyInfo(Variant::INT, "uid"), PropertyInfo(Variant::DICTIONARY, "adValueDictionary")));
+    ADD_SIGNAL(MethodInfo("on_native_overlay_ad_video_start", PropertyInfo(Variant::INT, "uid")));
+    ADD_SIGNAL(MethodInfo("on_native_overlay_ad_video_play", PropertyInfo(Variant::INT, "uid")));
+    ADD_SIGNAL(MethodInfo("on_native_overlay_ad_video_pause", PropertyInfo(Variant::INT, "uid")));
+    ADD_SIGNAL(MethodInfo("on_native_overlay_ad_video_end", PropertyInfo(Variant::INT, "uid")));
+    ADD_SIGNAL(MethodInfo("on_native_overlay_ad_video_mute", PropertyInfo(Variant::INT, "uid"), PropertyInfo(Variant::BOOL, "is_muted")));
 }
 
 int PoingGodotAdMobNativeOverlayAd::create() {
@@ -138,4 +148,44 @@ float PoingGodotAdMobNativeOverlayAd::get_height_in_pixels(int uid) {
         return [ad getHeightInPixels];
     }
     return 0.0f;
+}
+
+bool PoingGodotAdMobNativeOverlayAd::has_video_content(int uid) {
+    NativeOverlayAd *ad = getObject(uid);
+    if (ad != nil) {
+        return [ad hasVideoContent];
+    }
+    return false;
+}
+
+float PoingGodotAdMobNativeOverlayAd::get_video_duration(int uid) {
+    NativeOverlayAd *ad = getObject(uid);
+    if (ad != nil) {
+        return [ad getVideoDuration];
+    }
+    return 0.0f;
+}
+
+float PoingGodotAdMobNativeOverlayAd::get_video_aspect_ratio(int uid) {
+    NativeOverlayAd *ad = getObject(uid);
+    if (ad != nil) {
+        return [ad getVideoAspectRatio];
+    }
+    return 0.0f;
+}
+
+bool PoingGodotAdMobNativeOverlayAd::is_video_muted(int uid) {
+    NativeOverlayAd *ad = getObject(uid);
+    if (ad != nil) {
+        return [ad isVideoMuted];
+    }
+    return true;
+}
+
+bool PoingGodotAdMobNativeOverlayAd::is_video_custom_controls_enabled(int uid) {
+    NativeOverlayAd *ad = getObject(uid);
+    if (ad != nil) {
+        return [ad isVideoCustomControlsEnabled];
+    }
+    return false;
 }

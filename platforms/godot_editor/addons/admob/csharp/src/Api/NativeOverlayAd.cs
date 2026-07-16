@@ -22,6 +22,7 @@ namespace PoingStudios.AdMob.Api
         public Action<AdValue> OnAdPaid { get; set; }
         private readonly int _uid;
         private Action<NativeOverlayAd, LoadAdError> _adLoadCallback;
+        private MediaContent _mediaContent;
 
         private readonly Callable _onAdClickedCallable;
         private readonly Callable _onAdClosedCallable;
@@ -30,6 +31,11 @@ namespace PoingStudios.AdMob.Api
         private readonly Callable _onAdLoadedCallable;
         private readonly Callable _onAdFailedToLoadCallable;
         private readonly Callable _onAdPaidCallable;
+        private readonly Callable _onVideoStartCallable;
+        private readonly Callable _onVideoPlayCallable;
+        private readonly Callable _onVideoPauseCallable;
+        private readonly Callable _onVideoEndCallable;
+        private readonly Callable _onVideoMuteCallable;
 
         private NativeOverlayAd(int uid)
         {
@@ -42,6 +48,11 @@ namespace PoingStudios.AdMob.Api
             _onAdLoadedCallable = Callable.From<int>(InternalOnAdLoaded);
             _onAdFailedToLoadCallable = Callable.From<int, Dictionary>(InternalOnAdFailedToLoad);
             _onAdPaidCallable = Callable.From<int, Dictionary>(InternalOnAdPaid);
+            _onVideoStartCallable = Callable.From<int>(OnVideoStart);
+            _onVideoPlayCallable = Callable.From<int>(OnVideoPlay);
+            _onVideoPauseCallable = Callable.From<int>(OnVideoPause);
+            _onVideoEndCallable = Callable.From<int>(OnVideoEnd);
+            _onVideoMuteCallable = Callable.From<int, bool>(OnVideoMute);
 
             if (_plugin != null)
             {
@@ -50,7 +61,17 @@ namespace PoingStudios.AdMob.Api
                 SafeConnect(_plugin, "on_native_overlay_ad_impression", _onAdImpressionCallable);
                 SafeConnect(_plugin, "on_native_overlay_ad_opened", _onAdOpenedCallable);
                 SafeConnect(_plugin, "on_native_overlay_ad_paid", _onAdPaidCallable);
+                SafeConnect(_plugin, "on_native_overlay_ad_video_start", _onVideoStartCallable);
+                SafeConnect(_plugin, "on_native_overlay_ad_video_play", _onVideoPlayCallable);
+                SafeConnect(_plugin, "on_native_overlay_ad_video_pause", _onVideoPauseCallable);
+                SafeConnect(_plugin, "on_native_overlay_ad_video_end", _onVideoEndCallable);
+                SafeConnect(_plugin, "on_native_overlay_ad_video_mute", _onVideoMuteCallable);
             }
+        }
+
+        public MediaContent GetMediaContent()
+        {
+            return _mediaContent;
         }
 
         public static void Load(string adUnitId, AdRequest adRequest, NativeAdOptions options, Action<NativeOverlayAd, LoadAdError> adLoadCallback)
@@ -145,6 +166,7 @@ namespace PoingStudios.AdMob.Api
             SafeDisconnect(_plugin, "on_native_overlay_ad_loaded", _onAdLoadedCallable);
             SafeDisconnect(_plugin, "on_native_overlay_ad_failed_to_load", _onAdFailedToLoadCallable);
 
+            _mediaContent = new MediaContent(_uid, _plugin);
             _adLoadCallback?.Invoke(this, null);
             _activeAds.Remove(this);
         }
@@ -190,6 +212,56 @@ namespace PoingStudios.AdMob.Api
             if (uid != _uid) return;
             var adValue = AdValue.Create(adValueDictionary);
             Callable.From(() => OnAdPaid?.Invoke(adValue)).CallDeferred();
+        }
+
+        private void OnVideoStart(int uid)
+        {
+            if (uid != _uid) return;
+            var callbacks = _mediaContent?.GetVideoController()?.VideoLifecycleCallbacks;
+            if (callbacks != null)
+            {
+                Callable.From(() => callbacks.OnVideoStart?.Invoke()).CallDeferred();
+            }
+        }
+
+        private void OnVideoPlay(int uid)
+        {
+            if (uid != _uid) return;
+            var callbacks = _mediaContent?.GetVideoController()?.VideoLifecycleCallbacks;
+            if (callbacks != null)
+            {
+                Callable.From(() => callbacks.OnVideoPlay?.Invoke()).CallDeferred();
+            }
+        }
+
+        private void OnVideoPause(int uid)
+        {
+            if (uid != _uid) return;
+            var callbacks = _mediaContent?.GetVideoController()?.VideoLifecycleCallbacks;
+            if (callbacks != null)
+            {
+                Callable.From(() => callbacks.OnVideoPause?.Invoke()).CallDeferred();
+            }
+        }
+
+        private void OnVideoEnd(int uid)
+        {
+            if (uid != _uid) return;
+            var callbacks = _mediaContent?.GetVideoController()?.VideoLifecycleCallbacks;
+            if (callbacks != null)
+            {
+                Callable.From(() => callbacks.OnVideoEnd?.Invoke()).CallDeferred();
+            }
+        }
+
+        private void OnVideoMute(int uid, bool isMuted)
+        {
+            if (uid != _uid) return;
+            var callbacks = _mediaContent?.GetVideoController()?.VideoLifecycleCallbacks;
+            if (callbacks != null)
+            {
+                Callable.From(() => callbacks.OnVideoMute?.Invoke(isMuted)).CallDeferred();
+            }
         }
     }
 }

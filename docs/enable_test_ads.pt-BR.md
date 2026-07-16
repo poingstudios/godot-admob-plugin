@@ -51,7 +51,7 @@ Abaixo estão os blocos de anúncios de exemplo para cada formato disponível ta
     | [Premiado (Rewarded Ads)](ad_formats/rewarded.md)   | ca-app-pub-3940256099942544/5224354917 |
     | [Intersticial Premiado](ad_formats/rewarded_interstitial.md)     | ca-app-pub-3940256099942544/5354046379 |
     | [Nativo](ad_formats/native_overlay.md)                    | ca-app-pub-3940256099942544/2247696110 |
-    | [Vídeo Nativo](ad_formats/native_overlay.md)              | ca-app-pub-3940256099942544/1044960115 |
+    | [Vídeo Nativo](ad_formats/native_video.md)              | ca-app-pub-3940256099942544/1044960115 |
 
 === "iOS"
 
@@ -65,7 +65,7 @@ Abaixo estão os blocos de anúncios de exemplo para cada formato disponível ta
     | [Premiado (Rewarded Ads)](ad_formats/rewarded.md)   | ca-app-pub-3940256099942544/1712485313 |
     | [Intersticial Premiado](ad_formats/rewarded_interstitial.md)     | ca-app-pub-3940256099942544/6978759866 |
     | [Nativo](ad_formats/native_overlay.md)                    | ca-app-pub-3940256099942544/3986624511 |
-    | [Vídeo Nativo](ad_formats/native_overlay.md)              | ca-app-pub-3940256099942544/2521693316 |
+    | [Vídeo Nativo](ad_formats/native_video.md)              | ca-app-pub-3940256099942544/2521693316 |
 
 ### Identificadores de Teste Especializados
 Embora os blocos de anúncios padrão acima possam ser usados adicionando parâmetros extras (como `collapsible`), os seguintes IDs de blocos de anúncios especializados **garantem** que recursos específicos sejam retornados para testar sua interface/experiência de usuário:

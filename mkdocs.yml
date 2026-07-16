@@ -104,7 +104,9 @@ plugins:
             Sizes: Tamanhos
             Anchored adaptive banners: Banners adaptativos ancorados
             Interstitial: Intersticial
+            Native: Nativo (Native)
             Native Overlay: Native Overlay
+            Respond to video events: Responder a eventos de vídeo
             Rewarded: Premiado (Rewarded)
             'Rewarded Interstitial': 'Intersticial Premiado'
             'Integrate AdMob Mediation': 'Integrar Mediação do AdMob'
@@ -178,7 +180,9 @@ plugins:
             Sizes: Tamaños
             Anchored adaptive banners: Banners adaptativos anclados
             Interstitial: Intersticial
+            Native: Nativo (Native)
             Native Overlay: Native Overlay
+            Respond to video events: Responder a eventos de video
             Rewarded: Bonificado (Rewarded)
             'Rewarded Interstitial': 'Intersticial Bonificado'
             'Integrate AdMob Mediation': 'Integrar mediación de AdMob'
@@ -253,7 +257,9 @@ plugins:
             Sizes: 尺寸
             Anchored adaptive banners: 锚定自适应横幅广告
             Interstitial: 插屏广告
+            Native: 原生广告
             Native Overlay: 原生重叠广告
+            Respond to video events: 响应视频事件
             Rewarded: 激励广告
             'Rewarded Interstitial': '激励插屏广告'
             'Integrate AdMob Mediation': '集成 AdMob 中介'
@@ -328,7 +334,9 @@ plugins:
             Sizes: サイズ
             Anchored adaptive banners: アンカー付きアダプティブバナー
             Interstitial: インタースティシャル広告 (Interstitial)
+            Native: ネイティブ広告
             Native Overlay: ネイティブオーバーレイ広告 (Native Overlay)
+            Respond to video events: 動画イベントに応答する
             Rewarded: リワード広告 (Rewarded)
             'Rewarded Interstitial': 'リワードインタースティシャル広告'
             'Integrate AdMob Mediation': 'AdMob メディエーションを統合する'
@@ -404,7 +412,9 @@ nav:
         - Sizes:
           - Anchored adaptive banners: ad_formats/banner/sizes/anchored_adaptive.md
       - Interstitial: ad_formats/interstitial.md
-      - Native Overlay: ad_formats/native_overlay.md
+      - Native:
+        - Native Overlay: ad_formats/native_overlay.md
+        - Respond to video events: ad_formats/native_video.md
       - Rewarded: ad_formats/rewarded.md
       - 'Rewarded Interstitial': ad_formats/rewarded_interstitial.md
     - Integrate AdMob Mediation:
