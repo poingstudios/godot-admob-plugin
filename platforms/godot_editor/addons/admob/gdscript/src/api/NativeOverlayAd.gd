@@ -60,8 +60,8 @@ static func load(
 	ad_unit_id: String, ad_request: AdRequest, options: NativeAdOptions, ad_load_callback: Callable
 ) -> void:
 	if _plugin:
-		var uid = _plugin.create()
-		var ad = NativeOverlayAd.new(uid)
+		var uid := _plugin.create() as int
+		var ad := NativeOverlayAd.new(uid)
 		ad._ad_load_callback = ad_load_callback
 		ad.reference()  # Keep alive until loaded or failed
 
@@ -198,7 +198,7 @@ func _on_ad_paid(uid: int, ad_value_dictionary: Dictionary) -> void:
 
 func _on_video_start(uid: int) -> void:
 	if uid == _uid and _media_content:
-		var controller = _media_content.get_video_controller()
+		var controller := _media_content.get_video_controller()
 		if controller and controller.video_lifecycle_callbacks:
 			if controller.video_lifecycle_callbacks.on_video_start.is_valid():
 				controller.video_lifecycle_callbacks.on_video_start.call_deferred()
@@ -206,7 +206,7 @@ func _on_video_start(uid: int) -> void:
 
 func _on_video_play(uid: int) -> void:
 	if uid == _uid and _media_content:
-		var controller = _media_content.get_video_controller()
+		var controller := _media_content.get_video_controller()
 		if controller and controller.video_lifecycle_callbacks:
 			if controller.video_lifecycle_callbacks.on_video_play.is_valid():
 				controller.video_lifecycle_callbacks.on_video_play.call_deferred()
@@ -214,7 +214,7 @@ func _on_video_play(uid: int) -> void:
 
 func _on_video_pause(uid: int) -> void:
 	if uid == _uid and _media_content:
-		var controller = _media_content.get_video_controller()
+		var controller := _media_content.get_video_controller()
 		if controller and controller.video_lifecycle_callbacks:
 			if controller.video_lifecycle_callbacks.on_video_pause.is_valid():
 				controller.video_lifecycle_callbacks.on_video_pause.call_deferred()
@@ -222,7 +222,7 @@ func _on_video_pause(uid: int) -> void:
 
 func _on_video_end(uid: int) -> void:
 	if uid == _uid and _media_content:
-		var controller = _media_content.get_video_controller()
+		var controller := _media_content.get_video_controller()
 		if controller and controller.video_lifecycle_callbacks:
 			if controller.video_lifecycle_callbacks.on_video_end.is_valid():
 				controller.video_lifecycle_callbacks.on_video_end.call_deferred()
@@ -230,7 +230,7 @@ func _on_video_end(uid: int) -> void:
 
 func _on_video_mute(uid: int, is_muted: bool) -> void:
 	if uid == _uid and _media_content:
-		var controller = _media_content.get_video_controller()
+		var controller := _media_content.get_video_controller()
 		if controller and controller.video_lifecycle_callbacks:
 			if controller.video_lifecycle_callbacks.on_video_mute.is_valid():
 				controller.video_lifecycle_callbacks.on_video_mute.call_deferred(is_muted)
