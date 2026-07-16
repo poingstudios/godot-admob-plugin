@@ -1,6 +1,6 @@
 # API リファレンス
 
-このページでは、Godot AdMob 插件が提供するクラス、列挙型、およびコールバックの一覧を掲載しています。
+このページでは、Godot AdMob プラグインが提供するクラス、列挙型、およびコールバックの一覧を掲載しています。
 
 ## クラス
 
@@ -24,7 +24,7 @@
 | [RewardedInterstitialAdLoader](classes/RewardedInterstitialAdLoader.ja.md) | リワードインタースティシャル広告の取得を担当するローダークラス。 |
 | [NativeOverlayAd](classes/NativeOverlayAd.ja.md) | Godot シーンの上に重ねて表示されるネイティブ広告フォーマット。 |
 | [NativeAdOptions](classes/NativeAdOptions.ja.md) | ネイティブオーバーレイ広告のレンダリング設定。 |
-| [NativeTemplateStyle](classes/NativeTemplateStyle.ja.md) | ネイティブオーバーレイ広告 of ビジュアルスタイルテンプレート。 |
+| [NativeTemplateStyle](classes/NativeTemplateStyle.ja.md) | ネイティブオーバーレイ広告のビジュアルスタイルテンプレート。 |
 | [NativeTemplateTextStyle](classes/NativeTemplateTextStyle.ja.md) | テキスト要素のフォントと色の設定。 |
 | [ResponseInfo](classes/ResponseInfo.ja.md) | ロードされた広告のメタデータとアダプター応答情報を保持するクラス。 |
 | [AdapterResponseInfo](classes/AdapterResponseInfo.ja.md) | 特定のメディエーションネットワークアダプターからのメタデータ。 |
@@ -69,7 +69,7 @@
 | [OnUserEarnedRewardListener](listeners/OnUserEarnedRewardListener.ja.md) | ユーザーがリワードを獲得したときにイベントを受信します。 |
 | [AppOpenAdLoadCallback](listeners/AppOpenAdLoadCallback.ja.md) | アプリ起動時広告のロード結果を処理します。 |
 | [InterstitialAdLoadCallback](listeners/InterstitialAdLoadCallback.ja.md) | インタースティシャル広告のロード結果を処理します。 |
-| [RewardedAdLoadCallback](listeners/RewardedAdLoadCallback.ja.md) | リワード広告 of ロード結果を処理します。 |
+| [RewardedAdLoadCallback](listeners/RewardedAdLoadCallback.ja.md) | リワード広告のロード結果を処理します。 |
 | [RewardedInterstitialAdLoadCallback](listeners/RewardedInterstitialAdLoadCallback.ja.md) | リワードインタースティシャル広告のロード结果を処理します。 |
 | [VideoLifecycleCallbacks](listeners/VideoLifecycleCallbacks.ja.md) | ネイティブ広告内のビデオ再生ライフサイクルイベントを受信します。 |
 | [AdInspectorClosedListener](listeners/AdInspectorClosedListener.ja.md) | ネイティブ広告インスペクターが閉じられたときにトリガーされます。 |
