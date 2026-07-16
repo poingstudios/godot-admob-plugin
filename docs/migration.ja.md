@@ -1,19 +1,24 @@
 # SDK バージョンの移行
 
-このガイドでは、Godot プロジェクトを Godot AdMob エディタープラグインの v4 から v5 に移行する際に必要な API 変更について説明します。
+このページでは、現在および以前のバージョンの移行について説明します。
 
-v5 では、Android の新しい **GMA Next-Gen SDK** の API が採用されています。移行の負担を最小限に抑えるため公開 API は高い互換性を維持していますが、一部のレガシー API は削除されました。
+## v4 から v5 への移行
 
----
+以下のサブセクションでは、Godot AdMob エディタープラグインのメジャーバージョン 4 と 5 の間の破壊的変更および動作の違いについて説明します。
 
-## スマートバナーの削除
+### スマートバナーの削除
 
-レガシーな `スマートバナー` フォーマットは Google によって非推奨となり、GMA Next-Gen SDK から完全に削除されました。
+レガシーな `スマートバナー` フォーマットは Google によって非推奨となり、v5 でプラグインから完全に削除されました。
+
+| 言語 | 削除されたプロパティ | 代替手段 |
+| :--- | :--- | :--- |
+| **GDScript** | `AdSize.SMART_BANNER` | [`AdSize.get_current_orientation_anchored_adaptive_banner_ad_size()`](reference/classes/AdSize.md#adaptive-banners) |
+| **C#** | `AdSize.SmartBanner` | [`AdSize.GetCurrentOrientationAnchoredAdaptiveBannerAdSize()`](reference/classes/AdSize.md#adaptive-banners) |
 
 !!! danger "破壊的変更 (Breaking Change)"
     静的プロパティ `AdSize.SMART_BANNER`（GDScript）および `AdSize.SmartBanner`（C#）は完全に削除されました。スクリプトを更新してアダプティブサイズのメソッドを使用する必要があります。
 
-### 移行方法
+#### 移行方法
 代わりに**アンカー付きアダプティブバナー**を使用してください。これらは公式のモダンな代替手段であり、デバイスの幅と画面密度に基づいて最適な高さを動的に計算します。
 
 !!! note "後方互換性のフォールバック"
@@ -49,9 +54,7 @@ v5 では、Android の新しい **GMA Next-Gen SDK** の API が採用されて
         var adView = new AdView(unitId, adSize, AdPosition.Top);
         ```
 
----
-
-## Gradle 依存関係の変更
+### Gradle 依存関係の変更
 
 ネイティブ Android プラグインは、新しい Next-Gen SDK を取り込むようになりました。
 

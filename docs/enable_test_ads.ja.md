@@ -16,38 +16,57 @@
 ## 前提条件
 - 完成 [開始使用指南](index.ja.md)
 
+## Godot エディタでのテスト
+
+Godot エディタ内で直接広告をテストできます。エディタはモック広告オーバーレイを表示し、モバイルプラットフォームでの実際の広告の動作に近い体験を提供します。
+
+<video autoplay loop muted playsinline>
+  <source src="../assets/editor_test_ads.mp4" type="video/mp4">
+  お使いのブラウザはビデオタグをサポートしていません。
+</video>
+
+!!! note
+    モック広告は Godot の Control ノードを使用して実装されているため、エディタ内ではゲームウィンドウ内にレンダリングされます。ただし、モバイルプラットフォームにエクスポートすると、公式の Google Mobile Ads SDK がすべてのゲームビューの上にネイティブ広告をレンダリングします。
+
+モックシステム、ビジュアルテンプレート、コールバックシミュレーションの詳細については、[エディタ内でのモック広告のプレビュー](editor_mock_ads.ja.md)ガイドを参照してください。
+
 ## サンプル広告ユニット {: #sample-ad-units }
 
 テストを有効にする最も迅速な方法は、Google が提供するテスト用広告ユニットを採用することです。これらの広告ユニットはご自身の AdMob アカウントとは切り離されているため、使用中にアカウントが無効なトラフィックを生成するリスクはありません。
 
 テスト対象のプラットフォームに基づいて、Google が提供する適切なテスト用広告ユニットを選択する必要がある点に注意してください。iOS でテスト広告リクエストを行うには iOS 用のテスト広告ユニットを使用し、Android でリクエストを行うには Android 用のテスト広告ユニットを使用します。
 
-!!! note
-
-    **重要事項**: アプリをリリースする前に、これらのテスト用 ID を必ずご自身の広告ユニット ID に置き換えてください。
+!!! warning "警告"
+    アプリを公開する前に、これらの ID をご自身の広告ユニット ID に置き換えていることを確認してください。すでにアプリを公開している場合は、[テストデバイスを有効](#enable-test-devices)にしてください。
 
 以下は、Android と iOS の両方で利用可能な各フォーマットのサンプル広告ユニットです。
 
 === "Android"
     | 広告フォーマット       | サンプル広告ユニット ID                 |
     |-----------------------|----------------------------------------|
-    | Banner                | ca-app-pub-3940256099942544/6300978111 |
-    | App Open              | ca-app-pub-3940256099942544/9257395921 |
-    | Interstitial          | ca-app-pub-3940256099942544/1033173712 |
-    | Rewarded              | ca-app-pub-3940256099942544/5224354917 |
-    | Rewarded Interstitial | ca-app-pub-3940256099942544/5354046379 |
-    | Native                | ca-app-pub-3940256099942544/2247696110 |
+    | [App Open](ad_formats/app_open.md)                  | ca-app-pub-3940256099942544/9257395921 |
+    | [Anchored Adaptive Banner](ad_formats/banner/get_started.md)  | ca-app-pub-3940256099942544/9214589741 |
+    | [Inline Adaptive Banner](ad_formats/banner/get_started.md)    | ca-app-pub-3940256099942544/9214589741 |
+    | [Fixed Size Banner](ad_formats/banner/get_started.md)         | ca-app-pub-3940256099942544/6300978111 |
+    | [Interstitial](ad_formats/interstitial.md)              | ca-app-pub-3940256099942544/1033173712 |
+    | [Rewarded Ads](ad_formats/rewarded.md)              | ca-app-pub-3940256099942544/5224354917 |
+    | [Rewarded Interstitial](ad_formats/rewarded_interstitial.md)     | ca-app-pub-3940256099942544/5354046379 |
+    | [Native](ad_formats/native_overlay.md)                    | ca-app-pub-3940256099942544/2247696110 |
+    | [Native Video](ad_formats/native_overlay.md)              | ca-app-pub-3940256099942544/1044960115 |
 
 === "iOS"
 
     | 広告フォーマット       | サンプル広告ユニット ID                 |
     |-----------------------|----------------------------------------|
-    | Banner                | ca-app-pub-3940256099942544/2934735716 |
-    | App Open              | ca-app-pub-3940256099942544/5575463023 |
-    | Interstitial          | ca-app-pub-3940256099942544/4411468910 |
-    | Rewarded              | ca-app-pub-3940256099942544/1712485313 |
-    | Rewarded Interstitial | ca-app-pub-3940256099942544/6978759866 |
-    | Native                | ca-app-pub-3940256099942544/3986624511 |
+    | [App Open](ad_formats/app_open.md)                  | ca-app-pub-3940256099942544/5575463023 |
+    | [Anchored Adaptive Banner](ad_formats/banner/get_started.md)  | ca-app-pub-3940256099942544/2435281174 |
+    | [Inline Adaptive Banner](ad_formats/banner/get_started.md)    | ca-app-pub-3940256099942544/2435281174 |
+    | [Fixed Size Banner](ad_formats/banner/get_started.md)         | ca-app-pub-3940256099942544/2934735716 |
+    | [Interstitial](ad_formats/interstitial.md)              | ca-app-pub-3940256099942544/4411468910 |
+    | [Rewarded Ads](ad_formats/rewarded.md)              | ca-app-pub-3940256099942544/1712485313 |
+    | [Rewarded Interstitial](ad_formats/rewarded_interstitial.md)     | ca-app-pub-3940256099942544/6978759866 |
+    | [Native](ad_formats/native_overlay.md)                    | ca-app-pub-3940256099942544/3986624511 |
+    | [Native Video](ad_formats/native_overlay.md)              | ca-app-pub-3940256099942544/2521693316 |
 
 ### 特殊なテスト用識別子
 上記の標準広告ユニットは追加のパラメータ（`collapsible` など）を追加して使用できますが、以下の特殊な広告ユニット ID は、UI/UX のテスト用に特定の機能が返されることを**保証**します。

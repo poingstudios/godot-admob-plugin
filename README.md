@@ -571,7 +571,7 @@ private void OnShowPressed()
 
 - 🍎 [iOS Platform Setup][iOSPlatform]
 - 🤖 [Android Platform Setup][AndroidPlatform]
-- ⏳ [Legacy Support (Godot < 4.2)](https://github.com/poingstudios/godot-admob-plugin/tree/v3)
+- ⏳ [Godot 3 Support](https://github.com/poingstudios/godot-admob-plugin/tree/v1)
 
 ## 📄 Documentation
 
@@ -597,10 +597,9 @@ Your support helps us continue to improve and maintain this plugin. Thank you fo
 
 
 
-## ⭐ Star History
-If you appreciate our work, don't forget to give us a star on GitHub! ⭐
+## Star History
 
-![Star History Chart](https://api.star-history.com/svg?repos=poingstudios/godot-admob-plugin&type=Date)
+[![Star History Chart](https://api.star-history.com/chart?repos=poingstudios/godot-admob-plugin&type=date&legend=top-left&sealed_token=ATUzb1mXlOQI3jnGm7Rpn_8YkMDh9y4DoyF-IOZ97Uw0oaShFtR9I5Srrxhrf_jaMaqgO5YKfVp9-UyqlLamx_epOX88rpSpr3g9utgVLd7xThQRsYWhJHM2lWd6WUg-wjEDVgZ7xpRrkzPHC4rGbTeXRrnvmPMagKmVDcL5_gX300ftiun-vv5iarNh)](https://www.star-history.com/?repos=poingstudios%2Fgodot-admob-plugin&type=date&legend=top-left)
 
 [VersionBadge]: https://img.shields.io/github/v/release/poingstudios/godot-admob-plugin
 [StarsBadge]: https://badgen.net/github/stars/poingstudios/godot-admob-plugin

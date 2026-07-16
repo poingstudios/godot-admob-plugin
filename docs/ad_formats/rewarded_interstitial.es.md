@@ -1,4 +1,4 @@
-# Anuncios intersticiales recompensados (beta)
+# Anuncios intersticiales recompensados
 
 Un [Intersticial recompensado](https://support.google.com/admob/answer/9884467)es una forma específica de formato de anuncio incentivado que le permite ofrecer recompensas a cambio de anuncios que aparecen automáticamente durante las transiciones naturales de las aplicaciones. A diferencia de los anuncios bonificados habituales, los usuarios no están obligados a suscribirse activamente para ver un intersticial recompensado; están perfectamente integrados en la experiencia de la aplicación.
 

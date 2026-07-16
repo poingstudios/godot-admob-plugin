@@ -165,7 +165,3 @@ adb logcat -s godot
 ```
 
 
-## ⭐ Star History
-If you appreciate our work, don't forget to give us a star on GitHub! ⭐
-
-![Star History Chart](https://api.star-history.com/svg?repos=poingstudios/godot-admob-android&type=Date)

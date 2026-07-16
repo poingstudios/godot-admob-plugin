@@ -31,7 +31,7 @@ func _get_name() -> String:
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
-	var ads_enabled := _get_setting(ProjectSettingsService.get_setting_path("android", "enabled"), true) as bool
+	var ads_enabled := _get_setting(ProjectSettingsService.get_android_setting_path("enabled"), true) as bool
 	return platform is EditorExportPlatformAndroid and ads_enabled
 
 
@@ -42,7 +42,7 @@ func _get_enabled_libs_list() -> Array[String]:
 func _get_plugins() -> Array[EditorExportPlugin]:
 	var plugins: Array[EditorExportPlugin] = []
 
-	var ads_enabled := _get_setting(ProjectSettingsService.get_setting_path("android", "enabled"), true) as bool
+	var ads_enabled := _get_setting(ProjectSettingsService.get_android_setting_path("enabled"), true) as bool
 	if not ads_enabled:
 		return plugins
 
@@ -88,7 +88,7 @@ func _get_android_dependencies_maven_repos(platform: EditorExportPlatform, debug
 func _get_android_manifest_application_element_contents(
 	_platform: EditorExportPlatform, _debug: bool
 ) -> String:
-	var ads_enabled := _get_setting(ProjectSettingsService.get_setting_path("android", "enabled"), true) as bool
+	var ads_enabled := _get_setting(ProjectSettingsService.get_android_setting_path("enabled"), true) as bool
 	if not ads_enabled:
 		return ""
 
@@ -111,7 +111,7 @@ func _get_android_manifest_application_element_contents(
 
 	var app_id := (
 		_get_setting(
-			ProjectSettingsService.get_setting_path("android", "app_id"),
+			ProjectSettingsService.get_android_setting_path("app_id"),
 			ProjectSettingsService.ANDROID_DEFAULT_APP_ID
 		)
 		as String
@@ -124,6 +124,32 @@ func _get_android_manifest_application_element_contents(
 	"""
 		% app_id
 	)
+
+	var disable_init_opt := _get_setting(
+		ProjectSettingsService.get_android_setting_path("disable_initialization_optimization"),
+		false
+	) as bool
+	if disable_init_opt:
+		content.append(
+			"""
+	<meta-data
+		android:name="com.google.android.gms.ads.flag.OPTIMIZE_INITIALIZATION"
+		android:value="false"/>
+	"""
+		)
+
+	var disable_load_opt := _get_setting(
+		ProjectSettingsService.get_android_setting_path("disable_ad_loading_optimization"),
+		false
+	) as bool
+	if disable_load_opt:
+		content.append(
+			"""
+	<meta-data
+		android:name="com.google.android.gms.ads.flag.OPTIMIZE_AD_LOADING"
+		android:value="false"/>
+	"""
+		)
 
 	return "\n".join(content)
 

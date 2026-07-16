@@ -82,6 +82,7 @@ plugins:
   - search
   - i18n:
       reconfigure_material: true
+      build_only_locale: !ENV [BUILD_ONLY_LOCALE, null]
       languages:
         - locale: en
           name: English
@@ -91,10 +92,11 @@ plugins:
           nav_translations:
             Guides: Guias
             Migrate SDK versions: Migrar versões do SDK
+            Optimize initialization and ad loading: Otimizar inicialização e carregamento de anúncios
             Reference: Referência
             'API Reference': 'Referência da API'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades do AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
-            Ad formats: Formatos de Anúncios
+            Choose an ad format: Escolher um formato de anúncio
             App Open: App Open
             Banner: Banner
             Set up banner ads: Configurar anúncios de banner
@@ -104,7 +106,7 @@ plugins:
             Interstitial: Intersticial
             Native Overlay: Native Overlay
             Rewarded: Premiado (Rewarded)
-            'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': 'Intersticial Premiado <span class="modern-icon" title="Beta">🧪</span>'
+            'Rewarded Interstitial': 'Intersticial Premiado'
             'Integrate AdMob Mediation': 'Integrar Mediação do AdMob'
             'Set up AdMob Mediation': 'Configurar Mediação do AdMob'
             'Integrate ad sources': 'Integrar fontes de anúncios'
@@ -128,6 +130,9 @@ plugins:
             Vpon: Vpon
             Zucks: Zucks
             'Troubleshoot bidding': 'Solucionar problemas de lances'
+            'Troubleshoot ads': 'Solucionar problemas com anúncios'
+            'Troubleshoot ads not showing': 'Solucionar problemas de anúncios que não são exibidos'
+            'Ad load errors': 'Erros de carregamento de anúncios'
             Privacy: Privacidade
             Regulatory solutions: Soluções regulatórias
             US states privacy laws: Leis de privacidade dos estados dos EUA
@@ -149,6 +154,7 @@ plugins:
             Copy troubleshooting output: Copiar saída de diagnóstico
             Targeting: Segmentação (Targeting)
             Impression-Level Ad Revenue: Receita de Anúncios a Nível de Impressão
+            'Server-Side Verification (SSV)': 'Verificação do Servidor (SSV)'
             Response Info: Informações de Resposta
             Overview: Visão Geral
             Classes: Classes
@@ -160,10 +166,11 @@ plugins:
           nav_translations:
             Guides: Guías
             Migrate SDK versions: Migrar versiones del SDK
+            Optimize initialization and ad loading: Optimizar la inicialización y la carga de anuncios
             Reference: Referencia
             'API Reference': 'Referencia de la API'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades de AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
-            Ad formats: Formatos de anuncios
+            Choose an ad format: Elegir un formato de anuncio
             App Open: App Open
             Banner: Banner
             Set up banner ads: Configurar anuncios de banner
@@ -173,7 +180,7 @@ plugins:
             Interstitial: Intersticial
             Native Overlay: Native Overlay
             Rewarded: Bonificado (Rewarded)
-            'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': 'Intersticial Bonificado <span class="modern-icon" title="Beta">🧪</span>'
+            'Rewarded Interstitial': 'Intersticial Bonificado'
             'Integrate AdMob Mediation': 'Integrar mediación de AdMob'
             'Set up AdMob Mediation': 'Configurar la mediación de AdMob'
             'Integrate ad sources': 'Integrar fuentes de anuncios'
@@ -197,6 +204,9 @@ plugins:
             Vpon: Vpon
             Zucks: Zucks
             'Troubleshoot bidding': 'Solucionar problemas de ofertas'
+            'Troubleshoot ads': 'Solución de problemas de anuncios'
+            'Troubleshoot ads not showing': 'Solucionar problemas de anuncios que no se muestran'
+            'Ad load errors': 'Errores de carga de anuncios'
             Privacy: Privacidad
             Regulatory solutions: Soluciones regulatorias
             US states privacy laws: Leyes de privacidad de estados de EE. UU.
@@ -219,6 +229,7 @@ plugins:
             Copy troubleshooting output: Copiar los resultados de la solución de problemas
             Targeting: Segmentación (Targeting)
             Impression-Level Ad Revenue: Ingresos de anuncios a nivel de impresión
+            'Server-Side Verification (SSV)': 'Verificación del lado del servidor (SSV)'
             Response Info: Información de respuesta
             Overview: Descripción general
             Classes: Clases
@@ -230,10 +241,11 @@ plugins:
           nav_translations:
             Guides: 指南
             Migrate SDK versions: 迁移 SDK 版本
+            Optimize initialization and ad loading: 优化初始化和广告加载
             Reference: 参考
             'API Reference': 'API 参考'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot 技能 <span class="modern-icon" title="Beta">🧪</span>'
-            Ad formats: 广告格式
+            Choose an ad format: 选择广告格式
             App Open: 开屏广告
             Banner: 横幅广告
             Set up banner ads: 设置横幅广告
@@ -243,7 +255,7 @@ plugins:
             Interstitial: 插屏广告
             Native Overlay: 原生重叠广告
             Rewarded: 激励广告
-            'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': '激励插屏广告 <span class="modern-icon" title="Beta">🧪</span>'
+            'Rewarded Interstitial': '激励插屏广告'
             'Integrate AdMob Mediation': '集成 AdMob 中介'
             'Set up AdMob Mediation': '设置 AdMob 中介'
             'Integrate ad sources': '集成广告来源'
@@ -267,6 +279,9 @@ plugins:
             Vpon: Vpon
             Zucks: Zucks
             'Troubleshoot bidding': '排查竞价问题'
+            'Troubleshoot ads': '排查广告问题'
+            'Troubleshoot ads not showing': '排查广告不显示问题'
+            'Ad load errors': '广告加载错误'
             Privacy: 隐私
             Regulatory solutions: 监管解决方案
             US states privacy laws: 美国各州隐私法
@@ -289,6 +304,7 @@ plugins:
             Copy troubleshooting output: 复制诊断输出
             Targeting: 定向 (Targeting)
             Impression-Level Ad Revenue: 展示级广告收入
+            'Server-Side Verification (SSV)': '服务器端验证 (SSV)'
             Response Info: 响应信息
             Overview: 概览
             Classes: 类
@@ -300,10 +316,11 @@ plugins:
           nav_translations:
             Guides: ガイド
             Migrate SDK versions: SDK バージョンの移行
+            Optimize initialization and ad loading: 初期化と広告読み込みの最適化
             Reference: リファレンス
             'API Reference': 'API リファレンス'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot スキル <span class="modern-icon" title="Beta">🧪</span>'
-            Ad formats: 広告フォーマット
+            Choose an ad format: 広告フォーマットの選択
             App Open: アプリ起動時広告 (App Open)
             Banner: バナー広告 (Banner)
             Set up banner ads: バナー広告のセットアップ
@@ -313,7 +330,7 @@ plugins:
             Interstitial: インタースティシャル広告 (Interstitial)
             Native Overlay: ネイティブオーバーレイ広告 (Native Overlay)
             Rewarded: リワード広告 (Rewarded)
-            'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': 'リワードインタースティシャル広告 <span class="modern-icon" title="Beta">🧪</span>'
+            'Rewarded Interstitial': 'リワードインタースティシャル広告'
             'Integrate AdMob Mediation': 'AdMob メディエーションを統合する'
             'Set up AdMob Mediation': 'AdMob メディエーションを設定する'
             'Integrate ad sources': '広告ソースを統合する'
@@ -337,6 +354,9 @@ plugins:
             Vpon: Vpon
             Zucks: Zucks
             'Troubleshoot bidding': '入札のトラブルシューティング'
+            'Troubleshoot ads': '広告のトラブルシューティング'
+            'Troubleshoot ads not showing': '表示されない広告のトラブルシューティング'
+            'Ad load errors': '広告の読み込みエラー'
             Privacy: プライバシー
             Regulatory solutions: 規制対応ソリューション
             US states privacy laws: 米国各州のプライバシー法
@@ -359,6 +379,7 @@ plugins:
             Copy troubleshooting output: 診断出力のコピー
             Targeting: ターゲティング (Targeting)
             Impression-Level Ad Revenue: インプレッションレベルの広告収益
+            'Server-Side Verification (SSV)': 'サーバー側検証 (SSV)'
             Response Info: レスポンス情報
             Overview: 概要
             Classes: クラス
@@ -372,9 +393,10 @@ nav:
     - Migrate SDK versions: migration.md
     - Enable test ads: enable_test_ads.md
     - Preview Mock Ads in Editor: editor_mock_ads.md
+    - Optimize initialization and ad loading: optimize_initialization.md
     - iOS Pause Background: ios_pause_background.md
     - 'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': ai_skills.md
-    - Ad formats:
+    - Choose an ad format:
       - App Open: ad_formats/app_open.md
       - Banner:
         - Set up banner ads: ad_formats/banner/get_started.md
@@ -384,7 +406,7 @@ nav:
       - Interstitial: ad_formats/interstitial.md
       - Native Overlay: ad_formats/native_overlay.md
       - Rewarded: ad_formats/rewarded.md
-      - 'Rewarded Interstitial <span class="modern-icon" title="Beta">🧪</span>': ad_formats/rewarded_interstitial.md
+      - 'Rewarded Interstitial': ad_formats/rewarded_interstitial.md
     - Integrate AdMob Mediation:
       - Set up AdMob Mediation: mediate/get_started.md
       - Choose ad sources: mediate/choose_networks.md
@@ -421,7 +443,8 @@ nav:
         - Get Started: privacy/user_messaging_tools/get_started.md
         - GDPR IAB support: privacy/user_messaging_tools/gdpr_iab_support.md
         - IDFA support: privacy/user_messaging_tools/idfa_support.md
-    - Troubleshoot:
+    - Troubleshoot ads:
+      - Ad load errors: advanced_topics/ad_load_errors.md
       - Manage Ad Inspector:
         - Overview: advanced_topics/ad_inspector/overview.md
         - Launch ad inspector: advanced_topics/ad_inspector/launch.md
@@ -431,9 +454,11 @@ nav:
         - Troubleshoot privacy settings: advanced_topics/ad_inspector/troubleshoot_privacy.md
         - Copy troubleshooting output: advanced_topics/ad_inspector/copy_output.md
       - Response Info: advanced_topics/response_info.md
+      - Troubleshoot ads not showing: https://support.google.com/admob/answer/9469204
     - Optimize:
       - Global settings: global_settings.md
       - Impression-Level Ad Revenue: advanced_topics/impression_level_ad_revenue.md
+      - Server-Side Verification (SSV): advanced_topics/ssv.md
       - Targeting: advanced_topics/targeting.md
   - Reference:
     - API Reference:

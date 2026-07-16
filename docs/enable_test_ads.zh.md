@@ -16,38 +16,57 @@
 ## 前提条件
 - 完成 [开始使用指南](index.md)
 
+## 在 Godot 编辑器中测试
+
+您可以直接在 Godot 编辑器中测试您的广告。编辑器将显示模拟广告覆盖层，提供与移动平台上实际广告行为相似的体验。
+
+<video autoplay loop muted playsinline>
+  <source src="../assets/editor_test_ads.mp4" type="video/mp4">
+  您的浏览器不支持视频标签。
+</video>
+
+!!! note
+    由于模拟广告是使用 Godot Control 节点实现的，它们将在编辑器中您的游戏窗口内渲染。但是，当您导出到移动平台时，官方的 Google Mobile Ads SDK 会在所有游戏视图之上渲染原生广告。
+
+要了解有关模拟系统、视觉模板和回调模拟的更多信息，请参阅 [在编辑器中预览模拟广告](editor_mock_ads.md) 指南。
+
 ## 示例广告单元 {: #sample-ad-units }
 
 启用测试最简便的方法是使用 Google 提供的测试广告单元。这些广告单元与您的 AdMob 账号分离，从而确保在使用它们时您的账号不会产生无效流量的风险。
 
 请记住，您应根据测试的平台选择适当的 Google 提供的测试广告单元。在 iOS 上进行测试广告请求时使用 iOS 测试广告单元，在 Android 上进行请求时使用 Android 测试广告单元。
 
-!!! note "注意"
-
-    **重要提示**：在发布您的应用之前，请务必将这些测试 ID 替换为您自己的广告单元 ID。
+!!! warning "警告"
+    在发布您的应用之前，请务必将这些测试 ID 替换为您自己的广告单元 ID。如果您已发布应用，请[启用测试设备](#enable-test-devices)。
 
 以下是 Android 和 iOS 上每种可用格式的示例广告单元：
 
 === "Android"
     | 广告格式             | 示例广告单元 ID                         |
     |-----------------------|----------------------------------------|
-    | 横幅广告 (Banner)     | ca-app-pub-3940256099942544/6300978111 |
-    | 开屏广告 (App Open)   | ca-app-pub-3940256099942544/9257395921 |
-    | 插屏广告 (Interstitial) | ca-app-pub-3940256099942544/1033173712 |
-    | 激励广告 (Rewarded)   | ca-app-pub-3940256099942544/5224354917 |
-    | 激励插屏广告 (Rewarded Interstitial) | ca-app-pub-3940256099942544/5354046379 |
-    | 原生重叠广告 (Native) | ca-app-pub-3940256099942544/2247696110 |
+    | [开屏广告 (App Open)](ad_formats/app_open.md)        | ca-app-pub-3940256099942544/9257395921 |
+    | [锚定自适应横幅广告 (Anchored Adaptive Banner)](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/9214589741 |
+    | [内联自适应横幅广告 (Inline Adaptive Banner)](ad_formats/banner/get_started.md)     | ca-app-pub-3940256099942544/9214589741 |
+    | [固定大小横幅广告 (Fixed Size Banner)](ad_formats/banner/get_started.md)        | ca-app-pub-3940256099942544/6300978111 |
+    | [插屏广告 (Interstitial)](ad_formats/interstitial.md)     | ca-app-pub-3940256099942544/1033173712 |
+    | [激励广告 (Rewarded Ads)](ad_formats/rewarded.md)       | ca-app-pub-3940256099942544/5224354917 |
+    | [激励插屏广告 (Rewarded Interstitial)](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/5354046379 |
+    | [原生广告 (Native)](ad_formats/native_overlay.md)         | ca-app-pub-3940256099942544/2247696110 |
+    | [原生视频广告 (Native Video)](ad_formats/native_overlay.md)   | ca-app-pub-3940256099942544/1044960115 |
 
 === "iOS"
 
     | 广告格式             | 示例广告单元 ID                         |
     |-----------------------|----------------------------------------|
-    | 横幅广告 (Banner)     | ca-app-pub-3940256099942544/2934735716 |
-    | 开屏广告 (App Open)   | ca-app-pub-3940256099942544/5575463023 |
-    | 插屏广告 (Interstitial) | ca-app-pub-3940256099942544/4411468910 |
-    | 激励广告 (Rewarded)   | ca-app-pub-3940256099942544/1712485313 |
-    | 激励插屏广告 (Rewarded Interstitial) | ca-app-pub-3940256099942544/6978759866 |
-    | 原生重叠广告 (Native) | ca-app-pub-3940256099942544/3986624511 |
+    | [开屏广告 (App Open)](ad_formats/app_open.md)        | ca-app-pub-3940256099942544/5575463023 |
+    | [锚定自适应横幅广告 (Anchored Adaptive Banner)](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2435281174 |
+    | [内联自适应横幅广告 (Inline Adaptive Banner)](ad_formats/banner/get_started.md)     | ca-app-pub-3940256099942544/2435281174 |
+    | [固定大小横幅广告 (Fixed Size Banner)](ad_formats/banner/get_started.md)        | ca-app-pub-3940256099942544/2934735716 |
+    | [插屏广告 (Interstitial)](ad_formats/interstitial.md)     | ca-app-pub-3940256099942544/4411468910 |
+    | [激励广告 (Rewarded Ads)](ad_formats/rewarded.md)       | ca-app-pub-3940256099942544/1712485313 |
+    | [激励插屏广告 (Rewarded Interstitial)](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/6978759866 |
+    | [原生广告 (Native)](ad_formats/native_overlay.md)         | ca-app-pub-3940256099942544/3986624511 |
+    | [原生视频广告 (Native Video)](ad_formats/native_overlay.md)   | ca-app-pub-3940256099942544/2521693316 |
 
 ### 专用测试标识符
 虽然上述标准广告单元可以通过添加额外参数（如 `collapsible`）来使用，但以下专用广告单元 ID **保证**在测试您的 UI/UX 时返回特定功能：

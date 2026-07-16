@@ -15,38 +15,57 @@ This document is based on:
 ## Prerequisites
 - Complete the [Get started guide](index.md)
 
+## Testing with the Godot Editor
+
+You can test your ads directly inside the Godot editor. The editor will display mock ads overlays giving a similar experience to how actual ads will behave on a mobile platform.
+
+<video autoplay loop muted playsinline>
+  <source src="../assets/editor_test_ads.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+!!! note
+    Because the mock ads are implemented using Godot Control nodes, they will render within your game window in the editor. When you export to a mobile platform, however, the official Google Mobile Ads SDK renders native ads on top of all game views.
+
+To learn more about the mock system, visual templates, and callback simulations, refer to the [Preview Mock Ads in Editor](editor_mock_ads.md) guide.
+
 ## Sample ad units {: #sample-ad-units }
 
 The most expedient method to enable testing is by employing Google's provided test ad units. These ad units are separate from your AdMob account, ensuring there is no risk of your account generating invalid traffic while using them.
 
 Please keep in mind that you should select the appropriate Google-provided test ad unit based on the platform you are testing. Use an iOS test ad unit for making test ad requests on iOS and an Android test ad unit for making requests on Android.
 
-!!! note
-
-    **Important Note**: Prior to releasing your app, be certain to substitute these test IDs with your own ad unit ID.
+!!! warning "Warning"
+    Before publishing your app, make sure that you replace these IDs with your ad unit ID. If you've published your app, [enable test devices](#enable-test-devices).
 
 Below are sample ad units for each format available on both Android and iOS:
 
 === "Android"
-    | Ad format             | Sample ad unit ID                      |
-    |-----------------------|----------------------------------------|
-    | Banner                | ca-app-pub-3940256099942544/6300978111 |
-    | App Open              | ca-app-pub-3940256099942544/9257395921 |
-    | Interstitial          | ca-app-pub-3940256099942544/1033173712 |
-    | Rewarded              | ca-app-pub-3940256099942544/5224354917 |
-    | Rewarded Interstitial | ca-app-pub-3940256099942544/5354046379 |
-    | Native                | ca-app-pub-3940256099942544/2247696110 |
+    | Ad format                 | Sample ad unit ID                      |
+    |---------------------------|----------------------------------------|
+    | [App Open](ad_formats/app_open.md)                  | ca-app-pub-3940256099942544/9257395921 |
+    | [Anchored Adaptive Banner](ad_formats/banner/get_started.md)  | ca-app-pub-3940256099942544/9214589741 |
+    | [Inline Adaptive Banner](ad_formats/banner/get_started.md)    | ca-app-pub-3940256099942544/9214589741 |
+    | [Fixed Size Banner](ad_formats/banner/get_started.md)         | ca-app-pub-3940256099942544/6300978111 |
+    | [Interstitial](ad_formats/interstitial.md)              | ca-app-pub-3940256099942544/1033173712 |
+    | [Rewarded Ads](ad_formats/rewarded.md)              | ca-app-pub-3940256099942544/5224354917 |
+    | [Rewarded Interstitial](ad_formats/rewarded_interstitial.md)     | ca-app-pub-3940256099942544/5354046379 |
+    | [Native](ad_formats/native_overlay.md)                    | ca-app-pub-3940256099942544/2247696110 |
+    | [Native Video](ad_formats/native_overlay.md)              | ca-app-pub-3940256099942544/1044960115 |
 
 === "iOS"
 
-    | Ad format             | Sample ad unit ID                      |
-    |-----------------------|----------------------------------------|
-    | Banner                | ca-app-pub-3940256099942544/2934735716 |
-    | App Open              | ca-app-pub-3940256099942544/5575463023 |
-    | Interstitial          | ca-app-pub-3940256099942544/4411468910 |
-    | Rewarded              | ca-app-pub-3940256099942544/1712485313 |
-    | Rewarded Interstitial | ca-app-pub-3940256099942544/6978759866 |
-    | Native                | ca-app-pub-3940256099942544/3986624511 |
+    | Ad format                 | Sample ad unit ID                      |
+    |---------------------------|----------------------------------------|
+    | [App Open](ad_formats/app_open.md)                  | ca-app-pub-3940256099942544/5575463023 |
+    | [Anchored Adaptive Banner](ad_formats/banner/get_started.md)  | ca-app-pub-3940256099942544/2435281174 |
+    | [Inline Adaptive Banner](ad_formats/banner/get_started.md)    | ca-app-pub-3940256099942544/2435281174 |
+    | [Fixed Size Banner](ad_formats/banner/get_started.md)         | ca-app-pub-3940256099942544/2934735716 |
+    | [Interstitial](ad_formats/interstitial.md)              | ca-app-pub-3940256099942544/4411468910 |
+    | [Rewarded Ads](ad_formats/rewarded.md)              | ca-app-pub-3940256099942544/1712485313 |
+    | [Rewarded Interstitial](ad_formats/rewarded_interstitial.md)     | ca-app-pub-3940256099942544/6978759866 |
+    | [Native](ad_formats/native_overlay.md)                    | ca-app-pub-3940256099942544/3986624511 |
+    | [Native Video](ad_formats/native_overlay.md)              | ca-app-pub-3940256099942544/2521693316 |
 
 ### Specialized Test Identifiers
 While the standard ad units above can be used by adding extra parameters (like `collapsible`), the following specialized ad unit IDs **guarantee** that specific features are returned for testing your UI/UX:
