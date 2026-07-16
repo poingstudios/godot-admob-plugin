@@ -43,7 +43,7 @@ Tenga en cuenta que debe seleccionar el bloque de anuncios de prueba proporciona
 === "Android"
  | Formato de anuncio | ID de bloque de anuncios de muestra | 
  | ----------------------- | ---------------------------------------- | 
- | [[App Open](ad_formats/app_open.md) (Aplicación abierta)](ad_formats/app_open.md) | ca-app-pub-3940256099942544/9257395921 | 
+ | [App Open (Aplicación abierta)](ad_formats/app_open.md) | ca-app-pub-3940256099942544/9257395921 | 
  | [Banner adaptativo anclado](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/9214589741 | 
  | [Banner adaptativo en línea](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/9214589741 | 
  | [Banner de tamaño fijo](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/6300978111 | 
@@ -57,7 +57,7 @@ Tenga en cuenta que debe seleccionar el bloque de anuncios de prueba proporciona
 
  | Formato de anuncio | ID de bloque de anuncios de muestra | 
  | ----------------------- | ---------------------------------------- | 
- | [[App Open](ad_formats/app_open.md) (Aplicación abierta)](ad_formats/app_open.md) | ca-app-pub-3940256099942544/5575463023 | 
+ | [App Open (Aplicación abierta)](ad_formats/app_open.md) | ca-app-pub-3940256099942544/5575463023 | 
  | [Banner adaptativo anclado](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2435281174 | 
  | [Banner adaptativo en línea](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2435281174 | 
  | [Banner de tamaño fijo](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2934735716 | 
