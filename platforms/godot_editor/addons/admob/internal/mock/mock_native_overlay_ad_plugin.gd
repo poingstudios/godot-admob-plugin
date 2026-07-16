@@ -31,6 +31,11 @@ signal on_native_overlay_ad_closed(uid: int)
 signal on_native_overlay_ad_impression(uid: int)
 signal on_native_overlay_ad_opened(uid: int)
 signal on_native_overlay_ad_paid(uid: int, ad_value: Dictionary)
+signal on_native_overlay_ad_video_start(uid: int)
+signal on_native_overlay_ad_video_play(uid: int)
+signal on_native_overlay_ad_video_pause(uid: int)
+signal on_native_overlay_ad_video_end(uid: int)
+signal on_native_overlay_ad_video_mute(uid: int, is_muted: bool)
 
 var _uid_counter := 0
 var _ads: Dictionary = {}
@@ -74,6 +79,13 @@ func create() -> int:
 
 func load(ad_unit_id: String, _ad_request_dictionary: Dictionary, _keywords: Array, _options: Dictionary, uid: int) -> void:
 	if not _ads.has(uid): return
+	var is_video := ad_unit_id.ends_with("1044960115") or ad_unit_id.ends_with("2521693316")
+	_ads[uid]["has_video_content"] = is_video
+	_ads[uid]["is_video_muted"] = false
+	_ads[uid]["is_video_playing"] = false
+	_ads[uid]["video_duration"] = 15.0
+	_ads[uid]["video_aspect_ratio"] = 1.777
+
 	var timer := (Engine.get_main_loop() as SceneTree).create_timer(0.5)
 	timer.timeout.connect(func():
 		emit_signal("on_native_overlay_ad_loaded", uid)
@@ -387,28 +399,78 @@ func _update_ui_position(uid: int) -> void:
 		media_vbox.add_theme_constant_override("separation", int(8 * scale_factor_y))
 		media_panel.add_child(media_vbox)
 
-		var media_title := Label.new()
-		media_title.text = "Flood-It!"
-		media_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		media_title.add_theme_color_override("font_color", Color.WHITE)
-		media_title.add_theme_font_size_override("font_size", max(1, int(round(20 * scale_factor_y))))
-		media_vbox.add_child(media_title)
+		if has_video_content(uid):
+			var video_status := Label.new()
+			video_status.text = "Video Ad (Paused)"
+			video_status.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			video_status.add_theme_color_override("font_color", Color.YELLOW)
+			video_status.add_theme_font_size_override("font_size", max(1, int(round(16 * scale_factor_y))))
+			media_vbox.add_child(video_status)
 
-		var grid := GridContainer.new()
-		grid.columns = 6
-		grid.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		grid.add_theme_constant_override("h_separation", int(4 * scale_factor_x))
-		grid.add_theme_constant_override("v_separation", int(4 * scale_factor_y))
-		media_vbox.add_child(grid)
-		var colors := [
-			Color.AQUA, Color.GREEN, Color.YELLOW, Color.DEEP_PINK, Color.BLUE, Color.RED,
-			Color.YELLOW, Color.DEEP_PINK, Color.BLUE, Color.RED, Color.AQUA, Color.GREEN
-		]
-		for c in colors:
-			var sq := ColorRect.new()
-			sq.color = c
-			sq.custom_minimum_size = Vector2(8 * scale_factor_x, 8 * scale_factor_y)
-			grid.add_child(sq)
+			var controls_hbox := HBoxContainer.new()
+			controls_hbox.alignment = BoxContainer.ALIGNMENT_CENTER
+			controls_hbox.add_theme_constant_override("separation", int(10 * scale_factor_x))
+			media_vbox.add_child(controls_hbox)
+
+			var play_btn := Button.new()
+			play_btn.text = "Play"
+			play_btn.custom_minimum_size = Vector2(60 * scale_factor_x, 30 * scale_factor_y)
+			controls_hbox.add_child(play_btn)
+
+			var mute_btn := Button.new()
+			mute_btn.text = "Mute"
+			mute_btn.custom_minimum_size = Vector2(60 * scale_factor_x, 30 * scale_factor_y)
+			controls_hbox.add_child(mute_btn)
+
+			var has_started := false
+			play_btn.pressed.connect(func():
+				var playing: bool = _ads[uid].get("is_video_playing", false)
+				if playing:
+					_ads[uid]["is_video_playing"] = false
+					play_btn.text = "Play"
+					video_status.text = "Video Ad (Paused)"
+					video_status.add_theme_color_override("font_color", Color.YELLOW)
+					on_native_overlay_ad_video_pause.emit(uid)
+				else:
+					_ads[uid]["is_video_playing"] = true
+					play_btn.text = "Pause"
+					video_status.text = "Video Ad (Playing...)"
+					video_status.add_theme_color_override("font_color", Color.GREEN)
+					if not has_started:
+						has_started = true
+						on_native_overlay_ad_video_start.emit(uid)
+					on_native_overlay_ad_video_play.emit(uid)
+			)
+
+			mute_btn.pressed.connect(func():
+				var muted: bool = _ads[uid].get("is_video_muted", false)
+				_ads[uid]["is_video_muted"] = not muted
+				mute_btn.text = "Unmute" if not muted else "Mute"
+				on_native_overlay_ad_video_mute.emit(uid, not muted)
+			)
+		else:
+			var media_title := Label.new()
+			media_title.text = "Flood-It!"
+			media_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			media_title.add_theme_color_override("font_color", Color.WHITE)
+			media_title.add_theme_font_size_override("font_size", max(1, int(round(20 * scale_factor_y))))
+			media_vbox.add_child(media_title)
+
+			var grid := GridContainer.new()
+			grid.columns = 6
+			grid.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+			grid.add_theme_constant_override("h_separation", int(4 * scale_factor_x))
+			grid.add_theme_constant_override("v_separation", int(4 * scale_factor_y))
+			media_vbox.add_child(grid)
+			var colors := [
+				Color.AQUA, Color.GREEN, Color.YELLOW, Color.DEEP_PINK, Color.BLUE, Color.RED,
+				Color.YELLOW, Color.DEEP_PINK, Color.BLUE, Color.RED, Color.AQUA, Color.GREEN
+			]
+			for c in colors:
+				var sq := ColorRect.new()
+				sq.color = c
+				sq.custom_minimum_size = Vector2(8 * scale_factor_x, 8 * scale_factor_y)
+				grid.add_child(sq)
 
 		# 2. Metadata row (Middle)
 		var meta_hbox := HBoxContainer.new()
@@ -632,3 +694,31 @@ func get_response_info(_uid: int) -> Dictionary:
 		"mediation_adapter_class_name": "MockAdapter",
 		"adapter_responses": {}, "loaded_adapter_response_info": {}, "response_extras": {}
 	}
+
+
+func has_video_content(uid: int) -> bool:
+	if _ads.has(uid):
+		return _ads[uid].get("has_video_content", false)
+	return false
+
+
+func get_video_duration(uid: int) -> float:
+	if _ads.has(uid):
+		return _ads[uid].get("video_duration", 0.0)
+	return 0.0
+
+
+func get_video_aspect_ratio(uid: int) -> float:
+	if _ads.has(uid):
+		return _ads[uid].get("video_aspect_ratio", 0.0)
+	return 0.0
+
+
+func is_video_muted(uid: int) -> bool:
+	if _ads.has(uid):
+		return _ads[uid].get("is_video_muted", false)
+	return false
+
+
+func is_video_custom_controls_enabled(_uid: int) -> bool:
+	return false

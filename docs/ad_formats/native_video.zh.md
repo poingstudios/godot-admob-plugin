@@ -77,3 +77,19 @@ hide:
     
     mediaContent.GetVideoController().VideoLifecycleCallbacks = callbacks;
     ```
+
+## 重要提示
+
+> [!WARNING]
+> **MediaView 要求**
+>
+> 如果您使用 `SMALL` 模板加载视频广告，您会看到一条实现问题/警告，指出：
+> `MediaView not used for main image or video asset. Use MediaView instead of ImageView to show the main image or video asset`。
+>
+> 这是因为官方 Google Mobile Ads SDK 需要可见的 `MediaView` 来渲染视频，但紧凑的 `SMALL` 模板布局默认不支持或包含一个功能性的视图。如果您的广告单元提供视频广告，您**必须使用包含内置 `MediaView` 的 `MEDIUM` 模板**。
+
+> [!NOTE]
+> **MediaContent 数值（时长与宽高比）**
+>
+> 如果在 `on_ad_loaded` 回调中立即查询，`MediaContent` 对象中的视频时长和宽高比等数值将返回 `0.0`。您必须在调用 `render_template()` **之后**进行查询，此时广告视图已被实例化并完成布局。
+

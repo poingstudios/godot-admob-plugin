@@ -77,3 +77,18 @@ hide:
     
     mediaContent.GetVideoController().VideoLifecycleCallbacks = callbacks;
     ```
+
+## 重要な注意点
+
+> [!WARNING]
+> **MediaViewの要件**
+>
+> `SMALL` テンプレートを使用して動画広告をロードすると、実装の問題に関する次のような警告が表示されます：
+> `MediaView not used for main image or video asset. Use MediaView instead of ImageView to show the main image or video asset` (メインの画像または動画アセットにMediaViewが使用されていません。メインの画像または動画アセットを表示するには、ImageViewの代わりにMediaViewを使用してください)。
+>
+> これは、公式のGoogle Mobile Ads SDKが動画をレンダリングするために表示可能な `MediaView` を必要とするのに対し、コンパクトな `SMALL` テンプレートレイアウトにはデフォルトで機能するものが含まれていないためです。動画広告を配信する広告ユニットを使用する場合は、ビルトインの `MediaView` が含まれている **`MEDIUM` テンプレートを使用する必要があります**。
+
+> [!NOTE]
+> **MediaContent の値 (再生時間とアスペクト比)**
+>
+> `on_ad_loaded` コールバック内で `MediaContent` オブジェクトから動画の再生時間やアスペクト比をすぐに照会すると、`0.0` が返されます。これらの値は、広告ビューがインフレートされてレイアウトされた後、つまり `render_template()` を呼び出した**後**に照会する必要があります。

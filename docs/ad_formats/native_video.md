@@ -77,3 +77,20 @@ To handle specific video events, create a `VideoLifecycleCallbacks` object and a
     
     mediaContent.GetVideoController().VideoLifecycleCallbacks = callbacks;
     ```
+
+## Important Notes
+
+> [!WARNING]
+> **MediaView Requirement**
+>
+> If you load a video ad using the `SMALL` template, you will see an implementation issue/warning stating:
+> `MediaView not used for main image or video asset. Use MediaView instead of ImageView to show the main image or video asset`.
+>
+> This happens because the official Google Mobile Ads SDK requires a visible `MediaView` to render the video, but the compact `SMALL` template layout does not support or include a functional one by default. If your ad unit serves video ads, you **must use the `MEDIUM` template** which includes a built-in `MediaView`.
+
+> [!NOTE]
+> **MediaContent Values (Duration & Aspect Ratio)**
+>
+> Values like video duration and aspect ratio from the `MediaContent` object will return `0.0` if queried immediately inside the `on_ad_loaded` callback. You must query them **after** calling `render_template()`, once the ad view has been inflated and laid out.
+
+

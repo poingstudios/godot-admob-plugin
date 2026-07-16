@@ -33,6 +33,11 @@ namespace PoingStudios.AdMob.Core
 		[Signal] public delegate void on_native_overlay_ad_impressionEventHandler(int uid);
 		[Signal] public delegate void on_native_overlay_ad_openedEventHandler(int uid);
 		[Signal] public delegate void on_native_overlay_ad_paidEventHandler(int uid, Godot.Collections.Dictionary adValue);
+		[Signal] public delegate void on_native_overlay_ad_video_startEventHandler(int uid);
+		[Signal] public delegate void on_native_overlay_ad_video_playEventHandler(int uid);
+		[Signal] public delegate void on_native_overlay_ad_video_pauseEventHandler(int uid);
+		[Signal] public delegate void on_native_overlay_ad_video_endEventHandler(int uid);
+		[Signal] public delegate void on_native_overlay_ad_video_muteEventHandler(int uid, bool isMuted);
 
 		private class AdData
 		{
@@ -44,6 +49,12 @@ namespace PoingStudios.AdMob.Core
 			public Godot.Collections.Dictionary Style;
 			public int CurrentWidth;
 			public int CurrentHeight;
+
+			public bool HasVideoContent = false;
+			public bool IsVideoMuted = false;
+			public bool IsVideoPlaying = false;
+			public double VideoDuration = 15.0;
+			public double VideoAspectRatio = 1.777;
 		}
 
 		private int _uidCounter = 0;
@@ -102,6 +113,13 @@ namespace PoingStudios.AdMob.Core
 		public void load(string adUnitId, Godot.Collections.Dictionary adRequestDictionary, Godot.Collections.Array keywords, Godot.Collections.Dictionary options, int uid)
 		{
 			if (!_ads.TryGetValue(uid, out AdData ad)) return;
+
+			bool isVideo = adUnitId.EndsWith("1044960115") || adUnitId.EndsWith("2521693316");
+			ad.HasVideoContent = isVideo;
+			ad.IsVideoMuted = false;
+			ad.IsVideoPlaying = false;
+			ad.VideoDuration = 15.0;
+			ad.VideoAspectRatio = 1.777;
 
 			var timer = ((SceneTree)Engine.GetMainLoop()).CreateTimer(0.5f);
 			timer.Connect(SceneTreeTimer.SignalName.Timeout, Callable.From(() => 
@@ -486,33 +504,103 @@ namespace PoingStudios.AdMob.Core
 				mediaVbox.AddThemeConstantOverride("separation", (int)Mathf.Round(8 * scaleFactor));
 				mediaPanel.AddChild(mediaVbox);
 
-				var mediaTitle = new Label { Text = "Flood-It!" };
-				mediaTitle.HorizontalAlignment = HorizontalAlignment.Center;
-				mediaTitle.AddThemeColorOverride("font_color", Colors.White);
-				mediaTitle.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(20 * scaleFactor)));
-				mediaVbox.AddChild(mediaTitle);
-
-				var grid = new GridContainer
+				if (has_video_content(uid))
 				{
-					Columns = 6,
-					SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter
-				};
-				grid.AddThemeConstantOverride("h_separation", (int)Mathf.Round(4 * scaleFactor));
-				grid.AddThemeConstantOverride("v_separation", (int)Mathf.Round(4 * scaleFactor));
-				mediaVbox.AddChild(grid);
-
-				Color[] colors = new Color[] {
-					Colors.Aqua, Colors.Green, Colors.Yellow, Colors.DeepPink, Colors.Blue, Colors.Red,
-					Colors.Yellow, Colors.DeepPink, Colors.Blue, Colors.Red, Colors.Aqua, Colors.Green
-				};
-				foreach (var c in colors)
-				{
-					var sq = new ColorRect
+					var videoStatus = new Label
 					{
-						Color = c,
-						CustomMinimumSize = new Vector2(8 * scaleFactor, 8 * scaleFactor)
+						Text = "Video Ad (Paused)",
+						HorizontalAlignment = HorizontalAlignment.Center
 					};
-					grid.AddChild(sq);
+					videoStatus.AddThemeColorOverride("font_color", Colors.Yellow);
+					videoStatus.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(16 * scaleFactor)));
+					mediaVbox.AddChild(videoStatus);
+
+					var controlsHbox = new HBoxContainer
+					{
+						Alignment = BoxContainer.AlignmentMode.Center
+					};
+					controlsHbox.AddThemeConstantOverride("separation", (int)Mathf.Round(10 * scaleFactor));
+					mediaVbox.AddChild(controlsHbox);
+
+					var playBtn = new Button
+					{
+						Text = "Play",
+						CustomMinimumSize = new Vector2(60 * scaleFactor, 30 * scaleFactor)
+					};
+					controlsHbox.AddChild(playBtn);
+
+					var muteBtn = new Button
+					{
+						Text = "Mute",
+						CustomMinimumSize = new Vector2(60 * scaleFactor, 30 * scaleFactor)
+					};
+					controlsHbox.AddChild(muteBtn);
+
+					bool hasStarted = false;
+					playBtn.Pressed += () =>
+					{
+						bool playing = ad.IsVideoPlaying;
+						if (playing)
+						{
+							ad.IsVideoPlaying = false;
+							playBtn.Text = "Play";
+							videoStatus.Text = "Video Ad (Paused)";
+							videoStatus.AddThemeColorOverride("font_color", Colors.Yellow);
+							EmitSignal(SignalName.on_native_overlay_ad_video_pause, uid);
+						}
+						else
+						{
+							ad.IsVideoPlaying = true;
+							playBtn.Text = "Pause";
+							videoStatus.Text = "Video Ad (Playing...)";
+							videoStatus.AddThemeColorOverride("font_color", Colors.Green);
+							if (!hasStarted)
+							{
+								hasStarted = true;
+								EmitSignal(SignalName.on_native_overlay_ad_video_start, uid);
+							}
+							EmitSignal(SignalName.on_native_overlay_ad_video_play, uid);
+						}
+					};
+
+					muteBtn.Pressed += () =>
+					{
+						bool muted = ad.IsVideoMuted;
+						ad.IsVideoMuted = !muted;
+						muteBtn.Text = muted ? "Mute" : "Unmute";
+						EmitSignal(SignalName.on_native_overlay_ad_video_mute, uid, !muted);
+					};
+				}
+				else
+				{
+					var mediaTitle = new Label { Text = "Flood-It!" };
+					mediaTitle.HorizontalAlignment = HorizontalAlignment.Center;
+					mediaTitle.AddThemeColorOverride("font_color", Colors.White);
+					mediaTitle.AddThemeFontSizeOverride("font_size", Mathf.Max(1, (int)Mathf.Round(20 * scaleFactor)));
+					mediaVbox.AddChild(mediaTitle);
+
+					var grid = new GridContainer
+					{
+						Columns = 6,
+						SizeFlagsHorizontal = Control.SizeFlags.ShrinkCenter
+					};
+					grid.AddThemeConstantOverride("h_separation", (int)Mathf.Round(4 * scaleFactor));
+					grid.AddThemeConstantOverride("v_separation", (int)Mathf.Round(4 * scaleFactor));
+					mediaVbox.AddChild(grid);
+
+					Color[] colors = new Color[] {
+						Colors.Aqua, Colors.Green, Colors.Yellow, Colors.DeepPink, Colors.Blue, Colors.Red,
+						Colors.Yellow, Colors.DeepPink, Colors.Blue, Colors.Red, Colors.Aqua, Colors.Green
+					};
+					foreach (var c in colors)
+					{
+						var sq = new ColorRect
+						{
+							Color = c,
+							CustomMinimumSize = new Vector2(8 * scaleFactor, 8 * scaleFactor)
+						};
+						grid.AddChild(sq);
+					}
 				}
 
 				// 2. Metadata row (Middle)
@@ -802,6 +890,52 @@ namespace PoingStudios.AdMob.Core
 				{ "mediation_adapter_class_name", "MockAdapter" },
 				{ "adapter_responses", new Godot.Collections.Dictionary() }, { "loaded_adapter_response_info", new Godot.Collections.Dictionary() }, { "response_extras", new Godot.Collections.Dictionary() }
 			};
+		}
+
+
+		public bool has_video_content(int uid)
+		{
+			if (_ads.TryGetValue(uid, out AdData ad))
+			{
+				return ad.HasVideoContent;
+			}
+			return false;
+		}
+
+
+		public float get_video_duration(int uid)
+		{
+			if (_ads.TryGetValue(uid, out AdData ad))
+			{
+				return (float)ad.VideoDuration;
+			}
+			return 0f;
+		}
+
+
+		public float get_video_aspect_ratio(int uid)
+		{
+			if (_ads.TryGetValue(uid, out AdData ad))
+			{
+				return (float)ad.VideoAspectRatio;
+			}
+			return 0f;
+		}
+
+
+		public bool is_video_muted(int uid)
+		{
+			if (_ads.TryGetValue(uid, out AdData ad))
+			{
+				return ad.IsVideoMuted;
+			}
+			return false;
+		}
+
+
+		public bool is_video_custom_controls_enabled(int uid)
+		{
+			return false;
 		}
 	}
 }
