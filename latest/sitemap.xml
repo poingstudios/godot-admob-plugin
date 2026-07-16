@@ -651,6 +651,16 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/AdValue/"/>
     </url>
     <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/reference/classes/AdVideoController/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latest/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/AdVideoController/"/>
+    </url>
+    <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/reference/classes/AdVideoOptions/</loc>
         <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
@@ -799,6 +809,16 @@
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/LoadAdError/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/LoadAdError/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/LoadAdError/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/reference/classes/MediaContent/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latest/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/MediaContent/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/reference/classes/MobileAds/</loc>
@@ -1139,6 +1159,16 @@
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/reference/listeners/VideoLifecycleCallbacks/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latest/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/listeners/VideoLifecycleCallbacks/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/</loc>
@@ -1741,15 +1771,6 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/"/>
     </url>
     <url>
-        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/reference/enums/</loc>
-        <lastmod>2026-07-16</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/reference/enums/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/enums/"/>
-        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/enums/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/enums/"/>
-    </url>
-    <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/reference/classes/AdError/</loc>
         <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
@@ -1798,6 +1819,16 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/AdValue/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/AdValue/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/AdValue/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/reference/classes/AdVideoController/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestreference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/AdVideoController/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/reference/classes/AdVideoOptions/</loc>
@@ -1948,6 +1979,16 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/LoadAdError/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/LoadAdError/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/LoadAdError/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/reference/classes/MediaContent/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestreference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/MediaContent/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/reference/classes/MobileAds/</loc>
@@ -2288,6 +2329,16 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/reference/listeners/VideoLifecycleCallbacks/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestreference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/listeners/VideoLifecycleCallbacks/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/es/</loc>
@@ -2890,15 +2941,6 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/"/>
     </url>
     <url>
-        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/es/reference/enums/</loc>
-        <lastmod>2026-07-16</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latest/es/reference/enums/"/>
-        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/enums/"/>
-        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/enums/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/enums/"/>
-    </url>
-    <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/es/reference/classes/AdError/</loc>
         <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
@@ -2947,6 +2989,16 @@
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/AdValue/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/AdValue/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/AdValue/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/es/reference/classes/AdVideoController/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latest/es/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestreference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/AdVideoController/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/es/reference/classes/AdVideoOptions/</loc>
@@ -3097,6 +3149,16 @@
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/LoadAdError/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/LoadAdError/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/LoadAdError/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/es/reference/classes/MediaContent/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latest/es/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestreference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/MediaContent/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/es/reference/classes/MobileAds/</loc>
@@ -3437,6 +3499,16 @@
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/es/reference/listeners/VideoLifecycleCallbacks/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latest/es/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestreference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/listeners/VideoLifecycleCallbacks/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/zh/</loc>
@@ -4039,15 +4111,6 @@
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/"/>
     </url>
     <url>
-        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/zh/reference/enums/</loc>
-        <lastmod>2026-07-16</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latest/zh/reference/enums/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/enums/"/>
-        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/enums/"/>
-        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/enums/"/>
-    </url>
-    <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/zh/reference/classes/AdError/</loc>
         <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
@@ -4096,6 +4159,16 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/AdValue/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/AdValue/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/AdValue/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/zh/reference/classes/AdVideoController/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latest/zh/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestreference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/AdVideoController/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/zh/reference/classes/AdVideoOptions/</loc>
@@ -4246,6 +4319,16 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/LoadAdError/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/LoadAdError/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/LoadAdError/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/zh/reference/classes/MediaContent/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latest/zh/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestreference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/MediaContent/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/zh/reference/classes/MobileAds/</loc>
@@ -4586,6 +4669,16 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
         <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/zh/reference/listeners/VideoLifecycleCallbacks/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latest/zh/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestreference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latestja/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/listeners/VideoLifecycleCallbacks/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ja/</loc>
@@ -5188,15 +5281,6 @@
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/"/>
     </url>
     <url>
-        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ja/reference/enums/</loc>
-        <lastmod>2026-07-16</lastmod>
-        <changefreq>daily</changefreq>
-        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latest/ja/reference/enums/"/>
-        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/enums/"/>
-        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/enums/"/>
-        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/enums/"/>
-    </url>
-    <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ja/reference/classes/AdError/</loc>
         <lastmod>2026-07-16</lastmod>
         <changefreq>daily</changefreq>
@@ -5245,6 +5329,16 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/AdValue/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/AdValue/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/AdValue/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ja/reference/classes/AdVideoController/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latest/ja/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestreference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/AdVideoController/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/AdVideoController/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ja/reference/classes/AdVideoOptions/</loc>
@@ -5395,6 +5489,16 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/LoadAdError/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/LoadAdError/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/LoadAdError/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ja/reference/classes/MediaContent/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latest/ja/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestreference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/classes/MediaContent/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/classes/MediaContent/"/>
     </url>
     <url>
         <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ja/reference/classes/MobileAds/</loc>
@@ -5735,5 +5839,15 @@
         <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
         <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
         <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/listeners/RewardedInterstitialAdLoadCallback/"/>
+    </url>
+    <url>
+        <loc>https://poingstudios.github.io/godot-admob-plugin/latest/ja/reference/listeners/VideoLifecycleCallbacks/</loc>
+        <lastmod>2026-07-16</lastmod>
+        <changefreq>daily</changefreq>
+        <xhtml:link rel="alternate" hreflang="ja" href="https://poingstudios.github.io/godot-admob-plugin/latest/ja/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://poingstudios.github.io/godot-admob-plugin/latestreference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="es" href="https://poingstudios.github.io/godot-admob-plugin/latestes/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="pt-BR" href="https://poingstudios.github.io/godot-admob-plugin/latestpt-BR/reference/listeners/VideoLifecycleCallbacks/"/>
+        <xhtml:link rel="alternate" hreflang="zh" href="https://poingstudios.github.io/godot-admob-plugin/latestzh/reference/listeners/VideoLifecycleCallbacks/"/>
     </url>
 </urlset>

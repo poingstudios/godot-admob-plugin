@@ -1,6 +1,6 @@
 
 <!doctype html>
-<html lang="ja" class="no-js">
+<html lang="pt" class="no-js">
   <head>
     
       <meta charset="utf-8">
@@ -8,37 +8,41 @@
       
       
       
-        <link rel="canonical" href="https://poingstudios.github.io/godot-admob-plugin/latest/ja/reference/enums/">
+        <link rel="canonical" href="https://poingstudios.github.io/godot-admob-plugin/latest/pt-BR/reference/listeners/VideoLifecycleCallbacks/">
       
       
+        <link rel="prev" href="../RewardedInterstitialAdLoadCallback/">
+      
+      
+        <link rel="next" href="../../enums/AdChoicesPlacement/">
       
       
         
-          <link rel="alternate" href="/godot-admob-plugin/latest/" hreflang="en">
+          <link rel="alternate" href="../../../../reference/listeners/VideoLifecycleCallbacks/" hreflang="en">
         
-          <link rel="alternate" href="../../../pt-BR/reference/enums/" hreflang="pt-BR">
+          <link rel="alternate" href="./" hreflang="pt-BR">
         
-          <link rel="alternate" href="../../../es/reference/enums/" hreflang="es">
+          <link rel="alternate" href="../../../../es/reference/listeners/VideoLifecycleCallbacks/" hreflang="es">
         
-          <link rel="alternate" href="../../../zh/reference/enums/" hreflang="zh">
+          <link rel="alternate" href="../../../../zh/reference/listeners/VideoLifecycleCallbacks/" hreflang="zh">
         
-          <link rel="alternate" href="./" hreflang="ja">
+          <link rel="alternate" href="../../../../ja/reference/listeners/VideoLifecycleCallbacks/" hreflang="ja">
         
       
       
-      <link rel="icon" href="../../../assets/icon.ico">
+      <link rel="icon" href="../../../../assets/icon.ico">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
     
     
       
-        <title>列挙型 (Enums) - Godot AdMob Plugin - Poing Studios</title>
+        <title>VideoLifecycleCallbacks - Godot AdMob Plugin - Poing Studios</title>
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -57,9 +61,9 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -84,8 +88,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#enums" class="md-skip">
-          コンテンツにスキップ
+        <a href="#videolifecyclecallbacks" class="md-skip">
+          Pular para conteúdo
         </a>
       
     </div>
@@ -111,12 +115,12 @@
           <div class='shape shape-2'>⚠️</div>
           <div class='shape shape-3'>⚠️</div>
         </div>
-        <span class='announcement-title'>⚠️ 実験的ドキュメント</span>
+        <span class='announcement-title'>⚠️ DOCUMENTAÇÃO EXPERIMENTAL</span>
         <div class='announcement-text'>
-          現在、
-          <a href="https://github.com/poingstudios/godot-admob-plugin/tree/master" target="_blank" rel="noopener" class="announcement-badge">Master ブランチ</a>
-          （最新版）を表示しています。<br>安定版リリースについては、
-          <a href="https://poingstudios.github.io/godot-admob-plugin/stable/" class="announcement-link">安定版</a>を参照してください。
+          Você está visualizando a
+          <a href="https://github.com/poingstudios/godot-admob-plugin/tree/master" target="_blank" rel="noopener" class="announcement-badge">Branch Master</a>
+          (mais recente).<br>Para versões estáveis, por favor veja a
+          <a href="https://poingstudios.github.io/godot-admob-plugin/stable/" class="announcement-link">versão estável</a>.
         </div>
       </div>
     </div>
@@ -136,10 +140,10 @@
       
 
 <header class="md-header" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="ヘッダー">
-    <a href="../../" title="Godot AdMob Plugin - Poing Studios" class="md-header__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
+  <nav class="md-header__inner md-grid" aria-label="Cabeçalho">
+    <a href="../../../" title="Godot AdMob Plugin - Poing Studios" class="md-header__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
       
-  <img src="../../../assets/icon.ico" alt="logo">
+  <img src="../../../../assets/icon.ico" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -156,7 +160,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              列挙型 (Enums)
+              VideoLifecycleCallbacks
             
           </span>
         </div>
@@ -196,38 +200,38 @@
       <div class="md-header__option">
   <div class="md-select">
     
-    <button class="md-header__button md-icon" aria-label="言語切り替え">
+    <button class="md-header__button md-icon" aria-label="Selecione o idioma">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12.87 15.07-2.54-2.51.03-.03A17.5 17.5 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2zm-2.62 7 1.62-4.33L19.12 17z"/></svg>
     </button>
     <div class="md-select__inner">
       <ul class="md-select__list">
         
           <li class="md-select__item">
-            <a href="/godot-admob-plugin/latest/" hreflang="en" class="md-select__link">
+            <a href="../../../../reference/listeners/VideoLifecycleCallbacks/" hreflang="en" class="md-select__link">
               English
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../pt-BR/reference/enums/" hreflang="pt-BR" class="md-select__link">
+            <a href="./" hreflang="pt-BR" class="md-select__link">
               Português (Brasil)
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../es/reference/enums/" hreflang="es" class="md-select__link">
+            <a href="../../../../es/reference/listeners/VideoLifecycleCallbacks/" hreflang="es" class="md-select__link">
               Español
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="../../../zh/reference/enums/" hreflang="zh" class="md-select__link">
+            <a href="../../../../zh/reference/listeners/VideoLifecycleCallbacks/" hreflang="zh" class="md-select__link">
               简体中文
             </a>
           </li>
         
           <li class="md-select__item">
-            <a href="./" hreflang="ja" class="md-select__link">
+            <a href="../../../../ja/reference/listeners/VideoLifecycleCallbacks/" hreflang="ja" class="md-select__link">
               日本語
             </a>
           </li>
@@ -248,16 +252,16 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="検索" placeholder="検索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Buscar" placeholder="Buscar" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="検索">
+      <nav class="md-search__options" aria-label="Pesquisar">
         
-        <button type="reset" class="md-search__icon md-icon" title="クリア" aria-label="クリア" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Limpar" aria-label="Limpar" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -270,7 +274,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            検索を初期化
+            Inicializando busca
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -282,7 +286,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/poingstudios/godot-admob-plugin" title="リポジトリへ" class="md-source" data-md-component="source">
+        <a href="https://github.com/poingstudios/godot-admob-plugin" title="Ir para repositório" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -303,7 +307,7 @@
         
           
             
-<nav class="md-tabs" aria-label="タブ" data-md-component="tabs">
+<nav class="md-tabs" aria-label="Abas" data-md-component="tabs">
   <div class="md-grid">
     <ul class="md-tabs__list">
       
@@ -315,11 +319,11 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../" class="md-tabs__link">
+        <a href="../../../" class="md-tabs__link">
           
   
   
-  ガイド
+  Guias
 
         </a>
       </li>
@@ -331,6 +335,8 @@
   
   
   
+    
+  
   
     
     
@@ -338,15 +344,17 @@
   
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
           
   
   
-  リファレンス
+  Referência
 
         </a>
       </li>
@@ -377,18 +385,18 @@
   
 
 
-<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="ナビゲーション" data-md-level="0">
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navegação" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../" title="Godot AdMob Plugin - Poing Studios" class="md-nav__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
+    <a href="../../../" title="Godot AdMob Plugin - Poing Studios" class="md-nav__button md-logo" aria-label="Godot AdMob Plugin - Poing Studios" data-md-component="logo">
       
-  <img src="../../../assets/icon.ico" alt="logo">
+  <img src="../../../../assets/icon.ico" alt="logo">
 
     </a>
     Godot AdMob Plugin - Poing Studios
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/poingstudios/godot-admob-plugin" title="リポジトリへ" class="md-source" data-md-component="source">
+      <a href="https://github.com/poingstudios/godot-admob-plugin" title="Ir para repositório" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -431,7 +439,7 @@
   <span class="md-ellipsis">
     
   
-    ガイド
+    Guias
   
 
     
@@ -447,7 +455,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    ガイド
+    Guias
   
 
           </label>
@@ -460,14 +468,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../../../" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    はじめに
+    Começar
   
 
     
@@ -488,14 +496,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../migration/" class="md-nav__link">
+      <a href="../../../migration/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    SDK バージョンの移行
+    Migrar versões do SDK
   
 
     
@@ -516,7 +524,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../enable_test_ads/" class="md-nav__link">
+      <a href="../../../enable_test_ads/" class="md-nav__link">
         
   
   
@@ -544,7 +552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../editor_mock_ads/" class="md-nav__link">
+      <a href="../../../editor_mock_ads/" class="md-nav__link">
         
   
   
@@ -572,14 +580,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../optimize_initialization/" class="md-nav__link">
+      <a href="../../../optimize_initialization/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    初期化と広告読み込みの最適化
+    Otimizar inicialização e carregamento de anúncios
   
 
     
@@ -600,7 +608,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ios_pause_background/" class="md-nav__link">
+      <a href="../../../ios_pause_background/" class="md-nav__link">
         
   
   
@@ -628,14 +636,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ai_skills/" class="md-nav__link">
+      <a href="../../../ai_skills/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    AI Copilot スキル <span class="modern-icon" title="Beta">🧪</span>
+    Habilidades do AI Copilot <span class="modern-icon" title="Beta">🧪</span>
   
 
     
@@ -679,7 +687,7 @@
   <span class="md-ellipsis">
     
   
-    広告フォーマットの選択
+    Escolher um formato de anúncio
   
 
     
@@ -695,7 +703,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    広告フォーマットの選択
+    Escolher um formato de anúncio
   
 
           </label>
@@ -708,14 +716,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ad_formats/app_open/" class="md-nav__link">
+      <a href="../../../ad_formats/app_open/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    アプリ起動時広告 (App Open)
+    App Open
   
 
     
@@ -759,7 +767,7 @@
   <span class="md-ellipsis">
     
   
-    バナー広告 (Banner)
+    Banner
   
 
     
@@ -775,7 +783,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    バナー広告 (Banner)
+    Banner
   
 
           </label>
@@ -788,14 +796,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ad_formats/banner/get_started/" class="md-nav__link">
+      <a href="../../../ad_formats/banner/get_started/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    バナー広告のセットアップ
+    Configurar anúncios de banner
   
 
     
@@ -816,14 +824,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ad_formats/banner/collapsible/" class="md-nav__link">
+      <a href="../../../ad_formats/banner/collapsible/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    折りたたみ式バナーの使用
+    Usar banners colapsáveis
   
 
     
@@ -867,7 +875,7 @@
   <span class="md-ellipsis">
     
   
-    サイズ
+    Tamanhos
   
 
     
@@ -883,7 +891,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    サイズ
+    Tamanhos
   
 
           </label>
@@ -896,14 +904,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ad_formats/banner/sizes/anchored_adaptive/" class="md-nav__link">
+      <a href="../../../ad_formats/banner/sizes/anchored_adaptive/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    アンカー付きアダプティブバナー
+    Banners adaptativos ancorados
   
 
     
@@ -940,14 +948,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ad_formats/interstitial/" class="md-nav__link">
+      <a href="../../../ad_formats/interstitial/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    インタースティシャル広告 (Interstitial)
+    Intersticial
   
 
     
@@ -991,7 +999,7 @@
   <span class="md-ellipsis">
     
   
-    ネイティブ広告
+    Nativo (Native)
   
 
     
@@ -1007,7 +1015,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    ネイティブ広告
+    Nativo (Native)
   
 
           </label>
@@ -1020,14 +1028,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ad_formats/native_overlay/" class="md-nav__link">
+      <a href="../../../ad_formats/native_overlay/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    ネイティブオーバーレイ広告 (Native Overlay)
+    Native Overlay
   
 
     
@@ -1048,14 +1056,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ad_formats/native_video/" class="md-nav__link">
+      <a href="../../../ad_formats/native_video/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    動画イベントに応答する
+    Responder a eventos de vídeo
   
 
     
@@ -1084,14 +1092,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ad_formats/rewarded/" class="md-nav__link">
+      <a href="../../../ad_formats/rewarded/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    リワード広告 (Rewarded)
+    Premiado (Rewarded)
   
 
     
@@ -1112,14 +1120,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../ad_formats/rewarded_interstitial/" class="md-nav__link">
+      <a href="../../../ad_formats/rewarded_interstitial/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    リワードインタースティシャル広告
+    Intersticial Premiado
   
 
     
@@ -1171,7 +1179,7 @@
   <span class="md-ellipsis">
     
   
-    AdMob メディエーションを統合する
+    Integrar Mediação do AdMob
   
 
     
@@ -1187,7 +1195,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    AdMob メディエーションを統合する
+    Integrar Mediação do AdMob
   
 
           </label>
@@ -1200,14 +1208,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/get_started/" class="md-nav__link">
+      <a href="../../../mediate/get_started/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    AdMob メディエーションを設定する
+    Configurar Mediação do AdMob
   
 
     
@@ -1228,7 +1236,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/choose_networks/" class="md-nav__link">
+      <a href="../../../mediate/choose_networks/" class="md-nav__link">
         
   
   
@@ -1279,7 +1287,7 @@
   <span class="md-ellipsis">
     
   
-    広告ソースを統合する
+    Integrar fontes de anúncios
   
 
     
@@ -1295,7 +1303,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    広告ソースを統合する
+    Integrar fontes de anúncios
   
 
           </label>
@@ -1308,7 +1316,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/applovin/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/applovin/" class="md-nav__link">
         
   
   
@@ -1336,7 +1344,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/bidmachine/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/bidmachine/" class="md-nav__link">
         
   
   
@@ -1364,7 +1372,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/chartboost/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/chartboost/" class="md-nav__link">
         
   
   
@@ -1392,14 +1400,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/dtexchange/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/dtexchange/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    DT Exchange（以前の Fyber）
+    DT Exchange (anteriormente Fyber)
   
 
     
@@ -1420,7 +1428,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/imobile/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/imobile/" class="md-nav__link">
         
   
   
@@ -1448,7 +1456,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/inmobi/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/inmobi/" class="md-nav__link">
         
   
   
@@ -1476,7 +1484,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/ironsource/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/ironsource/" class="md-nav__link">
         
   
   
@@ -1504,14 +1512,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/vungle/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/vungle/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Liftoff Monetize（以前の Vungle）
+    Liftoff Monetize (anteriormente Vungle)
   
 
     
@@ -1532,14 +1540,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/line/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/line/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    LY Ads Network（以前の Line Ads Network）
+    LY Ads Network (anteriormente Line Ads Network)
   
 
     
@@ -1560,7 +1568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/maio/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/maio/" class="md-nav__link">
         
   
   
@@ -1588,14 +1596,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/meta/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/meta/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Meta Audience Network（以前の Facebook）
+    Meta Audience Network (anteriormente Facebook)
   
 
     
@@ -1616,7 +1624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/mintegral/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/mintegral/" class="md-nav__link">
         
   
   
@@ -1644,7 +1652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/moloco/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/moloco/" class="md-nav__link">
         
   
   
@@ -1672,7 +1680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/mytarget/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/mytarget/" class="md-nav__link">
         
   
   
@@ -1700,7 +1708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/pangle/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/pangle/" class="md-nav__link">
         
   
   
@@ -1728,7 +1736,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/pubmatic/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/pubmatic/" class="md-nav__link">
         
   
   
@@ -1756,7 +1764,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/unity_ads/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/unity_ads/" class="md-nav__link">
         
   
   
@@ -1784,7 +1792,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/vpon/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/vpon/" class="md-nav__link">
         
   
   
@@ -1812,7 +1820,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/integrate_partner_networks/zucks/" class="md-nav__link">
+      <a href="../../../mediate/integrate_partner_networks/zucks/" class="md-nav__link">
         
   
   
@@ -1848,14 +1856,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../mediate/troubleshoot_bidding/" class="md-nav__link">
+      <a href="../../../mediate/troubleshoot_bidding/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    入札のトラブルシューティング
+    Solucionar problemas de lances
   
 
     
@@ -1907,7 +1915,7 @@
   <span class="md-ellipsis">
     
   
-    プライバシー
+    Privacidade
   
 
     
@@ -1923,7 +1931,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    プライバシー
+    Privacidade
   
 
           </label>
@@ -1959,7 +1967,7 @@
   <span class="md-ellipsis">
     
   
-    規制対応ソリューション
+    Soluções regulatórias
   
 
     
@@ -1975,7 +1983,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    規制対応ソリューション
+    Soluções regulatórias
   
 
           </label>
@@ -1988,14 +1996,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../privacy/regulatory_solutions/us_states_privacy_laws/" class="md-nav__link">
+      <a href="../../../privacy/regulatory_solutions/us_states_privacy_laws/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    米国各州のプライバシー法
+    Leis de privacidade dos estados dos EUA
   
 
     
@@ -2024,14 +2032,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../privacy/strategies/strategies/" class="md-nav__link">
+      <a href="../../../privacy/strategies/strategies/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    ストラテジー
+    Estratégias
   
 
     
@@ -2052,14 +2060,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../privacy/ad_serving_modes/ad_serving_modes/" class="md-nav__link">
+      <a href="../../../privacy/ad_serving_modes/ad_serving_modes/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    広告配信モード
+    Modos de veiculação de anúncios
   
 
     
@@ -2103,7 +2111,7 @@
   <span class="md-ellipsis">
     
   
-    データ開示
+    Divulgação de dados
   
 
     
@@ -2119,7 +2127,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    データ開示
+    Divulgação de dados
   
 
           </label>
@@ -2132,14 +2140,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../privacy/store_data_disclosure/google_play_data_disclosure/" class="md-nav__link">
+      <a href="../../../privacy/store_data_disclosure/google_play_data_disclosure/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Google Play データ開示
+    Divulgação de dados do Google Play
   
 
     
@@ -2160,14 +2168,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../privacy/store_data_disclosure/apple_app_store_data_disclosure/" class="md-nav__link">
+      <a href="../../../privacy/store_data_disclosure/apple_app_store_data_disclosure/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Apple App Store データ開示
+    Divulgação de dados da Apple App Store
   
 
     
@@ -2219,7 +2227,7 @@
   <span class="md-ellipsis">
     
   
-    ユーザーメッセージングツール
+    Ferramentas de mensagens de usuários
   
 
     
@@ -2235,7 +2243,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    ユーザーメッセージングツール
+    Ferramentas de mensagens de usuários
   
 
           </label>
@@ -2248,14 +2256,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../privacy/user_messaging_tools/get_started/" class="md-nav__link">
+      <a href="../../../privacy/user_messaging_tools/get_started/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    はじめに
+    Começar
   
 
     
@@ -2276,14 +2284,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../privacy/user_messaging_tools/gdpr_iab_support/" class="md-nav__link">
+      <a href="../../../privacy/user_messaging_tools/gdpr_iab_support/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    GDPR IAB サポート
+    Suporte ao GDPR IAB
   
 
     
@@ -2304,14 +2312,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../privacy/user_messaging_tools/idfa_support/" class="md-nav__link">
+      <a href="../../../privacy/user_messaging_tools/idfa_support/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    IDFA サポート
+    Suporte ao IDFA
   
 
     
@@ -2371,7 +2379,7 @@
   <span class="md-ellipsis">
     
   
-    広告のトラブルシューティング
+    Solucionar problemas com anúncios
   
 
     
@@ -2387,7 +2395,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    広告のトラブルシューティング
+    Solucionar problemas com anúncios
   
 
           </label>
@@ -2400,14 +2408,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced_topics/ad_load_errors/" class="md-nav__link">
+      <a href="../../../advanced_topics/ad_load_errors/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    広告の読み込みエラー
+    Erros de carregamento de anúncios
   
 
     
@@ -2451,7 +2459,7 @@
   <span class="md-ellipsis">
     
   
-    広告インスペクターの管理
+    Gerenciar inspecionador de anúncios
   
 
     
@@ -2467,7 +2475,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    広告インスペクターの管理
+    Gerenciar inspecionador de anúncios
   
 
           </label>
@@ -2480,14 +2488,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced_topics/ad_inspector/overview/" class="md-nav__link">
+      <a href="../../../advanced_topics/ad_inspector/overview/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    概要
+    Visão Geral
   
 
     
@@ -2508,14 +2516,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced_topics/ad_inspector/launch/" class="md-nav__link">
+      <a href="../../../advanced_topics/ad_inspector/launch/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    広告インスペクターの起動
+    Iniciar o inspecionador de anúncios
   
 
     
@@ -2536,14 +2544,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced_topics/ad_inspector/verify_adapters/" class="md-nav__link">
+      <a href="../../../advanced_topics/ad_inspector/verify_adapters/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    アダプター統合の確認
+    Verificar integrações de adaptadores
   
 
     
@@ -2564,14 +2572,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced_topics/ad_inspector/test_ad_units/" class="md-nav__link">
+      <a href="../../../advanced_topics/ad_inspector/test_ad_units/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    広告ユニットのテスト
+    Testar blocos de anúncios
   
 
     
@@ -2592,14 +2600,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced_topics/ad_inspector/troubleshoot_ad_units/" class="md-nav__link">
+      <a href="../../../advanced_topics/ad_inspector/troubleshoot_ad_units/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    広告ユニットのトラブルシューティング
+    Solucionar problemas de blocos de anúncios
   
 
     
@@ -2620,14 +2628,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced_topics/ad_inspector/troubleshoot_privacy/" class="md-nav__link">
+      <a href="../../../advanced_topics/ad_inspector/troubleshoot_privacy/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    プライバシー設定のトラブルシューティング
+    Solucionar problemas de configurações de privacidade
   
 
     
@@ -2648,14 +2656,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced_topics/ad_inspector/copy_output/" class="md-nav__link">
+      <a href="../../../advanced_topics/ad_inspector/copy_output/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    診断出力のコピー
+    Copiar saída de diagnóstico
   
 
     
@@ -2684,14 +2692,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced_topics/response_info/" class="md-nav__link">
+      <a href="../../../advanced_topics/response_info/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    レスポンス情報
+    Informações de Resposta
   
 
     
@@ -2719,7 +2727,7 @@
   <span class="md-ellipsis">
     
   
-    表示されない広告のトラブルシューティング
+    Solucionar problemas de anúncios que não são exibidos
   
 
     
@@ -2800,7 +2808,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../global_settings/" class="md-nav__link">
+      <a href="../../../global_settings/" class="md-nav__link">
         
   
   
@@ -2828,14 +2836,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced_topics/impression_level_ad_revenue/" class="md-nav__link">
+      <a href="../../../advanced_topics/impression_level_ad_revenue/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    インプレッションレベルの広告収益
+    Receita de Anúncios a Nível de Impressão
   
 
     
@@ -2856,14 +2864,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced_topics/ssv/" class="md-nav__link">
+      <a href="../../../advanced_topics/ssv/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    サーバー側検証 (SSV)
+    Verificação do Servidor (SSV)
   
 
     
@@ -2884,14 +2892,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../advanced_topics/targeting/" class="md-nav__link">
+      <a href="../../../advanced_topics/targeting/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    ターゲティング (Targeting)
+    Segmentação (Targeting)
   
 
     
@@ -2924,33 +2932,38 @@
       
   
   
+    
   
   
+  
     
     
     
     
+      
+        
+        
       
       
         
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
         
           
-          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    リファレンス
+    Referência
   
 
     
@@ -2961,12 +2974,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2">
             <span class="md-nav__icon md-icon"></span>
             
   
-    リファレンス
+    Referência
   
 
           </label>
@@ -2976,33 +2989,38 @@
                 
   
   
+    
   
   
+  
     
     
     
     
       
       
-        
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" >
         
           
-          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="0">
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
             
   
   
   <span class="md-ellipsis">
     
   
-    API リファレンス
+    Referência da API
   
 
     
@@ -3013,12 +3031,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_1">
             <span class="md-nav__icon md-icon"></span>
             
   
-    API リファレンス
+    Referência da API
   
 
           </label>
@@ -3031,14 +3049,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    概要
+    Visão Geral
   
 
     
@@ -3082,7 +3100,7 @@
   <span class="md-ellipsis">
     
   
-    クラス
+    Classes
   
 
     
@@ -3098,7 +3116,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    クラス
+    Classes
   
 
           </label>
@@ -3111,7 +3129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/AdError/" class="md-nav__link">
+      <a href="../../classes/AdError/" class="md-nav__link">
         
   
   
@@ -3139,7 +3157,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/AdPosition/" class="md-nav__link">
+      <a href="../../classes/AdPosition/" class="md-nav__link">
         
   
   
@@ -3167,7 +3185,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/AdRequest/" class="md-nav__link">
+      <a href="../../classes/AdRequest/" class="md-nav__link">
         
   
   
@@ -3195,7 +3213,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/AdSize/" class="md-nav__link">
+      <a href="../../classes/AdSize/" class="md-nav__link">
         
   
   
@@ -3223,7 +3241,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/AdValue/" class="md-nav__link">
+      <a href="../../classes/AdValue/" class="md-nav__link">
         
   
   
@@ -3251,7 +3269,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/AdVideoOptions/" class="md-nav__link">
+      <a href="../../classes/AdVideoController/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AdVideoController
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classes/AdVideoOptions/" class="md-nav__link">
         
   
   
@@ -3279,7 +3325,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/AdView/" class="md-nav__link">
+      <a href="../../classes/AdView/" class="md-nav__link">
         
   
   
@@ -3307,7 +3353,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/AdapterResponseInfo/" class="md-nav__link">
+      <a href="../../classes/AdapterResponseInfo/" class="md-nav__link">
         
   
   
@@ -3335,7 +3381,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/AdapterStatus/" class="md-nav__link">
+      <a href="../../classes/AdapterStatus/" class="md-nav__link">
         
   
   
@@ -3363,7 +3409,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/AppOpenAd/" class="md-nav__link">
+      <a href="../../classes/AppOpenAd/" class="md-nav__link">
         
   
   
@@ -3391,7 +3437,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/AppOpenAdLoader/" class="md-nav__link">
+      <a href="../../classes/AppOpenAdLoader/" class="md-nav__link">
         
   
   
@@ -3419,7 +3465,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/ConsentDebugSettings/" class="md-nav__link">
+      <a href="../../classes/ConsentDebugSettings/" class="md-nav__link">
         
   
   
@@ -3447,7 +3493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/ConsentForm/" class="md-nav__link">
+      <a href="../../classes/ConsentForm/" class="md-nav__link">
         
   
   
@@ -3475,7 +3521,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/ConsentInformation/" class="md-nav__link">
+      <a href="../../classes/ConsentInformation/" class="md-nav__link">
         
   
   
@@ -3503,7 +3549,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/ConsentRequestParameters/" class="md-nav__link">
+      <a href="../../classes/ConsentRequestParameters/" class="md-nav__link">
         
   
   
@@ -3531,7 +3577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/FormError/" class="md-nav__link">
+      <a href="../../classes/FormError/" class="md-nav__link">
         
   
   
@@ -3559,7 +3605,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/InitializationStatus/" class="md-nav__link">
+      <a href="../../classes/InitializationStatus/" class="md-nav__link">
         
   
   
@@ -3587,7 +3633,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/InterstitialAd/" class="md-nav__link">
+      <a href="../../classes/InterstitialAd/" class="md-nav__link">
         
   
   
@@ -3615,7 +3661,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/InterstitialAdLoader/" class="md-nav__link">
+      <a href="../../classes/InterstitialAdLoader/" class="md-nav__link">
         
   
   
@@ -3643,7 +3689,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/LoadAdError/" class="md-nav__link">
+      <a href="../../classes/LoadAdError/" class="md-nav__link">
         
   
   
@@ -3671,7 +3717,35 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/MobileAds/" class="md-nav__link">
+      <a href="../../classes/MediaContent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MediaContent
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../classes/MobileAds/" class="md-nav__link">
         
   
   
@@ -3699,7 +3773,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/NativeAdOptions/" class="md-nav__link">
+      <a href="../../classes/NativeAdOptions/" class="md-nav__link">
         
   
   
@@ -3727,7 +3801,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/NativeOverlayAd/" class="md-nav__link">
+      <a href="../../classes/NativeOverlayAd/" class="md-nav__link">
         
   
   
@@ -3755,7 +3829,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/NativeTemplateStyle/" class="md-nav__link">
+      <a href="../../classes/NativeTemplateStyle/" class="md-nav__link">
         
   
   
@@ -3783,7 +3857,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/NativeTemplateTextStyle/" class="md-nav__link">
+      <a href="../../classes/NativeTemplateTextStyle/" class="md-nav__link">
         
   
   
@@ -3811,7 +3885,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/RequestConfiguration/" class="md-nav__link">
+      <a href="../../classes/RequestConfiguration/" class="md-nav__link">
         
   
   
@@ -3839,7 +3913,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/ResponseInfo/" class="md-nav__link">
+      <a href="../../classes/ResponseInfo/" class="md-nav__link">
         
   
   
@@ -3867,7 +3941,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/RewardedAd/" class="md-nav__link">
+      <a href="../../classes/RewardedAd/" class="md-nav__link">
         
   
   
@@ -3895,7 +3969,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/RewardedAdLoader/" class="md-nav__link">
+      <a href="../../classes/RewardedAdLoader/" class="md-nav__link">
         
   
   
@@ -3923,7 +3997,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/RewardedInterstitialAd/" class="md-nav__link">
+      <a href="../../classes/RewardedInterstitialAd/" class="md-nav__link">
         
   
   
@@ -3951,7 +4025,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/RewardedInterstitialAdLoader/" class="md-nav__link">
+      <a href="../../classes/RewardedInterstitialAdLoader/" class="md-nav__link">
         
   
   
@@ -3979,7 +4053,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/RewardedItem/" class="md-nav__link">
+      <a href="../../classes/RewardedItem/" class="md-nav__link">
         
   
   
@@ -4007,7 +4081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/ServerSideVerificationOptions/" class="md-nav__link">
+      <a href="../../classes/ServerSideVerificationOptions/" class="md-nav__link">
         
   
   
@@ -4035,7 +4109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../classes/UserMessagingPlatform/" class="md-nav__link">
+      <a href="../../classes/UserMessagingPlatform/" class="md-nav__link">
         
   
   
@@ -4068,8 +4142,10 @@
                 
   
   
+    
   
   
+  
     
     
     
@@ -4080,11 +4156,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_3" checked>
         
           
           <label class="md-nav__link" for="__nav_2_1_3" id="__nav_2_1_3_label" tabindex="0">
@@ -4094,7 +4170,7 @@
   <span class="md-ellipsis">
     
   
-    リスナー
+    Listeners
   
 
     
@@ -4105,12 +4181,12 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_2_1_3">
             <span class="md-nav__icon md-icon"></span>
             
   
-    リスナー
+    Listeners
   
 
           </label>
@@ -4123,7 +4199,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../listeners/AdInspectorClosedListener/" class="md-nav__link">
+      <a href="../AdInspectorClosedListener/" class="md-nav__link">
         
   
   
@@ -4151,7 +4227,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../listeners/AdListener/" class="md-nav__link">
+      <a href="../AdListener/" class="md-nav__link">
         
   
   
@@ -4179,7 +4255,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../listeners/AppOpenAdLoadCallback/" class="md-nav__link">
+      <a href="../AppOpenAdLoadCallback/" class="md-nav__link">
         
   
   
@@ -4207,7 +4283,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../listeners/FullScreenContentCallback/" class="md-nav__link">
+      <a href="../FullScreenContentCallback/" class="md-nav__link">
         
   
   
@@ -4235,7 +4311,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../listeners/InterstitialAdLoadCallback/" class="md-nav__link">
+      <a href="../InterstitialAdLoadCallback/" class="md-nav__link">
         
   
   
@@ -4263,7 +4339,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../listeners/OnInitializationCompleteListener/" class="md-nav__link">
+      <a href="../OnInitializationCompleteListener/" class="md-nav__link">
         
   
   
@@ -4291,7 +4367,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../listeners/OnUserEarnedRewardListener/" class="md-nav__link">
+      <a href="../OnUserEarnedRewardListener/" class="md-nav__link">
         
   
   
@@ -4319,7 +4395,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../listeners/RewardedAdLoadCallback/" class="md-nav__link">
+      <a href="../RewardedAdLoadCallback/" class="md-nav__link">
         
   
   
@@ -4347,7 +4423,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../listeners/RewardedInterstitialAdLoadCallback/" class="md-nav__link">
+      <a href="../RewardedInterstitialAdLoadCallback/" class="md-nav__link">
         
   
   
@@ -4363,6 +4439,153 @@
   
 
       </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VideoLifecycleCallbacks
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VideoLifecycleCallbacks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Índice
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#callbacks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Callbacks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Callbacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on_video_start-onvideostart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_video_start / OnVideoStart
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_video_play-onvideoplay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_video_play / OnVideoPlay
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_video_pause-onvideopause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_video_pause / OnVideoPause
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_video_end-onvideoend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_video_end / OnVideoEnd
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_video_mute-onvideomute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_video_mute / OnVideoMute
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -4406,7 +4629,7 @@
   <span class="md-ellipsis">
     
   
-    列挙型 (Enums)
+    Enums
   
 
     
@@ -4422,7 +4645,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    列挙型 (Enums)
+    Enums
   
 
           </label>
@@ -4435,7 +4658,7 @@
   
   
     <li class="md-nav__item">
-      <a href="AdChoicesPlacement/" class="md-nav__link">
+      <a href="../../enums/AdChoicesPlacement/" class="md-nav__link">
         
   
   
@@ -4463,7 +4686,7 @@
   
   
     <li class="md-nav__item">
-      <a href="AdPosition/" class="md-nav__link">
+      <a href="../../enums/AdPosition/" class="md-nav__link">
         
   
   
@@ -4491,7 +4714,7 @@
   
   
     <li class="md-nav__item">
-      <a href="AdValue.PrecisionType/" class="md-nav__link">
+      <a href="../../enums/AdValue.PrecisionType/" class="md-nav__link">
         
   
   
@@ -4519,7 +4742,7 @@
   
   
     <li class="md-nav__item">
-      <a href="AdapterStatus.InitializationState/" class="md-nav__link">
+      <a href="../../enums/AdapterStatus.InitializationState/" class="md-nav__link">
         
   
   
@@ -4547,7 +4770,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ConsentInformation.ConsentStatus/" class="md-nav__link">
+      <a href="../../enums/ConsentInformation.ConsentStatus/" class="md-nav__link">
         
   
   
@@ -4575,7 +4798,7 @@
   
   
     <li class="md-nav__item">
-      <a href="ConsentInformation.PrivacyOptionsRequirementStatus/" class="md-nav__link">
+      <a href="../../enums/ConsentInformation.PrivacyOptionsRequirementStatus/" class="md-nav__link">
         
   
   
@@ -4603,7 +4826,7 @@
   
   
     <li class="md-nav__item">
-      <a href="DebugGeography/" class="md-nav__link">
+      <a href="../../enums/DebugGeography/" class="md-nav__link">
         
   
   
@@ -4631,7 +4854,7 @@
   
   
     <li class="md-nav__item">
-      <a href="NativeMediaAspectRatio/" class="md-nav__link">
+      <a href="../../enums/NativeMediaAspectRatio/" class="md-nav__link">
         
   
   
@@ -4659,7 +4882,7 @@
   
   
     <li class="md-nav__item">
-      <a href="NativeTemplateFontStyle/" class="md-nav__link">
+      <a href="../../enums/NativeTemplateFontStyle/" class="md-nav__link">
         
   
   
@@ -4687,7 +4910,7 @@
   
   
     <li class="md-nav__item">
-      <a href="RequestConfiguration.TagForChildDirectedTreatment/" class="md-nav__link">
+      <a href="../../enums/RequestConfiguration.TagForChildDirectedTreatment/" class="md-nav__link">
         
   
   
@@ -4715,7 +4938,7 @@
   
   
     <li class="md-nav__item">
-      <a href="RequestConfiguration.TagForUnderAgeOfConsent/" class="md-nav__link">
+      <a href="../../enums/RequestConfiguration.TagForUnderAgeOfConsent/" class="md-nav__link">
         
   
   
@@ -4772,7 +4995,7 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="目次">
+<nav class="md-nav md-nav--secondary" aria-label="Índice">
   
   
   
@@ -4781,18 +5004,79 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      目次
+      Índice
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#adposition" class="md-nav__link">
+  <a href="#callbacks" class="md-nav__link">
     <span class="md-ellipsis">
       
-        AdPosition
+        Callbacks
       
     </span>
   </a>
+  
+    <nav class="md-nav" aria-label="Callbacks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on_video_start-onvideostart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_video_start / OnVideoStart
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_video_play-onvideoplay" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_video_play / OnVideoPlay
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_video_pause-onvideopause" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_video_pause / OnVideoPause
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_video_end-onvideoend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_video_end / OnVideoEnd
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on_video_mute-onvideomute" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        on_video_mute / OnVideoMute
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4816,39 +5100,75 @@
   
 
 
-<h1 id="enums">列挙型 (Enums)</h1>
-<p>このページでは、Godot AdMob プラグインで使用されるパブリックな列挙型（Enums）を示します。</p>
-<h2 id="adposition">AdPosition</h2>
-<p>画面上におけるバナー広告の表示位置を定義します。</p>
+<h1 id="videolifecyclecallbacks">VideoLifecycleCallbacks</h1>
+<p>A classe <code>VideoLifecycleCallbacks</code> contém callbacks (ações/callables) invocados durante o ciclo de vida de reprodução de um vídeo dentro de um anúncio nativo.</p>
+<h2 id="callbacks">Callbacks</h2>
+<h3 id="on_video_start-onvideostart"><code>on_video_start</code> / <code>OnVideoStart</code></h3>
+<p>Chamado quando o vídeo começa a ser reproduzido.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">GDScript</label><label for="__tabbed_1_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">enum</span><span class="w"> </span><span class="n">AdPosition</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">TOP</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">BOTTOM</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="n">LEFT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="n">RIGHT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="n">TOP_LEFT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="n">TOP_RIGHT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">BOTTOM_LEFT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="n">BOTTOM_RIGHT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">    </span><span class="n">CENTER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">var</span><span class="w"> </span><span class="n">on_video_start</span><span class="p">:</span><span class="w"> </span><span class="n">Callable</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">public</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">AdPosition</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">{</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">Top</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">Bottom</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">    </span><span class="n">Left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="n">Right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="w">    </span><span class="n">TopLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="w">    </span><span class="n">TopRight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="n">BottomLeft</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="n">BottomRight</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="w">    </span><span class="n">Center</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">public</span><span class="w"> </span><span class="n">Action</span><span class="w"> </span><span class="n">OnVideoStart</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="on_video_play-onvideoplay"><code>on_video_play</code> / <code>OnVideoPlay</code></h3>
+<p>Chamado quando o vídeo é reproduzido/retomado.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">GDScript</label><label for="__tabbed_2_2">C#</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">var</span><span class="w"> </span><span class="n">on_video_play</span><span class="p">:</span><span class="w"> </span><span class="n">Callable</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">public</span><span class="w"> </span><span class="n">Action</span><span class="w"> </span><span class="n">OnVideoPlay</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="on_video_pause-onvideopause"><code>on_video_pause</code> / <code>OnVideoPause</code></h3>
+<p>Chamado quando o vídeo é pausado.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">var</span><span class="w"> </span><span class="n">on_video_pause</span><span class="p">:</span><span class="w"> </span><span class="n">Callable</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">public</span><span class="w"> </span><span class="n">Action</span><span class="w"> </span><span class="n">OnVideoPause</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="on_video_end-onvideoend"><code>on_video_end</code> / <code>OnVideoEnd</code></h3>
+<p>Chamado quando o vídeo termina de ser reproduzido.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">GDScript</label><label for="__tabbed_4_2">C#</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">var</span><span class="w"> </span><span class="n">on_video_end</span><span class="p">:</span><span class="w"> </span><span class="n">Callable</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">public</span><span class="w"> </span><span class="n">Action</span><span class="w"> </span><span class="n">OnVideoEnd</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="on_video_mute-onvideomute"><code>on_video_mute</code> / <code>OnVideoMute</code></h3>
+<p>Chamado quando o vídeo é silenciado ou reativado o som. Passa <code>true</code> se o vídeo estiver silenciado agora, ou <code>false</code> caso contrário.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">var</span><span class="w"> </span><span class="n">on_video_mute</span><span class="p">:</span><span class="w"> </span><span class="n">Callable</span><span class="w"> </span><span class="c1"># func(is_muted: bool)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">public</span><span class="w"> </span><span class="n">Action</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="w"> </span><span class="n">OnVideoMute</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">get</span><span class="p">;</span><span class="w"> </span><span class="k">set</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 </div>
 </div>
@@ -4878,7 +5198,7 @@
           <button type="button" class="md-top md-icon" data-md-component="top" hidden>
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
-  ページトップへ戻る
+  Voltar para o topo
 </button>
         
       </main>
@@ -4894,15 +5214,15 @@
   
     <div class="md-copyright__highlight">
       &copy; 2023-2026 <a href="https://github.com/poingstudios/godot-admob-plugin" target="_blank" rel="noopener">Poing Studios</a>
-      | 本ページの一部は、Google が作成および
-      <a href="https://developers.google.com/terms/site-policies" target="_blank" rel="noopener">共有した内容を基に改変されており、</a>
-      以下のライセンスに記載された条件に従って使用されています：
-      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">クリエイティブ・コモンズ 表示 4.0 ライセンス</a>.
+      | Partes desta página são modificações baseadas no trabalho criado e
+      <a href="https://developers.google.com/terms/site-policies" target="_blank" rel="noopener">compartilhado pelo Google</a>
+      e usadas de acordo com os termos descritos na
+      <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Licença de Atribuição Creative Commons 4.0</a>.
     </div>
   
   
     <div class="md-copyright__generator">
-      で作成
+      Feito com
       <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
         Material for MkDocs
       </a>
@@ -4950,13 +5270,13 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.tabs.link", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.annotation", "content.code.copy", "navigation.tabs"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u30b3\u30d4\u30fc\u3057\u307e\u3057\u305f", "clipboard.copy": "\u30af\u30ea\u30c3\u30d7\u30dc\u30fc\u30c9\u3078\u30b3\u30d4\u30fc", "search.result.more.one": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3082\u30461\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.more.other": "\u3053\u306e\u30da\u30fc\u30b8\u5185\u306b\u3042\u3068#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.none": "\u4f55\u3082\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f", "search.result.one": "1\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.other": "#\u4ef6\u898b\u3064\u304b\u308a\u307e\u3057\u305f", "search.result.placeholder": "\u691c\u7d22\u30ad\u30fc\u30ef\u30fc\u30c9\u3092\u5165\u529b\u3057\u3066\u304f\u3060\u3055\u3044", "search.result.term.missing": "\u691c\u7d22\u306b\u542b\u307e\u308c\u306a\u3044", "select.version": "\u30d0\u30fc\u30b8\u30e7\u30f3\u5207\u308a\u66ff\u3048"}, "version": {"default": "stable", "provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.tabs.link", "navigation.sections", "navigation.top", "search.suggest", "search.highlight", "content.code.annotation", "content.code.copy", "navigation.tabs"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado para \u00e1rea de transfer\u00eancia", "clipboard.copy": "Copiar para \u00e1rea de transfer\u00eancia", "search.result.more.one": "mais 1 nesta p\u00e1gina", "search.result.more.other": "# mais nesta p\u00e1gina", "search.result.none": "Nenhum documento encontrado", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Digite para iniciar a busca", "search.result.term.missing": "Ausente", "select.version": "Selecione a vers\u00e3o"}, "version": {"default": "stable", "provider": "mike"}}</script>
     
     
   
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../javascripts/extra.js"></script>
+        <script src="../../../../javascripts/extra.js"></script>
       
     
   <script>

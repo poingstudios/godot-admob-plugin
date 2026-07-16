@@ -3112,7 +3112,29 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        可用章节
+        类
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        枚举
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        接口 / 回调
       
     </span>
   </a>
@@ -3307,6 +3329,34 @@
     
   
     AdValue
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="classes/AdVideoController/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AdVideoController
   
 
     
@@ -3727,6 +3777,34 @@
     
   
     LoadAdError
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="classes/MediaContent/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MediaContent
   
 
     
@@ -4444,6 +4522,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="listeners/VideoLifecycleCallbacks/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    VideoLifecycleCallbacks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4865,7 +4971,29 @@
   <a href="#_1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        可用章节
+        类
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        枚举
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        接口 / 回调
       
     </span>
   </a>
@@ -4893,13 +5021,268 @@
 
 
 <h1 id="api">API 参考</h1>
-<p>本节包含 Godot AdMob 插件提供的类、方法、属性和枚举的技术参考。</p>
-<p>在侧边栏中选择一个类，以查看其在 <strong>GDScript</strong> 和 <strong>C#</strong> 中的实现细节。</p>
-<h2 id="_1">可用章节</h2>
-<ul>
-<li><strong><a href="classes/AdView/">类</a></strong>：针对 <code>AdView</code> 等 Godot AdMob API 类的技术规格。</li>
-<li><strong><a href="enums/">枚举</a></strong>：全局配置、定向和布局枚举的列表。</li>
-</ul>
+<p>此页面列出了 Godot AdMob 插件提供的类、枚举和回调。</p>
+<h2 id="_1">类</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">类</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="classes/MobileAds/">MobileAds</a></td>
+<td style="text-align: left;">全局配置和 SDK 初始化入口点。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/RequestConfiguration/">RequestConfiguration</a></td>
+<td style="text-align: left;">全局应用于所有广告请求的配置设置。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/AdRequest/">AdRequest</a></td>
+<td style="text-align: left;">用于加载广告的请求参数。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/AdSize/">AdSize</a></td>
+<td style="text-align: left;">横幅广告的宽度和高度定义。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/AdPosition/">AdPosition</a></td>
+<td style="text-align: left;">横幅广告和原生覆盖广告的屏幕对齐布局。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/AdView/">AdView</a></td>
+<td style="text-align: left;">一个用于加载和显示横幅广告的 Godot 节点。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/AdVideoController/">AdVideoController</a></td>
+<td style="text-align: left;">原生广告内的视频播放控制器。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/AdVideoOptions/">AdVideoOptions</a></td>
+<td style="text-align: left;">原生广告内视频元素的播放行为。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/AppOpenAd/">AppOpenAd</a></td>
+<td style="text-align: left;">当用户打开应用时显示的满屏广告格式。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/AppOpenAdLoader/">AppOpenAdLoader</a></td>
+<td style="text-align: left;">负责获取开屏广告的加载器类。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/InterstitialAd/">InterstitialAd</a></td>
+<td style="text-align: left;">全屏插屏广告格式。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/InterstitialAdLoader/">InterstitialAdLoader</a></td>
+<td style="text-align: left;">负责获取插屏广告的加载器类。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/RewardedAd/">RewardedAd</a></td>
+<td style="text-align: left;">全屏激励广告格式。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/RewardedAdLoader/">RewardedAdLoader</a></td>
+<td style="text-align: left;">负责获取激励广告的加载器类。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/RewardedInterstitialAd/">RewardedInterstitialAd</a></td>
+<td style="text-align: left;">激励插屏广告格式（半透明覆盖层）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/RewardedInterstitialAdLoader/">RewardedInterstitialAdLoader</a></td>
+<td style="text-align: left;">负责获取激励插屏广告的加载器类。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/NativeOverlayAd/">NativeOverlayAd</a></td>
+<td style="text-align: left;">覆盖在 Godot 场景之上的原生广告格式。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/NativeAdOptions/">NativeAdOptions</a></td>
+<td style="text-align: left;">渲染原生覆盖广告的偏好设置。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/NativeTemplateStyle/">NativeTemplateStyle</a></td>
+<td style="text-align: left;">原生覆盖广告的视觉样式模板。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/NativeTemplateTextStyle/">NativeTemplateTextStyle</a></td>
+<td style="text-align: left;">文本元素的字体和颜色配置。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/ResponseInfo/">ResponseInfo</a></td>
+<td style="text-align: left;">包含已加载广告的元数据和适配器响应信息。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/AdapterResponseInfo/">AdapterResponseInfo</a></td>
+<td style="text-align: left;">来自特定中介网络适配器的元数据。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/AdError/">AdError</a></td>
+<td style="text-align: left;">关于广告展示期间发生错误的信息。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/LoadAdError/">LoadAdError</a></td>
+<td style="text-align: left;">关于广告加载期间发生错误的信息。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/MediaContent/">MediaContent</a></td>
+<td style="text-align: left;">表示原生广告的媒体资产（视频/图像）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/AdValue/">AdValue</a></td>
+<td style="text-align: left;">表示广告展示的货币价值。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/RewardedItem/">RewardedItem</a></td>
+<td style="text-align: left;">表示用户获得的奖励（数量和类型）。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/InitializationStatus/">InitializationStatus</a></td>
+<td style="text-align: left;">包含 MobileAds 的初始化状态详细信息。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/AdapterStatus/">AdapterStatus</a></td>
+<td style="text-align: left;">表示单个中介适配器的初始化状态。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/ServerSideVerificationOptions/">ServerSideVerificationOptions</a></td>
+<td style="text-align: left;">服务器端激励回调的安全配置。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/UserMessagingPlatform/">UserMessagingPlatform</a></td>
+<td style="text-align: left;">GDPR 和隐私同意流程的入口点。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/ConsentInformation/">ConsentInformation</a></td>
+<td style="text-align: left;">检查并更新用户的同意状态。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/ConsentForm/">ConsentForm</a></td>
+<td style="text-align: left;">可以显示给用户的同意表单。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/ConsentRequestParameters/">ConsentRequestParameters</a></td>
+<td style="text-align: left;">请求同意信息更新的参数。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/ConsentDebugSettings/">ConsentDebugSettings</a></td>
+<td style="text-align: left;">同意流程的测试配置。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="classes/FormError/">FormError</a></td>
+<td style="text-align: left;">同意表单操作的错误信息。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_2">枚举</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">枚举</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="enums/AdPosition/">AdPosition</a></td>
+<td style="text-align: left;">横幅和原生覆盖广告的屏幕对齐预设值。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="enums/AdChoicesPlacement/">AdChoicesPlacement</a></td>
+<td style="text-align: left;">AdChoices 图标的角落放置位置。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="enums/NativeMediaAspectRatio/">NativeMediaAspectRatio</a></td>
+<td style="text-align: left;">原生广告的媒体宽高比偏好。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="enums/NativeTemplateFontStyle/">NativeTemplateFontStyle</a></td>
+<td style="text-align: left;">原生广告文本字段的排版字体粗细。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="enums/AdValue.PrecisionType/">AdValue.PrecisionType</a></td>
+<td style="text-align: left;">广告收入价值的精确级别。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="enums/AdapterStatus.InitializationState/">AdapterStatus.InitializationState</a></td>
+<td style="text-align: left;">指示中介适配器是否准备就绪。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="enums/RequestConfiguration.TagForChildDirectedTreatment/">RequestConfiguration.TagForChildDirectedTreatment</a></td>
+<td style="text-align: left;">儿童导向处理以符合 COPPA 合规性。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="enums/RequestConfiguration.TagForUnderAgeOfConsent/">RequestConfiguration.TagForUnderAgeOfConsent</a></td>
+<td style="text-align: left;">同意年龄以下的处理以符合 GDPR 合规性。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="enums/DebugGeography/">DebugGeography</a></td>
+<td style="text-align: left;">用于测试同意流程的调试地理位置。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="enums/ConsentInformation.ConsentStatus/">ConsentInformation.ConsentStatus</a></td>
+<td style="text-align: left;">隐私法规的用户同意状态。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="enums/ConsentInformation.PrivacyOptionsRequirementStatus/">ConsentInformation.PrivacyOptionsRequirementStatus</a></td>
+<td style="text-align: left;">是否需要隐私选项。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="_3">接口 / 回调</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">回调</th>
+<th style="text-align: left;">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><a href="listeners/OnInitializationCompleteListener/">OnInitializationCompleteListener</a></td>
+<td style="text-align: left;">SDK 初始化完成时触发的回调。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="listeners/AdListener/">AdListener</a></td>
+<td style="text-align: left;">接收横幅和覆盖广告事件。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="listeners/FullScreenContentCallback/">FullScreenContentCallback</a></td>
+<td style="text-align: left;">接收全屏格式的展示事件。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="listeners/OnUserEarnedRewardListener/">OnUserEarnedRewardListener</a></td>
+<td style="text-align: left;">当用户获得奖励时接收事件。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="listeners/AppOpenAdLoadCallback/">AppOpenAdLoadCallback</a></td>
+<td style="text-align: left;">处理开屏广告的加载结果。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="listeners/InterstitialAdLoadCallback/">InterstitialAdLoadCallback</a></td>
+<td style="text-align: left;">处理插屏广告的加载结果。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="listeners/RewardedAdLoadCallback/">RewardedAdLoadCallback</a></td>
+<td style="text-align: left;">处理激励广告的加载结果。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="listeners/RewardedInterstitialAdLoadCallback/">RewardedInterstitialAdLoadCallback</a></td>
+<td style="text-align: left;">处理激励插屏广告的加载结果。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="listeners/VideoLifecycleCallbacks/">VideoLifecycleCallbacks</a></td>
+<td style="text-align: left;">接收原生广告的视频播放生命周期事件。</td>
+</tr>
+<tr>
+<td style="text-align: left;"><a href="listeners/AdInspectorClosedListener/">AdInspectorClosedListener</a></td>
+<td style="text-align: left;">当原生广告检查器关闭时触发。</td>
+</tr>
+</tbody>
+</table>
 
 
 
