@@ -12,6 +12,7 @@ This page lists the classes, enums, and callbacks provided by the Godot AdMob Pl
 | [AdSize](classes/AdSize.md) | Width and height definitions for Banner ads. |
 | [AdPosition](classes/AdPosition.md) | Screen alignment layout for banner and native overlay ads. |
 | [AdView](classes/AdView.md) | A Godot node that loads and displays banner ads. |
+| [AdVideoController](classes/AdVideoController.md) | Video playback controller inside native ads. |
 | [AdVideoOptions](classes/AdVideoOptions.md) | Playback behavior for video elements inside native ads. |
 | [AppOpenAd](classes/AppOpenAd.md) | Full-screen ad format shown when users open the app. |
 | [AppOpenAdLoader](classes/AppOpenAdLoader.md) | Loader class responsible for fetching App Open Ads. |
@@ -29,6 +30,7 @@ This page lists the classes, enums, and callbacks provided by the Godot AdMob Pl
 | [AdapterResponseInfo](classes/AdapterResponseInfo.md) | Metadata from a specific mediation network adapter. |
 | [AdError](classes/AdError.md) | Information about errors occurring during ad display. |
 | [LoadAdError](classes/LoadAdError.md) | Information about errors occurring during ad loading. |
+| [MediaContent](classes/MediaContent.md) | Represents media assets (video/image) of a native ad. |
 | [AdValue](classes/AdValue.md) | Represents the monetary value of an ad impression. |
 | [RewardedItem](classes/RewardedItem.md) | Represents a reward earned by the user (amount and type). |
 | [InitializationStatus](classes/InitializationStatus.md) | Contains initialization status details for MobileAds. |
@@ -69,4 +71,5 @@ This page lists the classes, enums, and callbacks provided by the Godot AdMob Pl
 | [InterstitialAdLoadCallback](listeners/InterstitialAdLoadCallback.md) | Handles loading outcomes for Interstitial Ads. |
 | [RewardedAdLoadCallback](listeners/RewardedAdLoadCallback.md) | Handles loading outcomes for Rewarded Ads. |
 | [RewardedInterstitialAdLoadCallback](listeners/RewardedInterstitialAdLoadCallback.md) | Handles loading outcomes for Rewarded Interstitial Ads. |
+| [VideoLifecycleCallbacks](listeners/VideoLifecycleCallbacks.md) | Receives video playback lifecycle events for native ads. |
 | [AdInspectorClosedListener](listeners/AdInspectorClosedListener.md) | Triggers when the native Ad Inspector is closed. |
