@@ -264,7 +264,7 @@ func get_spm_packages() -> Array[Dictionary]:
 	return [
 		{
 			"url": "https://github.com/googleads/swift-package-manager-google-mobile-ads.git",
-			"version": "13.3.0",
+			"version": "13.6.0",
 			"products": ["GoogleMobileAds"]
 		},
 		{

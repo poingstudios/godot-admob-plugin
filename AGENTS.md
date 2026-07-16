@@ -26,14 +26,14 @@ This repository is a Godot plugin that integrates the Google AdMob SDK into Godo
 3. **C# ↔️ GDScript**: The C# API acts as a wrapper around the GDScript implementation or Engine singletons to guarantee 1:1 API parity.
 
 ## 📦 Current Environment
-- **Godot Version:** 4.6.1 (Current target for builds and testing).
+- **Godot Version:** 4.7.1 (Current target for builds and testing).
 
 ## 🛠️ Critical Commands
 - **Build All/Specific Platforms:** Use the central script for all compilation needs. 
   - ` ./scripts/build_local.sh [android|ios|all] <godot_version>`
-  - *Example (All):* `./scripts/build_local.sh all 4.6.1`
-  - *Example (iOS):* `./scripts/build_local.sh ios 4.6.1`
-  - *Example (Android):* `./scripts/build_local.sh android 4.6.1`
+  - *Example (All):* `./scripts/build_local.sh all 4.7.1`
+  - *Example (iOS):* `./scripts/build_local.sh ios 4.7.1`
+  - *Example (Android):* `./scripts/build_local.sh android 4.7.1`
 - **GitHub CLI:** Use `gh` to check status of `issues` or `prs`.
 
 ## 📝 Coding Standards

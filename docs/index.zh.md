@@ -19,6 +19,17 @@
 	- 目标 iOS 14.0 或更高版本
 - 推荐：[创建 AdMob 账号](https://support.google.com/admob/answer/7356219) 并 [注册应用](https://support.google.com/admob/answer/9989980)。
 
+### 原生 SDK 版本
+
+=== "Android"
+
+    * [`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.2.1`](https://mvnrepository.com/artifact/com.google.android.libraries.ads.mobile.sdk/ads-mobile-sdk/1.2.1) (Next-Gen SDK)
+
+=== "iOS"
+
+    * [`GoogleMobileAds`](https://github.com/googleads/swift-package-manager-google-mobile-ads/releases/tag/13.6.0) 版本 `13.6.0`
+    * [`GoogleUserMessagingPlatform`](https://github.com/googleads/swift-package-manager-google-user-messaging-platform/releases/tag/3.1.0) 版本 `3.1.0`
+
 ## 从 Poing Studios 下载 Godot AdMob 插件
 
 Poing Studios 的 Godot AdMob 插件简化了 Godot 开发者将 Google 移动广告集成到其 Android 和 iOS 应用中的过程，无需编写 Java/Kotlin 或 Objective-C++ 代码。相反，该插件提供了一个基于 GDScript 和 C# 的广告请求接口，可以无缝集成到您的 Godot 项目中。

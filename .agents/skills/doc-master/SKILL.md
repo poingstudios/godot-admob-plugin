@@ -21,6 +21,7 @@ Keep all project documentation in sync with the codebase.
 
 ### 3. Cross-Platform Docs
 - Ensure Android and iOS setup steps are verified when a new dependency is added to `build.gradle` or `Package.swift`.
+- **SDK Version Changes**: When the Google Mobile Ads SDK or UMP version changes in Android Gradle or iOS Swift Package Manager configurations, you must update these version numbers in the Native SDK Versions list in `docs/index.md` (and all its localization files) and `AGENTS.md`.
 
 ### 4. Localization Parity
 - **Primary Source**: English (`en`) is the source of truth. All new pages and layout changes must start in English first before translating.

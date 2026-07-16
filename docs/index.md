@@ -19,6 +19,17 @@ This document is based on:
 	- Target iOS 14.0 or higher
 - Recommended: [Create an AdMob account](https://support.google.com/admob/answer/7356219?visit_id=638286911958663013-3847536692&rd=1) and [register an app](https://support.google.com/admob/answer/9989980?visit_id=638286911964685099-3190075945&rd=1).
 
+### Native SDK Versions
+
+=== "Android"
+
+    * [`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.2.1`](https://mvnrepository.com/artifact/com.google.android.libraries.ads.mobile.sdk/ads-mobile-sdk/1.2.1) (Next-Gen SDK)
+
+=== "iOS"
+
+    * [`GoogleMobileAds`](https://github.com/googleads/swift-package-manager-google-mobile-ads/releases/tag/13.6.0) version `13.6.0`
+    * [`GoogleUserMessagingPlatform`](https://github.com/googleads/swift-package-manager-google-user-messaging-platform/releases/tag/3.1.0) version `3.1.0`
+
 ## Download the Godot AdMob Plugin from Poing Studios
 
 The Godot AdMob Plugin from Poing Studios simplifies the process for Godot developers to incorporate Google Mobile Ads into their Android and iOS apps, eliminating the need to write Java/Kotlin or Objective-C++ code. Instead, this plugin offers a GDScript and C#-based interface for ad requests, which can be seamlessly integrated into your Godot project. 
