@@ -4,6 +4,9 @@ Esta página abrange migrações para versões atuais e anteriores do Godot AdMo
 
 ## Migrar da v4 para a v5
 
+!!! tip "Automatizar com Assistentes de IA"
+    Se você estiver usando um assistente de programação de IA (como Gemini, Claude ou Cursor), você pode pedir para ele ler o arquivo de skill de migração distribuído do plugin em `res://addons/admob/skills/godot-admob-migrate/SKILL.md` para orientar o assistente automaticamente na atualização do seu código Veja [Habilidades de agentes](ai_skills.md) para mais detalhes.
+
 As subseções a seguir descrevem alterações de quebra, diferenças de comportamento e novas APIs entre as versões principais 4 e 5 do Godot AdMob Editor Plugin.
 
 ### Migração do SDK Android Next-Gen
@@ -27,6 +30,66 @@ configurations.configureEach {
 }
 ```
 Nenhuma intervenção ou configuração manual é necessária.
+
+---
+
+### Requisito de Inicialização Assíncrona do SDK
+
+Na versão 5.0.0 (GMA Next-Gen SDK no Android), a inicialização do SDK via `MobileAds.initialize()` é estritamente assíncrona.
+
+* **Requisito**: Você **deve** aguardar a conclusão da inicialização antes de carregar anúncios (ex: chamando `RewardedAdLoader.load()` ou `AdView.load()`).
+* **Consequência**: Tentar carregar anúncios antes que a inicialização termine resultará em uma exceção não capturada:
+  `MobileAds.initialize must be called before using the Google Mobile Ads SDK.`
+
+#### Como Migrar
+
+Passe um `OnInitializationCompleteListener` para `MobileAds.initialize()` e carregue seus anúncios somente quando o callback de conclusão for acionado.
+
+!!! note "Consultar Status de Inicialização"
+    Se você precisar consultar o status de inicialização mais tarde, você pode usar o método [MobileAds.get_initialization_status()](reference/classes/MobileAds.md#get_initialization_status).
+
+=== "v4"
+
+    === "GDScript"
+
+        ```gdscript
+        # Carregamento síncrono/imediato legado
+        MobileAds.initialize()
+        _load_rewarded_ad()
+        ```
+
+    === "C#"
+
+        ```csharp
+        // Carregamento síncrono/imediato legado
+        MobileAds.Initialize();
+        LoadRewardedAd();
+        ```
+
+=== "v5"
+
+    === "GDScript"
+
+        ```gdscript
+        var init_listener := OnInitializationCompleteListener.new()
+        init_listener.on_initialization_complete = func(status: InitializationStatus) -> void:
+            Log.info("Inicialização do AdMob concluída. Carregando primeiro anúncio...")
+            _load_rewarded_ad()
+
+        MobileAds.initialize(init_listener)
+        ```
+
+    === "C#"
+
+        ```csharp
+        var onInitListener = new OnInitializationCompleteListener();
+        onInitListener.OnInitializationComplete = (status) => {
+            GD.Print("Inicialização do AdMob concluída. Carregando primeiro anúncio...");
+            LoadRewardedAd();
+        };
+
+        MobileAds.Initialize(onInitListener);
+        ```
 
 ---
 
@@ -85,7 +148,7 @@ Use **Banners Adaptativos Ancorados** no lugar. Eles são a substituição moder
 
 Na versão 5.0.0, a API [`AdPosition`](reference/classes/AdPosition.md) mudou de um enum inteiro básico para uma instância de classe. Isso permite posicionar anúncios de banner usando coordenadas estáticas predefinidas ou deslocamentos de pixel personalizados.
 
-| API v4 (Descontinuada) | API v5 (Substituta) |
+| API da v4 (Substituído) | API da v5 (Substituição) |
 | :--- | :--- |
 | `AdPosition.Values.TOP` | `AdPosition.TOP` |
 | `AdPosition.Values.BOTTOM` | `AdPosition.BOTTOM` |
@@ -159,6 +222,12 @@ O suporte para as seguintes redes de mediação foi introduzido:
 * InMobi
 * IronSource
 * LINE
+* Maio
+* Mintegral
+* Moloco
+* myTarget
+* Pangle
+* PubMatic
 * Unity Ads
 
 ---
@@ -188,10 +257,22 @@ Vários novos métodos de API foram adicionados à classe [`MobileAds`](referenc
 
 Na versão 5.0.0, o plugin unificou todas as opções de configuração diretamente nas **Configurações do Projeto** (Project Settings) nativas do Godot, na seção `admob/`. Isso substitui quaisquer fluxos de configuração legados ou entradas de menu de editor personalizadas.
 
-!!! warning "Alteração de Configuração de Quebra: config.gd Removido"
-    Na versão 4, o AdMob App ID era definido modificando o script de configuração estática localizado em `res://addons/admob/android/config.gd`.
+!!! warning "Alteração de Configuração de Ruptura: config.gd do Android Removido"
+    Na versão 4, o App ID do AdMob para Android era configurado modificando o script de configuração estática localizado em `res://addons/admob/android/config.gd`.
     
-    Na versão 5, **o `config.gd` foi completamente removido**. Você deve transferir seus App IDs para o novo local nas Configurações do Projeto.
+    Na versão 5, o **`config.gd` foi completamente removido**. Você deve transferir seus App IDs (tanto de Android quanto de iOS) para o novo local nas Project Settings.
+    
+
+!!! danger "Alteração Crítica no iOS: Limpar Opções de Exportação Legadas (Para Evitar Conflitos)"
+    Na versão 5, você não precisa mais definir manualmente o `Gad Application Identifier` ou marcar as opções de plugins antigos nas configurações de Exportação do iOS. O plugin lê automaticamente o App ID das **Project Settings** (Configurações do Projeto) e injeta os frameworks necessários e o `GADApplicationIdentifier` no arquivo `Info.plist` do seu projeto do Xcode durante a exportação.
+    
+    **É fundamental que você limpe esses campos antigos e desmarque as opções herdadas do AdMob no seu Preset de Exportação do iOS.** Caso contrário, isso causará erros de símbolos duplicados e conflitos de plugins.
+
+
+!!! danger "Obrigatório: Atualizar Binários Nativos da Plataforma"
+    Depois de atualizar os arquivos do plugin do editor (GDScript/C#) no seu projeto, você **deve** abrir o **AdMob Manager** no Editor do Godot e clicar em **Download & Install** para as plataformas Android e iOS para baixar os binários nativos v5.0.0 correspondentes.
+    
+    Se você tentar exportar o projeto enquanto tiver binários de plataforma herdados (v4) ou ausentes, o plugin de exportação bloqueará o processo de exportação e exibirá um erro para evitar travamentos em tempo de execução causados por incompatibilidade de versão.
 
 As opções de configuração agora são registradas e configuradas em **Configurações do Projeto > Geral**:
 

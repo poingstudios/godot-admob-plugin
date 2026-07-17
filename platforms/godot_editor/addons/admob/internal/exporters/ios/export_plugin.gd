@@ -24,6 +24,7 @@ extends "res://addons/admob/internal/exporters/base_export_plugin.gd"
 
 const Library := preload("res://addons/admob/internal/exporters/ios/library.gd")
 const PbxprojService := preload("res://addons/admob/internal/services/pbxproj_service.gd")
+const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 
 var _spm_applied := false
 var _pending_export_path := ""
@@ -59,6 +60,8 @@ func _export_begin(features: PackedStringArray, is_debug: bool, path: String, fl
 	var ios_enabled := _get_setting(ProjectSettingsService.get_ios_setting_path("enabled"), true) as bool
 	if not ios_enabled:
 		return
+
+	PluginVersion.check_version_mismatch(PluginVersion.ios_version, "iOS")
 
 	var enabled_libs := _get_enabled_libs()
 	if enabled_libs.is_empty():

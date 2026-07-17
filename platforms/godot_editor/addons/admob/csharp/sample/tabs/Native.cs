@@ -197,6 +197,7 @@ namespace PoingStudios.AdMob.Sample
                 Log("Ad closed (destroyed)");
                 _nativeOverlayAd = null;
                 UpdateUiState(false);
+                SampleRegistry.SafeArea?.ResetAdOverlap();
             };
             _nativeOverlayAd.AdListener.OnAdImpression = () => Log("Ad impression recorded");
             _nativeOverlayAd.AdListener.OnAdOpened = () => Log("Ad opened");
@@ -248,6 +249,10 @@ namespace PoingStudios.AdMob.Sample
             {
                 _nativeOverlayAd.Hide();
             }
+            else
+            {
+                SampleRegistry.SafeArea?.UpdateAdOverlapCustom(_adPosition, _nativeOverlayAd.GetTemplateHeightInPixels());
+            }
 
             UpdateUiState(true);
         }
@@ -285,6 +290,7 @@ namespace PoingStudios.AdMob.Sample
                 _nativeOverlayAd = null;
                 Log("Native destroyed");
                 UpdateUiState(false);
+                SampleRegistry.SafeArea?.ResetAdOverlap();
             }
         }
 
@@ -296,6 +302,7 @@ namespace PoingStudios.AdMob.Sample
                 _nativeOverlayAd.Show();
                 Log("Native shown");
                 UpdateUiState(true);
+                SampleRegistry.SafeArea?.UpdateAdOverlapCustom(_adPosition, _nativeOverlayAd.GetTemplateHeightInPixels());
             }
         }
 
@@ -307,6 +314,7 @@ namespace PoingStudios.AdMob.Sample
                 _nativeOverlayAd.Hide();
                 Log("Native hidden");
                 UpdateUiState(true);
+                SampleRegistry.SafeArea?.ResetAdOverlap();
             }
         }
 
@@ -322,7 +330,14 @@ namespace PoingStudios.AdMob.Sample
         private void UpdatePosition(AdPosition pos)
         {
             _adPosition = pos;
-            _nativeOverlayAd?.SetTemplatePosition(pos);
+            if (_nativeOverlayAd != null)
+            {
+                _nativeOverlayAd.SetTemplatePosition(pos);
+                if (!_isHidden)
+                {
+                    SampleRegistry.SafeArea?.UpdateAdOverlapCustom(pos, _nativeOverlayAd.GetTemplateHeightInPixels());
+                }
+            }
         }
 
         private void OnPositionSelected(AdPosition pos)

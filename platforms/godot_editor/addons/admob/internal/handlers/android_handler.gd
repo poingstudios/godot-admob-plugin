@@ -23,6 +23,7 @@
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 const DownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
 const ZipService := preload("res://addons/admob/internal/services/archive/zip_service.gd")
+const InstallerService := preload("res://addons/admob/internal/services/installer_service.gd")
 
 const PACKAGE_PATH := "res://addons/admob/android/bin/package.gd"
 const DOWNLOAD_DIR := "res://addons/admob/downloads/android/"
@@ -64,7 +65,7 @@ func _on_download_completed(success: bool) -> void:
 
 	var extract_success := ZipService.extract_zip(zip_path, EXTRACT_PATH, true)
 	if extract_success:
-		_create_local_package(PACKAGE_PATH)
+		InstallerService.create_package_file(PACKAGE_PATH)
 		(
 			_dialog_service
 			. show_message(
@@ -72,21 +73,6 @@ func _on_download_completed(success: bool) -> void:
 			)
 		)
 
-
-func _create_local_package(path: String) -> void:
-	var file := FileAccess.open(path, FileAccess.WRITE)
-	if file:
-		var content := (
-			"""# This file is dynamically generated.
-# It defines the current installed version of the platform plugin.
-# Do not modify this manually.
-
-const VERSION := "%s"
-"""
-			% PluginVersion.current
-		)
-		file.store_string(content)
-		file.close()
 
 
 static func get_zip_file_name() -> String:

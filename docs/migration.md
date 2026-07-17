@@ -4,6 +4,9 @@ This page covers migrations for current and previous versions.
 
 ## Migrate from v4 to v5
 
+!!! tip "Automate with AI Assistants"
+    If you are using an AI coding assistant (like Gemini, Claude, or Cursor), you can ask it to read the plugin's distributed migration skill file at `res://addons/admob/skills/godot-admob-migrate/SKILL.md` to automatically guide the assistant in upgrading your codebase. See [Agent skills](ai_skills.md) for more details.
+
 The following subsections describe breaking changes, behavior differences, and new APIs between major version 4 and 5.
 
 ### Next-Gen Android SDK Migration
@@ -27,6 +30,66 @@ configurations.configureEach {
 }
 ```
 No manual intervention or configuration is required.
+
+---
+
+### Asynchronous SDK Initialization Requirement
+
+In version 5.0.0 (GMA Next-Gen SDK on Android), SDK initialization via `MobileAds.initialize()` is strictly asynchronous.
+
+* **Requirement**: You **must** wait for the initialization to complete before loading ads (e.g. calling `RewardedAdLoader.load()` or `AdView.load()`).
+* **Consequence**: Attempting to load ads before initialization finishes throws an uncaught exception:
+  `MobileAds.initialize must be called before using the Google Mobile Ads SDK.`
+
+#### How to Migrate
+
+Pass an `OnInitializationCompleteListener` listener to `MobileAds.initialize()` and load your ads only when the completion callback is triggered.
+
+!!! note "Querying Initialization Status"
+    If you need to query the initialization status later, you can use the [MobileAds.get_initialization_status()](reference/classes/MobileAds.md#get_initialization_status) method.
+
+=== "v4"
+
+    === "GDScript"
+
+        ```gdscript
+        # Legacy synchronous/immediate loading
+        MobileAds.initialize()
+        _load_rewarded_ad()
+        ```
+
+    === "C#"
+
+        ```csharp
+        // Legacy synchronous/immediate loading
+        MobileAds.Initialize();
+        LoadRewardedAd();
+        ```
+
+=== "v5"
+
+    === "GDScript"
+
+        ```gdscript
+        var init_listener := OnInitializationCompleteListener.new()
+        init_listener.on_initialization_complete = func(status: InitializationStatus) -> void:
+            Log.info("AdMob initialization complete. Loading first ad...")
+            _load_rewarded_ad()
+
+        MobileAds.initialize(init_listener)
+        ```
+
+    === "C#"
+
+        ```csharp
+        var onInitListener = new OnInitializationCompleteListener();
+        onInitListener.OnInitializationComplete = (status) => {
+            GD.Print("AdMob initialization complete. Loading first ad...");
+            LoadRewardedAd();
+        };
+
+        MobileAds.Initialize(onInitListener);
+        ```
 
 ---
 
@@ -85,7 +148,7 @@ Use **Anchored Adaptive Banners** instead. They are the official modern replacem
 
 In version 5.0.0, the [`AdPosition`](reference/classes/AdPosition.md) API has changed from a basic integer enum to a class instance. This allows positioning banner ads using either predefined static coordinates or custom pixel offsets.
 
-| v4 API (Deprecated) | v5 API (Replacement) |
+| v4 API (Replaced) | v5 API (Replacement) |
 | :--- | :--- |
 | `AdPosition.Values.TOP` | `AdPosition.TOP` |
 | `AdPosition.Values.BOTTOM` | `AdPosition.BOTTOM` |
@@ -159,6 +222,12 @@ Support for the following mediation networks has been introduced:
 * InMobi
 * IronSource
 * LINE
+* Maio
+* Mintegral
+* Moloco
+* myTarget
+* Pangle
+* PubMatic
 * Unity Ads
 
 ---
@@ -188,10 +257,20 @@ Several new API methods have been added to the [`MobileAds`](reference/classes/M
 
 In version 5.0.0, the plugin has unified all configuration options directly into Godot's native **Project Settings** under the `admob/` section. This replaces any legacy configuration flows or custom editor menu inputs.
 
-!!! warning "Breaking Configuration Change: config.gd Removed"
-    In version 4, the AdMob App ID was set by modifying the static configuration script located at `res://addons/admob/android/config.gd`.
+!!! warning "Breaking Configuration Change: Android config.gd Removed"
+    In version 4, the Android AdMob App ID was set by modifying the static configuration script located at `res://addons/admob/android/config.gd`.
     
-    In version 5, **`config.gd` has been completely removed**. You must transfer your App IDs to the new Project Settings location.
+    In version 5, **`config.gd` has been completely removed**. You must transfer your App IDs (both Android and iOS) to the new Project Settings location.
+
+!!! danger "Critical iOS Change: Clear Legacy Export Options (To Avoid Conflicts)"
+    In version 5, you no longer need to manually set the `Gad Application Identifier` or check the old plugin options in the iOS Export Preset options. The plugin automatically reads the App ID from **Project Settings** and injects the necessary frameworks and `GADApplicationIdentifier` into your Xcode project's `Info.plist` during export.
+    
+    **It is critical that you clear these old fields and uncheck the legacy AdMob options in your iOS Export Preset.** Failing to do so will result in duplicate symbol errors and plugin conflicts.
+
+!!! danger "Mandatory: Upgrade Native Platform Binaries"
+    After updating the editor plugin files (GDScript/C#) in your project, you **must** open the **AdMob Manager** in the Godot Editor and click **Download & Install** for both Android and iOS platforms to download the corresponding v5.0.0 native binaries.
+    
+    If you attempt to export the project while having legacy (v4) or missing platform binaries, the export plugin will block the export process and output an error to prevent runtime crashes caused by version mismatch.
 
 Configuration options are now registered and configured under **Project Settings > General**:
 

@@ -155,6 +155,7 @@ func _get_android_manifest_application_element_contents(
 
 
 func _export_begin(_features: PackedStringArray, _is_debug: bool, _path: String, _flags: int) -> void:
+	PluginVersion.check_version_mismatch(PluginVersion.android_version, "Android")
 	_patch_android_gradle_file()
 
 

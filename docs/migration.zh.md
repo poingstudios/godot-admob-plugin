@@ -30,6 +30,66 @@ configurations.configureEach {
 
 ---
 
+### 异步 SDK 初始化要求
+
+在版本 5.0.0 (Android 上的 GMA Next-Gen SDK) 中，通过 `MobileAds.initialize()` 进行的 SDK 初始化是严格异步的。
+
+* **要求**: 您**必须**在加载或调用 any 其他 Google Mobile Ads SDK API（例如 `RewardedAdLoader.load()` 或 `AdView.load()`）之前等待初始化完成。
+* **影响**: 在初始化完成之前尝试加载广告将导致未捕获的异常：
+  `MobileAds.initialize must be called before using the Google Mobile Ads SDK.`
+
+#### 如何迁移
+
+将 `OnInitializationCompleteListener` 监听器传递给 `MobileAds.initialize()`，且仅在触发完成回调时才加载广告。
+
+!!! note "查询初始化状态"
+    如果您稍后需要查询初始化状态，可以使用 [MobileAds.get_initialization_status()](reference/classes/MobileAds.md#get_initialization_status) 方法。
+
+=== "v4"
+
+    === "GDScript"
+
+        ```gdscript
+        # 传统同步/立即加载
+        MobileAds.initialize()
+        _load_rewarded_ad()
+        ```
+
+    === "C#"
+
+        ```csharp
+        // 传统同步/立即加载
+        MobileAds.Initialize();
+        LoadRewardedAd();
+        ```
+
+=== "v5"
+
+    === "GDScript"
+
+        ```gdscript
+        var init_listener := OnInitializationCompleteListener.new()
+        init_listener.on_initialization_complete = func(status: InitializationStatus) -> void:
+            Log.info("AdMob 初始化完成。正在加载第一个广告...")
+            _load_rewarded_ad()
+
+        MobileAds.initialize(init_listener)
+        ```
+
+    === "C#"
+
+        ```csharp
+        var onInitListener = new OnInitializationCompleteListener();
+        onInitListener.OnInitializationComplete = (status) => {
+            GD.Print("AdMob 初始化完成。正在加载第一个广告...");
+            LoadRewardedAd();
+        };
+
+        MobileAds.Initialize(onInitListener);
+        ```
+
+---
+
 ### 移除 Smart Banner
 
 旧版 `Smart Banner` 格式已被 Google 弃用，并已在 v5 中从插件中彻底移除。

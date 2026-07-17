@@ -48,6 +48,7 @@
     | [锚定自适应横幅广告 (Anchored Adaptive Banner)](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/9214589741 |
     | [内联自适应横幅广告 (Inline Adaptive Banner)](ad_formats/banner/get_started.md)     | ca-app-pub-3940256099942544/9214589741 |
     | [固定大小横幅广告 (Fixed Size Banner)](ad_formats/banner/get_started.md)        | ca-app-pub-3940256099942544/6300978111 |
+    | [折叠式横幅广告](ad_formats/banner/get_started.md)           | ca-app-pub-3940256099942544/2014213617 |
     | [插屏广告 (Interstitial)](ad_formats/interstitial.md)     | ca-app-pub-3940256099942544/1033173712 |
     | [激励广告 (Rewarded Ads)](ad_formats/rewarded.md)       | ca-app-pub-3940256099942544/5224354917 |
     | [激励插屏广告 (Rewarded Interstitial)](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/5354046379 |
@@ -62,20 +63,12 @@
     | [锚定自适应横幅广告 (Anchored Adaptive Banner)](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2435281174 |
     | [内联自适应横幅广告 (Inline Adaptive Banner)](ad_formats/banner/get_started.md)     | ca-app-pub-3940256099942544/2435281174 |
     | [固定大小横幅广告 (Fixed Size Banner)](ad_formats/banner/get_started.md)        | ca-app-pub-3940256099942544/2934735716 |
+    | [折叠式横幅广告](ad_formats/banner/get_started.md)           | ca-app-pub-3940256099942544/8388050270 |
     | [插屏广告 (Interstitial)](ad_formats/interstitial.md)     | ca-app-pub-3940256099942544/4411468910 |
     | [激励广告 (Rewarded Ads)](ad_formats/rewarded.md)       | ca-app-pub-3940256099942544/1712485313 |
     | [激励插屏广告 (Rewarded Interstitial)](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/6978759866 |
     | [原生广告 (Native)](ad_formats/native_overlay.md)         | ca-app-pub-3940256099942544/3986624511 |
     | [原生视频广告 (Native Video)](ad_formats/native_video.md)   | ca-app-pub-3940256099942544/2521693316 |
-
-### 专用测试标识符
-虽然上述标准广告单元可以通过添加额外参数（如 `collapsible`）来使用，但以下专用广告单元 ID **保证**在测试您的 UI/UX 时返回特定功能：
-
-| 功能 | Android | iOS |
-| :--- | :--- | :--- |
-| **折叠式横幅广告** | `ca-app-pub-3940256099942544/2014213617` | `ca-app-pub-3940256099942544/8388050270` |
-
-
 
 ## 启用测试设备 {: #enable-test-devices }
 要使用类似生产环境的广告进行更彻底的测试，您可以将您的设备配置为测试设备，并利用您在 AdMob UI 中创建的自己的广告单元 ID。您可以通过 AdMob UI 或使用 Google 移动广告 SDK 以编程方式添加测试设备。
@@ -86,21 +79,17 @@
 
     **重要提示**：Android 模拟器和 iOS 模拟器会自动配置为测试设备。这意味着您可以在这些虚拟设备上测试广告，而无需手动将它们添加到测试设备列表中。
 
-
 ### 在 AdMob UI 中添加您的测试设备
 
 若要使用一种简单、非编程的方法来包含测试设备并测试新版或现有的应用构建，您可以使用 AdMob UI。[具体操作如下](https://support.google.com/admob/answer/9691433)。
-
 
 !!! note "注意"
 
     **重要提示**：新添加的测试设备通常会在 15 分钟内开始在您的应用中展示测试广告，但也可能需要长达 24 小时才能生效。
 
-
 ### 以编程方式添加您的测试设备
 
 如果您希望在开发阶段测试应用内的广告并以编程方式注册您的测试设备，请遵循以下步骤：
-
 
 1. 打开集成了广告的应用并发起广告请求。
 2. 检查 logcat 输出以查找类似于以下内容的信息，该信息显示了您的设备 ID 以及如何将其添加为测试设备：
@@ -158,7 +147,6 @@
 !!! info "信息"
     
     请注意，中介广告_不会_显示 **Test Ad** 标签。请参阅下文以获取更多信息。
-
 
 ### 使用中介进行测试
 

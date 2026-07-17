@@ -28,13 +28,13 @@ show_help() {
     echo ""
     echo "Arguments:"
     echo "  [platform]       android, ios, or all (default: all)"
-    echo "  <godot_version>  The Godot version (e.g., 4.6.1 or 4.7-beta1)"
+    echo "  <godot_version>  The Godot version (e.g., 4.7.1 or 4.7-beta1)"
     echo "  --clean          Clean before building"
     echo ""
     echo "Examples:"
-    echo "  ./scripts/build_local.sh all 4.6.3"
+    echo "  ./scripts/build_local.sh all 4.7.1"
     echo "  ./scripts/build_local.sh ios 4.7-rc3 --clean"
-    echo "  ./scripts/build_local.sh android 4.6.3 --clean"
+    echo "  ./scripts/build_local.sh android 4.7.1 --clean"
 }
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then

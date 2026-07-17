@@ -25,6 +25,8 @@ extends MarginContainer
 const Registry = preload("res://addons/admob/internal/sample_registry.gd")
 
 var _active_ad_view: AdView = null
+var _custom_ad_pos: AdPosition = null
+var _custom_ad_height := 0.0
 
 
 func _ready() -> void:
@@ -35,11 +37,22 @@ func _ready() -> void:
 
 func update_ad_overlap(ad_view: AdView) -> void:
 	_active_ad_view = ad_view
+	_custom_ad_pos = null
+	_custom_ad_height = 0.0
+	_update_safe_area()
+
+
+func update_ad_overlap_custom(pos: AdPosition, height_pixels: float) -> void:
+	_active_ad_view = null
+	_custom_ad_pos = pos
+	_custom_ad_height = height_pixels
 	_update_safe_area()
 
 
 func reset_ad_overlap() -> void:
 	_active_ad_view = null
+	_custom_ad_pos = null
+	_custom_ad_height = 0.0
 	_update_safe_area()
 
 
@@ -62,10 +75,17 @@ func _update_safe_area() -> void:
 
 	var ad_margin_top := 0.0
 	var ad_margin_bottom := 0.0
+	var pos: AdPosition = null
+	var height := 0.0
 
 	if _active_ad_view and is_instance_valid(_active_ad_view):
-		var pos := _active_ad_view.ad_position
-		var height := float(_active_ad_view.get_height_in_pixels())
+		pos = _active_ad_view.ad_position
+		height = float(_active_ad_view.get_height_in_pixels())
+	elif _custom_ad_pos:
+		pos = _custom_ad_pos
+		height = _custom_ad_height
+
+	if pos:
 		if (
 			pos.value
 			in [AdPosition.Values.TOP, AdPosition.Values.TOP_LEFT, AdPosition.Values.TOP_RIGHT]
