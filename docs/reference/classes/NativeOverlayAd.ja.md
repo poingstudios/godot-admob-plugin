@@ -34,6 +34,22 @@
 
 ---
 
+### `on_template_rendered` / `OnTemplateRendered`
+
+ネイティブテンプレートが画面上に配置・レンダリングされた後（テンプレートビューが初めてグローバルレイアウトパスを完了した時点、またはエディタのモックテンプレートが配置された時点で）1回だけトリガーされます。これを使用して実際のレンダリングサイズに反応してください — 例えば、同期呼び出しの `get_template_height_in_pixels()`（古い寸法を返す可能性があります）に依存するのではなく、広告が完全にレンダリングされた後にのみコンテンツを `SafeArea` にプッシュするようにします。
+
+=== "GDScript"
+    ```gdscript
+    var on_template_rendered: Callable
+    ```
+
+=== "C#"
+    ```csharp
+    public Action OnTemplateRendered { get; set; }
+    ```
+
+---
+
 ## 静的メソッド
 
 ### `load` / `Load`

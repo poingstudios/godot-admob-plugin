@@ -34,6 +34,22 @@ Se activa cuando se registra una impresión y se han generado ingresos. Recibe u
 
 ---
 
+### `on_template_rendered` / `OnTemplateRendered`
+
+Se activa una vez que la plantilla nativa se ha posicionado y renderizado en pantalla (la primera vez que la vista de la plantilla completa su pasada de layout global, o cuando la plantilla mock se posiciona en el editor). Úsalo para reaccionar al tamaño renderizado real — por ejemplo, para empujar el contenido a una `SafeArea` solo después de que el anuncio esté completamente renderizado, en lugar de depender de una llamada síncrona a `get_template_height_in_pixels()`, que podría devolver dimensiones obsoletas.
+
+=== "GDScript"
+    ```gdscript
+    var on_template_rendered: Callable
+    ```
+
+=== "C#"
+    ```csharp
+    public Action OnTemplateRendered { get; set; }
+    ```
+
+---
+
 ## Métodos Estáticos
 
 ### `load` / `Load`

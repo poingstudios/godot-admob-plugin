@@ -211,6 +211,36 @@
     }
     ```
 
+### テンプレートのレンダリングに反応する
+
+レンダリングされたテンプレートの実際のサイズは、基になるネイティブビュー（またはエディタのモックプレビュー）が画面上にレイアウトされた後でのみ判明します。早すぎるタイミングで [`get_template_height_in_pixels()`](../reference/classes/NativeOverlayAd.md#get_template_height_in_pixels_gettemplateheightinpixels) を呼び出して古い寸法を受け取るのを避けるため、[`on_template_rendered`](../reference/classes/NativeOverlayAd.md#on_template_rendered_ontemplaterendered) コールバックに購読してください。テンプレートが最初のレイアウトパスを完了した時に発火します。
+
+これは UI を調整するための推奨フックです（例えば広告でコンテンツが隠れないように `SafeArea` を更新するなど）。
+
+=== "GDScript"
+
+    ```gdscript linenums="1"
+    func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
+        # ... ロードチェックと render_template() の呼び出し ...
+
+        ad.on_template_rendered = func() -> void:
+            print("テンプレートがレンダリングされました 高さ = ", ad.get_template_height_in_pixels())
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1"
+    private void OnAdLoadFinished(NativeOverlayAd ad, LoadAdError error)
+    {
+        // ... ロードチェックと RenderTemplate() の呼び出し ...
+
+        ad.OnTemplateRendered = () =>
+        {
+            GD.Print("テンプレートがレンダリングされました 高さ = " + ad.GetTemplateHeightInPixels());
+        };
+    }
+    ```
+
 ### 表示/非表示と破棄
 
 レンダリングされた後、広告の表示/非表示をコントロールしたり、リソースを解放するために完全に破棄したりできます。

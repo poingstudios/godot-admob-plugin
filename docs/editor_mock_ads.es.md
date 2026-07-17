@@ -53,6 +53,7 @@ El sistema simulado simula la apariencia visual y las interacciones de cada form
 ### Superposición nativa
 - Representa anuncios nativos simulados con estilo de plantilla (que admiten diseños tanto "pequeños" como "medianos") utilizando nodos de control Godot.
 - Muestra recursos simulados como íconos de aplicaciones, títulos, botones de llamado a la acción y cuerpos de texto.
+- Emite la señal `on_native_overlay_ad_rendered` una vez que la plantilla mock está posicionada, reflejando el comportamiento real del dispositivo para que puedas ajustar la UI (`SafeArea`, etc.) solo después de que el anuncio esté completamente renderizado.
 
 ![Mock Native Ad](assets/mock_ad_native.png)
 

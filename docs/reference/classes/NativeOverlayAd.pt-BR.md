@@ -34,6 +34,22 @@ Acionado quando uma impressão é registrada e a receita foi gerada. Recebe um [
 
 ---
 
+### `on_template_rendered` / `OnTemplateRendered`
+
+Acionado uma vez após o template nativo ser posicionado e renderizado na tela (a primeira vez que a view do template conclui seu pass de layout global, ou quando o template mock é posicionado no editor). Use isso para reagir ao tamanho real renderizado — por exemplo, para empurrar o conteúdo para uma `SafeArea` somente após o anúncio estar totalmente renderizado, em vez de depender de uma chamada síncrona a `get_template_height_in_pixels()`, que pode retornar dimensões desatualizadas.
+
+=== "GDScript"
+    ```gdscript
+    var on_template_rendered: Callable
+    ```
+
+=== "C#"
+    ```csharp
+    public Action OnTemplateRendered { get; set; }
+    ```
+
+---
+
 ## Métodos Estáticos
 
 ### `load` / `Load`

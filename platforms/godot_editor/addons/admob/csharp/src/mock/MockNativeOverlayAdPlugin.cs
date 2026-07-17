@@ -38,6 +38,7 @@ namespace PoingStudios.AdMob.Core
 		[Signal] public delegate void on_native_overlay_ad_video_pauseEventHandler(int uid);
 		[Signal] public delegate void on_native_overlay_ad_video_endEventHandler(int uid);
 		[Signal] public delegate void on_native_overlay_ad_video_muteEventHandler(int uid, bool isMuted);
+		[Signal] public delegate void on_native_overlay_ad_renderedEventHandler(int uid);
 
 		private class AdData
 		{
@@ -143,6 +144,7 @@ namespace PoingStudios.AdMob.Core
 				ad.CustomPosition = null;
 				ad.AdSize = adSize;
 				_updateUiPosition(uid);
+				EmitSignal(SignalName.on_native_overlay_ad_rendered, uid);
 			}
 		}
 
@@ -155,6 +157,7 @@ namespace PoingStudios.AdMob.Core
 				ad.CustomPosition = new Godot.Collections.Dictionary { { "x", x }, { "y", y } };
 				ad.AdSize = adSize;
 				_updateUiPosition(uid);
+				EmitSignal(SignalName.on_native_overlay_ad_rendered, uid);
 			}
 		}
 
@@ -866,8 +869,21 @@ namespace PoingStudios.AdMob.Core
 		{
 			if (_ads.TryGetValue(uid, out AdData ad) && !ad.IsHidden)
 			{
-				float screenScale = DisplayServer.ScreenGetScale(DisplayServer.WindowGetCurrentScreen());
-				return ad.CurrentWidth * screenScale;
+				var viewportSize = GetViewport().GetVisibleRect().Size;
+				var windowSize = DisplayServer.WindowGetSize();
+				float guiScaleFactor = 1.0f;
+				if (windowSize.X > 0)
+				{
+					guiScaleFactor = viewportSize.X / (float)windowSize.X;
+				}
+
+				float scaleFactor = Mathf.Min(viewportSize.X / 360f, viewportSize.Y / 640f);
+				if (scaleFactor <= 0.0f)
+				{
+					scaleFactor = 1.0f;
+				}
+				float widthInViewport = ad.CurrentWidth * scaleFactor;
+				return widthInViewport / guiScaleFactor;
 			}
 			return 0f;
 		}
@@ -876,8 +892,21 @@ namespace PoingStudios.AdMob.Core
 		{
 			if (_ads.TryGetValue(uid, out AdData ad) && !ad.IsHidden)
 			{
-				float screenScale = DisplayServer.ScreenGetScale(DisplayServer.WindowGetCurrentScreen());
-				return ad.CurrentHeight * screenScale;
+				var viewportSize = GetViewport().GetVisibleRect().Size;
+				var windowSize = DisplayServer.WindowGetSize();
+				float guiScaleFactor = 1.0f;
+				if (windowSize.Y > 0)
+				{
+					guiScaleFactor = viewportSize.Y / (float)windowSize.Y;
+				}
+
+				float scaleFactor = Mathf.Min(viewportSize.X / 360f, viewportSize.Y / 640f);
+				if (scaleFactor <= 0.0f)
+				{
+					scaleFactor = 1.0f;
+				}
+				float heightInViewport = ad.CurrentHeight * scaleFactor;
+				return heightInViewport / guiScaleFactor;
 			}
 			return 0f;
 		}

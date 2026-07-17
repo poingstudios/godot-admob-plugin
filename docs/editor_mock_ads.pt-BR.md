@@ -53,6 +53,7 @@ O sistema simulado simula a aparência visual e as interações de cada um dos p
 ### Native Overlay
 - Renderiza anúncios nativos simulados estilizados (suportando layouts `small` e `medium`) usando nós Control do Godot.
 - Exibe elementos simulados como ícones de aplicativos, títulos, botões de chamada para ação (CTA) e textos informativos.
+- Emite o sinal `on_native_overlay_ad_rendered` assim que o template mock é posicionado, espelhando o comportamento real do dispositivo para que você possa ajustar a UI (`SafeArea`, etc.) somente após o anúncio estar completamente renderizado.
 
 ![Mock Native Ad](assets/mock_ad_native.png)
 

@@ -245,13 +245,17 @@ namespace PoingStudios.AdMob.Sample
                 }
             }
 
+            _nativeOverlayAd.OnTemplateRendered = () =>
+            {
+                if (!_isHidden)
+                {
+                    SampleRegistry.SafeArea?.UpdateAdOverlapNative(_nativeOverlayAd, _adPosition);
+                }
+            };
+
             if (_isHidden)
             {
                 _nativeOverlayAd.Hide();
-            }
-            else
-            {
-                SampleRegistry.SafeArea?.UpdateAdOverlapCustom(_adPosition, _nativeOverlayAd.GetTemplateHeightInPixels());
             }
 
             UpdateUiState(true);
@@ -302,7 +306,7 @@ namespace PoingStudios.AdMob.Sample
                 _nativeOverlayAd.Show();
                 Log("Native shown");
                 UpdateUiState(true);
-                SampleRegistry.SafeArea?.UpdateAdOverlapCustom(_adPosition, _nativeOverlayAd.GetTemplateHeightInPixels());
+                SampleRegistry.SafeArea?.UpdateAdOverlapNative(_nativeOverlayAd, _adPosition);
             }
         }
 
@@ -335,7 +339,7 @@ namespace PoingStudios.AdMob.Sample
                 _nativeOverlayAd.SetTemplatePosition(pos);
                 if (!_isHidden)
                 {
-                    SampleRegistry.SafeArea?.UpdateAdOverlapCustom(pos, _nativeOverlayAd.GetTemplateHeightInPixels());
+                    SampleRegistry.SafeArea?.UpdateAdOverlapNative(_nativeOverlayAd, pos);
                 }
             }
         }

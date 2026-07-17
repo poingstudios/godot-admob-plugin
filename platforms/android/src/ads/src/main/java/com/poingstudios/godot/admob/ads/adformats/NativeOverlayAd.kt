@@ -71,6 +71,7 @@ class NativeOverlayAd(
         val onNativeOverlayAdVideoPause = SignalInfo("on_native_overlay_ad_video_pause", Integer::class.java)
         val onNativeOverlayAdVideoEnd = SignalInfo("on_native_overlay_ad_video_end", Integer::class.java)
         val onNativeOverlayAdVideoMute = SignalInfo("on_native_overlay_ad_video_mute", Integer::class.java, java.lang.Boolean::class.java)
+        val onNativeOverlayAdRendered = SignalInfo("on_native_overlay_ad_rendered", Integer::class.java)
     }
 
     private val mLayoutChangeListener = OnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
@@ -193,6 +194,13 @@ class NativeOverlayAd(
             godotLayout.addView(mTemplateView)
             godotLayout.addOnLayoutChangeListener(mLayoutChangeListener)
             updatePositionLogic()
+
+            mTemplateView?.viewTreeObserver?.addOnGlobalLayoutListener(object : android.view.ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    mTemplateView?.viewTreeObserver?.removeOnGlobalLayoutListener(this)
+                    emitSignal(godot, pluginName, SignalInfos.onNativeOverlayAdRendered, uid)
+                }
+            })
         }
     }
 

@@ -53,6 +53,7 @@
 ### 原生重叠广告 (Native Overlay)
 - 使用 Godot Control 节点渲染模板化样式的模拟原生广告（支持 `small` 和 `medium` 布局）。
 - 显示应用图标、标题、调用操作按钮和正文文本等模拟资产。
+- 模拟模板定位后立即发送 `on_native_overlay_ad_rendered` 信号，镜像真实设备行为，让您可以仅在广告完全布局后安全地调整 UI（例如 `SafeArea`）。
 
 ![模拟原生广告](assets/mock_ad_native.png)
 

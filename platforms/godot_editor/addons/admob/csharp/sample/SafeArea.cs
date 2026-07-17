@@ -28,6 +28,7 @@ using PoingStudios.AdMob.Sample;
 public partial class SafeArea : MarginContainer
 {
 	private AdView _activeAdView = null;
+	private NativeOverlayAd _activeNativeAd = null;
 	private AdPosition _customAdPos = null;
 	private float _customAdHeight = 0f;
 
@@ -41,7 +42,17 @@ public partial class SafeArea : MarginContainer
 	public void UpdateAdOverlap(AdView adView)
 	{
 		_activeAdView = adView;
+		_activeNativeAd = null;
 		_customAdPos = null;
+		_customAdHeight = 0f;
+		UpdateSafeArea();
+	}
+
+	public void UpdateAdOverlapNative(NativeOverlayAd nativeAd, AdPosition pos)
+	{
+		_activeAdView = null;
+		_activeNativeAd = nativeAd;
+		_customAdPos = pos;
 		_customAdHeight = 0f;
 		UpdateSafeArea();
 	}
@@ -49,6 +60,7 @@ public partial class SafeArea : MarginContainer
 	public void UpdateAdOverlapCustom(AdPosition pos, float heightPixels)
 	{
 		_activeAdView = null;
+		_activeNativeAd = null;
 		_customAdPos = pos;
 		_customAdHeight = heightPixels;
 		UpdateSafeArea();
@@ -57,6 +69,7 @@ public partial class SafeArea : MarginContainer
 	public void ResetAdOverlap()
 	{
 		_activeAdView = null;
+		_activeNativeAd = null;
 		_customAdPos = null;
 		_customAdHeight = 0f;
 		UpdateSafeArea();
@@ -95,6 +108,11 @@ public partial class SafeArea : MarginContainer
 		{
 			pos = _activeAdView.Position.Value;
 			height = (float)_activeAdView.GetHeightInPixels();
+		}
+		else if (_activeNativeAd != null)
+		{
+			pos = _customAdPos?.Value;
+			height = (float)_activeNativeAd.GetTemplateHeightInPixels();
 		}
 		else if (_customAdPos != null)
 		{

@@ -210,6 +210,36 @@
     }
     ```
 
+### 响应模板渲染
+
+模板的实际渲染尺寸只有在底层原生视图（或编辑器中的模拟预览）在屏幕上完成布局后才能得知。为了避免过早调用 [`get_template_height_in_pixels()`](../reference/classes/NativeOverlayAd.md#get_template_height_in_pixels_gettemplateheightinpixels) 而得到过时的尺寸，请订阅 [`on_template_rendered`](../reference/classes/NativeOverlayAd.md#on_template_rendered_ontemplaterendered) 回调 —— 它会在模板首次完成布局遍历时触发。
+
+这是调整 UI 的推荐钩子（例如更新 `SafeArea` 以防止内容被广告覆盖）。
+
+=== "GDScript"
+
+    ```gdscript linenums="1"
+    func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
+        # ... 检查加载并调用 render_template() ...
+
+        ad.on_template_rendered = func() -> void:
+            print("模板已渲染，高度 = ", ad.get_template_height_in_pixels())
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1"
+    private void OnAdLoadFinished(NativeOverlayAd ad, LoadAdError error)
+    {
+        // ... 检查加载并调用 RenderTemplate() ...
+
+        ad.OnTemplateRendered = () =>
+        {
+            GD.Print("模板已渲染，高度 = " + ad.GetTemplateHeightInPixels());
+        };
+    }
+    ```
+
 ### 显示/隐藏和销毁
 
 一旦渲染，您可以控制广告的可见性或将其完全销毁以释放资源。
