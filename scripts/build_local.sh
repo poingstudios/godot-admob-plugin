@@ -90,7 +90,7 @@ build_ios() {
     fi
     cd "$ROOT_DIR/platforms/ios" && ./scripts/build.sh $BUILD_OPTS "$GODOT_VERSION" || exit 1
     
-    ARCHIVE=$(ls -1 bin/release/poing-godot-admob-ios-v${GODOT_VERSION}.zip 2>/dev/null | tail -n 1)
+    ARCHIVE=$(ls -1 bin/release/ios-template-v${GODOT_VERSION}.zip 2>/dev/null | tail -n 1)
     if [ -f "$ARCHIVE" ]; then
         mkdir -p "$DEST/addons/admob/ios/bin/"
         unzip -qo "$ARCHIVE" -d "$DEST/addons/admob/ios/bin/" || exit 1

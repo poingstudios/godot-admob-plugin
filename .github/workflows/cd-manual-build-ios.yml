@@ -75,5 +75,5 @@ jobs:
       if: github.event.inputs.upload_to_release == 'false'
       uses: actions/upload-artifact@v4
       with:
-        name: poing-godot-admob-ios-v${{ needs.setup.outputs.godot_version }}
+        name: ios-template-v${{ needs.setup.outputs.godot_version }}
         path: platforms/ios/bin/release/*.zip

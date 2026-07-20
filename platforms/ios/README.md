@@ -59,12 +59,12 @@ The **purpose** of this plugin is to always keep **up to date with Godot**, supp
 ## 📦Installing:
 
 ### 📥Download
-- To get started, download the `poing-godot-admob-ios-v{{ your_godot_version }}.zip` file from the [releases tab](https://github.com/poingstudios/godot-admob-plugin/releases). You can also use the [AdMob Plugin](https://github.com/poingstudios/godot-admob-plugin) for this step by navigating to `Project -> Tools -> AdMob Manager -> iOS -> Download & Install`.
+- To get started, download the `ios-template-v{{ your_godot_version }}.zip` file from the [releases tab](https://github.com/poingstudios/godot-admob-plugin/releases). You can also use the [AdMob Plugin](https://github.com/poingstudios/godot-admob-plugin) for this step by navigating to `Project -> Tools -> AdMob Manager -> iOS -> Download & Install`.
 
 
 ### 🧑‍💻Usage
 - Video tutorial: https://youtu.be/TB7WhP8mieo
-- Inside `poing-godot-admob-ios-v{{ your_godot_version }}.zip` you downloaded, extract everything into the `res://ios/plugins` directory of your Godot project.
+- Inside `ios-template-v{{ your_godot_version }}.zip` you downloaded, extract everything into the `res://ios/plugins` directory of your Godot project.
 - Update the configuration in `res://ios/plugins/poing-godot-admob-ads.gdip`. The `GADApplicationIdentifier` must be changed to your App ID.
 - Export the project from Godot, enabling the `Ad Mob` plugin (and any mediation plugins) in the export options.
 - **That's it!** The plugin now uses `.xcframework` bundles that are automatically integrated by Godot. No manual Xcode steps or CocoaPods commands are required.
