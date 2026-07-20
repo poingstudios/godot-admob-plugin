@@ -24,7 +24,7 @@
 ## ✨ Key Features
 
 - **Google SDK Experience**: Designed to mirror the official Google Mobile Ads SDK structure, APIs, and documentation.
-- **Godot 4.1.0+**: Native support for Android and iOS with full 1:1 GDScript and C# parity.
+- **Godot 4.2.0+**: Native support for Android and iOS with full 1:1 GDScript and C# parity.
 - **All Formats & Mediations**: Out-of-the-box support for all Google ad formats and mediation adapters.
 - **Editor Mock Ads**: Test and preview ad layouts directly inside the Godot Editor.
 - **AI-Agent Ready**: Optimized to work with AI coding assistants for automated configuration.
@@ -571,7 +571,7 @@ If you find our work valuable and would like to support ongoing development, con
 [![Star History Chart](https://api.star-history.com/chart?repos=poingstudios/godot-admob-plugin&type=date&legend=top-left&sealed_token=ATUzb1mXlOQI3jnGm7Rpn_8YkMDh9y4DoyF-IOZ97Uw0oaShFtR9I5Srrxhrf_jaMaqgO5YKfVp9-UyqlLamx_epOX88rpSpr3g9utgVLd7xThQRsYWhJHM2lWd6WUg-wjEDVgZ7xpRrkzPHC4rGbTeXRrnvmPMagKmVDcL5_gX300ftiun-vv5iarNh)](https://www.star-history.com/?repos=poingstudios%2Fgodot-admob-plugin&type=date&legend=top-left)
 
 [VersionBadge]: https://badgen.net/github/release/poingstudios/godot-admob-plugin/latest
-[GodotBadge]: https://badgen.net/badge/Godot/4.1.0+/478CBF?icon=godotengine
+[GodotBadge]: https://badgen.net/badge/Godot/4.2.0+/478CBF?icon=godotengine
 [StarsBadge]: https://badgen.net/github/stars/poingstudios/godot-admob-plugin
 [DiscordBadge]: https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord
 [LicenseBadge]: https://badgen.net/github/license/poingstudios/godot-admob-plugin?label=License
