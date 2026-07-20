@@ -38,8 +38,8 @@ config/name="AdMobAddon"
 config/tags=PackedStringArray("admob", "mobile", "plugin", "sample")
 run/main_scene="uid://0esyp38ds6yg"
 config/features=PackedStringArray("4.7", "C#", "GL Compatibility")
+boot_splash/stretch_mode=0
 config/icon="res://addons/admob/assets/icon-1024.png"
-boot_splash/fullsize=false
 
 [display]
 
