@@ -101,7 +101,7 @@ static func check_version_mismatch(installed: String, platform: String) -> void:
 		return
 	if not is_major_version_compatible(installed):
 		push_error("AdMob %s Export Error: Major version mismatch. Installed %s binaries are version %s, but editor plugin requires version %s. Please open the AdMob Manager inside the editor and re-download/re-install the %s platform binaries." % [platform, platform, installed, current, platform])
-	elif installed != current:
+	elif installed.trim_prefix("v") != current.trim_prefix("v"):
 		push_warning("AdMob %s Export Warning: Version mismatch. Installed %s binaries are version %s, but editor plugin version is %s. You may want to update the platform binaries." % [platform, platform, installed, current])
 
 
