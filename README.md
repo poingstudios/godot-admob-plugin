@@ -21,6 +21,16 @@
 
 ---
 
+## ✨ Key Features
+
+- **Google SDK Experience**: Designed to mirror the official Google Mobile Ads SDK structure, APIs, and documentation.
+- **Godot 4.1.0+**: Native support for Android and iOS with full 1:1 GDScript and C# parity.
+- **All Formats & Mediations**: Out-of-the-box support for all Google ad formats and mediation adapters.
+- **Editor Mock Ads**: Test and preview ad layouts directly inside the Godot Editor.
+- **AI-Agent Ready**: Optimized to work with AI coding assistants for automated configuration.
+
+---
+
 ## 📦 Installation
 
 ### 📥 Godot Asset Store (Recommended)
