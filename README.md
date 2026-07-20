@@ -323,7 +323,7 @@ private void RenderNativeAd()
 </details>
 
 ### 🎁 Rewarded Ads
-Grants in-game rewards to players upon completing ad views.
+Allows you to give users in-game rewards for watching videos or interacting with ads.
 
 <details>
 <summary>GDScript</summary>
@@ -386,7 +386,7 @@ private void OnShowPressed()
 </details>
 
 ### 🎁📺 Rewarded Interstitial Ads
-Full-screen rewarded format that automatically grants rewards after a short duration.
+Shows rewarded ads automatically during game transitions without requiring the user to opt-in.
 
 <details>
 <summary>GDScript</summary>
