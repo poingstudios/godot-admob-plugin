@@ -15,7 +15,7 @@ jobs:
       should_build: ${{ steps.detect.outputs.should_build }}
       plugin_tag: ${{ steps.detect.outputs.plugin_tag }}
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Detect
       id: detect
@@ -48,7 +48,7 @@ jobs:
     if: needs.detect-latest.outputs.should_build == 'true'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         ref: ${{ needs.detect-latest.outputs.plugin_tag }}
     
@@ -76,7 +76,7 @@ jobs:
     if: needs.detect-latest.outputs.should_build == 'true'
     runs-on: macos-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         ref: ${{ needs.detect-latest.outputs.plugin_tag }}
 
