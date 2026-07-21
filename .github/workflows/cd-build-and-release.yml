@@ -31,7 +31,7 @@ jobs:
       build_type: ${{ steps.setup.outputs.build_type }}
       version: ${{ steps.setup.outputs.version }}
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
@@ -89,7 +89,7 @@ jobs:
       matrix:
         GODOT_VERSIONS: ["4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.5.2", "4.6.0", "4.6.1", "4.6.2", "4.6.3", "4.7.0", "4.7.1"]
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Cache Gradle
       uses: actions/cache@v4
@@ -132,7 +132,7 @@ jobs:
       matrix:
         GODOT_VERSIONS: ["4.1.0", "4.1.1", "4.1.2", "4.1.3", "4.1.4", "4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.5.2", "4.6.0", "4.6.1", "4.6.2", "4.6.3", "4.7.0", "4.7.1"]
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Verify matrix
       run: |
@@ -186,7 +186,7 @@ jobs:
     if: needs.initialize.outputs.should_build == 'true'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Set nightly version in plugin.cfg
       if: needs.initialize.outputs.build_type == 'Nightly'
@@ -213,7 +213,7 @@ jobs:
     if: needs.initialize.outputs.should_build == 'true' && needs.initialize.outputs.build_type == 'Release'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Download all artifacts
       uses: actions/download-artifact@v4
@@ -252,7 +252,7 @@ jobs:
     if: needs.initialize.outputs.should_build == 'true' && needs.initialize.outputs.build_type == 'Nightly'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
 
     - name: Download all artifacts
       uses: actions/download-artifact@v4
