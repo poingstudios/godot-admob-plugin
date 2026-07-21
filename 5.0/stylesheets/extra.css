@@ -29,25 +29,7 @@ body {
   padding: 0 !important;
 }
 
-/* 💫 ACCESSIBLE FLUID FOCUS (High Contrast & Compact) */
-.md-option:focus + .md-header__button,
-.md-option:focus-visible + .md-header__button,
-.md-option:focus ~ .md-header__button,
-.md-option:focus-visible ~ .md-header__button,
-.md-header__button:hover,
-.md-header__button:focus-within,
-.md-header__button:focus,
-[data-md-color-scheme="slate"] .md-option:focus + .md-header__button,
-[data-md-color-scheme="slate"] .md-option:focus ~ .md-header__button {
-  background-color: rgba(255, 255, 255, 0.35) !important;
-  color: #fff !important;
-  border-radius: 50% !important;
-  transition: all 0.2s ease-in-out !important;
-  outline: none !important;
-  /* High visibility AdMob Yellow, 25% more compact (3px) */
-  box-shadow: 0 0 0 3px #FBBC04 !important; 
-  z-index: 10 !important;
-}
+
 
 
 
@@ -135,10 +117,8 @@ body {
 /* 🐭 HOVER INTERACTION (Desktop Only) */
 @media (hover: hover) {
   .announcement-wrapper:hover .shape {
-    opacity: 0.4 !important;
-    /* Subtle boost */
-    filter: blur(0px);
-    transform: translate(0, -10px) scale(1.15) !important;
+    opacity: 0.45 !important;
+    filter: blur(2px);
   }
 
   .announcement-wrapper:hover::before {
@@ -149,7 +129,8 @@ body {
 /* 📝 ELEMENTS */
 .announcement-title {
   background: #FBBC04 !important;
-  color: #000 !important; /* Dark text for better contrast on yellow */
+  color: #000 !important;
+  /* Dark text for better contrast on yellow */
   padding: 8px 20px;
   border-radius: 4px;
   font-weight: 800;
@@ -246,6 +227,7 @@ body {
 
 /* 📱 MOBILE NAVIGATION FIXES */
 @media screen and (max-width: 76.25em) {
+
   /* Keep the banner bright and visible above the dark overlay when the drawer is open */
   [data-md-component="announce"] {
     z-index: 99 !important;
@@ -253,7 +235,8 @@ body {
 
   /* Compact the banner and fix its height for mobile alignment */
   .announcement-content {
-    padding: 1.2rem 1rem !important; /* Sightly tighter padding */
+    padding: 1.2rem 1rem !important;
+    /* Sightly tighter padding */
     min-height: 3.4rem;
     box-sizing: border-box;
     gap: 16px !important;
@@ -267,4 +250,62 @@ body {
     font-size: 0.85rem !important;
     line-height: 1.4 !important;
   }
+}
+
+/* 🏷️ NAVIGATION BADGES SCRIPT */
+.deprecated-badge {
+  background-color: #757575;
+  color: white !important;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  vertical-align: middle;
+  margin-left: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  line-height: 1.2;
+}
+
+.experimental-icon {
+  margin-left: 6px;
+  vertical-align: middle;
+  opacity: 0.8;
+}
+
+.modern-icon {
+  filter: grayscale(1);
+  opacity: 0.6;
+  margin-left: 6px;
+  vertical-align: middle;
+  font-size: 0.9em;
+  display: inline-block;
+  line-height: normal;
+}
+
+/* External Link Navigation Icon Setup */
+/* External Link Navigation Icon Setup */
+.md-nav__link[href^="http"],
+.md-nav__link[href^="https"] {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+}
+
+.md-nav__link[href^="http"]::after,
+.md-nav__link[href^="https"]::after {
+  content: "";
+  display: inline-block;
+  width: 13px;
+  height: 13px;
+  margin-right: 12px; /* aligns it perfectly with the native menu arrows > */
+  flex-shrink: 0;
+  background-color: currentColor;
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/></svg>') no-repeat;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/></svg>') no-repeat;
+  mask-size: cover;
+  -webkit-mask-size: cover;
+  opacity: 0.7;
 }
