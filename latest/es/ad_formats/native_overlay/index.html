@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../../../assets/icon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -39,7 +39,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1169,6 +1169,17 @@
     <span class="md-ellipsis">
       
         Escuche eventos publicitarios
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reaccionar-a-la-renderizacion-de-la-plantilla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reaccionar a la renderización de la plantilla
       
     </span>
   </a>
@@ -5141,6 +5152,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#reaccionar-a-la-renderizacion-de-la-plantilla" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Reaccionar a la renderización de la plantilla
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mostrarocultar-y-destruir" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5512,8 +5534,9 @@
 </div>
 </div>
 </div>
-<h3 id="mostrarocultar-y-destruir">Mostrar/Ocultar y destruir</h3>
-<p>Una vez renderizado, puedes controlar la visibilidad del anuncio o destruirlo por completo para liberar recursos.</p>
+<h3 id="reaccionar-a-la-renderizacion-de-la-plantilla">Reaccionar a la renderización de la plantilla</h3>
+<p>El tamaño real de la plantilla renderizada solo se conoce después de que la vista nativa subyacente (o la vista previa mock en el editor) se haya posicionado en pantalla. Para evitar consultar <a href="../../reference/classes/NativeOverlayAd/#get_template_height_in_pixels_gettemplateheightinpixels"><code>get_template_height_in_pixels()</code></a> demasiado pronto y recibir dimensiones obsoletas, suscríbete al callback <a href="../../reference/classes/NativeOverlayAd/#on_template_rendered_ontemplaterendered"><code>on_template_rendered</code></a>, que se dispara una vez que la plantilla completa su primera pasada de layout.</p>
+<p>Este es el hook recomendado para ajustar tu UI (por ejemplo, actualizar una <code>SafeArea</code> para evitar que el contenido quede cubierto por el anuncio).</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5521,19 +5544,11 @@
 <span class="normal"><a href="#__codelineno-8-2">2</a></span>
 <span class="normal"><a href="#__codelineno-8-3">3</a></span>
 <span class="normal"><a href="#__codelineno-8-4">4</a></span>
-<span class="normal"><a href="#__codelineno-8-5">5</a></span>
-<span class="normal"><a href="#__codelineno-8-6">6</a></span>
-<span class="normal"><a href="#__codelineno-8-7">7</a></span>
-<span class="normal"><a href="#__codelineno-8-8">8</a></span>
-<span class="normal"><a href="#__codelineno-8-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># To hide the ad</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">_native_overlay_ad</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_on_ad_load_finished</span><span class="p">(</span><span class="n">ad</span><span class="p">:</span><span class="w"> </span><span class="n">NativeOverlayAd</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">:</span><span class="w"> </span><span class="n">LoadAdError</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">    </span><span class="c1"># ... load check y llamada a render_template() ...</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="c1"># To show it again</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="n">_native_overlay_ad</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6"></a>
-<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="c1"># To destroy it (required when finished)</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="n">_native_overlay_ad</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="n">_native_overlay_ad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">null</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="n">ad</span><span class="o">.</span><span class="n">on_template_rendered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Plantilla renderizada, altura = &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ad</span><span class="o">.</span><span class="n">get_template_height_in_pixels</span><span class="p">())</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5545,15 +5560,61 @@
 <span class="normal"><a href="#__codelineno-9-6">6</a></span>
 <span class="normal"><a href="#__codelineno-9-7">7</a></span>
 <span class="normal"><a href="#__codelineno-9-8">8</a></span>
-<span class="normal"><a href="#__codelineno-9-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c1">// To hide the ad</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="n">_nativeOverlayAd</span><span class="p">.</span><span class="n">Hide</span><span class="p">();</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="c1">// To show it again</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="n">_nativeOverlayAd</span><span class="p">.</span><span class="n">Show</span><span class="p">();</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="c1">// To destroy it (required when finished)</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="n">_nativeOverlayAd</span><span class="p">.</span><span class="n">Destroy</span><span class="p">();</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="n">_nativeOverlayAd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+<span class="normal"><a href="#__codelineno-9-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnAdLoadFinished</span><span class="p">(</span><span class="n">NativeOverlayAd</span><span class="w"> </span><span class="n">ad</span><span class="p">,</span><span class="w"> </span><span class="n">LoadAdError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">    </span><span class="c1">// ... load check y llamada a RenderTemplate() ...</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">    </span><span class="n">ad</span><span class="p">.</span><span class="n">OnTemplateRendered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Plantilla renderizada, altura = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ad</span><span class="p">.</span><span class="n">GetTemplateHeightInPixels</span><span class="p">());</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">    </span><span class="p">};</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h3 id="mostrarocultar-y-destruir">Mostrar/Ocultar y destruir</h3>
+<p>Una vez renderizado, puedes controlar la visibilidad del anuncio o destruirlo por completo para liberar recursos.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">GDScript</label><label for="__tabbed_6_2">C#</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span>
+<span class="normal"><a href="#__codelineno-10-6">6</a></span>
+<span class="normal"><a href="#__codelineno-10-7">7</a></span>
+<span class="normal"><a href="#__codelineno-10-8">8</a></span>
+<span class="normal"><a href="#__codelineno-10-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c1"># To hide the ad</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="n">_native_overlay_ad</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="c1"># To show it again</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="n">_native_overlay_ad</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="c1"># To destroy it (required when finished)</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="n">_native_overlay_ad</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="n">_native_overlay_ad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">null</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span>
+<span class="normal"><a href="#__codelineno-11-5">5</a></span>
+<span class="normal"><a href="#__codelineno-11-6">6</a></span>
+<span class="normal"><a href="#__codelineno-11-7">7</a></span>
+<span class="normal"><a href="#__codelineno-11-8">8</a></span>
+<span class="normal"><a href="#__codelineno-11-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="c1">// To hide the ad</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">_nativeOverlayAd</span><span class="p">.</span><span class="n">Hide</span><span class="p">();</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="c1">// To show it again</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="n">_nativeOverlayAd</span><span class="p">.</span><span class="n">Show</span><span class="p">();</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="c1">// To destroy it (required when finished)</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="n">_nativeOverlayAd</span><span class="p">.</span><span class="n">Destroy</span><span class="p">();</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="n">_nativeOverlayAd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
@@ -5669,7 +5730,7 @@
     
     
   
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../javascripts/extra.js"></script>
       

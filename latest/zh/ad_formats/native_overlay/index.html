@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../../../assets/icon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -39,7 +39,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -1179,6 +1179,17 @@
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
+        响应模板渲染
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         显示/隐藏和销毁
       
     </span>
@@ -1192,7 +1203,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         最佳实践
@@ -1203,7 +1214,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         其他资源
@@ -5144,6 +5155,17 @@
   <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
+        响应模板渲染
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
         显示/隐藏和销毁
       
     </span>
@@ -5157,7 +5179,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_9" class="md-nav__link">
+  <a href="#_10" class="md-nav__link">
     <span class="md-ellipsis">
       
         最佳实践
@@ -5168,7 +5190,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_10" class="md-nav__link">
+  <a href="#_11" class="md-nav__link">
     <span class="md-ellipsis">
       
         其他资源
@@ -5511,8 +5533,9 @@
 </div>
 </div>
 </div>
-<h3 id="_8">显示/隐藏和销毁</h3>
-<p>一旦渲染，您可以控制广告的可见性或将其完全销毁以释放资源。</p>
+<h3 id="_8">响应模板渲染</h3>
+<p>模板的实际渲染尺寸只有在底层原生视图（或编辑器中的模拟预览）在屏幕上完成布局后才能得知。为了避免过早调用 <a href="../../reference/classes/NativeOverlayAd/#get_template_height_in_pixels_gettemplateheightinpixels"><code>get_template_height_in_pixels()</code></a> 而得到过时的尺寸，请订阅 <a href="../../reference/classes/NativeOverlayAd/#on_template_rendered_ontemplaterendered"><code>on_template_rendered</code></a> 回调 —— 它会在模板首次完成布局遍历时触发。</p>
+<p>这是调整 UI 的推荐钩子（例如更新 <code>SafeArea</code> 以防止内容被广告覆盖）。</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
@@ -5520,19 +5543,11 @@
 <span class="normal"><a href="#__codelineno-8-2">2</a></span>
 <span class="normal"><a href="#__codelineno-8-3">3</a></span>
 <span class="normal"><a href="#__codelineno-8-4">4</a></span>
-<span class="normal"><a href="#__codelineno-8-5">5</a></span>
-<span class="normal"><a href="#__codelineno-8-6">6</a></span>
-<span class="normal"><a href="#__codelineno-8-7">7</a></span>
-<span class="normal"><a href="#__codelineno-8-8">8</a></span>
-<span class="normal"><a href="#__codelineno-8-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="c1"># 隐藏广告</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="n">_native_overlay_ad</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+<span class="normal"><a href="#__codelineno-8-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_on_ad_load_finished</span><span class="p">(</span><span class="n">ad</span><span class="p">:</span><span class="w"> </span><span class="n">NativeOverlayAd</span><span class="p">,</span><span class="w"> </span><span class="n">error</span><span class="p">:</span><span class="w"> </span><span class="n">LoadAdError</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2"></a><span class="w">    </span><span class="c1"># ... 检查加载并调用 render_template() ...</span>
 <a id="__codelineno-8-3" name="__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="c1"># 再次显示广告</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="n">_native_overlay_ad</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6"></a>
-<a id="__codelineno-8-7" name="__codelineno-8-7"></a><span class="c1"># 销毁广告 (使用完毕后必须调用)</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8"></a><span class="n">_native_overlay_ad</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9"></a><span class="n">_native_overlay_ad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">null</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4"></a><span class="w">    </span><span class="n">ad</span><span class="o">.</span><span class="n">on_template_rendered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5"></a><span class="w">        </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;模板已渲染，高度 = &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">ad</span><span class="o">.</span><span class="n">get_template_height_in_pixels</span><span class="p">())</span>
 </code></pre></div></td></tr></table></div>
 </div>
 <div class="tabbed-block">
@@ -5544,26 +5559,72 @@
 <span class="normal"><a href="#__codelineno-9-6">6</a></span>
 <span class="normal"><a href="#__codelineno-9-7">7</a></span>
 <span class="normal"><a href="#__codelineno-9-8">8</a></span>
-<span class="normal"><a href="#__codelineno-9-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="c1">// 隐藏广告</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="n">_nativeOverlayAd</span><span class="p">.</span><span class="n">Hide</span><span class="p">();</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4"></a><span class="c1">// 再次显示广告</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="n">_nativeOverlayAd</span><span class="p">.</span><span class="n">Show</span><span class="p">();</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6"></a>
-<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="c1">// 销毁广告 (使用完毕后必须调用)</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="n">_nativeOverlayAd</span><span class="p">.</span><span class="n">Destroy</span><span class="p">();</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="n">_nativeOverlayAd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+<span class="normal"><a href="#__codelineno-9-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1"></a><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">OnAdLoadFinished</span><span class="p">(</span><span class="n">NativeOverlayAd</span><span class="w"> </span><span class="n">ad</span><span class="p">,</span><span class="w"> </span><span class="n">LoadAdError</span><span class="w"> </span><span class="n">error</span><span class="p">)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2"></a><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3"></a><span class="w">    </span><span class="c1">// ... 检查加载并调用 RenderTemplate() ...</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5"></a><span class="w">    </span><span class="n">ad</span><span class="p">.</span><span class="n">OnTemplateRendered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="o">=&gt;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7"></a><span class="w">        </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;模板已渲染，高度 = &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">ad</span><span class="p">.</span><span class="n">GetTemplateHeightInPixels</span><span class="p">());</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8"></a><span class="w">    </span><span class="p">};</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9"></a><span class="p">}</span>
 </code></pre></div></td></tr></table></div>
 </div>
 </div>
 </div>
-<h2 id="_9">最佳实践</h2>
+<h3 id="_9">显示/隐藏和销毁</h3>
+<p>一旦渲染，您可以控制广告的可见性或将其完全销毁以释放资源。</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">GDScript</label><label for="__tabbed_6_2">C#</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-10-1">1</a></span>
+<span class="normal"><a href="#__codelineno-10-2">2</a></span>
+<span class="normal"><a href="#__codelineno-10-3">3</a></span>
+<span class="normal"><a href="#__codelineno-10-4">4</a></span>
+<span class="normal"><a href="#__codelineno-10-5">5</a></span>
+<span class="normal"><a href="#__codelineno-10-6">6</a></span>
+<span class="normal"><a href="#__codelineno-10-7">7</a></span>
+<span class="normal"><a href="#__codelineno-10-8">8</a></span>
+<span class="normal"><a href="#__codelineno-10-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1"></a><span class="c1"># 隐藏广告</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2"></a><span class="n">_native_overlay_ad</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4"></a><span class="c1"># 再次显示广告</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5"></a><span class="n">_native_overlay_ad</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7"></a><span class="c1"># 销毁广告 (使用完毕后必须调用)</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8"></a><span class="n">_native_overlay_ad</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9"></a><span class="n">_native_overlay_ad</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb nb-Type">null</span>
+</code></pre></div></td></tr></table></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-11-1">1</a></span>
+<span class="normal"><a href="#__codelineno-11-2">2</a></span>
+<span class="normal"><a href="#__codelineno-11-3">3</a></span>
+<span class="normal"><a href="#__codelineno-11-4">4</a></span>
+<span class="normal"><a href="#__codelineno-11-5">5</a></span>
+<span class="normal"><a href="#__codelineno-11-6">6</a></span>
+<span class="normal"><a href="#__codelineno-11-7">7</a></span>
+<span class="normal"><a href="#__codelineno-11-8">8</a></span>
+<span class="normal"><a href="#__codelineno-11-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1"></a><span class="c1">// 隐藏广告</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2"></a><span class="n">_nativeOverlayAd</span><span class="p">.</span><span class="n">Hide</span><span class="p">();</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4"></a><span class="c1">// 再次显示广告</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5"></a><span class="n">_nativeOverlayAd</span><span class="p">.</span><span class="n">Show</span><span class="p">();</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7"></a><span class="c1">// 销毁广告 (使用完毕后必须调用)</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8"></a><span class="n">_nativeOverlayAd</span><span class="p">.</span><span class="n">Destroy</span><span class="p">();</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9"></a><span class="n">_nativeOverlayAd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span>
+</code></pre></div></td></tr></table></div>
+</div>
+</div>
+</div>
+<h2 id="_10">最佳实践</h2>
 <ul>
 <li><strong>销毁</strong>：在您不再需要该广告时，务必调用 <code>destroy()</code> 以防止原生平台上的内存泄漏。</li>
 <li><strong>后台加载</strong>：您可以在后台加载广告，并在准备展示它们时才调用 <code>render_template()</code>。</li>
 <li><strong>模板选择</strong>：将 <code>SMALL</code> 模板用于列表或狭窄空间，而 <code>MEDIUM</code> 模板用于更突出的展示位置，例如关卡过渡屏幕。</li>
 </ul>
-<h2 id="_10">其他资源</h2>
+<h2 id="_11">其他资源</h2>
 <ul>
 <li><a href="https://github.com/poingstudios/godot-admob-plugin/tree/master/addons/admob/sample">示例项目</a>：有关完整实现，请参见 <code>Native</code> 标签页。</li>
 </ul>
@@ -5668,7 +5729,7 @@
     
     
   
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../javascripts/extra.js"></script>
       

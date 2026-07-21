@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../../assets/icon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -39,7 +39,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -599,6 +599,34 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#requisito-de-inicializacao-assincrona-do-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisito de Inicialização Assíncrona do SDK
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requisito de Inicialização Assíncrona do SDK">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-migrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como Migrar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#remocao-do-smart-banner" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -611,7 +639,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#como-migrar" class="md-nav__link">
+  <a href="#como-migrar_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Como Migrar
@@ -639,7 +667,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#como-migrar_1" class="md-nav__link">
+  <a href="#como-migrar_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Como Migrar
@@ -5167,6 +5195,34 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#requisito-de-inicializacao-assincrona-do-sdk" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Requisito de Inicialização Assíncrona do SDK
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Requisito de Inicialização Assíncrona do SDK">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#como-migrar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Como Migrar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#remocao-do-smart-banner" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5179,7 +5235,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#como-migrar" class="md-nav__link">
+  <a href="#como-migrar_1" class="md-nav__link">
     <span class="md-ellipsis">
       
         Como Migrar
@@ -5207,7 +5263,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#como-migrar_1" class="md-nav__link">
+  <a href="#como-migrar_2" class="md-nav__link">
     <span class="md-ellipsis">
       
         Como Migrar
@@ -5333,6 +5389,10 @@
 <h1 id="migrar-versoes-do-sdk">Migrar versões do SDK</h1>
 <p>Esta página abrange migrações para versões atuais e anteriores do Godot AdMob Editor Plugin.</p>
 <h2 id="migrar-da-v4-para-a-v5">Migrar da v4 para a v5</h2>
+<div class="admonition tip">
+<p class="admonition-title">Automatizar com Assistentes de IA</p>
+<p>Se você estiver usando um assistente de programação de IA (como Gemini, Claude ou Cursor), você pode pedir para ele ler o arquivo de skill de migração distribuído do plugin em <code>res://addons/admob/skills/godot-admob-migrate/SKILL.md</code> para orientar o assistente automaticamente na atualização do seu código Veja <a href="../ai_skills/">Habilidades de agentes</a> para mais detalhes.</p>
+</div>
 <p>As subseções a seguir descrevem alterações de quebra, diferenças de comportamento e novas APIs entre as versões principais 4 e 5 do Godot AdMob Editor Plugin.</p>
 <h3 id="migracao-do-sdk-android-next-gen">Migração do SDK Android Next-Gen</h3>
 <p>A versão 5.0.0 migra o plugin nativo do Android da dependência do SDK legado do Google Mobile Ads para o moderno SDK Google Mobile Ads Next-Gen:</p>
@@ -5353,6 +5413,67 @@
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">}</span>
 </code></pre></div>
 Nenhuma intervenção ou configuração manual é necessária.</p>
+<hr />
+<h3 id="requisito-de-inicializacao-assincrona-do-sdk">Requisito de Inicialização Assíncrona do SDK</h3>
+<p>Na versão 5.0.0 (GMA Next-Gen SDK no Android), a inicialização do SDK via <code>MobileAds.initialize()</code> é estritamente assíncrona.</p>
+<ul>
+<li><strong>Requisito</strong>: Você <strong>deve</strong> aguardar a conclusão da inicialização antes de carregar anúncios (ex: chamando <code>RewardedAdLoader.load()</code> ou <code>AdView.load()</code>).</li>
+<li><strong>Consequência</strong>: Tentar carregar anúncios antes que a inicialização termine resultará em uma exceção não capturada:
+  <code>MobileAds.initialize must be called before using the Google Mobile Ads SDK.</code></li>
+</ul>
+<h4 id="como-migrar">Como Migrar</h4>
+<p>Passe um <code>OnInitializationCompleteListener</code> para <code>MobileAds.initialize()</code> e carregue seus anúncios somente quando o callback de conclusão for acionado.</p>
+<div class="admonition note">
+<p class="admonition-title">Consultar Status de Inicialização</p>
+<p>Se você precisar consultar o status de inicialização mais tarde, você pode usar o método <a href="../reference/classes/MobileAds/#get_initialization_status">MobileAds.get_initialization_status()</a>.</p>
+</div>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">v4</label><label for="__tabbed_1_2">v5</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">GDScript</label><label for="__tabbed_2_2">C#</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Carregamento síncrono/imediato legado</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">MobileAds</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">_load_rewarded_ad</span><span class="p">()</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Carregamento síncrono/imediato legado</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">MobileAds</span><span class="p">.</span><span class="n">Initialize</span><span class="p">();</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">LoadRewardedAd</span><span class="p">();</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="tabbed-block">
+<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">var</span><span class="w"> </span><span class="n">init_listener</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">OnInitializationCompleteListener</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">init_listener</span><span class="o">.</span><span class="n">on_initialization_complete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="n">InitializationStatus</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="n">Log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Inicialização do AdMob concluída. Carregando primeiro anúncio...&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">_load_rewarded_ad</span><span class="p">()</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">MobileAds</span><span class="o">.</span><span class="n">initialize</span><span class="p">(</span><span class="n">init_listener</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kt">var</span><span class="w"> </span><span class="n">onInitListener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnInitializationCompleteListener</span><span class="p">();</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">onInitListener</span><span class="p">.</span><span class="n">OnInitializationComplete</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;Inicialização do AdMob concluída. Carregando primeiro anúncio...&quot;</span><span class="p">);</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">LoadRewardedAd</span><span class="p">();</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">};</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">MobileAds</span><span class="p">.</span><span class="n">Initialize</span><span class="p">(</span><span class="n">onInitListener</span><span class="p">);</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 <hr />
 <h3 id="remocao-do-smart-banner">Remoção do Smart Banner</h3>
 <p>O formato legado <code>Smart Banner</code> foi descontinuado pelo Google e foi completamente removido do plugin na v5.</p>
@@ -5381,39 +5502,39 @@ Nenhuma intervenção ou configuração manual é necessária.</p>
 <p class="admonition-title">Fallback de Compatibilidade Retroativo</p>
 <p>Por segurança, tanto o plugin nativo do Android quanto o do iOS implementam um fallback automático: se uma cena ou layout antigo ainda enviar um tamanho de largura <code>-1</code> e altura <code>-1</code>, a ponte nativa intercepta e retorna um tamanho padrão de Banner Adaptativo Ancorado correspondente à largura da tela.</p>
 </div>
-<h4 id="como-migrar">Como Migrar</h4>
+<h4 id="como-migrar_1">Como Migrar</h4>
 <p>Use <strong>Banners Adaptativos Ancorados</strong> no lugar. Eles são a substituição moderna oficial, calculando dinamicamente a altura ideal com base na largura do dispositivo e na densidade da tela.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">v4</label><label for="__tabbed_1_2">v5</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">v4</label><label for="__tabbed_4_2">v5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">GDScript</label><label for="__tabbed_2_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Smart banner legado</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">AdSize</span><span class="o">.</span><span class="n">get_smart_banner_ad_size</span><span class="p">(),</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">Values</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Smart banner legado</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">AdSize</span><span class="o">.</span><span class="n">get_smart_banner_ad_size</span><span class="p">(),</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">Values</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Smart banner legado</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kt">var</span><span class="w"> </span><span class="n">adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">AdSize</span><span class="p">.</span><span class="n">GetSmartBannerAdSize</span><span class="p">(),</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Values</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">// Smart banner legado</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kt">var</span><span class="w"> </span><span class="n">adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">AdSize</span><span class="p">.</span><span class="n">GetSmartBannerAdSize</span><span class="p">(),</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Values</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
 </code></pre></div>
 </div>
 </div>
 </div>
 </div>
 <div class="tabbed-block">
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">GDScript</label><label for="__tabbed_6_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Banner adaptativo correspondente à largura total</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_size</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdSize</span><span class="o">.</span><span class="n">get_current_orientation_anchored_adaptive_banner_ad_size</span><span class="p">(</span><span class="n">AdSize</span><span class="o">.</span><span class="n">FULL_WIDTH</span><span class="p">)</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">ad_size</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Banner adaptativo correspondente à largura total</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_size</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdSize</span><span class="o">.</span><span class="n">get_current_orientation_anchored_adaptive_banner_ad_size</span><span class="p">(</span><span class="n">AdSize</span><span class="o">.</span><span class="n">FULL_WIDTH</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">ad_size</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">// Banner adaptativo correspondente à largura total</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kt">var</span><span class="w"> </span><span class="n">adSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdSize</span><span class="p">.</span><span class="n">GetCurrentOrientationAnchoredAdaptiveBannerAdSize</span><span class="p">(</span><span class="n">AdSize</span><span class="p">.</span><span class="n">FullWidth</span><span class="p">);</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kt">var</span><span class="w"> </span><span class="n">adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">adSize</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// Banner adaptativo correspondente à largura total</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kt">var</span><span class="w"> </span><span class="n">adSize</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">AdSize</span><span class="p">.</span><span class="n">GetCurrentOrientationAnchoredAdaptiveBannerAdSize</span><span class="p">(</span><span class="n">AdSize</span><span class="p">.</span><span class="n">FullWidth</span><span class="p">);</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kt">var</span><span class="w"> </span><span class="n">adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">adSize</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
 </code></pre></div>
 </div>
 </div>
@@ -5427,8 +5548,8 @@ Nenhuma intervenção ou configuração manual é necessária.</p>
 <table>
 <thead>
 <tr>
-<th style="text-align: left;">API v4 (Descontinuada)</th>
-<th style="text-align: left;">API v5 (Substituta)</th>
+<th style="text-align: left;">API da v4 (Substituído)</th>
+<th style="text-align: left;">API da v5 (Substituição)</th>
 </tr>
 </thead>
 <tbody>
@@ -5474,41 +5595,41 @@ Nenhuma intervenção ou configuração manual é necessária.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="como-migrar_1">Como Migrar</h4>
+<h4 id="como-migrar_2">Como Migrar</h4>
 <p>Atualize suas criações de banner e atualizações de posição para passar instâncias da classe <a href="../reference/classes/AdPosition/"><code>AdPosition</code></a> em vez dos valores brutos do enum.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">v4</label><label for="__tabbed_4_2">v5</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">v4</label><label for="__tabbed_7_2">v5</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="__tabbed_8_1" name="__tabbed_8" type="radio" /><input id="__tabbed_8_2" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="__tabbed_8_1">GDScript</label><label for="__tabbed_8_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">ad_size</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">Values</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">ad_size</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">Values</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kt">var</span><span class="w"> </span><span class="n">adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">adSize</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Values</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kt">var</span><span class="w"> </span><span class="n">adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">adSize</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Values</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
 </code></pre></div>
 </div>
 </div>
 </div>
 </div>
 <div class="tabbed-block">
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">GDScript</label><label for="__tabbed_6_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="__tabbed_9_1" name="__tabbed_9" type="radio" /><input id="__tabbed_9_2" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="__tabbed_9_1">GDScript</label><label for="__tabbed_9_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Posição predefinida</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">ad_size</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1"># Coordenadas personalizadas (ex. x=0, y=100)</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">var</span><span class="w"> </span><span class="n">custom_ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">ad_size</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">custom</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># Posição predefinida</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">var</span><span class="w"> </span><span class="n">ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">ad_size</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">TOP</span><span class="p">)</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="c1"># Coordenadas personalizadas (ex. x=0, y=100)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="k">var</span><span class="w"> </span><span class="n">custom_ad_view</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">AdView</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">unit_id</span><span class="p">,</span><span class="w"> </span><span class="n">ad_size</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="o">.</span><span class="n">custom</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">))</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">// Posição predefinida</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kt">var</span><span class="w"> </span><span class="n">adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">adSize</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1">// Coordenadas personalizadas (ex. x=0, y=100)</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="kt">var</span><span class="w"> </span><span class="n">customAdView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">adSize</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Custom</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">));</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">// Posição predefinida</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kt">var</span><span class="w"> </span><span class="n">adView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">adSize</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Top</span><span class="p">);</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1">// Coordenadas personalizadas (ex. x=0, y=100)</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="kt">var</span><span class="w"> </span><span class="n">customAdView</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">AdView</span><span class="p">(</span><span class="n">unitId</span><span class="p">,</span><span class="w"> </span><span class="n">adSize</span><span class="p">,</span><span class="w"> </span><span class="n">AdPosition</span><span class="p">.</span><span class="n">Custom</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">));</span>
 </code></pre></div>
 </div>
 </div>
@@ -5535,6 +5656,12 @@ Nenhuma intervenção ou configuração manual é necessária.</p>
 <li>InMobi</li>
 <li>IronSource</li>
 <li>LINE</li>
+<li>Maio</li>
+<li>Mintegral</li>
+<li>Moloco</li>
+<li>myTarget</li>
+<li>Pangle</li>
+<li>PubMatic</li>
 <li>Unity Ads</li>
 </ul>
 <hr />
@@ -5558,9 +5685,19 @@ Nenhuma intervenção ou configuração manual é necessária.</p>
 <h3 id="configuracao-unificada-nas-configuracoes-do-projeto">Configuração Unificada nas Configurações do Projeto</h3>
 <p>Na versão 5.0.0, o plugin unificou todas as opções de configuração diretamente nas <strong>Configurações do Projeto</strong> (Project Settings) nativas do Godot, na seção <code>admob/</code>. Isso substitui quaisquer fluxos de configuração legados ou entradas de menu de editor personalizadas.</p>
 <div class="admonition warning">
-<p class="admonition-title">Alteração de Configuração de Quebra: config.gd Removido</p>
-<p>Na versão 4, o AdMob App ID era definido modificando o script de configuração estática localizado em <code>res://addons/admob/android/config.gd</code>.</p>
-<p>Na versão 5, <strong>o <code>config.gd</code> foi completamente removido</strong>. Você deve transferir seus App IDs para o novo local nas Configurações do Projeto.</p>
+<p class="admonition-title">Alteração de Configuração de Ruptura: config.gd do Android Removido</p>
+<p>Na versão 4, o App ID do AdMob para Android era configurado modificando o script de configuração estática localizado em <code>res://addons/admob/android/config.gd</code>.</p>
+<p>Na versão 5, o <strong><code>config.gd</code> foi completamente removido</strong>. Você deve transferir seus App IDs (tanto de Android quanto de iOS) para o novo local nas Project Settings.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Alteração Crítica no iOS: Limpar Opções de Exportação Legadas (Para Evitar Conflitos)</p>
+<p>Na versão 5, você não precisa mais definir manualmente o <code>Gad Application Identifier</code> ou marcar as opções de plugins antigos nas configurações de Exportação do iOS. O plugin lê automaticamente o App ID das <strong>Project Settings</strong> (Configurações do Projeto) e injeta os frameworks necessários e o <code>GADApplicationIdentifier</code> no arquivo <code>Info.plist</code> do seu projeto do Xcode durante a exportação.</p>
+<p><strong>É fundamental que você limpe esses campos antigos e desmarque as opções herdadas do AdMob no seu Preset de Exportação do iOS.</strong> Caso contrário, isso causará erros de símbolos duplicados e conflitos de plugins.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Obrigatório: Atualizar Binários Nativos da Plataforma</p>
+<p>Depois de atualizar os arquivos do plugin do editor (GDScript/C#) no seu projeto, você <strong>deve</strong> abrir o <strong>AdMob Manager</strong> no Editor do Godot e clicar em <strong>Download &amp; Install</strong> para as plataformas Android e iOS para baixar os binários nativos v5.0.0 correspondentes.</p>
+<p>Se você tentar exportar o projeto enquanto tiver binários de plataforma herdados (v4) ou ausentes, o plugin de exportação bloqueará o processo de exportação e exibirá um erro para evitar travamentos em tempo de execução causados por incompatibilidade de versão.</p>
 </div>
 <p>As opções de configuração agora são registradas e configuradas em <strong>Configurações do Projeto &gt; Geral</strong>:</p>
 <ul>
@@ -5678,7 +5815,7 @@ Nenhuma intervenção ou configuração manual é necessária.</p>
     
     
   
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../javascripts/extra.js"></script>
       

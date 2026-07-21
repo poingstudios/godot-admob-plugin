@@ -31,7 +31,7 @@
       
       
       <link rel="icon" href="../assets/icon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -39,7 +39,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -5241,6 +5241,7 @@
 <ul>
 <li>Renders template-styled mock Native Ads (supporting both <code>small</code> and <code>medium</code> layouts) using Godot Control nodes.</li>
 <li>Shows mock assets like app icons, titles, call-to-action buttons, and body texts.</li>
+<li>Emits the <code>on_native_overlay_ad_rendered</code> signal once the mock template is positioned, mirroring the real device behavior so you can safely adjust UI (<code>SafeArea</code>, etc.) only after the ad is fully laid out.</li>
 </ul>
 <p><img alt="Mock Native Ad" src="../assets/mock_ad_native.png" /></p>
 <h2 id="lifecycle-callbacks">Lifecycle Callbacks</h2>
@@ -5424,7 +5425,7 @@
     
     
   
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../javascripts/extra.js"></script>
       
