@@ -50,7 +50,7 @@ jobs:
     - uses: actions/checkout@v7
 
     - name: Cache Gradle
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: |
           ~/.gradle/caches
@@ -87,7 +87,7 @@ jobs:
         ref: ${{ github.event.pull_request.head.sha }}
 
     - name: Load .scons_cache directory
-      uses: actions/cache@v5
+      uses: actions/cache@v6
       with:
         path: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
         key: scons-ios-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/scripts/**') }}
@@ -106,7 +106,7 @@ jobs:
         python -m pip install scons
 
     - name: Cache SPM dependencies
-      uses: actions/cache@v5
+      uses: actions/cache@v6
       with:
         path: platforms/ios/.build
         key: spm-${{ hashFiles('platforms/ios/Package.swift', 'platforms/ios/Package.resolved') }}
@@ -144,7 +144,7 @@ jobs:
 
     - name: Cache Godot Editor
       id: cache-godot
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: /usr/local/bin/godot
         key: godot-linux-${{ needs.detect-latest.outputs.godot_version }}
@@ -161,7 +161,7 @@ jobs:
 
     - name: Cache Export Templates
       id: cache-templates
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: ~/.local/share/godot/export_templates
         key: godot-templates-${{ needs.detect-latest.outputs.godot_version }}
@@ -306,7 +306,7 @@ jobs:
 
     - name: Cache Godot Editor (.NET)
       id: cache-godot-dotnet
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: |
           /usr/local/bin/godot
@@ -327,7 +327,7 @@ jobs:
 
     - name: Cache Export Templates
       id: cache-templates
-      uses: actions/cache@v4
+      uses: actions/cache@v6
       with:
         path: ~/.local/share/godot/export_templates
         key: godot-templates-mono-${{ needs.detect-latest.outputs.godot_version }}
