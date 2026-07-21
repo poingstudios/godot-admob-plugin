@@ -1,31 +1,23 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
 }
 
 android {
     namespace = "com.poingstudios.godot.admob.pangle"
 
+    def fullModuleName = rootProject.ext.buildFullModuleName(project)
+    base.archivesName = fullModuleName
+
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
-    def fullModuleName = rootProject.ext.buildFullModuleName(project)
-
-    libraryVariants.configureEach { variant ->
-        variant.outputs.all {
-            outputFileName = "${fullModuleName}-${variant.name}.aar"
-            println "Output file will be: $outputFileName"
-        }
-    }
 }
 
 dependencies {

@@ -78,4 +78,4 @@ func _on_download_completed(success: bool) -> void:
 
 
 static func get_zip_file_name() -> String:
-	return "ios-template-v" + PluginVersion.godot + ".zip"
+	return "ios-template-" + PluginVersion.godot + ".zip"

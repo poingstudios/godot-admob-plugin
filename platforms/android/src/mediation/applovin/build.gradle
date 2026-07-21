@@ -1,10 +1,12 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
 }
 
 android {
     namespace = "com.poingstudios.godot.admob.applovin"
+
+    def fullModuleName = rootProject.ext.buildFullModuleName(project)
+    base.archivesName = fullModuleName
 
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -18,14 +20,6 @@ android {
         }
     }
 
-    def fullModuleName = rootProject.ext.buildFullModuleName(project)
-
-    libraryVariants.configureEach { variant ->
-        variant.outputs.all {
-            outputFileName = "${fullModuleName}-${variant.name}.aar"
-            println "Output file will be: $outputFileName"
-        }
-    }
 }
 
 dependencies {

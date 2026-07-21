@@ -23,13 +23,12 @@
 import org.gradle.api.GradleException
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-    id 'com.android.application' version '8.13.2' apply false
+    id 'com.android.application' version '9.3.0' apply false
     id 'com.android.library' version '9.3.0' apply false
-    id 'org.jetbrains.kotlin.android' version '2.3.0' apply false
 }
 
 subprojects {
-    plugins.withId("org.jetbrains.kotlin.android") {
+    plugins.withId("com.android.library") {
         android {
             compileSdk 36
             defaultConfig {

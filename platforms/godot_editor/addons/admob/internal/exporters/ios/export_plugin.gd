@@ -57,6 +57,9 @@ func _export_begin(features: PackedStringArray, is_debug: bool, path: String, fl
 	_pending_export_path = path
 	_spm_dependencies.clear()
 
+	if not features.has("ios"):
+		return
+
 	var ios_enabled := _get_setting(ProjectSettingsService.get_ios_setting_path("enabled"), true) as bool
 	if not ios_enabled:
 		return
