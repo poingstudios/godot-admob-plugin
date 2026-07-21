@@ -5,6 +5,9 @@ plugins {
 android {
     namespace = "com.poingstudios.godot.admob.chartboost"
 
+    def fullModuleName = rootProject.ext.buildFullModuleName(project)
+    base.archivesName = fullModuleName
+
     defaultConfig {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
