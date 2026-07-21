@@ -15,7 +15,10 @@ Assists with migrating your Godot AdMob integration between different plugin ver
 
 1.  **Remove SMART_BANNER Constants**: Replace any references to `AdSize.SMART_BANNER` or `SmartBanner` with Anchored Adaptive Banner sizes.
 2.  **Update Fallbacks**: Ensure that any legacy layouts using `-1, -1` size fallback values are replaced with the recommended Anchored Adaptive Banner sizes.
-3.  **Project Settings & config.gd**: `config.gd` has been removed. Transfer your App IDs to **Project Settings > General > Admob** for both Android and iOS.
+3.  **Android App ID Migration & config.gd Removal**:
+    *   **Extract Android App ID**: Read the `APPLICATION_ID` constant from `res://addons/admob/android/config.gd` (if upgrading an existing project).
+    *   **Save to Project Settings**: Transfer the Android App ID into `project.godot` under `[admob]` section as `general/android/app_id="your-app-id"` (or via **Project Settings > General > Admob**).
+    *   **Remove config.gd**: `config.gd` is deprecated and removed in v5; all settings are now managed via Project Settings.
 4.  **AdPosition Class Migration**: `AdPosition.Values` enum is replaced by `AdPosition` static instances (e.g. `AdPosition.TOP` or `AdPosition.custom(x, y)`). Update your code references.
 5.  **iOS Export Cleanup & App ID Migration**:
     *   **Delete AdMob `.gdip` files & binaries**: Delete all legacy `poing-godot-admob*.gdip` files and the `res://ios/plugins/poing-godot-admob/` directory inside `res://ios/plugins/` (do not delete the outer `plugins/` folder if other non-AdMob plugins exist). Version 5 injects frameworks dynamically during export, so leaving old `.gdip` files and binaries will cause `Multiple commands produce ...` build errors in Xcode.
