@@ -253,6 +253,22 @@ En la versión 5.0.0, el plugin ha unificado todas las opciones de configuració
     
     En la versión 5, **el archivo `config.gd` ha sido completamente eliminado**. Debes transferir tus App IDs a la nueva ubicación en los Ajustes del Proyecto.
 
+!!! danger "Cambio Crítico en iOS: Elimine Archivos .gdip Heredados de v4 (Para Evitar Conflictos en Xcode)"
+    En la versión 4, los plugins de iOS se registraban mediante archivos de configuración `.gdip` ubicados en `res://ios/plugins/`.
+    En la versión 5, los frameworks y dependencias de iOS se agregan dinámicamente mediante el plugin del editor durante la exportación.
+    
+    **Debe eliminar todos los archivos heredados `poing-godot-admob*.gdip` y el directorio `res://ios/plugins/poing-godot-admob/`.** (No elimine el directorio `res://ios/plugins/` en sí si utiliza otros plugins de iOS que no sean de AdMob). No eliminar los archivos `.gdip` y binarios antiguos de AdMob provocará errores de símbolos y frameworks duplicados (`Multiple commands produce ...`) en Xcode.
+
+!!! danger "Cambio Crítico en iOS: Limpie las Opciones de Exportación Heredadas (Para Evitar Conflictos)"
+    En la versión 5, ya no necesita configurar manualmente el `Gad Application Identifier` ni marcar las opciones de plugins antiguos en las opciones del Preset de Exportación de iOS. El plugin lee automáticamente el App ID desde los **Ajustes del Proyecto** e inyecta los frameworks necesarios y el `GADApplicationIdentifier` en el `Info.plist` de su proyecto Xcode durante la exportación.
+    
+    **Es crítico que limpie estos campos antiguos y desmarque las opciones heredadas de AdMob en su Preset de Exportación de iOS.** De lo contrario, se producirán errores de símbolos duplicados y conflictos de plugins.
+
+!!! danger "Obligatorio: Actualizar Binarios Nativos de la Plataforma"
+    Después de actualizar los archivos del plugin del editor (GDScript/C#) en su proyecto, **debe** abrir el **AdMob Manager** en el Editor de Godot y hacer clic en **Download & Install** para ambas plataformas (Android e iOS) para descargar los binarios nativos v5.0.0 correspondientes.
+    
+    Si intenta exportar el proyecto con binarios nativos heredados (v4) o faltantes, el plugin de exportación bloqueará la exportación y mostrará un error para evitar cierres inesperados en tiempo de ejecución.
+
 Las opciones de configuración ahora se registran y configuran en **Ajustes del Proyecto > General**:
 
 * **Configuración de Android:** `admob/general/android/enabled`, `admob/general/android/app_id` y banderas de optimización.

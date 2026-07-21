@@ -263,6 +263,12 @@ Na versão 5.0.0, o plugin unificou todas as opções de configuração diretame
     Na versão 5, o **`config.gd` foi completamente removido**. Você deve transferir seus App IDs (tanto de Android quanto de iOS) para o novo local nas Project Settings.
     
 
+!!! danger "Alteração Crítica no iOS: Exclua Arquivos .gdip Legados da v4 (Para Evitar Conflitos no Xcode)"
+    Na versão 4, os plugins do iOS eram registrados via arquivos de configuração `.gdip` na pasta `res://ios/plugins/`.
+    Na versão 5, os frameworks e dependências do iOS são adicionados dinamicamente pelo plugin do editor durante o export.
+    
+    **Você deve excluir todos os arquivos legados `poing-godot-admob*.gdip` e o diretório `res://ios/plugins/poing-godot-admob/`.** (Não exclua o diretório `res://ios/plugins/` em si se você usar outros plugins de iOS que não sejam do AdMob). A não remoção dos arquivos `.gdip` e binários antigos do AdMob causará erros de símbolos e frameworks duplicados (`Multiple commands produce ...`) no Xcode.
+
 !!! danger "Alteração Crítica no iOS: Limpar Opções de Exportação Legadas (Para Evitar Conflitos)"
     Na versão 5, você não precisa mais definir manualmente o `Gad Application Identifier` ou marcar as opções de plugins antigos nas configurações de Exportação do iOS. O plugin lê automaticamente o App ID das **Project Settings** (Configurações do Projeto) e injeta os frameworks necessários e o `GADApplicationIdentifier` no arquivo `Info.plist` do seu projeto do Xcode durante a exportação.
     

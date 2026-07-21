@@ -253,6 +253,12 @@ configurations.configureEach {
     
     バージョン 5 では、**`config.gd` は完全に削除されました**。既存の App ID を新しいプロジェクト設定の場所へ移行する必要があります。
 
+!!! danger "iOS の重要な変更点: レガシー v4 .gdip ファイルの削除（Xcode のビルド競合を回避）"
+    バージョン 4 では、iOS プラグインは `res://ios/plugins/` 内に配置された `.gdip` 設定ファイルを通じて登録されていました。
+    バージョン 5 では、iOS フレームワークと依存関係はエクスポート時にエディタープラグインによって動的に追加されます。
+    
+    **レガシーの `poing-godot-admob*.gdip` ファイルおよび `res://ios/plugins/poing-godot-admob/` ディレクトリをすべて削除する必要があります。**（他の非 AdMob iOS プラグインを使用している場合は、`res://ios/plugins/` ディレクトリ自体は削除しないでください）。古い AdMob `.gdip` ファイルやバイナリを削除しないと、Xcode でシンボルおよびフレームワークの重複エラー（`Multiple commands produce ...`）が発生します。
+
 設定オプションは、**プロジェクト設定 > 一般** から設定できるようになりました。
 
 * **Android 設定:** `admob/general/android/enabled`、`admob/general/android/app_id`、および最適化フラグ。
