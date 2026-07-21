@@ -5679,6 +5679,12 @@
 <p>バージョン 4 では、AdMob の App ID は <code>res://addons/admob/android/config.gd</code> 内の静的変数を変更することで設定されていました。</p>
 <p>バージョン 5 では、<strong><code>config.gd</code> は完全に削除されました</strong>。既存の App ID を新しいプロジェクト設定の場所へ移行する必要があります。</p>
 </div>
+<div class="admonition danger">
+<p class="admonition-title">iOS の重要な変更点: レガシー v4 .gdip ファイルの削除（Xcode のビルド競合を回避）</p>
+<p>バージョン 4 では、iOS プラグインは <code>res://ios/plugins/</code> 内に配置された <code>.gdip</code> 設定ファイルを通じて登録されていました。
+バージョン 5 では、iOS フレームワークと依存関係はエクスポート時にエディタープラグインによって動的に追加されます。</p>
+<p><strong>レガシーの <code>poing-godot-admob*.gdip</code> ファイルおよび <code>res://ios/plugins/poing-godot-admob/</code> ディレクトリをすべて削除する必要があります。</strong>（他の非 AdMob iOS プラグインを使用している場合は、<code>res://ios/plugins/</code> ディレクトリ自体は削除しないでください）。古い AdMob <code>.gdip</code> ファイルやバイナリを削除しないと、Xcode でシンボルおよびフレームワークの重複エラー（<code>Multiple commands produce ...</code>）が発生します。</p>
+</div>
 <p>設定オプションは、<strong>プロジェクト設定 &gt; 一般</strong> から設定できるようになりました。</p>
 <ul>
 <li><strong>Android 設定:</strong> <code>admob/general/android/enabled</code>、<code>admob/general/android/app_id</code>、および最適化フラグ。</li>
