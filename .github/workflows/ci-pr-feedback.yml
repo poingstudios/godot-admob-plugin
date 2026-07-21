@@ -41,8 +41,8 @@ jobs:
             run_id: runId,
           });
 
-          const androidArtifact = artifacts.artifacts.find(a => a.name.startsWith('poing-godot-admob-android-'));
-          const iosArtifact = artifacts.artifacts.find(a => a.name.startsWith('poing-godot-admob-ios-'));
+          const androidArtifact = artifacts.artifacts.find(a => a.name.startsWith('android-template-v'));
+          const iosArtifact = artifacts.artifacts.find(a => a.name.startsWith('ios-template-v'));
           const apkArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-Android-GDScript-'));
           const csharpArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-Android-CSharp-'));
           const ipaArtifact = artifacts.artifacts.find(a => a.name.startsWith('AdMobAddon-iOS-Simulator-GDScript-'));

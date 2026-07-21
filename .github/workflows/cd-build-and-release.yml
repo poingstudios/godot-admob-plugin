@@ -87,7 +87,7 @@ jobs:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
-        GODOT_VERSIONS: ["4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.5.2", "4.6.0", "4.6.1", "4.6.2", "4.6.3", "4.7.0"]
+        GODOT_VERSIONS: ["4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.5.2", "4.6.0", "4.6.1", "4.6.2", "4.6.3", "4.7.0", "4.7.1"]
     steps:
     - uses: actions/checkout@v6
 
@@ -119,7 +119,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: android-${{matrix.GODOT_VERSIONS}}
-        path: platforms/android/.output/poing-godot-admob-android-v${{matrix.GODOT_VERSIONS}}.zip
+        path: platforms/android/.output/android-template-v${{matrix.GODOT_VERSIONS}}.zip
         if-no-files-found: error
         retention-days: 1
 
@@ -130,7 +130,7 @@ jobs:
     runs-on: "macos-latest"
     strategy:
       matrix:
-        GODOT_VERSIONS: ["4.1.0", "4.1.1", "4.1.2", "4.1.3", "4.1.4", "4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.5.2", "4.6.0", "4.6.1", "4.6.2", "4.6.3", "4.7.0"]
+        GODOT_VERSIONS: ["4.1.0", "4.1.1", "4.1.2", "4.1.3", "4.1.4", "4.2.0", "4.2.1", "4.2.2", "4.3.0", "4.4.0", "4.4.1", "4.5.0", "4.5.1", "4.5.2", "4.6.0", "4.6.1", "4.6.2", "4.6.3", "4.7.0", "4.7.1"]
     steps:
     - uses: actions/checkout@v6
 

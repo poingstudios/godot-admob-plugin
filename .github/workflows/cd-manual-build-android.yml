@@ -73,11 +73,11 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TAG: ${{ github.event.inputs.tag }}
       run: |
-        gh release upload "$TAG" platforms/android/.output/poing-godot-admob-android-v${{ needs.setup.outputs.godot_version }}.zip --clobber --repo "${{ github.repository }}"
+        gh release upload "$TAG" platforms/android/.output/android-template-v${{ needs.setup.outputs.godot_version }}.zip --clobber --repo "${{ github.repository }}"
 
     - name: Upload as workflow artifact
       if: github.event.inputs.upload_to_release == 'false'
       uses: actions/upload-artifact@v4
       with:
-        name: poing-godot-admob-android-v${{ needs.setup.outputs.godot_version }}
-        path: platforms/android/.output/poing-godot-admob-android-v${{ needs.setup.outputs.godot_version }}.zip
+        name: android-template-v${{ needs.setup.outputs.godot_version }}
+        path: platforms/android/.output/android-template-v${{ needs.setup.outputs.godot_version }}.zip

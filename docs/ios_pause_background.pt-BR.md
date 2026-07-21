@@ -6,12 +6,12 @@ No Android, seu jogo é pausado automaticamente quando um anúncio em tela cheia
 
 No iOS, o valor padrão é `false`.
 
-# Pré-requisitos
+## Pré-requisitos
 
 - Concluir o [Guia de Início Rápido](index.md)
 - Usar Godot v4.2 ou superior
 
-# Como usar
+## Como usar
 Você pode usar esse método quando desejar, antes, durante ou após a inicialização, como por exemplo:
 
 === "GDScript"

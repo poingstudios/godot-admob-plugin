@@ -30,6 +30,66 @@ configurations.configureEach {
 
 ---
 
+### 非同期 SDK 初期化の要件
+
+バージョン 5.0.0 (Android の GMA Next-Gen SDK) では、`MobileAds.initialize()` による SDK の初期化は厳密に非同期で行われます。
+
+* **要件**: 他の Google Mobile Ads SDK API (例えば `RewardedAdLoader.load()` や `AdView.load()`) をロードまたは呼び出す前に、初期化が完了するのを**必ず**待つ必要があります。
+* **影響**: 初期化が完了する前に広告をロードしようとすると、キャッチされない例外が発生します:
+  `MobileAds.initialize must be called before using the Google Mobile Ads SDK.`
+
+#### 移行方法
+
+`MobileAds.initialize()` に `OnInitializationCompleteListener` リスナーを渡し、初期化完了コールバックがトリガーされた後にのみ広告をロードするようにします。
+
+!!! note "初期化ステータスの照会"
+    後で初期化ステータスをクエリする必要がある場合は、[MobileAds.get_initialization_status()](reference/classes/MobileAds.md#get_initialization_status) メソッドを使用できます。
+
+=== "v4"
+
+    === "GDScript"
+
+        ```gdscript
+        # レガシーな同期/即時ロード
+        MobileAds.initialize()
+        _load_rewarded_ad()
+        ```
+
+    === "C#"
+
+        ```csharp
+        // レガシーな同期/即時ロード
+        MobileAds.Initialize();
+        LoadRewardedAd();
+        ```
+
+=== "v5"
+
+    === "GDScript"
+
+        ```gdscript
+        var init_listener := OnInitializationCompleteListener.new()
+        init_listener.on_initialization_complete = func(status: InitializationStatus) -> void:
+            Log.info("AdMob の初期化が完了しました。最初の広告をロードしています...")
+            _load_rewarded_ad()
+
+        MobileAds.initialize(init_listener)
+        ```
+
+    === "C#"
+
+        ```csharp
+        var onInitListener = new OnInitializationCompleteListener();
+        onInitListener.OnInitializationComplete = (status) => {
+            GD.Print("AdMob の初期化が完了しました。最初の広告をロードしています...");
+            LoadRewardedAd();
+        };
+
+        MobileAds.Initialize(onInitListener);
+        ```
+
+---
+
 ### スマートバナーの削除
 
 レガシーな `スマートバナー` フォーマットは Google によって非推奨となり、v5 でプラグインから完全に削除されました。

@@ -23,6 +23,7 @@
 const PluginVersion := preload("res://addons/admob/internal/version/plugin_version.gd")
 const DownloadService := preload("res://addons/admob/internal/services/network/download_service.gd")
 const ZipService := preload("res://addons/admob/internal/services/archive/zip_service.gd")
+const InstallerService := preload("res://addons/admob/internal/services/installer_service.gd")
 const DialogService := preload("res://addons/admob/internal/services/ui/dialog_service.gd")
 const FileService := preload("res://addons/admob/internal/services/ui/file_service.gd")
 
@@ -66,29 +67,15 @@ func _on_download_completed(success: bool) -> void:
 		zip_path, EXTRACT_PATH, false, ZipService.StripMode.NONE
 	)
 	if extract_success:
-		_create_local_package(PACKAGE_PATH)
-		_dialog_service.show_confirmation(
-			"iOS plugin installed successfully!\n\nRemember to check your iOS export settings.",
-			func(): pass,  # No specific config to open for iOS yet
-			"OK"
+		InstallerService.create_package_file(PACKAGE_PATH)
+		(
+			_dialog_service
+			. show_message(
+				"iOS plugin installed successfully!\n\nPlease configure AdMob for iOS in the Project Settings (Project -> Project Settings -> General -> Admob)."
+			)
 		)
 
-
-func _create_local_package(path: String) -> void:
-	var file := FileAccess.open(path, FileAccess.WRITE)
-	if file:
-		var content := (
-			"""# This file is dynamically generated.
-# It defines the current installed version of the platform plugin.
-# Do not modify this manually.
-
-const VERSION := "%s"
-"""
-			% PluginVersion.current
-		)
-		file.store_string(content)
-		file.close()
 
 
 static func get_zip_file_name() -> String:
-	return "poing-godot-admob-ios-" + PluginVersion.godot + ".zip"
+	return "ios-template-v" + PluginVersion.godot + ".zip"

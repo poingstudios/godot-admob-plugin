@@ -47,6 +47,7 @@ Tenga en cuenta que debe seleccionar el bloque de anuncios de prueba proporciona
  | [Banner adaptativo anclado](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/9214589741 | 
  | [Banner adaptativo en línea](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/9214589741 | 
  | [Banner de tamaño fijo](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/6300978111 | 
+ | [Banner plegable (Collapsible)](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2014213617 |
  | [Intersticial](ad_formats/interstitial.md) | ca-app-pub-3940256099942544/1033173712 | 
  | [Anuncios recompensados](ad_formats/rewarded.md) | ca-app-pub-3940256099942544/5224354917 | 
  | [Intersticial Recompensado](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/5354046379 | 
@@ -61,20 +62,12 @@ Tenga en cuenta que debe seleccionar el bloque de anuncios de prueba proporciona
  | [Banner adaptativo anclado](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2435281174 | 
  | [Banner adaptativo en línea](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2435281174 | 
  | [Banner de tamaño fijo](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/2934735716 | 
+ | [Banner plegable (Collapsible)](ad_formats/banner/get_started.md) | ca-app-pub-3940256099942544/8388050270 |
  | [Intersticial](ad_formats/interstitial.md) | ca-app-pub-3940256099942544/4411468910 | 
  | [Anuncios recompensados](ad_formats/rewarded.md) | ca-app-pub-3940256099942544/1712485313 | 
  | [Intersticial Recompensado](ad_formats/rewarded_interstitial.md) | ca-app-pub-3940256099942544/6978759866 | 
  | [Nativo](ad_formats/native_overlay.md) | ca-app-pub-3940256099942544/3986624511 | 
  | [Video nativo](ad_formats/native_video.md) | ca-app-pub-3940256099942544/2521693316 | 
-
-### Identificadores de pruebas especializados
-Si bien los bloques de anuncios estándar anteriores se pueden usar agregando parámetros adicionales (como "contraíble"), los siguientes ID de bloques de anuncios especializados **garantizan** que se devuelven funciones específicas para probar su UI/UX:
-
- | Característica | Android | iOS | 
- | :--- | :--- | :--- | 
- | **Banners plegables** | `ca-app-pub-3940256099942544/2014213617` | `ca-app-pub-3940256099942544/8388050270` | 
-
-
 
 ## Habilitar dispositivos de prueba {: #enable-test-devices }
 Para realizar pruebas más exhaustivas con anuncios similares a los de producción, puede configurar su dispositivo como dispositivo de prueba y utilizar sus propios ID de bloques de anuncios creados en la interfaz de usuario de AdMob. Puede agregar dispositivos de prueba a través de la interfaz de usuario de AdMob o mediante programación mediante el SDK de anuncios de Google para móviles.
@@ -89,7 +82,6 @@ Estos son los pasos para agregar su dispositivo como dispositivo de prueba:
 
 Para utilizar un método sencillo y no programático para incluir un dispositivo de prueba y probar compilaciones de aplicaciones nuevas o existentes, puede utilizar la interfaz de usuario de AdMob. [Así es como](https://support.google.com/admob/answer/9691433).
 
-
 !!! note
 
     **Nota importante**: Los dispositivos de prueba recién agregados generalmente comienzan a publicar anuncios de prueba en su aplicación en 15 minutos, aunque la configuración también puede demorar hasta 24 horas en surtir efecto.
@@ -97,7 +89,6 @@ Para utilizar un método sencillo y no programático para incluir un dispositivo
 ### Agregue su dispositivo de prueba mediante programación
 
 Si desea probar anuncios dentro de su aplicación durante la fase de desarrollo y desea registrar mediante programación su dispositivo de prueba, siga los pasos a continuación:
-
 
 1. Abra su aplicación con anuncios integrados e inicie una solicitud de anuncio.
 2. Verifique la salida de logcat para ver un mensaje similar al siguiente, que muestra la ID de su dispositivo y cómo agregarlo como dispositivo de prueba:
@@ -153,7 +144,6 @@ Copie la ID de su dispositivo de prueba en su portapapeles.
 
 !!! info
     Tenga en cuenta que los anuncios mediados _NO_ muestran una etiqueta **Anuncio de prueba**. Consulte la sección siguiente para obtener más información.
-
 
 ### Pruebas con mediación
 

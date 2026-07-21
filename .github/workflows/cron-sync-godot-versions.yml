@@ -28,8 +28,8 @@ jobs:
         RELEASE_EXISTS=$(gh api "repos/${{ github.repository }}/releases/tags/${TAG}" > /dev/null 2>&1 && echo "true" || echo "false")
         
         if [ "$RELEASE_EXISTS" = "true" ]; then
-          A_EXISTS=$(gh api "repos/${{ github.repository }}/releases/tags/${TAG}" --jq ".assets[].name" 2>/dev/null | grep -q "poing-godot-admob-android-v${LATEST_PAD}.zip" && echo "true" || echo "false")
-          I_EXISTS=$(gh api "repos/${{ github.repository }}/releases/tags/${TAG}" --jq ".assets[].name" 2>/dev/null | grep -q "poing-godot-admob-ios-v${LATEST_PAD}.zip" && echo "true" || echo "false")
+          A_EXISTS=$(gh api "repos/${{ github.repository }}/releases/tags/${TAG}" --jq ".assets[].name" 2>/dev/null | grep -q "android-template-v${LATEST_PAD}.zip" && echo "true" || echo "false")
+          I_EXISTS=$(gh api "repos/${{ github.repository }}/releases/tags/${TAG}" --jq ".assets[].name" 2>/dev/null | grep -q "ios-template-v${LATEST_PAD}.zip" && echo "true" || echo "false")
         else
           A_EXISTS="false"
           I_EXISTS="false"
@@ -67,7 +67,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: platforms/android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip
+        file: platforms/android/.output/android-template-v${{ needs.detect-latest.outputs.godot_version }}.zip
         tag: ${{ needs.detect-latest.outputs.plugin_tag }}
         overwrite: true
 

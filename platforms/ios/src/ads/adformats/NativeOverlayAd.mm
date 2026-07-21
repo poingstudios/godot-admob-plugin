@@ -130,6 +130,15 @@
         [window bringSubviewToFront:_templateView];
         _templateView.nativeAd = _nativeAd;
         [self updatePositionLogic];
+
+        [_templateView layoutIfNeeded];
+        NSNumber *uidCopy = self.UID;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            PoingGodotAdMobNativeOverlayAd *singleton = PoingGodotAdMobNativeOverlayAd::get_singleton();
+            if (singleton) {
+                singleton->emit_signal("on_native_overlay_ad_rendered", [uidCopy intValue]);
+            }
+        });
     }
 }
 

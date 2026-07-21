@@ -20,6 +20,7 @@ namespace PoingStudios.AdMob.Api
 
         public AdListener AdListener { get; set; } = new AdListener();
         public Action<AdValue> OnAdPaid { get; set; }
+        public Action OnTemplateRendered { get; set; }
         private readonly int _uid;
         private Action<NativeOverlayAd, LoadAdError> _adLoadCallback;
         private MediaContent _mediaContent;
@@ -36,6 +37,7 @@ namespace PoingStudios.AdMob.Api
         private readonly Callable _onVideoPauseCallable;
         private readonly Callable _onVideoEndCallable;
         private readonly Callable _onVideoMuteCallable;
+        private readonly Callable _onTemplateRenderedCallable;
 
         private NativeOverlayAd(int uid)
         {
@@ -53,6 +55,7 @@ namespace PoingStudios.AdMob.Api
             _onVideoPauseCallable = Callable.From<int>(OnVideoPause);
             _onVideoEndCallable = Callable.From<int>(OnVideoEnd);
             _onVideoMuteCallable = Callable.From<int, bool>(OnVideoMute);
+            _onTemplateRenderedCallable = Callable.From<int>(InternalOnTemplateRendered);
 
             if (_plugin != null)
             {
@@ -66,6 +69,7 @@ namespace PoingStudios.AdMob.Api
                 SafeConnect(_plugin, "on_native_overlay_ad_video_pause", _onVideoPauseCallable);
                 SafeConnect(_plugin, "on_native_overlay_ad_video_end", _onVideoEndCallable);
                 SafeConnect(_plugin, "on_native_overlay_ad_video_mute", _onVideoMuteCallable);
+                SafeConnect(_plugin, "on_native_overlay_ad_rendered", _onTemplateRenderedCallable);
             }
         }
 
@@ -262,6 +266,12 @@ namespace PoingStudios.AdMob.Api
             {
                 Callable.From(() => callbacks.OnVideoMute?.Invoke(isMuted)).CallDeferred();
             }
+        }
+
+        private void InternalOnTemplateRendered(int uid)
+        {
+            if (uid != _uid) return;
+            Callable.From(() => OnTemplateRendered?.Invoke()).CallDeferred();
         }
     }
 }

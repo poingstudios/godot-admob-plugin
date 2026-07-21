@@ -24,6 +24,7 @@ const PluginVersion := preload("res://addons/admob/internal/version/plugin_versi
 const ZipService := preload("res://addons/admob/internal/services/archive/zip_service.gd")
 const AndroidHandler := preload("res://addons/admob/internal/handlers/android_handler.gd")
 const IOSHandler := preload("res://addons/admob/internal/handlers/ios_handler.gd")
+const InstallerService := preload("res://addons/admob/internal/services/installer_service.gd")
 
 
 static func install_missing_binaries_sync() -> void:
@@ -53,7 +54,7 @@ static func _install_android_sync() -> void:
 		destination, AndroidHandler.EXTRACT_PATH, true, ZipService.StripMode.NONE
 	)
 	if extract_success:
-		_create_package_file(AndroidHandler.PACKAGE_PATH)
+		InstallerService.create_package_file(AndroidHandler.PACKAGE_PATH)
 		print("AdMob: Android binaries successfully downloaded and installed!")
 
 
@@ -71,19 +72,9 @@ static func _install_ios_sync() -> void:
 		destination, IOSHandler.EXTRACT_PATH, false, ZipService.StripMode.NONE
 	)
 	if extract_success:
-		_create_package_file(IOSHandler.PACKAGE_PATH)
+		InstallerService.create_package_file(IOSHandler.PACKAGE_PATH)
 		print("AdMob: iOS binaries successfully downloaded and installed!")
 
-
-static func _create_package_file(path: String) -> void:
-	var file := FileAccess.open(path, FileAccess.WRITE)
-	if file:
-		var content := (
-			'# This file is dynamically generated.\n# It defines the current installed version of the platform plugin.\n# Do not modify this manually.\n\nconst VERSION := "%s"\n'
-			% PluginVersion.current
-		)
-		file.store_string(content)
-		file.close()
 
 
 static func _download_file_sync(url: String, destination_path: String) -> bool:

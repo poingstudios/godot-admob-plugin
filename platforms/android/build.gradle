@@ -96,7 +96,7 @@ tasks.register('exportFiles', Copy) {
 
 tasks.register('zipPlugins', Zip) {
     def godotVersion = project.hasProperty("godotVersion") ? project.getProperty("godotVersion") : ""
-    def zipName = "poing-godot-admob-android${godotVersion ? '-v' + godotVersion : ''}.zip"
+    def zipName = "android-template${godotVersion ? '-v' + godotVersion : ''}.zip"
 
     archiveFileName.set(zipName)
     destinationDirectory.set(file("${rootProject.projectDir}/.output"))

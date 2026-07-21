@@ -55,7 +55,7 @@ El complemento AdMob para Godot está convenientemente disponible a través de G
 
 ## Descargar e instalar {: #download-install }
 !!! info
-    Esta sección normalmente **no es obligatoria**, ya que el complemento maneja las bibliotecas automáticamente. Siga estos pasos solo si la descarga automática falló.
+    Esta sección normalmente **no es obligatoria**, ya que el complemento maneja las bibliotecas automáticamente. Siga estos pasos solo si la descarga automática falló o si se actualiza de versión de Godot.
 
 === "Android"
 

@@ -36,6 +36,7 @@ signal on_native_overlay_ad_video_play(uid: int)
 signal on_native_overlay_ad_video_pause(uid: int)
 signal on_native_overlay_ad_video_end(uid: int)
 signal on_native_overlay_ad_video_mute(uid: int, is_muted: bool)
+signal on_native_overlay_ad_rendered(uid: int)
 
 var _uid_counter := 0
 var _ads: Dictionary = {}
@@ -103,6 +104,7 @@ func render_template(uid: int, style: Dictionary, position: int, ad_size: Dictio
 		_ads[uid]["custom_position"] = null
 		_ads[uid]["ad_size"] = ad_size
 		_update_ui_position(uid)
+		on_native_overlay_ad_rendered.emit(uid)
 
 
 func render_template_custom_position(uid: int, style: Dictionary, x: float, y: float, ad_size: Dictionary) -> void:
@@ -112,6 +114,7 @@ func render_template_custom_position(uid: int, style: Dictionary, x: float, y: f
 		_ads[uid]["custom_position"] = {"x": x, "y": y}
 		_ads[uid]["ad_size"] = ad_size
 		_update_ui_position(uid)
+		on_native_overlay_ad_rendered.emit(uid)
 
 
 func update_position(uid: int, position: int) -> void:
@@ -676,15 +679,35 @@ func destroy(uid: int) -> void:
 
 func get_width_in_pixels(uid: int) -> float:
 	if _ads.has(uid) and not _ads[uid].get("is_hidden", false):
-		var screen_scale := DisplayServer.screen_get_scale(DisplayServer.window_get_current_screen())
-		return float(_ads[uid].get("current_width", 320) * screen_scale)
+		var viewport_size := get_viewport().get_visible_rect().size
+		var window_size := DisplayServer.window_get_size()
+		var gui_scale_factor := 1.0
+		if window_size.x > 0:
+			gui_scale_factor = viewport_size.x / float(window_size.x)
+
+		var width_dp: int = _ads[uid].get("current_width", 320)
+		var scale_factor: float = min(viewport_size.x / 360.0, viewport_size.y / 640.0)
+		if scale_factor <= 0.0:
+			scale_factor = 1.0
+		var width_in_viewport = width_dp * scale_factor
+		return float(width_in_viewport / gui_scale_factor)
 	return 0.0
 
 
 func get_height_in_pixels(uid: int) -> float:
 	if _ads.has(uid) and not _ads[uid].get("is_hidden", false):
-		var screen_scale := DisplayServer.screen_get_scale(DisplayServer.window_get_current_screen())
-		return float(_ads[uid].get("current_height", 90) * screen_scale)
+		var viewport_size := get_viewport().get_visible_rect().size
+		var window_size := DisplayServer.window_get_size()
+		var gui_scale_factor := 1.0
+		if window_size.y > 0:
+			gui_scale_factor = viewport_size.y / float(window_size.y)
+
+		var height_dp: int = _ads[uid].get("current_height", 90)
+		var scale_factor: float = min(viewport_size.x / 360.0, viewport_size.y / 640.0)
+		if scale_factor <= 0.0:
+			scale_factor = 1.0
+		var height_in_viewport = height_dp * scale_factor
+		return float(height_in_viewport / gui_scale_factor)
 	return 0.0
 
 

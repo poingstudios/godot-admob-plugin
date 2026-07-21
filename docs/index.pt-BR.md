@@ -57,7 +57,7 @@ O plugin AdMob para Godot está convenientemente disponível através da Asset S
 <div id="download-instalacao"></div>
 ## Download & Instalação
 !!! info
-    Esta seção normalmente **não é necessária**, pois o plugin gerencia as bibliotecas automaticamente. Siga estas etapas apenas se o download automático falhar.
+    Esta seção normalmente **não é necessária**, pois o plugin gerencia as bibliotecas automaticamente. Siga estas etapas apenas se o download automático falhar ou se atualizar de versão do Godot.
 
 === "Android"
 

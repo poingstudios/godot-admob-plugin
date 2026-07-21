@@ -1,0 +1,29 @@
+version: 2
+updates:
+  # Maintain GitHub Actions dependencies
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  # Maintain Gradle dependencies for Android native plugin
+  - package-ecosystem: "gradle"
+    directory: "/platforms/android"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  # Maintain Swift Package Manager dependencies for iOS native plugin
+  - package-ecosystem: "swift"
+    directory: "/platforms/ios"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+
+  # Maintain NuGet dependencies for Godot C# Projects
+  - package-ecosystem: "nuget"
+    directory: "/platforms/godot_editor"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5

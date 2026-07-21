@@ -30,6 +30,66 @@ No se requiere ninguna intervención o configuración manual.
 
 ---
 
+### Requisito de Inicialización Asíncrona del SDK
+
+En la versión 5.0.0 (GMA Next-Gen SDK en Android), la inicialización del SDK a través de `MobileAds.initialize()` es estrictamente asíncrona.
+
+* **Requisito**: **Debe** esperar a que se complete la inicialización antes de cargar anuncios (por ejemplo, llamando a `RewardedAdLoader.load()` o `AdView.load()`).
+* **Consecuencia**: Intentar cargar anuncios antes de que se complete la inicialización generará una excepción no capturada:
+  `MobileAds.initialize must be called before using the Google Mobile Ads SDK.`
+
+#### Cómo Migrar
+
+Pase un `OnInitializationCompleteListener` a `MobileAds.initialize()` y cargue sus anuncios solo cuando se active el callback de finalización.
+
+!!! note "Consultar el Estado de Inicialización"
+    Si necesita consultar el estado de inicialización más tarde, puede usar el método [MobileAds.get_initialization_status()](reference/classes/MobileAds.md#get_initialization_status).
+
+=== "v4"
+
+    === "GDScript"
+
+        ```gdscript
+        # Carga síncrona/inmediata heredada
+        MobileAds.initialize()
+        _load_rewarded_ad()
+        ```
+
+    === "C#"
+
+        ```csharp
+        // Carga síncrona/inmediata heredada
+        MobileAds.Initialize();
+        LoadRewardedAd();
+        ```
+
+=== "v5"
+
+    === "GDScript"
+
+        ```gdscript
+        var init_listener := OnInitializationCompleteListener.new()
+        init_listener.on_initialization_complete = func(status: InitializationStatus) -> void:
+            Log.info("Inicialización de AdMob completa. Cargando primer anuncio...")
+            _load_rewarded_ad()
+
+        MobileAds.initialize(init_listener)
+        ```
+
+    === "C#"
+
+        ```csharp
+        var onInitListener = new OnInitializationCompleteListener();
+        onInitListener.OnInitializationComplete = (status) => {
+            GD.Print("Inicialización de AdMob completa. Cargando primer anuncio...");
+            LoadRewardedAd();
+        };
+
+        MobileAds.Initialize(onInitListener);
+        ```
+
+---
+
 ### Eliminación de Smart Banner
 
 El formato heredado `Smart Banner` ha sido marcado como obsoleto por Google y se ha eliminado por completo del plugin en v5.

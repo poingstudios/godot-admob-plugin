@@ -30,7 +30,7 @@ Puede utilizar este método siempre que desee, antes, durante o después de la i
     }
     ```
 
-## Notas importantes
+# Notas importantes
 
 Si tu juego es multijugador, probablemente necesitarás este valor como "falso" debido a problemas de conexión.
 [Lea más sobre esto aquí](https://github.com/poingstudios/godot-admob-ios/issues/70).

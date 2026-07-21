@@ -57,6 +57,7 @@ void PoingGodotAdMobNativeOverlayAd::_bind_methods() {
     ADD_SIGNAL(MethodInfo("on_native_overlay_ad_video_pause", PropertyInfo(Variant::INT, "uid")));
     ADD_SIGNAL(MethodInfo("on_native_overlay_ad_video_end", PropertyInfo(Variant::INT, "uid")));
     ADD_SIGNAL(MethodInfo("on_native_overlay_ad_video_mute", PropertyInfo(Variant::INT, "uid"), PropertyInfo(Variant::BOOL, "is_muted")));
+    ADD_SIGNAL(MethodInfo("on_native_overlay_ad_rendered", PropertyInfo(Variant::INT, "uid")));
 }
 
 int PoingGodotAdMobNativeOverlayAd::create() {

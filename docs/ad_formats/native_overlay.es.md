@@ -212,6 +212,36 @@ Para manejar las interacciones del usuario, puede utilizar la propiedad `ad_list
     }
     ```
 
+### Reaccionar a la renderización de la plantilla
+
+El tamaño real de la plantilla renderizada solo se conoce después de que la vista nativa subyacente (o la vista previa mock en el editor) se haya posicionado en pantalla. Para evitar consultar [`get_template_height_in_pixels()`](../reference/classes/NativeOverlayAd.md#get_template_height_in_pixels_gettemplateheightinpixels) demasiado pronto y recibir dimensiones obsoletas, suscríbete al callback [`on_template_rendered`](../reference/classes/NativeOverlayAd.md#on_template_rendered_ontemplaterendered), que se dispara una vez que la plantilla completa su primera pasada de layout.
+
+Este es el hook recomendado para ajustar tu UI (por ejemplo, actualizar una `SafeArea` para evitar que el contenido quede cubierto por el anuncio).
+
+=== "GDScript"
+
+    ```gdscript linenums="1"
+    func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
+        # ... load check y llamada a render_template() ...
+
+        ad.on_template_rendered = func() -> void:
+            print("Plantilla renderizada, altura = ", ad.get_template_height_in_pixels())
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1"
+    private void OnAdLoadFinished(NativeOverlayAd ad, LoadAdError error)
+    {
+        // ... load check y llamada a RenderTemplate() ...
+
+        ad.OnTemplateRendered = () =>
+        {
+            GD.Print("Plantilla renderizada, altura = " + ad.GetTemplateHeightInPixels());
+        };
+    }
+    ```
+
 ### Mostrar/Ocultar y destruir
 
 Una vez renderizado, puedes controlar la visibilidad del anuncio o destruirlo por completo para liberar recursos.

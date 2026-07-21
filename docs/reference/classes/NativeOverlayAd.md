@@ -34,6 +34,22 @@ Triggered when an impression is recorded and revenue has been generated. Receive
 
 ---
 
+### `on_template_rendered` / `OnTemplateRendered`
+
+Triggered once after the native template has been laid out and rendered on screen (the first time the template view completes its global layout pass, or when the mock template is positioned in the editor). Use this to react to the actual rendered size — for example, to push content into a [`SafeArea`](../../ad_formats/native_overlay.md#showhide-and-destroy) only after the ad is fully rendered, instead of relying on a synchronous call to `get_template_height_in_pixels()` which may return stale dimensions.
+
+=== "GDScript"
+    ```gdscript
+    var on_template_rendered: Callable
+    ```
+
+=== "C#"
+    ```csharp
+    public Action OnTemplateRendered { get; set; }
+    ```
+
+---
+
 ## Static Methods
 
 ### `load` / `Load`

@@ -6,12 +6,12 @@ On Android, your game will be automatically paused when a full-screen ad is show
 
 On iOS, the default value is `false`.
 
-# Prerequisites
+## Prerequisites
 
 - Complete the [Get started guide](index.md)
 - Use Godot v4.2 or higher
 
-# How to use
+## How to use
 You can use this whenever you want this method, before, during, or after the initialization, such as:
 
 === "GDScript"

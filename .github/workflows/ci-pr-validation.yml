@@ -72,8 +72,8 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v4
       with:
-        name: poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
-        path: platforms/android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip
+        name: android-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        path: platforms/android/.output/android-template-v${{ needs.detect-latest.outputs.godot_version }}.zip
         retention-days: 14
 
   build-ios:
@@ -123,7 +123,7 @@ jobs:
     - name: Upload artifact
       uses: actions/upload-artifact@v6
       with:
-        name: poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        name: ios-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/ios/bin/release/*.zip
         if-no-files-found: ignore
         retention-days: 14
@@ -182,14 +182,14 @@ jobs:
     - name: Download Android Plugin Binaries
       uses: actions/download-artifact@v4
       with:
-        name: poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        name: android-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/android/.output/
 
     - name: Extract Plugin Binaries to Addon
       working-directory: platforms/godot_editor
       run: |
         mkdir -p addons/admob/android/bin
-        unzip -o ../android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/android/bin/
+        unzip -o ../android/.output/android-template-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/android/bin/
 
     - name: Set Android SDK Path for Godot
       run: |
@@ -348,14 +348,14 @@ jobs:
     - name: Download Android Plugin Binaries
       uses: actions/download-artifact@v4
       with:
-        name: poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        name: android-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/android/.output/
 
     - name: Extract Plugin Binaries to Addon
       working-directory: platforms/godot_editor
       run: |
         mkdir -p addons/admob/android/bin
-        unzip -o ../android/.output/poing-godot-admob-android-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/android/bin/
+        unzip -o ../android/.output/android-template-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/android/bin/
 
     - name: Set Android SDK Path for Godot
       run: |
@@ -496,14 +496,14 @@ jobs:
     - name: Download iOS Plugin Binaries
       uses: actions/download-artifact@v4
       with:
-        name: poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        name: ios-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/ios/bin/release
 
     - name: Extract and Prepare Plugin
       working-directory: platforms/godot_editor
       run: |
         mkdir -p addons/admob/ios/bin
-        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/ios/bin/
+        unzip -o ../ios/bin/release/ios-template-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/ios/bin/
 
     - name: Generate Export Presets
       working-directory: platforms/godot_editor
@@ -655,14 +655,14 @@ jobs:
     - name: Download iOS Plugin Binaries
       uses: actions/download-artifact@v4
       with:
-        name: poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
+        name: ios-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/ios/bin/release
 
     - name: Extract and Prepare Plugin
       working-directory: platforms/godot_editor
       run: |
         mkdir -p addons/admob/ios/bin
-        unzip -o ../ios/bin/release/poing-godot-admob-ios-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/ios/bin/
+        unzip -o ../ios/bin/release/ios-template-v${{ needs.detect-latest.outputs.godot_version }}.zip -d addons/admob/ios/bin/
 
     - name: Generate Export Presets
       working-directory: platforms/godot_editor

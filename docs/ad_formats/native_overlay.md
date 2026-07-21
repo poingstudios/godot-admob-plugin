@@ -210,6 +210,36 @@ To handle user interactions, you can use the `ad_listener` property of the [`Nat
     }
     ```
 
+### React to template rendering
+
+The actual size of the rendered template is only known after the underlying native view (or mock preview in the editor) has been laid out on screen. To avoid querying [`get_template_height_in_pixels()`](../reference/classes/NativeOverlayAd.md#get_template_height_in_pixels_gettemplateheightinpixels) too early and receiving stale dimensions, subscribe to the [`on_template_rendered`](../reference/classes/NativeOverlayAd.md#on_template_rendered_ontemplaterendered) callback, which fires once the template has completed its first layout pass.
+
+This is the recommended hook for adjusting your UI (for example, updating a `SafeArea` to keep content from being covered by the ad).
+
+=== "GDScript"
+
+    ```gdscript linenums="1"
+    func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
+        # ... load check and render_template() call ...
+
+        ad.on_template_rendered = func() -> void:
+            print("Template rendered, height = ", ad.get_template_height_in_pixels())
+    ```
+
+=== "C#"
+
+    ```csharp linenums="1"
+    private void OnAdLoadFinished(NativeOverlayAd ad, LoadAdError error)
+    {
+        // ... load check and RenderTemplate() call ...
+
+        ad.OnTemplateRendered = () =>
+        {
+            GD.Print("Template rendered, height = " + ad.GetTemplateHeightInPixels());
+        };
+    }
+    ```
+
 ### Show/Hide and Destroy
 
 Once rendered, you can control the visibility of the ad or destroy it completely to free resources.

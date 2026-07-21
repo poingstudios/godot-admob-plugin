@@ -53,6 +53,7 @@ The mock system simulates the visual appearance and interactions for each major 
 ### Native Overlay
 - Renders template-styled mock Native Ads (supporting both `small` and `medium` layouts) using Godot Control nodes.
 - Shows mock assets like app icons, titles, call-to-action buttons, and body texts.
+- Emits the `on_native_overlay_ad_rendered` signal once the mock template is positioned, mirroring the real device behavior so you can safely adjust UI (`SafeArea`, etc.) only after the ad is fully laid out.
 
 ![Mock Native Ad](assets/mock_ad_native.png)
 

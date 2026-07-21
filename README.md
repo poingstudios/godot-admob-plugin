@@ -1,64 +1,88 @@
 <div align="center">
   <h1>
-    <img src="https://i.imgur.com/T3Beai0.png" width="40" style="vertical-align: middle;"> Godot AdMob Plugin
+    <img src="https://i.imgur.com/T3Beai0.png" width="42" style="vertical-align: middle;"> Godot AdMob Plugin
   </h1>
 
-  [![VersionBadge]][Releases] [![StarsBadge]][Stargazers] [![DiscordBadge]][DiscordLink] [![LicenseBadge]][LicenseLink] <br>
+  [![VersionBadge]][Releases] [![GodotBadge]][AssetStore] [![StarsBadge]][Stargazers] [![DiscordBadge]][DiscordLink] [![LicenseBadge]][LicenseLink] <br>
   [![DownloadsBadge]][Releases] [![AssetStoreBadge]][AssetStore] <br>
   [![AndroidBadge]][AndroidPlatform] [![iOSBadge]][iOSPlatform] [![GDScriptBadge]][Examples] [![CSharpBadge]][Examples]
 
-  **The complete solution for AdMob integration in Godot using GDScript or C#.**  
-  Supports [Android][AndroidPlatform] and [iOS][iOSPlatform] natively.
+
+  **The complete solution for Google AdMob integration in Godot using GDScript or C#.**  
 
   ![Plugin Usage](docs/assets/usage.webp)
 
   [🎬 Watch Video Tutorial](https://youtu.be/TB7WhP8mieo) • [📖 Read Documentation][DocumentationLink]
 
   ---
-
-  [📦 Installation](#-installation) • [📋 Examples](#-examples) • [🙏 Support](#-support)
+[📦 Installation](#-installation) • [🎨 Ad Formats](#-ad-formats) • [📋 Examples](#-examples) • [🙏 Support](#-support)
 
 </div>
 
+---
+
+## ✨ Key Features
+
+- **Google SDK Experience**: Designed to mirror the official Google Mobile Ads SDK structure, APIs, and documentation.
+- **Godot 4.2.0+**: Native support for Android and iOS with full 1:1 GDScript and C# parity.
+- **All Formats & Mediations**: Out-of-the-box support for all Google ad formats and mediation adapters.
+- **Editor Mock Ads**: Test and preview ad layouts directly inside the Godot Editor.
+- **AI-Agent Ready**: Optimized to work with AI coding assistants for automated configuration.
+
+---
+
 ## 📦 Installation
 
-### 📥 Godot Asset Store (recommended)
+### 📥 Godot Asset Store (Recommended)
 
-1. Find the [AdMob plugin](https://store.godotengine.org/asset/poingstudios/admob/) by `Poing Studios` \
+1. Open your Godot project.
+2. Go to the **AssetLib** tab and search for `AdMob` by `Poing Studios`. \
    <img height=120 src="docs/assets/asset_store.png">
-2. Click **Download** and **Install**.
+3. Click **Download** and **Install**.
 
 <details>
-<summary><b>Manual installation for custom versions</b></summary>
+<summary><b>Manual Installation (Custom Releases)</b></summary>
 
-1. Pick a [specific version](https://github.com/poingstudios/godot-admob-plugin/releases) from tags.
-2. Download the `poing-godot-admob-v*.zip` file from the assets.
-3. Extract the ZIP file in the root of your project.
+1. Download the latest `poing-godot-admob-v*.zip` from the [Releases][Releases] page.
+2. Extract the ZIP archive directly into your project's root folder (`res://`).
 
 </details>
 
-### ⚙️ Post-installation
+### ⚙️ Post-Installation Setup
 
 1. Enable the plugin in `Project → Project Settings → Plugins`.
-2. **Setup Platform Dependencies**:
-    - **Android**: Follow the [Android Setup Guide][AndroidPlatform].
-    - **iOS**: Follow the [iOS Setup Guide][iOSPlatform].
+2. Configure the required native dependencies for your target platforms:
+    - **Android Setup**: Follow the [Android Platform Guide][AndroidPlatform].
+    - **iOS Setup**: Follow the [iOS Platform Guide][iOSPlatform].
 
 > [!TIP]
-> If the automatic download fails, you can manually trigger it via `Project → Tools → AdMob Manager → (Android/iOS) → Download & Install`.
+> If automated package downloads fail, or when updating your Godot Engine version, trigger them manually in the editor via `Project → Tools → AdMob Manager → (Android/iOS) → Download & Install`.
 
-## 🙋‍♂️ How to use
-After installation, the `MobileAds` singleton becomes available in any script.
+---
+
+## 🎨 Showcase
+
+| Banner | Collapsible Banner | Interstitial | Native |
+| :---: | :---: | :---: | :---: |
+| <img src=".github/static/banner.webp" width="160" alt="Banner Ad"> | <img src=".github/static/banner_collapsive.webp" width="160" alt="Collapsible Banner Ad"> | <img src=".github/static/interstitial.webp" width="160" alt="Interstitial Ad"> | <img src=".github/static/native_small.webp" width="160" alt="Native Small Ad"> |
+| **Native Video** | **Rewarded** | **UMP Consent** | **Ad Inspector** |
+| <img src=".github/static/native_video.webp" width="160" alt="Native Video Ad"> | <img src=".github/static/rewarded_interstitial.webp" width="160" alt="Rewarded Ad"> | <img src=".github/static/ump.webp" width="160" alt="UMP Consent"> | <img src=".github/static/ad_inspector.webp" width="160" alt="Ad Inspector"> |
+
+---
+
+## 🙋‍♂️ How to Use
+After installation, the `MobileAds` singleton becomes globally available in any script.
 
 ## 📋 Examples
 
-## 🏁Initialize AdMob
+### 🏁 Initialize AdMob
+Must be called once during game startup before requesting any ads.
+
 <details>
 <summary>GDScript</summary>
 
 ```gdscript
 func _ready() -> void:
-	#just need to call once
 	MobileAds.initialize()
 ```
 
@@ -72,46 +96,33 @@ using PoingStudios.AdMob.Api;
 
 public override void _Ready()
 {
-	//just need to call once
 	MobileAds.Initialize();
 }
 ```
 
 </details>
 
-## 📱App Open Ads
+### 📱 App Open Ads
+Designed to be shown when users cold-start or return to your game.
+
 <details>
 <summary>GDScript</summary>
 
-### Load
 ```gdscript
 var app_open_ad : AppOpenAd
 var app_open_ad_load_callback := AppOpenAdLoadCallback.new()
 
-func _ready():
-	app_open_ad_load_callback.on_ad_failed_to_load = on_app_open_ad_failed_to_load
-	app_open_ad_load_callback.on_ad_loaded = on_app_open_ad_loaded
+func _ready() -> void:
+	app_open_ad_load_callback.on_ad_failed_to_load = func(ad_error: LoadAdError):
+		print("Load failed: ", ad_error.message)
+	app_open_ad_load_callback.on_ad_loaded = func(ad: AppOpenAd):
+		app_open_ad = ad
 
-# button signal on scene
 func _on_load_app_open_pressed() -> void:
-	var unit_id : String
-	if OS.get_name() == "Android":
-		unit_id = "ca-app-pub-3940256099942544/9257395921"
-		unit_id = "ca-app-pub-3940256099942544/5575463023"
-	
+	var unit_id := "ca-app-pub-3940256099942544/9257395921" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/5575463023"
 	AppOpenAdLoader.new().load(unit_id, AdRequest.new(), app_open_ad_load_callback)
 
-func on_app_open_ad_failed_to_load(adError : LoadAdError) -> void:
-	print(adError.message)
-	
-func on_app_open_ad_loaded(app_open_ad : AppOpenAd) -> void:
-	self.app_open_ad = app_open_ad
-```
-
-### Show
-```gdscript
-# button signal on scene
-func _on_show_pressed():
+func _on_show_pressed() -> void:
 	if app_open_ad:
 		app_open_ad.show()
 ```
@@ -121,7 +132,6 @@ func _on_show_pressed():
 <details>
 <summary>C#</summary>
 
-### Load
 ```csharp
 using Godot;
 using PoingStudios.AdMob.Api;
@@ -130,18 +140,9 @@ using PoingStudios.AdMob.Api.Listeners;
 
 private AppOpenAd _appOpenAd;
 
-// button signal on scene
 private void OnLoadAppOpenPressed()
 {
-	string unitId = "";
-	if (OS.GetName() == "Android")
-	{
-		unitId = "ca-app-pub-3940256099942544/9257395921";
-	}
-	else if (OS.GetName() == "iOS")
-	{
-		unitId = "ca-app-pub-3940256099942544/5575463023";
-	}
+	string unitId = OS.GetName() == "Android" ? "ca-app-pub-3940256099942544/9257395921" : "ca-app-pub-3940256099942544/5575463023";
 	
 	new AppOpenAdLoader().Load(unitId, new AdRequest(), new AppOpenAdLoadCallback
 	{
@@ -149,11 +150,7 @@ private void OnLoadAppOpenPressed()
 		OnAdFailedToLoad = err => GD.Print(err.Message)
 	});
 }
-```
 
-### Show
-```csharp
-// button signal on scene
 private void OnShowPressed()
 {
 	if (_appOpenAd != null)
@@ -165,22 +162,18 @@ private void OnShowPressed()
 
 </details>
 
-## 🎏Banner Ads
+### 🎏 Banner Ads
+Rectangular ads occupying a portion of the screen layout (supports standard and collapsible formats).
 
 <details>
 <summary>GDScript</summary>
 
-### Load (will automatically show)
 ```gdscript
-# button signal on scene
-func _on_load_banner_pressed() -> void:
-	var unit_id : String
-	if OS.get_name() == "Android":
-		unit_id = "ca-app-pub-3940256099942544/6300978111"
-	elif OS.get_name() == "iOS":
-		unit_id = "ca-app-pub-3940256099942544/2934735716"
+var ad_view: AdView
 
-	var ad_view := AdView.new(unit_id, AdSize.BANNER, AdPosition.Values.TOP)
+func _on_load_banner_pressed() -> void:
+	var unit_id := "ca-app-pub-3940256099942544/6300978111" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/2934735716"
+	ad_view = AdView.new(unit_id, AdSize.BANNER, AdPosition.TOP)
 	ad_view.load_ad(AdRequest.new())
 ```
 
@@ -189,65 +182,44 @@ func _on_load_banner_pressed() -> void:
 <details>
 <summary>C#</summary>
 
-### Load (will automatically show)
 ```csharp
 using Godot;
 using PoingStudios.AdMob.Api;
 using PoingStudios.AdMob.Api.Core;
 
-// button signal on scene
+private AdView _adView;
+
 private void OnLoadBannerPressed()
 {
-	string unitId = "";
-	if (OS.GetName() == "Android")
-	{
-		unitId = "ca-app-pub-3940256099942544/6300978111";
-	}
-	else if (OS.GetName() == "iOS")
-	{
-		unitId = "ca-app-pub-3940256099942544/2934735716";
-	}
-
-	var adView = new AdView(unitId, AdSize.Banner, AdPosition.Top);
-	adView.LoadAd(new AdRequest());
+	string unitId = OS.GetName() == "Android" ? "ca-app-pub-3940256099942544/6300978111" : "ca-app-pub-3940256099942544/2934735716";
+	_adView = new AdView(unitId, AdSize.Banner, AdPosition.Top);
+	_adView.LoadAd(new AdRequest());
 }
 ```
 
 </details>
 
-## 📺Interstitial Ads
+### 📺 Interstitial Ads
+Full-screen ads covering the interface until dismissed by the user.
+
 <details>
 <summary>GDScript</summary>
 
-### Load
 ```gdscript
 var interstitial_ad : InterstitialAd
-var interstitial_ad_load_callback := InterstitialAdLoadCallback.new()
-func _ready():
-	interstitial_ad_load_callback.on_ad_failed_to_load = on_interstitial_ad_failed_to_load
-	interstitial_ad_load_callback.on_ad_loaded = on_interstitial_ad_loaded
+var load_callback := InterstitialAdLoadCallback.new()
 
-# button signal on scene
+func _ready() -> void:
+	load_callback.on_ad_failed_to_load = func(error: LoadAdError):
+		print("Load failed: ", error.message)
+	load_callback.on_ad_loaded = func(ad: InterstitialAd):
+		interstitial_ad = ad
+
 func _on_load_interstitial_pressed() -> void:
-	var unit_id : String
-	if OS.get_name() == "Android":
-		unit_id = "ca-app-pub-3940256099942544/1033173712"
-	elif OS.get_name() == "iOS":
-		unit_id = "ca-app-pub-3940256099942544/4411468910"
+	var unit_id := "ca-app-pub-3940256099942544/1033173712" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/4411468910"
+	InterstitialAdLoader.new().load(unit_id, AdRequest.new(), load_callback)
 
-	InterstitialAdLoader.new().load(unit_id, AdRequest.new(), interstitial_ad_load_callback)
-
-func on_interstitial_ad_failed_to_load(adError : LoadAdError) -> void:
-	print(adError.message)
-
-func on_interstitial_ad_loaded(interstitial_ad : InterstitialAd) -> void:
-	self.interstitial_ad = interstitial_ad
-```
-
-### Show
-```gdscript
-# button signal on scene
-func _on_show_pressed():
+func _on_show_pressed() -> void:
 	if interstitial_ad:
 		interstitial_ad.show()
 ```
@@ -257,7 +229,6 @@ func _on_show_pressed():
 <details>
 <summary>C#</summary>
 
-### Load
 ```csharp
 using Godot;
 using PoingStudios.AdMob.Api;
@@ -266,18 +237,9 @@ using PoingStudios.AdMob.Api.Listeners;
 
 private InterstitialAd _interstitialAd;
 
-// button signal on scene
 private void OnLoadInterstitialPressed()
 {
-	string unitId = "";
-	if (OS.GetName() == "Android")
-	{
-		unitId = "ca-app-pub-3940256099942544/1033173712";
-	}
-	else if (OS.GetName() == "iOS")
-	{
-		unitId = "ca-app-pub-3940256099942544/4411468910";
-	}
+	string unitId = OS.GetName() == "Android" ? "ca-app-pub-3940256099942544/1033173712" : "ca-app-pub-3940256099942544/4411468910";
 	
 	new InterstitialAdLoader().Load(unitId, new AdRequest(), new InterstitialAdLoadCallback
 	{
@@ -285,11 +247,7 @@ private void OnLoadInterstitialPressed()
 		OnAdFailedToLoad = err => GD.Print(err.Message)
 	});
 }
-```
 
-### Show
-```csharp
-// button signal on scene
 private void OnShowPressed()
 {
 	if (_interstitialAd != null)
@@ -301,34 +259,26 @@ private void OnShowPressed()
 
 </details>
 
-## 🖼️Native Overlay Ads
+### 🖼️ Native Overlay Ads
+Highly customizable native layout format supporting small templates and native video playback.
+
 <details>
 <summary>GDScript</summary>
 
-### Load
 ```gdscript
 var native_overlay_ad: NativeOverlayAd
 
-# button signal on scene
 func _on_load_native_pressed() -> void:
 	var unit_id := "ca-app-pub-3940256099942544/2247696110" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/3986624511"
 	
-	var ad_request := AdRequest.new()
-	var options := NativeAdOptions.new()
+	NativeOverlayAd.load(unit_id, AdRequest.new(), NativeAdOptions.new(), func(ad: NativeOverlayAd, error: LoadAdError):
+		if error:
+			print("Native ad failed to load: ", error.message)
+			return
+		native_overlay_ad = ad
+		_render_native_ad()
+	)
 
-	NativeOverlayAd.load(unit_id, ad_request, options, _on_ad_load_finished)
-
-func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
-	if error:
-		print("Native ad failed to load: ", error.message)
-		return
-	
-	native_overlay_ad = ad
-	_render_native_ad()
-```
-
-### Render
-```gdscript
 func _render_native_ad() -> void:
 	var style := NativeTemplateStyle.new()
 	style.template_id = NativeTemplateStyle.MEDIUM
@@ -340,7 +290,6 @@ func _render_native_ad() -> void:
 <details>
 <summary>C#</summary>
 
-### Load
 ```csharp
 using Godot;
 using PoingStudios.AdMob.Api;
@@ -348,34 +297,21 @@ using PoingStudios.AdMob.Api.Core;
 
 private NativeOverlayAd _nativeOverlayAd;
 
-// button signal on scene
 private void OnLoadNativePressed()
 {
-	string unitId = OS.GetName() == "Android" 
-		? "ca-app-pub-3940256099942544/2247696110" 
-		: "ca-app-pub-3940256099942544/3986624511";
+	string unitId = OS.GetName() == "Android" ? "ca-app-pub-3940256099942544/2247696110" : "ca-app-pub-3940256099942544/3986624511";
 
-	var adRequest = new AdRequest();
-	var options = new NativeAdOptions();
-
-	NativeOverlayAd.Load(unitId, adRequest, options, OnAdLoadFinished);
+	NativeOverlayAd.Load(unitId, new AdRequest(), new NativeAdOptions(), (ad, error) => {
+		if (error != null)
+		{
+			GD.Print("Native ad failed to load: " + error.Message);
+			return;
+		}
+		_nativeOverlayAd = ad;
+		RenderNativeAd();
+	});
 }
 
-private void OnAdLoadFinished(NativeOverlayAd ad, LoadAdError error)
-{
-	if (error != null)
-	{
-		GD.Print("Native ad failed to load: " + error.Message);
-		return;
-	}
-
-	_nativeOverlayAd = ad;
-	RenderNativeAd();
-}
-```
-
-### Render
-```csharp
 private void RenderNativeAd()
 {
 	var style = new NativeTemplateStyle();
@@ -386,41 +322,27 @@ private void RenderNativeAd()
 
 </details>
 
-## 🎁Rewarded Ads
+### 🎁 Rewarded Ads
+Allows you to give users in-game rewards for watching videos or interacting with ads.
 
 <details>
 <summary>GDScript</summary>
 
-### Load
 ```gdscript
 var rewarded_ad : RewardedAd
-var rewarded_ad_load_callback := RewardedAdLoadCallback.new()
+var load_callback := RewardedAdLoadCallback.new()
 
-func _ready():
-	rewarded_ad_load_callback.on_ad_failed_to_load = on_rewarded_ad_failed_to_load
-	rewarded_ad_load_callback.on_ad_loaded = on_rewarded_ad_loaded
+func _ready() -> void:
+	load_callback.on_ad_failed_to_load = func(error: LoadAdError):
+		print("Load failed: ", error.message)
+	load_callback.on_ad_loaded = func(ad: RewardedAd):
+		rewarded_ad = ad
 
-# button signal on scene
 func _on_load_rewarded_pressed() -> void:
-	var unit_id : String
-	if OS.get_name() == "Android":
-		unit_id = "ca-app-pub-3940256099942544/5224354917"
-	elif OS.get_name() == "iOS":
-		unit_id = "ca-app-pub-3940256099942544/1712485313"
+	var unit_id := "ca-app-pub-3940256099942544/5224354917" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/1712485313"
+	RewardedAdLoader.new().load(unit_id, AdRequest.new(), load_callback)
 
-	RewardedAdLoader.new().load(unit_id, AdRequest.new(), rewarded_ad_load_callback)
-
-func on_rewarded_ad_failed_to_load(adError : LoadAdError) -> void:
-	print(adError.message)
-	
-func on_rewarded_ad_loaded(rewarded_ad : RewardedAd) -> void:
-	self.rewarded_ad = rewarded_ad
-```
-
-### Show
-```gdscript
-# button signal on scene
-func _on_show_pressed():
+func _on_show_pressed() -> void:
 	if rewarded_ad:
 		rewarded_ad.show()
 ```
@@ -430,7 +352,6 @@ func _on_show_pressed():
 <details>
 <summary>C#</summary>
 
-### Load
 ```csharp
 using Godot;
 using PoingStudios.AdMob.Api;
@@ -439,18 +360,9 @@ using PoingStudios.AdMob.Api.Listeners;
 
 private RewardedAd _rewardedAd;
 
-// button signal on scene
 private void OnLoadRewardedPressed()
 {
-	string unitId = "";
-	if (OS.GetName() == "Android")
-	{
-		unitId = "ca-app-pub-3940256099942544/5224354917";
-	}
-	else if (OS.GetName() == "iOS")
-	{
-		unitId = "ca-app-pub-3940256099942544/1712485313";
-	}
+	string unitId = OS.GetName() == "Android" ? "ca-app-pub-3940256099942544/5224354917" : "ca-app-pub-3940256099942544/1712485313";
 
 	new RewardedAdLoader().Load(unitId, new AdRequest(), new RewardedAdLoadCallback
 	{
@@ -458,11 +370,7 @@ private void OnLoadRewardedPressed()
 		OnAdFailedToLoad = err => GD.Print(err.Message)
 	});
 }
-```
 
-### Show
-```csharp
-// button signal on scene
 private void OnShowPressed()
 {
 	if (_rewardedAd != null)
@@ -477,42 +385,31 @@ private void OnShowPressed()
 
 </details>
 
-## 🎁📺Rewarded Interstitial Ads
+### 🎁📺 Rewarded Interstitial Ads
+Shows rewarded ads automatically during game transitions without requiring the user to opt-in.
+
 <details>
 <summary>GDScript</summary>
 
-### Load
 ```gdscript
 var rewarded_interstitial_ad : RewardedInterstitialAd
-var rewarded_interstitial_ad_load_callback := RewardedInterstitialAdLoadCallback.new()
+var load_callback := RewardedInterstitialAdLoadCallback.new()
 
-func _ready():
-	rewarded_interstitial_ad_load_callback.on_ad_failed_to_load = on_rewarded_interstitial_ad_failed_to_load
-	rewarded_interstitial_ad_load_callback.on_ad_loaded = on_rewarded_interstitial_ad_loaded
+func _ready() -> void:
+	load_callback.on_ad_failed_to_load = func(error: LoadAdError):
+		print("Load failed: ", error.message)
+	load_callback.on_ad_loaded = func(ad: RewardedInterstitialAd):
+		rewarded_interstitial_ad = ad
 
-# button signal on scene
 func _on_load_rewarded_interstitial_pressed() -> void:
-	var unit_id : String
-	if OS.get_name() == "Android":
-		unit_id = "ca-app-pub-3940256099942544/5354046379"
-	elif OS.get_name() == "iOS":
-		unit_id = "ca-app-pub-3940256099942544/6978759866"
-	
-	RewardedInterstitialAdLoader.new().load(unit_id, AdRequest.new(), rewarded_interstitial_ad_load_callback)
+	var unit_id := "ca-app-pub-3940256099942544/5354046379" if OS.get_name() == "Android" else "ca-app-pub-3940256099942544/6978759866"
+	RewardedInterstitialAdLoader.new().load(unit_id, AdRequest.new(), load_callback)
 
-func on_rewarded_interstitial_ad_failed_to_load(adError : LoadAdError) -> void:
-	print(adError.message)
-	
-func on_rewarded_interstitial_ad_loaded(rewarded_interstitial_ad : RewardedInterstitialAd) -> void:
-	self.rewarded_interstitial_ad = rewarded_interstitial_ad
-```
-
-### Show
-```gdscript
-# button signal on scene
-func _on_show_pressed():
+func _on_show_pressed() -> void:
 	if rewarded_interstitial_ad:
-		rewarded_interstitial_ad.show(on_user_earned_reward_listener)
+		rewarded_interstitial_ad.show(OnUserEarnedRewardListener.new(func(reward: RewardItem):
+			print("User rewarded: ", reward.amount, " ", reward.type)
+		))
 ```
 
 </details>
@@ -520,7 +417,6 @@ func _on_show_pressed():
 <details>
 <summary>C#</summary>
 
-### Load
 ```csharp
 using Godot;
 using PoingStudios.AdMob.Api;
@@ -529,18 +425,9 @@ using PoingStudios.AdMob.Api.Listeners;
 
 private RewardedInterstitialAd _rewardedInterstitialAd;
 
-// button signal on scene
 private void OnLoadRewardedInterstitialPressed()
 {
-	string unitId = "";
-	if (OS.GetName() == "Android")
-	{
-		unitId = "ca-app-pub-3940256099942544/5354046379";
-	}
-	else if (OS.GetName() == "iOS")
-	{
-		unitId = "ca-app-pub-3940256099942544/6978759866";
-	}
+	string unitId = OS.GetName() == "Android" ? "ca-app-pub-3940256099942544/5354046379" : "ca-app-pub-3940256099942544/6978759866";
 	
 	new RewardedInterstitialAdLoader().Load(unitId, new AdRequest(), new RewardedInterstitialAdLoadCallback
 	{
@@ -548,11 +435,7 @@ private void OnLoadRewardedInterstitialPressed()
 		OnAdFailedToLoad = err => GD.Print(err.Message)
 	});
 }
-```
 
-### Show
-```csharp
-// button signal on scene
 private void OnShowPressed()
 {
 	if (_rewardedInterstitialAd != null)
@@ -567,41 +450,128 @@ private void OnShowPressed()
 
 </details>
 
-## 📎 Useful links
+---
+
+## 🔒 Privacy & Debugging Tools
+
+### 🌐 User Messaging Platform (UMP)
+Request user consent for personalized ads under regulations like GDPR, COPPA, and CCPA.
+
+<details>
+<summary>GDScript</summary>
+
+```gdscript
+func request_user_consent() -> void:
+	var params := ConsentRequestParameters.new()
+	ConsentInformation.request_consent_info_update(params, OnConsentInfoUpdateListener.new(
+		func():
+			if ConsentInformation.is_consent_form_available():
+				ConsentForm.load_and_show_consent_form_if_required(OnConsentFormDismissedListener.new(
+					func(error: FormError):
+						if error:
+							print("Consent form error: ", error.message)
+				)),
+		func(error: FormError):
+			print("Consent info update error: ", error.message)
+	))
+```
+
+</details>
+
+<details>
+<summary>C#</summary>
+
+```csharp
+using PoingStudios.AdMob.Api.Ump;
+using PoingStudios.AdMob.Api.Ump.Listeners;
+
+public void RequestUserConsent()
+{
+	var params = new ConsentRequestParameters();
+	UserMessagingPlatform.ConsentInformation.RequestConsentInfoUpdate(params, new OnConsentInfoUpdateListener
+	{
+		OnConsentInfoUpdateSuccess = () =>
+		{
+			if (UserMessagingPlatform.ConsentInformation.IsConsentFormAvailable())
+			{
+				UserMessagingPlatform.ConsentForm.LoadAndShowConsentFormIfRequired(new OnConsentFormDismissedListener
+				{
+					OnConsentFormDismissed = error =>
+					{
+						if (error != null)
+						{
+							GD.Print("Consent form error: " + error.Message);
+						}
+					}
+				});
+			}
+		},
+		OnConsentInfoUpdateFailure = error => GD.Print("Consent info update error: " + error.Message)
+	});
+}
+```
+
+</details>
+
+### 🔍 Ad Inspector
+Google's diagnostic overlay to verify ad unit configurations, adapter statuses, and real-time ad delivery.
+
+<details>
+<summary>GDScript</summary>
+
+```gdscript
+func open_diagnostics() -> void:
+	MobileAds.open_ad_inspector()
+```
+
+</details>
+
+<details>
+<summary>C#</summary>
+
+```csharp
+using PoingStudios.AdMob.Api;
+
+public void OpenDiagnostics()
+{
+	MobileAds.OpenAdInspector();
+}
+```
+
+</details>
+
+---
+
+## 📎 Useful Links
 
 - 🍎 [iOS Platform Setup][iOSPlatform]
 - 🤖 [Android Platform Setup][AndroidPlatform]
-- ⏳ [Godot 3 Support](https://github.com/poingstudios/godot-admob-plugin/tree/v1)
+- ⏳ [Godot 3 Support (Legacy branch)](https://github.com/poingstudios/godot-admob-plugin/tree/v1)
 
 ## 📄 Documentation
 
-For complete documentation including mediation setup: **[Official Documentation][DocumentationLink]**.
+For complete documentation including third-party mediation networks setup: **[Official Documentation][DocumentationLink]**.
 
-Alternatively, check AdMob's original docs for [Android](https://developers.google.com/admob/android/quick-start) or [iOS](https://developers.google.com/admob/ios/quick-start).
+Alternatively, check AdMob's official SDK references for [Android](https://developers.google.com/admob/android/quick-start) and [iOS](https://developers.google.com/admob/ios/quick-start).
 
 ## 🙏 Support
 
-If you find our work valuable and would like to support us, consider contributing via these platforms:
+If you find our work valuable and would like to support ongoing development, consider contributing:
 
-[![PatreonBadge]][PatreonLink]
+[![PatreonBadge]][PatreonLink] [![KofiBadge]][KofiLink] [![PaypalBadge]][PaypalLink]
 
-[![KofiBadge]][KofiLink]
-
-[![PaypalBadge]][PaypalLink]
-
-Your support helps us continue to improve and maintain this plugin. Thank you for being a part of our community!
-
-## 🆘 Getting help
+## 🆘 Getting Help
 
 [![DiscussionsBadge]][DiscussionsLink] [![DiscordHelpBadge]][DiscordLink]
 
-
+---
 
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/chart?repos=poingstudios/godot-admob-plugin&type=date&legend=top-left&sealed_token=ATUzb1mXlOQI3jnGm7Rpn_8YkMDh9y4DoyF-IOZ97Uw0oaShFtR9I5Srrxhrf_jaMaqgO5YKfVp9-UyqlLamx_epOX88rpSpr3g9utgVLd7xThQRsYWhJHM2lWd6WUg-wjEDVgZ7xpRrkzPHC4rGbTeXRrnvmPMagKmVDcL5_gX300ftiun-vv5iarNh)](https://www.star-history.com/?repos=poingstudios%2Fgodot-admob-plugin&type=date&legend=top-left)
 
 [VersionBadge]: https://badgen.net/github/release/poingstudios/godot-admob-plugin/latest
+[GodotBadge]: https://badgen.net/badge/Godot/4.2.0+/478CBF?icon=godotengine
 [StarsBadge]: https://badgen.net/github/stars/poingstudios/godot-admob-plugin
 [DiscordBadge]: https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord
 [LicenseBadge]: https://badgen.net/github/license/poingstudios/godot-admob-plugin?label=License

@@ -47,6 +47,7 @@ Abaixo estão os blocos de anúncios de exemplo para cada formato disponível ta
     | [Banner Adaptativo Ancorado](ad_formats/banner/get_started.md)| ca-app-pub-3940256099942544/9214589741 |
     | [Banner Adaptativo Inline](ad_formats/banner/get_started.md)  | ca-app-pub-3940256099942544/9214589741 |
     | [Banner de Tamanho Fixo](ad_formats/banner/get_started.md)    | ca-app-pub-3940256099942544/6300978111 |
+    | [Banner Retrátil (Collapsible)](ad_formats/banner/get_started.md)    | ca-app-pub-3940256099942544/2014213617 |
     | [Intersticial](ad_formats/interstitial.md)              | ca-app-pub-3940256099942544/1033173712 |
     | [Premiado (Rewarded Ads)](ad_formats/rewarded.md)   | ca-app-pub-3940256099942544/5224354917 |
     | [Intersticial Premiado](ad_formats/rewarded_interstitial.md)     | ca-app-pub-3940256099942544/5354046379 |
@@ -61,18 +62,12 @@ Abaixo estão os blocos de anúncios de exemplo para cada formato disponível ta
     | [Banner Adaptativo Ancorado](ad_formats/banner/get_started.md)| ca-app-pub-3940256099942544/2435281174 |
     | [Banner Adaptativo Inline](ad_formats/banner/get_started.md)  | ca-app-pub-3940256099942544/2435281174 |
     | [Banner de Tamanho Fixo](ad_formats/banner/get_started.md)    | ca-app-pub-3940256099942544/2934735716 |
+    | [Banner Retrátil (Collapsible)](ad_formats/banner/get_started.md)    | ca-app-pub-3940256099942544/8388050270 |
     | [Intersticial](ad_formats/interstitial.md)              | ca-app-pub-3940256099942544/4411468910 |
     | [Premiado (Rewarded Ads)](ad_formats/rewarded.md)   | ca-app-pub-3940256099942544/1712485313 |
     | [Intersticial Premiado](ad_formats/rewarded_interstitial.md)     | ca-app-pub-3940256099942544/6978759866 |
     | [Nativo](ad_formats/native_overlay.md)                    | ca-app-pub-3940256099942544/3986624511 |
     | [Vídeo Nativo](ad_formats/native_video.md)              | ca-app-pub-3940256099942544/2521693316 |
-
-### Identificadores de Teste Especializados
-Embora os blocos de anúncios padrão acima possam ser usados adicionando parâmetros extras (como `collapsible`), os seguintes IDs de blocos de anúncios especializados **garantem** que recursos específicos sejam retornados para testar sua interface/experiência de usuário:
-
-| Recurso | Android | iOS |
-| :--- | :--- | :--- |
-| **Banners Retráteis (Collapsible)** | `ca-app-pub-3940256099942544/2014213617` | `ca-app-pub-3940256099942544/8388050270` |
 
 ## Ativar dispositivos de teste {: #ativar-dispositivos-de-teste }
 Para realizar testes mais detalhados com anúncios parecidos com os de produção, você pode configurar seu dispositivo físico como um dispositivo de teste e utilizar os seus próprios IDs de blocos de anúncios criados no painel do AdMob. Você pode adicionar dispositivos de teste através do painel do AdMob ou de forma programática usando o Google Mobile Ads SDK.

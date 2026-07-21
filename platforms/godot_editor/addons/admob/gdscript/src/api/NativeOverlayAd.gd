@@ -27,6 +27,7 @@ static var _plugin = _get_plugin("PoingGodotAdMobNativeOverlayAd")
 
 var ad_listener := AdListener.new()
 var on_ad_paid: Callable = func(_ad_value: AdValue): pass
+var on_template_rendered: Callable = func(): pass
 var _uid: int
 var _ad_load_callback: Callable
 var _media_content: MediaContent
@@ -45,6 +46,7 @@ func _init(uid: int) -> void:
 		safe_connect(_plugin, "on_native_overlay_ad_video_pause", _on_video_pause)
 		safe_connect(_plugin, "on_native_overlay_ad_video_end", _on_video_end)
 		safe_connect(_plugin, "on_native_overlay_ad_video_mute", _on_video_mute)
+		safe_connect(_plugin, "on_native_overlay_ad_rendered", _on_template_rendered)
 
 
 func get_media_content() -> MediaContent:
@@ -234,4 +236,9 @@ func _on_video_mute(uid: int, is_muted: bool) -> void:
 		if controller and controller.video_lifecycle_callbacks:
 			if controller.video_lifecycle_callbacks.on_video_mute.is_valid():
 				controller.video_lifecycle_callbacks.on_video_mute.call_deferred(is_muted)
+
+
+func _on_template_rendered(uid: int) -> void:
+	if uid == _uid and on_template_rendered.is_valid():
+		on_template_rendered.call_deferred()
 #endregion

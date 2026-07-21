@@ -207,7 +207,7 @@ func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
 	var cta_style := NativeTemplateTextStyle.new()
 	cta_style.background_color = _cta_bg_color
 	cta_style.text_color = _cta_text_color
-	cta_style.font_size = 15  # Default
+	cta_style.font_size = 15 # Default
 	cta_style.style = NativeTemplateFontStyle.Values.BOLD
 
 	style.call_to_action_text = cta_style
@@ -230,6 +230,10 @@ func _on_ad_load_finished(ad: NativeOverlayAd, error: LoadAdError) -> void:
 				callbacks.on_video_end = func(): _log("Video ended")
 				callbacks.on_video_mute = func(is_muted: bool): _log("Video isMuted: %s" % is_muted)
 				controller.video_lifecycle_callbacks = callbacks
+
+	_native_overlay_ad.on_template_rendered = func() -> void:
+		if Registry.safe_area and not _is_hidden:
+			Registry.safe_area.update_ad_overlap_native(_native_overlay_ad, _ad_position)
 
 	if _is_hidden:
 		_native_overlay_ad.hide()
@@ -276,6 +280,8 @@ func _on_destroy_native_pressed() -> void:
 		_native_overlay_ad = null
 		_log("Native destroyed")
 		_update_ui_state(false)
+		if Registry.safe_area:
+			Registry.safe_area.reset_ad_overlap()
 
 
 func _on_show_native_pressed() -> void:
@@ -284,6 +290,8 @@ func _on_show_native_pressed() -> void:
 		_native_overlay_ad.show()
 		_log("Native shown")
 		_update_ui_state(true)
+		if Registry.safe_area:
+			Registry.safe_area.update_ad_overlap_native(_native_overlay_ad, _ad_position)
 
 
 func _on_hide_native_pressed() -> void:
@@ -292,6 +300,8 @@ func _on_hide_native_pressed() -> void:
 		_native_overlay_ad.hide()
 		_log("Native hidden")
 		_update_ui_state(true)
+		if Registry.safe_area:
+			Registry.safe_area.reset_ad_overlap()
 
 
 func _on_get_size_pressed() -> void:
@@ -310,6 +320,8 @@ func _update_position(pos: AdPosition) -> void:
 	_ad_position = pos
 	if _native_overlay_ad:
 		_native_overlay_ad.set_template_position(pos)
+		if Registry.safe_area and not _is_hidden:
+			Registry.safe_area.update_ad_overlap_native(_native_overlay_ad, pos)
 
 
 func _on_position_selected(pos: AdPosition) -> void:
@@ -336,6 +348,8 @@ func _on_ad_closed() -> void:
 	_log("Ad closed (destroyed)")
 	_native_overlay_ad = null
 	_update_ui_state(false)
+	if Registry.safe_area:
+		Registry.safe_area.reset_ad_overlap()
 
 
 func _on_ad_impression() -> void:

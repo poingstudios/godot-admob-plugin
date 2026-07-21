@@ -63,6 +63,7 @@ class PoingGodotAdMobNativeOverlayAd(godot: Godot?) : org.godotengine.godot.plug
         signals.add(NativeOverlayAd.SignalInfos.onNativeOverlayAdVideoPause)
         signals.add(NativeOverlayAd.SignalInfos.onNativeOverlayAdVideoEnd)
         signals.add(NativeOverlayAd.SignalInfos.onNativeOverlayAdVideoMute)
+        signals.add(NativeOverlayAd.SignalInfos.onNativeOverlayAdRendered)
         return signals
     }
 

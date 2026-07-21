@@ -34,6 +34,22 @@
 
 ---
 
+### `on_template_rendered` / `OnTemplateRendered`
+
+在原生模板布局完成并在屏幕上渲染后触发一次（即模板视图首次完成全布局遍历，或编辑器中的模拟模板定位时）。请使用此回调来响应实际渲染尺寸 —— 例如，仅在广告完整渲染后再将内容推送到 `SafeArea`，而不是依赖同步调用 `get_template_height_in_pixels()`（它可能返回过时的尺寸）。
+
+=== "GDScript"
+    ```gdscript
+    var on_template_rendered: Callable
+    ```
+
+=== "C#"
+    ```csharp
+    public Action OnTemplateRendered { get; set; }
+    ```
+
+---
+
 ## 静态方法
 
 ### `load` / `Load`
