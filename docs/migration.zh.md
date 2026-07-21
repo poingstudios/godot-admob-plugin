@@ -253,6 +253,12 @@ configurations.configureEach {
     
     在 v5 版本中，**`config.gd` 已经被彻底移除**。你必须将现有的 App ID 搬迁到项目设置中的新位置。
 
+!!! danger "iOS 关键变更：删除旧版 v4 .gdip 文件（避免 Xcode 冲突）"
+    在第 4 版中，iOS 插件是通过位于 `res://ios/plugins/` 的 `.gdip` 配置文件注册的。
+    在第 5 版中，iOS framework 和依赖项会在导出过程中由编辑器插件动态添加。
+    
+    **您必须删除所有旧版 `poing-godot-admob*.gdip` 文件以及 `res://ios/plugins/poing-godot-admob/` 目录。**（如果您使用了其他非 AdMob 的 iOS 插件，请勿删除 `res://ios/plugins/` 根目录本身）。如果不删除旧的 AdMob `.gdip` 文件和二进制文件，将导致 Xcode 中出现符号和 framework 重复错误（`Multiple commands produce ...`）。
+
 配置项现在已注册并可在 **Project Settings > General** 下进行配置：
 
 * **Android 设置:** `admob/general/android/enabled`、`admob/general/android/app_id` 以及各类初始化/加载优化标志。
