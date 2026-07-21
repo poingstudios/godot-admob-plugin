@@ -116,7 +116,7 @@ jobs:
         ./gradlew zipPlugins -PgodotVersion="${{matrix.GODOT_VERSIONS}}"
 
     - name: Upload binaries to artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: android-${{matrix.GODOT_VERSIONS}}
         path: platforms/android/.output/android-template-v${{matrix.GODOT_VERSIONS}}.zip
@@ -173,7 +173,7 @@ jobs:
         ./scripts/build.sh ${{env.CURRENT_GODOT_VERSION}}
 
     - name: Upload binaries to artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: ios-${{matrix.GODOT_VERSIONS}}
         path: platforms/ios/bin/release/*.zip
@@ -200,7 +200,7 @@ jobs:
       run: ./.github/scripts/compress_editor_plugin.sh
 
     - name: Upload zip to artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: godot-editor
         path: platforms/godot_editor/${{ env.ZIP_NAME }}

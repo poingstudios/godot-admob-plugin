@@ -70,7 +70,7 @@ jobs:
         ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}"
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: android-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/android/.output/android-template-v${{ needs.detect-latest.outputs.godot_version }}.zip
@@ -121,7 +121,7 @@ jobs:
         ./scripts/build.sh ${{ needs.detect-latest.outputs.godot_version }}
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v6
+      uses: actions/upload-artifact@v7
       with:
         name: ios-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/ios/bin/release/*.zip
@@ -279,7 +279,7 @@ jobs:
         godot --headless --export-debug "Android" .output/AdMobAddon.apk
 
     - name: Upload APK artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: AdMobAddon-Android-GDScript-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/godot_editor/.output/AdMobAddon.apk
@@ -451,7 +451,7 @@ jobs:
         godot --headless --export-debug "Android" .output/AdMobAddon-CSharp.apk
 
     - name: Upload APK artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: AdMobAddon-Android-CSharp-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/godot_editor/.output/AdMobAddon-CSharp.apk
@@ -605,7 +605,7 @@ jobs:
         rm -rf "$APP_NAME"
 
     - name: Upload Simulator App artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: AdMobAddon-iOS-Simulator-GDScript-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/godot_editor/exports/ios/*.zip
@@ -768,7 +768,7 @@ jobs:
         rm -rf "$APP_NAME"
 
     - name: Upload Simulator App artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: AdMobAddon-iOS-Simulator-CSharp-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/godot_editor/exports/ios/*.zip
