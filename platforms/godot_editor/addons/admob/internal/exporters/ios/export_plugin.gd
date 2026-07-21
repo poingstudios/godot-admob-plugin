@@ -64,6 +64,7 @@ func _export_begin(features: PackedStringArray, is_debug: bool, path: String, fl
 	if not ios_enabled:
 		return
 
+	_check_legacy_gdip_files()
 	PluginVersion.check_version_mismatch(PluginVersion.ios_version, "iOS")
 
 	var enabled_libs := _get_enabled_libs()
@@ -357,3 +358,16 @@ func _add_cpp_code(code: String) -> void:
 		call("add_apple_embedded_platform_cpp_code", code)
 	elif has_method("add_ios_cpp_code"):
 		call("add_ios_cpp_code", code)
+
+
+func _check_legacy_gdip_files() -> void:
+	var legacy_dir := "res://ios/plugins"
+	if DirAccess.dir_exists_absolute(legacy_dir):
+		var dir := DirAccess.open(legacy_dir)
+		if dir:
+			dir.list_dir_begin()
+			var file_name := dir.get_next()
+			while file_name != "":
+				if (file_name.begins_with("poing-godot-admob") and file_name.ends_with(".gdip")) or file_name == "poing-godot-admob":
+					push_error("AdMob iOS Migration Error: Found legacy v4 plugin file/folder '%s'. Please delete all 'poing-godot-admob*.gdip' files and the 'res://ios/plugins/poing-godot-admob/' folder to avoid Xcode build conflicts." % [legacy_dir.path_join(file_name)])
+				file_name = dir.get_next()
