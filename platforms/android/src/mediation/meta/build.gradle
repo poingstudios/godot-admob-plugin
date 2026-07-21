@@ -1,6 +1,5 @@
 plugins {
     id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
 }
 
 android {
@@ -18,14 +17,6 @@ android {
         }
     }
 
-    def fullModuleName = rootProject.ext.buildFullModuleName(project)
-
-    libraryVariants.configureEach { variant ->
-        variant.outputs.all {
-            outputFileName = "${fullModuleName}-${variant.name}.aar"
-            println "Output file will be: $outputFileName"
-        }
-    }
 }
 
 dependencies {
