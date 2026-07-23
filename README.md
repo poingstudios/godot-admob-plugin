@@ -575,7 +575,7 @@ If you find our work valuable and would like to support ongoing development, con
 [StarsBadge]: https://badgen.net/github/stars/poingstudios/godot-admob-plugin
 [DiscordBadge]: https://badgen.net/badge/_/Discord/7289DA?label=&icon=discord
 [LicenseBadge]: https://badgen.net/github/license/poingstudios/godot-admob-plugin?label=License
-[DownloadsBadge]: https://badgen.net/github/assets-dl/poingstudios/godot-admob-plugin?label=Downloads&color=green
+[DownloadsBadge]: https://badgen.net/github/assets-dl/poingstudios/godot-admob-plugin/v4.3.1?label=Downloads&color=green
 [AssetStoreBadge]: https://badgen.net/badge/Download/Asset%20Store/green
 [AndroidBadge]: https://badgen.net/badge/_/Android/3DDC84?label=&icon=android
 [iOSBadge]: https://badgen.net/badge/_/iOS/000000?label=&icon=apple

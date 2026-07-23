@@ -3,12 +3,18 @@ on:
   push:
     branches:
       - master
-    tags:
-      - '*'
-  workflow_run:
-    workflows: ['\[Manual\] Release All Platforms']
-    types:
-      - completed
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      deploy_target:
+        description: 'What to deploy'
+        required: true
+        type: choice
+        options:
+          - 'stable'
+          - 'latest'
+        default: 'stable'
 
 permissions:
   contents: write
@@ -16,7 +22,10 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
+    if: >-
+      (github.event_name == 'push') ||
+      (github.event_name == 'release' && github.event.release.prerelease == false) ||
+      (github.event_name == 'workflow_dispatch')
     steps:
       - uses: actions/checkout@v7
         with:
@@ -35,14 +44,23 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
       - name: Deploy documentation
         run: |
-          if [[ $GITHUB_REF == refs/tags/* ]] || [[ $GITHUB_EVENT_NAME == "workflow_run" ]]; then
-            # Extract the version (e.g., 4.3)
+          DEPLOY_TARGET=""
+
+          if [[ $GITHUB_EVENT_NAME == "release" ]]; then
+            DEPLOY_TARGET="stable"
+          elif [[ $GITHUB_EVENT_NAME == "workflow_dispatch" ]]; then
+            DEPLOY_TARGET="${{ github.event.inputs.deploy_target }}"
+          else
+            DEPLOY_TARGET="latest"
+          fi
+
+          if [[ $DEPLOY_TARGET == "stable" ]]; then
+            # Extract MAJOR.MINOR version (e.g., "5.0", "5.1", "6.0")
             VERSION=$(grep "version=" platforms/godot_editor/addons/admob/plugin.cfg | cut -d'"' -f2 | sed 's/^v//' | cut -d. -f1,2)
-            
-            # Deploy versioned and stable as distinct menu entries
+
+            # Deploy versioned docs (e.g., "5.0") and "stable" as separate menu entries
             mike deploy --push --update-aliases $VERSION
             mike deploy --push --update-aliases stable
-            
             mike set-default --push stable
           else
             # Define the warning message for the 'latest' version.

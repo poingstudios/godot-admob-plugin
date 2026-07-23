@@ -34,6 +34,9 @@ This repository is a Godot plugin that integrates the Google AdMob SDK into Godo
   - *Example (All):* `./scripts/build_local.sh all 4.7.1`
   - *Example (iOS):* `./scripts/build_local.sh ios 4.7.1`
   - *Example (Android):* `./scripts/build_local.sh android 4.7.1`
+- **Local Documentation Preview:**
+  - Standard (Stable preview): `mkdocs serve`
+  - Development (Master/Latest preview with banner): `mkdocs serve -f mkdocs.dev.yml`
 - **GitHub CLI:** Use `gh` to check status of `issues` or `prs`.
 
 ## 📝 Coding Standards
