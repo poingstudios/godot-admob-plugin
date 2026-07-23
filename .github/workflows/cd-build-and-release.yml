@@ -226,7 +226,7 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         VERSION: ${{ needs.initialize.outputs.version }}
       run: |
-        gh release create "$VERSION" release-artifacts/* --title "$VERSION" --generate-notes
+        gh release create "$VERSION" release-artifacts/* --title "$VERSION" --generate-notes --latest
 
     - name: Set up Python
       uses: actions/setup-python@v6
