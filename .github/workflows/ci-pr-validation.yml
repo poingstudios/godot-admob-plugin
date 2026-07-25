@@ -177,7 +177,7 @@ jobs:
         mv templates/* ~/.local/share/godot/export_templates/${DOWNLOAD_VERSION}.stable/
 
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
+      uses: android-actions/setup-android@v4
 
     - name: Download Android Plugin Binaries
       uses: actions/download-artifact@v4
@@ -343,7 +343,7 @@ jobs:
         mv templates/* ~/.local/share/godot/export_templates/${DOWNLOAD_VERSION}.stable.mono/
 
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
+      uses: android-actions/setup-android@v4
 
     - name: Download Android Plugin Binaries
       uses: actions/download-artifact@v4
