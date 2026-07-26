@@ -36,134 +36,158 @@
 
 Prior to loading ads, you must initialize the SDK.
 
-=== "GDScript"
+<details open>
+<summary><b>GDScript</b></summary>
 
-    ```gdscript
-    func _ready() -> void:
-        # Connect to initialization signal
-        MobileAds.connect("initialization_complete", self, "_on_AdMob_initialization_complete")
-        MobileAds.initialize()
+```gdscript
+func _ready() -> void:
+    # Connect to initialization signal
+    MobileAds.connect("initialization_complete", self, "_on_AdMob_initialization_complete")
+    MobileAds.initialize()
 
-    func _on_AdMob_initialization_complete(status: int, adapter_name: String) -> void:
-        print("AdMob Initialized: ", status)
-    ```
+func _on_AdMob_initialization_complete(status: int, adapter_name: String) -> void:
+    print("AdMob Initialized: ", status)
+```
 
-=== "C#"
+</details>
 
-    ```csharp
-    public override void _Ready()
-    {
-        MobileAds.Connect("initialization_complete", this, nameof(_on_AdMob_initialization_complete));
-        MobileAds.Call("initialize");
-    }
+<details>
+<summary><b>C#</b></summary>
 
-    private void _on_AdMob_initialization_complete(int status, string adapterName)
-    {
-        GD.Print("AdMob Initialized: " + status);
-    }
-    ```
+```csharp
+public override void _Ready()
+{
+    MobileAds.Connect("initialization_complete", this, nameof(_on_AdMob_initialization_complete));
+    MobileAds.Call("initialize");
+}
+
+private void _on_AdMob_initialization_complete(int status, string adapterName)
+{
+    GD.Print("AdMob Initialized: " + status);
+}
+```
+
+</details>
 
 ---
 
 ### 📱 Banner Ads
 
-=== "GDScript"
+<details open>
+<summary><b>GDScript</b></summary>
 
-    ```gdscript
-    func load_and_show_banner() -> void:
-        MobileAds.connect("banner_loaded", self, "_on_banner_loaded")
-        MobileAds.load_banner()
+```gdscript
+func load_and_show_banner() -> void:
+    MobileAds.connect("banner_loaded", self, "_on_banner_loaded")
+    MobileAds.load_banner()
 
-    func _on_banner_loaded() -> void:
-        MobileAds.show_banner()
-    ```
+func _on_banner_loaded() -> void:
+    MobileAds.show_banner()
+```
 
-=== "C#"
+</details>
 
-    ```csharp
-    public void LoadAndShowBanner()
-    {
-        MobileAds.Connect("banner_loaded", this, nameof(_on_banner_loaded));
-        MobileAds.Call("load_banner");
-    }
+<details>
+<summary><b>C#</b></summary>
 
-    private void _on_banner_loaded()
-    {
-        MobileAds.Call("show_banner");
-    }
-    ```
+```csharp
+public void LoadAndShowBanner()
+{
+    MobileAds.Connect("banner_loaded", this, nameof(_on_banner_loaded));
+    MobileAds.Call("load_banner");
+}
+
+private void _on_banner_loaded()
+{
+    MobileAds.Call("show_banner");
+}
+```
+
+</details>
 
 ---
 
 ### 🎬 Interstitial Ads
 
-=== "GDScript"
+<details open>
+<summary><b>GDScript</b></summary>
 
-    ```gdscript
-    func show_interstitial_ad() -> void:
-        MobileAds.connect("interstitial_loaded", self, "_on_interstitial_loaded")
-        MobileAds.load_interstitial()
+```gdscript
+func show_interstitial_ad() -> void:
+    MobileAds.connect("interstitial_loaded", self, "_on_interstitial_loaded")
+    MobileAds.load_interstitial()
 
-    func _on_interstitial_loaded() -> void:
-        MobileAds.show_interstitial()
-    ```
+func _on_interstitial_loaded() -> void:
+    MobileAds.show_interstitial()
+```
 
-=== "C#"
+</details>
 
-    ```csharp
-    public void ShowInterstitialAd()
-    {
-        MobileAds.Connect("interstitial_loaded", this, nameof(_on_interstitial_loaded));
-        MobileAds.Call("load_interstitial");
-    }
+<details>
+<summary><b>C#</b></summary>
 
-    private void _on_interstitial_loaded()
-    {
-        MobileAds.Call("show_interstitial");
-    }
-    ```
+```csharp
+public void ShowInterstitialAd()
+{
+    MobileAds.Connect("interstitial_loaded", this, nameof(_on_interstitial_loaded));
+    MobileAds.Call("load_interstitial");
+}
+
+private void _on_interstitial_loaded()
+{
+    MobileAds.Call("show_interstitial");
+}
+```
+
+</details>
 
 ---
 
 ### 🎁 Rewarded Video Ads
 
-=== "GDScript"
+<details open>
+<summary><b>GDScript</b></summary>
 
-    ```gdscript
-    func show_rewarded_ad() -> void:
-        MobileAds.connect("rewarded_ad_loaded", self, "_on_rewarded_ad_loaded")
-        MobileAds.connect("user_earned_rewarded", self, "_on_user_earned_rewarded")
-        MobileAds.load_rewarded()
+```gdscript
+func show_rewarded_ad() -> void:
+    MobileAds.connect("rewarded_ad_loaded", self, "_on_rewarded_ad_loaded")
+    MobileAds.connect("user_earned_rewarded", self, "_on_user_earned_rewarded")
+    MobileAds.load_rewarded()
 
-    func _on_rewarded_ad_loaded() -> void:
-        MobileAds.show_rewarded()
+func _on_rewarded_ad_loaded() -> void:
+    MobileAds.show_rewarded()
 
-    func _on_user_earned_rewarded(currency: String, amount: int) -> void:
-        print("Rewarded! Type: ", currency, ", Amount: ", amount)
-    ```
+func _on_user_earned_rewarded(currency: String, amount: int) -> void:
+    print("Rewarded! Type: ", currency, ", Amount: ", amount)
+```
 
-=== "C#"
+</details>
 
-    ```csharp
-    public void ShowRewardedAd()
-    {
-        MobileAds.Connect("rewarded_ad_loaded", this, nameof(_on_rewarded_ad_loaded));
-        MobileAds.Connect("user_earned_rewarded", this, nameof(_on_user_earned_rewarded));
-        MobileAds.Call("load_rewarded");
-    }
+<details>
+<summary><b>C#</b></summary>
 
-    private void _on_rewarded_ad_loaded()
-    {
-        MobileAds.Call("show_rewarded");
-    }
+```csharp
+public void ShowRewardedAd()
+{
+    MobileAds.Connect("rewarded_ad_loaded", this, nameof(_on_rewarded_ad_loaded));
+    MobileAds.Connect("user_earned_rewarded", this, nameof(_on_user_earned_rewarded));
+    MobileAds.Call("load_rewarded");
+}
 
-    private void _on_user_earned_rewarded(string currency, int amount)
-    {
-        GD.Print("Rewarded! Type: " + currency + ", Amount: " + amount);
-    }
-    ```
+private void _on_rewarded_ad_loaded()
+{
+    MobileAds.Call("show_rewarded");
+}
 
-For the complete list of methods and signals, check out the [API Reference][DocumentationLink].
+private void _on_user_earned_rewarded(string currency, int amount)
+{
+    GD.Print("Rewarded! Type: " + currency + ", Amount: " + amount);
+}
+```
+
+</details>
+
+For the complete list of methods and signals, check out the [API Reference][ApiReferenceLink].
 
 ---
 
@@ -190,6 +214,7 @@ If you find our work valuable and would like to support us, consider contributin
 [PaypalBadge]: https://badgen.net/badge/Donate/via%20Paypal/blue?icon=paypal
 
 [DocumentationLink]: https://poingstudios.github.io/godot-admob-plugin/v1/
+[ApiReferenceLink]: https://poingstudios.github.io/godot-admob-plugin/v1/reference/
 [Releases]: https://github.com/poingstudios/godot-admob-plugin/releases
 [Stargazers]: https://github.com/poingstudios/godot-admob-plugin/stargazers
 [DiscordLink]: https://discord.com/invite/YEPvYjSSMk
