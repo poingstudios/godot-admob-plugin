@@ -124,13 +124,18 @@ When building your game for mobile platforms, configure the Export Presets in **
     1. Select (or add) your **Android** export preset.
     2. In the **Options** tab:
        - Enable **Use Custom Build** under **Custom Build** (requires Android Build Template installed via **Project -> Install Android Build Template...**).
+       - Set **Min SDK** to `23` (Android 6.0).
        - Enable **Ad Mob** under **Plugins**.
+    3. Click **Export Project...** to generate your APK or AAB.
+
+    ![Android Export Preset](assets/export_android.png)
 
 === "iOS"
 
     1. Select (or add) your **iOS** export preset.
     2. In the **Options** tab:
        - Enable **Ad Mob** under **Plugins**.
+    3. Click **Export Project...** to generate your Xcode project.
 
 ---
 

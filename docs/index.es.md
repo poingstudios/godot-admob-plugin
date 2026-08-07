@@ -1,10 +1,14 @@
 # Primeros Pasos
 
-!!! note "Documentación Godot 3 (v1)"
-    Esta documentación es para el plugin **v1**, que solo es compatible con **Godot 3.x**.
+!!! note "Documentación de Godot 3 (v1)"
+    Esta documentación es para el complemento **v1**, compatible únicamente con **Godot 3.x**.
     Para **Godot 4.2+**, consulte la [documentación estable](https://poingstudios.github.io/godot-admob-plugin/stable/).
 
-Integrar el complemento AdMob en tu proyecto de Godot para **Godot 3** te permite mostrar fácilmente anuncios de Google Mobile Ads en dispositivos Android e iOS.
+!!! important "Cambios clave en esta versión:"
+    - **iOS**: Ahora utiliza **Swift Package Manager (SPM)** para resolver y vincular automáticamente todas las dependencias (como el SDK de Google Mobile Ads). Ya no necesita descargar ni vincular los archivos del SDK manualmente.
+    - **Android**: La versión mínima de Android soportada se ha actualizado a **Android 6.0 (API Nivel 23 / Min SDK 23)**. Asegúrese de configurar su perfil de exportación de Android con **Min SDK 23**.
+
+La integración del complemento AdMob en su proyecto de Godot para **Godot 3** le permite mostrar fácilmente anuncios de Google Mobile Ads en dispositivos Android e iOS.
 
 ---
 
@@ -124,13 +128,18 @@ Al compilar su juego para plataformas móviles, configure los perfiles de export
     1. Seleccione (o agregue) su perfil de exportación para **Android**.
     2. En la pestaña **Opciones**:
        - Active **Use Custom Build** (requiere la Plantilla de Compilación de Android instalada desde **Proyecto -> Instalar plantilla de compilación de Android...**).
+       - Configure el **Min SDK** en `23` (Android 6.0).
        - Active **Ad Mob** en **Plugins**.
+    3. Haga clic en **Exportar Proyecto...** para generar su archivo APK o AAB.
+
+    ![Perfil de Exportación de Android](assets/export_android.png)
 
 === "iOS"
 
     1. Seleccione (o agregue) su perfil de exportación para **iOS**.
     2. En la pestaña **Opciones**:
        - Active **Ad Mob** en **Plugins**.
+    3. Haga clic en **Exportar Proyecto...** para generar su proyecto de Xcode.
 
 ---
 
