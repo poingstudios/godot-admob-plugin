@@ -30,19 +30,19 @@ var ad_mob_settings = preload(
 func _on_AndroidButton_pressed():
 	OS.shell_open(
 		"https://github.com/poingstudios/"
-		+ "godot-admob-android#installation"
+		+ "godot-admob-plugin/tree/v1/platforms/android"
 	)
 
 func _on_ios_button_pressed():
 	OS.shell_open(
 		"https://github.com/poingstudios/"
-		+ "godot-admob-ios#installation"
+		+ "godot-admob-plugin/tree/v1/platforms/ios"
 	)
 
 func _on_AdMobButton_pressed():
 	OS.shell_open(
 		"https://github.com/poingstudios/"
-		+ "godot-admob-editor"
+		+ "godot-admob-plugin"
 	)
 
 func _on_PoingButton_pressed():

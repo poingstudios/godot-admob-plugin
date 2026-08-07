@@ -13,9 +13,7 @@
 [ext_resource path="res://addons/admob/src/core/components/ad_format/RewardedInterstitialAdFormat.tscn" type="PackedScene" id=11]
 [ext_resource path="res://addons/admob/src/core/components/Downloads.tscn" type="PackedScene" id=12]
 [ext_resource path="res://addons/admob/src/core/components/Debug.tscn" type="PackedScene" id=13]
-[ext_resource path="res://addons/admob/src/core/SupportVersion.gd" type="Script" id=14]
 [ext_resource path="res://addons/admob/src/core/CurrentVersion.gd" type="Script" id=15]
-[ext_resource path="res://addons/admob/src/core/VersionSupportedHTTPRequest.tscn" type="PackedScene" id=16]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.839216, 0.0352941, 0.0352941, 1 )
@@ -209,27 +207,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SupportVersion" type="RichTextLabel" parent="BottomPanel"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -35.0
-margin_right = -158.0
-custom_fonts/normal_font = SubResource( 4 )
-custom_styles/normal = SubResource( 3 )
-bbcode_enabled = true
-bbcode_text = "[rainbow sat=10]iOS[/rainbow][color=black]:v2.1.0[/color] [rainbow sat=10]Android[/rainbow][color=black]:v2.1.0[/color]"
-text = "iOS:v2.1.0 Android:v2.1.0"
-script = ExtResource( 14 )
-
-[node name="VersionSupportedHTTPRequest" parent="BottomPanel/SupportVersion" instance=ExtResource( 16 )]
-
 [node name="CurrentVersion" type="Label" parent="BottomPanel"]
-anchor_left = 1.0
+anchor_left = 0.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -158.0
 margin_top = -35.0
 rect_min_size = Vector2( 0, 35 )
 custom_fonts/font = SubResource( 6 )
