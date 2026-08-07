@@ -29,7 +29,7 @@
       
       
       <link rel="icon" href="../assets/icon.ico">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -37,7 +37,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -488,10 +488,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#download-e-importacao-do-plugin" class="md-nav__link">
+  <a href="#baixar-e-importar-o-plugin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Download e Importação do Plugin
+        Baixar e Importar o Plugin
       
     </span>
   </a>
@@ -514,6 +514,34 @@
     <span class="md-ellipsis">
       
         Configuração
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuração">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracao-do-app-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuração do App ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exportando-o-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exportando o Projeto
       
     </span>
   </a>
@@ -1076,10 +1104,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#download-e-importacao-do-plugin" class="md-nav__link">
+  <a href="#baixar-e-importar-o-plugin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Download e Importação do Plugin
+        Baixar e Importar o Plugin
       
     </span>
   </a>
@@ -1102,6 +1130,34 @@
     <span class="md-ellipsis">
       
         Configuração
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuração">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracao-do-app-id" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuração do App ID
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exportando-o-projeto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exportando o Projeto
       
     </span>
   </a>
@@ -1227,85 +1283,178 @@ Para <strong>Godot 4.2+</strong>, veja a <a href="https://poingstudios.github.io
 </div>
 </div>
 <hr />
-<h2 id="download-e-importacao-do-plugin">Download e Importação do Plugin</h2>
-<ol>
-<li>Baixe o release mais recente na página de <a href="https://github.com/poingstudios/godot-admob-plugin/releases">GitHub Releases</a>.</li>
-<li>Extraia o arquivo e copie a pasta <code>addons/admob</code> para o diretório <code>res://addons/</code> do seu projeto Godot.</li>
-<li>Abra o Editor do Godot, navegue até <strong>Projeto -&gt; Configurações do Projeto -&gt; Plugins</strong> e altere o status do plugin <strong>AdMob</strong> para <strong>Habilitado</strong>.</li>
-</ol>
-<p>Uma vez habilitado, o plugin registra automaticamente o singleton autoload <code>MobileAds</code> no seu projeto.</p>
-<hr />
-<h2 id="baixar-templates-de-plataforma">Baixar Templates de Plataforma</h2>
-<p>Após habilitar o plugin, a aba <strong>AdMob</strong> aparecerá nas abas principais do editor (ao lado de <strong>2D</strong>, <strong>3D</strong>, <strong>AssetLib</strong>, etc.) no topo do editor. Abra-a para acessar o gerenciador AdMob.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Android</label><label for="__tabbed_2_2">iOS</label></div>
+<h2 id="baixar-e-importar-o-plugin">Baixar e Importar o Plugin</h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">Asset Library (Recomendado)</label><label for="__tabbed_2_2">GitHub Releases (Manual)</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>Selecione <strong>Download Android Template</strong>. O plugin irá baixar e extrair automaticamente os arquivos de template necessários (<code>.aar</code> e <code>.gdap</code>) diretamente na sua pasta <code>res://android/plugins/</code> (não é necessário extrair o zip manualmente).</p>
+<ol>
+<li>Abra o seu projeto no Godot Editor e clique na aba <strong>AssetLib</strong> no topo.</li>
+<li>Pesquise por <strong>AdMob</strong> (por <code>poing.studios</code>).</li>
+<li>Clique em <strong>Download</strong> e depois em <strong>Instalar</strong> para adicionar os arquivos do plugin ao seu projeto.</li>
+<li>Vá em <strong>Projeto -&gt; Configurações do Projeto -&gt; Plugins</strong> e altere o status do plugin <strong>AdMob</strong> para <strong>Ativo</strong>.</li>
+</ol>
 </div>
 <div class="tabbed-block">
-<p>Selecione <strong>Download iOS Template</strong>. O plugin irá baixar e extrair automaticamente os arquivos de template necessários (<code>.gdip</code> e arquivos de biblioteca) diretamente na sua pasta <code>res://ios/plugins/</code> (não é necessário extrair o zip manualmente).</p>
+<ol>
+<li>Baixe a versão mais recente na página de <a href="https://github.com/poingstudios/godot-admob-plugin/releases">Releases no GitHub</a>.</li>
+<li>Extraia o arquivo e copie a pasta <code>addons/admob</code> para o diretório <code>res://addons/</code> do seu projeto Godot.</li>
+<li>Abra o Godot Editor, navegue até <strong>Projeto -&gt; Configurações do Projeto -&gt; Plugins</strong> e altere o status do plugin <strong>AdMob</strong> para <strong>Ativo</strong>.</li>
+</ol>
+</div>
+</div>
+</div>
+<p>Assim que ativado, o plugin registrará automaticamente o singleton autoload <code>MobileAds</code> no seu projeto.</p>
+<hr />
+<h2 id="baixar-templates-de-plataforma">Baixar Templates de Plataforma</h2>
+<p>O plugin requer templates binários nativos (<code>.aar</code>/<code>.gdap</code> para Android, <code>.gdip</code>/<code>.xcframework</code> para iOS) para compilar as exportações móveis. Você pode obtê-los de três formas:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:3"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><input id="__tabbed_3_3" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">Automático (Padrão)</label><label for="__tabbed_3_2">Aba do Editor AdMob (Manual)</label><label for="__tabbed_3_3">GitHub Releases (Zip Direto)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Ao ativar o plugin, ele tentará automaticamente baixar e extrair os templates nativos correspondentes à sua versão do Godot diretamente no seu projeto (<code>res://android/plugins/</code> ou <code>res://ios/plugins/</code>).</p>
+</div>
+<div class="tabbed-block">
+<p>Caso o download automático falhe ao ativar o plugin, você pode realizar o download manualmente pelo editor:</p>
+<ol>
+<li>Abra a aba <strong>AdMob</strong> no topo do espaço de trabalho do editor.</li>
+<li>Acesse a sub-aba <strong>Downloads</strong>.</li>
+<li>Selecione a plataforma desejada (<strong>Android</strong> ou <strong>iOS</strong>) e clique em <strong>Download Android Template</strong> ou <strong>Download iOS Template</strong>.</li>
+</ol>
+</div>
+<div class="tabbed-block">
+<p>Você também pode baixar o arquivo do template diretamente na página de <a href="https://github.com/poingstudios/godot-admob-plugin/releases/tag/v1.3.6-godot3">Releases no GitHub (v1.3.6-godot3)</a>:</p>
+<ol>
+<li>Localize a tag de release para o Godot 3 (ex: <code>v1.3.6-godot3</code>) e baixe o arquivo zip correspondente à sua versão do Godot (<code>android-template-v&lt;godot_version&gt;.zip</code> ou <code>ios-template-v&lt;godot_version&gt;.zip</code>).</li>
+<li>Extraia o conteúdo do arquivo diretamente no diretório de plugins da plataforma no seu projeto (<code>res://android/plugins/</code> para Android ou <code>res://ios/plugins/</code> para iOS).</li>
+</ol>
 </div>
 </div>
 </div>
 <hr />
 <h2 id="configuracao">Configuração</h2>
 <p>No <strong>painel do AdMob</strong> (<code>Projeto -&gt; Ferramentas -&gt; AdMob Manager</code>), configure as seguintes opções:</p>
+<p><img alt="Editor AdMob" src="../assets/editor.png" /></p>
 <table>
 <thead>
 <tr>
 <th>Opção</th>
+<th>Aba</th>
 <th>Descrição</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>App ID</strong></td>
-<td>Seu ID de aplicativo AdMob (ex: <code>ca-app-pub-3940256099942544~1458002511</code>).</td>
+<td><strong>Enabled</strong></td>
+<td>Geral</td>
+<td>Ativa/desativa os anúncios mock / funcionalidade do plugin no editor globalmente.</td>
 </tr>
 <tr>
-<td><strong>Ad Unit IDs</strong></td>
-<td>IDs para cada formato de anúncio que você planeja usar (Banner, Intersticial, Premiado, Intersticial Premiado).</td>
+<td><strong>Child Directed Treatment</strong></td>
+<td>Geral</td>
+<td>Configura a conformidade COPPA (Tratamento direcionado a crianças).</td>
 </tr>
 <tr>
-<td><strong>Is Enabled</strong></td>
-<td>Ative/desative os anúncios globalmente.</td>
-</tr>
-<tr>
-<td><strong>Banner Position</strong></td>
-<td>Escolha onde o banner aparece (Topo, Rodapé, Personalizado).</td>
+<td><strong>MaxAdContentRating</strong></td>
+<td>Geral</td>
+<td>Define a classificação máxima de conteúdo dos anúncios (<code>G</code>, <code>PG</code>, <code>T</code>, <code>MA</code>).</td>
 </tr>
 <tr>
 <td><strong>Banner Size</strong></td>
-<td>Selecione o tamanho do banner (Banner, Banner Grande, Retângulo Médio, etc.).</td>
+<td>Banner</td>
+<td>Seleciona o tamanho do banner (Padrão, Banner Grande, Retângulo Médio, etc.).</td>
+</tr>
+<tr>
+<td><strong>Position</strong></td>
+<td>Banner</td>
+<td>Escolha a posição do banner (Topo ou Rodapé).</td>
+</tr>
+<tr>
+<td><strong>Show Instantly</strong></td>
+<td>Banner</td>
+<td>Exibe o banner automaticamente ao carregar.</td>
+</tr>
+<tr>
+<td><strong>Respect Safe Area</strong></td>
+<td>Banner</td>
+<td>Ajusta o posicionamento do banner para respeitar áreas seguras (recortes de tela / notches).</td>
 </tr>
 </tbody>
 </table>
+<h3 id="configuracao-do-app-id">Configuração do App ID</h3>
+<p>Antes de exportar para um dispositivo físico, configure o seu <a href="https://support.google.com/admob/answer/7356431">App ID do AdMob</a> (<code>ca-app-pub-XXXXXXXXXXXXXXXX~YYYYYYYYYY</code>) para cada plataforma desejada:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">Android</label><label for="__tabbed_4_2">iOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Adicione uma tag <code>&lt;meta-data&gt;</code> com seu App ID dentro de <code>&lt;application&gt;</code> em <code>res://android/build/AndroidManifest.xml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="cm">&lt;!-- Exemplo de App ID do AdMob: ca-app-pub-3940256099942544~3347511713 --&gt;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nt">&lt;meta-data</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="na">tools:replace=</span><span class="s">&quot;android:value&quot;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="na">android:name=</span><span class="s">&quot;com.google.android.gms.ads.APPLICATION_ID&quot;</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">    </span><span class="na">android:value=</span><span class="s">&quot;ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy&quot;</span><span class="nt">/&gt;</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Você pode configurar o seu App ID do AdMob diretamente no Godot Editor sem a necessidade de editar arquivos de configuração manualmente:</p>
+<ol>
+<li>Abra as configurações de exportação em <strong>Projeto -&gt; Exportar...</strong>.</li>
+<li>Selecione a sua definição de exportação para <strong>iOS</strong>.</li>
+<li>Na aba <strong>Opções</strong>, navegue até a seção <strong>Plugins Plist</strong>.</li>
+<li>Preencha o campo <strong>Gad Application Identifier</strong> com o seu App ID do AdMob (ex: <code>ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy</code>).</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Configuração Alternativa</p>
+<p>Você também pode pré-definir <code>GADApplicationIdentifier="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"</code> diretamente na seção <code>[plist]</code> do arquivo <code>res://ios/plugins/admob.gdip</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<hr />
+<h2 id="exportando-o-projeto">Exportando o Projeto</h2>
+<p>Ao compilar o seu jogo para plataformas móveis, configure as definições de exportação em <strong>Projeto -&gt; Exportar...</strong>:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">Android</label><label for="__tabbed_5_2">iOS</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<ol>
+<li>Selecione (ou adicione) a sua definição de exportação para <strong>Android</strong>.</li>
+<li>Na aba <strong>Opções</strong>:</li>
+<li>Marque <strong>Use Custom Build</strong> como <strong>Ativo</strong> (requer o Template de Build do Android instalado via <strong>Projeto -&gt; Instalar Template de Build do Android...</strong>).</li>
+<li>Marque <strong>Ad Mob</strong> como <strong>Ativo</strong> em <strong>Plugins</strong>.</li>
+</ol>
+</div>
+<div class="tabbed-block">
+<ol>
+<li>Selecione (ou adicione) a sua definição de exportação para <strong>iOS</strong>.</li>
+<li>Na aba <strong>Opções</strong>:</li>
+<li>Marque <strong>Ad Mob</strong> como <strong>Ativo</strong> em <strong>Plugins</strong>.</li>
+</ol>
+</div>
+</div>
+</div>
 <hr />
 <h2 id="inicializar-o-sdk">Inicializar o SDK</h2>
 <p>Antes de carregar anúncios, o SDK do Google Mobile Ads deve ser inicializado. Se a opção <strong>Is Enabled</strong> estiver ativa na sua configuração, o plugin se inicializará automaticamente ao iniciar.</p>
 <p>Se preferir inicializar manualmente, ou quiser monitorar a conclusão, conecte-se ao sinal <code>initialization_complete</code>:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">GDScript</label><label for="__tabbed_6_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="n">MobileAds</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;initialization_complete&quot;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_on_AdMob_initialization_complete&quot;</span><span class="p">)</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">MobileAds</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">func</span><span class="w"> </span><span class="n">_on_AdMob_initialization_complete</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">adapter_name</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AdMob Inicializado: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="n">MobileAds</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="s2">&quot;initialization_complete&quot;</span><span class="p">,</span><span class="w"> </span><span class="bp">self</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;_on_AdMob_initialization_complete&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">MobileAds</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">func</span><span class="w"> </span><span class="n">_on_AdMob_initialization_complete</span><span class="p">(</span><span class="n">status</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">int</span><span class="p">,</span><span class="w"> </span><span class="n">adapter_name</span><span class="p">:</span><span class="w"> </span><span class="nb nb-Type">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AdMob Inicializado: &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">status</span><span class="p">)</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">{</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">MobileAds</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="s">&quot;initialization_complete&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="k">nameof</span><span class="p">(</span><span class="n">_on_AdMob_initialization_complete</span><span class="p">));</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="n">MobileAds</span><span class="p">.</span><span class="n">Call</span><span class="p">(</span><span class="s">&quot;initialize&quot;</span><span class="p">);</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_on_AdMob_initialization_complete</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">adapterName</span><span class="p">)</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">{</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;AdMob Inicializado: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="p">{</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">MobileAds</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="s">&quot;initialization_complete&quot;</span><span class="p">,</span><span class="w"> </span><span class="k">this</span><span class="p">,</span><span class="w"> </span><span class="k">nameof</span><span class="p">(</span><span class="n">_on_AdMob_initialization_complete</span><span class="p">));</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">    </span><span class="n">MobileAds</span><span class="p">.</span><span class="n">Call</span><span class="p">(</span><span class="s">&quot;initialize&quot;</span><span class="p">);</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">}</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="k">private</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_on_AdMob_initialization_complete</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">status</span><span class="p">,</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="n">adapterName</span><span class="p">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="p">{</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">&quot;AdMob Inicializado: &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">status</span><span class="p">);</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="p">}</span>
 </code></pre></div>
 </div>
 </div>
@@ -1449,7 +1598,7 @@ Para <strong>Godot 4.2+</strong>, veja a <a href="https://poingstudios.github.io
     
     
   
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../javascripts/extra.js"></script>
       
