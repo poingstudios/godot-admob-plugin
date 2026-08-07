@@ -27,11 +27,20 @@
 
 ## 下载并导入插件
 
-1. 从[GitHub Releases](https://github.com/poingstudios/godot-admob-plugin/releases)页面下载最新版本。
-2. 解压文件并将`addons/admob`文件夹复制到Godot项目的`res://addons/`目录。
-3. 打开Godot编辑器，导航到**项目 -> 项目设置 -> 插件**，将**AdMob**插件状态切换为**已启用**。
+=== "资产库 (推荐)"
 
-启用后，插件会自动将`MobileAds`单例注册到您的项目中。
+    1. 在 Godot 编辑器中打开您的项目，然后点击顶部的 **AssetLib** 标签页。
+    2. 搜索 **AdMob**（作者为 `poing.studios`）。
+    3. 点击 **下载**，然后点击 **安装** 将插件文件添加到您的项目中。
+    4. 转到 **项目 -> 项目设置 -> 插件**，将 **AdMob** 插件的状态切换为 **启用**。
+
+=== "GitHub Releases (手动)"
+
+    1. 从 [GitHub Releases](https://github.com/poingstudios/godot-admob-plugin/releases) 页面下载最新版本。
+    2. 解压压缩包并将 `addons/admob` 文件夹复制到 Godot 项目的 `res://addons/` 目录中。
+    3. 打开 Godot 编辑器，转到 **项目 -> 项目设置 -> 插件**，将 **AdMob** 插件的状态切换为 **启用**。
+
+启用后，插件会自动在您的项目中注册 `MobileAds` 自动加载单例。
 
 ---
 
@@ -53,13 +62,64 @@
 
 在 **AdMob 编辑器面板**（`项目 -> 工具 -> AdMob 管理器`）中，配置以下选项：
 
-| 选项 | 说明 |
-|------|------|
-| **App ID** | 您的 AdMob 应用 ID（例如 `ca-app-pub-3940256099942544~1458002511`）。 |
-| **Ad Unit IDs** | 您计划使用的每种广告格式的 ID（横幅、插页、激励、激励插页）。 |
-| **Is Enabled** | 全局启用或禁用广告。 |
-| **Banner Position** | 选择横幅显示位置（顶部、底部、自定义）。 |
-| **Banner Size** | 选择横幅尺寸（横幅、大横幅、中矩形等）。 |
+![AdMob 编辑器](assets/editor.png)
+
+| 选项 | 标签页 | 说明 |
+|------|--------|------|
+| **Enabled** | General | 在编辑器中全局启用/禁用模拟广告及插件功能。 |
+| **Child Directed Treatment** | General | 配置面向儿童的设置（COPPA）。 |
+| **MaxAdContentRating** | General | 设置最高广告内容分级过滤（`G`, `PG`, `T`, `MA`）。 |
+| **Banner Size** | Banner | 选择横幅尺寸（标准、大横幅、中矩形等）。 |
+| **Position** | Banner | 选择横幅显示位置（顶部或底部）。 |
+| **Show Instantly** | Banner | 加载后自动显示横幅。 |
+| **Respect Safe Area** | Banner | 调整横幅位置以避开刘海屏/安全区域。 |
+
+### 配置 App ID
+
+在导出到真机之前，请为每个目标平台配置您的 [AdMob 应用 ID](https://support.google.com/admob/answer/7356431)（`ca-app-pub-XXXXXXXXXXXXXXXX~YYYYYYYYYY`）：
+
+=== "Android"
+
+    在 `res://android/build/AndroidManifest.xml` 的 `<application>` 标签内部添加包含 App ID 的 `<meta-data>` 标签：
+
+    ```xml
+    <!-- AdMob 应用 ID 示例: ca-app-pub-3940256099942544~3347511713 -->
+    <meta-data
+        tools:replace="android:value"
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>
+    ```
+
+=== "iOS"
+
+    您可以直接在 Godot 编辑器内部配置 AdMob 应用 ID，无需手动编辑配置文件：
+
+    1. 通过 **项目 -> 导出...** 打开导出设置窗口。
+    2. 选择您的 **iOS** 导出预设。
+    3. 在 **选项** 标签页中，滚动至 **Plugins Plist** 部分。
+    4. 将 **Gad Application Identifier** 字段设置为您的 AdMob 应用 ID（例如 `ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy`）。
+
+    !!! tip "替代配置方式"
+        您也可以直接在 `res://ios/plugins/admob.gdip` 的 `[plist]` 部分预先配置 `GADApplicationIdentifier="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"`。
+
+---
+
+## 导出项目
+
+为移动平台构建游戏时，请在 **项目 -> 导出...** 中配置导出预设：
+
+=== "Android"
+
+    1. 选择（或添加）您的 **Android** 导出预设。
+    2. 在 **选项** 标签页中：
+       - 启用 **Custom Build** 下的 **Use Custom Build**（需要通过 **项目 -> 安装 Android 构建模板...** 安装构建模板）。
+       - 启用 **Plugins** 下的 **Ad Mob**。
+
+=== "iOS"
+
+    1. 选择（或添加）您的 **iOS** 导出预设。
+    2. 在 **选项** 标签页中：
+       - 启用 **Plugins** 下的 **Ad Mob**。
 
 ---
 

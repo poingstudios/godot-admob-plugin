@@ -27,25 +27,45 @@ Godot 3用のAdMobプラグインを統合すると、AndroidおよびiOSデバ�
 
 ## プラグインのダウンロードとインポート
 
-1. [GitHub Releases](https://github.com/poingstudios/godot-admob-plugin/releases)ページから最新リリースをダウンロード。
-2. アーカイブを展開し、`addons/admob`フォルダをGodotプロジェクトの`res://addons/`ディレクトリにコピー。
-3. Godotエディタを開き、**プロジェクト -> プロジェクト設定 -> プラグイン**に移動し、**AdMob**プラグインのステータスを**有効**に切り替え。
+=== "アセットライブラリ（推奨）"
 
-有効にすると、プラグインは自動的に`MobileAds`シングルトンをプロジェクトに登録します。
+    1. Godot エディタでプロジェクトを開き、上部の **AssetLib** タブをクリックします。
+    2. **AdMob**（作成者：`poing.studios`）を検索します。
+    3. **ダウンロード** をクリックし、次に **インストール** をクリックしてプラグインファイルをプロジェクトに追加します。
+    4. **プロジェクト -> プロジェクト設定 -> プラグイン** に移動し、**AdMob** プラグインのステータスを **有効** に切り替えます。
+
+=== "GitHub Releases（手動）"
+
+    1. [GitHub Releases](https://github.com/poingstudios/godot-admob-plugin/releases) ページから最新リリースをダウンロードします。
+    2. アーカイブを解凍し、`addons/admob` フォルダを Godot プロジェクトの `res://addons/` ディレクトリにコピーします。
+    3. Godot エディタを開き、**プロジェクト -> プロジェクト設定 -> プラグイン** に移動して、**AdMob** プラグインのステータスを **有効** に切り替えます。
+
+有効にすると、プラグインは `MobileAds` 自動読み込みシングルトンをプロジェクトに自動的に登録します。
 
 ---
 
-## プラットフォームテンプレートのダウンロード
+## プラグインテンプレートのダウンロード
 
-Godotエディタ内でAdMobマネージャーを開きます（**プロジェクト -> ツール -> AdMobマネージャー**または**AdMob**パネルタブをクリック）。
+プラグインは、モバイルエクスポートをビルドするためにネイティブバイナリテンプレート（Android 用の `.aar`/`.gdap`、iOS 用の `.gdip`/`.xcframework`）を必要とします。取得方法は3つあります：
 
-=== "Android"
+=== "自動（デフォルト）"
 
-    **Androidテンプレートをダウンロード**を選択します。プラグインが自動的に必要なテンプレートファイル（`.aar`および`.gdap`）をダウンロードし、`res://android/plugins/`フォルダに直接展開します（手動でのzip解凍は不要です）。
+    プラグインを有効にすると、お使いの Godot バージョンに対応する必要なネイティブプラットフォームテンプレートをプロジェクト（`res://android/plugins/` または `res://ios/plugins/`）に自動的にダウンロードして展開します。
 
-=== "iOS"
+=== "AdMob エディタタブ（手動）"
 
-    **iOSテンプレートをダウンロード**を選択します。プラグインが自動的に必要なテンプレート文件（`.gdip`およびライブラリファイル）をダウンロードし、`res://ios/plugins/`フォルダに直接展開します（手動でのzip解凍は不要です）。
+    プラグイン有効化時に自動ダウンロードが失敗した場合、エディタ内で手動実行できます：
+
+    1. エディタ上部の **AdMob** タブを開きます。
+    2. **Downloads** サブタブに移動します。
+    3. 対象プラットフォーム（**Android** または **iOS**）を選択し、**Download Android Template** または **Download iOS Template** をクリックします。
+
+=== "GitHub Releases（直接 Zip）"
+
+    [GitHub Releases (v1.3.6-godot3)](https://github.com/poingstudios/godot-admob-plugin/releases/tag/v1.3.6-godot3) からテンプレートアーカイブを直接ダウンロードすることもできます：
+
+    1. Godot 3 用のリリースライブラリ（例：`v1.3.6-godot3`）を見つけ、お使いの Godot バージョンに対応する zip アセット（`android-template-v<godot_version>.zip` または `ios-template-v<godot_version>.zip`）をダウンロードします。
+    2. アーカイブの内容をプロジェクトのプラットフォームプラグインディレクトリ（Android の場合は `res://android/plugins/`、iOS の場合は `res://ios/plugins/`）に直接展開します。
 
 ---
 
@@ -53,13 +73,64 @@ Godotエディタ内でAdMobマネージャーを開きます（**プロジェ�
 
 **AdMobエディタパネル**（`プロジェクト -> ツール -> AdMobマネージャー`）で、以下のオプションを設定します：
 
-| オプション | 説明 |
-|-----------|------|
-| **App ID** | AdMobアプリID（例：`ca-app-pub-3940256099942544~1458002511`）。 |
-| **Ad Unit IDs** | 使用する各広告フォーマットのID（バナー、インタースティシャル、リワード、リワードインタースティシャル）。 |
-| **Is Enabled** | 広告の有効/無効をグローバルに切り替えます。 |
-| **Banner Position** | バナーの表示位置（上部、下部、カスタム）。 |
-| **Banner Size** | バナーのサイズ（バナー、大バナー、中矩形など）。 |
+![AdMobエディタ](assets/editor.png)
+
+| オプション | タブ | 説明 |
+|-----------|------|------|
+| **Enabled** | General | エディタ内のモック広告/プラグイン機能をグローバルに有効/無効化します。 |
+| **Child Directed Treatment** | General | 子供向け配信（COPPA）適合設定を行います。 |
+| **MaxAdContentRating** | General | 配信される広告の最高コンテンツレーティング（`G`, `PG`, `T`, `MA`）を設定します。 |
+| **Banner Size** | Banner | バナーのサイズ（標準、大バナー、中矩形など）を選択します。 |
+| **Position** | Banner | バナーの表示位置（上部または下部）を選択します。 |
+| **Show Instantly** | Banner | 読み込み時にバナーを自動表示します。 |
+| **Respect Safe Area** | Banner | ノッチや画面カットアウトなどのセーフエリアを考慮して配置を調整します。 |
+
+### App ID の設定
+
+実機にエクスポートする前に、対象の各プラットフォームの [AdMob アプリ ID](https://support.google.com/admob/answer/7356431)（`ca-app-pub-XXXXXXXXXXXXXXXX~YYYYYYYYYY`）を設定してください：
+
+=== "Android"
+
+    `res://android/build/AndroidManifest.xml` の `<application>` タグ内に App ID の `<meta-data>` タグを追加します：
+
+    ```xml
+    <!-- AdMob アプリ ID 例: ca-app-pub-3940256099942544~3347511713 -->
+    <meta-data
+        tools:replace="android:value"
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>
+    ```
+
+=== "iOS"
+
+    設定ファイルを直接編集することなく、Godot エディタ内で直接 AdMob アプリ ID を設定できます：
+
+    1. **プロジェクト -> エクスポート...** からエクスポートウィンドウを開きます。
+    2. **iOS** エクスポートプリセットを選択します。
+    3. **オプション** タブで **Plugins Plist** セクションまでスクロールします。
+    4. **Gad Application Identifier** フィールドに AdMob アプリ ID（例：`ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy`）を入力します。
+
+    !!! tip "代替設定"
+        `res://ios/plugins/admob.gdip` 内の `[plist]` セクションに `GADApplicationIdentifier="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"` を直接事前設定することもできます。
+
+---
+
+## プロジェクトのエクスポート
+
+モバイルプラットフォーム向けにゲームをビルドする場合は、**プロジェクト -> エクスポート...** でエクスポートプリセットを設定します：
+
+=== "Android"
+
+    1. **Android** エクスポートプリセットを選択（または追加）します。
+    2. **オプション** タブで：
+       - **Custom Build** 内の **Use Custom Build** を **オン** にします（**プロジェクト -> Android ビルドテンプレートのインストール...** が必要です）。
+       - **Plugins** 内の **Ad Mob** を **オン** にします。
+
+=== "iOS"
+
+    1. **iOS** エクスポートプリセットを選択（または追加）します。
+    2. **オプション** タブで：
+       - **Plugins** 内の **Ad Mob** を **オン** にします。
 
 ---
 

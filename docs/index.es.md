@@ -25,27 +25,47 @@ Integrar el complemento AdMob en tu proyecto de Godot para **Godot 3** te permit
 
 ---
 
-## Descargar e Importar el Complemento
+## Descarga e Importación del Complemento
 
-1. Descarga la última versión desde la página de [GitHub Releases](https://github.com/poingstudios/godot-admob-plugin/releases).
-2. Extrae el archivo y copia la carpeta `addons/admob` en el directorio `res://addons/` de tu proyecto de Godot.
-3. Abre el Editor de Godot, ve a **Proyecto -> Configuración del Proyecto -> Complementos** y cambia el estado del complemento **AdMob** a **Habilitado**.
+=== "Biblioteca de Activos (Recomendado)"
 
-Una vez habilitado, el complemento registra automáticamente el singleton `MobileAds` en tu proyecto.
+    1. Abra su proyecto en el Editor de Godot y haga clic en la pestaña **AssetLib** en la parte superior.
+    2. Busque **AdMob** (por `poing.studios`).
+    3. Haga clic en **Descargar** y luego en **Instalar** para agregar los archivos del complemento a su proyecto.
+    4. Vaya a **Proyecto -> Configuración del Proyecto -> Plugins** y cambie el estado del complemento **AdMob** a **Habilitado**.
+
+=== "Releases de GitHub (Manual)"
+
+    1. Descargue la última versión de la página de [Releases de GitHub](https://github.com/poingstudios/godot-admob-plugin/releases).
+    2. Extraiga el archivo y copie la carpeta `addons/admob` al directorio `res://addons/` de su proyecto de Godot.
+    3. Abra el Editor de Godot, vaya a **Proyecto -> Configuración del Proyecto -> Plugins** y cambie el estado del complemento **AdMob** a **Habilitado**.
+
+Una vez habilitado, el complemento registrará automáticamente el singleton autoload `MobileAds` en su proyecto.
 
 ---
 
 ## Descargar Plantillas de Plataforma
 
-Abre el Administrador de AdMob dentro del editor de Godot (**Proyecto -> Herramientas -> Administrador de AdMob** o haz clic en la pestaña del panel **AdMob**).
+El complemento requiere plantillas binarias nativas (`.aar`/`.gdap` para Android, `.gdip`/`.xcframework` para iOS) para compilar exportaciones móviles. Puede obtenerlas de tres maneras:
 
-=== "Android"
+=== "Automático (Predeterminado)"
 
-    Selecciona **Descargar Plantilla Android**. El complemento descargará y extraerá automáticamente los archivos de plantilla necesarios (`.aar` y `.gdap`) directamente en tu carpeta `res://android/plugins/` (no es necesario extraer el archivo zip manualmente).
+    Al habilitar el complemento, este intentará descargar y extraer automáticamente las plantillas nativas correspondientes a su versión de Godot directamente en su proyecto (`res://android/plugins/` o `res://ios/plugins/`).
 
-=== "iOS"
+=== "Pestaña del Editor AdMob (Manual)"
 
-    Selecciona **Descargar Plantilla iOS**. El complemento descargará y extraerá automáticamente los archivos de plantilla necesarios (`.gdip` y bibliotecas) directamente en tu carpeta `res://ios/plugins/` (no es necesario extraer el archivo zip manualmente).
+    Si la descarga automática falla al activar el complemento, puede realizar la descarga manualmente desde el editor:
+
+    1. Abra la pestaña **AdMob** en la parte superior del espacio de trabajo del editor.
+    2. Vaya a la subpestaña **Downloads**.
+    3. Seleccione la plataforma deseada (**Android** o **iOS**) y haga clic en **Download Android Template** o **Download iOS Template**.
+
+=== "Releases de GitHub (Zip Directo)"
+
+    También puede descargar el archivo de la plantilla directamente desde la página de [Releases de GitHub (v1.3.6-godot3)](https://github.com/poingstudios/godot-admob-plugin/releases/tag/v1.3.6-godot3):
+
+    1. Busque la etiqueta de release para Godot 3 (ej: `v1.3.6-godot3`) y descargue el archivo zip correspondiente a su versión de Godot (`android-template-v<godot_version>.zip` o `ios-template-v<godot_version>.zip`).
+    2. Extraiga el contenido del archivo directamente en el directorio de complementos de la plataforma en su proyecto (`res://android/plugins/` para Android o `res://ios/plugins/` para iOS).
 
 ---
 
@@ -53,13 +73,64 @@ Abre el Administrador de AdMob dentro del editor de Godot (**Proyecto -> Herrami
 
 En el **panel del Editor de AdMob** (`Proyecto -> Herramientas -> Administrador de AdMob`), configure las siguientes opciones:
 
-| Opción | Descripción |
-|--------|-------------|
-| **App ID** | Su ID de aplicación de AdMob (ej: `ca-app-pub-3940256099942544~1458002511`). |
-| **Ad Unit IDs** | IDs para cada formato de anuncio que planea usar (Banner, Intersticial, Recompensado, Intersticial Recompensado). |
-| **Is Enabled** | Active/desactive los anuncios globalmente. |
-| **Banner Position** | Elija dónde aparece el banner (Superior, Inferior, Personalizado). |
-| **Banner Size** | Seleccione el tamaño del banner (Banner, Banner Grande, Rectángulo Mediano, etc.). |
+![Editor de AdMob](assets/editor.png)
+
+| Opción | Pestaña | Descripción |
+|--------|---------|-------------|
+| **Enabled** | General | Activa/desactiva anuncios simulados / funcionalidad del complemento en el editor globalmente. |
+| **Child Directed Treatment** | General | Configura el cumplimiento de COPPA (Tratamiento dirigido a niños). |
+| **MaxAdContentRating** | General | Estabilidad la clasificación máxima del contenido del anuncio (`G`, `PG`, `T`, `MA`). |
+| **Banner Size** | Banner | Selecciona el tamaño del banner (Estándar, Banner Grande, Rectángulo Mediano, etc.). |
+| **Position** | Banner | Elija la posición del banner (Superior o Inferior). |
+| **Show Instantly** | Banner | Muestra el banner automáticamente al cargar. |
+| **Respect Safe Area** | Banner | Ajusta la posición del banner para respetar las áreas seguras de la pantalla (muescas / notches). |
+
+### Configuración del App ID
+
+Antes de exportar a un dispositivo físico, configure su [App ID de AdMob](https://support.google.com/admob/answer/7356431) (`ca-app-pub-XXXXXXXXXXXXXXXX~YYYYYYYYYY`) para cada plataforma de destino:
+
+=== "Android"
+
+    Agregue una etiqueta `<meta-data>` con su App ID dentro de `<application>` en `res://android/build/AndroidManifest.xml`:
+
+    ```xml
+    <!-- Ejemplo de App ID de AdMob: ca-app-pub-3940256099942544~3347511713 -->
+    <meta-data
+        tools:replace="android:value"
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>
+    ```
+
+=== "iOS"
+
+    Puede configurar su App ID de AdMob directamente en el Editor de Godot sin necesidad de editar archivos de configuración manualmente:
+
+    1. Abra la ventana de exportación desde **Proyecto -> Exportar...**.
+    2. Seleccione su perfil de exportación para **iOS**.
+    3. En la pestaña **Opciones**, navegue hasta la sección **Plugins Plist**.
+    4. Complete el campo **Gad Application Identifier** con su App ID de AdMob (ej: `ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy`).
+
+    !!! tip "Configuración Alternativa"
+        También puede predefinir `GADApplicationIdentifier="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"` directamente dentro de la sección `[plist]` del archivo `res://ios/plugins/admob.gdip`.
+
+---
+
+## Exportando el Proyecto
+
+Al compilar su juego para plataformas móviles, configure los perfiles de exportación en **Proyecto -> Exportar...**:
+
+=== "Android"
+
+    1. Seleccione (o agregue) su perfil de exportación para **Android**.
+    2. En la pestaña **Opciones**:
+       - Active **Use Custom Build** (requiere la Plantilla de Compilación de Android instalada desde **Proyecto -> Instalar plantilla de compilación de Android...**).
+       - Active **Ad Mob** en **Plugins**.
+
+=== "iOS"
+
+    1. Seleccione (o agregue) su perfil de exportación para **iOS**.
+    2. En la pestaña **Opciones**:
+       - Active **Ad Mob** en **Plugins**.
 
 ---
 
