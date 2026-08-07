@@ -53,13 +53,45 @@ Godotエディタ内でAdMobマネージャーを開きます（**プロジェ�
 
 **AdMobエディタパネル**（`プロジェクト -> ツール -> AdMobマネージャー`）で、以下のオプションを設定します：
 
-| オプション | 説明 |
-|-----------|------|
-| **App ID** | AdMobアプリID（例：`ca-app-pub-3940256099942544~1458002511`）。 |
-| **Ad Unit IDs** | 使用する各広告フォーマットのID（バナー、インタースティシャル、リワード、リワードインタースティシャル）。 |
-| **Is Enabled** | 広告の有効/無効をグローバルに切り替えます。 |
-| **Banner Position** | バナーの表示位置（上部、下部、カスタム）。 |
-| **Banner Size** | バナーのサイズ（バナー、大バナー、中矩形など）。 |
+![AdMobエディタ](assets/editor.png)
+
+| オプション | タブ | 説明 |
+|-----------|------|------|
+| **Enabled** | General | エディタ内のモック広告/プラグイン機能をグローバルに有効/無効化します。 |
+| **Child Directed Treatment** | General | 子供向け配信（COPPA）適合設定を行います。 |
+| **MaxAdContentRating** | General | 配信される広告の最高コンテンツレーティング（`G`, `PG`, `T`, `MA`）を設定します。 |
+| **Banner Size** | Banner | バナーのサイズ（標準、大バナー、中矩形など）を選択します。 |
+| **Position** | Banner | バナーの表示位置（上部または下部）を選択します。 |
+| **Show Instantly** | Banner | 読み込み時にバナーを自動表示します。 |
+| **Respect Safe Area** | Banner | ノッチや画面カットアウトなどのセーフエリアを考慮して配置を調整します。 |
+
+### App ID の設定
+
+実機にエクスポートする前に、対象の各プラットフォームの [AdMob アプリ ID](https://support.google.com/admob/answer/7356431)（`ca-app-pub-XXXXXXXXXXXXXXXX~YYYYYYYYYY`）を設定してください：
+
+=== "Android"
+
+    `res://android/build/AndroidManifest.xml` の `<application>` タグ内に App ID の `<meta-data>` タグを追加します：
+
+    ```xml
+    <!-- AdMob アプリ ID 例: ca-app-pub-3940256099942544~3347511713 -->
+    <meta-data
+        tools:replace="android:value"
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>
+    ```
+
+=== "iOS"
+
+    設定ファイルを直接編集することなく、Godot エディタ内で直接 AdMob アプリ ID を設定できます：
+
+    1. **プロジェクト -> エクスポート...** からエクスポートウィンドウを開きます。
+    2. **iOS** エクスポートプリセットを選択します。
+    3. **オプション** タブで **Plugins Plist** セクションまでスクロールします。
+    4. **Gad Application Identifier** フィールドに AdMob アプリ ID（例：`ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy`）を入力します。
+
+    !!! tip "代替設定"
+        `res://ios/plugins/admob.gdip` 内の `[plist]` セクションに `GADApplicationIdentifier="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"` を直接事前設定することもできます。
 
 ---
 

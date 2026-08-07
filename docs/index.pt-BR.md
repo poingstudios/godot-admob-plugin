@@ -53,13 +53,45 @@ Após habilitar o plugin, a aba **AdMob** aparecerá nas abas principais do edit
 
 No **painel do AdMob** (`Projeto -> Ferramentas -> AdMob Manager`), configure as seguintes opções:
 
-| Opção | Descrição |
-|-------|-----------|
-| **App ID** | Seu ID de aplicativo AdMob (ex: `ca-app-pub-3940256099942544~1458002511`). |
-| **Ad Unit IDs** | IDs para cada formato de anúncio que você planeja usar (Banner, Intersticial, Premiado, Intersticial Premiado). |
-| **Is Enabled** | Ative/desative os anúncios globalmente. |
-| **Banner Position** | Escolha onde o banner aparece (Topo, Rodapé, Personalizado). |
-| **Banner Size** | Selecione o tamanho do banner (Banner, Banner Grande, Retângulo Médio, etc.). |
+![Editor AdMob](assets/editor.png)
+
+| Opção | Aba | Descrição |
+|-------|-----|-----------|
+| **Enabled** | Geral | Ativa/desativa os anúncios mock / funcionalidade do plugin no editor globalmente. |
+| **Child Directed Treatment** | Geral | Configura a conformidade COPPA (Tratamento direcionado a crianças). |
+| **MaxAdContentRating** | Geral | Define a classificação máxima de conteúdo dos anúncios (`G`, `PG`, `T`, `MA`). |
+| **Banner Size** | Banner | Seleciona o tamanho do banner (Padrão, Banner Grande, Retângulo Médio, etc.). |
+| **Position** | Banner | Escolha a posição do banner (Topo ou Rodapé). |
+| **Show Instantly** | Banner | Exibe o banner automaticamente ao carregar. |
+| **Respect Safe Area** | Banner | Ajusta o posicionamento do banner para respeitar áreas seguras (recortes de tela / notches). |
+
+### Configuração do App ID
+
+Antes de exportar para um dispositivo físico, configure o seu [App ID do AdMob](https://support.google.com/admob/answer/7356431) (`ca-app-pub-XXXXXXXXXXXXXXXX~YYYYYYYYYY`) para cada plataforma desejada:
+
+=== "Android"
+
+    Adicione uma tag `<meta-data>` com seu App ID dentro de `<application>` em `res://android/build/AndroidManifest.xml`:
+
+    ```xml
+    <!-- Exemplo de App ID do AdMob: ca-app-pub-3940256099942544~3347511713 -->
+    <meta-data
+        tools:replace="android:value"
+        android:name="com.google.android.gms.ads.APPLICATION_ID"
+        android:value="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"/>
+    ```
+
+=== "iOS"
+
+    Você pode configurar o seu App ID do AdMob diretamente no Godot Editor sem a necessidade de editar arquivos de configuração manualmente:
+
+    1. Abra as configurações de exportação em **Projeto -> Exportar...**.
+    2. Selecione a sua definição de exportação para **iOS**.
+    3. Na aba **Opções**, navegue até a seção **Plugins Plist**.
+    4. Preencha o campo **Gad Application Identifier** com o seu App ID do AdMob (ex: `ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy`).
+
+    !!! tip "Configuração Alternativa"
+        Você também pode pré-definir `GADApplicationIdentifier="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"` diretamente na seção `[plist]` do arquivo `res://ios/plugins/admob.gdip`.
 
 ---
 
