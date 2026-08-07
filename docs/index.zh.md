@@ -27,11 +27,20 @@
 
 ## 下载并导入插件
 
-1. 从[GitHub Releases](https://github.com/poingstudios/godot-admob-plugin/releases)页面下载最新版本。
-2. 解压文件并将`addons/admob`文件夹复制到Godot项目的`res://addons/`目录。
-3. 打开Godot编辑器，导航到**项目 -> 项目设置 -> 插件**，将**AdMob**插件状态切换为**已启用**。
+=== "资产库 (推荐)"
 
-启用后，插件会自动将`MobileAds`单例注册到您的项目中。
+    1. 在 Godot 编辑器中打开您的项目，然后点击顶部的 **AssetLib** 标签页。
+    2. 搜索 **AdMob**（作者为 `poing.studios`）。
+    3. 点击 **下载**，然后点击 **安装** 将插件文件添加到您的项目中。
+    4. 转到 **项目 -> 项目设置 -> 插件**，将 **AdMob** 插件的状态切换为 **启用**。
+
+=== "GitHub Releases (手动)"
+
+    1. 从 [GitHub Releases](https://github.com/poingstudios/godot-admob-plugin/releases) 页面下载最新版本。
+    2. 解压压缩包并将 `addons/admob` 文件夹复制到 Godot 项目的 `res://addons/` 目录中。
+    3. 打开 Godot 编辑器，转到 **项目 -> 项目设置 -> 插件**，将 **AdMob** 插件的状态切换为 **启用**。
+
+启用后，插件会自动在您的项目中注册 `MobileAds` 自动加载单例。
 
 ---
 
@@ -92,6 +101,25 @@
 
     !!! tip "替代配置方式"
         您也可以直接在 `res://ios/plugins/admob.gdip` 的 `[plist]` 部分预先配置 `GADApplicationIdentifier="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"`。
+
+---
+
+## 导出项目
+
+为移动平台构建游戏时，请在 **项目 -> 导出...** 中配置导出预设：
+
+=== "Android"
+
+    1. 选择（或添加）您的 **Android** 导出预设。
+    2. 在 **选项** 标签页中：
+       - 启用 **Custom Build** 下的 **Use Custom Build**（需要通过 **项目 -> 安装 Android 构建模板...** 安装构建模板）。
+       - 启用 **Plugins** 下的 **Ad Mob**。
+
+=== "iOS"
+
+    1. 选择（或添加）您的 **iOS** 导出预设。
+    2. 在 **选项** 标签页中：
+       - 启用 **Plugins** 下的 **Ad Mob**。
 
 ---
 

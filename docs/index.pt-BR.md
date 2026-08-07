@@ -25,27 +25,47 @@ A integração do plugin AdMob da Poing Studios no seu projeto Godot 3 permite e
 
 ---
 
-## Download e Importação do Plugin
+## Baixar e Importar o Plugin
 
-1. Baixe o release mais recente na página de [GitHub Releases](https://github.com/poingstudios/godot-admob-plugin/releases).
-2. Extraia o arquivo e copie a pasta `addons/admob` para o diretório `res://addons/` do seu projeto Godot.
-3. Abra o Editor do Godot, navegue até **Projeto -> Configurações do Projeto -> Plugins** e altere o status do plugin **AdMob** para **Habilitado**.
+=== "Asset Library (Recomendado)"
 
-Uma vez habilitado, o plugin registra automaticamente o singleton autoload `MobileAds` no seu projeto.
+    1. Abra o seu projeto no Godot Editor e clique na aba **AssetLib** no topo.
+    2. Pesquise por **AdMob** (por `poing.studios`).
+    3. Clique em **Download** e depois em **Instalar** para adicionar os arquivos do plugin ao seu projeto.
+    4. Vá em **Projeto -> Configurações do Projeto -> Plugins** e altere o status do plugin **AdMob** para **Ativo**.
+
+=== "GitHub Releases (Manual)"
+
+    1. Baixe a versão mais recente na página de [Releases no GitHub](https://github.com/poingstudios/godot-admob-plugin/releases).
+    2. Extraia o arquivo e copie a pasta `addons/admob` para o diretório `res://addons/` do seu projeto Godot.
+    3. Abra o Godot Editor, navegue até **Projeto -> Configurações do Projeto -> Plugins** e altere o status do plugin **AdMob** para **Ativo**.
+
+Assim que ativado, o plugin registrará automaticamente o singleton autoload `MobileAds` no seu projeto.
 
 ---
 
 ## Baixar Templates de Plataforma
 
-Após habilitar o plugin, a aba **AdMob** aparecerá nas abas principais do editor (ao lado de **2D**, **3D**, **AssetLib**, etc.) no topo do editor. Abra-a para acessar o gerenciador AdMob.
+O plugin requer templates binários nativos (`.aar`/`.gdap` para Android, `.gdip`/`.xcframework` para iOS) para compilar as exportações móveis. Você pode obtê-los de três formas:
 
-=== "Android"
+=== "Automático (Padrão)"
 
-    Selecione **Download Android Template**. O plugin irá baixar e extrair automaticamente os arquivos de template necessários (`.aar` e `.gdap`) diretamente na sua pasta `res://android/plugins/` (não é necessário extrair o zip manualmente).
+    Ao ativar o plugin, ele tentará automaticamente baixar e extrair os templates nativos correspondentes à sua versão do Godot diretamente no seu projeto (`res://android/plugins/` ou `res://ios/plugins/`).
 
-=== "iOS"
+=== "Aba do Editor AdMob (Manual)"
 
-    Selecione **Download iOS Template**. O plugin irá baixar e extrair automaticamente os arquivos de template necessários (`.gdip` e arquivos de biblioteca) diretamente na sua pasta `res://ios/plugins/` (não é necessário extrair o zip manualmente).
+    Caso o download automático falhe ao ativar o plugin, você pode realizar o download manualmente pelo editor:
+
+    1. Abra a aba **AdMob** no topo do espaço de trabalho do editor.
+    2. Acesse a sub-aba **Downloads**.
+    3. Selecione a plataforma desejada (**Android** ou **iOS**) e clique em **Download Android Template** ou **Download iOS Template**.
+
+=== "GitHub Releases (Zip Direto)"
+
+    Você também pode baixar o arquivo do template diretamente na página de [Releases no GitHub (v1.3.6-godot3)](https://github.com/poingstudios/godot-admob-plugin/releases/tag/v1.3.6-godot3):
+
+    1. Localize a tag de release para o Godot 3 (ex: `v1.3.6-godot3`) e baixe o arquivo zip correspondente à sua versão do Godot (`android-template-v<godot_version>.zip` ou `ios-template-v<godot_version>.zip`).
+    2. Extraia o conteúdo do arquivo diretamente no diretório de plugins da plataforma no seu projeto (`res://android/plugins/` para Android ou `res://ios/plugins/` para iOS).
 
 ---
 
@@ -92,6 +112,25 @@ Antes de exportar para um dispositivo físico, configure o seu [App ID do AdMob]
 
     !!! tip "Configuração Alternativa"
         Você também pode pré-definir `GADApplicationIdentifier="ca-app-pub-xxxxxxxxxxxxxxxx~yyyyyyyyyy"` diretamente na seção `[plist]` do arquivo `res://ios/plugins/admob.gdip`.
+
+---
+
+## Exportando o Projeto
+
+Ao compilar o seu jogo para plataformas móveis, configure as definições de exportação em **Projeto -> Exportar...**:
+
+=== "Android"
+
+    1. Selecione (ou adicione) a sua definição de exportação para **Android**.
+    2. Na aba **Opções**:
+       - Marque **Use Custom Build** como **Ativo** (requer o Template de Build do Android instalado via **Projeto -> Instalar Template de Build do Android...**).
+       - Marque **Ad Mob** como **Ativo** em **Plugins**.
+
+=== "iOS"
+
+    1. Selecione (ou adicione) a sua definição de exportação para **iOS**.
+    2. Na aba **Opções**:
+       - Marque **Ad Mob** como **Ativo** em **Plugins**.
 
 ---
 
