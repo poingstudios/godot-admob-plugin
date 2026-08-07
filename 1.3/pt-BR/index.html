@@ -1255,11 +1255,18 @@
 
 <h1 id="comecar">Começar</h1>
 <div class="admonition note">
-<p class="admonition-title">Documentação Godot 3 (v1)</p>
-<p>Esta documentação é para o plugin <strong>v1</strong>, que suporta apenas <strong>Godot 3.x</strong>.
-Para <strong>Godot 4.2+</strong>, veja a <a href="https://poingstudios.github.io/godot-admob-plugin/stable/">documentação estável</a>.</p>
+<p class="admonition-title">Documentação do Godot 3 (v1)</p>
+<p>Esta documentação é destinada exclusivamente ao plugin <strong>v1</strong>, compatível com o <strong>Godot 3.x</strong>.
+Para <strong>Godot 4.2+</strong>, acesse a <a href="https://poingstudios.github.io/godot-admob-plugin/stable/">documentação estável</a>.</p>
 </div>
-<p>A integração do plugin AdMob da Poing Studios no seu projeto Godot 3 permite exibir anúncios do Google Mobile Ads em dispositivos Android e iOS de forma simples.</p>
+<div class="admonition important">
+<p class="admonition-title">Principais Mudanças nesta Versão:</p>
+<ul>
+<li><strong>iOS</strong>: Agora utiliza o <strong>Swift Package Manager (SPM)</strong> para resolver e vincular automaticamente todas as dependências (como o SDK do Google Mobile Ads). Não é mais necessário baixar e vincular os arquivos do SDK manualmente.</li>
+<li><strong>Android</strong>: A versão mínima do Android suportada passou para o <strong>Android 6.0 (API Level 23 / Min SDK 23)</strong>. Certifique-se de configurar as opções de exportação do Android com o <strong>Min SDK 23</strong>.</li>
+</ul>
+</div>
+<p>A integração do plugin AdMob no seu projeto Godot para o <strong>Godot 3</strong> permite exibir facilmente anúncios do Google Mobile Ads em dispositivos Android e iOS. de forma simples.</p>
 <hr />
 <h2 id="pre-requisitos">Pré-requisitos</h2>
 <ul>
@@ -1417,14 +1424,18 @@ Para <strong>Godot 4.2+</strong>, veja a <a href="https://poingstudios.github.io
 <li>Selecione (ou adicione) a sua definição de exportação para <strong>Android</strong>.</li>
 <li>Na aba <strong>Opções</strong>:</li>
 <li>Marque <strong>Use Custom Build</strong> como <strong>Ativo</strong> (requer o Template de Build do Android instalado via <strong>Projeto -&gt; Instalar Template de Build do Android...</strong>).</li>
+<li>Configure o <strong>Min SDK</strong> para <code>23</code> (Android 6.0).</li>
 <li>Marque <strong>Ad Mob</strong> como <strong>Ativo</strong> em <strong>Plugins</strong>.</li>
+<li>Clique em <strong>Exportar Projeto...</strong> para gerar o seu arquivo APK ou AAB.</li>
 </ol>
+<p><img alt="Definição de Exportação Android" src="../assets/export_android.png" /></p>
 </div>
 <div class="tabbed-block">
 <ol>
 <li>Selecione (ou adicione) a sua definição de exportação para <strong>iOS</strong>.</li>
 <li>Na aba <strong>Opções</strong>:</li>
 <li>Marque <strong>Ad Mob</strong> como <strong>Ativo</strong> em <strong>Plugins</strong>.</li>
+<li>Clique em <strong>Exportar Projeto...</strong> para gerar o seu projeto do Xcode.</li>
 </ol>
 </div>
 </div>
