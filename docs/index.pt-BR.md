@@ -1,10 +1,14 @@
 # Começar
 
-!!! note "Documentação Godot 3 (v1)"
-    Esta documentação é para o plugin **v1**, que suporta apenas **Godot 3.x**.
-    Para **Godot 4.2+**, veja a [documentação estável](https://poingstudios.github.io/godot-admob-plugin/stable/).
+!!! note "Documentação do Godot 3 (v1)"
+    Esta documentação é destinada exclusivamente ao plugin **v1**, compatível com o **Godot 3.x**.
+    Para **Godot 4.2+**, acesse a [documentação estável](https://poingstudios.github.io/godot-admob-plugin/stable/).
 
-A integração do plugin AdMob da Poing Studios no seu projeto Godot 3 permite exibir anúncios do Google Mobile Ads em dispositivos Android e iOS de forma simples.
+!!! important "Principais Mudanças nesta Versão:"
+    - **iOS**: Agora utiliza o **Swift Package Manager (SPM)** para resolver e vincular automaticamente todas as dependências (como o SDK do Google Mobile Ads). Não é mais necessário baixar e vincular os arquivos do SDK manualmente.
+    - **Android**: A versão mínima do Android suportada passou para o **Android 6.0 (API Level 23 / Min SDK 23)**. Certifique-se de configurar as opções de exportação do Android com o **Min SDK 23**.
+
+A integração do plugin AdMob no seu projeto Godot para o **Godot 3** permite exibir facilmente anúncios do Google Mobile Ads em dispositivos Android e iOS. de forma simples.
 
 ---
 
@@ -124,13 +128,18 @@ Ao compilar o seu jogo para plataformas móveis, configure as definições de ex
     1. Selecione (ou adicione) a sua definição de exportação para **Android**.
     2. Na aba **Opções**:
        - Marque **Use Custom Build** como **Ativo** (requer o Template de Build do Android instalado via **Projeto -> Instalar Template de Build do Android...**).
+       - Configure o **Min SDK** para `23` (Android 6.0).
        - Marque **Ad Mob** como **Ativo** em **Plugins**.
+    3. Clique em **Exportar Projeto...** para gerar o seu arquivo APK ou AAB.
+
+    ![Definição de Exportação Android](assets/export_android.png)
 
 === "iOS"
 
     1. Selecione (ou adicione) a sua definição de exportação para **iOS**.
     2. Na aba **Opções**:
        - Marque **Ad Mob** como **Ativo** em **Plugins**.
+    3. Clique em **Exportar Projeto...** para gerar o seu projeto do Xcode.
 
 ---
 

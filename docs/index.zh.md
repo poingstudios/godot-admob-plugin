@@ -113,13 +113,18 @@
     1. 选择（或添加）您的 **Android** 导出预设。
     2. 在 **选项** 标签页中：
        - 启用 **Custom Build** 下的 **Use Custom Build**（需要通过 **项目 -> 安装 Android 构建模板...** 安装构建模板）。
+       - 将 **Min SDK** 设置为 `23`（Android 6.0）。
        - 启用 **Plugins** 下的 **Ad Mob**。
+    3. 点击 **导出项目...** 生成您的 APK 或 AAB 文件。
+
+    ![Android 导出预设](assets/export_android.png)
 
 === "iOS"
 
     1. 选择（或添加）您的 **iOS** 导出预设。
     2. 在 **选项** 标签页中：
        - 启用 **Plugins** 下的 **Ad Mob**。
+    3. 点击 **导出项目...** 生成您的 Xcode 项目。
 
 ---
 
