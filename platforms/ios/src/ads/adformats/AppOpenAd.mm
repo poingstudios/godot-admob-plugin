@@ -81,7 +81,9 @@
 /// Tells the delegate that the ad dismissed full screen content.
 - (void)adDidDismissFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad{
     PoingGodotAdMobAppOpenAd::get_singleton()->emit_signal("on_app_open_ad_dismissed_full_screen_content", [self.UID intValue]);
-    OS_IOS::get_singleton()->on_focus_in();
+    if ([StaticVariablesHelper pauseOnBackground]){
+        OS_IOS::get_singleton()->on_focus_in();
+    }
 }
 
 /// Tells the delegate that the ad failed to present full screen content.
@@ -105,9 +107,9 @@
 - (void)adWillPresentFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad {
     NSLog(@"AppOpenAd: Ad will present full screen content.");
     
-    NSLog(@"AppOpenAd: pauseOnBackground %s", StaticVariablesHelper.pauseOnBackground ? "true" : "false");
+    NSLog(@"AppOpenAd: pauseOnBackground %s", [StaticVariablesHelper pauseOnBackground] ? "true" : "false");
 
-    if (StaticVariablesHelper.pauseOnBackground){
+    if ([StaticVariablesHelper pauseOnBackground]){
         OS_IOS::get_singleton()->on_focus_out();
     }
 }
