@@ -5147,16 +5147,16 @@
 </div>
 </div>
 <h2 id="_3">重要提示</h2>
-<blockquote>
-<p>[!WARNING]
-<strong>MediaView 要求</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">MediaView 要求</p>
 <p>如果您使用 <code>SMALL</code> 模板加载视频广告，您会看到一条实现问题/警告，指出：
 <code>MediaView not used for main image or video asset. Use MediaView instead of ImageView to show the main image or video asset</code>。</p>
 <p>这是因为官方 Google Mobile Ads SDK 需要可见的 <code>MediaView</code> 来渲染视频，但紧凑的 <code>SMALL</code> 模板布局默认不支持或包含一个功能性的视图。如果您的广告单元提供视频广告，您<strong>必须使用包含内置 <code>MediaView</code> 的 <code>MEDIUM</code> 模板</strong>。</p>
-<p>[!NOTE]
-<strong>MediaContent 数值（时长与宽高比）</strong></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">MediaContent 数值（时长与宽高比）</p>
 <p>如果在 <code>on_ad_loaded</code> 回调中立即查询，<code>MediaContent</code> 对象中的视频时长和宽高比等数值将返回 <code>0.0</code>。您必须在调用 <code>render_template()</code> <strong>之后</strong>进行查询，此时广告视图已被实例化并完成布局。</p>
-</blockquote>
+</div>
 
 
 

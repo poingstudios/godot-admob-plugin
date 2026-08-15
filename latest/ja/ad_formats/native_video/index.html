@@ -5147,16 +5147,16 @@
 </div>
 </div>
 <h2 id="_3">重要な注意点</h2>
-<blockquote>
-<p>[!WARNING]
-<strong>MediaViewの要件</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">MediaViewの要件</p>
 <p><code>SMALL</code> テンプレートを使用して動画広告をロードすると、実装の問題に関する次のような警告が表示されます：
 <code>MediaView not used for main image or video asset. Use MediaView instead of ImageView to show the main image or video asset</code> (メインの画像または動画アセットにMediaViewが使用されていません。メインの画像または動画アセットを表示するには、ImageViewの代わりにMediaViewを使用してください)。</p>
 <p>これは、公式のGoogle Mobile Ads SDKが動画をレンダリングするために表示可能な <code>MediaView</code> を必要とするのに対し、コンパクトな <code>SMALL</code> テンプレートレイアウトにはデフォルトで機能するものが含まれていないためです。動画広告を配信する広告ユニットを使用する場合は、ビルトインの <code>MediaView</code> が含まれている <strong><code>MEDIUM</code> テンプレートを使用する必要があります</strong>。</p>
-<p>[!NOTE]
-<strong>MediaContent の値 (再生時間とアスペクト比)</strong></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">MediaContent の値 (再生時間とアスペクト比)</p>
 <p><code>on_ad_loaded</code> コールバック内で <code>MediaContent</code> オブジェクトから動画の再生時間やアスペクト比をすぐに照会すると、<code>0.0</code> が返されます。これらの値は、広告ビューがインフレートされてレイアウトされた後、つまり <code>render_template()</code> を呼び出した<strong>後</strong>に照会する必要があります。</p>
-</blockquote>
+</div>
 
 
 

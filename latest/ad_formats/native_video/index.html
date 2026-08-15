@@ -5147,16 +5147,16 @@
 </div>
 </div>
 <h2 id="important-notes">Important Notes</h2>
-<blockquote>
-<p>[!WARNING]
-<strong>MediaView Requirement</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">MediaView Requirement</p>
 <p>If you load a video ad using the <code>SMALL</code> template, you will see an implementation issue/warning stating:
 <code>MediaView not used for main image or video asset. Use MediaView instead of ImageView to show the main image or video asset</code>.</p>
 <p>This happens because the official Google Mobile Ads SDK requires a visible <code>MediaView</code> to render the video, but the compact <code>SMALL</code> template layout does not support or include a functional one by default. If your ad unit serves video ads, you <strong>must use the <code>MEDIUM</code> template</strong> which includes a built-in <code>MediaView</code>.</p>
-<p>[!NOTE]
-<strong>MediaContent Values (Duration &amp; Aspect Ratio)</strong></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">MediaContent Values (Duration &amp; Aspect Ratio)</p>
 <p>Values like video duration and aspect ratio from the <code>MediaContent</code> object will return <code>0.0</code> if queried immediately inside the <code>on_ad_loaded</code> callback. You must query them <strong>after</strong> calling <code>render_template()</code>, once the ad view has been inflated and laid out.</p>
-</blockquote>
+</div>
 
 
 

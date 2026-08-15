@@ -5147,16 +5147,16 @@
 </div>
 </div>
 <h2 id="notas-importantes">Notas importantes</h2>
-<blockquote>
-<p>[!WARNING]
-<strong>Requisito de MediaView</strong></p>
+<div class="admonition warning">
+<p class="admonition-title">Requisito de MediaView</p>
 <p>Si cargas un anuncio de video usando la plantilla <code>SMALL</code>, verás una advertencia de problema de implementación que indica:
 <code>MediaView not used for main image or video asset. Use MediaView instead of ImageView to show the main image or video asset</code>.</p>
 <p>Esto sucede porque el SDK oficial de Google Mobile Ads requiere un <code>MediaView</code> visible para renderizar el video, pero el diseño compacto de la plantilla <code>SMALL</code> no lo admite o incluye de forma predeterminada. Si tu bloque de anuncios publica anuncios de video, <strong>debes usar la plantilla <code>MEDIUM</code></strong> que incluye un <code>MediaView</code> integrado.</p>
-<p>[!NOTE]
-<strong>Valores de MediaContent (Duración y Relación de Aspecto)</strong></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Valores de MediaContent (Duración y Relación de Aspecto)</p>
 <p>Los valores como la duración del video y la relación de aspecto del objeto <code>MediaContent</code> devolverán <code>0.0</code> si se consultan inmediatamente dentro de la función de callback <code>on_ad_loaded</code>. Debes consultarlos <strong>después</strong> de llamar a <code>render_template()</code>, una vez que la vista del anuncio se haya inflado y diseñado en pantalla.</p>
-</blockquote>
+</div>
 
 
 
