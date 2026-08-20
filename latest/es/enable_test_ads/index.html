@@ -5299,8 +5299,8 @@ A continuación se muestran bloques de anuncios de muestra para cada formato dis
 <div class="tabbed-content">
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code>```java
-I/Ads: Use RequestConfiguration.Builder.setTestDeviceIds(Arrays.asList(&quot;33BE2250B43518CCDA7DE426D04EE231&quot;)) 
-to get test ads on this device.&quot;
+I/Ads: Use RequestConfiguration.Builder.setTestDeviceIds(Arrays.asList("33BE2250B43518CCDA7DE426D04EE231")) 
+to get test ads on this device."
 ```
 </code></pre></div>
 </div>
@@ -5308,7 +5308,7 @@ to get test ads on this device.&quot;
 <div class="highlight"><pre><span></span><code>```swift
 &lt;Google&gt; To get test ads on this device, set:
 GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers =
-@[ @&quot;2077ef9a63d2b398840261c8221a0c9b&quot; ];
+@[ @"2077ef9a63d2b398840261c8221a0c9b" ];
 ```
 </code></pre></div>
 </div>
@@ -5326,7 +5326,7 @@ GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers =
 <span class="normal"><a href="#__codelineno-2-3">3</a></span>
 <span class="normal"><a href="#__codelineno-2-4">4</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1"></a><span class="k">func</span><span class="w"> </span><span class="n">_ready</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2"></a><span class="w">    </span><span class="k">var</span><span class="w"> </span><span class="n">request_configuration</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">RequestConfiguration</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="hll"><span class="w">    </span><span class="n">request_configuration</span><span class="o">.</span><span class="n">test_device_ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;2077ef9a63d2b398840261c8221a0c9b&quot;</span><span class="p">]</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3"></a><span class="hll"><span class="w">    </span><span class="n">request_configuration</span><span class="o">.</span><span class="n">test_device_ids</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s2">"2077ef9a63d2b398840261c8221a0c9b"</span><span class="p">]</span>
 </span><a id="__codelineno-2-4" name="__codelineno-2-4"></a><span class="hll"><span class="w">    </span><span class="n">MobileAds</span><span class="o">.</span><span class="n">set_request_configuration</span><span class="p">(</span><span class="n">request_configuration</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 </div>
@@ -5352,7 +5352,7 @@ GADMobileAds.sharedInstance.requestConfiguration.testDeviceIdentifiers =
 <a id="__codelineno-3-7" name="__codelineno-3-7"></a><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">_Ready</span><span class="p">()</span>
 <a id="__codelineno-3-8" name="__codelineno-3-8"></a><span class="w">    </span><span class="p">{</span>
 <a id="__codelineno-3-9" name="__codelineno-3-9"></a><span class="w">        </span><span class="kt">var</span><span class="w"> </span><span class="n">requestConfiguration</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">RequestConfiguration</span><span class="p">();</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="hll"><span class="w">        </span><span class="n">requestConfiguration</span><span class="p">.</span><span class="n">TestDeviceIds</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;2077ef9a63d2b398840261c8221a0c9b&quot;</span><span class="p">);</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10"></a><span class="hll"><span class="w">        </span><span class="n">requestConfiguration</span><span class="p">.</span><span class="n">TestDeviceIds</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">"2077ef9a63d2b398840261c8221a0c9b"</span><span class="p">);</span>
 </span><a id="__codelineno-3-11" name="__codelineno-3-11"></a><span class="hll"><span class="w">        </span><span class="n">MobileAds</span><span class="p">.</span><span class="n">SetRequestConfiguration</span><span class="p">(</span><span class="n">requestConfiguration</span><span class="p">);</span>
 </span><a id="__codelineno-3-12" name="__codelineno-3-12"></a><span class="w">    </span><span class="p">}</span>
 <a id="__codelineno-3-13" name="__codelineno-3-13"></a><span class="p">}</span>

@@ -5157,13 +5157,13 @@
 <li><code>allprojects &gt; repositories</code> ブロック（または <code>repositories</code> ブロック）内に Zucks Maven リポジトリを追加します：
    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">repositories</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="c1">// ... その他のリポジトリ</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">maven</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="s1">&#39;https://github.com/zucks/ZucksAdNetworkSDK-Maven/raw/master/&#39;</span><span class="w"> </span><span class="o">}</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="n">maven</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="n">url</span><span class="w"> </span><span class="s1">'https://github.com/zucks/ZucksAdNetworkSDK-Maven/raw/master/'</span><span class="w"> </span><span class="o">}</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="o">}</span>
 </code></pre></div></li>
 <li><code>dependencies</code> ブロック内に Zucks メディエーションアダプターの依存関係を追加します（これにより Zucks SDK も推移的にダウンロードされます）：
    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">dependencies</span><span class="w"> </span><span class="o">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="c1">// ... その他の依存関係</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">implementation</span><span class="w"> </span><span class="s1">&#39;net.zucks:zucks-ad-network-admob-adapter:6.1.0.1&#39;</span><span class="w"> </span><span class="c1">// 最新のアダプターバージョンに置き換えてください</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="n">implementation</span><span class="w"> </span><span class="s1">'net.zucks:zucks-ad-network-admob-adapter:6.1.0.1'</span><span class="w"> </span><span class="c1">// 最新のアダプターバージョンに置き換えてください</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="o">}</span>
 </code></pre></div></li>
 </ol>

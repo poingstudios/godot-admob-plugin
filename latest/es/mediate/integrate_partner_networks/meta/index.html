@@ -5455,13 +5455,13 @@ Si está compilando para iOS 14 o posterior, Meta Audience Network requiere que 
 </div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">if</span><span class="w"> </span><span class="n">OS</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;iOS&quot;</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">if</span><span class="w"> </span><span class="n">OS</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"iOS"</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="c1"># FBAdSettings está disponible solo para iOS, Google no puso este método en el SDK de Android</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="n">FBAdSettings</span><span class="o">.</span><span class="n">set_advertiser_tracking_enabled</span><span class="p">(</span><span class="bp">true</span><span class="p">)</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">OS</span><span class="p">.</span><span class="n">GetName</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">&quot;iOS&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">OS</span><span class="p">.</span><span class="n">GetName</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s">"iOS"</span><span class="p">)</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">{</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="c1">// FBAdSettings está disponible solo para iOS, Google no puso este método en el SDK de Android</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="n">FBAdSettings</span><span class="p">.</span><span class="n">SetAdvertiserTrackingEnabled</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
