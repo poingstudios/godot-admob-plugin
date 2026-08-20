@@ -213,8 +213,8 @@ If you find our work valuable and would like to support us, consider contributin
 [KofiBadge]: https://badgen.net/badge/Buy%20us%20a/coffee/yellow?icon=kofi
 [PaypalBadge]: https://badgen.net/badge/Donate/via%20Paypal/blue?icon=paypal
 
-[DocumentationLink]: https://poingstudios.github.io/godot-admob-plugin/v1/
-[ApiReferenceLink]: https://poingstudios.github.io/godot-admob-plugin/v1/reference/
+[DocumentationLink]: https://poingstudios.github.io/godot-admob-plugin/1.3/
+[ApiReferenceLink]: https://poingstudios.github.io/godot-admob-plugin/1.3/reference/
 [Releases]: https://github.com/poingstudios/godot-admob-plugin/releases
 [Stargazers]: https://github.com/poingstudios/godot-admob-plugin/stargazers
 [DiscordLink]: https://discord.com/invite/YEPvYjSSMk
