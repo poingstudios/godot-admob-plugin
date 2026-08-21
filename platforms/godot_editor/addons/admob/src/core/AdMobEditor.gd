@@ -45,4 +45,4 @@ func _on_AdMobButton_pressed():
 	)
 
 func _on_PoingButton_pressed():
-	OS.shell_open("https://github.com/poingstudios")
+	OS.shell_open("https://github.com/poingstudios/godot-admob-plugin")
