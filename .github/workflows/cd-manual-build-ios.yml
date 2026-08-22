@@ -59,14 +59,17 @@ jobs:
       with: { python-version: '3.x' }
     - run: python -m pip install scons
 
-    - name: Load .scons_cache directory
+    - name: Cache iOS build artifacts
       uses: actions/cache@v6
       with:
-        path: ${{ github.workspace }}/platforms/ios/godot/.scons_cache/
-        key: scons-ios-${{ needs.setup.outputs.godot_version }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/scripts/**') }}
+        path: |
+          platforms/ios/build
+          platforms/ios/bin/static_libraries
+          platforms/ios/.sconsign.dblite
+        key: ios-build-${{ needs.setup.outputs.godot_version }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/src/**') }}
         restore-keys: |
-          scons-ios-${{ needs.setup.outputs.godot_version }}-
-          scons-ios-
+          ios-build-${{ needs.setup.outputs.godot_version }}-
+          ios-build-
 
     - name: Cache SPM dependencies
       uses: actions/cache@v6
@@ -78,8 +81,6 @@ jobs:
 
     - name: Build Source
       working-directory: platforms/ios
-      env:
-        SCONS_CACHE: ${{ github.workspace }}/platforms/ios/godot/.scons_cache/
       run: ./scripts/build.sh ${{ needs.setup.outputs.godot_version }}
 
     - name: Upload to GitHub Release

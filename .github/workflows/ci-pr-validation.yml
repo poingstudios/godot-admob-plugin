@@ -86,14 +86,17 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.sha }}
 
-    - name: Load .scons_cache directory
+    - name: Cache iOS build artifacts
       uses: actions/cache@v6
       with:
-        path: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
-        key: scons-ios-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/scripts/**') }}
+        path: |
+          platforms/ios/build
+          platforms/ios/bin/static_libraries
+          platforms/ios/.sconsign.dblite
+        key: ios-build-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/src/**') }}
         restore-keys: |
-          scons-ios-${{ needs.detect-latest.outputs.godot_version }}-
-          scons-ios-
+          ios-build-${{ needs.detect-latest.outputs.godot_version }}-
+          ios-build-
 
     - name: Set up Python 3.x
       uses: actions/setup-python@v6
@@ -115,8 +118,6 @@ jobs:
 
     - name: Compiles the Source Code
       working-directory: platforms/ios
-      env:
-        SCONS_CACHE: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
       run: |
         ./scripts/build.sh ${{ needs.detect-latest.outputs.godot_version }}
 
@@ -177,7 +178,7 @@ jobs:
         mv templates/* ~/.local/share/godot/export_templates/${DOWNLOAD_VERSION}.stable/
 
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
+      uses: android-actions/setup-android@v4
 
     - name: Download Android Plugin Binaries
       uses: actions/download-artifact@v7
@@ -300,7 +301,7 @@ jobs:
         distribution: 'temurin'
 
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v6
       with:
         dotnet-version: '8.0.x'
 
@@ -343,7 +344,7 @@ jobs:
         mv templates/* ~/.local/share/godot/export_templates/${DOWNLOAD_VERSION}.stable.mono/
 
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
+      uses: android-actions/setup-android@v4
 
     - name: Download Android Plugin Binaries
       uses: actions/download-artifact@v7
@@ -620,7 +621,7 @@ jobs:
     - uses: actions/checkout@v7
 
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v6
       with:
         dotnet-version: '8.0.x'
 
