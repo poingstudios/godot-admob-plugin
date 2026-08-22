@@ -22,7 +22,7 @@
 
 tool
 extends Control
-var ad_mob_settings = preload(
+var ad_mob_settings := preload(
 	"res://addons/admob/src/utils/AdMobSettings.gd"
 ).new()
 
@@ -41,9 +41,8 @@ func _on_ios_button_pressed():
 
 func _on_AdMobButton_pressed():
 	OS.shell_open(
-		"https://github.com/poingstudios/"
-		+ "godot-admob-plugin"
+		"https://poingstudios.github.io/godot-admob-plugin/1.3/"
 	)
 
 func _on_PoingButton_pressed():
-	OS.shell_open("https://github.com/poingstudios")
+	OS.shell_open("https://github.com/poingstudios/godot-admob-plugin")

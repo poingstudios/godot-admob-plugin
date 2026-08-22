@@ -399,6 +399,9 @@ func _on_ios_open_directory_button_pressed():
 	)
 	OS.shell_open(str("file://", path_directory))
 
+func _on_Advice_meta_clicked(meta):
+	OS.shell_open(str("file://", ProjectSettings.globalize_path(meta)))
+
 func _on_VerifyNetworkGithub_network_status_changed(
 	value : int
 ):
