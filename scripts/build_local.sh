@@ -8,12 +8,12 @@ show_help() {
     echo ""
     echo "Arguments:"
     echo "  [platform]       android, ios, or all (default: all)"
-    echo "  <godot_version>  The target Godot version (e.g. 3.6.2)"
+    echo "  <godot_version>  The target Godot version (e.g. 3.6.3)"
     echo ""
     echo "Examples:"
-    echo "  ./scripts/build_local.sh all 3.6.2"
-    echo "  ./scripts/build_local.sh ios 3.6.2"
-    echo "  ./scripts/build_local.sh android 3.6.2"
+    echo "  ./scripts/build_local.sh all 3.6.3"
+    echo "  ./scripts/build_local.sh ios 3.6.3"
+    echo "  ./scripts/build_local.sh android 3.6.3"
 }
 
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
@@ -25,7 +25,7 @@ PLATFORM=${1:-all}
 GODOT_VERSION=$2
 
 if [ -z "$GODOT_VERSION" ]; then
-    echo "[ERROR] Please specify target Godot version (e.g., 3.6.2)."
+    echo "[ERROR] Please specify target Godot version (e.g., 3.6.3)."
     show_help
     exit 1
 fi
