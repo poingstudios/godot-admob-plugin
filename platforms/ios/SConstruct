@@ -20,6 +20,11 @@ opts = Variables([], ARGUMENTS)
 # Gets the standard flags CC, CCX, etc.
 env = DefaultEnvironment()
 
+scons_cache_path = os.environ.get("SCONS_CACHE")
+if scons_cache_path:
+    CacheDir(scons_cache_path)
+    Decider("MD5")
+
 # Define our options
 opts.Add(EnumVariable('target', "Compilation target", 'debug', ['debug', 'release', "release_debug"]))
 opts.Add(EnumVariable('arch', "Compilation Architecture", '', ['', 'arm64', 'armv7', 'x86_64']))
