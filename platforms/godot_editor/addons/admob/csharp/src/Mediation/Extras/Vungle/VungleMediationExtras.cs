@@ -20,29 +20,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Collections.Generic;
-
 namespace PoingStudios.AdMob.Mediation.Extras.Vungle
 {
     public class VungleMediationExtras : MediationExtras
     {
-        private const string AllPlacementsKey = "ALL_PLACEMENTS_KEY";
         private const string UserIdKey = "USER_ID_KEY";
-        private const string SoundEnabledKey = "SOUND_ENABLED_KEY";
-
-        public List<string> AllPlacements
-        {
-            set => Extras[AllPlacementsKey] = string.Join(",", value);
-        }
 
         public string UserId
         {
             set => Extras[UserIdKey] = value;
-        }
-
-        public bool SoundEnabled
-        {
-            set => Extras[SoundEnabledKey] = value;
         }
 
         protected override string GetAndroidMediationExtraClassName()
