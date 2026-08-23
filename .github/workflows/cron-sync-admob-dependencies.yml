@@ -73,7 +73,7 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           
           git checkout -B "$BRANCH_NAME"
-          git add platforms/android/src/ platforms/ios/src/
+          git add -u platforms/android/src/ platforms/ios/src/
           git commit -m "chore(deps): update AdMob and mediation SDKs across Android and iOS"
           git push -f origin "$BRANCH_NAME"
           

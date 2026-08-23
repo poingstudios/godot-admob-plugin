@@ -30,6 +30,8 @@ __pycache__/
 /site/
 /platforms/godot_editor/android/
 /platforms/godot_editor/ios/
+/android/
+/ios/
 
 # Exceptions
 !platforms/godot_editor/addons/admob/icon.png
@@ -51,5 +53,3 @@ platforms/godot_editor/addons/admob/csharp/.gdignore
 
 # MkDocs local development version helper
 docs/versions.json
-
-android/
