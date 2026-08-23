@@ -180,6 +180,7 @@ func _patch_android_gradle_file() -> void:
 configurations.configureEach {
     exclude group: "com.google.android.gms", module: "play-services-ads"
     exclude group: "com.google.android.gms", module: "play-services-ads-lite"
+    resolutionStrategy.force "androidx.browser:browser:1.8.0"
 }
 """
 	content += patch
