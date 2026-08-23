@@ -287,7 +287,7 @@ fi
 
 if [ "$MAX_PARALLEL_JOBS" -gt 1 ]; then
     for PLUGIN in "${ALL_PLUGINS[@]}"; do
-        local LOG_FILE="$LOG_DIR/${BUILD_TIMESTAMP}_${PLUGIN}.log"
+        LOG_FILE="$LOG_DIR/${BUILD_TIMESTAMP}_${PLUGIN}.log"
         if [ -f "$LOG_FILE" ] && grep -q -i "warning:" "$LOG_FILE"; then
             log_warning "Warnings detected for $PLUGIN:"
             grep -i "warning:" "$LOG_FILE" | head -n 10
