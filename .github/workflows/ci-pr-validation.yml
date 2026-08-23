@@ -49,25 +49,29 @@ jobs:
     steps:
     - uses: actions/checkout@v7
 
-    - name: Cache Gradle
+    - name: Cache Gradle & Godot Lib
       uses: actions/cache@v6
       with:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
-        key: android-gradle-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
-        restore-keys: android-gradle-
+          platforms/android/.gradle
+          platforms/android/godot-lib
+        key: android-gradle-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
+        restore-keys: |
+          android-gradle-${{ needs.detect-latest.outputs.godot_version }}-
+          android-gradle-
 
     - name: Build Plugins
       working-directory: platforms/android
       run: |
         chmod +x ./gradlew
-        ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }}
+        ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }} --parallel
 
     - name: Compress the artifact output
       working-directory: platforms/android
       run: |
-        ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}"
+        ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}" --parallel
 
     - name: Upload artifact
       uses: actions/upload-artifact@v7
@@ -86,14 +90,16 @@ jobs:
       with:
         ref: ${{ github.event.pull_request.head.sha }}
 
-    - name: Load .scons_cache directory
+    - name: Cache iOS build artifacts
       uses: actions/cache@v6
       with:
-        path: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
-        key: scons-ios-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/scripts/**') }}
+        path: |
+          platforms/ios/build
+          platforms/ios/bin/static_libraries
+        key: ios-build-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/src/**') }}
         restore-keys: |
-          scons-ios-${{ needs.detect-latest.outputs.godot_version }}-
-          scons-ios-
+          ios-build-${{ needs.detect-latest.outputs.godot_version }}-
+          ios-build-
 
     - name: Set up Python 3.x
       uses: actions/setup-python@v6
@@ -113,12 +119,16 @@ jobs:
         restore-keys: |
           spm-
 
+    - name: Cache Godot Source & Headers
+      uses: actions/cache@v6
+      with:
+        path: platforms/ios/godot
+        key: godot-source-ios-${{ needs.detect-latest.outputs.godot_version }}
+
     - name: Compiles the Source Code
       working-directory: platforms/ios
-      env:
-        SCONS_CACHE: ${{github.workspace}}/platforms/ios/godot/.scons_cache/
       run: |
-        ./scripts/build.sh ${{ needs.detect-latest.outputs.godot_version }}
+        ./scripts/build.sh --parallel ${{ needs.detect-latest.outputs.godot_version }}
 
     - name: Upload artifact
       uses: actions/upload-artifact@v7
@@ -177,10 +187,10 @@ jobs:
         mv templates/* ~/.local/share/godot/export_templates/${DOWNLOAD_VERSION}.stable/
 
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
+      uses: android-actions/setup-android@v4
 
     - name: Download Android Plugin Binaries
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v7
       with:
         name: android-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/android/.output/
@@ -214,7 +224,7 @@ jobs:
         custom_features=""
         export_filter="all_resources"
         include_filter=""
-        exclude_filter=""
+        exclude_filter="addons/admob/csharp/*"
         export_path=""
         encryption_include_filters=""
         encryption_exclude_filters=""
@@ -257,6 +267,18 @@ jobs:
         screen/support_large=true
         screen/support_xlarge=true
         EOF
+
+    - name: Cache Gradle for Godot Android Export
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: godot-android-gradle-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
+        restore-keys: |
+          godot-android-gradle-${{ needs.detect-latest.outputs.godot_version }}-
+          godot-android-gradle-
+          android-gradle-
 
     - name: Import Project Resources
       working-directory: platforms/godot_editor
@@ -300,9 +322,21 @@ jobs:
         distribution: 'temurin'
 
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v6
       with:
         dotnet-version: '8.0.x'
+
+    - name: Cache .NET Build & NuGet Packages
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.nuget/packages
+          platforms/godot_editor/.godot/mono
+          platforms/godot_editor/obj
+        key: dotnet-build-${{ runner.os }}-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/godot_editor/**/*.cs', 'platforms/godot_editor/**/*.csproj', 'platforms/godot_editor/**/*.sln') }}
+        restore-keys: |
+          dotnet-build-${{ runner.os }}-${{ needs.detect-latest.outputs.godot_version }}-
+          dotnet-build-${{ runner.os }}-
 
     - name: Cache Godot Editor (.NET)
       id: cache-godot-dotnet
@@ -343,10 +377,10 @@ jobs:
         mv templates/* ~/.local/share/godot/export_templates/${DOWNLOAD_VERSION}.stable.mono/
 
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
+      uses: android-actions/setup-android@v4
 
     - name: Download Android Plugin Binaries
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v7
       with:
         name: android-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/android/.output/
@@ -424,16 +458,24 @@ jobs:
         screen/support_xlarge=true
         EOF
 
+    - name: Cache Gradle for Godot Android Export
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: godot-android-gradle-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
+        restore-keys: |
+          godot-android-gradle-${{ needs.detect-latest.outputs.godot_version }}-
+          godot-android-gradle-
+          android-gradle-
+
     - name: Import Project Resources
       working-directory: platforms/godot_editor
       run: |
         # Set main scene to C# sample for this build
         sed -i 's|run/main_scene="uid://0esyp38ds6yg"|run/main_scene="res://addons/admob/csharp/sample/MainCSharpExample.tscn"|' project.godot
         timeout 120 godot --headless --import --quit || true
-
-    - name: Build C# Solution
-      working-directory: platforms/godot_editor
-      run: dotnet build
 
     - name: Install Android Build Template
       working-directory: platforms/godot_editor
@@ -465,7 +507,15 @@ jobs:
     steps:
     - uses: actions/checkout@v7
 
+    - name: Cache Godot Editor
+      id: cache-godot
+      uses: actions/cache@v6
+      with:
+        path: /Applications/Godot.app
+        key: godot-macos-${{ needs.detect-latest.outputs.godot_version }}
+
     - name: Download Godot
+      if: steps.cache-godot.outputs.cache-hit != 'true'
       run: |
         CV="${{ needs.detect-latest.outputs.godot_version }}"
         DOWNLOAD_VERSION="${CV%.0}"
@@ -479,7 +529,15 @@ jobs:
         rm -rf /Applications/Godot.app
         mv Godot.app /Applications/Godot.app
 
+    - name: Cache Export Templates
+      id: cache-templates
+      uses: actions/cache@v6
+      with:
+        path: ~/Library/Application Support/Godot/export_templates
+        key: godot-templates-macos-${{ needs.detect-latest.outputs.godot_version }}
+
     - name: Download Export Templates
+      if: steps.cache-templates.outputs.cache-hit != 'true'
       run: |
         CV="${{ needs.detect-latest.outputs.godot_version }}"
         DOWNLOAD_VERSION="${CV%.0}"
@@ -494,7 +552,7 @@ jobs:
         mv templates/* ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable/
 
     - name: Download iOS Plugin Binaries
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v7
       with:
         name: ios-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/ios/bin/release
@@ -517,7 +575,7 @@ jobs:
         custom_features=""
         export_filter="all_resources"
         include_filter=""
-        exclude_filter=""
+        exclude_filter="addons/admob/csharp/*"
         export_path=""
         encryption_include_filters=""
         encryption_exclude_filters=""
@@ -575,6 +633,15 @@ jobs:
         EOF
         python3 patch_pbxproj.py platforms/godot_editor/exports/ios/AdMobSample.xcodeproj/project.pbxproj
 
+    - name: Cache Xcode SPM Packages
+      uses: actions/cache@v6
+      with:
+        path: platforms/godot_editor/exports/ios/build_output/SourcePackages
+        key: ios-spm-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/ios/Package.resolved') }}
+        restore-keys: |
+          ios-spm-${{ needs.detect-latest.outputs.godot_version }}-
+          ios-spm-
+
     - name: Build and Package Test Simulator App
       working-directory: platforms/godot_editor/exports/ios
       run: |
@@ -620,11 +687,31 @@ jobs:
     - uses: actions/checkout@v7
 
     - name: Setup .NET SDK
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v6
       with:
         dotnet-version: '8.0.x'
 
+    - name: Cache .NET Build & NuGet Packages
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.nuget/packages
+          platforms/godot_editor/.godot/mono
+          platforms/godot_editor/obj
+        key: dotnet-build-${{ runner.os }}-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/godot_editor/**/*.cs', 'platforms/godot_editor/**/*.csproj', 'platforms/godot_editor/**/*.sln') }}
+        restore-keys: |
+          dotnet-build-${{ runner.os }}-${{ needs.detect-latest.outputs.godot_version }}-
+          dotnet-build-${{ runner.os }}-
+
+    - name: Cache Godot Editor (.NET)
+      id: cache-godot
+      uses: actions/cache@v6
+      with:
+        path: /Applications/Godot.app
+        key: godot-mono-macos-${{ needs.detect-latest.outputs.godot_version }}
+
     - name: Download Godot (.NET)
+      if: steps.cache-godot.outputs.cache-hit != 'true'
       run: |
         CV="${{ needs.detect-latest.outputs.godot_version }}"
         DOWNLOAD_VERSION="${CV%.0}"
@@ -638,7 +725,15 @@ jobs:
         rm -rf /Applications/Godot.app
         mv Godot_mono.app /Applications/Godot.app
 
+    - name: Cache Export Templates (.NET)
+      id: cache-templates
+      uses: actions/cache@v6
+      with:
+        path: ~/Library/Application Support/Godot/export_templates
+        key: godot-mono-templates-macos-${{ needs.detect-latest.outputs.godot_version }}
+
     - name: Download Export Templates
+      if: steps.cache-templates.outputs.cache-hit != 'true'
       run: |
         CV="${{ needs.detect-latest.outputs.godot_version }}"
         DOWNLOAD_VERSION="${CV%.0}"
@@ -653,7 +748,7 @@ jobs:
         mv templates/* ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable.mono/
 
     - name: Download iOS Plugin Binaries
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v7
       with:
         name: ios-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/ios/bin/release
@@ -692,6 +787,7 @@ jobs:
         application/bundle_identifier="com.poingstudios.admob"
         plugins_plist/GADApplicationIdentifier="ca-app-pub-3940256099942544~1458002511"
         plugins/AdMob=true
+        application/export_project_only=true
         EOF
 
     - name: Import Project Resources
@@ -699,10 +795,6 @@ jobs:
       run: |
         sed -i '' 's|run/main_scene="uid://0esyp38ds6yg"|run/main_scene="res://addons/admob/csharp/sample/MainCSharpExample.tscn"|' project.godot
         timeout 120 /Applications/Godot.app/Contents/MacOS/Godot --headless --import --quit || true
-
-    - name: Build C# Solution
-      working-directory: platforms/godot_editor
-      run: dotnet build
 
     - name: Export Godot Sample Project
       working-directory: platforms/godot_editor
@@ -737,6 +829,15 @@ jobs:
         if __name__ == "__main__": patch_pbxproj(sys.argv[1])
         EOF
         python3 patch_pbxproj.py platforms/godot_editor/exports/ios/AdMobSample.xcodeproj/project.pbxproj
+
+    - name: Cache Xcode SPM Packages
+      uses: actions/cache@v6
+      with:
+        path: platforms/godot_editor/exports/ios/build_output/SourcePackages
+        key: ios-spm-csharp-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/ios/Package.resolved') }}
+        restore-keys: |
+          ios-spm-csharp-${{ needs.detect-latest.outputs.godot_version }}-
+          ios-spm-csharp-
 
     - name: Build and Package Test Simulator App
       working-directory: platforms/godot_editor/exports/ios
@@ -784,7 +885,7 @@ jobs:
     - uses: actions/checkout@v7
 
     - name: Set up Python 3.x
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v6
       with:
         python-version: '3.x'
 
