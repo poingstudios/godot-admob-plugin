@@ -44,8 +44,9 @@ on:
 jobs:
   review:
     if: >
-      github.event_name == 'pull_request' ||
-      (github.event_name == 'workflow_dispatch' && inputs.mode == 'review')
+      github.actor != 'dependabot[bot]' &&
+      (github.event_name == 'pull_request' ||
+      (github.event_name == 'workflow_dispatch' && inputs.mode == 'review'))
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -114,9 +115,10 @@ jobs:
 
   triage:
     if: >
-      (github.event_name == 'pull_request') ||
+      github.actor != 'dependabot[bot]' &&
+      ((github.event_name == 'pull_request') ||
       (github.event_name == 'issues') ||
-      (github.event_name == 'workflow_dispatch' && inputs.mode == 'triage')
+      (github.event_name == 'workflow_dispatch' && inputs.mode == 'triage'))
     runs-on: ubuntu-latest
     permissions:
       issues: write
