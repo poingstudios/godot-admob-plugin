@@ -88,6 +88,9 @@ build_android() {
         rm -rf "$DEST/addons/admob/android/bin/"*
     fi
     
+    # Clean up legacy v1 .gdap artifacts from testbed if present
+    rm -rf "$DEST/android/plugins"
+    
     ./gradlew build -PgodotVersion="$GODOT_VERSION" $GRADLE_OPTS && \
     ./gradlew exportFiles -PpluginExportPath="$DEST/addons/admob/android/bin" $GRADLE_OPTS || exit 1
 }
