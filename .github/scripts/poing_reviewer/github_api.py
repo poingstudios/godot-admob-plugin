@@ -107,12 +107,12 @@ def fetch_review_threads(owner, repo_name, pr_number, token):
               isResolved
               path
               line
-              pullRequestReview { databaseId }
               comments(first: 50) {
                 nodes {
                   author { login }
                   body
                   databaseId
+                  pullRequestReview { databaseId }
                   reactions(first: 10) {
                     nodes { content }
                   }

@@ -309,7 +309,9 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
             for t in threads:
                 if not t or t.get("isResolved", False):
                     continue
-                review_node = t.get("pullRequestReview") or {}
+                comments = (t.get("comments") or {}).get("nodes") or []
+                first_comment = comments[0] if comments else {}
+                review_node = first_comment.get("pullRequestReview") or {}
                 thread_review_id = review_node.get("databaseId")
                 if thread_review_id and thread_review_id in stale_review_ids:
                     try:
