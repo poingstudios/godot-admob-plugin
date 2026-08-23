@@ -25,7 +25,7 @@ namespace PoingStudios.AdMob.Core
     public static class PluginVersion
     {
         private static readonly PluginConfig _config = new PluginConfig();
-        private const string FallbackPluginVersion = "v5.0.0";
+        private const string FallbackPluginVersion = "v5.1.0";
         private static string _cachedVersion = "";
 
         public static string Current
