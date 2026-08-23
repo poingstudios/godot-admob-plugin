@@ -326,6 +326,18 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
+    - name: Cache .NET Build & NuGet Packages
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.nuget/packages
+          platforms/godot_editor/.godot/mono
+          platforms/godot_editor/obj
+        key: dotnet-build-${{ runner.os }}-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/godot_editor/**/*.cs', 'platforms/godot_editor/**/*.csproj', 'platforms/godot_editor/**/*.sln') }}
+        restore-keys: |
+          dotnet-build-${{ runner.os }}-${{ needs.detect-latest.outputs.godot_version }}-
+          dotnet-build-${{ runner.os }}-
+
     - name: Cache Godot Editor (.NET)
       id: cache-godot-dotnet
       uses: actions/cache@v6
@@ -682,6 +694,18 @@ jobs:
       uses: actions/setup-dotnet@v6
       with:
         dotnet-version: '8.0.x'
+
+    - name: Cache .NET Build & NuGet Packages
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.nuget/packages
+          platforms/godot_editor/.godot/mono
+          platforms/godot_editor/obj
+        key: dotnet-build-${{ runner.os }}-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/godot_editor/**/*.cs', 'platforms/godot_editor/**/*.csproj', 'platforms/godot_editor/**/*.sln') }}
+        restore-keys: |
+          dotnet-build-${{ runner.os }}-${{ needs.detect-latest.outputs.godot_version }}-
+          dotnet-build-${{ runner.os }}-
 
     - name: Cache Godot Editor (.NET)
       id: cache-godot
