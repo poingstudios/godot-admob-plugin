@@ -24,11 +24,14 @@
 #define StaticVariablesHelper_h
 
 #import <Foundation/Foundation.h>
+
 @interface StaticVariablesHelper : NSObject
 
 @property(class) BOOL pauseOnBackground;
 
-@end
++ (void)onAdWillPresentFullScreenContent;
++ (void)onAdDidDismissFullScreenContent;
 
+@end
 
 #endif /* StaticVariablesHelper_h */

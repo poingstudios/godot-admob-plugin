@@ -102,7 +102,7 @@ jobs:
           ios-build-
 
     - name: Set up Python 3.x
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@v7
       with:
         python-version: '3.x'
         architecture: 'x64'
@@ -190,7 +190,7 @@ jobs:
       uses: android-actions/setup-android@v4
 
     - name: Download Android Plugin Binaries
-      uses: actions/download-artifact@v7
+      uses: actions/download-artifact@v8
       with:
         name: android-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/android/.output/
@@ -380,7 +380,7 @@ jobs:
       uses: android-actions/setup-android@v4
 
     - name: Download Android Plugin Binaries
-      uses: actions/download-artifact@v7
+      uses: actions/download-artifact@v8
       with:
         name: android-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/android/.output/
@@ -552,7 +552,7 @@ jobs:
         mv templates/* ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable/
 
     - name: Download iOS Plugin Binaries
-      uses: actions/download-artifact@v7
+      uses: actions/download-artifact@v8
       with:
         name: ios-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/ios/bin/release
@@ -748,7 +748,7 @@ jobs:
         mv templates/* ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable.mono/
 
     - name: Download iOS Plugin Binaries
-      uses: actions/download-artifact@v7
+      uses: actions/download-artifact@v8
       with:
         name: ios-template-v${{ needs.detect-latest.outputs.godot_version }}-${{ github.event.pull_request.head.sha }}
         path: platforms/ios/bin/release
@@ -885,7 +885,7 @@ jobs:
     - uses: actions/checkout@v7
 
     - name: Set up Python 3.x
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@v7
       with:
         python-version: '3.x'
 

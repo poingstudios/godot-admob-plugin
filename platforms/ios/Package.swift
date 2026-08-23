@@ -147,6 +147,9 @@ let package = Package(
                 "../../godot",
                 "../../bin",
                 "../../.build"
+            ],
+            linkerSettings: [
+                .linkedFramework("JavaScriptCore")
             ]
         )
     ]
