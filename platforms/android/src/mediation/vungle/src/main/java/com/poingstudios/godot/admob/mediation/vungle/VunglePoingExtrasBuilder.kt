@@ -23,39 +23,25 @@
 package com.poingstudios.godot.admob.mediation.vungle
 
 import android.os.Bundle
+import com.google.ads.mediation.vungle.VungleConstants
 import com.poingstudios.godot.admob.core.AdNetworkExtras
 import com.poingstudios.godot.admob.core.utils.Logger
-import com.vungle.mediation.VungleExtrasBuilder
 import kotlin.Any
 import kotlin.String
 
 abstract class VunglePoingExtrasBuilder : AdNetworkExtras {
     companion object {
-        private const val ALL_PLACEMENTS_KEY = "ALL_PLACEMENTS_KEY"
         private const val USER_ID_KEY = "USER_ID_KEY"
-        private const val SOUND_ENABLED_KEY = "SOUND_ENABLED_KEY"
     }
 
     override fun buildExtras(extras: Map<String, Any>?): Bundle? {
-        val placements = extras?.get(ALL_PLACEMENTS_KEY)
-
-        val extrasBuilder = if (placements != null) {
-            VungleExtrasBuilder((placements as String).split(",").toTypedArray())
-        } else {
-            VungleExtrasBuilder(null)
-        }
-
-        val soundEnabled = extras?.get(SOUND_ENABLED_KEY)
-        if (soundEnabled != null) {
-            extrasBuilder.setStartMuted(soundEnabled as Boolean)
-        }
-
+        val bundle = Bundle()
         val userId = extras?.get(USER_ID_KEY)
         if (userId != null) {
-            extrasBuilder.setUserId(userId as String)
+            bundle.putString(VungleConstants.KEY_USER_ID, userId as String)
         }
 
         Logger.debug("buildExtras of class : ${getAdapterClass()}")
-        return extrasBuilder.build()
+        return bundle
     }
 }

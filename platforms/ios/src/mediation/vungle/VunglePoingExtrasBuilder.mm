@@ -25,9 +25,7 @@
 
 @implementation VunglePoingExtrasBuilder
 
-String const ALL_PLACEMENTS_KEY = "ALL_PLACEMENTS_KEY";
 String const USER_ID_KEY = "USER_ID_KEY";
-String const SOUND_ENABLED_KEY = "SOUND_ENABLED_KEY";
 
 - (id<GADAdNetworkExtras>)buildExtras:(Dictionary) extras {
     VungleAdNetworkExtras *vungleExtras = [[VungleAdNetworkExtras alloc] init];

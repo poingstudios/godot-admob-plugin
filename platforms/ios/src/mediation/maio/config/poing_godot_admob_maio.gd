@@ -54,7 +54,7 @@ func get_spm_packages() -> Array[Dictionary]:
 	return [
 		{
 			"url": "https://github.com/googleads/googleads-mobile-ios-mediation-maio.git",
-			"version": "2.2.200",
+			"version": "2.2.102",
 			"products": ["MaioAdapterTarget"]
 		}
 	]
