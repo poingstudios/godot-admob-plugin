@@ -40,7 +40,10 @@ func get_deinitialization_method() -> String:
 
 
 func get_system_dependencies() -> PackedStringArray:
-	return PackedStringArray(["AppTrackingTransparency.framework"])
+	return PackedStringArray([
+		"AppTrackingTransparency.framework",
+		"JavaScriptCore.framework"
+	])
 
 
 func get_files_to_copy() -> PackedStringArray:
@@ -51,7 +54,11 @@ func get_files_to_copy() -> PackedStringArray:
 
 
 func get_linker_flags() -> PackedStringArray:
-	return PackedStringArray(["-ObjC"])
+	return PackedStringArray([
+		"-ObjC",
+		"-framework",
+		"JavaScriptCore"
+	])
 
 
 func get_plist_content() -> String:
