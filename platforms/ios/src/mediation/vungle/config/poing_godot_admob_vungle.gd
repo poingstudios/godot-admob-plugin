@@ -54,7 +54,7 @@ func get_spm_packages() -> Array[Dictionary]:
 	return [
 		{
 			"url": "https://github.com/googleads/googleads-mobile-ios-mediation-liftoffmonetize.git",
-			"version": "7.5.300",
+			"version": "7.7.600",
 			"products": ["LiftoffMonetizeAdapterTarget"]
 		}
 	]

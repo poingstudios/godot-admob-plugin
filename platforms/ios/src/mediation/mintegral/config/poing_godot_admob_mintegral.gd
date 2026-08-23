@@ -54,7 +54,7 @@ func get_spm_packages() -> Array[Dictionary]:
 	return [
 		{
 			"url": "https://github.com/googleads/googleads-mobile-ios-mediation-mintegral.git",
-			"version": "8.1.500",
+			"version": "8.1.600",
 			"products": ["MintegralAdapterTarget"]
 		}
 	]

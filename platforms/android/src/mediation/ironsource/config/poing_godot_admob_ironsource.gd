@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "ironsource"
-var _dependency_library := ["com.google.ads.mediation:ironsource:9.4.2.0"]
+var _dependency_library := ["com.google.ads.mediation:ironsource:9.6.0.0"]
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
 	return platform is EditorExportPlatformAndroid

@@ -54,7 +54,7 @@ func get_spm_packages() -> Array[Dictionary]:
 	return [
 		{
 			"url": "https://github.com/googleads/googleads-mobile-ios-mediation-meta.git",
-			"version": "6.20.100",
+			"version": "6.22.000",
 			"products": ["MetaAdapterTarget"]
 		}
 	]
