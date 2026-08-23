@@ -143,7 +143,7 @@ jobs:
         echo "CURRENT_GODOT_VERSION=${CV}" >> $GITHUB_ENV
 
     - name: Cache & Load Python/SPM
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@v7
       with:
         python-version: '3.x'
 
@@ -237,7 +237,7 @@ jobs:
         gh release create "$VERSION" release-artifacts/* --title "$VERSION" --generate-notes --latest
 
     - name: Set up Python
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@v7
       with:
         python-version: '3.8'
 
