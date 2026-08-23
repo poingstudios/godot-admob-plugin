@@ -5,6 +5,9 @@ on:
     - cron: '0 22 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   detect-latest:
     name: Check latest Godot version
@@ -51,25 +54,45 @@ jobs:
     - uses: actions/checkout@v7
       with:
         ref: ${{ needs.detect-latest.outputs.plugin_tag }}
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v5
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Cache Gradle & Godot Lib
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+          platforms/android/.gradle
+          platforms/android/godot-lib
+        key: android-gradle-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
+        restore-keys: |
+          android-gradle-${{ needs.detect-latest.outputs.godot_version }}-
+          android-gradle-
     
     - name: Build Plugins
       working-directory: platforms/android
       run: |
+        chmod +x ./scripts/unix/download_godot.sh
+        ./scripts/unix/download_godot.sh ${{ needs.detect-latest.outputs.godot_version }}
         chmod +x ./gradlew
-        ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }}
+        ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }} --parallel
 
     - name: Compress the artifact output
       working-directory: platforms/android
       run: |
-        ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}"
+        ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}" --parallel
 
     - name: Upload binary
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: platforms/android/.output/android-template-v${{ needs.detect-latest.outputs.godot_version }}.zip
-        tag: ${{ needs.detect-latest.outputs.plugin_tag }}
-        overwrite: true
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TAG: ${{ needs.detect-latest.outputs.plugin_tag }}
+      run: |
+        gh release upload "$TAG" platforms/android/.output/android-template-v${{ needs.detect-latest.outputs.godot_version }}.zip --clobber --repo "${{ github.repository }}"
 
   ios:
     needs: detect-latest
@@ -82,18 +105,44 @@ jobs:
 
     - name: Dependencies
       uses: actions/setup-python@v6
-      with: { python-version: '3.x' }
-    - run: python -m pip install scons
+      with:
+        python-version: '3.x'
+
+    - name: Install scons
+      run: python -m pip install scons
+
+    - name: Cache iOS build artifacts
+      uses: actions/cache@v6
+      with:
+        path: |
+          platforms/ios/build
+          platforms/ios/bin/static_libraries
+        key: ios-build-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/src/**') }}
+        restore-keys: |
+          ios-build-${{ needs.detect-latest.outputs.godot_version }}-
+          ios-build-
+
+    - name: Cache SPM dependencies
+      uses: actions/cache@v6
+      with:
+        path: platforms/ios/.build
+        key: spm-${{ hashFiles('platforms/ios/Package.swift', 'platforms/ios/Package.resolved') }}
+        restore-keys: |
+          spm-
+
+    - name: Cache Godot Source & Headers
+      uses: actions/cache@v6
+      with:
+        path: platforms/ios/godot
+        key: godot-source-ios-${{ needs.detect-latest.outputs.godot_version }}
 
     - name: Build 
       working-directory: platforms/ios
-      run: ./scripts/build.sh ${{ needs.detect-latest.outputs.godot_version }}
+      run: ./scripts/build.sh --parallel ${{ needs.detect-latest.outputs.godot_version }}
 
     - name: Upload binary
-      uses: svenstaro/upload-release-action@v2
-      with:
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: platforms/ios/bin/release/*.zip
-        file_glob: true
-        tag: ${{ needs.detect-latest.outputs.plugin_tag }}
-        overwrite: true
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TAG: ${{ needs.detect-latest.outputs.plugin_tag }}
+      run: |
+        gh release upload "$TAG" platforms/ios/bin/release/*.zip --clobber --repo "${{ github.repository }}"

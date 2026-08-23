@@ -568,7 +568,8 @@ If you find our work valuable and would like to support ongoing development, con
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/chart?repos=poingstudios/godot-admob-plugin&type=date&legend=top-left&sealed_token=ATUzb1mXlOQI3jnGm7Rpn_8YkMDh9y4DoyF-IOZ97Uw0oaShFtR9I5Srrxhrf_jaMaqgO5YKfVp9-UyqlLamx_epOX88rpSpr3g9utgVLd7xThQRsYWhJHM2lWd6WUg-wjEDVgZ7xpRrkzPHC4rGbTeXRrnvmPMagKmVDcL5_gX300ftiun-vv5iarNh)](https://www.star-history.com/?repos=poingstudios%2Fgodot-admob-plugin&type=date&legend=top-left)
+[![Star History Chart](https://api.star-history.com/chart?repos=poingstudios/godot-admob-plugin&type=date&legend=top-left&sealed_token=9xsv3x-ufjH0o6si3ZCvFMY36VP390ywEVOZe-simz9dB_qMyE4fIfTA6MQmgB_G8jPLH8lvDD_K2SaF5DZzQhMH46EaMYBGuToegrekTnKtA1Tz11UxqFUL53zo_WD_q_TnmO2qIFqarcPkB25s5jxvIT3yaKkR5Pkom8-JORCP7q_Wsg11mheUn7I6)](https://www.star-history.com/?repos=poingstudios%2Fgodot-admob-plugin&type=date&legend=top-left)
+
 
 [VersionBadge]: https://badgen.net/github/release/poingstudios/godot-admob-plugin/latest
 [GodotBadge]: https://badgen.net/badge/Godot/4.2.0+/478CBF?icon=godotengine
