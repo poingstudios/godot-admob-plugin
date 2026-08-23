@@ -94,7 +94,22 @@ def load_guidelines():
     return None
 
 
-def build_prompt(pr_title, annotated_diff, guidelines, batch_label):
+def build_prompt(pr_title, annotated_diff, guidelines, batch_label, verified_actions=None):
+    action_info = ""
+    if verified_actions:
+        valid_list = [f"- `{k}`: VALID (Verified live release/tag on GitHub)" for k, v in verified_actions.items() if v]
+        invalid_list = [f"- `{k}`: INVALID (Not found on GitHub)" for k, v in verified_actions.items() if not v]
+        lines = []
+        if valid_list:
+            lines.append("### Verified Action Versions (Live GitHub API Check):")
+            lines.extend(valid_list)
+            lines.append("\nCRITICAL: The actions marked VALID above have been confirmed to exist on GitHub. Do NOT claim they do not exist, and do NOT request changes for these valid versions.")
+        if invalid_list:
+            lines.append("### Unverified/Non-Existent Actions:")
+            lines.extend(invalid_list)
+        if lines:
+            action_info = "\n## GitHub Actions Ground Truth\n" + "\n".join(lines) + "\n"
+
     prompt = f"""You are Poing Reviewer, a senior code reviewer.
 Analyze the pull request diff below and return a structured JSON response.
 
@@ -138,6 +153,7 @@ In the annotated diff, each code line is prefixed like [path/to/file L12].
 Match line numbers exactly when adding inline comments.
 Only comment on lines that exist in the diff.
 {guidelines}
+{action_info}
 ## Annotated Diff
 
 ```diff

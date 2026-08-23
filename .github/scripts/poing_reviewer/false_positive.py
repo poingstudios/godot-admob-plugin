@@ -92,3 +92,63 @@ def is_suppressed(comment_body, path, line, suppressed_fingerprints):
     clean_body = strip_footer(comment_body)
     fp = fingerprint(path, clean_body, line)
     return fp in suppressed_fingerprints
+
+
+def filter_action_version_false_positives(findings, comments, verified_actions):
+    """Filters out false-positive findings and comments on verified-valid GitHub Actions."""
+    if not verified_actions:
+        return findings, comments
+
+    valid_actions = {k for k, v in verified_actions.items() if v}
+    if not valid_actions:
+        return findings, comments
+
+    fp_action_phrases = [
+        "non-existent",
+        "does not exist",
+        "latest version is",
+        "not exist",
+        "invalid version",
+        "unrecognized",
+        "conflicts with",
+    ]
+
+    filtered_findings = []
+    for f in findings:
+        finding_text = f.get("finding", "").lower()
+        is_fp = False
+        for action in valid_actions:
+            action_name = action.split("@")[0].lower()
+            tag = action.split("@")[-1].lower()
+            if (action_name in finding_text or tag in finding_text) and any(
+                kw in finding_text for kw in fp_action_phrases
+            ):
+                print(
+                    f"Suppressing false-positive action finding for verified [{action}]: {f['finding']}",
+                    file=sys.stderr,
+                )
+                is_fp = True
+                break
+        if not is_fp:
+            filtered_findings.append(f)
+
+    filtered_comments = []
+    for c in comments:
+        comment_text = c.get("body", "").lower()
+        is_fp = False
+        for action in valid_actions:
+            action_name = action.split("@")[0].lower()
+            tag = action.split("@")[-1].lower()
+            if (action_name in comment_text or tag in comment_text) and any(
+                kw in comment_text for kw in fp_action_phrases
+            ):
+                print(
+                    f"Suppressing false-positive action comment for verified [{action}]: {c['body']}",
+                    file=sys.stderr,
+                )
+                is_fp = True
+                break
+        if not is_fp:
+            filtered_comments.append(c)
+
+    return filtered_findings, filtered_comments
