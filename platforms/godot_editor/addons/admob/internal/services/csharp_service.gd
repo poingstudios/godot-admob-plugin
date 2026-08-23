@@ -61,14 +61,7 @@ static func _refresh_filesystem(editor_plugin: EditorPlugin = null, file_path: S
 	if not filesystem:
 		return
 
-	# Always update the specific file so the internal state changes
 	filesystem.update_file(file_path)
-
-	# Delay the scan to avoid collisions with the "project reload" tasks or first-time scans.
-	# We don't check frames_drawn anymore to ensure it ALWAYS happens even on startup.
-	var timer := editor_plugin.get_tree().create_timer(1.0)
-	timer.timeout.connect(
-		func():
-			if filesystem and not filesystem.is_scanning():
-				filesystem.scan()
-	)
+	if not filesystem.is_scanning():
+		filesystem.scan()
+		filesystem.scan_sources()

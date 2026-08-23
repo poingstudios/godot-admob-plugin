@@ -107,12 +107,12 @@ def fetch_review_threads(owner, repo_name, pr_number, token):
               isResolved
               path
               line
-              pullRequestReview { databaseId }
               comments(first: 50) {
                 nodes {
                   author { login }
                   body
                   databaseId
+                  pullRequestReview { databaseId }
                   reactions(first: 10) {
                     nodes { content }
                   }
@@ -251,6 +251,58 @@ def add_comment(repo, issue_number, body, token):
         return resp.json()
     print(f"Error adding comment to issue {issue_number}: {resp.status_code} {resp.text}", file=sys.stderr)
     return None
+
+
+def verify_github_action(action_str, token):
+    """Checks if a GitHub Action reference (e.g. 'actions/checkout@v7') exists on GitHub."""
+    import re
+    match = re.match(r"^([a-zA-Z0-9_-]+)/([a-zA-Z0-9_.-]+)(?:/.*)?@([a-zA-Z0-9_.-]+)$", action_str.strip())
+    if not match:
+        return None, "Invalid format"
+    owner, repo, tag = match.group(1), match.group(2), match.group(3)
+    headers = _headers(token) if token else {}
+
+    # 1. Check release by tag
+    resp = requests.get(f"{BASE_URL}/repos/{owner}/{repo}/releases/tags/{tag}", headers=headers)
+    if resp.status_code == 200:
+        return True, "Release tag exists"
+
+    # 2. Check git ref tags
+    resp = requests.get(f"{BASE_URL}/repos/{owner}/{repo}/git/ref/tags/{tag}", headers=headers)
+    if resp.status_code == 200:
+        return True, "Git tag ref exists"
+
+    # 3. Check branches (e.g., @main, @master)
+    resp = requests.get(f"{BASE_URL}/repos/{owner}/{repo}/branches/{tag}", headers=headers)
+    if resp.status_code == 200:
+        return True, "Branch ref exists"
+
+    # 4. Check alternate tag prefix (v1 vs 1)
+    alt_tag = tag[1:] if tag.startswith("v") else f"v{tag}"
+    resp = requests.get(f"{BASE_URL}/repos/{owner}/{repo}/releases/tags/{alt_tag}", headers=headers)
+    if resp.status_code == 200:
+        return True, f"Release tag {alt_tag} exists"
+
+    return False, "Tag/branch not found"
+
+
+def extract_and_verify_actions(diff_text, token):
+    """Extracts GitHub Action references from diff and verifies them against GitHub API."""
+    import re
+    action_pattern = re.compile(
+        r"^\+?\s*(?:-\s*)?uses:\s*([a-zA-Z0-9_-]+/[a-zA-Z0-9_.-]+(?:/[a-zA-Z0-9_.-]+)?@[a-zA-Z0-9_.-]+)",
+        re.MULTILINE,
+    )
+    actions = set(action_pattern.findall(diff_text))
+    results = {}
+    for action in sorted(actions):
+        if action.startswith("./") or action.startswith("docker://"):
+            continue
+        is_valid, reason = verify_github_action(action, token)
+        if is_valid is not None:
+            results[action] = is_valid
+            print(f"Action check [{action}]: {'VALID' if is_valid else 'INVALID'} ({reason})", file=sys.stderr)
+    return results
 
 
 

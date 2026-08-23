@@ -54,18 +54,37 @@ jobs:
       with:
         ref: ${{ github.event.inputs.tag || github.ref }}
 
+    - name: Set up JDK 17
+      uses: actions/setup-java@v5
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+
+    - name: Cache Gradle & Godot Lib
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+          platforms/android/.gradle
+          platforms/android/godot-lib
+        key: android-gradle-${{ needs.setup.outputs.godot_version }}-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
+        restore-keys: |
+          android-gradle-${{ needs.setup.outputs.godot_version }}-
+          android-gradle-
+
     - name: Build Plugins
       working-directory: platforms/android
       run: |
         chmod +x ./scripts/unix/download_godot.sh
         ./scripts/unix/download_godot.sh ${{ needs.setup.outputs.godot_version }}
         chmod +x ./gradlew
-        ./gradlew build -PgodotVersion=${{ needs.setup.outputs.godot_version }}
+        ./gradlew build -PgodotVersion=${{ needs.setup.outputs.godot_version }} --parallel
 
     - name: Compress the artifact output
       working-directory: platforms/android
       run: |
-        ./gradlew zipPlugins -PgodotVersion="${{ needs.setup.outputs.godot_version }}"
+        ./gradlew zipPlugins -PgodotVersion="${{ needs.setup.outputs.godot_version }}" --parallel
 
     - name: Upload to GitHub Release
       if: github.event.inputs.upload_to_release == 'true'

@@ -21,10 +21,12 @@
 // SOFTWARE.
 
 #import "StaticVariablesHelper.h"
+#include "platform/ios/os_ios.h"
 
 @implementation StaticVariablesHelper
 
 static BOOL _pauseOnBackground = NO;
+static NSInteger _activePausedAdsCount = 0;
 
 + (BOOL)pauseOnBackground {
     return _pauseOnBackground;
@@ -32,6 +34,25 @@ static BOOL _pauseOnBackground = NO;
 
 + (void)setPauseOnBackground:(BOOL)pause {
     _pauseOnBackground = pause;
+}
+
++ (void)onAdWillPresentFullScreenContent {
+    NSLog(@"pauseOnBackground %s", _pauseOnBackground ? "true" : "false");
+    if (_pauseOnBackground) {
+        _activePausedAdsCount++;
+        if (_activePausedAdsCount == 1) {
+            OS_IOS::get_singleton()->on_focus_out();
+        }
+    }
+}
+
++ (void)onAdDidDismissFullScreenContent {
+    if (_activePausedAdsCount > 0) {
+        _activePausedAdsCount--;
+        if (_activePausedAdsCount == 0) {
+            OS_IOS::get_singleton()->on_focus_in();
+        }
+    }
 }
 
 @end
