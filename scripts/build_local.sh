@@ -107,6 +107,8 @@ build_ios() {
     
     ARCHIVE=$(ls -1 bin/release/ios-template-v${GODOT_VERSION}.zip 2>/dev/null | tail -n 1)
     if [ -f "$ARCHIVE" ]; then
+        # Clean up legacy v1 .gdip artifacts from testbed if present
+        rm -rf "$DEST/ios"
         mkdir -p "$DEST/addons/admob/ios/bin/"
         unzip -qo "$ARCHIVE" -d "$DEST/addons/admob/ios/bin/" || exit 1
     fi
