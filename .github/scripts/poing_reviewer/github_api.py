@@ -83,12 +83,30 @@ def submit_review(repo, pr_number, token, body, event, comments=None):
 
 def submit_review_with_retry(repo, pr_number, token, body, event, comments):
     resp = submit_review(repo, pr_number, token, body, event, comments)
-    if resp.status_code == 422 and comments:
-        print(
-            "GitHub rejected 422 with comments. Retrying without inline comments...",
-            file=sys.stderr,
-        )
-        resp = submit_review(repo, pr_number, token, body, event, comments=None)
+    if resp.status_code == 422:
+        error_text = resp.text.lower()
+        if "own pull request" in error_text and event != "COMMENT":
+            print(
+                "GitHub rejected review event on own pull request. Retrying as COMMENT...",
+                file=sys.stderr,
+            )
+            event = "COMMENT"
+            resp = submit_review(repo, pr_number, token, body, event, comments)
+
+        if resp.status_code == 422 and comments:
+            print(
+                "GitHub rejected 422 with comments. Retrying without inline comments...",
+                file=sys.stderr,
+            )
+            resp = submit_review(repo, pr_number, token, body, event, comments=None)
+
+            if resp.status_code == 422 and "own pull request" in resp.text.lower() and event != "COMMENT":
+                print(
+                    "GitHub rejected review event on own pull request. Retrying as COMMENT without inline comments...",
+                    file=sys.stderr,
+                )
+                resp = submit_review(repo, pr_number, token, body, "COMMENT", comments=None)
+
     if resp.status_code >= 400:
         print(f"GitHub API error: {resp.status_code} {resp.text}", file=sys.stderr)
         sys.exit(1)
