@@ -477,10 +477,6 @@ jobs:
         sed -i 's|run/main_scene="uid://0esyp38ds6yg"|run/main_scene="res://addons/admob/csharp/sample/MainCSharpExample.tscn"|' project.godot
         timeout 120 godot --headless --import --quit || true
 
-    - name: Build C# Solution
-      working-directory: platforms/godot_editor
-      run: dotnet build
-
     - name: Install Android Build Template
       working-directory: platforms/godot_editor
       run: |
@@ -799,10 +795,6 @@ jobs:
       run: |
         sed -i '' 's|run/main_scene="uid://0esyp38ds6yg"|run/main_scene="res://addons/admob/csharp/sample/MainCSharpExample.tscn"|' project.godot
         timeout 120 /Applications/Godot.app/Contents/MacOS/Godot --headless --import --quit || true
-
-    - name: Build C# Solution
-      working-directory: platforms/godot_editor
-      run: dotnet build
 
     - name: Export Godot Sample Project
       working-directory: platforms/godot_editor
