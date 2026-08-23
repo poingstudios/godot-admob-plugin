@@ -27,6 +27,7 @@ This repository is a Godot plugin that integrates the Google AdMob SDK into Godo
 
 ## 📦 Current Environment
 - **Godot Version:** 4.7.2 (Current target for builds and testing).
+- **Godot Version Updates:** Whenever targeting or updating to a new Godot version, always update both the Android and iOS `GODOT_VERSIONS` matrices in `.github/workflows/cd-build-and-release.yml` to include the new version.
 
 ## 🛠️ Critical Commands
 - **Build All/Specific Platforms:** Use the central script for all compilation needs. 
