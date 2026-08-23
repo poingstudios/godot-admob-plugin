@@ -271,7 +271,7 @@ done
 if [ ${#FAILED_PLUGINS[@]} -gt 0 ]; then
     echo ""
     for FAILED_PLUGIN in "${FAILED_PLUGINS[@]}"; do
-        local FAILED_LOG="$LOG_DIR/${BUILD_TIMESTAMP}_${FAILED_PLUGIN}.log"
+        FAILED_LOG="$LOG_DIR/${BUILD_TIMESTAMP}_${FAILED_PLUGIN}.log"
         log_error "=================================================="
         log_error "Build failed for plugin: $FAILED_PLUGIN"
         log_error "------------------------------------------------=="
