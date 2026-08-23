@@ -144,7 +144,6 @@ build_single_plugin() {
 
     if [ "$MAX_PARALLEL_JOBS" -gt 1 ]; then
         (
-            log_info "Processing $PLUGIN..."
             ./scripts/lib/generate_static_library.sh "$PLUGIN" release || exit 1
             ./scripts/lib/generate_static_library.sh "$PLUGIN" release_debug || exit 1
 
@@ -232,6 +231,9 @@ RUNNING_PLUGINS=()
 FAILED_PLUGINS=()
 
 for PLUGIN in "${ALL_PLUGINS[@]}"; do
+    if [ "$MAX_PARALLEL_JOBS" -gt 1 ]; then
+        log_info "Started building $PLUGIN..."
+    fi
     build_single_plugin "$PLUGIN" &
     PID=$!
     RUNNING_PIDS+=("$PID")
@@ -240,8 +242,13 @@ for PLUGIN in "${ALL_PLUGINS[@]}"; do
     if [ ${#RUNNING_PIDS[@]} -ge "$MAX_PARALLEL_JOBS" ]; then
         CURRENT_PID="${RUNNING_PIDS[0]}"
         CURRENT_PLUGIN="${RUNNING_PLUGINS[0]}"
-        if ! wait "$CURRENT_PID"; then
+        if wait "$CURRENT_PID"; then
+            if [ "$MAX_PARALLEL_JOBS" -gt 1 ]; then
+                log_success "Finished building $CURRENT_PLUGIN"
+            fi
+        else
             FAILED_PLUGINS+=("$CURRENT_PLUGIN")
+            log_error "Failed building $CURRENT_PLUGIN"
         fi
         RUNNING_PIDS=("${RUNNING_PIDS[@]:1}")
         RUNNING_PLUGINS=("${RUNNING_PLUGINS[@]:1}")
@@ -251,8 +258,13 @@ done
 for i in "${!RUNNING_PIDS[@]}"; do
     PID="${RUNNING_PIDS[$i]}"
     PLUGIN="${RUNNING_PLUGINS[$i]}"
-    if ! wait "$PID"; then
+    if wait "$PID"; then
+        if [ "$MAX_PARALLEL_JOBS" -gt 1 ]; then
+            log_success "Finished building $PLUGIN"
+        fi
+    else
         FAILED_PLUGINS+=("$PLUGIN")
+        log_error "Failed building $PLUGIN"
     fi
 done
 

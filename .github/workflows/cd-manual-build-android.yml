@@ -60,12 +60,14 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Cache Gradle
+    - name: Cache Gradle & Godot Lib
       uses: actions/cache@v6
       with:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
+          platforms/android/.gradle
+          platforms/android/godot-lib
         key: android-gradle-${{ needs.setup.outputs.godot_version }}-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
         restore-keys: |
           android-gradle-${{ needs.setup.outputs.godot_version }}-

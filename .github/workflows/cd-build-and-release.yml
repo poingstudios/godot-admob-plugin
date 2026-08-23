@@ -91,12 +91,14 @@ jobs:
     steps:
     - uses: actions/checkout@v7
 
-    - name: Cache Gradle
+    - name: Cache Gradle & Godot Lib
       uses: actions/cache@v6
       with:
         path: |
           ~/.gradle/caches
           ~/.gradle/wrapper
+          platforms/android/.gradle
+          platforms/android/godot-lib
         key: android-gradle-${{ matrix.GODOT_VERSIONS }}-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
         restore-keys: |
           android-gradle-${{ matrix.GODOT_VERSIONS }}-
