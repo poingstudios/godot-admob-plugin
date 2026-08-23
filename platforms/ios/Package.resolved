@@ -140,8 +140,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/googleads/googleads-mobile-ios-mediation-maio.git",
       "state" : {
-        "revision" : "e5697d8641b884ee24f04b82a9d25bb79da8849e",
-        "version" : "2.2.102"
+        "revision" : "ea9e1c16831bee27fdae4b3dc7a43f87a67f98bb",
+        "version" : "2.2.3"
       }
     },
     {
@@ -221,8 +221,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/imobile/MaioSDK-v2-iOS.git",
       "state" : {
-        "revision" : "dcc77ac63d560fd5d2931c8b08c62534effcc5de",
-        "version" : "2.2.1"
+        "revision" : "884c2717ad5ee52298c0d4516acb0ce0fae4c070",
+        "version" : "2.2.0"
       }
     },
     {
