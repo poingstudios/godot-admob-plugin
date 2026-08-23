@@ -190,11 +190,14 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
     if unique_findings:
         findings_section = "| Severity | File | Finding |\n| :---: | :--- | :--- |\n"
         for f in unique_findings:
-            findings_section += f"| {f['severity']} | `{f['file']}` | {f['finding']} |\n"
+            desc = f['finding']
+            if isinstance(desc, str):
+                desc = desc.replace("\\n", " ").replace("\n", " ")
+            findings_section += f"| {f['severity']} | `{f['file']}` | {desc} |\n"
     else:
         findings_section = "No issues found. ✅"
 
-    combined_summary = "\n\n".join(s for s in summaries if s)
+    combined_summary = "\n\n".join(s.replace("\\n", "\n") for s in summaries if s)
     verdict_str = VERDICT_MAP.get(combined_verdict, "**🟡 Comment**")
 
     body_markdown = f"""## 📋 Summary
@@ -217,6 +220,8 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
         line = c.get("line")
         body = c.get("body")
         if path and line and body:
+            if isinstance(body, str):
+                body = body.replace("\\n", "\n").replace("\\t", "\t")
             if (path, int(line)) in all_valid_lines:
                 raw_comments.append({
                     "path": path,

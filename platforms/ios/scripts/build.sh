@@ -214,6 +214,15 @@ build_single_plugin() {
 
 MAX_PARALLEL_JOBS=1
 if [ "$PARALLEL_BUILD" = true ]; then
+    if [ -z "$NUM_CORES" ]; then
+        if command -v sysctl >/dev/null 2>&1; then
+            NUM_CORES=$(sysctl -n hw.logicalcpu 2>/dev/null || sysctl -n hw.ncpu 2>/dev/null || echo 4)
+        elif command -v nproc >/dev/null 2>&1; then
+            NUM_CORES=$(nproc 2>/dev/null || echo 4)
+        else
+            NUM_CORES=4
+        fi
+    fi
     MAX_PARALLEL_JOBS=$NUM_CORES
 fi
 if [ -z "$MAX_PARALLEL_JOBS" ] || [ "$MAX_PARALLEL_JOBS" -lt 1 ]; then
