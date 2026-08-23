@@ -94,7 +94,7 @@ def load_guidelines():
     return None
 
 
-def build_prompt(pr_title, annotated_diff, guidelines, batch_label, verified_actions=None):
+def build_prompt(pr_title, annotated_diff, guidelines, batch_label, verified_actions=None, file_contents=None):
     action_info = ""
     if verified_actions:
         valid_list = [f"- `{k}`: VALID (Verified live release/tag on GitHub)" for k, v in verified_actions.items() if v]
@@ -110,36 +110,35 @@ def build_prompt(pr_title, annotated_diff, guidelines, batch_label, verified_act
         if lines:
             action_info = "\n## GitHub Actions Ground Truth\n" + "\n".join(lines) + "\n"
 
+    files_context = ""
+    if file_contents:
+        files_blocks = []
+        for fpath, content in file_contents.items():
+            files_blocks.append(f"### Full File: `{fpath}`\n```\n{content}\n```")
+        if files_blocks:
+            files_context = "\n## Full Source Code of Modified Files (Ground Truth)\nUse the full file contents below to verify class declarations, method implementations, and symbol references across the whole file. Never speculate about code you cannot see in the diff—verify against this full file source.\n\n" + "\n\n".join(files_blocks) + "\n"
+
     prompt = f"""You are Poing Reviewer, a senior code reviewer.
-Analyze the pull request diff below and return a structured JSON response.
+Analyze the pull request diff and full file context below, and return a structured JSON response.
 
 PR Title: {pr_title}
 
-## What to focus on
+## Review Focus
 
-1. **Logic errors and bugs** - Race conditions, null pointers, incorrect API usage
-2. **Security issues** - Hardcoded secrets, injection vulnerabilities, permission problems
-3. **Architecture violations** - Breaking cross-platform patterns, incorrect abstraction layers
-4. **Project conventions** - GDScript/C# style, naming, type annotations, signal patterns
-5. **API compatibility** - Breaking changes to the public API, missing signal parity
-6. **Reliability** - Error handling, edge cases, resource cleanup
+1. **Logic errors and bugs** - Null dereferences, broken state machines, resource leaks, incorrect API usage
+2. **Security vulnerabilities** - Secret leaks, injection, insecure permissions
+3. **Architecture & parity** - GDScript/C# API parity, platform bridge integrity
+4. **Reliability & error handling** - Unhandled exception paths, failed async states
 
 {batch_label}
-Examine the diff and identify any real issues.
 
-Do NOT comment on:
-- Code style that already matches project conventions
-- Minor formatting differences
-- Comments or documentation formatting
-- Changes outside the diff
+## Strict Quality Rules (No Nitpicks, No Speculation)
 
-CRITICAL: Only report findings that are clearly present. If you are unsure
-whether an issue exists, err on the side of not commenting. False positives
-waste reviewer time.
-
-CRITICAL: It is perfectly fine to return empty arrays. If the code looks
-correct, return `{{"findings": [], "comments": []}}`. Do NOT fabricate issues
-just to populate the arrays.
+1. **GROUND TRUTH FIRST**: You are provided with both the `Annotated Diff` (what changed) and `Full Source Code of Modified Files` (the entire current file). Use the full file content to verify whether functions, variables, or constants are used before making any claims.
+2. **NO SPECULATION**: NEVER post speculative comments such as "Please ensure other parts of the file/codebase don't use this", "make sure this doesn't break unseen code", or "not shown in this diff". If you do not see a definite bug in the provided context, do NOT comment.
+3. **NO NITPICKS**: Do NOT comment on personal style preferences, trivial formatting, or comments.
+4. **EMPTY IS FINE**: If the changes are clean and correct, return `{{"findings": [], "comments": []}}`. Do NOT invent issues.
+5. **EXACT LINE MATCHING**: Inline comments must specify the exact line number from the `Annotated Diff` prefixed with `[<file> L<number>]`.
 
 ## Output format
 
@@ -149,11 +148,9 @@ Return valid JSON with:
 - `findings`: array of {{severity: "🔴"|"🟡"|"🟢", file: "path", finding: "description"}} (can be empty)
 - `comments`: array of {{path, line, body}} for inline review notes (can be empty)
 
-In the annotated diff, each code line is prefixed like [path/to/file L12].
-Match line numbers exactly when adding inline comments.
-Only comment on lines that exist in the diff.
 {guidelines}
 {action_info}
+{files_context}
 ## Annotated Diff
 
 ```diff
