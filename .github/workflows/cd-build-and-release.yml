@@ -108,12 +108,12 @@ jobs:
         chmod +x ./scripts/unix/download_godot.sh
         ./scripts/unix/download_godot.sh ${{matrix.GODOT_VERSIONS}}
         chmod +x ./gradlew
-        ./gradlew build -PgodotVersion=${{matrix.GODOT_VERSIONS}}
+        ./gradlew build -PgodotVersion=${{matrix.GODOT_VERSIONS}} --parallel
 
     - name: Compress the artifact output
       working-directory: platforms/android
       run: |
-        ./gradlew zipPlugins -PgodotVersion="${{matrix.GODOT_VERSIONS}}"
+        ./gradlew zipPlugins -PgodotVersion="${{matrix.GODOT_VERSIONS}}" --parallel
 
     - name: Upload binaries to artifact
       uses: actions/upload-artifact@v7
@@ -154,7 +154,6 @@ jobs:
         path: |
           platforms/ios/build
           platforms/ios/bin/static_libraries
-          platforms/ios/.sconsign.dblite
         key: ios-build-${{ env.CURRENT_GODOT_VERSION }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/src/**') }}
         restore-keys: |
           ios-build-${{ env.CURRENT_GODOT_VERSION }}-
@@ -168,10 +167,16 @@ jobs:
         restore-keys: |
           spm-
 
+    - name: Cache Godot Source & Headers
+      uses: actions/cache@v6
+      with:
+        path: platforms/ios/godot
+        key: godot-source-ios-${{ env.CURRENT_GODOT_VERSION }}
+
     - name: Compiles the Source Code
       working-directory: platforms/ios
       run: |
-        ./scripts/build.sh ${{env.CURRENT_GODOT_VERSION}}
+        ./scripts/build.sh --parallel ${{env.CURRENT_GODOT_VERSION}}
 
     - name: Upload binaries to artifact
       uses: actions/upload-artifact@v7

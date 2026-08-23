@@ -65,7 +65,6 @@ jobs:
         path: |
           platforms/ios/build
           platforms/ios/bin/static_libraries
-          platforms/ios/.sconsign.dblite
         key: ios-build-${{ needs.setup.outputs.godot_version }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/src/**') }}
         restore-keys: |
           ios-build-${{ needs.setup.outputs.godot_version }}-
@@ -79,9 +78,15 @@ jobs:
         restore-keys: |
           spm-
 
+    - name: Cache Godot Source & Headers
+      uses: actions/cache@v6
+      with:
+        path: platforms/ios/godot
+        key: godot-source-ios-${{ needs.setup.outputs.godot_version }}
+
     - name: Build Source
       working-directory: platforms/ios
-      run: ./scripts/build.sh ${{ needs.setup.outputs.godot_version }}
+      run: ./scripts/build.sh --parallel ${{ needs.setup.outputs.godot_version }}
 
     - name: Upload to GitHub Release
       if: github.event.inputs.upload_to_release == 'true'

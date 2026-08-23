@@ -77,12 +77,12 @@ jobs:
         chmod +x ./scripts/unix/download_godot.sh
         ./scripts/unix/download_godot.sh ${{ needs.setup.outputs.godot_version }}
         chmod +x ./gradlew
-        ./gradlew build -PgodotVersion=${{ needs.setup.outputs.godot_version }}
+        ./gradlew build -PgodotVersion=${{ needs.setup.outputs.godot_version }} --parallel
 
     - name: Compress the artifact output
       working-directory: platforms/android
       run: |
-        ./gradlew zipPlugins -PgodotVersion="${{ needs.setup.outputs.godot_version }}"
+        ./gradlew zipPlugins -PgodotVersion="${{ needs.setup.outputs.godot_version }}" --parallel
 
     - name: Upload to GitHub Release
       if: github.event.inputs.upload_to_release == 'true'

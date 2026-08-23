@@ -30,21 +30,29 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Helper for logging
+# Helper for logging (ISO 8601 UTC format)
+get_timestamp() {
+    date -u +"%Y-%m-%dT%H:%M:%SZ"
+}
+
+get_filename_timestamp() {
+    date -u +"%Y-%m-%dT%H-%M-%SZ"
+}
+
 log_info() {
-    echo -e "${BLUE}[INFO]${NC} $1"
+    echo -e "${BLUE}[$(get_timestamp)] [INFO]${NC} $1"
 }
 
 log_success() {
-    echo -e "${GREEN}[SUCCESS]${NC} $1"
+    echo -e "${GREEN}[$(get_timestamp)] [SUCCESS]${NC} $1"
 }
 
 log_warning() {
-    echo -e "${YELLOW}[WARNING]${NC} $1"
+    echo -e "${YELLOW}[$(get_timestamp)] [WARNING]${NC} $1"
 }
 
 log_error() {
-    echo -e "${RED}[ERROR]${NC} $1"
+    echo -e "${RED}[$(get_timestamp)] [ERROR]${NC} $1"
 }
 
 check_error() {

@@ -24,16 +24,18 @@
 # scripts/build_local.sh
 
 show_help() {
-    echo "Usage: ./scripts/build_local.sh [android|ios|all] <godot_version> [--clean]"
+    echo "Usage: ./scripts/build_local.sh [android|ios|all] <godot_version> [--clean] [--parallel]"
     echo ""
     echo "Arguments:"
     echo "  [platform]       android, ios, or all (default: all)"
     echo "  <godot_version>  The Godot version (e.g., 4.7.2 or 4.7-beta1)"
     echo "  --clean          Clean before building"
+    echo "  --parallel       Build in parallel across CPU cores"
     echo ""
     echo "Examples:"
     echo "  ./scripts/build_local.sh all 4.7.2"
-    echo "  ./scripts/build_local.sh ios 4.7-rc3 --clean"
+    echo "  ./scripts/build_local.sh ios 4.7.2 --parallel"
+    echo "  ./scripts/build_local.sh ios 4.7-rc3 --clean --parallel"
     echo "  ./scripts/build_local.sh android 4.7.2 --clean"
 }
 
@@ -43,10 +45,13 @@ if [[ "$1" == "--help" || "$1" == "-h" ]]; then
 fi
 
 CLEAN=false
+PARALLEL=false
 ARGS=()
 for arg in "$@"; do
     if [ "$arg" = "--clean" ]; then
         CLEAN=true
+    elif [ "$arg" = "--parallel" ]; then
+        PARALLEL=true
     else
         ARGS+=("$arg")
     fi
@@ -70,23 +75,33 @@ build_android() {
     ./scripts/unix/download_godot.sh "$GODOT_VERSION" && \
     chmod +x gradlew
     
+    local GRADLE_OPTS="--no-configuration-cache"
+    if [ "$PARALLEL" = true ]; then
+        GRADLE_OPTS="$GRADLE_OPTS --parallel"
+    else
+        GRADLE_OPTS="$GRADLE_OPTS --no-parallel"
+    fi
+
     if [ "$CLEAN" = true ]; then
         echo ">>> Cleaning Android build and export directories..."
-        ./gradlew clean --no-configuration-cache || exit 1
+        ./gradlew clean $GRADLE_OPTS || exit 1
         rm -rf "$DEST/addons/admob/android/bin/"*
     fi
     
-    ./gradlew build -PgodotVersion="$GODOT_VERSION" --no-configuration-cache && \
-    ./gradlew exportFiles -PpluginExportPath="$DEST/addons/admob/android/bin" --no-configuration-cache || exit 1
+    ./gradlew build -PgodotVersion="$GODOT_VERSION" $GRADLE_OPTS && \
+    ./gradlew exportFiles -PpluginExportPath="$DEST/addons/admob/android/bin" $GRADLE_OPTS || exit 1
 }
 
 build_ios() {
     echo ">>> Building iOS ($GODOT_VERSION)..."
     BUILD_OPTS=""
     if [ "$CLEAN" = true ]; then
-        BUILD_OPTS="--clean"
+        BUILD_OPTS="$BUILD_OPTS --clean"
         echo ">>> Cleaning iOS export directories..."
         rm -rf "$DEST/addons/admob/ios/bin/"*
+    fi
+    if [ "$PARALLEL" = true ]; then
+        BUILD_OPTS="$BUILD_OPTS --parallel"
     fi
     cd "$ROOT_DIR/platforms/ios" && ./scripts/build.sh $BUILD_OPTS "$GODOT_VERSION" || exit 1
     

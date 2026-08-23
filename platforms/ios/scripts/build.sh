@@ -34,6 +34,7 @@ fi
 # Default values
 CLEAN_BUILD=false
 GENERATE_SDK=false
+PARALLEL_BUILD=false
 GODOT_VERSION=""
 PLUGIN_CONFIG_PATH="../godot_editor/addons/admob/plugin.cfg"
 
@@ -44,6 +45,7 @@ show_help() {
     echo "Options:"
     echo "  --clean       Perform a clean build (removes all artifacts first)"
     echo "  --sdk         Generate the 'sdk-external-dependencies' zip"
+    echo "  --parallel    Build plugins in parallel across CPU cores"
     echo "  --plugin-config <path>   Provide a custom path to plugin.cfg"
     echo "  --help        Show this help message"
     echo ""
@@ -55,6 +57,7 @@ show_help() {
     echo "  ./scripts/build.sh 4.7             # Incremental build for specific version"
     echo "  ./scripts/build.sh 4.7-beta1         # Incremental build for pre-release version"
     echo "  ./scripts/build.sh --clean           # Clean build using detected version"
+    echo "  ./scripts/build.sh --parallel        # Parallel build across all CPU cores"
     echo "  ./scripts/build.sh --sdk             # Build plugin and generate SDK dependencies"
 }
 
@@ -63,6 +66,7 @@ while [[ "$#" -gt 0 ]]; do
     case $1 in
         --clean) CLEAN_BUILD=true ;;
         --sdk) GENERATE_SDK=true ;;
+        --parallel) PARALLEL_BUILD=true ;;
         --plugin-config) 
             if [ -n "$2" ] && [[ "$2" != --* ]]; then
                 PLUGIN_CONFIG_PATH="$2"
@@ -130,42 +134,146 @@ log_info "--- Building Internal Plugin ---"
 
 STAGING_INTERNAL="./bin/release/internal"
 
-# Check if we can skip the loop and zipping if all plugins are already built and staged
-# For simplicity, we just run the loop but rely on generate_static_library.sh's internal optimization
+BUILD_TIMESTAMP=$(get_filename_timestamp)
+LOG_DIR="./bin/logs"
+mkdir -p "$LOG_DIR"
+
+build_single_plugin() {
+    local PLUGIN="$1"
+    local LOG_FILE="$LOG_DIR/${BUILD_TIMESTAMP}_${PLUGIN}.log"
+
+    if [ "$MAX_PARALLEL_JOBS" -gt 1 ]; then
+        (
+            log_info "Processing $PLUGIN..."
+            ./scripts/lib/generate_static_library.sh "$PLUGIN" release || exit 1
+            ./scripts/lib/generate_static_library.sh "$PLUGIN" release_debug || exit 1
+
+            local XCF_DIR="./bin/xcframeworks/${PLUGIN}"
+            local DEBUG_XCF="$XCF_DIR/poing-godot-admob-${PLUGIN}.debug.xcframework"
+            
+            # Only move if the debug_xcframework exists (it might have been skipped if up to date)
+            if [ -d "$XCF_DIR/poing-godot-admob-${PLUGIN}.release_debug.xcframework" ]; then
+                rm -rf "$DEBUG_XCF"
+                mv "$XCF_DIR/poing-godot-admob-${PLUGIN}.release_debug.xcframework" "$DEBUG_XCF"
+            fi
+
+            # Create destination dirs matching Android structure
+            local PLUGIN_DEST_DIR="$STAGING_INTERNAL/$PLUGIN"
+            mkdir -p "$PLUGIN_DEST_DIR/libs"
+
+            cp -R "$XCF_DIR/poing-godot-admob-${PLUGIN}.release.xcframework" "$PLUGIN_DEST_DIR/libs/"
+            cp -R "$XCF_DIR/poing-godot-admob-${PLUGIN}.debug.xcframework" "$PLUGIN_DEST_DIR/libs/"
+
+            # Copy the config script (e.g. poing_godot_admob_applovin.gd)
+            local CONFIG_DIR
+            CONFIG_DIR=$(get_plugin_config_dir "$PLUGIN")
+            if [ -f "$CONFIG_DIR/poing_godot_admob_${PLUGIN}.gd" ]; then
+                cp "$CONFIG_DIR/poing_godot_admob_${PLUGIN}.gd" "$PLUGIN_DEST_DIR/poing_godot_admob_${PLUGIN}.gd"
+            fi
+
+            # Copy any resource bundle files if they exist (like .xib templates for ads)
+            if [ "$PLUGIN" == "ads" ]; then
+                mkdir -p "$PLUGIN_DEST_DIR/res"
+                cp ./src/ads/helpers/NativeTemplates/*.xib "$PLUGIN_DEST_DIR/res/" 2>/dev/null || true
+            fi
+        ) > "$LOG_FILE" 2>&1
+    else
+        log_info "Processing $PLUGIN..."
+        ./scripts/lib/generate_static_library.sh "$PLUGIN" release || return 1
+        ./scripts/lib/generate_static_library.sh "$PLUGIN" release_debug || return 1
+
+        local XCF_DIR="./bin/xcframeworks/${PLUGIN}"
+        local DEBUG_XCF="$XCF_DIR/poing-godot-admob-${PLUGIN}.debug.xcframework"
+        
+        # Only move if the debug_xcframework exists (it might have been skipped if up to date)
+        if [ -d "$XCF_DIR/poing-godot-admob-${PLUGIN}.release_debug.xcframework" ]; then
+            rm -rf "$DEBUG_XCF"
+            mv "$XCF_DIR/poing-godot-admob-${PLUGIN}.release_debug.xcframework" "$DEBUG_XCF"
+        fi
+
+        # Create destination dirs matching Android structure
+        local PLUGIN_DEST_DIR="$STAGING_INTERNAL/$PLUGIN"
+        mkdir -p "$PLUGIN_DEST_DIR/libs"
+
+        cp -R "$XCF_DIR/poing-godot-admob-${PLUGIN}.release.xcframework" "$PLUGIN_DEST_DIR/libs/"
+        cp -R "$XCF_DIR/poing-godot-admob-${PLUGIN}.debug.xcframework" "$PLUGIN_DEST_DIR/libs/"
+
+        # Copy the config script (e.g. poing_godot_admob_applovin.gd)
+        local CONFIG_DIR
+        CONFIG_DIR=$(get_plugin_config_dir "$PLUGIN")
+        if [ -f "$CONFIG_DIR/poing_godot_admob_${PLUGIN}.gd" ]; then
+            cp "$CONFIG_DIR/poing_godot_admob_${PLUGIN}.gd" "$PLUGIN_DEST_DIR/poing_godot_admob_${PLUGIN}.gd"
+        fi
+
+        # Copy any resource bundle files if they exist (like .xib templates for ads)
+        if [ "$PLUGIN" == "ads" ]; then
+            mkdir -p "$PLUGIN_DEST_DIR/res"
+            cp ./src/ads/helpers/NativeTemplates/*.xib "$PLUGIN_DEST_DIR/res/" 2>/dev/null || true
+        fi
+    fi
+}
+
+MAX_PARALLEL_JOBS=1
+if [ "$PARALLEL_BUILD" = true ]; then
+    MAX_PARALLEL_JOBS=$NUM_CORES
+fi
+if [ -z "$MAX_PARALLEL_JOBS" ] || [ "$MAX_PARALLEL_JOBS" -lt 1 ]; then
+    MAX_PARALLEL_JOBS=1
+fi
+
+if [ "$MAX_PARALLEL_JOBS" -gt 1 ]; then
+    log_info "Building ${#ALL_PLUGINS[@]} plugins in parallel (max $MAX_PARALLEL_JOBS jobs)..."
+else
+    log_info "Building ${#ALL_PLUGINS[@]} plugins sequentially..."
+fi
+
+RUNNING_PIDS=()
+RUNNING_PLUGINS=()
+FAILED_PLUGINS=()
 
 for PLUGIN in "${ALL_PLUGINS[@]}"; do
-    log_info "Processing $PLUGIN..."
-    ./scripts/lib/generate_static_library.sh "$PLUGIN" release || exit 1
-    ./scripts/lib/generate_static_library.sh "$PLUGIN" release_debug || exit 1
+    build_single_plugin "$PLUGIN" &
+    PID=$!
+    RUNNING_PIDS+=("$PID")
+    RUNNING_PLUGINS+=("$PLUGIN")
 
-    XCF_DIR="./bin/xcframeworks/${PLUGIN}"
-    DEBUG_XCF="$XCF_DIR/poing-godot-admob-${PLUGIN}.debug.xcframework"
-    
-    # Only move if the debug_xcframework exists (it might have been skipped if up to date)
-    if [ -d "$XCF_DIR/poing-godot-admob-${PLUGIN}.release_debug.xcframework" ]; then
-        rm -rf "$DEBUG_XCF"
-        mv "$XCF_DIR/poing-godot-admob-${PLUGIN}.release_debug.xcframework" "$DEBUG_XCF"
-    fi
-
-    # Create destination dirs matching Android structure
-    PLUGIN_DEST_DIR="$STAGING_INTERNAL/$PLUGIN"
-    mkdir -p "$PLUGIN_DEST_DIR/libs"
-
-    cp -R "$XCF_DIR/poing-godot-admob-${PLUGIN}.release.xcframework" "$PLUGIN_DEST_DIR/libs/"
-    cp -R "$XCF_DIR/poing-godot-admob-${PLUGIN}.debug.xcframework" "$PLUGIN_DEST_DIR/libs/"
-
-    # Copy the config script (e.g. poing_godot_admob_applovin.gd)
-    CONFIG_DIR=$(get_plugin_config_dir "$PLUGIN")
-    if [ -f "$CONFIG_DIR/poing_godot_admob_${PLUGIN}.gd" ]; then
-        cp "$CONFIG_DIR/poing_godot_admob_${PLUGIN}.gd" "$PLUGIN_DEST_DIR/poing_godot_admob_${PLUGIN}.gd"
-    fi
-
-    # Copy any resource bundle files if they exist (like .xib templates for ads)
-    if [ "$PLUGIN" == "ads" ]; then
-        mkdir -p "$PLUGIN_DEST_DIR/res"
-        cp ./src/ads/helpers/NativeTemplates/*.xib "$PLUGIN_DEST_DIR/res/" 2>/dev/null || true
+    if [ ${#RUNNING_PIDS[@]} -ge "$MAX_PARALLEL_JOBS" ]; then
+        CURRENT_PID="${RUNNING_PIDS[0]}"
+        CURRENT_PLUGIN="${RUNNING_PLUGINS[0]}"
+        if ! wait "$CURRENT_PID"; then
+            FAILED_PLUGINS+=("$CURRENT_PLUGIN")
+        fi
+        RUNNING_PIDS=("${RUNNING_PIDS[@]:1}")
+        RUNNING_PLUGINS=("${RUNNING_PLUGINS[@]:1}")
     fi
 done
+
+for i in "${!RUNNING_PIDS[@]}"; do
+    PID="${RUNNING_PIDS[$i]}"
+    PLUGIN="${RUNNING_PLUGINS[$i]}"
+    if ! wait "$PID"; then
+        FAILED_PLUGINS+=("$PLUGIN")
+    fi
+done
+
+if [ ${#FAILED_PLUGINS[@]} -gt 0 ]; then
+    echo ""
+    for FAILED_PLUGIN in "${FAILED_PLUGINS[@]}"; do
+        local FAILED_LOG="$LOG_DIR/${BUILD_TIMESTAMP}_${FAILED_PLUGIN}.log"
+        log_error "=================================================="
+        log_error "Build failed for plugin: $FAILED_PLUGIN"
+        log_error "------------------------------------------------=="
+        if [ -f "$FAILED_LOG" ]; then
+            cat "$FAILED_LOG"
+        fi
+        log_error "=================================================="
+        echo ""
+    done
+    log_error "The following ${#FAILED_PLUGINS[@]} plugin(s) failed to build: ${FAILED_PLUGINS[*]}"
+    exit 1
+fi
+
+rm -f "$LOG_DIR/${BUILD_TIMESTAMP}_"*.log
 
 PLUGIN_VERSION=$(grep -E '^version=' "$PLUGIN_CONFIG_PATH" | cut -d '"' -f 2)
 if [ -z "$PLUGIN_VERSION" ]; then

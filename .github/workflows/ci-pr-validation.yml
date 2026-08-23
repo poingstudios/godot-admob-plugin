@@ -62,12 +62,12 @@ jobs:
       working-directory: platforms/android
       run: |
         chmod +x ./gradlew
-        ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }}
+        ./gradlew build -PgodotVersion=${{ needs.detect-latest.outputs.godot_version }} --parallel
 
     - name: Compress the artifact output
       working-directory: platforms/android
       run: |
-        ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}"
+        ./gradlew zipPlugins -PgodotVersion="${{ needs.detect-latest.outputs.godot_version }}" --parallel
 
     - name: Upload artifact
       uses: actions/upload-artifact@v7
@@ -92,7 +92,6 @@ jobs:
         path: |
           platforms/ios/build
           platforms/ios/bin/static_libraries
-          platforms/ios/.sconsign.dblite
         key: ios-build-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/ios/SConstruct', 'platforms/ios/src/**') }}
         restore-keys: |
           ios-build-${{ needs.detect-latest.outputs.godot_version }}-
@@ -116,10 +115,16 @@ jobs:
         restore-keys: |
           spm-
 
+    - name: Cache Godot Source & Headers
+      uses: actions/cache@v6
+      with:
+        path: platforms/ios/godot
+        key: godot-source-ios-${{ needs.detect-latest.outputs.godot_version }}
+
     - name: Compiles the Source Code
       working-directory: platforms/ios
       run: |
-        ./scripts/build.sh ${{ needs.detect-latest.outputs.godot_version }}
+        ./scripts/build.sh --parallel ${{ needs.detect-latest.outputs.godot_version }}
 
     - name: Upload artifact
       uses: actions/upload-artifact@v7
@@ -258,6 +263,18 @@ jobs:
         screen/support_large=true
         screen/support_xlarge=true
         EOF
+
+    - name: Cache Gradle for Godot Android Export
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: godot-android-gradle-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
+        restore-keys: |
+          godot-android-gradle-${{ needs.detect-latest.outputs.godot_version }}-
+          godot-android-gradle-
+          android-gradle-
 
     - name: Import Project Resources
       working-directory: platforms/godot_editor
@@ -425,6 +442,18 @@ jobs:
         screen/support_xlarge=true
         EOF
 
+    - name: Cache Gradle for Godot Android Export
+      uses: actions/cache@v6
+      with:
+        path: |
+          ~/.gradle/caches
+          ~/.gradle/wrapper
+        key: godot-android-gradle-${{ needs.detect-latest.outputs.godot_version }}-${{ hashFiles('platforms/android/**/*.gradle*', 'platforms/android/gradle.properties') }}
+        restore-keys: |
+          godot-android-gradle-${{ needs.detect-latest.outputs.godot_version }}-
+          godot-android-gradle-
+          android-gradle-
+
     - name: Import Project Resources
       working-directory: platforms/godot_editor
       run: |
@@ -466,7 +495,15 @@ jobs:
     steps:
     - uses: actions/checkout@v7
 
+    - name: Cache Godot Editor
+      id: cache-godot
+      uses: actions/cache@v6
+      with:
+        path: /Applications/Godot.app
+        key: godot-macos-${{ needs.detect-latest.outputs.godot_version }}
+
     - name: Download Godot
+      if: steps.cache-godot.outputs.cache-hit != 'true'
       run: |
         CV="${{ needs.detect-latest.outputs.godot_version }}"
         DOWNLOAD_VERSION="${CV%.0}"
@@ -480,7 +517,15 @@ jobs:
         rm -rf /Applications/Godot.app
         mv Godot.app /Applications/Godot.app
 
+    - name: Cache Export Templates
+      id: cache-templates
+      uses: actions/cache@v6
+      with:
+        path: ~/Library/Application Support/Godot/export_templates
+        key: godot-templates-macos-${{ needs.detect-latest.outputs.godot_version }}
+
     - name: Download Export Templates
+      if: steps.cache-templates.outputs.cache-hit != 'true'
       run: |
         CV="${{ needs.detect-latest.outputs.godot_version }}"
         DOWNLOAD_VERSION="${CV%.0}"
@@ -625,7 +670,15 @@ jobs:
       with:
         dotnet-version: '8.0.x'
 
+    - name: Cache Godot Editor (.NET)
+      id: cache-godot
+      uses: actions/cache@v6
+      with:
+        path: /Applications/Godot.app
+        key: godot-mono-macos-${{ needs.detect-latest.outputs.godot_version }}
+
     - name: Download Godot (.NET)
+      if: steps.cache-godot.outputs.cache-hit != 'true'
       run: |
         CV="${{ needs.detect-latest.outputs.godot_version }}"
         DOWNLOAD_VERSION="${CV%.0}"
@@ -639,7 +692,15 @@ jobs:
         rm -rf /Applications/Godot.app
         mv Godot_mono.app /Applications/Godot.app
 
+    - name: Cache Export Templates (.NET)
+      id: cache-templates
+      uses: actions/cache@v6
+      with:
+        path: ~/Library/Application Support/Godot/export_templates
+        key: godot-mono-templates-macos-${{ needs.detect-latest.outputs.godot_version }}
+
     - name: Download Export Templates
+      if: steps.cache-templates.outputs.cache-hit != 'true'
       run: |
         CV="${{ needs.detect-latest.outputs.godot_version }}"
         DOWNLOAD_VERSION="${CV%.0}"
