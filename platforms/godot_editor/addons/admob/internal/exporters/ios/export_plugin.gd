@@ -294,7 +294,10 @@ let package = Package(
             name: "PoingGodotAdMobDeps",
             dependencies: [
 %s            ],
-            path: "PoingGodotAdMobDeps"
+            path: "PoingGodotAdMobDeps",
+            linkerSettings: [
+                .linkedFramework("JavaScriptCore")
+            ]
         )
     ]
 )
