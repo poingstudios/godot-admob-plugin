@@ -19,6 +19,9 @@ jobs:
         filters: |
           code:
             - 'platforms/**'
+            - '!platforms/**/LICENSE*'
+            - '!platforms/**/*.md'
+            - '!platforms/**/*.txt'
             - 'scripts/**'
             - '.github/workflows/**'
 
