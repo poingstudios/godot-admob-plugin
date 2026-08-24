@@ -23,7 +23,8 @@ jobs:
             - '!platforms/**/*.md'
             - '!platforms/**/*.txt'
             - 'scripts/**'
-            - '.github/workflows/**'
+            - '.github/workflows/ci-pr-validation.yml'
+            - '.github/workflows/cd-build-and-release.yml'
 
   detect-latest:
     name: Check latest Godot version
