@@ -16,7 +16,7 @@ AdMob 插件を Godot プロジェクト（特に Godot v4.2 以降）に統合�
 - iOS への展開:
 	- Godot v4.1 以上を使用
 	- Xcode 26.2 以上を使用
-	- iOS 14.0 以上をターゲット
+	- iOS 15.0 以上をターゲット
 - 推奨: [AdMob アカウントの作成](https://support.google.com/admob/answer/7356219?visit_id=638286911958663013-3847536692&rd=1) および [アプリの登録](https://support.google.com/admob/answer/9989980?visit_id=638286911964685099-3190075945&rd=1)。
 
 ### ネイティブ SDK バージョン

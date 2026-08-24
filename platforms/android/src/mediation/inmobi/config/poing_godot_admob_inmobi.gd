@@ -24,8 +24,8 @@ extends EditorExportPlugin
 
 const PLUGIN_NAME := "inmobi"
 var _dependency_library := [
-	"com.google.ads.mediation:inmobi:11.3.0.0",
-	"com.inmobi.monetization:inmobi-ads-kotlin:11.3.0"
+	"com.google.ads.mediation:inmobi:11.4.1.0",
+	"com.inmobi.monetization:inmobi-ads-kotlin:11.4.1"
 ]
 
 

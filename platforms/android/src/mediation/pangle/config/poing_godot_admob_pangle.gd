@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "pangle"
-var _dependency_library := ["com.google.ads.mediation:pangle:8.0.0.5.0"]
+var _dependency_library := ["com.google.ads.mediation:pangle:8.2.0.4.0"]
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:

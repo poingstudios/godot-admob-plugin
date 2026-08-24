@@ -152,3 +152,43 @@ def filter_action_version_false_positives(findings, comments, verified_actions):
             filtered_comments.append(c)
 
     return filtered_findings, filtered_comments
+
+
+def filter_speculative_false_positives(findings, comments):
+    """Filters out speculative comments/findings about code outside the diff or unshown context."""
+    speculative_phrases = [
+        "not shown in this diff",
+        "not visible in this diff",
+        "not in this diff",
+        "outside this diff",
+        "outside of this diff",
+        "please ensure that the body of",
+        "make sure the rest of the file",
+        "ensure that other parts of the codebase",
+        "verify that the rest of",
+    ]
+
+    filtered_findings = []
+    for f in findings:
+        text = f.get("finding", "").lower()
+        if any(phrase in text for phrase in speculative_phrases):
+            print(
+                f"Suppressing speculative finding: {f['finding']}",
+                file=sys.stderr,
+            )
+            continue
+        filtered_findings.append(f)
+
+    filtered_comments = []
+    for c in comments:
+        text = c.get("body", "").lower()
+        if any(phrase in text for phrase in speculative_phrases):
+            print(
+                f"Suppressing speculative comment on {c.get('path')} L{c.get('line')}: {c['body']}",
+                file=sys.stderr,
+            )
+            continue
+        filtered_comments.append(c)
+
+    return filtered_findings, filtered_comments
+

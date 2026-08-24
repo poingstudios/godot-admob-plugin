@@ -131,7 +131,7 @@ for gdFile in gdFiles {
 
 let package = Package(
     name: "PoingGodotAdMobDeps",
-    platforms: [.iOS(.v14)],
+    platforms: [.iOS(.v15)],
     products: [
         .library(
             name: "PoingGodotAdMobDeps",

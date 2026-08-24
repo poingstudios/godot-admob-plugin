@@ -54,7 +54,7 @@ func get_spm_packages() -> Array[Dictionary]:
 	return [
 		{
 			"url": "https://github.com/googleads/googleads-mobile-ios-mediation-pubmatic.git",
-			"version": "5.1.100",
+			"version": "5.2.000",
 			"products": ["PubMaticAdapterTarget"]
 		}
 	]

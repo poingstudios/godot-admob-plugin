@@ -29,7 +29,13 @@ from poing_reviewer.config import (
     FP_KEYWORDS,
     fingerprint,
 )
-from poing_reviewer.diff import get_git_diff, annotate_diff, split_diff_by_file, split_batches
+from poing_reviewer.diff import (
+    get_git_diff,
+    annotate_diff,
+    split_diff_by_file,
+    split_batches,
+    load_file_contents_for_diff,
+)
 from poing_reviewer.model import load_guidelines, build_prompt, call_review_model, pick_verdict
 from poing_reviewer.github_api import (
     fetch_existing_reviews,
@@ -45,6 +51,7 @@ from poing_reviewer.false_positive import (
     fetch_thumbs_down_fingerprints,
     add_footer_hint,
     filter_action_version_false_positives,
+    filter_speculative_false_positives,
 )
 from poing_reviewer.thread_resolver import collect_thread_fingerprints, resolve_fixed_threads
 
@@ -127,12 +134,15 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
         batch_diff = "".join(batch)
         annotated, valid_lines = annotate_diff(batch_diff)
         all_valid_lines.update(valid_lines)
+        batch_file_paths = {p for p, _ in valid_lines}
+        file_contents = load_file_contents_for_diff(batch_file_paths)
         prompt = build_prompt(
             cfg.PR_TITLE,
             annotated,
             guidelines,
             batch_label,
             verified_actions=verified_actions,
+            file_contents=file_contents,
         )
         result = None
         for model in cfg.MODELS_TO_TRY:
@@ -169,6 +179,9 @@ The repository has an AGENTS.md file with project-specific rules. Follow these g
     filtered_findings = _filter_model_false_positives(all_findings)
     filtered_findings, all_comments = filter_action_version_false_positives(
         filtered_findings, all_comments, verified_actions
+    )
+    filtered_findings, all_comments = filter_speculative_false_positives(
+        filtered_findings, all_comments
     )
 
     has_red = any(f.get("severity") == "🔴" for f in filtered_findings)

@@ -20,8 +20,34 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+import os
 import subprocess
 import sys
+
+IGNORED_EXTENSIONS = {
+    ".png", ".jpg", ".jpeg", ".svg", ".zip", ".tar", ".gz", ".aar",
+    ".jar", ".dylib", ".so", ".dll", ".a", ".framework", ".xcframework",
+    ".resolved", ".lock"
+}
+MAX_FILE_SIZE_BYTES = 100 * 1024  # 100 KB limit per file
+
+
+def load_file_contents_for_diff(file_paths):
+    """Read the full content of modified source files from disk for ground-truth context."""
+    file_contents = {}
+    for path in file_paths:
+        if any(path.endswith(ext) for ext in IGNORED_EXTENSIONS):
+            continue
+        if not os.path.exists(path) or os.path.isdir(path):
+            continue
+        try:
+            if os.path.getsize(path) > MAX_FILE_SIZE_BYTES:
+                continue
+            with open(path, "r", encoding="utf-8", errors="replace") as f:
+                file_contents[path] = f.read()
+        except Exception as e:
+            print(f"Warning: Could not read file content for {path}: {e}", file=sys.stderr)
+    return file_contents
 
 
 def get_git_diff(base_ref):
