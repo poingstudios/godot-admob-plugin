@@ -492,10 +492,10 @@ jobs:
         mv Godot.app /Applications/Godot.app
         rm -f godot.zip
 
-        # Extract only iPhone templates (saves 1GB disk/cache overhead)
+        # Extract only iOS templates (saves 1GB disk/cache overhead)
         mkdir -p ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable
         curl -sSL "$URL_TPZ" -o templates.tpz
-        unzip -q -j templates.tpz "templates/iphone.zip" "templates/version.txt" -d ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable/
+        unzip -q -j templates.tpz "templates/ios.zip" "templates/version.txt" -d ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable/
         rm -f templates.tpz
 
     - name: Download iOS Plugin Binaries
@@ -668,10 +668,10 @@ jobs:
         mv Godot_mono.app /Applications/Godot.app
         rm -f godot.zip
 
-        # Extract only iPhone .NET templates
+        # Extract only iOS .NET templates
         mkdir -p ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable.mono
         curl -sSL "$URL_TPZ" -o templates.tpz
-        unzip -q -j templates.tpz "templates/iphone.zip" "templates/version.txt" -d ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable.mono/
+        unzip -q -j templates.tpz "templates/ios.zip" "templates/version.txt" -d ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable.mono/
         rm -f templates.tpz
 
     - name: Download iOS Plugin Binaries
