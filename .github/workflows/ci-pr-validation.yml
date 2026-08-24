@@ -23,7 +23,8 @@ jobs:
             - '!platforms/**/*.md'
             - '!platforms/**/*.txt'
             - 'scripts/**'
-            - '.github/workflows/**'
+            - '.github/workflows/ci-pr-validation.yml'
+            - '.github/workflows/cd-build-and-release.yml'
 
   detect-latest:
     name: Check latest Godot version
@@ -155,39 +156,22 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Cache Godot Editor
-      id: cache-godot
-      uses: actions/cache@v6
-      with:
-        path: /usr/local/bin/godot
-        key: godot-linux-${{ needs.detect-latest.outputs.godot_version }}
-
-    - name: Download Godot
-      if: steps.cache-godot.outputs.cache-hit != 'true'
+    - name: Download Godot & Android Export Templates
       run: |
         GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
         DOWNLOAD_VERSION="${GODOT_VERSION%.0}"
-        wget -q "https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_linux.x86_64.zip" -O godot.zip
+        # Download and install Godot Editor binary
+        curl -sSL "https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_linux.x86_64.zip" -o godot.zip
         unzip -q godot.zip
         mv Godot_v${DOWNLOAD_VERSION}-stable_linux.x86_64 /usr/local/bin/godot
         chmod +x /usr/local/bin/godot
+        rm -f godot.zip
 
-    - name: Cache Export Templates
-      id: cache-templates
-      uses: actions/cache@v6
-      with:
-        path: ~/.local/share/godot/export_templates
-        key: godot-templates-${{ needs.detect-latest.outputs.godot_version }}
-
-    - name: Download Export Templates
-      if: steps.cache-templates.outputs.cache-hit != 'true'
-      run: |
-        GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
-        DOWNLOAD_VERSION="${GODOT_VERSION%.0}"
-        wget -q "https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_export_templates.tpz" -O templates.tpz
+        # Download and selectively extract only Android export templates (saves 1GB disk/cache overhead)
         mkdir -p ~/.local/share/godot/export_templates/${DOWNLOAD_VERSION}.stable
-        unzip -q templates.tpz
-        mv templates/* ~/.local/share/godot/export_templates/${DOWNLOAD_VERSION}.stable/
+        curl -sSL "https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_export_templates.tpz" -o templates.tpz
+        unzip -q -j templates.tpz "templates/android_*" "templates/version.txt" -d ~/.local/share/godot/export_templates/${DOWNLOAD_VERSION}.stable/
+        rm -f templates.tpz
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v4
@@ -341,43 +325,23 @@ jobs:
           dotnet-build-${{ runner.os }}-${{ needs.detect-latest.outputs.godot_version }}-
           dotnet-build-${{ runner.os }}-
 
-    - name: Cache Godot Editor (.NET)
-      id: cache-godot-dotnet
-      uses: actions/cache@v6
-      with:
-        path: |
-          /usr/local/bin/godot
-          /usr/local/bin/GodotSharp
-        key: godot-linux-mono-${{ needs.detect-latest.outputs.godot_version }}
-
-    - name: Download Godot (.NET)
-      if: steps.cache-godot-dotnet.outputs.cache-hit != 'true'
+    - name: Download Godot (.NET) & Android Export Templates
       run: |
         GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
         DOWNLOAD_VERSION="${GODOT_VERSION%.0}"
-        wget -q "https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_mono_linux_x86_64.zip" -O godot.zip
+        # Download and install Godot .NET Editor binary
+        curl -sSL "https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_mono_linux_x86_64.zip" -o godot.zip
         unzip -q godot.zip
-        # Robustly find and move the binary and GodotSharp folder
         find . -name "Godot_v${DOWNLOAD_VERSION}-stable_mono_linux.x86_64" -exec cp {} /usr/local/bin/godot \;
         find . -name "GodotSharp" -type d -exec cp -r {} /usr/local/bin/ \;
         chmod +x /usr/local/bin/godot
+        rm -rf godot.zip Godot_v*
 
-    - name: Cache Export Templates
-      id: cache-templates
-      uses: actions/cache@v6
-      with:
-        path: ~/.local/share/godot/export_templates
-        key: godot-templates-mono-${{ needs.detect-latest.outputs.godot_version }}
-
-    - name: Download Export Templates
-      if: steps.cache-templates.outputs.cache-hit != 'true'
-      run: |
-        GODOT_VERSION=${{ needs.detect-latest.outputs.godot_version }}
-        DOWNLOAD_VERSION="${GODOT_VERSION%.0}"
-        wget -q "https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_mono_export_templates.tpz" -O templates.tpz
+        # Download and selectively extract only Android .NET export templates
         mkdir -p ~/.local/share/godot/export_templates/${DOWNLOAD_VERSION}.stable.mono
-        unzip -q templates.tpz
-        mv templates/* ~/.local/share/godot/export_templates/${DOWNLOAD_VERSION}.stable.mono/
+        curl -sSL "https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_mono_export_templates.tpz" -o templates.tpz
+        unzip -q -j templates.tpz "templates/android_*" "templates/version.txt" -d ~/.local/share/godot/export_templates/${DOWNLOAD_VERSION}.stable.mono/
+        rm -f templates.tpz
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v4
@@ -510,49 +474,29 @@ jobs:
     steps:
     - uses: actions/checkout@v7
 
-    - name: Cache Godot Editor
-      id: cache-godot
-      uses: actions/cache@v6
-      with:
-        path: /Applications/Godot.app
-        key: godot-macos-${{ needs.detect-latest.outputs.godot_version }}
-
-    - name: Download Godot
-      if: steps.cache-godot.outputs.cache-hit != 'true'
+    - name: Download Godot & iOS Export Templates
       run: |
         CV="${{ needs.detect-latest.outputs.godot_version }}"
         DOWNLOAD_VERSION="${CV%.0}"
         if [[ "$CV" =~ (beta|rc|dev) ]]; then
-          URL="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_macos.universal.zip"
+          URL_APP="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_macos.universal.zip"
+          URL_TPZ="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_export_templates.tpz"
         else
-          URL="https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_macos.universal.zip"
+          URL_APP="https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_macos.universal.zip"
+          URL_TPZ="https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_export_templates.tpz"
         fi
-        curl -LO "$URL"
-        unzip -q *.zip
+        # Install Godot macOS App
+        curl -sSL "$URL_APP" -o godot.zip
+        unzip -q godot.zip
         rm -rf /Applications/Godot.app
         mv Godot.app /Applications/Godot.app
+        rm -f godot.zip
 
-    - name: Cache Export Templates
-      id: cache-templates
-      uses: actions/cache@v6
-      with:
-        path: ~/Library/Application Support/Godot/export_templates
-        key: godot-templates-macos-${{ needs.detect-latest.outputs.godot_version }}
-
-    - name: Download Export Templates
-      if: steps.cache-templates.outputs.cache-hit != 'true'
-      run: |
-        CV="${{ needs.detect-latest.outputs.godot_version }}"
-        DOWNLOAD_VERSION="${CV%.0}"
-        if [[ "$CV" =~ (beta|rc|dev) ]]; then
-          URL="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_export_templates.tpz"
-        else
-          URL="https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_export_templates.tpz"
-        fi
-        curl -LO "$URL"
+        # Extract only iOS templates (saves 1GB disk/cache overhead)
         mkdir -p ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable
-        unzip -q *.tpz
-        mv templates/* ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable/
+        curl -sSL "$URL_TPZ" -o templates.tpz
+        unzip -q -j templates.tpz "templates/ios.zip" "templates/version.txt" -d ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable/
+        rm -f templates.tpz
 
     - name: Download iOS Plugin Binaries
       uses: actions/download-artifact@v8
@@ -706,49 +650,29 @@ jobs:
           dotnet-build-${{ runner.os }}-${{ needs.detect-latest.outputs.godot_version }}-
           dotnet-build-${{ runner.os }}-
 
-    - name: Cache Godot Editor (.NET)
-      id: cache-godot
-      uses: actions/cache@v6
-      with:
-        path: /Applications/Godot.app
-        key: godot-mono-macos-${{ needs.detect-latest.outputs.godot_version }}
-
-    - name: Download Godot (.NET)
-      if: steps.cache-godot.outputs.cache-hit != 'true'
+    - name: Download Godot (.NET) & iOS Export Templates
       run: |
         CV="${{ needs.detect-latest.outputs.godot_version }}"
         DOWNLOAD_VERSION="${CV%.0}"
         if [[ "$CV" =~ (beta|rc|dev) ]]; then
-          URL="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_mono_macos.universal.zip"
+          URL_APP="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_mono_macos.universal.zip"
+          URL_TPZ="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_mono_export_templates.tpz"
         else
-          URL="https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_mono_macos.universal.zip"
+          URL_APP="https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_mono_macos.universal.zip"
+          URL_TPZ="https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_mono_export_templates.tpz"
         fi
-        curl -LO "$URL"
-        unzip -q *.zip
+        # Install Godot .NET macOS App
+        curl -sSL "$URL_APP" -o godot.zip
+        unzip -q godot.zip
         rm -rf /Applications/Godot.app
         mv Godot_mono.app /Applications/Godot.app
+        rm -f godot.zip
 
-    - name: Cache Export Templates (.NET)
-      id: cache-templates
-      uses: actions/cache@v6
-      with:
-        path: ~/Library/Application Support/Godot/export_templates
-        key: godot-mono-templates-macos-${{ needs.detect-latest.outputs.godot_version }}
-
-    - name: Download Export Templates
-      if: steps.cache-templates.outputs.cache-hit != 'true'
-      run: |
-        CV="${{ needs.detect-latest.outputs.godot_version }}"
-        DOWNLOAD_VERSION="${CV%.0}"
-        if [[ "$CV" =~ (beta|rc|dev) ]]; then
-          URL="https://github.com/godotengine/godot-builds/releases/download/${CV}/Godot_v${CV}_mono_export_templates.tpz"
-        else
-          URL="https://github.com/godotengine/godot/releases/download/${DOWNLOAD_VERSION}-stable/Godot_v${DOWNLOAD_VERSION}-stable_mono_export_templates.tpz"
-        fi
-        curl -LO "$URL"
+        # Extract only iOS .NET templates
         mkdir -p ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable.mono
-        unzip -q *.tpz
-        mv templates/* ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable.mono/
+        curl -sSL "$URL_TPZ" -o templates.tpz
+        unzip -q -j templates.tpz "templates/ios.zip" "templates/version.txt" -d ~/Library/Application\ Support/Godot/export_templates/${DOWNLOAD_VERSION}.stable.mono/
+        rm -f templates.tpz
 
     - name: Download iOS Plugin Binaries
       uses: actions/download-artifact@v8
