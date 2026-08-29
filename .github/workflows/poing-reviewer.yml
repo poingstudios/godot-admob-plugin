@@ -76,7 +76,6 @@ jobs:
           mode: review
           github-token: ${{ steps.app-token.outputs.token }}
           gemini-api-key: ${{ secrets.GEMMA_API_KEY }}
-          model: gemini-3.5-flash
 
   triage:
     if: >
@@ -98,4 +97,3 @@ jobs:
           mode: triage
           github-token: ${{ secrets.GITHUB_TOKEN }}
           gemini-api-key: ${{ secrets.GEMMA_API_KEY }}
-          model: gemini-3.5-flash
