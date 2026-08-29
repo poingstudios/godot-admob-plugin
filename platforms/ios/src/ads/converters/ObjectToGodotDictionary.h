@@ -36,7 +36,7 @@
 + (Dictionary)convertGADAdapterStatusToDictionary:
     (GADAdapterStatus *)adapterStatus;
 + (Dictionary)convertGADAdSizeToDictionary:(GADAdSize)adSize;
-+ (Dictionary)convertNSErrorToDictionaryAsAdError:(NSError *)nsError;
++ (Dictionary)convertNSErrorToDictionaryAsAdError:(id)nsErrorObject;
 + (Dictionary)convertNSErrorToDictionaryAsLoadAdError:(NSError *)nsError;
 + (Dictionary)convertResponseInfoToDictionary:(GADResponseInfo *)responseInfo;
 + (Dictionary)convertLoadedAdapterResponseInfoToDictionary:
@@ -46,7 +46,7 @@
 + (Dictionary)convertBundleNSDictionaryToDictionary:
     (NSDictionary *)bundleNSDictionary;
 + (Dictionary)convertGADAdRewardToDictionary:(GADAdReward *)adReward;
-+ (Dictionary)convertNSErrorToDictionaryAsFormError:(NSError *)nsError;
++ (Dictionary)convertNSErrorToDictionaryAsFormError:(id)nsErrorObject;
 + (Dictionary)convertGADAdValueToDictionary:(GADAdValue *)adValue;
 
 @end

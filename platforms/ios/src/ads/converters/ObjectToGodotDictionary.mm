@@ -58,17 +58,26 @@
   return dictionary;
 }
 
-+ (Dictionary)convertNSErrorToDictionaryAsAdError:(NSError *)nsError {
++ (Dictionary)convertNSErrorToDictionaryAsAdError:(id)nsErrorObject {
   Dictionary dictionary;
 
+  // `userInfo[NSUnderlyingErrorKey]` is not always an NSError. Ad SDKs put
+  // `[NSNull null]` there to mean "no underlying error", and NSNull is not nil,
+  // so a presence check passes it straight into this method — where `code` is
+  // sent to it and the app dies with `-[NSNull code]: unrecognized selector`.
+  // Seen in the field on banner load failures.
+  if (![nsErrorObject isKindOfClass:[NSError class]]) {
+    return dictionary;
+  }
+  NSError *nsError = (NSError *)nsErrorObject;
+
   dictionary["code"] = (int)nsError.code;
-  dictionary["domain"] = [nsError.domain UTF8String];
-  dictionary["message"] = [nsError.localizedDescription UTF8String];
-  dictionary["cause"] =
-      (nsError.userInfo[NSUnderlyingErrorKey])
-          ? [ObjectToGodotDictionary convertNSErrorToDictionaryAsAdError:
-                                         nsError.userInfo[NSUnderlyingErrorKey]]
-          : Dictionary();
+  dictionary["domain"] = nsError.domain ? [nsError.domain UTF8String] : "";
+  dictionary["message"] = nsError.localizedDescription
+                              ? [nsError.localizedDescription UTF8String]
+                              : "";
+  dictionary["cause"] = [ObjectToGodotDictionary
+      convertNSErrorToDictionaryAsAdError:nsError.userInfo[NSUnderlyingErrorKey]];
 
   return dictionary;
 }
@@ -154,9 +163,19 @@
     (NSDictionary *)bundleNSDictionary {
   Dictionary dictionary;
 
+  // Same lesson as the error converter: the values here are whatever the SDK
+  // put in the bundle. `extrasDictionary` and `adUnitMapping` routinely carry
+  // NSNumber, and NSNull stands in for a missing value — neither answers
+  // `UTF8String`. Anything that is not a string is described instead.
   for (NSString *key in [bundleNSDictionary allKeys]) {
-    NSString *value = [bundleNSDictionary objectForKey:key];
-    dictionary[key.UTF8String] = (value) ? [value UTF8String] : "";
+    id value = [bundleNSDictionary objectForKey:key];
+    const char *text = "";
+    if ([value isKindOfClass:[NSString class]]) {
+      text = [(NSString *)value UTF8String];
+    } else if (value && ![value isKindOfClass:[NSNull class]]) {
+      text = [[value description] UTF8String];
+    }
+    dictionary[key.UTF8String] = text ? text : "";
   }
 
   return dictionary;
@@ -171,11 +190,18 @@
   return dictionary;
 }
 
-+ (Dictionary)convertNSErrorToDictionaryAsFormError:(NSError *)nsError {
++ (Dictionary)convertNSErrorToDictionaryAsFormError:(id)nsErrorObject {
   Dictionary dictionary;
 
+  if (![nsErrorObject isKindOfClass:[NSError class]]) {
+    return dictionary;
+  }
+  NSError *nsError = (NSError *)nsErrorObject;
+
   dictionary["error_code"] = (int)nsError.code;
-  dictionary["message"] = [nsError.localizedDescription UTF8String];
+  dictionary["message"] = nsError.localizedDescription
+                              ? [nsError.localizedDescription UTF8String]
+                              : "";
 
   return dictionary;
 }
