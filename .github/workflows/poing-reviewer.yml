@@ -59,31 +59,10 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - name: 2. Checkout Base Repository
+      - name: 2. Checkout Code
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
-
-      - name: 3. Setup Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: '3.10'
-
-      - name: 4. Install Trusted Dependencies
-        run: pip install -r .github/scripts/requirements.txt
-
-      - name: 5. Isolate Trusted Scripts
-        run: |
-          mkdir -p /tmp/poing_reviewer_trusted
-          cp -r .github/scripts/* /tmp/poing_reviewer_trusted/
-
-      - name: 6. Fetch PR Ref
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request_target" ]; then
-            git fetch origin "${{ github.event.pull_request.base.ref }}"
-            git fetch origin "pull/${{ github.event.pull_request.number }}/head:pr-${{ github.event.pull_request.number }}"
-            git checkout "pr-${{ github.event.pull_request.number }}"
-          fi
 
       - name: Checkout PR (workflow_dispatch)
         if: github.event_name == 'workflow_dispatch'
@@ -91,33 +70,12 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
-      - name: Set PR Env (workflow_dispatch)
-        if: github.event_name == 'workflow_dispatch'
-        run: |
-          pr_data=$(gh pr view ${{ inputs.number }} --json baseRefName,number,title,headRefName,headRefOid --repo ${{ github.repository }})
-          echo "PR_NUMBER=$(echo $pr_data | jq -r '.number')" >> $GITHUB_ENV
-          echo "PR_TITLE=$(echo $pr_data | jq -r '.title')" >> $GITHUB_ENV
-          echo "BASE_REF=$(echo $pr_data | jq -r '.baseRefName')" >> $GITHUB_ENV
-          echo "PR_HEAD_SHA=$(echo $pr_data | jq -r '.headRefOid')" >> $GITHUB_ENV
-        env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
-
-      - name: 7. Run Reviewer
-        env:
-          PYTHONPATH: /tmp/poing_reviewer_trusted
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
-          GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
-          MODE: review
-          PR_NUMBER: ${{ github.event.pull_request.number || env.PR_NUMBER }}
-          REPO: ${{ github.repository }}
-          BASE_REF: ${{ github.event.pull_request.base.ref || env.BASE_REF }}
-          PR_TITLE: ${{ github.event.pull_request.title || env.PR_TITLE }}
-          PR_HEAD_SHA: ${{ github.event.pull_request.head.sha || env.PR_HEAD_SHA }}
-          MODEL_NAME: gemini-3.5-flash
-          MAX_CHARS: 100000
-          TRIGGER_ACTION: ${{ github.event.action || 'workflow_dispatch' }}
-          COMMENT_BODY: ${{ github.event.comment.body || '' }}
-        run: python /tmp/poing_reviewer_trusted/poing_reviewer.py
+      - name: 3. Run Poing Reviewer
+        uses: poingstudios/poing-reviewer@master
+        with:
+          mode: review
+          github-token: ${{ steps.app-token.outputs.token }}
+          gemini-api-key: ${{ secrets.GEMMA_API_KEY }}
 
   triage:
     if: >
@@ -130,26 +88,12 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - name: 1. Checkout Base Repository
+      - name: 1. Checkout Code
         uses: actions/checkout@v7
 
-      - name: 2. Setup Python
-        uses: actions/setup-python@v7
+      - name: 2. Run Poing Triage
+        uses: poingstudios/poing-reviewer@master
         with:
-          python-version: '3.10'
-
-      - name: 3. Install Dependencies
-        run: pip install -r .github/scripts/requirements.txt
-
-      - name: 4. Run Triage
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
-          MODE: triage
-          ISSUE_NUMBER: ${{ github.event.issue.number || github.event.pull_request.number || inputs.number }}
-          REPO: ${{ github.repository }}
-          ISSUE_TITLE: ${{ github.event.issue.title || github.event.pull_request.title || '' }}
-          ISSUE_BODY: ${{ github.event.issue.body || github.event.pull_request.body || '' }}
-          ISSUE_ACTION: ${{ github.event.action || 'workflow_dispatch' }}
-          MODEL_NAME: gemini-3.5-flash
-        run: python .github/scripts/poing_reviewer.py
+          mode: triage
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          gemini-api-key: ${{ secrets.GEMMA_API_KEY }}
