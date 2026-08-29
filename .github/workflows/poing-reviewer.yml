@@ -58,6 +58,7 @@ jobs:
         with:
           client-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+        continue-on-error: true
 
       - name: 2. Checkout Code
         uses: actions/checkout@v7
@@ -68,13 +69,13 @@ jobs:
         if: github.event_name == 'workflow_dispatch'
         run: gh pr checkout ${{ inputs.number }}
         env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
 
       - name: 3. Run Poing Reviewer
         uses: poingstudios/poing-reviewer@master
         with:
           mode: review
-          github-token: ${{ steps.app-token.outputs.token }}
+          github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
           gemini-api-key: ${{ secrets.GEMMA_API_KEY }}
 
   triage:
@@ -88,12 +89,20 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - name: 1. Checkout Code
+      - name: 1. Generate App Token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+        continue-on-error: true
+
+      - name: 2. Checkout Code
         uses: actions/checkout@v7
 
-      - name: 2. Run Poing Triage
+      - name: 3. Run Poing Triage
         uses: poingstudios/poing-reviewer@master
         with:
           mode: triage
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
           gemini-api-key: ${{ secrets.GEMMA_API_KEY }}
