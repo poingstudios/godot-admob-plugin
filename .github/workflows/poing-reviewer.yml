@@ -76,6 +76,7 @@ jobs:
         uses: poingstudios/poing-reviewer@master
         with:
           mode: review
+          number: ${{ inputs.number }}
           github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
           gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
 
@@ -105,5 +106,6 @@ jobs:
         uses: poingstudios/poing-reviewer@master
         with:
           mode: triage
+          number: ${{ inputs.number }}
           github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
           gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
