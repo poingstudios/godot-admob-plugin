@@ -76,7 +76,7 @@ jobs:
         with:
           mode: review
           github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
-          gemini-api-key: ${{ secrets.GEMMA_API_KEY }}
+          gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
 
   triage:
     if: >
@@ -105,4 +105,4 @@ jobs:
         with:
           mode: triage
           github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
-          gemini-api-key: ${{ secrets.GEMMA_API_KEY }}
+          gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
