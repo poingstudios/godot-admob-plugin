@@ -23,8 +23,8 @@
 name: Poing Reviewer
 
 on:
-  pull_request:
-    types: [opened, review_requested]
+  pull_request_target:
+    types: [opened, synchronize, review_requested]
   issues:
     types: [opened]
   workflow_dispatch:
@@ -45,7 +45,7 @@ jobs:
   review:
     if: >
       github.actor != 'dependabot[bot]' &&
-      (github.event_name == 'pull_request' ||
+      (github.event_name == 'pull_request_target' ||
       (github.event_name == 'workflow_dispatch' && inputs.mode == 'review'))
     runs-on: ubuntu-latest
     permissions:
@@ -59,10 +59,31 @@ jobs:
           app-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
 
-      - name: 2. Checkout Code
+      - name: 2. Checkout Base Repository
         uses: actions/checkout@v7
         with:
           fetch-depth: 0
+
+      - name: 3. Setup Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.10'
+
+      - name: 4. Install Trusted Dependencies
+        run: pip install -r .github/scripts/requirements.txt
+
+      - name: 5. Isolate Trusted Scripts
+        run: |
+          mkdir -p /tmp/poing_reviewer_trusted
+          cp -r .github/scripts/* /tmp/poing_reviewer_trusted/
+
+      - name: 6. Fetch PR Ref
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request_target" ]; then
+            git fetch origin "${{ github.event.pull_request.base.ref }}"
+            git fetch origin "pull/${{ github.event.pull_request.number }}/head:pr-${{ github.event.pull_request.number }}"
+            git checkout "pr-${{ github.event.pull_request.number }}"
+          fi
 
       - name: Checkout PR (workflow_dispatch)
         if: github.event_name == 'workflow_dispatch'
@@ -81,24 +102,9 @@ jobs:
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token }}
 
-      - name: Fetch Base Branch
-        run: |
-          if [ "${{ github.event_name }}" = "pull_request" ]; then
-            git fetch origin "${{ github.event.pull_request.base.ref }}"
-          else
-            git fetch origin "$BASE_REF"
-          fi
-
-      - name: 3. Setup Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: '3.10'
-
-      - name: 4. Install Dependencies
-        run: pip install -r .github/scripts/requirements.txt
-
-      - name: 5. Run Reviewer
+      - name: 7. Run Reviewer
         env:
+          PYTHONPATH: /tmp/poing_reviewer_trusted
           GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
           GEMINI_API_KEY: ${{ secrets.GEMMA_API_KEY }}
           MODE: review
@@ -111,12 +117,12 @@ jobs:
           MAX_CHARS: 100000
           TRIGGER_ACTION: ${{ github.event.action || 'workflow_dispatch' }}
           COMMENT_BODY: ${{ github.event.comment.body || '' }}
-        run: python .github/scripts/poing_reviewer.py
+        run: python /tmp/poing_reviewer_trusted/poing_reviewer.py
 
   triage:
     if: >
       github.actor != 'dependabot[bot]' &&
-      ((github.event_name == 'pull_request') ||
+      ((github.event_name == 'pull_request_target') ||
       (github.event_name == 'issues') ||
       (github.event_name == 'workflow_dispatch' && inputs.mode == 'triage'))
     runs-on: ubuntu-latest
@@ -124,7 +130,7 @@ jobs:
       issues: write
       pull-requests: write
     steps:
-      - name: 1. Checkout Code
+      - name: 1. Checkout Base Repository
         uses: actions/checkout@v7
 
       - name: 2. Setup Python
