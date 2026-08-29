@@ -24,7 +24,7 @@ name: Poing Reviewer
 
 on:
   pull_request_target:
-    types: [opened, synchronize, review_requested]
+    types: [opened, synchronize, ready_for_review, review_requested]
   issues:
     types: [opened]
   workflow_dispatch:
@@ -41,12 +41,15 @@ on:
         description: 'PR or Issue number'
         required: true
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   review:
     if: >
-      github.actor != 'dependabot[bot]' &&
-      (github.event_name == 'pull_request_target' ||
-      (github.event_name == 'workflow_dispatch' && inputs.mode == 'review'))
+      (github.event_name == 'pull_request_target' && !github.event.pull_request.draft) ||
+      (github.event_name == 'workflow_dispatch' && inputs.mode == 'review')
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -56,8 +59,9 @@ jobs:
         id: app-token
         uses: actions/create-github-app-token@v3
         with:
-          app-id: ${{ secrets.APP_ID }}
+          client-id: ${{ secrets.APP_ID }}
           private-key: ${{ secrets.APP_PRIVATE_KEY }}
+        continue-on-error: true
 
       - name: 2. Checkout Code
         uses: actions/checkout@v7
@@ -66,34 +70,43 @@ jobs:
 
       - name: Checkout PR (workflow_dispatch)
         if: github.event_name == 'workflow_dispatch'
-        run: gh pr checkout ${{ inputs.number }}
+        run: gh pr checkout "$PR_NUMBER"
         env:
-          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          PR_NUMBER: ${{ inputs.number }}
+          GH_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
 
       - name: 3. Run Poing Reviewer
         uses: poingstudios/poing-reviewer@master
         with:
           mode: review
-          github-token: ${{ steps.app-token.outputs.token }}
-          gemini-api-key: ${{ secrets.GEMMA_API_KEY }}
+          number: ${{ inputs.number }}
+          github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
+          gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
 
   triage:
     if: >
-      github.actor != 'dependabot[bot]' &&
-      ((github.event_name == 'pull_request_target') ||
-      (github.event_name == 'issues') ||
-      (github.event_name == 'workflow_dispatch' && inputs.mode == 'triage'))
+      github.event_name == 'issues' ||
+      (github.event_name == 'workflow_dispatch' && inputs.mode == 'triage')
     runs-on: ubuntu-latest
     permissions:
       issues: write
       pull-requests: write
     steps:
-      - name: 1. Checkout Code
+      - name: 1. Generate App Token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+        continue-on-error: true
+
+      - name: 2. Checkout Code
         uses: actions/checkout@v7
 
-      - name: 2. Run Poing Triage
+      - name: 3. Run Poing Triage
         uses: poingstudios/poing-reviewer@master
         with:
           mode: triage
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          gemini-api-key: ${{ secrets.GEMMA_API_KEY }}
+          number: ${{ inputs.number }}
+          github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
+          gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
