@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-name: Poing Reviewer
+name: Poing AI
 
 on:
   pull_request_target:
@@ -75,8 +75,8 @@ jobs:
           PR_NUMBER: ${{ inputs.number }}
           GH_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
 
-      - name: 3. Run Poing Reviewer
-        uses: poingstudios/poing-reviewer@master
+      - name: 3. Run Poing AI
+        uses: poingstudios/poing-ai@master
         with:
           mode: review
           number: ${{ inputs.number }}
@@ -103,8 +103,8 @@ jobs:
       - name: 2. Checkout Code
         uses: actions/checkout@v7
 
-      - name: 3. Run Poing Triage
-        uses: poingstudios/poing-reviewer@master
+      - name: 3. Run Poing AI
+        uses: poingstudios/poing-ai@master
         with:
           mode: triage
           number: ${{ inputs.number }}
