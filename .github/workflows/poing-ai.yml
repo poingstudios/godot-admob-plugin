@@ -24,31 +24,35 @@ name: Poing AI
 
 on:
   pull_request_target:
-    types: [opened, synchronize, ready_for_review, review_requested]
+    types: [opened, ready_for_review]
   issues:
     types: [opened]
+  issue_comment:
+    types: [created]
   workflow_dispatch:
     inputs:
       mode:
-        description: 'Mode: review or triage'
+        description: 'Mode: review, triage, or fix'
         required: true
         default: 'review'
         type: choice
         options:
           - review
           - triage
+          - fix
       number:
         description: 'PR or Issue number'
         required: true
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.event.issue.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
   review:
     if: >
       (github.event_name == 'pull_request_target' && !github.event.pull_request.draft) ||
+      (github.event_name == 'issue_comment' && github.event.issue.pull_request && (contains(github.event.comment.body, '/review') || contains(github.event.comment.body, '@poing-ai review') || contains(github.event.comment.body, '@poing-ai[bot] review'))) ||
       (github.event_name == 'workflow_dispatch' && inputs.mode == 'review')
     runs-on: ubuntu-latest
     permissions:
@@ -68,24 +72,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Checkout PR (workflow_dispatch)
-        if: github.event_name == 'workflow_dispatch'
-        run: gh pr checkout "$PR_NUMBER"
-        env:
-          PR_NUMBER: ${{ inputs.number }}
-          GH_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
-
-      - name: 3. Run Poing AI
-        uses: poingstudios/poing-ai@master
+      - name: 3. Run Poing AI Reviewer
+        uses: poingstudios/poing-ai@v1
         with:
           mode: review
-          number: ${{ inputs.number }}
+          number: ${{ inputs.number || github.event.issue.number }}
           github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
           gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
 
   triage:
     if: >
       github.event_name == 'issues' ||
+      (github.event_name == 'pull_request_target' && github.event.action == 'opened') ||
       (github.event_name == 'workflow_dispatch' && inputs.mode == 'triage')
     runs-on: ubuntu-latest
     permissions:
@@ -103,10 +101,43 @@ jobs:
       - name: 2. Checkout Code
         uses: actions/checkout@v7
 
-      - name: 3. Run Poing AI
-        uses: poingstudios/poing-ai@master
+      - name: 3. Run Poing AI Triage
+        uses: poingstudios/poing-ai@v1
         with:
           mode: triage
-          number: ${{ inputs.number }}
+          number: ${{ inputs.number || github.event.issue.number }}
+          github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
+          gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
+
+  fix:
+    name: Auto-Fix
+    if: >
+      (github.event_name == 'issue_comment' && github.event.issue.pull_request && (contains(github.event.comment.body, '/fix') || contains(github.event.comment.body, '@poing-ai fix') || contains(github.event.comment.body, '@poing-ai[bot] fix'))) ||
+      (github.event_name == 'workflow_dispatch' && inputs.mode == 'fix')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: 1. Generate App Token
+        id: app-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+        continue-on-error: true
+
+      - name: 2. Checkout Code
+        uses: actions/checkout@v7
+        with:
+          token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: 3. Run Poing AI Auto-Fixer
+        uses: poingstudios/poing-ai@v1
+        with:
+          mode: fix
+          provider: antigravity
+          number: ${{ inputs.number || github.event.issue.number }}
           github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
           gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
