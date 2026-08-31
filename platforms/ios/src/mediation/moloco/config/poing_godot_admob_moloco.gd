@@ -54,7 +54,7 @@ func get_spm_packages() -> Array[Dictionary]:
 	return [
 		{
 			"url": "https://github.com/googleads/googleads-mobile-ios-mediation-moloco.git",
-			"version": "4.9.000",
+			"version": "4.9.100",
 			"products": ["MolocoAdapterTarget"]
 		}
 	]
