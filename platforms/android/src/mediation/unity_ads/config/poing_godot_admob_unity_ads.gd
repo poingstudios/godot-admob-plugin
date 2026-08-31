@@ -24,7 +24,7 @@ extends EditorExportPlugin
 
 const PLUGIN_NAME := "unity_ads"
 var _dependency_library := [
-	"com.google.ads.mediation:unity:4.20.0.0",
+	"com.google.ads.mediation:unity:4.20.0.1",
 	"com.unity3d.ads:unity-ads:4.20.0"
 ]
 

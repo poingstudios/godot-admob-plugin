@@ -54,7 +54,7 @@ func get_spm_packages() -> Array[Dictionary]:
 	return [
 		{
 			"url": "https://github.com/googleads/googleads-mobile-ios-mediation-unity.git",
-			"version": "4.19.001",
+			"version": "4.20.000",
 			"products": ["UnityAdapterTarget"]
 		}
 	]

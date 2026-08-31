@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "mintegral"
-var _dependency_library := ["com.google.ads.mediation:mintegral:17.1.71.0"]
+var _dependency_library := ["com.google.ads.mediation:mintegral:17.1.81.0"]
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
