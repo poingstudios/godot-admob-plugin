@@ -159,6 +159,84 @@ func _export_begin(_features: PackedStringArray, _is_debug: bool, _path: String,
 		return
 	PluginVersion.check_version_mismatch(PluginVersion.android_version, "Android")
 	_patch_android_gradle_file()
+	if not _is_debug:
+		_patch_android_r8()
+
+
+func _patch_android_r8() -> void:
+	var enable_r8 := _get_setting(
+		ProjectSettingsService.get_android_setting_path("enable_r8_optimization"),
+		false
+	) as bool
+	if not enable_r8:
+		return
+
+	var gradle_path := "res://android/build/app/build.gradle"
+	var proguard_path := "res://android/build/app/proguard-rules.pro"
+	if not FileAccess.file_exists(gradle_path):
+		gradle_path = "res://android/build/build.gradle"
+		proguard_path = "res://android/build/proguard-rules.pro"
+		if not FileAccess.file_exists(gradle_path):
+			return
+
+	_ensure_godot_proguard_rules(proguard_path)
+	_ensure_r8_enabled_in_gradle(gradle_path)
+
+
+func _ensure_godot_proguard_rules(proguard_path: String) -> void:
+	var rules := """
+# Godot Engine Core (Added by Poing Godot AdMob Plugin for R8 optimization)
+-keep class org.godotengine.** { *; }
+-keepclassmembers class org.godotengine.** { *; }
+-keep class com.godot.** { *; }
+-keepclassmembers class com.godot.** { *; }
+-keep class * extends org.godotengine.godot.plugin.GodotPlugin { *; }
+-keepclassmembers class * extends org.godotengine.godot.plugin.GodotPlugin {
+	@org.godotengine.godot.plugin.UsedByGodot <methods>;
+}
+-keepclasseswithmembernames class * {
+	native <methods>;
+}
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+"""
+	var existing_content := ""
+	if FileAccess.file_exists(proguard_path):
+		existing_content = FileAccess.get_file_as_string(proguard_path)
+
+	if "org.godotengine" in existing_content:
+		return
+
+	var new_content := existing_content + rules
+	var file := FileAccess.open(proguard_path, FileAccess.WRITE)
+	if file:
+		file.store_string(new_content)
+		file.close()
+
+
+func _ensure_r8_enabled_in_gradle(gradle_path: String) -> void:
+	var content := FileAccess.get_file_as_string(gradle_path)
+	if content.is_empty():
+		return
+
+	if "minifyEnabled true" in content or "shouldMinify()" in content:
+		return
+
+	var regex := RegEx.new()
+	regex.compile("release\\s*\\{[^}]*minifyEnabled\\s+false")
+	var regex_match := regex.search(content)
+	if regex_match:
+		var matched_str := regex_match.get_string()
+		var replacement := matched_str.replace(
+			"minifyEnabled false",
+			"minifyEnabled true\n            shrinkResources false\n            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'"
+		)
+		content = content.replace(matched_str, replacement)
+		var file := FileAccess.open(gradle_path, FileAccess.WRITE)
+		if file:
+			file.store_string(content)
+			file.close()
 
 
 func _patch_android_gradle_file() -> void:

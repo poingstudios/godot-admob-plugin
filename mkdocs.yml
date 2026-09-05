@@ -82,6 +82,7 @@ plugins:
             Guides: Guias
             Migrate SDK versions: Migrar versões do SDK
             Optimize initialization and ad loading: Otimizar inicialização e carregamento de anúncios
+            Android R8 & Obfuscation: Otimização e Ofuscação R8 no Android
             Reference: Referência
             'API Reference': 'Referência da API'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades do AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
@@ -158,6 +159,7 @@ plugins:
             Guides: Guías
             Migrate SDK versions: Migrar versiones del SDK
             Optimize initialization and ad loading: Optimizar la inicialización y la carga de anuncios
+            Android R8 & Obfuscation: Optimización y Ofuscación R8 en Android
             Reference: Referencia
             'API Reference': 'Referencia de la API'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'Habilidades de AI Copilot <span class="modern-icon" title="Beta">🧪</span>'
@@ -235,6 +237,7 @@ plugins:
             Guides: 指南
             Migrate SDK versions: 迁移 SDK 版本
             Optimize initialization and ad loading: 优化初始化和广告加载
+            Android R8 & Obfuscation: Android R8 优化与混淆
             Reference: 参考
             'API Reference': 'API 参考'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot 技能 <span class="modern-icon" title="Beta">🧪</span>'
@@ -312,6 +315,7 @@ plugins:
             Guides: ガイド
             Migrate SDK versions: SDK バージョンの移行
             Optimize initialization and ad loading: 初期化と広告読み込みの最適化
+            Android R8 & Obfuscation: Android R8 最適化と難読化
             Reference: リファレンス
             'API Reference': 'API リファレンス'
             'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': 'AI Copilot スキル <span class="modern-icon" title="Beta">🧪</span>'
@@ -391,6 +395,7 @@ nav:
     - Enable test ads: enable_test_ads.md
     - Preview Mock Ads in Editor: editor_mock_ads.md
     - Optimize initialization and ad loading: optimize_initialization.md
+    - Android R8 & Obfuscation: android_r8_obfuscation.md
     - iOS Pause Background: ios_pause_background.md
     - 'AI Copilot Skills <span class="modern-icon" title="Beta">🧪</span>': ai_skills.md
     - Choose an ad format:
