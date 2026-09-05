@@ -223,20 +223,25 @@ func _ensure_r8_enabled_in_gradle(gradle_path: String) -> void:
 	if "minifyEnabled true" in content or "shouldMinify()" in content:
 		return
 
-	var regex := RegEx.new()
-	regex.compile("release\\s*\\{[^}]*minifyEnabled\\s+false")
-	var regex_match := regex.search(content)
-	if regex_match:
-		var matched_str := regex_match.get_string()
-		var replacement := matched_str.replace(
-			"minifyEnabled false",
-			"minifyEnabled true\n            shrinkResources false\n            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'"
-		)
-		content = content.replace(matched_str, replacement)
-		var file := FileAccess.open(gradle_path, FileAccess.WRITE)
-		if file:
-			file.store_string(content)
-			file.close()
+	var r8_block := """
+            minifyEnabled true
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'"""
+
+	if "minifyEnabled false" in content:
+		content = content.replace("minifyEnabled false", r8_block.strip_edges())
+	else:
+		var regex := RegEx.new()
+		regex.compile("(buildTypes\\s*\\{[\\s\\S]*?release\\s*\\{)")
+		var regex_match := regex.search(content)
+		if regex_match:
+			var matched_str := regex_match.get_string(1)
+			content = content.replace(matched_str, matched_str + r8_block)
+
+	var file := FileAccess.open(gradle_path, FileAccess.WRITE)
+	if file:
+		file.store_string(content)
+		file.close()
 
 
 func _patch_android_gradle_file() -> void:
