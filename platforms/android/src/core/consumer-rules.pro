@@ -19,3 +19,4 @@
 -dontwarn com.bytedance.sdk.**
 -dontwarn com.tiktok.**
 -dontwarn jp.maio.sdk.**
+-dontwarn ru.ok.tracer.**

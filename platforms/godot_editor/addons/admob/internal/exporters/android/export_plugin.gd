@@ -216,6 +216,11 @@ func _ensure_godot_proguard_rules(proguard_path: String) -> void:
 -dontwarn com.bytedance.sdk.**
 -dontwarn com.tiktok.**
 -dontwarn jp.maio.sdk.**
+-dontwarn ru.ok.tracer.**
+"""
+	elif not "-dontwarn ru.ok.tracer.**" in existing_content:
+		rules_to_append += """
+-dontwarn ru.ok.tracer.**
 """
 
 	if rules_to_append.is_empty():
@@ -233,28 +238,46 @@ func _ensure_r8_enabled_in_gradle(gradle_path: String) -> void:
 	if content.is_empty():
 		return
 
-	if "minifyEnabled true" in content or "shouldMinify()" in content:
-		return
+	var modified := false
 
-	var r8_block := """
+	if not "com.android.tools:r8" in content:
+		var buildscript_block := """buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools:r8:8.8.27'
+    }
+}
+
+"""
+		content = buildscript_block + content
+		modified = true
+
+	if not ("minifyEnabled true" in content or "shouldMinify()" in content):
+		var r8_block := """
             minifyEnabled true
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'"""
 
-	if "minifyEnabled false" in content:
-		content = content.replace("minifyEnabled false", r8_block.strip_edges())
-	else:
-		var regex := RegEx.new()
-		regex.compile("(buildTypes\\s*\\{[\\s\\S]*?release\\s*\\{)")
-		var regex_match := regex.search(content)
-		if regex_match:
-			var matched_str := regex_match.get_string(1)
-			content = content.replace(matched_str, matched_str + r8_block)
+		if "minifyEnabled false" in content:
+			content = content.replace("minifyEnabled false", r8_block.strip_edges())
+			modified = true
+		else:
+			var regex := RegEx.new()
+			regex.compile("(buildTypes\\s*\\{[\\s\\S]*?release\\s*\\{)")
+			var regex_match := regex.search(content)
+			if regex_match:
+				var matched_str := regex_match.get_string(1)
+				content = content.replace(matched_str, matched_str + r8_block)
+				modified = true
 
-	var file := FileAccess.open(gradle_path, FileAccess.WRITE)
-	if file:
-		file.store_string(content)
-		file.close()
+	if modified:
+		var file := FileAccess.open(gradle_path, FileAccess.WRITE)
+		if file:
+			file.store_string(content)
+			file.close()
 
 
 func _patch_android_gradle_file() -> void:

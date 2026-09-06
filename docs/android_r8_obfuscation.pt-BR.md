@@ -97,6 +97,7 @@ Abra `android/build/proguard-rules.pro` (ou `android/build/app/proguard-rules.pr
 -dontwarn com.bytedance.sdk.**
 -dontwarn com.tiktok.**
 -dontwarn jp.maio.sdk.**
+-dontwarn ru.ok.tracer.**
 ```
 
 ---
