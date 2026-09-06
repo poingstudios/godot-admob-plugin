@@ -90,6 +90,13 @@ buildTypes {
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
+
+# Suppress harmless warnings from Kotlin metadata and optional mediation dependencies
+-dontwarn kotlin.Metadata
+-dontwarn com.android.billingclient.**
+-dontwarn com.bytedance.sdk.**
+-dontwarn com.tiktok.**
+-dontwarn jp.maio.sdk.**
 ```
 
 ---

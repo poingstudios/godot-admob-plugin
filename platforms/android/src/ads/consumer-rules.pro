@@ -12,3 +12,10 @@
 -keepclasseswithmembernames class * {
     native <methods>;
 }
+
+# Suppress harmless warnings from Kotlin metadata and optional mediation dependencies
+-dontwarn kotlin.Metadata
+-dontwarn com.android.billingclient.**
+-dontwarn com.bytedance.sdk.**
+-dontwarn com.tiktok.**
+-dontwarn jp.maio.sdk.**

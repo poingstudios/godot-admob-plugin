@@ -184,7 +184,13 @@ func _patch_android_r8() -> void:
 
 
 func _ensure_godot_proguard_rules(proguard_path: String) -> void:
-	var rules := """
+	var existing_content := ""
+	if FileAccess.file_exists(proguard_path):
+		existing_content = FileAccess.get_file_as_string(proguard_path)
+
+	var rules_to_append := ""
+	if not "org.godotengine" in existing_content:
+		rules_to_append += """
 # Godot Engine Core (Added by Poing Godot AdMob Plugin for R8 optimization)
 -keep class org.godotengine.** { *; }
 -keepclassmembers class org.godotengine.** { *; }
@@ -201,14 +207,21 @@ func _ensure_godot_proguard_rules(proguard_path: String) -> void:
 -keep public class * extends android.app.Application
 -keep public class * extends android.app.Service
 """
-	var existing_content := ""
-	if FileAccess.file_exists(proguard_path):
-		existing_content = FileAccess.get_file_as_string(proguard_path)
 
-	if "org.godotengine" in existing_content:
+	if not "-dontwarn kotlin.Metadata" in existing_content:
+		rules_to_append += """
+# Suppress harmless warnings from Kotlin metadata and optional mediation dependencies
+-dontwarn kotlin.Metadata
+-dontwarn com.android.billingclient.**
+-dontwarn com.bytedance.sdk.**
+-dontwarn com.tiktok.**
+-dontwarn jp.maio.sdk.**
+"""
+
+	if rules_to_append.is_empty():
 		return
 
-	var new_content := existing_content + rules
+	var new_content := existing_content + rules_to_append
 	var file := FileAccess.open(proguard_path, FileAccess.WRITE)
 	if file:
 		file.store_string(new_content)
