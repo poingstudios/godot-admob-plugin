@@ -14,20 +14,29 @@ jobs:
       actions: read
 
     steps:
-    - name: Get PR number
+    - name: 1. Generate App Token
+      id: app-token
+      uses: actions/create-github-app-token@v3
+      with:
+        client-id: ${{ secrets.APP_ID }}
+        private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      continue-on-error: true
+
+    - name: 2. Get PR number
       id: pr
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
       run: |
         PR_NUMBER=$(gh api \
           "repos/${{ github.repository }}/pulls?head=${{ github.event.workflow_run.head_repository.owner.login }}:${{ github.event.workflow_run.head_branch }}&state=open" \
           --jq '.[0].number')
         echo "number=$PR_NUMBER" >> $GITHUB_OUTPUT
 
-    - name: Comment on success
+    - name: 3. Comment on success
       if: github.event.workflow_run.conclusion == 'success' || github.event.workflow_run.conclusion == 'skipped'
       uses: actions/github-script@v9
       with:
+        github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
         script: |
           const prNumber = parseInt('${{ steps.pr.outputs.number }}');
           if (!prNumber) return;
@@ -75,10 +84,11 @@ jobs:
           } else {
             await github.rest.issues.createComment({ issue_number: prNumber, owner: context.repo.owner, repo: context.repo.repo, body });
           }
-    - name: Comment on failure
+    - name: 4. Comment on failure
       if: github.event.workflow_run.conclusion == 'failure' || github.event.workflow_run.conclusion == 'cancelled'
       uses: actions/github-script@v9
       with:
+        github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
         script: |
           const prNumber = parseInt('${{ steps.pr.outputs.number }}');
           if (!prNumber) return;
