@@ -30,22 +30,16 @@ const BinaryInstaller := preload("res://addons/admob/internal/services/network/b
 const ProjectSettingsService := preload(
 	"res://addons/admob/internal/services/project_settings_service.gd"
 )
-const TranslationService := preload(
-	"res://addons/admob/internal/services/translation_service.gd"
-)
 
 var _main_exporter := preload("res://addons/admob/internal/exporters/main_export_plugin.gd").new()
 var _android_exporter := preload("res://addons/admob/internal/exporters/android/export_plugin.gd").new()
 var _ios_exporter := preload("res://addons/admob/internal/exporters/ios/export_plugin.gd").new()
-var _translation_service := TranslationService.new()
 
 
 func _enter_tree() -> void:
 	CSharpService.manage_visibility(self)
 	BinaryInstaller.install_missing_binaries_sync()
 	ProjectSettingsService.register_settings()
-
-	_translation_service.setup()
 
 	add_export_plugin(_main_exporter)
 	add_export_plugin(_android_exporter)
@@ -54,7 +48,6 @@ func _enter_tree() -> void:
 
 
 func _exit_tree() -> void:
-	_translation_service.cleanup()
 	remove_export_plugin(_main_exporter)
 	remove_export_plugin(_android_exporter)
 	remove_export_plugin(_ios_exporter)
