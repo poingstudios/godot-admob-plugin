@@ -9,7 +9,7 @@ En iOS, el valor predeterminado es "falso".
 ## Requisitos previos
 
 - Complete la [Guía de inicio](index.md)
-- Utilice Godot v4.4 o superior
+- Utilice Godot v4.5 o superior
 
 ## Cómo usar
 Puede utilizar este método siempre que desee, antes, durante o después de la inicialización, como por ejemplo:

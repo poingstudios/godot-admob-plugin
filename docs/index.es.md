@@ -1,6 +1,6 @@
 # Empezar
 
-Integrar el complemento AdMob en su proyecto Godot, específicamente para Godot v4.4+, es el paso inicial y crucial para permitir la visualización de anuncios y la generación de ingresos. Después de incorporar con éxito este complemento, tendrá la flexibilidad de seleccionar entre varios formatos de anuncios, como Banner o Intersticial, y continuar con los pasos de implementación necesarios.
+Integrar el complemento AdMob en su proyecto Godot, específicamente para Godot v4.5+, es el paso inicial y crucial para permitir la visualización de anuncios y la generación de ingresos. Después de incorporar con éxito este complemento, tendrá la flexibilidad de seleccionar entre varios formatos de anuncios, como Banner o Intersticial, y continuar con los pasos de implementación necesarios.
 
 Este documento se basa en:
 
@@ -10,11 +10,11 @@ Este documento se basa en:
 ## Requisitos previos
 
 - Implementar Android:
-	- Utilice Godot v4.4 o superior
+	- Utilice Godot v4.5 o superior
 	- `minSdkVersion` de 24 o superior
 	- `compileSdkVersion` de 35 o superior
 - Implementar iOS:
-	- Utilice Godot v4.4 o superior
+	- Utilice Godot v4.5 o superior
 	- Utilice Xcode 15.0 o superior
 	- Target iOS 15.0 o superior
 - Recomendado: [Crear una cuenta de AdMob](https://support.google.com/admob/answer/7356219?visit_id=638286911958663013-3847536692&rd=1) y [registrar una aplicación](https://support.google.com/admob/answer/9989980?visit_id=638286911964685099-3190075945&rd=1).

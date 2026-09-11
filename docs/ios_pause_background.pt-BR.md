@@ -9,7 +9,7 @@ No iOS, o valor padrão é `false`.
 ## Pré-requisitos
 
 - Conclua o [Guia de introdução](index.md)
-- Usar Godot v4.4 ou superior
+- Usar Godot v4.5 ou superior
 
 ## Como usar
 Você pode usar esse método quando desejar, antes, durante ou após a inicialização, como por exemplo:
