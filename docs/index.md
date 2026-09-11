@@ -1,6 +1,6 @@
 # Get Started
 
-Integrating the AdMob plugin into your Godot project, specifically for Godot v4.2+, is the initial and crucial step in enabling ad displays and revenue generation. After successfully incorporating this plugin, you'll have the flexibility to select from various ad formats, like Banner or Interstitial, and proceed with the necessary implementation steps.
+Integrating the AdMob plugin into your Godot project, specifically for Godot v4.4+, is the initial and crucial step in enabling ad displays and revenue generation. After successfully incorporating this plugin, you'll have the flexibility to select from various ad formats, like Banner or Interstitial, and proceed with the necessary implementation steps.
 
 This document is based on:
 
@@ -10,12 +10,12 @@ This document is based on:
 ## Prerequisites
 
 - Deploy Android:
-	- Use Godot v4.2 or higher
+	- Use Godot v4.4 or higher
 	- `minSdkVersion` of 24 or higher
-	- `compileSdkVersion` of 36 or higher
+	- `compileSdkVersion` of 35 or higher
 - Deploy iOS:
-	- Use Godot v4.1 or higher
-	- Use Xcode 26.2 or higher
+	- Use Godot v4.4 or higher
+	- Use Xcode 15.0 or higher
 	- Target iOS 15.0 or higher
 - Recommended: [Create an AdMob account](https://support.google.com/admob/answer/7356219?visit_id=638286911958663013-3847536692&rd=1) and [register an app](https://support.google.com/admob/answer/9989980?visit_id=638286911964685099-3190075945&rd=1).
 

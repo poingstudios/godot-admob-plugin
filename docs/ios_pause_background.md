@@ -9,7 +9,7 @@ On iOS, the default value is `false`.
 ## Prerequisites
 
 - Complete the [Get started guide](index.md)
-- Use Godot v4.2 or higher
+- Use Godot v4.4 or higher
 
 ## How to use
 You can use this whenever you want this method, before, during, or after the initialization, such as:

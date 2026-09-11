@@ -8,8 +8,8 @@ En iOS, el valor predeterminado es "falso".
 
 ## Requisitos previos
 
-- Completa el [Guía de introducción](index.md)
-- Utilice Godot v4.2 o superior
+- Complete la [Guía de inicio](index.md)
+- Utilice Godot v4.4 o superior
 
 ## Cómo usar
 Puede utilizar este método siempre que desee, antes, durante o después de la inicialización, como por ejemplo:

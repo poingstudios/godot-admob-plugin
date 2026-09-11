@@ -17,7 +17,7 @@ Thank you for your interest in contributing to the Godot AdMob Plugin! This guid
 ## 💻 Development Setup
 
 ### Requirements
-- **Godot 4.2+** (Standard or .NET edition).
+- **Godot 4.4+** (Standard or .NET edition).
 - **Android**: Android Studio & SDK (minimum API 24).
 - **iOS**: macOS with Xcode 15+ and SCons installed (`brew install scons`).
 - **Python 3.x**: Required for Godot's build system and internal scripts.
