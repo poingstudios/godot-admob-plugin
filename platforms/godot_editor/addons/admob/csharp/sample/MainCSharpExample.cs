@@ -41,6 +41,27 @@ public partial class MainCSharpExample : Control, ISampleLogger
 	private Timer _resizeTimer;
 	private Label _appTitle;
 
+	public override void _EnterTree()
+	{
+		LoadTranslations();
+	}
+
+	private static void LoadTranslations()
+	{
+		const string dir = "res://addons/admob/internal/translations";
+		foreach (string file in DirAccess.GetFilesAt(dir))
+		{
+			if (file.GetExtension() == "translation")
+			{
+				var translation = GD.Load<Translation>($"{dir}/{file}");
+				if (translation != null)
+				{
+					TranslationServer.AddTranslation(translation);
+				}
+			}
+		}
+	}
+
 	public override async void _Ready()
 	{
 		_appTitle = GetNode<Label>("Background/SafeArea/LayoutContainer/HeaderContainer/VBox/LogoContainer/TitleContainer/AppTitle");
