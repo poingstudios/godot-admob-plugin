@@ -64,7 +64,7 @@ func _on_project_settings_changed() -> void:
 
 
 func _load_translations() -> void:
-	_editor_translations.clear()
+	_unload_translations()
 	_editor_translations = load_sample_translations()
 
 
