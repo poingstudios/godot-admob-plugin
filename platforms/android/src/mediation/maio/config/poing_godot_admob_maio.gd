@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "maio"
-var _dependency_library := ["com.google.ads.mediation:maio:2.0.9.0"]
+var _dependency_library := ["com.google.ads.mediation:maio:2.0.9.1"]
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:

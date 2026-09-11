@@ -54,7 +54,7 @@ func get_spm_packages() -> Array[Dictionary]:
 	return [
 		{
 			"url": "https://github.com/googleads/googleads-mobile-ios-mediation-applovin.git",
-			"version": "13.6.300",
+			"version": "13.6.400",
 			"products": ["AppLovinAdapterTarget"]
 		}
 	]

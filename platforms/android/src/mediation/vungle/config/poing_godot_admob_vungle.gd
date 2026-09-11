@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "vungle"
-var _dependency_library := ["com.google.ads.mediation:vungle:7.7.7.0"]
+var _dependency_library := ["com.google.ads.mediation:vungle:7.7.8.1"]
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
 	return platform is EditorExportPlatformAndroid

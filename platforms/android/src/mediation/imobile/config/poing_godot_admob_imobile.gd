@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "imobile"
-var _dependency_library := ["com.google.ads.mediation:imobile:2.3.2.4"]
+var _dependency_library := ["com.google.ads.mediation:imobile:2.3.2.5"]
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
