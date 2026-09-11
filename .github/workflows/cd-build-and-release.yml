@@ -31,14 +31,23 @@ jobs:
       build_type: ${{ steps.setup.outputs.build_type }}
       version: ${{ steps.setup.outputs.version }}
     steps:
+    - name: Generate App Token
+      id: app-token
+      uses: actions/create-github-app-token@v3
+      with:
+        client-id: ${{ secrets.APP_ID }}
+        private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      continue-on-error: true
+
     - uses: actions/checkout@v7
       with:
+        token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
         fetch-depth: 0
 
     - name: Setup and Validation
       id: setup
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
       run: |
         # Determine build type
         if [ "${{ github.event_name }}" = "schedule" ]; then
@@ -221,7 +230,17 @@ jobs:
     if: needs.initialize.outputs.should_build == 'true' && needs.initialize.outputs.build_type == 'Release'
     runs-on: ubuntu-latest
     steps:
+    - name: Generate App Token
+      id: app-token
+      uses: actions/create-github-app-token@v3
+      with:
+        client-id: ${{ secrets.APP_ID }}
+        private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      continue-on-error: true
+
     - uses: actions/checkout@v7
+      with:
+        token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
 
     - name: Download all artifacts
       uses: actions/download-artifact@v8
@@ -231,7 +250,7 @@ jobs:
 
     - name: Publish Release
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
         VERSION: ${{ needs.initialize.outputs.version }}
       run: |
         gh release create "$VERSION" release-artifacts/* --title "$VERSION" --generate-notes --latest
@@ -260,7 +279,17 @@ jobs:
     if: needs.initialize.outputs.should_build == 'true' && needs.initialize.outputs.build_type == 'Nightly'
     runs-on: ubuntu-latest
     steps:
+    - name: Generate App Token
+      id: app-token
+      uses: actions/create-github-app-token@v3
+      with:
+        client-id: ${{ secrets.APP_ID }}
+        private-key: ${{ secrets.APP_PRIVATE_KEY }}
+      continue-on-error: true
+
     - uses: actions/checkout@v7
+      with:
+        token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
 
     - name: Download all artifacts
       uses: actions/download-artifact@v8
@@ -270,7 +299,7 @@ jobs:
 
     - name: Delete previous nightly release
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
       run: |
         EXISTING=$(gh api repos/${{ github.repository }}/releases --paginate -q '.[] | select(.prerelease == true and (.tag_name | contains("-nightly."))) | .tag_name' | head -n 1 || true)
         if [ -n "$EXISTING" ]; then
@@ -282,7 +311,7 @@ jobs:
 
     - name: Publish Nightly Release
       env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GH_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
         VERSION: ${{ needs.initialize.outputs.version }}
       run: |
         gh release create "$VERSION" release-artifacts/* \
