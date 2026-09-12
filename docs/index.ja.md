@@ -1,22 +1,22 @@
 # はじめに
 
-AdMob 插件を Godot プロジェクト（特に Godot v4.2 以降）に統合することは、広告を表示して収益を上げるための最初で最も重要なステップです。このプラグインの導入に成功すると、バナー広告やインタースティシャル広告など、さまざまな広告フォーマットを選択し、必要な実装手順を進めることができるようになります。
+AdMob 插件を Godot プロジェクト（特に Godot v4.5 以降）に統合することは、広告を表示して収益を上げるための最初で最も重要なステップです。このプラグインの導入に成功すると、バナー広告やインタースティシャル広告など、さまざまな広告フォーマットを選択し、必要な実装手順を進めることができるようになります。
 
-本文書は以下に基づいています。
+このドキュメントは以下に基づいています:
 
-- [Google Mobile Ads SDK Android 公式ドキュメント](https://developers.google.com/admob/android/quick-start)
-- [Google Mobile Ads SDK iOS 公式ドキュメント](https://developers.google.com/admob/ios/quick-start)
+- [Google Mobile Ads SDK Android ドキュメント](https://developers.google.com/admob/android/quick-start)
+- [Google Mobile Ads SDK iOS ドキュメント](https://developers.google.com/admob/ios/quick-start)
 
 ## 前提条件
 
 - Android への展開:
-	- Godot v4.2 以上を使用
+	- Godot v4.5 以上を使用
 	- `minSdkVersion` が 24 以上
-	- `compileSdkVersion` が 36 以上
+	- `compileSdkVersion` が 35 以上
 - iOS への展開:
-	- Godot v4.1 以上を使用
-	- Xcode 26.2 以上を使用
-	- iOS 15.0 以上をターゲット
+	- Godot v4.5 以上を使用
+	- Xcode 15.0 以上を使用
+	- iOS 15.0 以上をターゲットにする
 - 推奨: [AdMob アカウントの作成](https://support.google.com/admob/answer/7356219?visit_id=638286911958663013-3847536692&rd=1) および [アプリの登録](https://support.google.com/admob/answer/9989980?visit_id=638286911964685099-3190075945&rd=1)。
 
 ### ネイティブ SDK バージョン

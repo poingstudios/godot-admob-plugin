@@ -38,7 +38,7 @@
 
 This repository is for a _Godot Engine Plugin_ that allows showing the ads offered by **AdMob** in an **easy** way, without worrying about the building or version, **just download and use**.
 
-The **purpose** of this plugin is to always keep **up to date with Godot**, supporting **ALMOST ALL** versions from v4.2+, and also make the code **compatible** on **Android and [iOS](https://github.com/poingstudios/godot-admob-ios)**, so each advertisement will work **identically on both systems**.
+The **purpose** of this plugin is to always keep **up to date with Godot**, supporting **ALMOST ALL** versions from v4.5+, and also make the code **compatible** on **Android and [iOS](https://github.com/poingstudios/godot-admob-ios)**, so each advertisement will work **identically on both systems**.
 
 ### 🔑 Key features
 
