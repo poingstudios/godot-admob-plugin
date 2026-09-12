@@ -92,7 +92,7 @@ AdMob 中介（Mediation）是一项极具价值的功能，允许您向您的�
 
 ## 激励广告中介
 我们强烈建议您通过在 AdMob UI 中配置奖励值来自定义所有默认奖励值。为此，请选择**应用到中介组中的所有网络**选项，以确保奖励在所有网络中保持一致。请记住，某些广告网络可能不提供奖励值或类型。通过覆盖奖励值，无论由哪个广告网络负责投放该广告，您都能保证获得一致的奖励。
-![apply_all_networks](https://developers.google.com/static/admob/images/mediation/admob_apply_all_networks.png)
+![apply_all_networks](https://i.imgur.com/QR0jPx7.png)
 
 有关在 AdMob UI 中设置奖励值的更多信息，请参阅创建激励广告单元。
 

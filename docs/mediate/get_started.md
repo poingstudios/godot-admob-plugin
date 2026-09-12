@@ -93,7 +93,7 @@ When utilizing banner ads in AdMob mediation, it's essential to disable refresh 
 
 ## Rewarded ads mediation
 We strongly advise you to customize all default reward values by configuring reward values within the AdMob UI. To accomplish this, select the **Apply to all networks in Mediation groups** option to ensure that the reward remains uniform across all networks. Keep in mind that certain ad networks may not provide a reward value or type. By overriding the reward value, you guarantee a consistent reward, regardless of the ad network responsible for serving the ad.
-![apply_all_networks](https://developers.google.com/static/admob/images/mediation/admob_apply_all_networks.png)
+![apply_all_networks](https://i.imgur.com/QR0jPx7.png)
 
 For more information on setting reward values in the AdMob UI, refer to create a rewarded ad unit.
 
