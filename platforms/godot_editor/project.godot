@@ -10,6 +10,7 @@ config_version=5
 
 [admob]
 
+general/android/enable_r8_optimization=true
 mediation/applovin=true
 mediation/bidmachine=true
 mediation/chartboost=true
