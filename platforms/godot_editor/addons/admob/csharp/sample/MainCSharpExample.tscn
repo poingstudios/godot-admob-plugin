@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://f3f176vu6pfo" path="res://addons/admob/assets/music.ogg" id="13_music"]
 [ext_resource type="PackedScene" uid="uid://df7xan3v87p5" path="res://addons/admob/csharp/sample/tabs/MobileAds.tscn" id="14_mobile_ads_scene"]
 [ext_resource type="Theme" uid="uid://cax2scu7f6q4k" path="res://addons/admob/assets/theme_modern.tres" id="15_theme"]
+[ext_resource type="Script" path="res://addons/admob/gdscript/sample/SampleTranslationLoader.gd" id="18_trans"]
 
 [sub_resource type="GDScript" id="GDScript_1vvio"]
 script/source = "extends TextureButton
@@ -269,6 +270,9 @@ scroll_following = true
 [node name="ResizeTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="SampleTranslationLoader" type="Node" parent="."]
+script = ExtResource("18_trans")
 
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Patreon" method="_on_pressed"]
 [connection signal="pressed" from="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Ko-fi" to="Background/SafeArea/LayoutContainer/HeaderContainer/VBox/SupportCard/VBox/SupportButtons/Ko-fi" method="_on_pressed"]
