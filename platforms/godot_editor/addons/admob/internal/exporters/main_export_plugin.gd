@@ -26,11 +26,16 @@ const CFG_FILE_PATH := "res://addons/admob/plugin.cfg"
 
 
 func _export_begin(features: PackedStringArray, is_debug: bool, path: String, flags: int) -> void:
-	var file = FileAccess.open(CFG_FILE_PATH, FileAccess.READ)
+	var file := FileAccess.open(CFG_FILE_PATH, FileAccess.READ)
 	if file:
 		print("Exporting Poing AdMob '.cfg' file")
 		add_file(CFG_FILE_PATH, file.get_buffer(file.get_length()), false)
-	file.close()
+		file.close()
+
+
+func _export_file(path: String, _type: String, _features: PackedStringArray) -> void:
+	if path == CFG_FILE_PATH:
+		skip()
 
 
 func _get_name() -> String:

@@ -51,29 +51,30 @@ jobs:
           token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - name: 3. Setup Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: '3.10'
-
-      - name: 4. Check and update GDScript config files
+      - name: 3. Check and sync dependencies with Poing AI
         id: sync
-        env:
-          GITHUB_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
-        run: python3 .github/scripts/sync_admob_dependencies.py
+        uses: poingstudios/poing-ai@v1
+        with:
+          mode: sync
+          github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
+          gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
 
-      - name: 5. Create Pull Request
+      - name: 4. Update documentation SDK versions
+        if: steps.sync.outputs.has_updates == 'true'
+        run: python3 .github/scripts/update_docs_dependencies.py
+
+      - name: 5. Create or Update Pull Request
         if: steps.sync.outputs.has_updates == 'true'
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
-          SUMMARY_TABLE: ${{ steps.sync.outputs.summary_table }}
+          PR_BODY: ${{ steps.sync.outputs.pr_body }}
         run: |
           BRANCH_NAME="deps/sync-admob-dependencies"
           git config user.name "poing-ai[bot]"
           git config user.email "296332247+poing-ai[bot]@users.noreply.github.com"
           
           git checkout -B "$BRANCH_NAME"
-          git add -u platforms/android/src/ platforms/ios/src/
+          git add -u
           git commit -m "chore(deps): update AdMob and mediation SDKs across Android and iOS"
           git push -f origin "$BRANCH_NAME"
           
@@ -81,14 +82,12 @@ jobs:
           cat << 'EOF' > pr_body.md
           ## 📦 Automated Dependency Sync
 
-          The following upstream Google Mobile Ads (GMA) and mediation SDK updates were detected and synchronized across the GDScript plugin configuration files:
-
           EOF
-          echo "$SUMMARY_TABLE" >> pr_body.md
+          echo "$PR_BODY" >> pr_body.md
           cat << 'EOF' >> pr_body.md
 
           ---
-          *Generated automatically by `[Cron] Sync AdMob Dependencies`.*
+          *Generated automatically by `[Cron] Sync AdMob Dependencies` via [Poing AI](https://github.com/poingstudios/poing-ai).*
           EOF
           
           # Check if PR already exists

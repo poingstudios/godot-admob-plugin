@@ -1,6 +1,6 @@
 # 开始使用
 
-将 AdMob 插件集成到您的 Godot 项目中（特别适用于 Godot v4.2+）是启用广告展示和产生收入的首要且关键的步骤。成功加入此插件后，您可以灵活地从各种广告格式（如横幅或插屏）中进行选择，并继续执行必要的实现步骤。
+将 AdMob 插件集成到您的 Godot 项目中（特别适用于 Godot v4.5+）是启用广告展示和产生收入的首要且关键的步骤。成功加入此插件后，您可以灵活地从各种广告格式（如横幅或插屏）中进行选择，并继续执行必要的实现步骤。
 
 本文档基于：
 
@@ -10,12 +10,12 @@
 ## 前提条件
 
 - 部署 Android：
-	- 使用 Godot v4.2 或更高版本
+	- 使用 Godot v4.5 或更高版本
 	- `minSdkVersion` 为 24 或更高
-	- `compileSdkVersion` 为 36 或更高
+	- `compileSdkVersion` 为 35 或更高
 - 部署 iOS：
-	- 使用 Godot v4.1 或更高版本
-	- 使用 Xcode 26.2 或更高版本
+	- 使用 Godot v4.5 或更高版本
+	- 使用 Xcode 15.0 或更高版本
 	- 目标 iOS 15.0 或更高版本
 - 推荐：[创建 AdMob 账号](https://support.google.com/admob/answer/7356219) 并 [注册应用](https://support.google.com/admob/answer/9989980)。
 
@@ -23,11 +23,11 @@
 
 === "Android"
 
-    * [`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.2.1`](https://mvnrepository.com/artifact/com.google.android.libraries.ads.mobile.sdk/ads-mobile-sdk/1.2.1) (Next-Gen SDK)
+    * [`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.4.0`](https://mvnrepository.com/artifact/com.google.android.libraries.ads.mobile.sdk/ads-mobile-sdk/1.4.0) (Next-Gen SDK)
 
 === "iOS"
 
-    * [`GoogleMobileAds`](https://github.com/googleads/swift-package-manager-google-mobile-ads/releases/tag/13.6.0) 版本 `13.6.0`
+    * [`GoogleMobileAds`](https://github.com/googleads/swift-package-manager-google-mobile-ads/releases/tag/13.9.0) 版本 `13.9.0`
     * [`GoogleUserMessagingPlatform`](https://github.com/googleads/swift-package-manager-google-user-messaging-platform/releases/tag/3.1.0) 版本 `3.1.0`
 
 ## 从 Poing Studios 下载 Godot AdMob 插件

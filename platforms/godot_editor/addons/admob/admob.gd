@@ -38,9 +38,7 @@ var _ios_exporter := preload("res://addons/admob/internal/exporters/ios/export_p
 
 func _enter_tree() -> void:
 	CSharpService.manage_visibility(self)
-
 	BinaryInstaller.install_missing_binaries_sync()
-
 	ProjectSettingsService.register_settings()
 
 	add_export_plugin(_main_exporter)

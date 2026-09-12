@@ -44,6 +44,7 @@ var _app_subtitle: Label = $Background/SafeArea/LayoutContainer/HeaderContainer/
 var _resize_timer: Timer = $ResizeTimer
 
 
+
 func _ready() -> void:
 	var current_year: int = Time.get_datetime_dict_from_system().year
 	_app_subtitle.text = "© %d Poing Studios" % current_year

@@ -157,6 +157,11 @@ func _get_android_manifest_application_element_contents(
 func _export_begin(_features: PackedStringArray, _is_debug: bool, _path: String, _flags: int) -> void:
 	if not _features.has("android"):
 		return
+	if not get_option("gradle_build/use_gradle_build"):
+		push_error(
+			"AdMob Android Export Error: 'Use Gradle Build' must be enabled in the Android export preset. Prebuilt APK export is not supported by the Poing AdMob plugin."
+		)
+		return
 	PluginVersion.check_version_mismatch(PluginVersion.android_version, "Android")
 	_patch_android_gradle_file()
 	if not _is_debug:
