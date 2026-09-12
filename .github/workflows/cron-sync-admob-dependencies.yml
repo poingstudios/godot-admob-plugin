@@ -59,7 +59,11 @@ jobs:
           github-token: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
           gemini-api-key: ${{ secrets.GEMINI_API_KEY }}
 
-      - name: 4. Create or Update Pull Request
+      - name: 4. Update documentation SDK versions
+        if: steps.sync.outputs.has_updates == 'true'
+        run: python3 .github/scripts/update_docs_dependencies.py
+
+      - name: 5. Create or Update Pull Request
         if: steps.sync.outputs.has_updates == 'true'
         env:
           GH_TOKEN: ${{ steps.app-token.outputs.token || secrets.GITHUB_TOKEN }}
