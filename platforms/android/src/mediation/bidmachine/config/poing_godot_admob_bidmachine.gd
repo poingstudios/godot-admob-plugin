@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "bidmachine"
-var _dependency_library := ["com.google.ads.mediation:bidmachine:3.7.1.1"]
+var _dependency_library := ["com.google.ads.mediation:bidmachine:3.8.0.0"]
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
