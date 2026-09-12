@@ -23,11 +23,11 @@ Este documento é baseado em:
 
 === "Android"
 
-    * [`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.2.1`](https://mvnrepository.com/artifact/com.google.android.libraries.ads.mobile.sdk/ads-mobile-sdk/1.2.1) (Next-Gen SDK)
+    * [`com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.4.0`](https://mvnrepository.com/artifact/com.google.android.libraries.ads.mobile.sdk/ads-mobile-sdk/1.4.0) (Next-Gen SDK)
 
 === "iOS"
 
-    * [`GoogleMobileAds`](https://github.com/googleads/swift-package-manager-google-mobile-ads/releases/tag/13.6.0) versão `13.6.0`
+    * [`GoogleMobileAds`](https://github.com/googleads/swift-package-manager-google-mobile-ads/releases/tag/13.9.0) versão `13.9.0`
     * [`GoogleUserMessagingPlatform`](https://github.com/googleads/swift-package-manager-google-user-messaging-platform/releases/tag/3.1.0) versão `3.1.0`
 
 ## Baixar o Plugin Godot AdMob da Poing Studios
