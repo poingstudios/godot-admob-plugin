@@ -212,30 +212,34 @@ func _apply_spm(path: String, defer_patch: bool) -> void:
 	_generate_package_swift(export_dir, _spm_dependencies)
 	_generate_dummy_source(export_dir)
 
-	if defer_patch:
-		_defer_pbxproj_patch.call_deferred(export_dir, path)
-	else:
-		_patch_xcodeproj(export_dir, path)
+	# Patch if the Xcode project is already on disk. call_deferred does not work
+	# in a headless/  CI / command-line environment. Godot unloads and frees
+	# editor addons as soon as the export returns, before the message queue is
+	# flushed, so the deferred call is dropped and the project is never patched.
+	if _patch_xcodeproj(export_dir, path):
 		_spm_dependencies.clear()
+	elif defer_patch:
+		_defer_pbxproj_patch.call_deferred(export_dir, path)
 
 
 func _defer_pbxproj_patch(export_dir: String, path: String) -> void:
-	_patch_xcodeproj(export_dir, path)
-	_spm_dependencies.clear()
+	if _patch_xcodeproj(export_dir, path):
+		_spm_dependencies.clear()
 
 
-func _patch_xcodeproj(export_dir: String, path: String) -> void:
+## Returns true if the project was found and patched.
+func _patch_xcodeproj(export_dir: String, path: String) -> bool:
 	var project_name := path.get_file().get_basename()
 	var pbxproj_path := export_dir.path_join(project_name + ".xcodeproj/project.pbxproj")
 
 	if FileAccess.file_exists(pbxproj_path):
 		PbxprojService.patch(pbxproj_path)
-		return
+		return true
 
 	var dir := DirAccess.open(export_dir)
 	if not dir:
 		push_warning("AdMob: Could not open export directory: %s" % export_dir)
-		return
+		return false
 
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
@@ -244,10 +248,12 @@ func _patch_xcodeproj(export_dir: String, path: String) -> void:
 			var found_path := export_dir.path_join(file_name).path_join("project.pbxproj")
 			if FileAccess.file_exists(found_path):
 				PbxprojService.patch(found_path)
-			else:
-				push_warning("AdMob: project.pbxproj not found at: %s" % found_path)
-			break
+				return true
+			push_warning("AdMob: project.pbxproj not found at: %s" % found_path)
+			return false
 		file_name = dir.get_next()
+
+	return false
 
 
 func _generate_package_swift(export_dir: String, dependencies: Array[Dictionary]) -> void:
