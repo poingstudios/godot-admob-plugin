@@ -66,6 +66,12 @@ If your app has special requirements, you can set the optional `gad_has_consent_
     MobileAds.SetGadHasConsentForCookies(false);
     ```
 
+## Android minification
+
+You can enable Android R8 code shrinking, minification, and obfuscation to reduce DEX bytecode size and comply with Google Play Console optimization guidelines.
+
+For complete instructions on configuring automated R8 optimization or manual ProGuard rules, see the [Android R8 Optimization & Obfuscation](android_r8_obfuscation.md) guide.
+
 ## Disable crash reporting
 
 Google Mobile Ads SDK collects crash reports for debugging and analysis purposes. To disable crash reporting, see the following sections for Android and iOS.

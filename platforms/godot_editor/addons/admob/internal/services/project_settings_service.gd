@@ -71,6 +71,7 @@ static func _get_android_settings() -> Array[SettingDefinition]:
 	return [
 		SettingDefinition.new(get_android_setting_path("enabled"), TYPE_BOOL, true),
 		SettingDefinition.new(get_android_setting_path("app_id"), TYPE_STRING, ANDROID_DEFAULT_APP_ID),
+		SettingDefinition.new(get_android_setting_path("enable_r8_optimization"), TYPE_BOOL, false),
 		SettingDefinition.new(get_android_setting_path("disable_initialization_optimization"), TYPE_BOOL, false),
 		SettingDefinition.new(get_android_setting_path("disable_ad_loading_optimization"), TYPE_BOOL, false),
 	]

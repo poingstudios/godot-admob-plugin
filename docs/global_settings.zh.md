@@ -66,6 +66,12 @@
     MobileAds.SetGadHasConsentForCookies(false);
     ```
 
+## Android 代码压缩与混淆 (Minification)
+
+您可以启用 Android R8 代码缩减、压缩和混淆，以减小 DEX 字节码大小并符合 Google Play Console 优化准则。
+
+有关配置自动 R8 优化或手动 ProGuard 规则的完整说明，请参阅 [Android R8 优化与混淆](android_r8_obfuscation.md) 指南。
+
 ## 禁用崩溃报告
 
 Google Mobile Ads SDK 收集崩溃报告用于调试和分析。要禁用崩溃报告，请参阅以下 Android 和 iOS 部分。

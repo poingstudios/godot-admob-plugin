@@ -58,3 +58,16 @@ When an ad fails to load, `LoadAdError` returns one of the following error codes
         MobileAds.OpenAdInspector();
     }
     ```
+
+## Google Play Console Obfuscation Threshold Warning (< 25%)
+
+If Google Play Console displays:
+> **App optimization is below our threshold: Obfuscation (10%)**
+
+This occurs because the Google Mobile Ads Next-Gen SDK moves runtime execution logic into your app's DEX bytecode while Godot defaults to `minifyEnabled false`.
+
+### Resolution Workflow
+1. In Godot Editor, navigate to **Project > Project Settings > Admob > General > Android**.
+2. Enable **Enable R8 Optimization** (`admob/general/android/enable_r8_optimization = true`).
+3. Export your **Release** build using an Android build template (`android/build/`). The export plugin automatically sets `minifyEnabled true`, `shrinkResources false`, and ensures required Godot Engine ProGuard rules are in `proguard-rules.pro`.
+4. The plugin's Android `.aar` libraries automatically supply embedded `consumer-rules.pro` to protect all AdMob plugin classes, GodotPlugin subclasses, and native JNI methods.

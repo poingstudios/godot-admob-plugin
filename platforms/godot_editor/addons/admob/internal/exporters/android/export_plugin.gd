@@ -164,6 +164,125 @@ func _export_begin(_features: PackedStringArray, _is_debug: bool, _path: String,
 		return
 	PluginVersion.check_version_mismatch(PluginVersion.android_version, "Android")
 	_patch_android_gradle_file()
+	if not _is_debug:
+		_patch_android_r8()
+
+
+func _patch_android_r8() -> void:
+	var enable_r8 := _get_setting(
+		ProjectSettingsService.get_android_setting_path("enable_r8_optimization"),
+		false
+	) as bool
+	if not enable_r8:
+		return
+
+	var gradle_path := "res://android/build/app/build.gradle"
+	var proguard_path := "res://android/build/app/proguard-rules.pro"
+	if not FileAccess.file_exists(gradle_path):
+		gradle_path = "res://android/build/build.gradle"
+		proguard_path = "res://android/build/proguard-rules.pro"
+		if not FileAccess.file_exists(gradle_path):
+			return
+
+	_ensure_godot_proguard_rules(proguard_path)
+	_ensure_r8_enabled_in_gradle(gradle_path)
+
+
+func _ensure_godot_proguard_rules(proguard_path: String) -> void:
+	var existing_content := ""
+	if FileAccess.file_exists(proguard_path):
+		existing_content = FileAccess.get_file_as_string(proguard_path)
+
+	var rules_to_append := ""
+	if not "org.godotengine" in existing_content:
+		rules_to_append += """
+# Godot Engine Core (Added by Poing Godot AdMob Plugin for R8 optimization)
+-keep class org.godotengine.** { *; }
+-keepclassmembers class org.godotengine.** { *; }
+-keep class com.godot.** { *; }
+-keepclassmembers class com.godot.** { *; }
+-keep class * extends org.godotengine.godot.plugin.GodotPlugin { *; }
+-keepclassmembers class * extends org.godotengine.godot.plugin.GodotPlugin {
+	@org.godotengine.godot.plugin.UsedByGodot <methods>;
+}
+-keepclasseswithmembernames class * {
+	native <methods>;
+}
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Application
+-keep public class * extends android.app.Service
+"""
+
+	if not "-dontwarn kotlin.Metadata" in existing_content:
+		rules_to_append += """
+# Suppress harmless warnings from Kotlin metadata and optional mediation dependencies
+-dontwarn kotlin.Metadata
+-dontwarn com.android.billingclient.**
+-dontwarn com.bytedance.sdk.**
+-dontwarn com.tiktok.**
+-dontwarn jp.maio.sdk.**
+-dontwarn ru.ok.tracer.**
+"""
+	elif not "-dontwarn ru.ok.tracer.**" in existing_content:
+		rules_to_append += """
+-dontwarn ru.ok.tracer.**
+"""
+
+	if rules_to_append.is_empty():
+		return
+
+	var new_content := existing_content + rules_to_append
+	var file := FileAccess.open(proguard_path, FileAccess.WRITE)
+	if file:
+		file.store_string(new_content)
+		file.close()
+
+
+func _ensure_r8_enabled_in_gradle(gradle_path: String) -> void:
+	var content := FileAccess.get_file_as_string(gradle_path)
+	if content.is_empty():
+		return
+
+	var modified := false
+
+	if not "com.android.tools:r8" in content:
+		var buildscript_block := """buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools:r8:8.8.27'
+    }
+}
+
+"""
+		content = buildscript_block + content
+		modified = true
+
+	if not ("minifyEnabled true" in content or "shouldMinify()" in content):
+		var r8_block := """
+            minifyEnabled true
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'"""
+
+		if "minifyEnabled false" in content:
+			content = content.replace("minifyEnabled false", r8_block.strip_edges())
+			modified = true
+		else:
+			var regex := RegEx.new()
+			regex.compile("(buildTypes\\s*\\{[\\s\\S]*?release\\s*\\{)")
+			var regex_match := regex.search(content)
+			if regex_match:
+				var matched_str := regex_match.get_string(1)
+				content = content.replace(matched_str, matched_str + r8_block)
+				modified = true
+
+	if modified:
+		var file := FileAccess.open(gradle_path, FileAccess.WRITE)
+		if file:
+			file.store_string(content)
+			file.close()
 
 
 func _patch_android_gradle_file() -> void:
