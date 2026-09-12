@@ -43,17 +43,6 @@ La mediación de AdMob admite varias fuentes de anuncios, que admiten integracio
       <td>Ninguno</td>
     </tr>
     <tr>
-      <td><a href="https://developers.google.com/admob/ios/mediation/bigo" target="_blank">BIGO Ads SDK</a></td>
-      <td><span class="table-check">✓</span></td>
-      <td><span class="table-check">✓</span></td>
-      <td><span class="table-check">✓</span></td>
-      <td><span class="table-check">✓</span></td>
-      <td></td>
-      <td><span class="table-check">✓</span></td>
-      <td><span class="table-check">✓</span></td>
-      <td>Ninguno</td>
-    </tr>
-    <tr>
       <td><a href="integrate_partner_networks/chartboost.md">Chartboost</a></td>
       <td></td>
       <td><span class="table-check">✓</span></td>
