@@ -30,6 +30,7 @@ admob/general/android/enable_r8_optimization = true
 ```
 
 Al exportar una versión de **Release** con una plantilla de compilación de Android (`android/build/`), el plugin de exportación automáticamente:
+
 - Habilita `minifyEnabled true` y `shrinkResources false` en su configuración de compilación de release.
 - Configura `proguardFiles` para hacer referencia a su archivo `proguard-rules.pro`.
 - Garantiza que las clases principales de Godot Engine, singletons y métodos nativos JNI se conserven.
@@ -41,6 +42,7 @@ Al exportar una versión de **Release** con una plantilla de compilación de And
 El plugin Poing Godot AdMob incluye reglas de ProGuard de consumidor (`consumer-rules.pro`) empaquetadas directamente dentro de sus archivos binarios de biblioteca `.aar` para Android.
 
 Cuando R8 se ejecuta durante la compilación de release de Gradle, Gradle fusiona automáticamente las reglas del plugin para proteger:
+
 - Todas las clases del plugin AdMob (`com.poingstudios.godot.admob.**`).
 - Todas las subclases de `GodotPlugin` y métodos anotados con `@UsedByGodot`.
 - Todos los métodos nativos JNI (`native <methods>;`).

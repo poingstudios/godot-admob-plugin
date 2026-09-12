@@ -66,6 +66,12 @@
     MobileAds.SetGadHasConsentForCookies(false);
     ```
 
+## Android の難読化・縮小 (Minification)
+
+Android R8 コードの縮小、最適化、および難読化を有効にして、DEX バイトコードのサイズを削減し、Google Play Console の最適化ガイドラインに準拠できます。
+
+自動 R8 最適化の設定や手動の ProGuard ルールに関する詳細な手順については、[Android R8 最適化と難読化](android_r8_obfuscation.md) ガイドを参照してください。
+
 ## クラッシュレポートの無効化
 
 Google Mobile Ads SDK は、デバッグと分析のためにクラッシュレポートを収集します。クラッシュレポートを無効にするには、Android と iOS の以下のセクションを参照してください。

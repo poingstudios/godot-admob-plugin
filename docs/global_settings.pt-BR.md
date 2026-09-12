@@ -66,6 +66,12 @@ Se seu aplicativo possui requisitos especiais, você pode definir a chave opcion
     MobileAds.SetGadHasConsentForCookies(false);
     ```
 
+## Minificação no Android
+
+Você pode habilitar a redução, minificação e ofuscação de código Android R8 para diminuir o tamanho do bytecode DEX e atender às diretrizes de otimização da Google Play Console.
+
+Para instruções completas sobre como configurar a otimização automática via R8 ou regras manuais do ProGuard, consulte o guia [Otimização e Ofuscação Android R8](android_r8_obfuscation.md).
+
 ## Desabilitar relatório de fallos
 
 O Google Mobile Ads SDK coleta relatórios de falhas para depuração e análise. Para desabilitar o relatório de falhos, veja as seguintes seções para Android e iOS.

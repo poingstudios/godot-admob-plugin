@@ -30,6 +30,7 @@ admob/general/android/enable_r8_optimization = true
 ```
 
 在使用 Android 构建模板（`android/build/`）导出 **Release**（发布）版本时，导出插件会自动：
+
 - 在 Release 构建配置中启用 `minifyEnabled true` 和 `shrinkResources false`。
 - 配置 `proguardFiles` 引用您的 `proguard-rules.pro` 规则文件。
 - 确保保留 Godot Engine 核心类、单例以及本地 JNI 方法。
@@ -41,6 +42,7 @@ admob/general/android/enable_r8_optimization = true
 Poing Godot AdMob 插件直接在其 Android `.aar` 库二进制文件中内置了消费者 ProGuard 规则（`consumer-rules.pro`）。
 
 当 Gradle Release 构建运行 R8 时，Gradle 会自动合并插件规则以保护：
+
 - 所有 AdMob 插件类（`com.poingstudios.godot.admob.**`）。
 - 所有 `GodotPlugin` 子类及带有 `@UsedByGodot` 注解的方法。
 - 所有本地 JNI 方法（`native <methods>;`）。
