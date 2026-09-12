@@ -309,3 +309,95 @@ body {
   -webkit-mask-size: cover;
   opacity: 0.7;
 }
+
+/* 📊 MEDIATION MATRIX TABLE */
+.admob-matrix-table {
+  display: table !important;
+  width: 100% !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+  font-size: 0.75rem !important;
+  margin: 1.5em 0 0.5em 0 !important;
+  line-height: 1.35 !important;
+}
+
+.admob-matrix-table thead tr {
+  background-color: #e8eaed !important;
+}
+
+[data-md-color-scheme="slate"] .admob-matrix-table thead tr {
+  background-color: #232734 !important;
+}
+
+.admob-matrix-table th,
+.admob-matrix-table td {
+  padding: 8px 3px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest) !important;
+  hyphens: none !important;
+  word-break: normal !important;
+}
+
+.admob-matrix-table th {
+  font-weight: 600 !important;
+}
+
+.admob-matrix-table th:first-child,
+.admob-matrix-table td:first-child {
+  text-align: left !important;
+  padding-left: 8px !important;
+  font-weight: 500;
+}
+
+.admob-matrix-table th:last-child,
+.admob-matrix-table td:last-child {
+  text-align: left !important;
+  padding-left: 8px !important;
+}
+
+.table-check {
+  color: #1e8e3e !important;
+  font-weight: bold !important;
+  font-size: 1.1em !important;
+}
+
+[data-md-color-scheme="slate"] .table-check {
+  color: #34a853 !important;
+}
+
+.footnote {
+  color: var(--md-typeset-a-color, #1a73e8) !important;
+  text-decoration: none !important;
+  font-size: 0.75em !important;
+  vertical-align: super !important;
+  margin-left: 2px !important;
+  font-weight: normal !important;
+}
+
+.footnote:hover {
+  text-decoration: underline !important;
+}
+
+.table-footnotes {
+  font-size: 0.78rem !important;
+  color: var(--md-default-fg-color--light) !important;
+  margin-top: 0.5em !important;
+  margin-bottom: 1.5em !important;
+  line-height: 1.5 !important;
+}
+
+.table-section-row th {
+  background-color: #f1f3f4 !important;
+  color: #202124 !important;
+  font-weight: 700 !important;
+  text-align: left !important;
+  padding: 10px 8px !important;
+  font-size: 0.8rem !important;
+  border: none !important;
+}
+
+[data-md-color-scheme="slate"] .table-section-row th {
+  background-color: #1a1d27 !important;
+  color: #e8eaed !important;
+}
