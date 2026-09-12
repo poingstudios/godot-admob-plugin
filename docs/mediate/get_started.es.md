@@ -92,7 +92,7 @@ Al utilizar anuncios de banner en la mediación de AdMob, es esencial inhabilita
 
 ## Mediación de anuncios bonificados
 Le recomendamos encarecidamente que personalice todos los valores de recompensa predeterminados configurándolos en la interfaz de usuario de AdMob. Para lograr esto, seleccione la opción **Aplicar a todas las redes en grupos de mediación** para garantizar que la recompensa permanezca uniforme en todas las redes. Tenga en cuenta que es posible que determinadas redes publicitarias no proporcionen un valor o tipo de recompensa. Al anular el valor de la recompensa, garantiza una recompensa constante, independientemente de la red publicitaria responsable de publicar el anuncio.
-![apply_all_networks](https://developers.google.com/static/admob/images/mediation/admob_apply_all_networks.png)
+![apply_all_networks](https://i.imgur.com/QR0jPx7.png)
 
 Para obtener más información sobre cómo configurar valores de recompensa en la interfaz de usuario de AdMob, consulte crear un bloque de anuncios recompensados.
 

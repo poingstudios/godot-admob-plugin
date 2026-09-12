@@ -93,7 +93,7 @@ AdMob メディエーションでバナー広告を使用する場合、メデ�
 
 ## リワード広告のメディエーション
 AdMob UI 内で報酬値を設定して、すべてのデフォルトの報酬値をカスタマイズすることを強くお勧めします。これを実現するには、**[メディエーション グループのすべてのネットワークに適用]** オプションを選択して、すべてのネットワークで報酬が一律になるようにします。一部の広告ネットワークでは、報酬値またはタイプが提供されない場合があることに注意してください。報酬値を上書きすることで、広告配信を担当する広告ネットワークに関係なく、一貫した報酬が提供されることが保証されます。
-![apply_all_networks](https://developers.google.com/static/admob/images/mediation/admob_apply_all_networks.png)
+![apply_all_networks](https://i.imgur.com/QR0jPx7.png)
 
 AdMob UI での報酬値の設定に関する詳細については、[リワード広告ユニットの作成](https://support.google.com/admob/answer/7311747)のドキュメントを参照してください。
 
