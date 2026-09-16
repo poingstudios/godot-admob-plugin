@@ -54,7 +54,7 @@ func get_spm_packages() -> Array[Dictionary]:
 	return [
 		{
 			"url": "https://github.com/googleads/googleads-mobile-ios-mediation-ironsource.git",
-			"version": "9.5.00000",
+			"version": "9.6.00000",
 			"products": ["IronSourceAdapterTarget"]
 		}
 	]

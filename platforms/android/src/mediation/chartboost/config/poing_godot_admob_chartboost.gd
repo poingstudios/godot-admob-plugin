@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "chartboost"
-var _dependency_library := ["com.google.ads.mediation:chartboost:9.14.0.1"]
+var _dependency_library := ["com.google.ads.mediation:chartboost:9.14.1.0"]
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
