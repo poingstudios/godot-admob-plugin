@@ -25,7 +25,7 @@ extends EditorExportPlugin
 const PLUGIN_NAME := "ads"
 var _dependency_library := [
 	"com.google.android.libraries.ads.mobile.sdk:ads-mobile-sdk:1.4.0",
-	"androidx.constraintlayout:constraintlayout:2.2.0"
+	"androidx.constraintlayout:constraintlayout:2.2.2"
 ]
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
