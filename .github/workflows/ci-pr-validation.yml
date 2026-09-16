@@ -176,6 +176,8 @@ jobs:
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v4
+      with:
+        packages: 'platform-tools'
 
     - name: Download Android Plugin Binaries
       uses: actions/download-artifact@v8
@@ -346,6 +348,8 @@ jobs:
 
     - name: Setup Android SDK
       uses: android-actions/setup-android@v4
+      with:
+        packages: 'platform-tools'
 
     - name: Download Android Plugin Binaries
       uses: actions/download-artifact@v8
