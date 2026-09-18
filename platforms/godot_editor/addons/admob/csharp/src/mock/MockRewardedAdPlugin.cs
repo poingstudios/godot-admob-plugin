@@ -198,7 +198,7 @@ namespace PoingStudios.AdMob.Core
 
 			var canvas = new CanvasLayer
 			{
-				Layer = 100
+				Layer = MockAdMobFactory.LayerFullscreen
 			};
 			canvas.AddChild(ui);
 			AddChild(canvas);

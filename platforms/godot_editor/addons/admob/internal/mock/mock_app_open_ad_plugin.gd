@@ -22,6 +22,7 @@
 
 extends Node
 
+const MockAdMobFactory := preload("res://addons/admob/internal/mock/mock_admob_factory.gd")
 const _FLOOD_IT_ICON := preload("res://addons/admob/assets/flood_it_icon.svg")
 
 signal on_app_open_ad_clicked(uid: int)
@@ -60,7 +61,7 @@ func create() -> int:
 	}
 
 	var canvas := CanvasLayer.new()
-	canvas.layer = 100
+	canvas.layer = MockAdMobFactory.LAYER_FULLSCREEN
 	canvas.add_child(ui)
 	add_child(canvas)
 

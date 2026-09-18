@@ -22,6 +22,7 @@
 
 extends Node
 
+const MockAdMobFactory := preload("res://addons/admob/internal/mock/mock_admob_factory.gd")
 const _ICON_120 := preload("res://addons/admob/assets/icon-120.png")
 const _GOOGLE_PLAY_ICON := preload("res://addons/admob/assets/google_play_icon.svg")
 const _FORMAT_REWARDED_INTERSTITIAL := preload("res://addons/admob/assets/format-rewarded-interstitial.svg")
@@ -142,7 +143,7 @@ func create() -> int:
 	}
 
 	var canvas := CanvasLayer.new()
-	canvas.layer = 100
+	canvas.layer = MockAdMobFactory.LAYER_FULLSCREEN
 	canvas.add_child(ui)
 	add_child(canvas)
 
