@@ -134,7 +134,9 @@ func load_ad(uid: int, _ad_request_dictionary: Dictionary, _keywords: Array) -> 
 			_ads[uid]["toggle_btn"].show()
 
 	var timer := (Engine.get_main_loop() as SceneTree).create_timer(0.5)
-	timer.timeout.connect(func():
+	timer.timeout.connect(func() -> void:
+		if not _ads.has(uid):
+			return
 		on_ad_loaded.emit(uid)
 		var ad: Dictionary = _ads[uid]
 		if not ad.get("is_hidden", false) and is_instance_valid(ad["ui"]):
