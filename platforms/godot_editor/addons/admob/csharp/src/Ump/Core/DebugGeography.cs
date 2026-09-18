@@ -26,6 +26,8 @@ namespace PoingStudios.AdMob.Ump.Core
     {
         Disabled = 0,
         Eea = 1,
-        NotEea = 2
+        NotEea = 2,
+        RegulatedUsState = 3,
+        Other = 4
     }
 }

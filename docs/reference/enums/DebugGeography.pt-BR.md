@@ -10,7 +10,9 @@ Define a geografia de depuração a ser simulada para testar o fluxo de consenti
     enum Values {
         DISABLED = 0,
         EEA = 1,
-        NOT_EEA = 2
+        NOT_EEA = 2,
+        REGULATED_US_STATE = 3,
+        OTHER = 4
     }
     ```
 
@@ -20,6 +22,8 @@ Define a geografia de depuração a ser simulada para testar o fluxo de consenti
     {
         Disabled = 0,
         Eea = 1,
-        NotEea = 2
+        NotEea = 2,
+        RegulatedUsState = 3,
+        Other = 4
     }
     ```
