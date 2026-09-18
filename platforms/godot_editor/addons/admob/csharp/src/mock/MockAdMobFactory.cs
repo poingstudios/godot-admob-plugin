@@ -27,6 +27,9 @@ namespace PoingStudios.AdMob.Core
 {
 	public static class MockAdMobFactory
 	{
+		public const int LayerOverlay = 100;
+		public const int LayerFullscreen = 1000;
+
 		private static readonly Dictionary<string, GodotObject> _mocks = new Dictionary<string, GodotObject>();
 
 		public static GodotObject GetMockPlugin(string pluginName)

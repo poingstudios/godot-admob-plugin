@@ -22,6 +22,7 @@
 
 extends Node
 
+const MockAdMobFactory := preload("res://addons/admob/internal/mock/mock_admob_factory.gd")
 const _FORMAT_INTERSTITIAL := preload("res://addons/admob/assets/format-interstitial.svg")
 
 signal on_interstitial_ad_clicked(uid: int)
@@ -60,7 +61,7 @@ func create() -> int:
 	}
 
 	var canvas := CanvasLayer.new()
-	canvas.layer = 100
+	canvas.layer = MockAdMobFactory.LAYER_FULLSCREEN
 	canvas.add_child(ui)
 	add_child(canvas)
 

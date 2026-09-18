@@ -22,6 +22,8 @@
 
 extends Node
 
+const MockAdMobFactory := preload("res://addons/admob/internal/mock/mock_admob_factory.gd")
+
 signal on_ad_clicked(uid: int)
 signal on_ad_closed(uid: int)
 signal on_ad_failed_to_load(uid: int, error_dictionary: Dictionary)
@@ -115,7 +117,7 @@ func create(ad_view_dictionary: Dictionary) -> int:
 	}
 
 	var canvas := CanvasLayer.new()
-	canvas.layer = 100
+	canvas.layer = MockAdMobFactory.LAYER_OVERLAY
 	canvas.add_child(ui)
 	add_child(canvas)
 
