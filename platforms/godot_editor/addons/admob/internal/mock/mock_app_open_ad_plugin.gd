@@ -74,6 +74,8 @@ func load(ad_unit_id: String, _ad_request_dictionary: Dictionary, _keywords: Arr
 	_ads[uid]["ad_unit_id"] = ad_unit_id
 	var timer := (Engine.get_main_loop() as SceneTree).create_timer(0.5)
 	timer.timeout.connect(func() -> void:
+		if not _ads.has(uid):
+			return
 		on_app_open_ad_loaded.emit(uid)
 	)
 

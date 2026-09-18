@@ -89,7 +89,9 @@ func load(ad_unit_id: String, _ad_request_dictionary: Dictionary, _keywords: Arr
 	_ads[uid]["video_aspect_ratio"] = 1.777
 
 	var timer := (Engine.get_main_loop() as SceneTree).create_timer(0.5)
-	timer.timeout.connect(func():
+	timer.timeout.connect(func() -> void:
+		if not _ads.has(uid):
+			return
 		emit_signal("on_native_overlay_ad_loaded", uid)
 		var ad: Dictionary = _ads[uid]
 		if not ad.get("is_hidden", false) and is_instance_valid(ad["ui"]):
