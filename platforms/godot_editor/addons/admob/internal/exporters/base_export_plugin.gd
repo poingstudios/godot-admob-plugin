@@ -47,7 +47,9 @@ const MEDIATION_LIBS: Array[String] = [
 	"vpon",
 	"zucks"
 ]
-static var KNOWN_LIBS: Array[String] = ["ads"] + MEDIATION_LIBS
+# Not typed as Array[String]: `+` on two typed arrays returns an untyped Array,
+# which Godot refuses to assign to a typed static var, leaving KNOWN_LIBS empty.
+static var KNOWN_LIBS := ["ads"] + MEDIATION_LIBS
 
 
 func _get_setting(setting_name: String, default_value):
@@ -71,7 +73,9 @@ func _discover_enabled_libs(root_bin_path: String) -> Array[String]:
 		var dir_name := dir_access.get_next()
 		while dir_name != "":
 			if dir_access.current_is_dir() and not dir_name.begins_with("."):
-				if not dir_name in KNOWN_LIBS:
+				# `enabled_libs` is checked too, so a name can never be added twice even
+				# if the list above is ever empty again.
+				if not dir_name in KNOWN_LIBS and not dir_name in enabled_libs:
 					var gd_path := root_bin_path.path_join(dir_name).path_join(
 						"poing_godot_admob_" + dir_name + ".gd"
 					)
