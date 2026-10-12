@@ -32,12 +32,6 @@ dependencies:
       paths:
         - "platforms/android/src/**/config/*.gd"
         - "platforms/ios/src/**/config/*.gd"
-    - type: "gradle"
-      paths:
-        - "platforms/android/build.gradle"
-    - type: "swift_package"
-      paths:
-        - "platforms/ios/Package.swift"
   post_sync: "python3 .github/scripts/update_docs_dependencies.py"
 
 triage:
