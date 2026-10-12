@@ -54,7 +54,7 @@ func get_spm_packages() -> Array[Dictionary]:
 	return [
 		{
 			"url": "https://github.com/googleads/googleads-mobile-ios-mediation-pangle.git",
-			"version": "8.3.00600",
+			"version": "8.3.00800",
 			"products": ["PangleAdapterTarget"]
 		}
 	]
