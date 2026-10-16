@@ -78,6 +78,38 @@ Para lograr esto:
     }
     ```
 
+## Leer opciones de consentimiento
+
+Una vez recopilado el consentimiento del usuario, el SDK de UMP escribe las cadenas de IAB TCF v2 directamente en las preferencias predeterminadas de la aplicación en la plataforma (`SharedPreferences` en Android, `NSUserDefaults` en iOS). Puede leer estas claves usando [`ApplicationPreferences`](../../reference/classes/ApplicationPreferences.es.md):
+
+=== "GDScript"
+
+    ```gdscript
+    # Lee Purpose Consents (cadena binaria que representa el consentimiento para cada uno de los 10 propósitos de IAB TCF)
+    var purpose_consents := ApplicationPreferences.get_string("IABTCF_PurposeConsents", "")
+
+    # Verifica el consentimiento para el Propósito 1 (Cookies / Acceso al dispositivo)
+    var has_purpose1_consent := purpose_consents.length() > 0 and purpose_consents[0] == "1"
+
+    # Verifica el indicador de cookies de Google (1 = consentimiento, 0 = sin consentimiento)
+    var cookie_consent := ApplicationPreferences.get_int("gad_has_consent_for_cookies", 1)
+    ```
+
+=== "C#"
+
+    ```csharp
+    using PoingStudios.AdMob.Api;
+
+    // Lee Purpose Consents (cadena binaria que representa el consentimiento para cada uno de los 10 propósitos de IAB TCF)
+    string purposeConsents = ApplicationPreferences.GetString("IABTCF_PurposeConsents", "");
+
+    // Verifica el consentimiento para el Propósito 1 (Cookies / Acceso al dispositivo)
+    bool hasPurpose1Consent = !string.IsNullOrEmpty(purposeConsents) && purposeConsents[0] == '1';
+
+    // Verifica el indicador de cookies de Google (1 = consentimiento, 0 = sin consentimiento)
+    int cookieConsent = ApplicationPreferences.GetInt("gad_has_consent_for_cookies", 1);
+    ```
+
 ## Mediación
 Siga los pasos en[Agregar socios publicitarios a los mensajes GDPR publicados](https://support.google.com/admob/answer/10113004#adding_ad_partners_to_published_gdpr_messages)para agregar sus socios de mediación a la lista de socios publicitarios. No hacerlo puede provocar que los socios no publiquen anuncios en su aplicación.
 

@@ -78,6 +78,38 @@ To accomplish this:
     }
     ```
 
+## Reading consent choices
+
+After user consent has been gathered, the UMP SDK writes the IAB TCF v2 strings directly to the platform's default application preferences (`SharedPreferences` on Android, `NSUserDefaults` on iOS). You can read these keys using [`ApplicationPreferences`](../../reference/classes/ApplicationPreferences.md):
+
+=== "GDScript"
+
+    ```gdscript
+    # Read Purpose Consents (binary string representing consent for each of the 10 IAB TCF purposes)
+    var purpose_consents := ApplicationPreferences.get_string("IABTCF_PurposeConsents", "")
+
+    # Check consent for Purpose 1 (Cookies / Device Access)
+    var has_purpose1_consent := purpose_consents.length() > 0 and purpose_consents[0] == "1"
+
+    # Check Google cookie consent flag (1 = consent, 0 = no consent)
+    var cookie_consent := ApplicationPreferences.get_int("gad_has_consent_for_cookies", 1)
+    ```
+
+=== "C#"
+
+    ```csharp
+    using PoingStudios.AdMob.Api;
+
+    // Read Purpose Consents (binary string representing consent for each of the 10 IAB TCF purposes)
+    string purposeConsents = ApplicationPreferences.GetString("IABTCF_PurposeConsents", "");
+
+    // Check consent for Purpose 1 (Cookies / Device Access)
+    bool hasPurpose1Consent = !string.IsNullOrEmpty(purposeConsents) && purposeConsents[0] == '1';
+
+    // Check Google cookie consent flag (1 = consent, 0 = no consent)
+    int cookieConsent = ApplicationPreferences.GetInt("gad_has_consent_for_cookies", 1);
+    ```
+
 ## Mediation
 Follow the steps in [Add ad partners to published GDPR messages](https://support.google.com/admob/answer/10113004#adding_ad_partners_to_published_gdpr_messages) to add your mediation partners to the ad partners list. Failure to do so can lead to partners failing to serve ads on your app.
 

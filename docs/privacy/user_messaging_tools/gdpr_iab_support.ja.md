@@ -78,6 +78,38 @@
     }
     ```
 
+## 同意選択の読み取り
+
+ユーザーの同意が収集された後、UMP SDK は IAB TCF v2 文字列をプラットフォームのデフォルトのアプリケーション設定（Android の `SharedPreferences`、iOS の `NSUserDefaults`）に直接書き込みます。[`ApplicationPreferences`](../../reference/classes/ApplicationPreferences.ja.md) を使用してこれらのキーを読み取ることができます:
+
+=== "GDScript"
+
+    ```gdscript
+    # Purpose Consents を読み取る（10 個の IAB TCF の各目的に対する同意を表すバイナリ文字列）
+    var purpose_consents := ApplicationPreferences.get_string("IABTCF_PurposeConsents", "")
+
+    # 目的 1 の同意を確認（Cookie / デバイスアクセス）
+    var has_purpose1_consent := purpose_consents.length() > 0 and purpose_consents[0] == "1"
+
+    # Google Cookie 同意フラグを確認（1 = 同意、0 = 同意なし）
+    var cookie_consent := ApplicationPreferences.get_int("gad_has_consent_for_cookies", 1)
+    ```
+
+=== "C#"
+
+    ```csharp
+    using PoingStudios.AdMob.Api;
+
+    // Purpose Consents を読み取る（10 個の IAB TCF の各目的に対する同意を表すバイナリ文字列）
+    string purposeConsents = ApplicationPreferences.GetString("IABTCF_PurposeConsents", "");
+
+    // 目的 1 の同意を確認（Cookie / デバイスアクセス）
+    bool hasPurpose1Consent = !string.IsNullOrEmpty(purposeConsents) && purposeConsents[0] == '1';
+
+    // Google Cookie 同意フラグを確認（1 = 同意、0 = 同意なし）
+    int cookieConsent = ApplicationPreferences.GetInt("gad_has_consent_for_cookies", 1);
+    ```
+
 ## メディエーション
 [公開済みの GDPR メッセージへの広告パートナーの追加](https://support.google.com/admob/answer/10113004#adding_ad_partners_to_published_gdpr_messages)の手順に従って、メディエーションパートナーを広告パートナーリストに追加します。これを怠ると、パートナーがアプリ内で広告を配信できなくなる可能性があります。
 

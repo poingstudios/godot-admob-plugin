@@ -7,6 +7,7 @@
 | クラス | 説明 |
 | :--- | :--- |
 | [MobileAds](classes/MobileAds.ja.md) | グローバル設定と SDK 初期化のエントリポイント。 |
+| [ApplicationPreferences](classes/ApplicationPreferences.ja.md) | アプリケーションスコープの設定（SharedPreferences / NSUserDefaults）の読み書き。 |
 | [RequestConfiguration](classes/RequestConfiguration.ja.md) | すべての広告リクエストにグローバルに適用される設定。 |
 | [AdRequest](classes/AdRequest.ja.md) | 広告のロードに使用されるリクエストパラメータ。 |
 | [AdSize](classes/AdSize.ja.md) | バナー広告の幅と高さの定義。 |

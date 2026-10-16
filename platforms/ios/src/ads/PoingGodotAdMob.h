@@ -48,6 +48,12 @@ public:
     void set_publisher_first_party_id_enabled(bool enabled);
     void set_gad_has_consent_for_cookies(bool enabled);
     bool get_gad_has_consent_for_cookies();
+    void set_app_preference_int(String key, int value);
+    int get_app_preference_int(String key, int default_value);
+    void set_app_preference_string(String key, String value);
+    String get_app_preference_string(String key, String default_value);
+    void set_app_preference_boolean(String key, bool value);
+    bool get_app_preference_boolean(String key, bool default_value);
     void disable_sdk_crash_reporting();
     String get_platform_version();
     void open_ad_inspector();

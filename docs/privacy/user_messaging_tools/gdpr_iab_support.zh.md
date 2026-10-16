@@ -78,6 +78,38 @@
     }
     ```
 
+## 读取同意选择
+
+在收集用户同意后，UMP SDK 会将 IAB TCF v2 字符串直接写入平台的默认应用程序首选项（Android 上的 `SharedPreferences`，iOS 上的 `NSUserDefaults`）。您可以使用 [`ApplicationPreferences`](../../reference/classes/ApplicationPreferences.zh.md) 读取这些键：
+
+=== "GDScript"
+
+    ```gdscript
+    # 读取 Purpose Consents（代表 10 个 IAB TCF 目的中每一个目的的同意情况的二进制字符串）
+    var purpose_consents := ApplicationPreferences.get_string("IABTCF_PurposeConsents", "")
+
+    # 检查目的 1 的同意情况（Cookie / 设备访问权限）
+    var has_purpose1_consent := purpose_consents.length() > 0 and purpose_consents[0] == "1"
+
+    # 检查 Google Cookie 同意标志（1 = 同意，0 = 未同意）
+    var cookie_consent := ApplicationPreferences.get_int("gad_has_consent_for_cookies", 1)
+    ```
+
+=== "C#"
+
+    ```csharp
+    using PoingStudios.AdMob.Api;
+
+    // 读取 Purpose Consents（代表 10 个 IAB TCF 目的中每一个目的的同意情况的二进制字符串）
+    string purposeConsents = ApplicationPreferences.GetString("IABTCF_PurposeConsents", "");
+
+    // 检查目的 1 的同意情况（Cookie / 设备访问权限）
+    bool hasPurpose1Consent = !string.IsNullOrEmpty(purposeConsents) && purposeConsents[0] == '1';
+
+    // 检查 Google Cookie 同意标志（1 = 同意，0 = 未同意）
+    int cookieConsent = ApplicationPreferences.GetInt("gad_has_consent_for_cookies", 1);
+    ```
+
 ## 中介
 按照[在已发布的 GDPR 消息中添加广告合作伙伴](https://support.google.com/admob/answer/10113004#adding_ad_partners_to_published_gdpr_messages)中的步骤，将您的中介合作伙伴添加到广告合作伙伴列表中。否则可能会导致合作伙伴无法在您的应用上投放广告。
 

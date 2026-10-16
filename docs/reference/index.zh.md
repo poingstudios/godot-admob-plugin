@@ -7,6 +7,7 @@
 | 类 | 描述 |
 | :--- | :--- |
 | [MobileAds](classes/MobileAds.zh.md) | 全局配置和 SDK 初始化入口点。 |
+| [ApplicationPreferences](classes/ApplicationPreferences.zh.md) | 读取和写入应用程序范围的首选项（SharedPreferences / NSUserDefaults）。 |
 | [RequestConfiguration](classes/RequestConfiguration.zh.md) | 全局应用于所有广告请求的配置设置。 |
 | [AdRequest](classes/AdRequest.zh.md) | 用于加载广告的请求参数。 |
 | [AdSize](classes/AdSize.zh.md) | 横幅广告的宽度和高度定义。 |

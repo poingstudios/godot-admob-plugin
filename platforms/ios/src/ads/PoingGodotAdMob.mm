@@ -107,6 +107,49 @@ bool PoingGodotAdMob::get_gad_has_consent_for_cookies() {
     return [val integerValue] == 1;
 }
 
+void PoingGodotAdMob::set_app_preference_int(String key, int value) {
+    NSString *nsKey = [NSString stringWithUTF8String:key.utf8().get_data()];
+    [[NSUserDefaults standardUserDefaults] setInteger:value forKey:nsKey];
+}
+
+int PoingGodotAdMob::get_app_preference_int(String key, int default_value) {
+    NSString *nsKey = [NSString stringWithUTF8String:key.utf8().get_data()];
+    id val = [[NSUserDefaults standardUserDefaults] objectForKey:nsKey];
+    if (val == nil) {
+        return default_value;
+    }
+    return (int)[val integerValue];
+}
+
+void PoingGodotAdMob::set_app_preference_string(String key, String value) {
+    NSString *nsKey = [NSString stringWithUTF8String:key.utf8().get_data()];
+    NSString *nsValue = [NSString stringWithUTF8String:value.utf8().get_data()];
+    [[NSUserDefaults standardUserDefaults] setObject:nsValue forKey:nsKey];
+}
+
+String PoingGodotAdMob::get_app_preference_string(String key, String default_value) {
+    NSString *nsKey = [NSString stringWithUTF8String:key.utf8().get_data()];
+    id val = [[NSUserDefaults standardUserDefaults] objectForKey:nsKey];
+    if (val == nil || ![val isKindOfClass:[NSString class]]) {
+        return default_value;
+    }
+    return String([(NSString *)val UTF8String]);
+}
+
+void PoingGodotAdMob::set_app_preference_boolean(String key, bool value) {
+    NSString *nsKey = [NSString stringWithUTF8String:key.utf8().get_data()];
+    [[NSUserDefaults standardUserDefaults] setBool:value forKey:nsKey];
+}
+
+bool PoingGodotAdMob::get_app_preference_boolean(String key, bool default_value) {
+    NSString *nsKey = [NSString stringWithUTF8String:key.utf8().get_data()];
+    id val = [[NSUserDefaults standardUserDefaults] objectForKey:nsKey];
+    if (val == nil) {
+        return default_value;
+    }
+    return [val boolValue];
+}
+
 void PoingGodotAdMob::disable_sdk_crash_reporting() {
     [[GADMobileAds sharedInstance] disableSDKCrashReporting];
 }
@@ -143,6 +186,12 @@ void PoingGodotAdMob::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_publisher_first_party_id_enabled"), &PoingGodotAdMob::set_publisher_first_party_id_enabled);
     ClassDB::bind_method(D_METHOD("set_gad_has_consent_for_cookies"), &PoingGodotAdMob::set_gad_has_consent_for_cookies);
     ClassDB::bind_method(D_METHOD("get_gad_has_consent_for_cookies"), &PoingGodotAdMob::get_gad_has_consent_for_cookies);
+    ClassDB::bind_method(D_METHOD("set_app_preference_int", "key", "value"), &PoingGodotAdMob::set_app_preference_int);
+    ClassDB::bind_method(D_METHOD("get_app_preference_int", "key", "default_value"), &PoingGodotAdMob::get_app_preference_int);
+    ClassDB::bind_method(D_METHOD("set_app_preference_string", "key", "value"), &PoingGodotAdMob::set_app_preference_string);
+    ClassDB::bind_method(D_METHOD("get_app_preference_string", "key", "default_value"), &PoingGodotAdMob::get_app_preference_string);
+    ClassDB::bind_method(D_METHOD("set_app_preference_boolean", "key", "value"), &PoingGodotAdMob::set_app_preference_boolean);
+    ClassDB::bind_method(D_METHOD("get_app_preference_boolean", "key", "default_value"), &PoingGodotAdMob::get_app_preference_boolean);
     ClassDB::bind_method(D_METHOD("disable_sdk_crash_reporting"), &PoingGodotAdMob::disable_sdk_crash_reporting);
     ClassDB::bind_method(D_METHOD("get_platform_version"), &PoingGodotAdMob::get_platform_version);
     ClassDB::bind_method(D_METHOD("open_ad_inspector"), &PoingGodotAdMob::open_ad_inspector);

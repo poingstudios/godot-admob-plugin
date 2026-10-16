@@ -480,6 +480,7 @@ nav:
         - AdapterStatus: reference/classes/AdapterStatus.md
         - AppOpenAd: reference/classes/AppOpenAd.md
         - AppOpenAdLoader: reference/classes/AppOpenAdLoader.md
+        - ApplicationPreferences: reference/classes/ApplicationPreferences.md
         - ConsentDebugSettings: reference/classes/ConsentDebugSettings.md
         - ConsentForm: reference/classes/ConsentForm.md
         - ConsentInformation: reference/classes/ConsentInformation.md

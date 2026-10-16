@@ -78,6 +78,38 @@ Para realizar isso:
     }
     ```
 
+## Ler escolhas de consentimento
+
+Depois que o consentimento do usuário for coletado, o SDK do UMP grava as strings do IAB TCF v2 diretamente nas preferências padrão do aplicativo na plataforma (`SharedPreferences` no Android, `NSUserDefaults` no iOS). Você pode ler essas chaves usando [`ApplicationPreferences`](../../reference/classes/ApplicationPreferences.pt-BR.md):
+
+=== "GDScript"
+
+    ```gdscript
+    # Lê Purpose Consents (string binária representando o consentimento para cada um dos 10 propósitos do IAB TCF)
+    var purpose_consents := ApplicationPreferences.get_string("IABTCF_PurposeConsents", "")
+
+    # Verifica o consentimento para o Propósito 1 (Cookies / Acesso ao dispositivo)
+    var has_purpose1_consent := purpose_consents.length() > 0 and purpose_consents[0] == "1"
+
+    # Verifica o sinalizador de cookies do Google (1 = consentimento, 0 = sem consentimento)
+    var cookie_consent := ApplicationPreferences.get_int("gad_has_consent_for_cookies", 1)
+    ```
+
+=== "C#"
+
+    ```csharp
+    using PoingStudios.AdMob.Api;
+
+    // Lê Purpose Consents (string binária representando o consentimento para cada um dos 10 propósitos do IAB TCF)
+    string purposeConsents = ApplicationPreferences.GetString("IABTCF_PurposeConsents", "");
+
+    // Verifica o consentimento para o Propósito 1 (Cookies / Acesso ao dispositivo)
+    bool hasPurpose1Consent = !string.IsNullOrEmpty(purposeConsents) && purposeConsents[0] == '1';
+
+    // Verifica o sinalizador de cookies do Google (1 = consentimento, 0 = sem consentimento)
+    int cookieConsent = ApplicationPreferences.GetInt("gad_has_consent_for_cookies", 1);
+    ```
+
 ## Mediação
 Siga as etapas em [Adicionar parceiros de anúncios a mensagens do GDPR publicadas](https://support.google.com/admob/answer/10113004#adding_ad_partners_to_published_gdpr_messages) para adicionar seus parceiros de mediação à lista de parceiros de anúncios. Caso contrário, os parceiros poderão não conseguir veicular anúncios no seu aplicativo.
 
