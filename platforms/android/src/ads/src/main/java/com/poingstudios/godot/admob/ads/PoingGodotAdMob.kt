@@ -118,6 +118,54 @@ class PoingGodotAdMob(godot: Godot?) : org.godotengine.godot.plugin.GodotPlugin(
         return sharedPrefs.getInt("gad_has_consent_for_cookies", 1) == 1
     }
 
+    @Suppress("DEPRECATION")
+    @UsedByGodot
+    fun set_app_preference_int(key: String, value: Int) {
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(aActivity)
+        sharedPrefs.edit {
+            putInt(key, value)
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    @UsedByGodot
+    fun get_app_preference_int(key: String, defaultValue: Int): Int {
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(aActivity)
+        return sharedPrefs.getInt(key, defaultValue)
+    }
+
+    @Suppress("DEPRECATION")
+    @UsedByGodot
+    fun set_app_preference_string(key: String, value: String) {
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(aActivity)
+        sharedPrefs.edit {
+            putString(key, value)
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    @UsedByGodot
+    fun get_app_preference_string(key: String, defaultValue: String): String {
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(aActivity)
+        return sharedPrefs.getString(key, defaultValue) ?: defaultValue
+    }
+
+    @Suppress("DEPRECATION")
+    @UsedByGodot
+    fun set_app_preference_boolean(key: String, value: Boolean) {
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(aActivity)
+        sharedPrefs.edit {
+            putBoolean(key, value)
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    @UsedByGodot
+    fun get_app_preference_boolean(key: String, defaultValue: Boolean): Boolean {
+        val sharedPrefs = PreferenceManager.getDefaultSharedPreferences(aActivity)
+        return sharedPrefs.getBoolean(key, defaultValue)
+    }
+
     @UsedByGodot
     fun set_publisher_first_party_id_enabled(enabled: Boolean) {
         MobileAds.putPublisherFirstPartyIdEnabled(enabled)

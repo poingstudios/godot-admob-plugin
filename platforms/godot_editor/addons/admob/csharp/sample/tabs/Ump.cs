@@ -21,6 +21,7 @@
 // SOFTWARE.
 
 using Godot;
+using PoingStudios.AdMob.Api;
 using PoingStudios.AdMob.Ump.Api;
 using PoingStudios.AdMob.Ump.Core;
 using PoingStudios.AdMob.Sample;
@@ -33,6 +34,8 @@ public partial class Ump : BaseTab
 		GetNode<Button>("GetConsentStatus").Pressed += OnGetConsentStatusPressed;
 		GetNode<Button>("ResetConsentInformation").Pressed += OnResetConsentPressed;
 		GetNode<Button>("ShowPrivacyOptionsForm").Pressed += OnShowPrivacyOptionsFormPressed;
+		GetNode<Button>("ReadConsentPreferences").Pressed += OnReadConsentPreferencesPressed;
+		GetNode<Button>("TestApplicationPreferences").Pressed += OnTestApplicationPreferencesPressed;
 	}
 
 	private void OnGetConsentStatusPressed()
@@ -84,6 +87,34 @@ public partial class Ump : BaseTab
 			},
 			onFailure: err => Log($"Consent update error: {err.Message}")
 		);
+	}
+
+	private void OnReadConsentPreferencesPressed()
+	{
+		Log("--- Consent Preferences ---");
+		string purposeConsents = ApplicationPreferences.GetString("IABTCF_PurposeConsents", "None");
+		string gppString = ApplicationPreferences.GetString("IABGPP_HDR_GppString", "None");
+		string gppSid = ApplicationPreferences.GetString("IABGPP_GppSID", "None");
+		bool cookiesConsent = ApplicationPreferences.GetBoolean("gad_has_consent_for_cookies", false);
+
+		Log($"IABTCF_PurposeConsents: {purposeConsents}");
+		Log($"IABGPP_HDR_GppString: {gppString}");
+		Log($"IABGPP_GppSID: {gppSid}");
+		Log($"gad_has_consent_for_cookies: {cookiesConsent}");
+	}
+
+	private void OnTestApplicationPreferencesPressed()
+	{
+		Log("Testing ApplicationPreferences write/read...");
+		ApplicationPreferences.SetString("test_string_key", "GodotAdMob");
+		ApplicationPreferences.SetInt("test_int_key", 2026);
+		ApplicationPreferences.SetBoolean("test_bool_key", true);
+
+		string readStr = ApplicationPreferences.GetString("test_string_key", "");
+		int readInt = ApplicationPreferences.GetInt("test_int_key", 0);
+		bool readBool = ApplicationPreferences.GetBoolean("test_bool_key", false);
+
+		Log($"Test Results -> String: {readStr} | Int: {readInt} | Bool: {readBool}");
 	}
 
 	private void Log(string message)

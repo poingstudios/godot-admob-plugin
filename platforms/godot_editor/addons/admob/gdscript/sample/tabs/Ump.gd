@@ -120,6 +120,37 @@ func _on_privacy_options_form_dismissed(error: FormError) -> void:
 		_log("Privacy options form dismissed successfully")
 
 
+func _on_read_consent_preferences_pressed() -> void:
+	_log("--- Consent Preferences ---")
+	var purpose_consents := ApplicationPreferences.get_string("IABTCF_PurposeConsents", "None")
+	var gpp_string := ApplicationPreferences.get_string("IABGPP_HDR_GppString", "None")
+	var gpp_sid := ApplicationPreferences.get_string("IABGPP_GppSID", "None")
+	var cookies_consent := ApplicationPreferences.get_boolean(
+		"gad_has_consent_for_cookies", false
+	)
+
+	_log("IABTCF_PurposeConsents: " + purpose_consents)
+	_log("IABGPP_HDR_GppString: " + gpp_string)
+	_log("IABGPP_GppSID: " + gpp_sid)
+	_log("gad_has_consent_for_cookies: " + str(cookies_consent))
+
+
+func _on_test_application_preferences_pressed() -> void:
+	_log("Testing ApplicationPreferences write/read...")
+	ApplicationPreferences.set_string("test_string_key", "GodotAdMob")
+	ApplicationPreferences.set_int("test_int_key", 2026)
+	ApplicationPreferences.set_boolean("test_bool_key", true)
+
+	var read_str := ApplicationPreferences.get_string("test_string_key", "")
+	var read_int := ApplicationPreferences.get_int("test_int_key", 0)
+	var read_bool := ApplicationPreferences.get_boolean("test_bool_key", false)
+
+	_log(
+		"Test Results -> String: %s | Int: %d | Bool: %s"
+		% [read_str, read_int, str(read_bool)]
+	)
+
+
 func _log(message: String) -> void:
 	if Registry.logger:
 		Registry.logger.log_message("[UMP] " + message)

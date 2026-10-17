@@ -25,3 +25,13 @@ text = "GAD_ResetConsentInformation"
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 text = "GAD_ShowPrivacyOptionsForm"
+
+[node name="ReadConsentPreferences" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "GAD_ReadConsentPreferences"
+
+[node name="TestApplicationPreferences" type="Button" parent="."]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+text = "GAD_TestApplicationPreferences"

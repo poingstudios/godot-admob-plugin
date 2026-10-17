@@ -21,8 +21,9 @@ For every new feature in `admob.gd`:
 - [ ] Verify that all optional parameters have the same default values in both languages.
 
 ### 3. Sample Sync
-- [ ] If a feature is added to `gdscript/sample/Main.gd`, it MUST be added to `csharp/sample/MainCSharpExample.cs`.
-- [ ] Verify that the C# sample actually instantiates the classes (to trigger Static Initializers/Warnings).
+- [ ] Every new API feature, class, method, or modification MUST be added to the sample projects (`platforms/godot_editor/addons/admob/{gdscript,csharp}/sample/`) for interactive testing and verification.
+- [ ] Maintain 1:1 functional, visual, and layout parity between GDScript and C# sample tabs and scenes.
+- [ ] Verify that the C# sample actually instantiates or calls the classes (to trigger Static Initializers/Warnings).
 
 ## 🛠️ Verification Command
 - Run `grep -r "_get_plugin" .` and `grep -r "GetPlugin" .` to compare list of initialized modules.
