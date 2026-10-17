@@ -36,6 +36,22 @@
 
 ## メソッド
 
+### `can_show_ad` / `CanShowAd`
+
+広告が読み込まれ、有効で表示可能な状態であれば `true` を返し、すでに表示済み、閉じられた、または破棄された場合は `false` を返します。
+
+=== "GDScript"
+    ```gdscript
+    func can_show_ad() -> bool
+    ```
+
+=== "C#"
+    ```csharp
+    public bool CanShowAd()
+    ```
+
+---
+
 ### `show` / `Show`
 
 全画面のリワード広告オーバーレイを表示します。

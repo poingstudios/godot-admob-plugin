@@ -100,10 +100,18 @@ public partial class RewardedInterstitial : BaseTab
 
 	private void OnShowPressed()
 	{
-		_rewardedInterstitialAd?.Show(new OnUserEarnedRewardListener
+		if (_rewardedInterstitialAd != null && _rewardedInterstitialAd.CanShowAd())
 		{
-			OnUserEarnedReward = reward => Log($"Reward earned: {reward.Amount} {reward.Type}"),
-		});
+			Log("Showing rewarded interstitial ad...");
+			_rewardedInterstitialAd.Show(new OnUserEarnedRewardListener
+			{
+				OnUserEarnedReward = reward => Log($"Reward earned: {reward.Amount} {reward.Type}"),
+			});
+		}
+		else
+		{
+			Log("Cannot show ad (CanShowAd returned false)");
+		}
 	}
 
 	private void OnDestroyPressed() => DestroyAd();

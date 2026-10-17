@@ -36,6 +36,22 @@ Triggered when an ad impression is recorded and revenue has been generated. Rece
 
 ## Methods
 
+### `can_show_ad` / `CanShowAd`
+
+Returns `true` if the ad is loaded, valid, and ready to be presented; `false` if it was already shown, dismissed, or destroyed.
+
+=== "GDScript"
+    ```gdscript
+    func can_show_ad() -> bool
+    ```
+
+=== "C#"
+    ```csharp
+    public bool CanShowAd()
+    ```
+
+---
+
 ### `show` / `Show`
 
 Presents the full-screen interstitial ad overlay.

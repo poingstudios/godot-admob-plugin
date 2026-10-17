@@ -68,9 +68,11 @@ func _on_load_pressed() -> void:
 
 
 func _on_show_pressed() -> void:
-	if _interstitial_ad:
+	if _interstitial_ad and _interstitial_ad.can_show_ad():
 		_log("Showing interstitial ad...")
 		_interstitial_ad.show()
+	else:
+		_log("Cannot show ad (can_show_ad returned false)")
 
 
 func _on_destroy_pressed() -> void:

@@ -27,6 +27,7 @@ static var _plugin = _get_plugin("PoingGodotAdMobAppOpenAd")
 var full_screen_content_callback := FullScreenContentCallback.new()
 
 var _uid: int
+var _can_show_ad := true
 var on_ad_paid: Callable = func(_ad_value: AdValue): pass
 
 var placement_id: int:
@@ -44,12 +45,18 @@ func _init(uid: int):
 	register_callbacks()
 
 
+func can_show_ad() -> bool:
+	return _can_show_ad and _plugin != null
+
+
 func show() -> void:
-	if _plugin:
+	if can_show_ad():
+		_can_show_ad = false
 		_plugin.show(_uid)
 
 
 func destroy() -> void:
+	_can_show_ad = false
 	if _plugin:
 		_plugin.destroy(_uid)
 
@@ -96,6 +103,7 @@ func _on_app_open_ad_clicked(uid: int) -> void:
 
 func _on_app_open_ad_dismissed_full_screen_content(uid: int) -> void:
 	if uid == _uid:
+		_can_show_ad = false
 		full_screen_content_callback.on_ad_dismissed_full_screen_content.call_deferred()
 
 
@@ -103,6 +111,7 @@ func _on_app_open_ad_failed_to_show_full_screen_content(
 	uid: int, ad_error_dictionary: Dictionary
 ) -> void:
 	if uid == _uid:
+		_can_show_ad = false
 		full_screen_content_callback.on_ad_failed_to_show_full_screen_content.call_deferred(
 			AdError.create(ad_error_dictionary)
 		)

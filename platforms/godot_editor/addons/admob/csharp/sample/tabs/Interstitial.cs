@@ -92,7 +92,18 @@ public partial class Interstitial : BaseTab
 		});
 	}
 
-	private void OnShowPressed() => _interstitialAd?.Show();
+	private void OnShowPressed()
+	{
+		if (_interstitialAd != null && _interstitialAd.CanShowAd())
+		{
+			Log("Showing interstitial ad...");
+			_interstitialAd.Show();
+		}
+		else
+		{
+			Log("Cannot show ad (CanShowAd returned false)");
+		}
+	}
 
 	private void OnDestroyPressed() => DestroyAd();
 

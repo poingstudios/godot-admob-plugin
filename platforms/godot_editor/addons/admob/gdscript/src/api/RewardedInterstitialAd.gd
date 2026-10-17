@@ -28,6 +28,7 @@ var full_screen_content_callback := FullScreenContentCallback.new()
 var on_ad_paid: Callable = func(_ad_value: AdValue): pass
 
 var _uid: int
+var _can_show_ad := true
 
 
 func _init(uid: int):
@@ -38,8 +39,13 @@ func _init(uid: int):
 var _on_user_earned_reward_listener: OnUserEarnedRewardListener
 
 
+func can_show_ad() -> bool:
+	return _can_show_ad and _plugin != null
+
+
 func show(on_user_earned_reward_listener := OnUserEarnedRewardListener.new()) -> void:
-	if _plugin:
+	if can_show_ad():
+		_can_show_ad = false
 		self._on_user_earned_reward_listener = on_user_earned_reward_listener
 		_plugin.show(_uid)
 		safe_connect(
@@ -50,6 +56,7 @@ func show(on_user_earned_reward_listener := OnUserEarnedRewardListener.new()) ->
 
 
 func destroy() -> void:
+	_can_show_ad = false
 	if _plugin:
 		_plugin.destroy(_uid)
 
@@ -114,6 +121,7 @@ func _on_rewarded_interstitial_ad_clicked(uid: int) -> void:
 
 func _on_rewarded_interstitial_ad_dismissed_full_screen_content(uid: int) -> void:
 	if uid == _uid:
+		_can_show_ad = false
 		full_screen_content_callback.on_ad_dismissed_full_screen_content.call_deferred()
 
 
@@ -121,6 +129,7 @@ func _on_rewarded_interstitial_ad_failed_to_show_full_screen_content(
 	uid: int, ad_error_dictionary: Dictionary
 ) -> void:
 	if uid == _uid:
+		_can_show_ad = false
 		full_screen_content_callback.on_ad_failed_to_show_full_screen_content.call_deferred(
 			AdError.create(ad_error_dictionary)
 		)
