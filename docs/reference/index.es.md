@@ -7,6 +7,7 @@ Esta página enumera las clases, enumeraciones y devoluciones de llamada proporc
 | Clase | Descripción |
 | :--- | :--- |
 | [MobileAds](classes/MobileAds.es.md) | Configuraciones globales y punto de entrada de inicialización del SDK. |
+| [ApplicationPreferences](classes/ApplicationPreferences.es.md) | Lee y escribe preferencias en el ámbito de la aplicación (SharedPreferences / NSUserDefaults). |
 | [RequestConfiguration](classes/RequestConfiguration.es.md) | Configuraciones aplicadas globalmente a todas las solicitudes de anuncios. |
 | [AdRequest](classes/AdRequest.es.md) | Parámetros de solicitud utilizados para cargar anuncios. |
 | [AdSize](classes/AdSize.es.md) | Definiciones de ancho y alto para anuncios de banner. |

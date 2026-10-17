@@ -7,6 +7,7 @@ Esta página lista as classes, enums e callbacks fornecidos pelo Godot AdMob Plu
 | Classe | Descrição |
 | :--- | :--- |
 | [MobileAds](classes/MobileAds.pt-BR.md) | Configurações globais e ponto de entrada de inicialização do SDK. |
+| [ApplicationPreferences](classes/ApplicationPreferences.pt-BR.md) | Lê e grava preferências no escopo do aplicativo (SharedPreferences / NSUserDefaults). |
 | [RequestConfiguration](classes/RequestConfiguration.pt-BR.md) | Configurações aplicadas globalmente a todas as solicitações de anúncios. |
 | [AdRequest](classes/AdRequest.pt-BR.md) | Parâmetros de solicitação usados para carregar anúncios. |
 | [AdSize](classes/AdSize.pt-BR.md) | Definições de largura e altura para anúncios de banner. |

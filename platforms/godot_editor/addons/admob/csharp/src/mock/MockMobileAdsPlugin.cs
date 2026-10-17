@@ -39,6 +39,7 @@ namespace PoingStudios.AdMob.Core
 		private bool _publisherFirstPartyIdEnabled = true;
 		private Dictionary _requestConfiguration = new Dictionary();
 		private bool _gadHasConsentForCookies = true;
+		private readonly Dictionary _appPreferences = new Dictionary();
 
 		public void initialize()
 		{
@@ -101,11 +102,58 @@ namespace PoingStudios.AdMob.Core
 		public void set_gad_has_consent_for_cookies(bool enabled)
 		{
 			_gadHasConsentForCookies = enabled;
+			_appPreferences["gad_has_consent_for_cookies"] = enabled ? 1 : 0;
 		}
 
 		public bool get_gad_has_consent_for_cookies()
 		{
+			if (_appPreferences.ContainsKey("gad_has_consent_for_cookies"))
+			{
+				return (int)_appPreferences["gad_has_consent_for_cookies"] == 1;
+			}
 			return _gadHasConsentForCookies;
+		}
+
+		public void set_app_preference_int(string key, int value)
+		{
+			_appPreferences[key] = value;
+		}
+
+		public int get_app_preference_int(string key, int defaultValue)
+		{
+			if (_appPreferences.ContainsKey(key))
+			{
+				return (int)_appPreferences[key];
+			}
+			return defaultValue;
+		}
+
+		public void set_app_preference_string(string key, string value)
+		{
+			_appPreferences[key] = value;
+		}
+
+		public string get_app_preference_string(string key, string defaultValue)
+		{
+			if (_appPreferences.ContainsKey(key))
+			{
+				return (string)_appPreferences[key];
+			}
+			return defaultValue;
+		}
+
+		public void set_app_preference_boolean(string key, bool value)
+		{
+			_appPreferences[key] = value;
+		}
+
+		public bool get_app_preference_boolean(string key, bool defaultValue)
+		{
+			if (_appPreferences.ContainsKey(key))
+			{
+				return (bool)_appPreferences[key];
+			}
+			return defaultValue;
 		}
 
 		public void disable_sdk_crash_reporting()

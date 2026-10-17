@@ -31,6 +31,7 @@ var _muted := false
 var _publisher_first_party_id_enabled := true
 var _request_configuration := {}
 var _gad_has_consent_for_cookies := true
+var _app_preferences := {}
 
 func initialize() -> void:
 	if _is_initialized:
@@ -73,9 +74,36 @@ func set_publisher_first_party_id_enabled(enabled: bool) -> void:
 
 func set_gad_has_consent_for_cookies(enabled: bool) -> void:
 	_gad_has_consent_for_cookies = enabled
+	_app_preferences["gad_has_consent_for_cookies"] = 1 if enabled else 0
 
 func get_gad_has_consent_for_cookies() -> bool:
+	if _app_preferences.has("gad_has_consent_for_cookies"):
+		return _app_preferences["gad_has_consent_for_cookies"] == 1
 	return _gad_has_consent_for_cookies
+
+func set_app_preference_int(key: String, value: int) -> void:
+	_app_preferences[key] = value
+
+func get_app_preference_int(key: String, default_value: int) -> int:
+	if _app_preferences.has(key):
+		return int(_app_preferences[key])
+	return default_value
+
+func set_app_preference_string(key: String, value: String) -> void:
+	_app_preferences[key] = value
+
+func get_app_preference_string(key: String, default_value: String) -> String:
+	if _app_preferences.has(key):
+		return str(_app_preferences[key])
+	return default_value
+
+func set_app_preference_boolean(key: String, value: bool) -> void:
+	_app_preferences[key] = value
+
+func get_app_preference_boolean(key: String, default_value: bool) -> bool:
+	if _app_preferences.has(key):
+		return bool(_app_preferences[key])
+	return default_value
 
 func disable_sdk_crash_reporting() -> void:
 	pass
