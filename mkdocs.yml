@@ -133,9 +133,11 @@ plugins:
             Data disclosure: Divulgação de dados
             Google Play data disclosure: Divulgação de dados do Google Play
             Apple App Store data disclosure: Divulgação de dados da Apple App Store
-            User messaging tools: Ferramentas de mensagens de usuários
-            Get Started: Começar
-            GDPR IAB support: Suporte ao GDPR IAB
+            User Messaging Platform (UMP): User Messaging Platform (UMP)
+            Set up UMP SDK: Configurar o SDK do UMP
+            IAB support: Suporte ao IAB
+            Disclose to EEA users: Fazer divulgações para usuários do EEE
+            Disclose to US users: Fazer divulgações para usuários dos EUA
             IDFA support: Suporte ao IDFA
             Manage Ad Inspector: Gerenciar inspecionador de anúncios
             Launch ad inspector: Iniciar o inspecionador de anúncios
@@ -210,9 +212,11 @@ plugins:
             Data disclosure: Divulgación de datos
             Google Play data disclosure: Divulgación de datos de Google Play
             Apple App Store data disclosure: Divulgación de datos de la Apple App Store
-            User messaging tools: Herramientas de mensajería de usuarios
-            Get Started: Empezar
-            GDPR IAB support: Soporte GDPR IAB
+            User Messaging Platform (UMP): User Messaging Platform (UMP)
+            Set up UMP SDK: Configurar el SDK de UMP
+            IAB support: Compatibilidad con IAB
+            Disclose to EEA users: Divulgar a los usuarios del EEE
+            Disclose to US users: Divulgar a los usuarios de EE. UU.
             IDFA support: Soporte IDFA
             Advanced topics: Temas avanzados
             Manage Ad Inspector: Administrar el inspector de anuncios
@@ -288,9 +292,11 @@ plugins:
             Data disclosure: 数据披露
             Google Play data disclosure: Google Play 数据披露
             Apple App Store data disclosure: Apple App Store 数据披露
-            User messaging tools: 用户消息工具
-            Get Started: 开始使用
-            GDPR IAB support: GDPR IAB 支持
+            User Messaging Platform (UMP): User Messaging Platform (UMP)
+            Set up UMP SDK: 设置 UMP SDK
+            IAB support: IAB 支持
+            Disclose to EEA users: 向欧洲经济区用户披露信息
+            Disclose to US users: 向美国用户披露信息
             IDFA support: IDFA 支持
             Advanced topics: 高级主题
             Manage Ad Inspector: 管理广告检查器
@@ -366,9 +372,11 @@ plugins:
             Data disclosure: データ開示
             Google Play data disclosure: Google Play データ開示
             Apple App Store data disclosure: Apple App Store データ開示
-            User messaging tools: ユーザーメッセージングツール
-            Get Started: はじめに
-            GDPR IAB support: GDPR IAB サポート
+            User Messaging Platform (UMP): User Messaging Platform (UMP)
+            Set up UMP SDK: UMP SDK の設定
+            IAB support: IAB のサポート
+            Disclose to EEA users: EEA のユーザーへの開示
+            Disclose to US users: 米国のユーザーへの開示
             IDFA support: IDFA サポート
             Advanced topics: 高度なトピック
             Manage Ad Inspector: 広告インスペクターの管理
@@ -436,16 +444,16 @@ nav:
         - Zucks: mediate/integrate_partner_networks/zucks.md
       - Troubleshoot bidding: mediate/troubleshoot_bidding.md
     - Privacy:
-      - Regulatory solutions:
-        - US states privacy laws: privacy/regulatory_solutions/us_states_privacy_laws.md
       - Strategies: privacy/strategies/strategies.md
       - Ad serving modes: privacy/ad_serving_modes/ad_serving_modes.md
       - Data disclosure:
         - Google Play data disclosure: privacy/store_data_disclosure/google_play_data_disclosure.md
         - Apple App Store data disclosure: privacy/store_data_disclosure/apple_app_store_data_disclosure.md
-      - User messaging tools:
-        - Get Started: privacy/user_messaging_tools/get_started.md
-        - GDPR IAB support: privacy/user_messaging_tools/gdpr_iab_support.md
+      - User Messaging Platform (UMP):
+        - Set up UMP SDK: privacy/user_messaging_tools/get_started.md
+        - IAB support:
+          - Disclose to EEA users: privacy/user_messaging_tools/gdpr_iab_support.md
+          - Disclose to US users: privacy/regulatory_solutions/us_states_privacy_laws.md
         - IDFA support: privacy/user_messaging_tools/idfa_support.md
     - Troubleshoot ads:
       - Ad load errors: advanced_topics/ad_load_errors.md
