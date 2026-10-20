@@ -4110,6 +4110,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#can_show_ad-canshowad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        can_show_ad / CanShowAd
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#show-show" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5144,6 +5155,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#can_show_ad-canshowad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        can_show_ad / CanShowAd
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#show-show" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5245,31 +5267,46 @@
 </div>
 <hr />
 <h2 id="metodos">Métodos</h2>
-<h3 id="show-show"><code>show</code> / <code>Show</code></h3>
-<p>Presenta la superposición de anuncio recompensado a pantalla completa.</p>
+<h3 id="can_show_ad-canshowad"><code>can_show_ad</code> / <code>CanShowAd</code></h3>
+<p>Devuelve <code>true</code> si el anuncio está cargado, es válido y está listo para mostrarse; <code>false</code> si ya se mostró, se cerró o se destruyó.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="3:2"><input checked="checked" id="__tabbed_3_1" name="__tabbed_3" type="radio" /><input id="__tabbed_3_2" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="__tabbed_3_1">GDScript</label><label for="__tabbed_3_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">func</span><span class="w"> </span><span class="n">show</span><span class="p">(</span><span class="n">on_user_earned_reward_listener</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">OnUserEarnedRewardListener</span><span class="o">.</span><span class="n">new</span><span class="p">())</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">func</span><span class="w"> </span><span class="n">can_show_ad</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">bool</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">CanShowAd</span><span class="p">()</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<hr />
+<h3 id="show-show"><code>show</code> / <code>Show</code></h3>
+<p>Presenta la superposición de anuncio recompensado a pantalla completa.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">GDScript</label><label for="__tabbed_4_2">C#</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">func</span><span class="w"> </span><span class="n">show</span><span class="p">(</span><span class="n">on_user_earned_reward_listener</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">OnUserEarnedRewardListener</span><span class="o">.</span><span class="n">new</span><span class="p">())</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span>
 </code></pre></div>
 <p><strong>Uso:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">var</span><span class="w"> </span><span class="n">reward_listener</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">OnUserEarnedRewardListener</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">reward_listener</span><span class="o">.</span><span class="n">on_user_earned_reward</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">(</span><span class="n">reward_item</span><span class="p">:</span><span class="w"> </span><span class="n">RewardItem</span><span class="p">):</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">"User earned: "</span><span class="p">,</span><span class="w"> </span><span class="n">reward_item</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w"> </span><span class="n">reward_item</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">rewarded_ad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">reward_listener</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">var</span><span class="w"> </span><span class="n">reward_listener</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="n">OnUserEarnedRewardListener</span><span class="o">.</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">reward_listener</span><span class="o">.</span><span class="n">on_user_earned_reward</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">func</span><span class="p">(</span><span class="n">reward_item</span><span class="p">:</span><span class="w"> </span><span class="n">RewardItem</span><span class="p">):</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nb">print</span><span class="p">(</span><span class="s2">"User earned: "</span><span class="p">,</span><span class="w"> </span><span class="n">reward_item</span><span class="o">.</span><span class="n">amount</span><span class="p">,</span><span class="w"> </span><span class="s2">" "</span><span class="p">,</span><span class="w"> </span><span class="n">reward_item</span><span class="o">.</span><span class="n">type</span><span class="p">)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">rewarded_ad</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">reward_listener</span><span class="p">)</span>
 </code></pre></div></p>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Show</span><span class="p">(</span><span class="n">OnUserEarnedRewardListener</span><span class="w"> </span><span class="n">listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Show</span><span class="p">(</span><span class="n">OnUserEarnedRewardListener</span><span class="w"> </span><span class="n">listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Uso:</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">OnUserEarnedRewardListener</span><span class="w"> </span><span class="n">listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnUserEarnedRewardListener</span><span class="p">();</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">listener</span><span class="p">.</span><span class="n">OnUserEarnedReward</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">rewardItem</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">$"User earned: {rewardItem.Amount} {rewardItem.Type}"</span><span class="p">);</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">};</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">rewardedAd</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="n">listener</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">OnUserEarnedRewardListener</span><span class="w"> </span><span class="n">listener</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">OnUserEarnedRewardListener</span><span class="p">();</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">listener</span><span class="p">.</span><span class="n">OnUserEarnedReward</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">rewardItem</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="n">GD</span><span class="p">.</span><span class="n">Print</span><span class="p">(</span><span class="s">$"User earned: {rewardItem.Amount} {rewardItem.Type}"</span><span class="p">);</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">};</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="n">rewardedAd</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="n">listener</span><span class="p">);</span>
 </code></pre></div></p>
 </div>
 </div>
@@ -5277,14 +5314,14 @@
 <hr />
 <h3 id="destroy-destroy"><code>destroy</code> / <code>Destroy</code></h3>
 <p>Destruye el objeto de anuncio nativo y libera recursos.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="__tabbed_4_1" name="__tabbed_4" type="radio" /><input id="__tabbed_4_2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="__tabbed_4_1">GDScript</label><label for="__tabbed_4_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">func</span><span class="w"> </span><span class="n">destroy</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">func</span><span class="w"> </span><span class="n">destroy</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Destroy</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">Destroy</span><span class="p">()</span>
 </code></pre></div>
 </div>
 </div>
@@ -5292,14 +5329,14 @@
 <hr />
 <h3 id="get_response_info-getresponseinfo"><code>get_response_info</code> / <code>GetResponseInfo</code></h3>
 <p>Devuelve la información de respuesta de mediación que contiene el historial de adaptadores para el anuncio cargado.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">GDScript</label><label for="__tabbed_5_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">GDScript</label><label for="__tabbed_6_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">func</span><span class="w"> </span><span class="n">get_response_info</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ResponseInfo</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">func</span><span class="w"> </span><span class="n">get_response_info</span><span class="p">()</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">ResponseInfo</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">public</span><span class="w"> </span><span class="n">ResponseInfo</span><span class="w"> </span><span class="nf">GetResponseInfo</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">public</span><span class="w"> </span><span class="n">ResponseInfo</span><span class="w"> </span><span class="nf">GetResponseInfo</span><span class="p">()</span>
 </code></pre></div>
 </div>
 </div>
@@ -5307,14 +5344,14 @@
 <hr />
 <h3 id="set_server_side_verification_options-setserversideverificationoptions"><code>set_server_side_verification_options</code> / <code>SetServerSideVerificationOptions</code></h3>
 <p>Configura los parámetros de verificación utilizados para las devoluciones de llamada de recompensa del lado del servidor.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="6:2"><input checked="checked" id="__tabbed_6_1" name="__tabbed_6" type="radio" /><input id="__tabbed_6_2" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="__tabbed_6_1">GDScript</label><label for="__tabbed_6_2">C#</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:2"><input checked="checked" id="__tabbed_7_1" name="__tabbed_7" type="radio" /><input id="__tabbed_7_2" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="__tabbed_7_1">GDScript</label><label for="__tabbed_7_2">C#</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">func</span><span class="w"> </span><span class="n">set_server_side_verification_options</span><span class="p">(</span><span class="n">server_side_verification_options</span><span class="p">:</span><span class="w"> </span><span class="n">ServerSideVerificationOptions</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">func</span><span class="w"> </span><span class="n">set_server_side_verification_options</span><span class="p">(</span><span class="n">server_side_verification_options</span><span class="p">:</span><span class="w"> </span><span class="n">ServerSideVerificationOptions</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nb nb-Type">void</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetServerSideVerificationOptions</span><span class="p">(</span><span class="n">ServerSideVerificationOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">public</span><span class="w"> </span><span class="k">void</span><span class="w"> </span><span class="nf">SetServerSideVerificationOptions</span><span class="p">(</span><span class="n">ServerSideVerificationOptions</span><span class="w"> </span><span class="n">options</span><span class="p">)</span>
 </code></pre></div>
 </div>
 </div>
