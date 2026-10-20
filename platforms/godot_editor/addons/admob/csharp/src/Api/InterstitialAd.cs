@@ -37,6 +37,7 @@ namespace PoingStudios.AdMob.Api
         public Action<AdValue> OnAdPaid { get; set; }
 
         private readonly int _uid;
+        private bool _canShowAd = true;
 
         private readonly Callable _onClickedCallable;
         private readonly Callable _onDismissedCallable;
@@ -59,13 +60,23 @@ namespace PoingStudios.AdMob.Api
             RegisterCallbacks();
         }
 
+        public bool CanShowAd()
+        {
+            return _canShowAd && _plugin != null;
+        }
+
         public void Show()
         {
-            _plugin?.Call("show", _uid);
+            if (CanShowAd())
+            {
+                _canShowAd = false;
+                _plugin?.Call("show", _uid);
+            }
         }
 
         public void Destroy()
         {
+            _canShowAd = false;
             _plugin?.Call("destroy", _uid);
         }
 
@@ -95,12 +106,14 @@ namespace PoingStudios.AdMob.Api
         private void OnDismissed(int uid)
         {
             if (uid != _uid) return;
+            _canShowAd = false;
             Callable.From(() => FullScreenContentCallback.OnAdDismissedFullScreenContent?.Invoke()).CallDeferred();
         }
 
         private void OnFailedToShow(int uid, Dictionary errorDict)
         {
             if (uid != _uid) return;
+            _canShowAd = false;
             var error = AdError.Create(errorDict);
             Callable.From(() => FullScreenContentCallback.OnAdFailedToShowFullScreenContent?.Invoke(error)).CallDeferred();
         }

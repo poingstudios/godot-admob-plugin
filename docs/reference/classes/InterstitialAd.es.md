@@ -36,6 +36,22 @@ Se activa cuando se registra una impresión de anuncio y se han generado ingreso
 
 ## Métodos
 
+### `can_show_ad` / `CanShowAd`
+
+Devuelve `true` si el anuncio está cargado, es válido y está listo para mostrarse; `false` si ya se mostró, se cerró o se destruyó.
+
+=== "GDScript"
+    ```gdscript
+    func can_show_ad() -> bool
+    ```
+
+=== "C#"
+    ```csharp
+    public bool CanShowAd()
+    ```
+
+---
+
 ### `show` / `Show`
 
 Presenta la superposición de anuncio intersticial a pantalla completa.

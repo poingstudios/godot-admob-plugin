@@ -36,6 +36,22 @@
 
 ## 方法
 
+### `can_show_ad` / `CanShowAd`
+
+如果广告已加载、有效并准备好展示，则返回 `true`；如果已经展示、关闭或销毁，则返回 `false`。
+
+=== "GDScript"
+    ```gdscript
+    func can_show_ad() -> bool
+    ```
+
+=== "C#"
+    ```csharp
+    public bool CanShowAd()
+    ```
+
+---
+
 ### `show` / `Show`
 
 展示全屏插页式广告覆盖层。

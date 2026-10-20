@@ -69,13 +69,15 @@ func _on_load_pressed() -> void:
 
 
 func _on_show_pressed() -> void:
-	if _app_open_ad:
+	if _app_open_ad and _app_open_ad.can_show_ad():
 		if _is_ad_expired():
 			_log("Ad expired (more than 4 hours). Destroying and please load again.")
 			_destroy_ad()
 		else:
 			_log("Showing app open ad...")
 			_app_open_ad.show()
+	else:
+		_log("Cannot show ad (can_show_ad returned false)")
 
 
 func _is_ad_expired() -> bool:

@@ -83,7 +83,7 @@ namespace PoingStudios.AdMob.Sample
 
         private void _on_show_pressed()
         {
-            if (_appOpenAd != null)
+            if (_appOpenAd != null && _appOpenAd.CanShowAd())
             {
                 if (IsAdExpired())
                 {
@@ -95,6 +95,10 @@ namespace PoingStudios.AdMob.Sample
                     Log("Showing app open ad...");
                     _appOpenAd.Show();
                 }
+            }
+            else
+            {
+                Log("Cannot show ad (CanShowAd returned false)");
             }
         }
 

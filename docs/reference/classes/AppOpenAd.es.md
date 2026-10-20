@@ -50,6 +50,22 @@ Un entero que representa el índice de colocación de la posición del layout ac
 
 ## Métodos
 
+### `can_show_ad` / `CanShowAd`
+
+Devuelve `true` si el anuncio está cargado, es válido y está listo para mostrarse; `false` si ya se mostró, se cerró o se destruyó.
+
+=== "GDScript"
+    ```gdscript
+    func can_show_ad() -> bool
+    ```
+
+=== "C#"
+    ```csharp
+    public bool CanShowAd()
+    ```
+
+---
+
 ### `show` / `Show`
 
 Presenta la superposición de anuncio App Open a pantalla completa.

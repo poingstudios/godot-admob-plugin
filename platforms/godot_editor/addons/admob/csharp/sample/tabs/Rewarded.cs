@@ -100,10 +100,18 @@ public partial class Rewarded : BaseTab
 
 	private void OnShowPressed()
 	{
-		_rewardedAd?.Show(new OnUserEarnedRewardListener
+		if (_rewardedAd != null && _rewardedAd.CanShowAd())
 		{
-			OnUserEarnedReward = reward => Log($"Reward earned: {reward.Amount} {reward.Type}"),
-		});
+			Log("Showing rewarded ad...");
+			_rewardedAd.Show(new OnUserEarnedRewardListener
+			{
+				OnUserEarnedReward = reward => Log($"Reward earned: {reward.Amount} {reward.Type}"),
+			});
+		}
+		else
+		{
+			Log("Cannot show ad (CanShowAd returned false)");
+		}
 	}
 
 	private void OnDestroyPressed() => DestroyAd();
