@@ -89,12 +89,14 @@ class PoingGodotAdMobAppOpenAd(godot: Godot?) : org.godotengine.godot.plugin.God
                         override fun onAdDismissedFullScreenContent() {
                             Logger.debug("Ad dismissed fullscreen content.")
                             appOpenAds[uid] = null
+                            ad.destroy()
                             emitSignal("on_app_open_ad_dismissed_full_screen_content", uid)
                         }
 
                         override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
                             Logger.debug("Ad failed to show fullscreen content.")
                             appOpenAds[uid] = null
+                            ad.destroy()
                             emitSignal("on_app_open_ad_failed_to_show_full_screen_content", uid, fullScreenContentError.convertToGodotDictionary())
                         }
 
@@ -160,6 +162,8 @@ class PoingGodotAdMobAppOpenAd(godot: Godot?) : org.godotengine.godot.plugin.God
     @UsedByGodot
     fun destroy(uid : Int){
         Logger.debug("DESTROYING ${javaClass.simpleName}")
+        val ad = appOpenAds.getOrNull(uid) ?: return
         appOpenAds[uid] = null
+        ad.destroy()
     }
 }

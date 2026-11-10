@@ -96,12 +96,14 @@ class PoingGodotAdMobInterstitialAd(godot: Godot?) : org.godotengine.godot.plugi
                             override fun onAdDismissedFullScreenContent() {
                                 Logger.debug("Ad dismissed fullscreen content.")
                                 interstitials[uid] = null
+                                ad.destroy()
                                 emitSignal("on_interstitial_ad_dismissed_full_screen_content", uid)
                             }
 
                             override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
                                 Logger.debug("Ad failed to show fullscreen content.")
                                 interstitials[uid] = null
+                                ad.destroy()
                                 emitSignal("on_interstitial_ad_failed_to_show_full_screen_content", uid, fullScreenContentError.convertToGodotDictionary())
                             }
 
@@ -136,7 +138,9 @@ class PoingGodotAdMobInterstitialAd(godot: Godot?) : org.godotengine.godot.plugi
     @UsedByGodot
     fun destroy(uid : Int){
         Logger.debug("DESTROYING ${javaClass.simpleName}")
-        interstitials[uid] = null //just set to null in order to try to clean up memory
+        val ad = interstitials.getOrNull(uid) ?: return
+        interstitials[uid] = null
+        ad.destroy()
     }
 
 
