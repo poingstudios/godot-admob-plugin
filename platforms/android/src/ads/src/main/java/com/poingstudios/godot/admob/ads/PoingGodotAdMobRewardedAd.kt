@@ -99,12 +99,14 @@ class PoingGodotAdMobRewardedAd(godot: Godot?) : org.godotengine.godot.plugin.Go
                             override fun onAdDismissedFullScreenContent() {
                                 Logger.debug("Ad dismissed fullscreen content.")
                                 rewardedAds[uid] = null
+                                ad.destroy()
                                 emitSignal("on_rewarded_ad_dismissed_full_screen_content", uid)
                             }
 
                             override fun onAdFailedToShowFullScreenContent(fullScreenContentError: FullScreenContentError) {
                                 Logger.debug("Ad failed to show fullscreen content.")
                                 rewardedAds[uid] = null
+                                ad.destroy()
                                 emitSignal("on_rewarded_ad_failed_to_show_full_screen_content", uid, fullScreenContentError.convertToGodotDictionary())
                             }
 
@@ -143,7 +145,9 @@ class PoingGodotAdMobRewardedAd(godot: Godot?) : org.godotengine.godot.plugin.Go
     @UsedByGodot
     fun destroy(uid : Int){
         Logger.debug("DESTROYING ${javaClass.simpleName}")
-        rewardedAds[uid] = null //just set to null in order to try to clean up memory
+        val ad = rewardedAds.getOrNull(uid) ?: return
+        rewardedAds[uid] = null
+        ad.destroy()
     }
 
     @UsedByGodot
