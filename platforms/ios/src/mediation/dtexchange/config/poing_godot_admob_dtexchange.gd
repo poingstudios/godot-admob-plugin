@@ -54,7 +54,7 @@ func get_spm_packages() -> Array[Dictionary]:
 	return [
 		{
 			"url": "https://github.com/googleads/googleads-mobile-ios-mediation-dtexchange.git",
-			"version": "8.5.000",
+			"version": "8.5.200",
 			"products": ["DTExchangeAdapterTarget"]
 		}
 	]

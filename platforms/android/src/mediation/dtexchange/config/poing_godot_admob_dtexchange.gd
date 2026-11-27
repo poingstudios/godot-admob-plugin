@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "dtexchange"
-var _dependency_library := ["com.google.ads.mediation:fyber:8.4.7.1"]
+var _dependency_library := ["com.google.ads.mediation:fyber:8.5.1.0"]
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
