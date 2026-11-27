@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "applovin"
-var _dependency_library := ["com.google.ads.mediation:applovin:13.6.4.2"]
+var _dependency_library := ["com.google.ads.mediation:applovin:13.7.0.0"]
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:

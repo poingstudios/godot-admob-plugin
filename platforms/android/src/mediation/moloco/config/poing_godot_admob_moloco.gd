@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "moloco"
-var _dependency_library := ["com.google.ads.mediation:moloco:4.13.0.0"]
+var _dependency_library := ["com.google.ads.mediation:moloco:4.14.1.0"]
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:

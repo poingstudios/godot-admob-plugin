@@ -23,7 +23,7 @@
 extends EditorExportPlugin
 
 const PLUGIN_NAME := "pubmatic"
-var _dependency_library := ["com.google.ads.mediation:pubmatic:5.4.1.0"]
+var _dependency_library := ["com.google.ads.mediation:pubmatic:5.5.0.0"]
 
 
 func _supports_platform(platform: EditorExportPlatform) -> bool:
